@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="@color/white">-->
+
+<!--    <include layout="@layout/app_bar_custom"-->
+<!--        android:id="@+id/mToolbar"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/txtBharatPostPaidBillDetails"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="BHARAT BILL PAYMENT SYSTEM"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textStyle="bold"-->
+<!--        android:layout_marginStart="@dimen/_8sdp"-->
+<!--        android:layout_marginTop="@dimen/_10sdp"-->
+<!--        android:padding="@dimen/_10sdp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/mToolbar"/>-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imgBharatBillPay"-->
+<!--        android:layout_width="@dimen/_60sdp"-->
+<!--        android:layout_height="@dimen/_40sdp"-->
+<!--        android:layout_marginEnd="@dimen/_10sdp"-->
+<!--        android:contentDescription="@string/app_name"-->
+<!--        android:src="@drawable/bharat_connect"-->
+<!--        app:layout_constraintTop_toTopOf="@id/txtBharatPostPaidBillDetails"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"/>-->
+
+<!--    <View-->
+<!--        android:id="@+id/viewTopLine"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="1dp"-->
+<!--        android:background="@color/black_new"-->
+<!--        android:layout_marginTop="@dimen/_5sdp"-->
+<!--        android:layout_marginEnd="@dimen/_10sdp"-->
+<!--        android:layout_marginStart="@dimen/_10sdp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/imgBharatBillPay"/>-->
+
+<!--    <ScrollView-->
+<!--        android:id="@+id/scrollview_complain_Design"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:fillViewport="true"-->
+<!--        android:fitsSystemWindows="true"-->
+<!--        app:layout_constraintStart_toStartOf="@id/viewTopLine"-->
+<!--        app:layout_constraintEnd_toEndOf="@id/viewTopLine"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/viewTopLine"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent">-->
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <RadioButton-->
+<!--                android:id="@+id/radioButtonTransaction"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Complaint Register"-->
+<!--                android:buttonTint="@color/colorPrimaryB"-->
+<!--                android:padding="@dimen/_5sdp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:layout_marginTop="@dimen/_10sdp"-->
+<!--                android:layout_marginStart="@dimen/_3sdp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"/>-->
+
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/editTransactionRefId_layout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0dp"-->
+<!--                android:layout_weight="1"-->
+<!--                app:hintTextColor="@color/colorPrimaryB"-->
+<!--                android:textColorHint="#B3B3B3"-->
+<!--                app:boxStrokeColor="@color/colorPrimaryB"-->
+<!--                app:cursorColor="@color/colorPrimaryB"-->
+<!--                style="@style/TextInputLayoutNew"-->
+<!--                android:layout_marginTop="@dimen/_7sdp"-->
+<!--                android:layout_marginStart="@dimen/_5sdp"-->
+<!--                android:layout_marginEnd="@dimen/_5sdp"-->
+<!--                app:boxCornerRadiusBottomEnd="@dimen/_30sdp"-->
+<!--                app:boxCornerRadiusBottomStart="@dimen/_30sdp"-->
+<!--                app:boxCornerRadiusTopEnd="@dimen/_30sdp"-->
+<!--                app:boxCornerRadiusTopStart="@dimen/_30sdp"-->
+<!--                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"-->
+<!--                app:layout_constraintStart_toStartOf="@id/radioButtonTransaction"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/radioButtonTransaction">-->
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/editTransactionRefId"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:hint="Transaction Ref Id"-->
+<!--                    android:maxLength="30"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:textColorHint="#B5B5B5"-->
+<!--                    android:textColor="@color/black_4"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:textSize="@dimen/_12sdp"-->
+<!--                    android:inputType="text" />-->
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--            &lt;!&ndash;<EditText-->
+<!--                android:id="@+id/editTransactionRefId"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/background_new_2"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:hint="Transaction Ref Id"-->
+<!--                android:inputType="text"-->
+<!--                android:autofillHints="text"-->
+<!--                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"-->
+<!--                android:padding="@dimen/_7sdp"-->
+
+<!--                android:textColor="@color/black_2"-->
+<!--                android:textColorHint="@color/black_2"-->
+<!--                />-->
+<!--&ndash;&gt;-->
+<!--            <TextView-->
+<!--                android:id="@+id/txtComplaint"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:text="Complaint Disposition"-->
+<!--                android:autofillHints="text"-->
+<!--                android:background="@drawable/corner_white_recharge_2"-->
+<!--                android:layout_marginTop="@dimen/_16sdp"-->
+<!--                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"-->
+<!--                android:padding="@dimen/_12sdp"-->
+<!--                android:textColor="@color/black_2"-->
+<!--                android:textColorHint="@color/black_2"-->
+<!--                app:layout_constraintStart_toStartOf="@id/editTransactionRefId_layout"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/editTransactionRefId_layout"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/editTransactionRefId_layout"/>-->
+
+<!--            <Button-->
+<!--                android:id="@+id/btnSubmit"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Submit"-->
+<!--                android:layout_marginTop="@dimen/_15sdp"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:background="@drawable/rounded_button_background"-->
+<!--                app:layout_constraintStart_toStartOf="@id/editTransactionRefId_layout"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/editTransactionRefId_layout"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/txtComplaint" />-->
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--    </ScrollView>-->
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/loading"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="vertical"-->
+<!--        android:visibility="gone">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="#BA333333"-->
+<!--            android:gravity="center"-->
+<!--            android:orientation="vertical">-->
+
+
+<!--            <ProgressBar-->
+<!--                android:layout_width="@dimen/_35sdp"-->
+<!--                android:layout_height="@dimen/_35sdp"-->
+<!--                android:indeterminateDrawable="@drawable/layout_process_bar" />-->
+
+
+<!--        </LinearLayout>-->
+
+<!--    </LinearLayout>-->
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".modules.activities.newActivities.ComplaintRegistrationActivity">
+
+    <include layout="@layout/app_bar_custom"
+        android:id="@+id/mToolbar"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#EDEDED"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mToolbar"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/txtBharatPostPaidBillDetails"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="B Connect Complaint"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:padding="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mToolbar"/>
+
+    <ImageView
+        android:id="@+id/imgBharatBillPay"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/bharat_connect"
+        app:layout_constraintTop_toTopOf="@id/txtBharatPostPaidBillDetails"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <View
+        android:id="@+id/viewTopLine"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/black_new"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgBharatBillPay"/>
+
+    <ScrollView
+        android:id="@+id/scrollview_complain_Design"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:fitsSystemWindows="true"
+        app:layout_constraintStart_toStartOf="@id/viewTopLine"
+        app:layout_constraintEnd_toEndOf="@id/viewTopLine"
+        app:layout_constraintTop_toBottomOf="@id/viewTopLine"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <RadioButton
+                    android:id="@+id/radioButtonRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Complaint Register"
+                    android:buttonTint="@color/colorPrimaryB"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_5sdp"/>
+
+                <RadioButton
+                    android:id="@+id/radioButtonTracking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Complaint Tracking"
+                    android:textColor="@color/black"
+                    android:buttonTint="@color/colorPrimaryB"
+                    android:padding="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_5sdp"/>
+
+            </RadioGroup>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/complaintRegistered"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/radioGroup"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup">
+                <EditText
+                    android:id="@+id/editTransactionRefId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_new_2"
+                    android:gravity="center_vertical"
+                    android:hint="Transaction Order Id"
+                    android:inputType="text"
+                    android:autofillHints="text"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:padding="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:textColor="@color/black_2"
+                    android:textColorHint="@color/black_2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/txtDisposition"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_new_2"
+                    android:gravity="center_vertical"
+                    android:text="Complaint Disposition"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:padding="@dimen/_7sdp"
+                    android:textColor="@color/black_2"
+                    android:textColorHint="@color/black_2"
+                    app:layout_constraintStart_toStartOf="@id/editTransactionRefId"
+                    app:layout_constraintEnd_toEndOf="@id/editTransactionRefId"
+                    app:layout_constraintTop_toBottomOf="@id/editTransactionRefId"/>
+
+                <Button
+                    android:id="@+id/btnSubmit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Submit"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/new_button_"
+                    app:layout_constraintStart_toStartOf="@id/editTransactionRefId"
+                    app:layout_constraintEnd_toEndOf="@id/editTransactionRefId"
+                    app:layout_constraintTop_toBottomOf="@id/txtDisposition" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/complaintTracking"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/radioGroup"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup">
+                <EditText
+                    android:id="@+id/editComplaintId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_new_2"
+                    android:gravity="center_vertical"
+                    android:hint="Complaint Id"
+                    android:inputType="text"
+                    android:autofillHints="text"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:padding="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:textColor="@color/black_2"
+                    android:textColorHint="@color/black_2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <Button
+                    android:id="@+id/btnTrackingSubmit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Submit"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/new_button_"
+                    app:layout_constraintStart_toStartOf="@id/editComplaintId"
+                    app:layout_constraintEnd_toEndOf="@id/editComplaintId"
+                    app:layout_constraintTop_toBottomOf="@id/editComplaintId" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/complaintTrackingResponse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginEnd="@dimen/_6sdp"
+                app:layout_constraintTop_toBottomOf="@id/complaintTracking"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:id="@+id/txtComplaintId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Complaint Id:"
+                    android:textColor="@color/black"
+                    app:layout_constraintHorizontal_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/txtComplaintIdValue"
+                    app:layout_constraintTop_toTopOf="parent"/>
+                <TextView
+                    android:id="@+id/txtComplaintIdValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    app:layout_constraintHorizontal_weight="1.8"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    app:layout_constraintStart_toEndOf="@id/txtComplaintId"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/txtComplaintId"
+                    app:layout_constraintBottom_toBottomOf="@id/txtComplaintId"/>
+
+                <TextView
+                    android:id="@+id/txtComplaintStatus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Status:"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintHorizontal_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/txtComplaintStatusValue"
+                    app:layout_constraintTop_toBottomOf="@id/txtComplaintId"/>
+
+                <TextView
+                    android:id="@+id/txtComplaintStatusValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    app:layout_constraintHorizontal_weight="1.8"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    app:layout_constraintStart_toEndOf="@id/txtComplaintStatus"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/txtComplaintStatus"
+                    app:layout_constraintBottom_toBottomOf="@id/txtComplaintStatus"/>
+
+                <TextView
+                    android:id="@+id/txtRemark"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Remark:"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    app:layout_constraintTop_toBottomOf="@id/txtComplaintStatusValue"
+                    app:layout_constraintStart_toStartOf="@id/txtComplaintId"
+                    app:layout_constraintEnd_toEndOf="@id/txtComplaintIdValue"/>
+
+                <TextView
+                    android:id="@+id/txtRemarkValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    app:layout_constraintTop_toBottomOf="@id/txtRemark"
+                    app:layout_constraintStart_toStartOf="@id/txtComplaintId"
+                    app:layout_constraintEnd_toEndOf="@id/txtComplaintIdValue"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#BA333333"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:indeterminateDrawable="@drawable/layout_process_bar" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

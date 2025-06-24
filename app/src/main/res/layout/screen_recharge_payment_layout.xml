@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/_15sdp"
+        android:paddingEnd="@dimen/_15sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:background="@drawable/rounded_dialog">
+
+        <TextView
+            android:id="@+id/txtPaymentMethod"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Payment Detail"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/txtTransactionAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Transaction Amount"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/black_2"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/txtTransactionAmountValue"
+            app:layout_constraintTop_toBottomOf="@id/txtPaymentMethod"/>
+
+        <TextView
+            android:id="@+id/txtTransactionAmountValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/black_2"
+            app:layout_constraintStart_toEndOf="@id/txtTransactionAmount"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/txtTransactionAmount"/>
+
+        <TextView
+            android:id="@+id/txtTotalDiscount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Total Discount"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryB"
+            app:layout_constraintStart_toStartOf="@id/txtTransactionAmount"
+            app:layout_constraintEnd_toStartOf="@id/viewSubtract"
+            app:layout_constraintTop_toBottomOf="@id/txtTransactionAmount"/>
+
+        <View
+            android:id="@+id/viewSubtract"
+            android:layout_width="10dp"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimaryB"
+            app:layout_constraintEnd_toStartOf="@id/txtTotalDiscountValue"
+            app:layout_constraintTop_toTopOf="@id/txtTotalDiscountValue"
+            app:layout_constraintBottom_toBottomOf="@id/txtTotalDiscountValue"/>
+
+        <TextView
+            android:id="@+id/txtTotalDiscountValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryB"
+            android:gravity="end"
+            app:layout_constraintEnd_toEndOf="@id/txtTransactionAmountValue"
+            app:layout_constraintTop_toBottomOf="@id/txtTransactionAmount"/>
+
+        <View
+            android:id="@+id/viewPayableAmt"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#80CFCFCF"
+            app:layout_constraintStart_toStartOf="@id/txtTransactionAmount"
+            app:layout_constraintEnd_toEndOf="@id/txtTransactionAmountValue"
+            app:layout_constraintTop_toBottomOf="@id/txtTotalDiscount"/>
+
+        <TextView
+            android:id="@+id/txtPayableAmt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Payable Amount"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/black_2"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/txtPayableAmtValue"
+            app:layout_constraintTop_toBottomOf="@id/viewPayableAmt"/>
+
+        <TextView
+            android:id="@+id/txtPayableAmtValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:gravity="end"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/black_2"
+            app:layout_constraintStart_toEndOf="@id/txtPayableAmt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/txtPayableAmt"/>
+
+        <View
+            android:id="@+id/viewTransaction"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#80CFCFCF"
+            app:layout_constraintStart_toStartOf="@id/txtTransactionAmount"
+            app:layout_constraintEnd_toEndOf="@id/txtTransactionAmountValue"
+            app:layout_constraintTop_toBottomOf="@id/txtPayableAmt"/>
+
+        <TextView
+            android:id="@+id/txtWalletAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your balance"
+            android:textSize="@dimen/_13sdp"
+            android:layout_marginTop="8dp"
+            android:padding="10dp"
+            android:visibility="gone"
+            android:textColor="@color/black_2"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/txtWalletAmountValue"
+            app:layout_constraintTop_toBottomOf="@id/viewTransaction"/>
+
+        <TextView
+            android:id="@+id/txtWalletAmountValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_13sdp"
+            android:gravity="end"
+            android:padding="10dp"
+            android:visibility="gone"
+            android:textColor="@color/black_2"
+            app:layout_constraintStart_toEndOf="@id/txtWalletAmount"
+            app:layout_constraintTop_toTopOf="@id/txtWalletAmount"/>
+
+        <View
+            android:id="@+id/viewWallet"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="#80CFCFCF"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/txtWalletAmount"
+            app:layout_constraintEnd_toEndOf="@id/txtWalletAmountValue"
+            app:layout_constraintTop_toBottomOf="@id/txtWalletAmount"/>
+
+        <TextView
+            android:id="@+id/btnPay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15sdp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/btn_drawable"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewWallet"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

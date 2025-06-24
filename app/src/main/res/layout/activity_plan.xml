@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/app_bar_custom" />
+
+        <LinearLayout
+            android:id="@+id/infoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:orientation="horizontal"
+            android:background="@drawable/background_operator_information"
+            android:layout_margin="@dimen/_20sdp"
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/imgOperator"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:src="@drawable/upi"
+                android:padding="8dp"
+                android:contentDescription="@string/app_name"
+                android:background="@drawable/plan_drawable_background"
+                android:layout_marginStart="16dp"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="2"
+                android:layout_gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/txtPhoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="@dimen/_10sdp"/>
+
+                <TextView
+                    android:id="@+id/txtPhoneProvider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:id="@+id/txtPhoneOrigin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="@color/color_c"
+                    android:layout_marginBottom="@dimen/_10sdp"/>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtRecharge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Change"
+                android:padding="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/edit_txt_bg"/>
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtSearch"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="Search"
+                android:padding="8dp"
+                android:gravity="center_vertical"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="5dp"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/ic_search"
+                android:background="@drawable/search_edit_drawable"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tab_layout"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:ignore="UseCompatTextViewDrawableXml" />
+
+            <EditText
+                android:id="@+id/editSearch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Search"
+                android:padding="8dp"
+                android:inputType="text"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="5dp"
+                android:drawablePadding="10dp"
+                android:visibility="gone"
+                android:drawableStart="@drawable/ic_search"
+                android:imeOptions="actionSearch"
+                android:background="@drawable/search_edit_text_drawable"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/txtCancel"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+                <requestFocus/>
+            </EditText>
+
+            <ImageView
+                android:id="@+id/imgClose"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_close"
+                android:visibility="gone"
+                app:tint="@color/black_4"
+                android:padding="3dp"
+                android:background="@drawable/circle_gray_drawable"
+                android:layout_marginEnd="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="@id/editSearch"
+                app:layout_constraintTop_toTopOf="@id/editSearch"
+                app:layout_constraintBottom_toBottomOf="@id/editSearch"/>
+
+            <TextView
+                android:id="@+id/txtCancel"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:textColor="@color/colorPrimaryB"
+                android:padding="@dimen/_6sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:gravity="center"
+                android:visibility="gone"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:layout_constraintStart_toEndOf="@id/editSearch"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/editSearch"
+                app:layout_constraintBottom_toBottomOf="@id/editSearch"/>
+
+            <com.vuvrecharge.custom.ClassesTabLayout
+                android:id="@+id/tab_layout"
+                style="@style/Costume_profile"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_28sdp"
+                app:tabMode="auto"
+                android:paddingEnd="@dimen/_10sdp"
+                app:tabSelectedTextColor="@color/black_4"
+                app:tabTextColor="@color/black_new"
+                app:layout_constraintStart_toEndOf="@id/txtSearch"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:nestedScrollingEnabled="true"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#BA333333"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ProgressBar
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:indeterminateDrawable="@drawable/layout_process_bar" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+</RelativeLayout>

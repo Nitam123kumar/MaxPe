@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginBottom="@dimen/_2sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:orientation="horizontal"
+          android:elevation="@dimen/_10sdp"
+        android:outlineAmbientShadowColor="@color/blue_dark"
+        android:outlineSpotShadowColor="@color/blue_dark"
+        android:background="@drawable/box_shadow">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_marginLeft="@dimen/_10sdp"
+    android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:src="@drawable/profile" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/custombernumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/black_2"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/custombername_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textStyle="bold"
+                android:textColor="@color/black_2"
+                android:textSize="@dimen/_11sdp" />
+            <TextView
+                android:id="@+id/customercoment_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/black_2"
+                android:textSize="@dimen/_10sdp" />
+
+        </LinearLayout>
+
+</LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

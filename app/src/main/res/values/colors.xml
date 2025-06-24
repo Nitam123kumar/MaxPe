@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary">#ffffff</color>
+<!--    <color name="colorPrimaryB">#4B0082</color>-->
+<!--    <color name="colorPrimaryB">#004DEB</color>-->
+    <color name="colorPrimaryB">#0549AE</color>
+<!--    <color name="colorPrimaryT">#580695</color>-->
+    <color name="colorPrimaryT">#084AAA</color>
+    <color name="colorPrimaryA">#6202A8</color>
+    <color name="colorPrimary_gr">#00000000</color>
+    <color name="transparent_p">#8F4B0082</color>
+    <color name="transparent_b">#AE858686</color>
+    <color name="colorPrimaryLight">#6004A3</color>
+<!--    <color name="colorPrimary_other">#4B0082</color>-->
+<!--    <color name="colorPrimary_other">#084AAA</color>-->
+    <color name="colorPrimary_other">#0549AE</color>
+    <color name="colorPrimaryDark">#E5E5E5</color>
+    <color name="colorPrimaryDarkOther">#3D0268</color>
+    <color name="colorAccent">#cccccc</color>
+    <color name="transparent">#00000000</color>
+    <color name="dial_color">#e0f2f1</color>
+    <color name="light">#138996</color>
+    <color name="dark">#056F7B</color>
+    <color name="gray_shape">#F2F2F2</color>
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#CCCCCC</color>
+    <color name="accept">#FF6700</color>
+    <color name="green">#8BC34A</color>
+    <color name="leave_tr">#5EF5C700</color>
+
+    <color name="bg">#32FADBD7</color>
+    <color name="white">#ffffff</color>
+    <color name="white_new">#FAF7FF</color>
+    <color name="white_light">#4910a3</color>
+    <color name="white_5">#f5f5f5</color>
+    <color name="white_e5">#e5e5e5</color>
+    <color name="one">#33C1C2</color>
+    <color name="two">#AD82F5</color>
+    <color name="three">#70DAF6</color>
+    <color name="four">#7C8100</color>
+    <color name="five">#25C6F2</color>
+    <color name="six">#F2C800</color>
+    <color name="golden">#DBA61A</color>
+    <color name="seven">#138995</color>
+    <color name="eight">#8CCDEF</color>
+    <color name="white_e">#eeeeee</color>
+    <color name="white_c">#cccccc</color>
+    <color name="black">#000000</color>
+    <color name="black_2">#222222</color>
+    <color name="black_5">#B3B3B3</color>
+    <color name="black_4">#444</color>
+    <color name="color_c">#cccccc</color>
+    <color name="red">#FFE22708</color>
+    <color name="black_light">#9597A1</color>
+    <color name="black_new">#918f8f</color>
+    <color name="top">#eceff1</color>
+
+    <color name="circleColor">#FF02667C</color>
+    <color name="circleColorBright">#9E7BFD</color>
+    <color name="circleColorLight">#C4AD8EFF</color>
+    <color name="bg_s">#0b2f7d</color>
+    <color name="bg_e">#3db0ef</color>
+    <color name="bgg_s">#5a0c0c</color>
+    <color name="bgg_e">#dc1921</color>
+    <color name="left">#4285f4</color>
+    <color name="blue">#4285f4</color>
+    <color name="blue_dark">#2968D1</color>
+    <color name="blue_dark_tab">#234C8F</color>
+    <color name="right">#00acc1</color>
+    <color name="transparent_">#14000000</color>
+    <color name="green_start">#77d755</color>
+    <color name="green_end">#01A400</color>
+    <color name="call">#FF288D4F</color>
+    <color name="dial">#66bb6a</color>
+    <color name="yellow_new">#fbc02d</color>
+    <color name="orange">#FF8008</color>
+    <color name="white_f5">#f5f5f5</color>
+    <color name="self">#e2ffc7</color>
+    <color name="gray">#c3c3c3</color>
+    <color name="gray_black">#474749</color>
+    <color name="white_d">#dddddd</color>
+    <color name="white_deam">#b6b5b5</color>
+    <color name="present">#05cc67</color>
+    <color name="absent">#fe0400</color>
+    <color name="leave">#f5c700</color>
+    <color name="other">#676767</color>
+    <color name="yellow">#EFCE4A</color>
+    <color name="custom_input_hint">#999999</color>
+    <color name="custom_input_border">#F2F2F2</color>
+    <color name="re_yellow_light">#EEAB58</color>
+    <color name="pending">#FFA51F</color>
+    <color name="success">#56BA4F</color>
+    <color name="failed">#FF3333</color>
+
+
+
+</resources>

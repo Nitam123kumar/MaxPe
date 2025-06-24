@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardCornerRadius="@dimen/_16sdp"
+    android:layout_margin="@dimen/_6sdp"
+    app:cardBackgroundColor="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/_10sdp"
+        android:background="@color/white">
+<!--        #242424-->
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_16sdp"
+            android:textColor="@color/colorPrimaryB"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:padding="@dimen/_5sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/txtTitleSub"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/colorPrimaryB"
+            android:padding="@dimen/_5sdp"
+            android:maxLines="2"
+            app:layout_constraintStart_toStartOf="@id/txtTitle"
+            app:layout_constraintEnd_toEndOf="@id/imageSlide"
+            app:layout_constraintTop_toBottomOf="@id/txtTitle" />
+
+        <TextView
+            android:id="@+id/btnClick"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:paddingStart="@dimen/_14sdp"
+            android:paddingEnd="@dimen/_14sdp"
+            android:background="@drawable/btn_drawable"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@id/txtTitle"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imageSlide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:riv_corner_radius="45dp"
+            android:minWidth="75dp"
+            android:maxWidth="80dp"
+            android:maxHeight="80dp"
+            android:minHeight="75dp"
+            android:adjustViewBounds="true"
+            android:layout_marginEnd="@dimen/_5sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+        </com.makeramen.roundedimageview.RoundedImageView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

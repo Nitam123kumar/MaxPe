@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".modules.activities.newActivities.MobileBankingActivity">
+
+    <include layout="@layout/app_bar_custom"
+        android:id="@+id/mToolbar"/>
+
+    <ImageView
+        android:id="@+id/imgHistory"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="@dimen/_6sdp"
+        android:src="@drawable/history_3"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/mToolbar"
+        app:layout_constraintBottom_toBottomOf="@id/mToolbar"/>
+
+    <TextView
+        android:id="@+id/help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="Help?"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:textColor="#242424"
+        android:background="@drawable/plan_drawable_background"
+        app:layout_constraintEnd_toEndOf="@id/mToolbar"
+        app:layout_constraintTop_toTopOf="@id/mToolbar"
+        app:layout_constraintBottom_toBottomOf="@id/mToolbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:nestedScrollingEnabled="true"
+        app:layout_constraintTop_toBottomOf="@id/mToolbar"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/select_payment_method_layout"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:background="@drawable/corner_white_recharge_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:id="@+id/txtType"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Select Circle"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    app:drawableEndCompat="@drawable/ic_drop_down"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:textColor="@color/black_2"/>
+
+<!--                <com.toptoche.searchablespinnerlibrary.SearchableSpinner-->
+<!--                    android:id="@+id/select_payment_method"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:theme="@style/MatchSpinnerTheme" />-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/select_bank_layout"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:background="@drawable/corner_white_recharge_2"
+                app:layout_constraintStart_toStartOf="@id/select_payment_method_layout"
+                app:layout_constraintEnd_toEndOf="@id/select_payment_method_layout"
+                app:layout_constraintTop_toBottomOf="@id/select_payment_method_layout">
+
+                <TextView
+                    android:id="@+id/txtBank"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Select Bank"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    app:drawableEndCompat="@drawable/ic_drop_down"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:textColor="@color/black_2"/>
+
+<!--                <com.toptoche.searchablespinnerlibrary.SearchableSpinner-->
+<!--                    android:id="@+id/select_bank"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_vertical"-->
+<!--                    android:theme="@style/MatchSpinnerTheme" />-->
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/reference_number_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:hintTextColor="@color/colorPrimaryB"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                app:boxStrokeWidth="1dp"
+                android:textColorHint="#B3B3B3"
+                app:boxCornerRadiusBottomEnd="@dimen/_30sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_30sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_30sdp"
+                app:boxCornerRadiusTopStart="@dimen/_30sdp"
+                app:boxStrokeColor="@color/colorPrimaryB"
+                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:layout_constraintStart_toStartOf="@id/select_payment_method_layout"
+                app:layout_constraintEnd_toEndOf="@id/select_payment_method_layout"
+                app:layout_constraintTop_toBottomOf="@id/select_bank_layout">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/reference_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Reference Number/UTR"
+                    android:maxLength="30"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_4"
+                    android:textColorHint="#B5B5B5"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/_12sdp"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/amount_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:hintTextColor="@color/colorPrimaryB"
+                android:textColorHint="#B3B3B3"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                app:boxStrokeWidth="1dp"
+                app:boxStrokeColor="@color/colorPrimaryB"
+
+                app:boxCornerRadiusBottomEnd="@dimen/_30sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_30sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_30sdp"
+                app:boxCornerRadiusTopStart="@dimen/_30sdp"
+                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:layout_constraintStart_toStartOf="@id/reference_number_layout"
+                app:layout_constraintEnd_toEndOf="@id/reference_number_layout"
+                app:layout_constraintTop_toBottomOf="@id/reference_number_layout">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Amount"
+                    android:maxLength="30"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_4"
+                    android:textColorHint="#B5B5B5"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/_12sdp"
+                    android:inputType="phone" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/note_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:hintTextColor="@color/colorPrimaryB"
+                android:textColorHint="#B3B3B3"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_16sdp"
+                app:boxStrokeWidth="1dp"
+                app:boxStrokeColor="@color/colorPrimaryB"
+                app:boxCornerRadiusBottomEnd="@dimen/_30sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_30sdp"
+                app:boxCornerRadiusTopEnd="@dimen/_30sdp"
+                app:boxCornerRadiusTopStart="@dimen/_30sdp"
+                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:layout_constraintStart_toStartOf="@id/reference_number_layout"
+                app:layout_constraintEnd_toEndOf="@id/reference_number_layout"
+                app:layout_constraintTop_toBottomOf="@id/amount_layout">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Note"
+                    android:maxLength="30"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_4"
+                    android:textColorHint="#B5B5B5"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/_12sdp"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/register"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="REQUEST"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/btn_drawable_disable"
+                android:textAllCaps="false"
+                android:textColor="@color/black_4"
+                android:textStyle="bold"
+                android:textSize="@dimen/_15sdp"
+                android:padding="@dimen/_10sdp"
+                app:layout_constraintStart_toStartOf="@id/select_payment_method_layout"
+                app:layout_constraintEnd_toEndOf="@id/select_payment_method_layout"
+                app:layout_constraintTop_toBottomOf="@id/note_layout"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                app:layout_constraintTop_toBottomOf="@id/register"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/list_item"/>
+
+            <TextView
+                android:id="@+id/bankInfoCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Bank Details"
+                android:gravity="center"
+                android:textColor="#212121"
+                android:layout_marginTop="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/register"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_item"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bankInfoCard"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/_24sdp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ProgressBar
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:indeterminateDrawable="@drawable/layout_process_bar" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/no_internet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#BA333333"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/wifi" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingRight="@dimen/_15sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:text="No Internet available.\nCheck connection"
+            android:textColor="@color/white_5" />
+
+        <TextView
+            android:id="@+id/retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/corner_primary"
+            android:gravity="center"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingRight="@dimen/_15sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:text="Re-Try"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

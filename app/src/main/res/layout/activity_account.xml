@@ -1,0 +1,938 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/pattern_1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#4DDBFFFF"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:textColor="#242424"
+            app:layout_constraintStart_toStartOf="@id/toolbar"
+            app:layout_constraintTop_toTopOf="@id/toolbar"
+            app:layout_constraintEnd_toStartOf="@id/instagram"
+            app:layout_constraintBottom_toBottomOf="@id/toolbar"/>
+
+
+        <ImageView
+            android:id="@+id/instagram"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/instagram_2"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintTop_toTopOf="@id/toolbar"
+            app:layout_constraintBottom_toBottomOf="@id/toolbar"
+            app:layout_constraintEnd_toStartOf="@id/support"/>
+
+        <TextView
+            android:id="@+id/support"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="Help?"
+            android:padding="@dimen/_5sdp"
+            android:gravity="center"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@drawable/plan_drawable_background"
+            app:layout_constraintEnd_toEndOf="@id/toolbar"
+            app:layout_constraintTop_toTopOf="@id/toolbar"
+            app:layout_constraintBottom_toBottomOf="@id/toolbar"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardLogo"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_margin="@dimen/_20sdp"
+                    app:cardCornerRadius="@dimen/_22sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+                    <ImageView
+                        android:id="@+id/logo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/app_logo"
+                        android:contentDescription="@string/app_name" />
+                </androidx.cardview.widget.CardView>
+
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#3C3F48"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:maxLines="1"
+                    android:textStyle="bold"
+                    android:ellipsize="end"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@id/cardLogo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/cardLogo"
+                    app:layout_constraintBottom_toTopOf="@id/email_id"/>
+
+                <TextView
+                    android:id="@+id/email_id"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#7D7C7C"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:layout_constraintStart_toStartOf="@id/name"
+                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintTop_toBottomOf="@id/name"
+                    app:layout_constraintBottom_toTopOf="@id/phoneNumber"/>
+
+                <TextView
+                    android:id="@+id/phoneNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#7D7C7C"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:layout_constraintStart_toStartOf="@id/name"
+                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintTop_toBottomOf="@id/email_id"
+                    app:layout_constraintBottom_toBottomOf="@id/cardLogo"/>
+
+                <View
+                    android:id="@+id/viewWallet"
+                    android:layout_width="0dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="@drawable/plan_drawable_background"
+                    app:layout_constraintStart_toStartOf="@id/cardLogo"
+                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintTop_toBottomOf="@id/cardLogo"/>
+
+                <TextView
+                    android:id="@+id/txtWallet"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#3C3F48"
+                    android:text="Your balance"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_margin="@dimen/_14sdp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintStart_toStartOf="@id/viewWallet"
+                    app:layout_constraintEnd_toEndOf="@id/viewWallet"
+                    app:layout_constraintTop_toTopOf="@id/viewWallet"/>
+
+                <ImageView
+                    android:id="@+id/imgWallet"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:src="@drawable/wallet_colored"
+                    android:layout_marginBottom="@dimen/_14sdp"
+                    app:layout_constraintBottom_toBottomOf="@id/viewWallet"
+                    app:layout_constraintStart_toStartOf="@id/txtWallet"
+                    app:layout_constraintTop_toBottomOf="@id/txtWallet"
+                    android:contentDescription="@string/app_name" />
+
+                <TextView
+                    android:id="@+id/walletBalance"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textColor="#3C3F48"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintStart_toEndOf="@id/imgWallet"
+                    app:layout_constraintTop_toTopOf="@id/imgWallet"
+                    app:layout_constraintBottom_toBottomOf="@id/imgWallet"/>
+
+                <TextView
+                    android:id="@+id/btnWallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add Balance"
+                    android:textColor="@color/colorPrimaryB"
+                    android:padding="@dimen/_10sdp"
+                    android:textStyle="bold"
+                    android:background="@drawable/btn_add_money_drawable"
+                    app:layout_constraintEnd_toEndOf="@id/txtWallet"
+                    app:layout_constraintTop_toBottomOf="@id/txtWallet"
+                    app:layout_constraintBottom_toBottomOf="@id/imgWallet"/>
+
+                <View
+                    android:id="@+id/viewProfile"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    app:layout_constraintStart_toStartOf="@id/cardLogo"
+                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintTop_toBottomOf="@id/viewWallet"/>
+
+                <ImageView
+                    android:id="@+id/imgProfile"
+                    android:layout_width="35dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/profile"
+                    android:padding="6dp"
+                    android:background="@drawable/light_blue_drawable"
+                    app:tint="@color/white"
+                    app:layout_constraintStart_toStartOf="@id/viewProfile"
+                    app:layout_constraintTop_toTopOf="@id/viewProfile"
+                    app:layout_constraintBottom_toBottomOf="@id/viewProfile"
+                    android:contentDescription="@string/app_name" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="View Profile"
+                    android:textStyle="bold"
+                    android:textColor="#3C3F48"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    app:layout_constraintStart_toEndOf="@id/imgProfile"
+                    app:layout_constraintEnd_toEndOf="@id/viewProfile"
+                    app:layout_constraintTop_toTopOf="@id/viewProfile"
+                    app:layout_constraintBottom_toBottomOf="@id/viewProfile"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#4DD9D9D9"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginStart="60dp"
+                    app:layout_constraintStart_toStartOf="@id/viewProfile"
+                    app:layout_constraintEnd_toEndOf="@id/viewProfile"
+                    app:layout_constraintBottom_toBottomOf="@id/viewProfile"/>
+
+                <View
+                    android:id="@+id/viewFingerPrint"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintStart_toStartOf="@id/viewProfile"
+                    app:layout_constraintEnd_toEndOf="@id/viewProfile"
+                    app:layout_constraintTop_toBottomOf="@id/viewProfile"/>
+
+                <ImageView
+                    android:id="@+id/imgFingerPrint"
+                    android:layout_width="35dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/screen_lock"
+                    android:padding="6dp"
+                    android:background="@drawable/light_yellow_drawable"
+                    app:tint="@color/white"
+                    app:layout_constraintStart_toStartOf="@id/viewFingerPrint"
+                    app:layout_constraintTop_toTopOf="@id/viewFingerPrint"
+                    app:layout_constraintBottom_toBottomOf="@id/viewFingerPrint"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Fingerprint"
+                    android:textColor="#3C3F48"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    app:layout_constraintStart_toEndOf="@id/imgFingerPrint"
+                    app:layout_constraintEnd_toStartOf="@id/btnSwitch"
+                    app:layout_constraintTop_toTopOf="@id/viewFingerPrint"
+                    app:layout_constraintBottom_toBottomOf="@id/viewFingerPrint"/>
+
+                <Switch
+                    android:id="@+id/btnSwitch"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:thumb="@drawable/custom_switch"
+                    app:layout_constraintEnd_toEndOf="@id/viewFingerPrint"
+                    app:layout_constraintTop_toTopOf="@id/viewFingerPrint"
+                    app:layout_constraintBottom_toBottomOf="@id/viewFingerPrint"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#4DD9D9D9"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    app:layout_constraintStart_toStartOf="@id/viewFingerPrint"
+                    app:layout_constraintEnd_toEndOf="@id/viewFingerPrint"
+                    app:layout_constraintBottom_toBottomOf="@id/viewFingerPrint"/>
+<!--view password-->
+<!--                <View-->
+<!--                    android:id="@+id/viewPasswordLess"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="35dp"-->
+<!--                    android:layout_marginTop="@dimen/_14sdp"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/viewProfile"-->
+<!--                    app:layout_constraintEnd_toEndOf="@id/viewProfile"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/viewFingerPrint" />-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imgPasswordLess"-->
+<!--                    android:layout_width="35dp"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    android:src="@drawable/login_with_otp"-->
+<!--                    android:padding="6dp"-->
+<!--                    android:background="@drawable/light_gray_drawable"-->
+<!--                    app:tint="@color/white"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/viewPasswordLess"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/viewPasswordLess"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/viewPasswordLess"/>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Password less login"-->
+<!--                    android:textColor="#3C3F48"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_marginStart="@dimen/_12sdp"-->
+<!--                    android:layout_marginEnd="@dimen/_12sdp"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/imgPasswordLess"-->
+<!--                    app:layout_constraintEnd_toStartOf="@id/btnPasswordLessSwitch"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/viewPasswordLess"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/viewPasswordLess"/>-->
+
+<!--                <Switch-->
+<!--                    android:id="@+id/btnPasswordLessSwitch"-->
+<!--                    android:layout_width="40dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:thumb="@drawable/custom_switch"-->
+<!--                    app:layout_constraintEnd_toEndOf="@id/viewPasswordLess"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/viewPasswordLess"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/viewPasswordLess"-->
+<!--                    tools:ignore="UseSwitchCompatOrMaterialXml" />-->
+
+<!--                <View-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:background="#4DD9D9D9"-->
+<!--                    android:layout_marginStart="60dp"-->
+<!--                    android:layout_marginTop="@dimen/_2sdp"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/viewPasswordLess"-->
+<!--                    app:layout_constraintEnd_toEndOf="@id/viewPasswordLess"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/viewPasswordLess"/>-->
+<!--view password-->
+                <View
+                    android:id="@+id/viewChangePassword"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintStart_toStartOf="@id/cardLogo"
+                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintTop_toBottomOf="@id/viewFingerPrint"/>
+
+                <ImageView
+                    android:id="@+id/imgChangePassword"
+                    android:layout_width="35dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/password_c"
+                    android:padding="6dp"
+                    android:background="@drawable/light_voilate_drawable"
+                    app:tint="@color/white"
+                    app:layout_constraintStart_toStartOf="@id/viewChangePassword"
+                    app:layout_constraintTop_toTopOf="@id/viewChangePassword"
+                    app:layout_constraintBottom_toBottomOf="@id/viewChangePassword"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Change Password"
+                    android:textColor="#3C3F48"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    app:layout_constraintStart_toEndOf="@id/imgChangePassword"
+                    app:layout_constraintEnd_toEndOf="@id/viewChangePassword"
+                    app:layout_constraintTop_toTopOf="@id/viewChangePassword"
+                    app:layout_constraintBottom_toBottomOf="@id/viewChangePassword"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#4DD9D9D9"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    app:layout_constraintStart_toStartOf="@id/viewChangePassword"
+                    app:layout_constraintEnd_toEndOf="@id/viewChangePassword"
+                    app:layout_constraintBottom_toBottomOf="@id/viewChangePassword"/>
+
+                <View
+                    android:id="@+id/viewChangeMPin"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintStart_toStartOf="@id/cardLogo"
+                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintTop_toBottomOf="@id/viewChangePassword"/>
+
+                <ImageView
+                    android:id="@+id/imgChangeMPin"
+                    android:layout_width="35dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/password_c"
+                    android:padding="6dp"
+                    android:background="@drawable/dark_blue_drawable"
+                    app:tint="@color/white"
+                    app:layout_constraintStart_toStartOf="@id/viewChangeMPin"
+                    app:layout_constraintTop_toTopOf="@id/viewChangeMPin"
+                    app:layout_constraintBottom_toBottomOf="@id/viewChangeMPin"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Change Mpin"
+                    android:textColor="#3C3F48"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    app:layout_constraintStart_toEndOf="@id/imgChangeMPin"
+                    app:layout_constraintEnd_toEndOf="@id/viewChangeMPin"
+                    app:layout_constraintTop_toTopOf="@id/viewChangeMPin"
+                    app:layout_constraintBottom_toBottomOf="@id/viewChangeMPin"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#4DD9D9D9"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    app:layout_constraintStart_toStartOf="@id/viewChangeMPin"
+                    app:layout_constraintEnd_toEndOf="@id/viewChangeMPin"
+                    app:layout_constraintBottom_toBottomOf="@id/viewChangeMPin"/>
+
+                <View
+                    android:id="@+id/viewResetMPin"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintStart_toStartOf="@id/cardLogo"
+                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintTop_toBottomOf="@id/viewChangeMPin"/>
+
+                <ImageView
+                    android:id="@+id/imgResetMPin"
+                    android:layout_width="35dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/password_c"
+                    android:padding="6dp"
+                    android:background="@drawable/dark_yellow_drawable"
+                    app:tint="@color/white"
+                    app:layout_constraintStart_toStartOf="@id/viewResetMPin"
+                    app:layout_constraintTop_toTopOf="@id/viewResetMPin"
+                    app:layout_constraintBottom_toBottomOf="@id/viewResetMPin"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Reset Mpin"
+                    android:textColor="#3C3F48"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    app:layout_constraintStart_toEndOf="@id/imgResetMPin"
+                    app:layout_constraintEnd_toEndOf="@id/viewResetMPin"
+                    app:layout_constraintTop_toTopOf="@id/viewResetMPin"
+                    app:layout_constraintBottom_toBottomOf="@id/viewResetMPin"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#4DD9D9D9"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    app:layout_constraintStart_toStartOf="@id/viewResetMPin"
+                    app:layout_constraintEnd_toEndOf="@id/viewResetMPin"
+                    app:layout_constraintBottom_toBottomOf="@id/viewResetMPin"/>
+
+                <View
+                    android:id="@+id/viewPrivacy"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintStart_toStartOf="@id/viewProfile"
+                    app:layout_constraintEnd_toEndOf="@id/viewProfile"
+                    app:layout_constraintTop_toBottomOf="@id/viewResetMPin"/>
+
+                <ImageView
+                    android:id="@+id/imgPrivacy"
+                    android:layout_width="35dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/privacy"
+                    android:padding="6dp"
+                    android:background="@drawable/light_gray_drawable"
+                    app:tint="@color/white"
+                    app:layout_constraintStart_toStartOf="@id/viewPrivacy"
+                    app:layout_constraintTop_toTopOf="@id/viewPrivacy"
+                    app:layout_constraintBottom_toBottomOf="@id/viewPrivacy"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Privacy Policy"
+                    android:textColor="#3C3F48"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    app:layout_constraintStart_toEndOf="@id/imgPrivacy"
+                    app:layout_constraintEnd_toEndOf="@id/viewPrivacy"
+                    app:layout_constraintTop_toTopOf="@id/viewPrivacy"
+                    app:layout_constraintBottom_toBottomOf="@id/viewPrivacy"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#4DD9D9D9"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    app:layout_constraintStart_toStartOf="@id/viewPrivacy"
+                    app:layout_constraintEnd_toEndOf="@id/viewPrivacy"
+                    app:layout_constraintBottom_toBottomOf="@id/viewPrivacy"/>
+
+                <View
+                    android:id="@+id/viewCondition"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintStart_toStartOf="@id/cardLogo"
+                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintTop_toBottomOf="@id/viewPrivacy"/>
+
+                <ImageView
+                    android:id="@+id/imgCondition"
+                    android:layout_width="35dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/term_c"
+                    android:padding="6dp"
+                    android:background="@drawable/light_red_drawable"
+                    app:tint="@color/white"
+                    app:layout_constraintStart_toStartOf="@id/viewCondition"
+                    app:layout_constraintTop_toTopOf="@id/viewCondition"
+                    app:layout_constraintBottom_toBottomOf="@id/viewCondition"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Term &amp; Conditions"
+                    android:textColor="#3C3F48"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    app:layout_constraintStart_toEndOf="@id/imgCondition"
+                    app:layout_constraintEnd_toEndOf="@id/viewCondition"
+                    app:layout_constraintTop_toTopOf="@id/viewCondition"
+                    app:layout_constraintBottom_toBottomOf="@id/viewCondition"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#4DD9D9D9"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    app:layout_constraintStart_toStartOf="@id/viewCondition"
+                    app:layout_constraintEnd_toEndOf="@id/viewCondition"
+                    app:layout_constraintBottom_toBottomOf="@id/viewCondition"/>
+
+                <View
+                    android:id="@+id/viewRefund"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintStart_toStartOf="@id/cardLogo"
+                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintTop_toBottomOf="@id/viewCondition"/>
+
+                <ImageView
+                    android:id="@+id/imgRefund"
+                    android:layout_width="35dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/refund"
+                    android:padding="6dp"
+                    android:background="@drawable/light_green_drawable"
+                    app:tint="@color/white"
+                    app:layout_constraintStart_toStartOf="@id/viewRefund"
+                    app:layout_constraintTop_toTopOf="@id/viewRefund"
+                    app:layout_constraintBottom_toBottomOf="@id/viewRefund"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Refund, Cancellation &amp; refund Policy"
+                    android:textColor="#3C3F48"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    app:layout_constraintStart_toEndOf="@id/imgRefund"
+                    app:layout_constraintEnd_toEndOf="@id/viewRefund"
+                    app:layout_constraintTop_toTopOf="@id/viewRefund"
+                    app:layout_constraintBottom_toBottomOf="@id/viewRefund"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#4DD9D9D9"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    app:layout_constraintStart_toStartOf="@id/viewRefund"
+                    app:layout_constraintEnd_toEndOf="@id/viewRefund"
+                    app:layout_constraintBottom_toBottomOf="@id/viewRefund"/>
+
+
+                <View
+                    android:id="@+id/viewComplaint"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintStart_toStartOf="@id/cardLogo"
+                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintTop_toBottomOf="@id/viewRefund"/>
+
+                <ImageView
+                    android:id="@+id/imgComplaint"
+                    android:layout_width="35dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/bharat_logo"
+                    android:padding="6dp"
+                    app:layout_constraintStart_toStartOf="@id/viewComplaint"
+                    app:layout_constraintTop_toTopOf="@id/viewComplaint"
+                    app:layout_constraintBottom_toBottomOf="@id/viewComplaint"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Complaint Registration"
+                    android:textColor="#3C3F48"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    app:layout_constraintStart_toEndOf="@id/imgComplaint"
+                    app:layout_constraintEnd_toEndOf="@id/viewComplaint"
+                    app:layout_constraintTop_toTopOf="@id/viewComplaint"
+                    app:layout_constraintBottom_toBottomOf="@id/viewComplaint"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#4DD9D9D9"
+                    android:layout_marginStart="55dp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    app:layout_constraintStart_toStartOf="@id/viewComplaint"
+                    app:layout_constraintEnd_toEndOf="@id/viewComplaint"
+                    app:layout_constraintBottom_toBottomOf="@id/viewComplaint"/>
+
+                <View
+                    android:id="@+id/viewRateUs"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintStart_toStartOf="@id/cardLogo"
+                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintTop_toBottomOf="@id/viewComplaint"/>
+
+                <ImageView
+                    android:id="@+id/imgRateUs"
+                    android:layout_width="35dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/rate"
+                    android:padding="6dp"
+                    android:background="@drawable/light_blue_drawable"
+                    app:layout_constraintStart_toStartOf="@id/viewRateUs"
+                    app:layout_constraintTop_toTopOf="@id/viewRateUs"
+                    app:layout_constraintBottom_toBottomOf="@id/viewRateUs"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Rate Us"
+                    android:textColor="#3C3F48"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    app:layout_constraintStart_toEndOf="@id/imgRateUs"
+                    app:layout_constraintEnd_toEndOf="@id/viewRateUs"
+                    app:layout_constraintTop_toTopOf="@id/viewRateUs"
+                    app:layout_constraintBottom_toBottomOf="@id/viewRateUs"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#4DD9D9D9"
+                    android:layout_marginStart="55dp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    app:layout_constraintStart_toStartOf="@id/viewRateUs"
+                    app:layout_constraintEnd_toEndOf="@id/viewRateUs"
+                    app:layout_constraintBottom_toBottomOf="@id/viewRateUs"/>
+
+
+                <View
+                    android:id="@+id/viewFeedBack"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintStart_toStartOf="@id/cardLogo"
+                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintTop_toBottomOf="@id/viewRateUs"/>
+
+                <ImageView
+                    android:id="@+id/imgFeedBack"
+                    android:layout_width="35dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/feedback"
+                    android:padding="6dp"
+                    android:background="@drawable/light_yellow_drawable"
+                    app:tint="@color/white"
+                    app:layout_constraintStart_toStartOf="@id/viewFeedBack"
+                    app:layout_constraintTop_toTopOf="@id/viewFeedBack"
+                    app:layout_constraintBottom_toBottomOf="@id/viewFeedBack"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Feedback"
+                    android:textColor="#3C3F48"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    app:layout_constraintStart_toEndOf="@id/imgFeedBack"
+                    app:layout_constraintEnd_toEndOf="@id/viewFeedBack"
+                    app:layout_constraintTop_toTopOf="@id/viewFeedBack"
+                    app:layout_constraintBottom_toBottomOf="@id/viewFeedBack"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#4DD9D9D9"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    app:layout_constraintStart_toStartOf="@id/viewFeedBack"
+                    app:layout_constraintEnd_toEndOf="@id/viewFeedBack"
+                    app:layout_constraintBottom_toBottomOf="@id/viewFeedBack"/>
+
+                <View
+                    android:id="@+id/viewInvite"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintStart_toStartOf="@id/cardLogo"
+                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintTop_toBottomOf="@id/viewFeedBack"/>
+
+                <ImageView
+                    android:id="@+id/imgInvite"
+                    android:layout_width="35dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/invite"
+                    android:padding="6dp"
+                    android:background="@drawable/light_gray_drawable"
+                    app:tint="@color/white"
+                    app:layout_constraintStart_toStartOf="@id/viewInvite"
+                    app:layout_constraintTop_toTopOf="@id/viewInvite"
+                    app:layout_constraintBottom_toBottomOf="@id/viewInvite"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Invite &amp; Earn"
+                    android:textColor="#3C3F48"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    app:layout_constraintStart_toEndOf="@id/imgInvite"
+                    app:layout_constraintEnd_toEndOf="@id/viewInvite"
+                    app:layout_constraintTop_toTopOf="@id/viewInvite"
+                    app:layout_constraintBottom_toBottomOf="@id/viewInvite"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#4DD9D9D9"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    app:layout_constraintStart_toStartOf="@id/viewInvite"
+                    app:layout_constraintEnd_toEndOf="@id/viewInvite"
+                    app:layout_constraintBottom_toBottomOf="@id/viewInvite"/>
+
+                <View
+                    android:id="@+id/viewFollow"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintStart_toStartOf="@id/cardLogo"
+                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintTop_toBottomOf="@id/viewInvite"/>
+
+                <ImageView
+                    android:id="@+id/imgFollow"
+                    android:layout_width="35dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/social"
+                    android:padding="6dp"
+                    android:background="@drawable/light_green_drawable"
+                    app:tint="@color/white"
+                    app:layout_constraintStart_toStartOf="@id/viewFollow"
+                    app:layout_constraintTop_toTopOf="@id/viewFollow"
+                    app:layout_constraintBottom_toBottomOf="@id/viewFollow"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Follow Us"
+                    android:textColor="#3C3F48"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    app:layout_constraintStart_toEndOf="@id/imgFollow"
+                    app:layout_constraintEnd_toEndOf="@id/viewFollow"
+                    app:layout_constraintTop_toTopOf="@id/viewFollow"
+                    app:layout_constraintBottom_toBottomOf="@id/viewFollow"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#4DD9D9D9"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    app:layout_constraintStart_toStartOf="@id/viewFollow"
+                    app:layout_constraintEnd_toEndOf="@id/viewFollow"
+                    app:layout_constraintBottom_toBottomOf="@id/viewFollow"/>
+
+                <View
+                    android:id="@+id/viewLogout"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintStart_toStartOf="@id/cardLogo"
+                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintTop_toBottomOf="@id/viewFollow"/>
+
+                <ImageView
+                    android:id="@+id/imgLogout"
+                    android:layout_width="35dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/logout"
+                    android:padding="6dp"
+                    android:background="@drawable/dark_red_drawable"
+                    app:tint="@color/white"
+                    app:layout_constraintStart_toStartOf="@id/viewLogout"
+                    app:layout_constraintTop_toTopOf="@id/viewLogout"
+                    app:layout_constraintBottom_toBottomOf="@id/viewLogout"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Log Out"
+                    android:textColor="#3C3F48"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    app:layout_constraintStart_toEndOf="@id/imgLogout"
+                    app:layout_constraintEnd_toEndOf="@id/viewLogout"
+                    app:layout_constraintTop_toTopOf="@id/viewLogout"
+                    app:layout_constraintBottom_toBottomOf="@id/viewLogout"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#4DD9D9D9"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    app:layout_constraintStart_toStartOf="@id/viewLogout"
+                    app:layout_constraintEnd_toEndOf="@id/viewLogout"
+                    app:layout_constraintBottom_toBottomOf="@id/viewLogout"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/viewLogout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#BA333333"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ProgressBar
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:indeterminateDrawable="@drawable/layout_process_bar" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/no_internet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#BA333333"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/wifi" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="@dimen/_13sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingRight="@dimen/_13sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:text="No Internet available.\nCheck connection"
+            android:textColor="@color/white_5" />
+
+        <TextView
+            android:id="@+id/retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/corner_primary"
+            android:gravity="center"
+            android:paddingLeft="@dimen/_13sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingRight="@dimen/_13sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:text="Re-Try"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</LinearLayout>

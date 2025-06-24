@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/_4sdp">
+    <TextView
+        android:id="@+id/txtCustomerInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Customer Name"
+        android:textColor="@color/black_4"
+        android:visibility="visible"
+        android:maxLines="2"
+        android:textSize="@dimen/_11sdp"
+        android:ellipsize="end"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/txtCustomerInfoValue"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/txtCustomerInfoValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Chitransh Suman"
+        android:visibility="visible"
+        android:textColor="@color/black_4"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:maxLines="2"
+        android:gravity="end"
+        android:textSize="@dimen/_11sdp"
+        android:ellipsize="end"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        app:layout_constraintStart_toEndOf="@id/txtCustomerInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/txtCustomerInfo"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

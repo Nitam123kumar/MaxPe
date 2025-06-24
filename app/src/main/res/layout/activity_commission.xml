@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/main_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/app_bar_custom" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingLeft="@dimen/_10sdp"
+                            android:paddingRight="@dimen/_10sdp">
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:layout_marginBottom="@dimen/_16sdp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/recharge_commission"
+                                        android:gravity="center"
+                                        android:orientation="vertical"
+                                        android:padding="@dimen/_8sdp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginEnd="@dimen/_5sdp"
+                                            android:gravity="center"
+                                            android:text="Today Recharge"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/_15sdp" />
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:elevation="@dimen/_3sdp"
+                                            android:layout_marginTop="@dimen/_2sdp"
+                                            android:paddingStart="@dimen/_10sdp"
+                                            android:paddingEnd="@dimen/_10sdp"
+                                            android:paddingTop="@dimen/_2sdp"
+                                            android:paddingBottom="@dimen/_2sdp"
+                                            android:background="@drawable/recharge_commission_text_drawable">
+
+                                            <TextView
+                                                android:id="@+id/today_total"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="0"
+                                                android:textColor="@color/green_end"
+                                                android:textSize="@dimen/_12sdp" />
+
+                                            <TextView
+                                                android:id="@+id/today_count"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:paddingLeft="@dimen/_2sdp"
+                                                android:text="(0)"
+                                                android:textColor="@color/green_end"
+                                                android:textSize="@dimen/_12sdp" />
+
+                                        </LinearLayout>
+
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:background="@drawable/recharge_commission"
+                                        android:gravity="center"
+                                        android:layout_marginTop="@dimen/_8sdp"
+                                        android:orientation="vertical"
+                                        android:padding="@dimen/_8sdp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:text="Yesterday Recharge"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/_15sdp" />
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:elevation="@dimen/_3sdp"
+                                            android:layout_marginTop="@dimen/_2sdp"
+                                            android:paddingStart="@dimen/_10sdp"
+                                            android:paddingEnd="@dimen/_10sdp"
+                                            android:paddingTop="@dimen/_2sdp"
+                                            android:paddingBottom="@dimen/_2sdp"
+                                            android:background="@drawable/recharge_commission_text_drawable">
+
+                                            <TextView
+                                                android:id="@+id/yesterday_total"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="0"
+                                                android:textColor="@color/green_end"
+                                                android:textSize="@dimen/_12sdp" />
+
+                                            <TextView
+                                                android:id="@+id/yesterday_count"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:paddingLeft="@dimen/_2sdp"
+                                                android:text="(0)"
+                                                android:textColor="@color/green_end"
+                                                android:textSize="@dimen/_12sdp" />
+
+                                        </LinearLayout>
+
+
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:layout_marginTop="@dimen/_8sdp"
+                                        android:background="@drawable/recharge_commission"
+                                        android:orientation="vertical"
+                                        android:padding="@dimen/_8sdp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:text="This Month Recharge"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/_15sdp" />
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:elevation="@dimen/_3sdp"
+                                            android:layout_marginTop="@dimen/_2sdp"
+                                            android:paddingStart="@dimen/_10sdp"
+                                            android:paddingEnd="@dimen/_10sdp"
+                                            android:paddingTop="@dimen/_2sdp"
+                                            android:paddingBottom="@dimen/_2sdp"
+                                            android:background="@drawable/recharge_commission_text_drawable">
+
+                                            <TextView
+                                                android:id="@+id/this_month_total"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="0"
+                                                android:textColor="@color/green_end"
+                                                android:textSize="@dimen/_12sdp" />
+
+                                            <TextView
+                                                android:id="@+id/this_month_count"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:paddingLeft="@dimen/_2sdp"
+                                                android:text="(0)"
+                                                android:textColor="@color/green_end"
+                                                android:textSize="@dimen/_12sdp" />
+
+                                        </LinearLayout>
+
+
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:layout_marginTop="@dimen/_8sdp"
+                                        android:background="@drawable/recharge_commission"
+                                        android:orientation="vertical"
+                                        android:padding="@dimen/_8sdp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:text="Last Month Recharge"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/_15sdp" />
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:elevation="@dimen/_3sdp"
+                                            android:layout_marginTop="@dimen/_2sdp"
+                                            android:paddingStart="@dimen/_10sdp"
+                                            android:paddingEnd="@dimen/_10sdp"
+                                            android:paddingTop="@dimen/_2sdp"
+                                            android:paddingBottom="@dimen/_2sdp"
+                                            android:background="@drawable/recharge_commission_text_drawable">
+
+                                            <TextView
+                                                android:id="@+id/last_month"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="0"
+                                                android:textColor="@color/green_end"
+                                                android:textSize="@dimen/_12sdp" />
+
+                                            <TextView
+                                                android:id="@+id/last_month_count"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:paddingLeft="@dimen/_2sdp"
+                                                android:text="(0)"
+                                                android:textColor="@color/green_end"
+                                                android:textSize="@dimen/_12sdp" />
+
+                                        </LinearLayout>
+
+
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:gravity="center"
+                                        android:layout_marginTop="@dimen/_8sdp"
+                                        android:background="@drawable/recharge_commission"
+                                        android:orientation="vertical"
+                                        android:padding="@dimen/_8sdp">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginRight="@dimen/_5sdp"
+                                            android:gravity="center"
+                                            android:text="Commission Earned"
+                                            android:textColor="@color/black"
+                                            android:textSize="@dimen/_15sdp" />
+
+                                        <TextView
+                                            android:id="@+id/total_commission"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="0"
+                                            android:textColor="@color/green_end"
+                                            android:textSize="@dimen/_12sdp"
+                                            android:elevation="@dimen/_3sdp"
+                                            android:layout_marginTop="@dimen/_2sdp"
+                                            android:paddingStart="@dimen/_10sdp"
+                                            android:paddingEnd="@dimen/_10sdp"
+                                            android:paddingTop="@dimen/_2sdp"
+                                            android:paddingBottom="@dimen/_2sdp"
+                                            android:background="@drawable/recharge_commission_text_drawable"/>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_4sdp"
+                                        android:layout_weight="1"
+
+                                        android:background="@drawable/corner_new"
+                                        android:gravity="center"
+                                        android:orientation="vertical"
+                                        android:padding="@dimen/_15sdp"
+                                        android:visibility="gone">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:gravity="center"
+                                            android:text="Today Recharge"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/_11sdp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="0"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/_11sdp" />
+
+
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
+
+                <LinearLayout
+                    android:id="@+id/loading"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ProgressBar
+                            android:layout_width="@dimen/_35sdp"
+                            android:layout_height="@dimen/_35sdp"
+                            android:indeterminateDrawable="@drawable/layout_process_bar" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

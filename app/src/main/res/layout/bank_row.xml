@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:orientation="vertical">-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/top"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/_5sdp" />-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/bank_count"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/_25sdp"-->
+<!--                android:gravity="center"-->
+<!--                android:paddingLeft="@dimen/_10sdp"-->
+<!--                android:text="BANK NAME"-->
+<!--                android:textColor="@color/black_2"-->
+<!--                android:textSize="@dimen/_11sdp" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0.5dp"-->
+<!--                android:background="@color/black_2" />-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/_25sdp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1.5"-->
+<!--                    android:paddingLeft="@dimen/_10sdp"-->
+<!--                    android:text="BANK NAME"-->
+<!--                    android:textColor="@color/black_2"-->
+<!--                    android:textSize="@dimen/_11sdp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="0.5dp"-->
+<!--                    android:layout_height="@dimen/_25sdp"-->
+<!--                    android:background="@color/black_2" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/bank_name"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center"-->
+<!--                    android:paddingLeft="@dimen/_10sdp"-->
+<!--                    android:text=""-->
+<!--                    android:textColor="@color/black_2"-->
+<!--                    android:textSize="@dimen/_11sdp" />-->
+
+<!--            </LinearLayout>-->
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0.5dp"-->
+<!--                android:background="@color/black_2" />-->
+
+<!--        </LinearLayout>-->
+
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
+
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/_25sdp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1.5"-->
+<!--                    android:paddingLeft="@dimen/_10sdp"-->
+<!--                    android:text="A/C HOLDER"-->
+<!--                    android:textColor="@color/black_2"-->
+<!--                    android:textSize="@dimen/_11sdp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="0.5dp"-->
+<!--                    android:layout_height="@dimen/_25sdp"-->
+<!--                    android:background="@color/black_2" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/ac_holder"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center"-->
+<!--                    android:paddingLeft="@dimen/_10sdp"-->
+<!--                    android:text=""-->
+<!--                    android:textColor="@color/black_2"-->
+<!--                    android:textSize="@dimen/_11sdp" />-->
+
+<!--            </LinearLayout>-->
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0.5dp"-->
+<!--                android:background="@color/black_2" />-->
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
+
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/_25sdp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:paddingLeft="@dimen/_10sdp"-->
+<!--                    android:text="A/C NUMBER"-->
+<!--                    android:layout_weight="1.3"-->
+<!--                    android:textColor="@color/black_2"-->
+<!--                    android:textSize="@dimen/_11sdp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="0.5dp"-->
+<!--                    android:layout_marginLeft="@dimen/_6sdp"-->
+<!--                    android:layout_height="@dimen/_25sdp"-->
+<!--                    android:background="@color/black_2" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/ac_no"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:gravity="center"-->
+<!--                        android:layout_marginRight="@dimen/_2sdp"-->
+<!--                        android:paddingLeft="@dimen/_10sdp"-->
+<!--                        android:text=""-->
+<!--                        android:textColor="@color/black_2"-->
+<!--                        android:textSize="@dimen/_11sdp" />-->
+<!--                    <TextView-->
+<!--                        android:id="@+id/copy_account"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:ellipsize="end"-->
+<!--                        android:background="@drawable/corner_white"-->
+<!--                        android:padding="@dimen/_2sdp"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:textSize="@dimen/_8sdp"-->
+<!--                        android:layout_marginRight="@dimen/_4sdp"-->
+<!--                        android:layout_alignParentRight="true"-->
+<!--                        android:text="copy"-->
+<!--                        android:textColor="@color/black" />-->
+
+
+
+<!--            </LinearLayout>-->
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0.5dp"-->
+<!--                android:background="@color/black_2" />-->
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
+
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/_25sdp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1.5"-->
+<!--                    android:paddingLeft="@dimen/_10sdp"-->
+<!--                    android:text="IFSC CODE"-->
+<!--                    android:textColor="@color/black_2"-->
+<!--                    android:textSize="@dimen/_11sdp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="0.5dp"-->
+<!--                    android:layout_height="@dimen/_25sdp"-->
+<!--                    android:background="@color/black_2" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/ifsc_code"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center"-->
+<!--                    android:paddingLeft="@dimen/_10sdp"-->
+<!--                    android:text=""-->
+<!--                    android:textColor="@color/black_2"-->
+<!--                    android:textSize="@dimen/_11sdp" />-->
+
+<!--            </LinearLayout>-->
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0.5dp"-->
+<!--                android:background="@color/black_2" />-->
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
+
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/_25sdp"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="horizontal">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1.5"-->
+<!--                    android:paddingLeft="@dimen/_10sdp"-->
+<!--                    android:text="ACCOUNT TYPE"-->
+<!--                    android:textColor="@color/black_2"-->
+<!--                    android:textSize="@dimen/_11sdp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="0.5dp"-->
+<!--                    android:layout_height="@dimen/_25sdp"-->
+<!--                    android:background="@color/black_2" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/ac_type"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center"-->
+<!--                    android:paddingLeft="@dimen/_10sdp"-->
+<!--                    android:text=""-->
+<!--                    android:textColor="@color/black_2"-->
+<!--                    android:textSize="@dimen/_11sdp" />-->
+
+<!--            </LinearLayout>-->
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="0.5dp"-->
+<!--                android:background="@color/black_2" />-->
+
+<!--        </LinearLayout>-->
+
+<!--    </LinearLayout>-->
+
+<!--</LinearLayout>-->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:padding="@dimen/dimen_6dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent">
+<!--    android:background="@drawable/bg_bank"-->
+    <View
+        android:id="@+id/viewDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/black_new"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/txtBankName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Bank Name"
+        android:textColor="#212121"
+        android:layout_marginTop="10dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@id/viewDivider"
+        app:layout_constraintEnd_toStartOf="@id/txtBankNameValue"
+        app:layout_constraintTop_toBottomOf="@id/viewDivider"/>
+
+    <TextView
+        android:id="@+id/txtBankNameValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:textColor="#212121"
+        app:layout_constraintHorizontal_weight="1.5"
+        app:layout_constraintStart_toEndOf="@id/txtBankName"
+        app:layout_constraintEnd_toStartOf="@id/txtCopy1"
+        app:layout_constraintTop_toTopOf="@id/txtBankName"/>
+
+    <TextView
+        android:id="@+id/txtCopy1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Copy"
+        android:padding="@dimen/_1sdp"
+        android:textColor="@color/white"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:background="@drawable/green_background"
+        app:layout_constraintStart_toEndOf="@id/txtBankNameValue"
+        app:layout_constraintEnd_toEndOf="@id/viewDivider"
+        app:layout_constraintTop_toTopOf="@id/txtBankName"
+        app:layout_constraintBottom_toBottomOf="@id/txtBankName"/>
+
+    <TextView
+        android:id="@+id/txtAccountHolder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="A/c Holder"
+        android:textColor="#212121"
+        android:layout_marginTop="10dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@id/viewDivider"
+        app:layout_constraintEnd_toStartOf="@id/txtBankNameValue"
+        app:layout_constraintTop_toBottomOf="@id/txtBankNameValue"/>
+
+    <TextView
+        android:id="@+id/txtAccountHolderValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:textColor="#212121"
+        app:layout_constraintHorizontal_weight="1.5"
+        app:layout_constraintStart_toEndOf="@id/txtAccountHolder"
+        app:layout_constraintEnd_toStartOf="@id/txtCopy2"
+        app:layout_constraintTop_toTopOf="@id/txtAccountHolder"/>
+
+    <TextView
+        android:id="@+id/txtCopy2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Copy"
+        android:padding="@dimen/_1sdp"
+        android:textColor="@color/white"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:background="@drawable/green_background"
+        app:layout_constraintStart_toEndOf="@id/txtAccountHolderValue"
+        app:layout_constraintEnd_toEndOf="@id/viewDivider"
+        app:layout_constraintTop_toTopOf="@id/txtAccountHolder"
+        app:layout_constraintBottom_toBottomOf="@id/txtAccountHolder"/>
+
+    <TextView
+        android:id="@+id/txtAccountNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="A/c Number"
+        android:textColor="#212121"
+        android:layout_marginTop="10dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@id/viewDivider"
+        app:layout_constraintEnd_toStartOf="@id/txtAccountNumberValue"
+        app:layout_constraintTop_toBottomOf="@id/txtAccountHolderValue"/>
+
+    <TextView
+        android:id="@+id/txtAccountNumberValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:textColor="#212121"
+        app:layout_constraintHorizontal_weight="1.5"
+        app:layout_constraintStart_toEndOf="@id/txtAccountNumber"
+        app:layout_constraintEnd_toStartOf="@id/txtCopy3"
+        app:layout_constraintTop_toTopOf="@id/txtAccountNumber"/>
+
+    <TextView
+        android:id="@+id/txtCopy3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Copy"
+        android:padding="@dimen/_1sdp"
+        android:textColor="@color/white"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:background="@drawable/green_background"
+        app:layout_constraintStart_toEndOf="@id/txtAccountNumberValue"
+        app:layout_constraintEnd_toEndOf="@id/viewDivider"
+        app:layout_constraintTop_toTopOf="@id/txtAccountNumber"
+        app:layout_constraintBottom_toBottomOf="@id/txtAccountNumber"/>
+
+    <TextView
+        android:id="@+id/txtIFSCCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="IFSC Code"
+        android:textColor="#212121"
+        android:layout_marginTop="10dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@id/viewDivider"
+        app:layout_constraintEnd_toStartOf="@id/txtIFSCCodeValue"
+        app:layout_constraintTop_toBottomOf="@id/txtAccountNumberValue"/>
+
+    <TextView
+        android:id="@+id/txtIFSCCodeValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:textColor="#212121"
+        app:layout_constraintHorizontal_weight="1.5"
+        app:layout_constraintStart_toEndOf="@id/txtIFSCCode"
+        app:layout_constraintEnd_toStartOf="@id/txtCopy4"
+        app:layout_constraintTop_toTopOf="@id/txtIFSCCode"/>
+
+    <TextView
+        android:id="@+id/txtCopy4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Copy"
+        android:padding="@dimen/_1sdp"
+        android:textColor="@color/white"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:background="@drawable/green_background"
+        app:layout_constraintStart_toEndOf="@id/txtIFSCCodeValue"
+        app:layout_constraintEnd_toEndOf="@id/viewDivider"
+        app:layout_constraintTop_toTopOf="@id/txtIFSCCode"
+        app:layout_constraintBottom_toBottomOf="@id/txtIFSCCode"/>
+
+    <TextView
+        android:id="@+id/txtAccountType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Account Type"
+        android:textColor="#212121"
+        android:layout_marginTop="10dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="@id/viewDivider"
+        app:layout_constraintEnd_toStartOf="@id/txtAccountTypeValue"
+        app:layout_constraintTop_toBottomOf="@id/txtIFSCCodeValue"/>
+
+    <TextView
+        android:id="@+id/txtAccountTypeValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:textColor="#212121"
+        app:layout_constraintHorizontal_weight="1.8"
+        app:layout_constraintStart_toEndOf="@id/txtAccountType"
+        app:layout_constraintEnd_toEndOf="@id/viewDivider"
+        app:layout_constraintTop_toTopOf="@id/txtAccountType"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

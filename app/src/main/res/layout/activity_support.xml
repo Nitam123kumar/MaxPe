@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include layout="@layout/app_bar_custom"
+            android:id="@+id/mToolBar"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintTop_toBottomOf="@id/mToolBar"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="@dimen/_4sdp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/app_name_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_12sdp"
+                            android:gravity="center"
+                            android:padding="@dimen/_8sdp"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14sdp"
+                            android:textStyle="bold"
+                            android:visibility="gone" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/contactSupportLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="110dp"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:background="@drawable/support_design_background"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/imgContactSupport"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:contentDescription="@string/contact_us"
+                            android:src="@drawable/customer_service"
+                            android:layout_marginStart="@dimen/_32sdp"
+                            app:layout_constraintVertical_chainStyle="packed"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toTopOf="@id/txtContactSupport"/>
+
+                        <TextView
+                            android:id="@+id/txtContactSupport"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Call Us"
+                            android:gravity="center"
+                            android:textColor="#6F6F6F"
+                            android:textStyle="bold"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            app:layout_constraintStart_toStartOf="@id/imgContactSupport"
+                            app:layout_constraintEnd_toEndOf="@id/imgContactSupport"
+                            app:layout_constraintTop_toBottomOf="@id/imgContactSupport"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/mobile_tv"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:textColor="@color/black_2"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:layout_marginStart="@dimen/_12sdp"
+                            android:layout_marginEnd="@dimen/_16sdp"
+                            app:layout_constraintStart_toEndOf="@id/imgContactSupport"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/imgContactSupport"
+                            app:layout_constraintBottom_toBottomOf="@id/txtContactSupport"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/whatsAppSupportLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="110dp"
+                        android:background="@drawable/support_design_background"
+                        app:layout_constraintStart_toStartOf="@id/contactSupportLayout"
+                        app:layout_constraintEnd_toEndOf="@id/contactSupportLayout"
+                        app:layout_constraintTop_toBottomOf="@id/contactSupportLayout">
+
+                        <ImageView
+                            android:id="@+id/imgWhatsAppSupport"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/whatsapp"
+                            android:layout_marginStart="@dimen/_32sdp"
+                            app:layout_constraintVertical_chainStyle="packed"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toTopOf="@id/txtWhatsAppSupport"/>
+
+                        <TextView
+                            android:id="@+id/txtWhatsAppSupport"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="WhatsApp"
+                            android:textColor="#6F6F6F"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            app:layout_constraintStart_toStartOf="@id/imgWhatsAppSupport"
+                            app:layout_constraintEnd_toEndOf="@id/imgWhatsAppSupport"
+                            app:layout_constraintTop_toBottomOf="@id/imgWhatsAppSupport"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/tv_whatsapp"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:textColor="@color/black_2"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:layout_marginStart="@dimen/_12sdp"
+                            android:layout_marginEnd="@dimen/_16sdp"
+                            app:layout_constraintStart_toEndOf="@id/imgWhatsAppSupport"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/imgWhatsAppSupport"
+                            app:layout_constraintBottom_toBottomOf="@id/txtWhatsAppSupport"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/emailSupportLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="110dp"
+                        android:background="@drawable/support_design_background"
+                        app:layout_constraintStart_toStartOf="@id/contactSupportLayout"
+                        app:layout_constraintEnd_toEndOf="@id/contactSupportLayout"
+                        app:layout_constraintTop_toBottomOf="@id/whatsAppSupportLayout">
+
+                        <ImageView
+                            android:id="@+id/imgEmailSupport"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/email_12"
+                            android:layout_marginStart="@dimen/_32sdp"
+                            app:layout_constraintVertical_chainStyle="packed"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toTopOf="@id/txtEmailSupport"/>
+
+                        <TextView
+                            android:id="@+id/txtEmailSupport"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Email"
+                            android:gravity="center"
+                            android:textColor="#6F6F6F"
+                            android:textStyle="bold"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            app:layout_constraintStart_toStartOf="@id/imgEmailSupport"
+                            app:layout_constraintEnd_toEndOf="@id/imgEmailSupport"
+                            app:layout_constraintTop_toBottomOf="@id/imgEmailSupport"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/email"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:textColor="@color/black_2"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:layout_marginStart="@dimen/_12sdp"
+                            android:layout_marginEnd="@dimen/_16sdp"
+                            app:layout_constraintStart_toEndOf="@id/imgEmailSupport"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/imgEmailSupport"
+                            app:layout_constraintBottom_toBottomOf="@id/txtEmailSupport"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/addressSupportLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="110dp"
+                        android:background="@drawable/support_design_background"
+                        app:layout_constraintStart_toStartOf="@id/contactSupportLayout"
+                        app:layout_constraintEnd_toEndOf="@id/contactSupportLayout"
+                        app:layout_constraintTop_toBottomOf="@id/emailSupportLayout">
+
+                        <ImageView
+                            android:id="@+id/imgAddressSupport"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/map_12"
+                            android:layout_marginStart="@dimen/_32sdp"
+                            app:layout_constraintVertical_chainStyle="packed"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toTopOf="@id/txtAddressSupport"/>
+
+                        <TextView
+                            android:id="@+id/txtAddressSupport"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Address"
+                            android:textColor="#6F6F6F"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            app:layout_constraintStart_toStartOf="@id/imgAddressSupport"
+                            app:layout_constraintEnd_toEndOf="@id/imgAddressSupport"
+                            app:layout_constraintTop_toBottomOf="@id/imgAddressSupport"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/tvAddress"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:textStyle="bold"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:textColor="@color/black_2"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                            android:layout_marginStart="@dimen/_12sdp"
+                            android:layout_marginEnd="@dimen/_16sdp"
+                            app:layout_constraintStart_toEndOf="@id/imgAddressSupport"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="@id/txtAddressSupport"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/time_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/support_design_background"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:maxLines="1"
+                        android:textColor="@color/black"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        app:layout_constraintStart_toStartOf="@id/contactSupportLayout"
+                        app:layout_constraintEnd_toEndOf="@id/contactSupportLayout"
+                        app:layout_constraintTop_toBottomOf="@id/addressSupportLayout"/>
+
+                    <TextView
+                        android:id="@+id/llPrepaidNumber"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/support_button_background"
+                        android:text="Prepaid Toll Free Number"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:maxLines="1"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_10sdp"
+                        android:textColor="@color/white"
+                        android:elevation="@dimen/_5sdp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        app:layout_constraintStart_toStartOf="@id/contactSupportLayout"
+                        app:layout_constraintEnd_toEndOf="@id/contactSupportLayout"
+                        app:layout_constraintTop_toBottomOf="@id/time_tv"/>
+
+                    <TextView
+                        android:id="@+id/llDTHNumber"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/support_button_background"
+                        android:text="DTH Toll Free Number"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:maxLines="1"
+                        android:elevation="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_10sdp"
+                        android:textColor="@color/white"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        app:layout_constraintStart_toStartOf="@id/contactSupportLayout"
+                        app:layout_constraintEnd_toEndOf="@id/contactSupportLayout"
+                        app:layout_constraintTop_toBottomOf="@id/llPrepaidNumber"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_margin="@dimen/_8sdp"
+                        app:layout_constraintTop_toBottomOf="@id/llDTHNumber"
+                        app:layout_constraintBottom_toBottomOf="parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Connect with us"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                            android:textColor="#ADABAB" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            android:layout_marginTop="@dimen/_8sdp">
+
+                            <ImageView
+                                android:id="@+id/instagram"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:src="@drawable/instagram_2"
+                                android:contentDescription="@string/app_name"/>
+
+                            <ImageView
+                                android:id="@+id/youtube"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:src="@drawable/youtube_2"
+                                android:contentDescription="@string/app_name"/>
+
+                            <ImageView
+                                android:id="@+id/facebook"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/facebook_2"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:contentDescription="@string/app_name"/>
+
+                            <ImageView
+                                android:id="@+id/telegram"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/telegram"
+                                android:contentDescription="@string/app_name"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/no_internet"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#31333333"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="@dimen/_70sdp"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/wifi" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:paddingLeft="@dimen/_15sdp"
+                            android:paddingTop="@dimen/_10sdp"
+                            android:paddingRight="@dimen/_15sdp"
+                            android:paddingBottom="@dimen/_10sdp"
+                            android:text="No Internet available.\nCheck connection"
+                            android:textColor="@color/black_4" />
+
+                        <TextView
+                            android:id="@+id/retry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/corner_primary"
+                            android:gravity="center"
+                            android:paddingLeft="@dimen/_15sdp"
+                            android:paddingTop="@dimen/_10sdp"
+                            android:paddingRight="@dimen/_15sdp"
+                            android:paddingBottom="@dimen/_10sdp"
+                            android:text="Re-Try"
+                            android:textColor="@color/white" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

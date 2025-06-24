@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name">MaxPe</string>
+    <string name="default_notification_channel_id">999999</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="exit">Exit?</string>
+    <string name="yes">Yes</string>
+    <string name="allow">Allow</string>
+    <string name="no">No</string>
+    <string name="sure">Are you sure?</string>
+    <string name="welcome_txt">Welcome To\nEG Payment</string>
+    <string name="log_out">Log Out</string>
+    <string name="share">Share</string>
+    <string name="school_info">About</string>
+    <string name="rate_us">Rate Us</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="change_password">Change Password</string>
+    <string name="btn_ok">OK</string>
+    <string name="no_network_message">Thank you to check your internet connection.</string>
+    <string name="no_internet">No Internet</string>
+    <string name="enable">Enable</string>
+    <string name="permission">We need to permissions for performing necessary task. Please permit the permission through Settings screen.\n\nSelect Permissions -> Enable permission</string>
+
+    <string name="logout">Log Out!</string>
+    <string name="logout_text">Are you sure for logout?</string>
+    <string name="sponsor_id">Sponsor Id</string>
+    <string name="full_name">Full Name</string>
+    <string name="email_">Email</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="firm_name">First Name</string>
+    <string name="member_description">Member Description</string>
+    <string name="Pincode">Pincode</string>
+    <string name="gst_no">GST No</string>
+    <string name="description">Description</string>
+    <string name="add_member">Add Member</string>
+    <string name="closing_amount">Closing Amount</string>
+    <string name="country">Country</string>
+    <string name="landmark">Landmark</string>
+    <string name="Shop_name">Shop Name</string>
+    <string name="master">Master</string>
+    <string name="distributor">Distributor</string>
+    <string name="payment_mode">Payment Mode : </string>
+    <string name="wallet">Wallet</string>
+    <string name="retry">Re-Try</string>
+    <string name="email">Email : </string>
+    <string name="address">Address : </string>
+    <string name="iperror">Check your internet connection or change internet once.</string>
+    <string name="error">Check your internet connection or change internet once.</string>
+    <string name="amount">Amount <font color="red">(1 to 100000)</font></string>
+
+
+    <string-array name="bill_provider">
+        <item>Education Fees</item>
+        <item>Loan Repayment</item>
+        <item>Electricity</item>
+        <item>Broadband Postpaid</item>
+        <item>Water</item>
+        <item>Municipal Taxes</item>
+        <item>Insurance</item>
+        <item>Housing Society</item>
+        <item>Gas</item>
+        <item>FASTag</item>
+        <item>Subscription</item>
+        <item>Mobile Postpaid</item>
+        <item>Landline Postpaid</item>
+        <item>Cable TV</item>
+        <item>Clubs and Associations</item>
+        <item>DTH</item>
+        <item>Life Insurance</item>
+        <item>LPG Gas</item>
+        <item>Hospital and Pathology</item>
+        <item>Municipal Services</item>
+        <item>Credit Card</item>
+        <item>Health Insurance</item>
+        <item>Mobile Prepaid</item>
+        <item>Recurring Deposit</item>
+    </string-array>
+    <string name="paytm_payment_gateway"><font color="#000000"><b>Paytm</b></font> <br /> Payment Gateway</string>
+    <string name="upi_phonepe_gateway"><font color="#000000"><b>UPI</b></font> <br /> <br /> (PhonePe <br /> Gateway)</string>
+    <string name="razorpay_payment_gateway"><font color="#000000"><b>Razorpay</b></font> <br /> Payment Gateway</string>
+    <string name="mobile_banking_neft_imps"><font color="#000000"><b>Mobile</b></font> <br /> Banking <br /> (NEFT, IMPS)</string>
+    <string name="bharat_pay">Bharat Pay</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="slug_first_fragment">One-stop solution for all \nyour Recharge and Bill\nPayments</string>
+    <string name="slug_second_fragment">Spend And Earn\nGuaranteed Cashback\nOn Every Recharge...</string>
+    <string name="slug_third_fragment">*Get a Chance to Win\nUpto ₹100 on Every 5\nReferrals</string>
+    <string name="view_plan_details">View Plan Details</string>
+    <string name="cancel">Cancel</string>
+    <string name="image">image</string>
+
+</resources>

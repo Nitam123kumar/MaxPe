@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".modules.fragments.intro.FirstFragment">
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Introducing"
+        android:gravity="center"
+        android:layout_marginTop="40dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#27346B"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/txtSubTitle"/>
+    <TextView
+        android:id="@+id/txtSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MaxPe"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textColor="@color/colorPrimaryB"
+        app:layout_constraintStart_toStartOf="@id/txtTitle"
+        app:layout_constraintEnd_toEndOf="@id/txtTitle"
+        app:layout_constraintTop_toBottomOf="@id/txtTitle" />
+
+    <View
+        android:id="@+id/viewHandWithCard"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/circle_light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imgHandWithCard"
+        app:layout_constraintBottom_toBottomOf="@id/imgHandWithCard"/>
+
+    <ImageView
+        android:id="@+id/imgHandWithCard"
+        android:layout_width="0dp"
+        android:layout_height="400dp"
+        android:src="@drawable/mobile_with_info_2"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtSubTitle"
+        app:layout_constraintBottom_toTopOf="@id/txtSlug"/>
+
+    <TextView
+        android:id="@+id/txtSlug"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/slug_first_fragment"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#27346B"
+        android:layout_marginStart="25dp"
+        android:textStyle="bold"
+        android:textFontWeight="500"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="@dimen/_110sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="UnusedAttribute" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

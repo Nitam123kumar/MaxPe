@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#4E69FF"
+    tools:context=".modules.fragments.intro.SecondFragment">
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Cashback"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_marginTop="40dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/viewHandWithCard"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/circle_light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imgHandWithCard"
+        app:layout_constraintBottom_toBottomOf="@id/imgHandWithCard"/>
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/imgHandWithCard"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtTitle"
+        app:layout_constraintBottom_toTopOf="@id/txtSlug"/>
+
+    <TextView
+        android:id="@+id/txtSlug"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/slug_second_fragment"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/white"
+        android:layout_marginStart="25dp"
+        android:textStyle="bold"
+        android:textFontWeight="500"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="@dimen/_110sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+<!--    <TextView-->
+<!--        android:id="@+id/btnNext"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:padding="10dp"-->
+<!--        android:text="Next"-->
+<!--        android:gravity="center"-->
+<!--        android:textColor="#27346B"-->
+<!--        android:layout_marginBottom="7dp"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
+<!--        android:background="@drawable/btn_color_green"-->
+<!--        app:layout_constraintStart_toStartOf="@id/txtSlug"-->
+<!--        app:layout_constraintEnd_toEndOf="@id/txtSlug"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/txtSkip"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/txtSkip"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:padding="10dp"-->
+<!--        android:text="Skip"-->
+<!--        android:gravity="center"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
+<!--        app:layout_constraintStart_toStartOf="@id/txtSlug"-->
+<!--        app:layout_constraintEnd_toEndOf="@id/txtSlug"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

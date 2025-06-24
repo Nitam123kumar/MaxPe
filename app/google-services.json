@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1045930285431",
+    "project_id": "maxpe-327204",
+    "storage_bucket": "maxpe-327204.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1045930285431:android:64864748262dda87b32972",
+        "android_client_info": {
+          "package_name": "com.vuvrecharge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1045930285431-7fid8p2nmc34legm5pulv0qrbdibq8rs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vuvrecharge",
+            "certificate_hash": "6e8e1516d13a4fe177830fef06d2b203f31634d4"
+          }
+        },
+        {
+          "client_id": "1045930285431-cf2ia2umref0mpn92d5lb6epppbl6onj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsHuTMLdEadgZILtt-HeF1SRF1JYawifY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1045930285431-cf2ia2umref0mpn92d5lb6epppbl6onj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

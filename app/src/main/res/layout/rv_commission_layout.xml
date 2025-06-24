@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:id="@+id/viewRow1"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        app:layout_constraintStart_toStartOf="@id/viewRow1"
+        app:layout_constraintTop_toTopOf="@id/viewRow1"
+        app:layout_constraintBottom_toBottomOf="@id/viewRow1"/>
+
+    <TextView
+        android:id="@+id/txtOperator"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Airtel"
+        android:textColor="#242424"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        app:layout_constraintEnd_toStartOf="@id/txtOperatorValue"
+        app:layout_constraintStart_toEndOf="@id/imgLogo"
+        app:layout_constraintTop_toTopOf="@id/viewRow1"
+        app:layout_constraintBottom_toBottomOf="@id/viewRow1"/>
+<!--    android:textColor="#242424"-->
+<!--    android:singleLine="true"-->
+
+    <TextView
+        android:id="@+id/txtOperatorValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="1.60%"
+        android:textColor="@color/green_end"
+        android:background="@drawable/recharge_commission_text_drawable"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:elevation="@dimen/_3sdp"
+        android:textStyle="bold"
+        android:ellipsize="start"
+        android:paddingStart="@dimen/_6sdp"
+        android:paddingEnd="@dimen/_6sdp"
+        android:paddingTop="@dimen/_1sdp"
+        android:paddingBottom="@dimen/_1sdp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        app:layout_constraintEnd_toEndOf="@id/viewRow1"
+        app:layout_constraintTop_toTopOf="@id/viewRow1"
+        app:layout_constraintBottom_toBottomOf="@id/viewRow1"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#4DD9D9D9"
+        app:layout_constraintStart_toStartOf="@id/txtOperator"
+        app:layout_constraintEnd_toEndOf="@id/txtOperatorValue"
+        app:layout_constraintBottom_toBottomOf="@id/viewRow1"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

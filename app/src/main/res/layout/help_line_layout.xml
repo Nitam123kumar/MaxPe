@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:layout_margin="10dp"
+    android:background="@drawable/light_gray_rectangle_drawable"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardImg"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            app:cardCornerRadius="27dp"
+            android:layout_margin="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imgProvider"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:src="@drawable/app_logo" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/txtNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="198 &amp; 199"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textStyle="bold"
+            android:textColor="#242424"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@id/cardImg"
+            app:layout_constraintTop_toTopOf="@id/cardImg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/txtProvider"/>
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/supprot_pro"
+            app:layout_constraintStart_toStartOf="@id/txtNumber"
+            app:layout_constraintTop_toBottomOf="@id/txtNumber"
+            app:layout_constraintBottom_toBottomOf="@id/cardImg"/>
+
+        <TextView
+            android:id="@+id/txtProvider"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Airtel"
+            android:textStyle="bold"
+            android:textColor="#242424"
+            android:textIsSelectable="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            app:layout_constraintStart_toEndOf="@id/img"
+            app:layout_constraintEnd_toEndOf="@id/txtNumber"
+            app:layout_constraintTop_toTopOf="@id/img"
+            app:layout_constraintBottom_toBottomOf="@id/img"/>
+
+        <TextView
+            android:id="@+id/txtCare"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Balance Check *123# &amp; *124*1#"
+            android:textColor="#3C3F48"
+            android:textStyle="bold"
+            android:textIsSelectable="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:padding="@dimen/_8sdp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:background="@drawable/commission_details"
+            app:layout_constraintStart_toStartOf="@id/cardImg"
+            app:layout_constraintEnd_toEndOf="@id/txtNumber"
+            app:layout_constraintTop_toBottomOf="@id/cardImg"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

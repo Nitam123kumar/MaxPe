@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#084AAA">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/background_image_2"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/txtPhokat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_90sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:gravity="center"
+        android:lineSpacingExtra="5dp"
+        android:visibility="gone"
+        android:text="Get Unlimited Caskback On Your\nEvery Recharge and Bill Payments"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgSplash"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_130sdp"
+        android:adjustViewBounds="true"
+        android:layout_margin="@dimen/_2sdp"
+        android:src="@drawable/app_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/imgSecure"
+        android:layout_width="31dp"
+        android:layout_height="31dp"
+        android:src="@drawable/secure_img"
+        android:contentDescription="@string/image"
+        android:layout_marginStart="65dp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/txtHundred"
+        app:layout_constraintBottom_toTopOf="@id/txtPoweredBy"/>
+
+    <TextView
+        android:id="@+id/txtHundred"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_semibold"
+        android:text="100%"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:layout_marginTop="-2dp"
+        app:layout_constraintTop_toTopOf="@id/imgSecure"
+        app:layout_constraintStart_toEndOf="@id/imgSecure" />
+
+    <TextView
+        android:id="@+id/txtSecure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Secure"
+        android:fontFamily="@font/inter"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@id/txtHundred"
+        app:layout_constraintTop_toBottomOf="@id/txtHundred"
+        app:layout_constraintBottom_toBottomOf="@id/imgSecure"/>
+
+    <ImageView
+        android:id="@+id/imgTrusted"
+        android:layout_width="31dp"
+        android:layout_height="31dp"
+        android:src="@drawable/trusted_img"
+        android:contentDescription="@string/image"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintEnd_toStartOf="@id/txtTrustedBy"
+        app:layout_constraintBottom_toTopOf="@id/txtPoweredBy"/>
+
+    <TextView
+        android:id="@+id/txtTrustedBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter"
+        android:text="Trusted By"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:layout_marginEnd="65dp"
+        android:layout_marginStart="3dp"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@id/txtSecure"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imgTrusted" />
+
+    <TextView
+        android:id="@+id/txtUsers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3M+ Users"
+        android:fontFamily="@font/inter_semibold"
+        android:textSize="13sp"
+        android:textColor="@color/white"
+        android:layout_marginStart="5dp"
+        app:layout_constraintStart_toStartOf="@id/txtTrustedBy"
+        app:layout_constraintEnd_toEndOf="@id/txtTrustedBy"
+        app:layout_constraintTop_toBottomOf="@id/txtTrustedBy"
+        app:layout_constraintBottom_toBottomOf="@id/imgTrusted"/>
+
+    <TextView
+        android:id="@+id/txtPoweredBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Powered By"
+        android:textSize="12sp"
+        android:fontFamily="@font/inter"
+        android:textColor="@color/white"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/bharatConnect"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/bharatConnect"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:src="@drawable/bharat_connect"
+        app:layout_constraintStart_toEndOf="@id/txtPoweredBy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/txtPoweredBy"
+        app:layout_constraintTop_toTopOf="@id/txtPoweredBy"/>
+    
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:fontFamily="@font/righteous"
+        android:gravity="center"
+        android:text="Trusted By 30+ Lacs Happy Users"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/txtBharat"
+        app:layout_constraintEnd_toEndOf="@id/txtSafe"
+        app:layout_constraintStart_toStartOf="@id/txtSafe" />
+    
+    <TextView
+        android:id="@+id/txtBharat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Made In भारत"
+        android:textColor="@color/white"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/viewRed"
+        app:layout_constraintEnd_toStartOf="@id/imgHeart"
+        app:layout_constraintBottom_toTopOf="@id/viewRed"/>
+
+    <ImageView
+        android:id="@+id/imgHeart"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/india_flag"
+        android:visibility="gone"
+        android:layout_marginStart="@dimen/_2sdp"
+        app:layout_constraintStart_toEndOf="@id/txtBharat"
+        app:layout_constraintEnd_toEndOf="@id/viewRed"
+        app:layout_constraintTop_toTopOf="@id/txtBharat"
+        app:layout_constraintBottom_toBottomOf="@id/txtBharat"/>
+    
+    <View
+        android:id="@+id/viewRed"
+        android:layout_width="70dp"
+        android:layout_height="3dp"
+        android:visibility="gone"
+        android:background="@drawable/red_line_drawable"
+        android:layout_marginBottom="@dimen/_12sdp"
+        app:layout_constraintStart_toStartOf="@id/txtSafe"
+        app:layout_constraintEnd_toEndOf="@id/txtSafe"
+        app:layout_constraintBottom_toTopOf="@id/txtSafe"/>
+
+    <TextView
+        android:id="@+id/txtSafe"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_30sdp"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="100% Safe And Secure"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/no_internet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        android:gravity="center"
+        android:visibility="gone">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/wifi" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:text="No Internet available.\nCheck connection"
+                android:textColor="@color/black_4" />
+
+            <TextView
+                android:id="@+id/retry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/corner_primary"
+                android:gravity="center"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:text="Re-Try"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

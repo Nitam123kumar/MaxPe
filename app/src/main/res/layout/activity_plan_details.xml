@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".modules.activities.newActivities.PlanDetailsActivity">
+
+    <include layout="@layout/app_bar_custom"
+        android:id="@+id/mToolBar"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/amount_layout"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_220sdp"
+        android:padding="16dp"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:background="@drawable/plan_recharge_dialog"
+        app:layout_constraintStart_toStartOf="@id/phone_layout"
+        app:layout_constraintEnd_toEndOf="@id/phone_layout"
+        app:layout_constraintTop_toBottomOf="@id/phone_layout">
+<!--        #7D7C7C-->
+        <TextView
+            android:id="@+id/txtRechargeAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Recharge Amount"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@color/black"
+            android:gravity="center"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/viewAmount"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/viewAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_circle_plan_drawable"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="@id/txtRechargeAmount"
+            app:layout_constraintEnd_toEndOf="@id/txtRechargeAmount"
+            app:layout_constraintTop_toBottomOf="@id/txtRechargeAmount"
+            app:layout_constraintBottom_toTopOf="@id/txtPlanDetails">
+            <ImageView
+                android:id="@+id/imgINR"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/inr"
+                app:tint="@color/colorPrimaryB"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/txtAmount"
+                app:layout_constraintTop_toTopOf="@id/txtAmount"/>
+            <TextView
+                android:id="@+id/txtAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_30sdp"
+                android:textColor="@color/colorPrimaryB"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/imgINR"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/imgINR" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/txtPlanDetails"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/view_plan_details"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="#084AAA"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/_13sdp"
+            app:layout_constraintStart_toStartOf="@id/txtRechargeAmount"
+            app:layout_constraintEnd_toEndOf="@id/txtRechargeAmount"
+            app:layout_constraintTop_toBottomOf="@id/viewAmount"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/phone_layout"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:orientation="horizontal"
+        android:background="@drawable/background_operator_information"
+        android:layout_margin="@dimen/_20sdp"
+        android:layout_gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/mToolBar">
+
+        <ImageView
+            android:id="@+id/imgOperator"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:src="@drawable/upi"
+            android:padding="8dp"
+            android:contentDescription="@string/app_name"
+            android:background="@drawable/plan_drawable_background"
+            android:layout_marginStart="16dp"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="2"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/txtPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/txtPhoneProvider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/white"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/txtPhoneOrigin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/color_c"
+                android:layout_marginBottom="@dimen/_10sdp"/>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtRecharge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Change"
+            android:padding="@dimen/_10sdp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edit_txt_bg"/>
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/txtShimmerWarning"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:background="@drawable/cashback_line_background"
+        app:layout_constraintStart_toStartOf="@id/amount_layout"
+        app:layout_constraintEnd_toEndOf="@id/amount_layout"
+        app:layout_constraintTop_toBottomOf="@id/amount_layout"
+        app:layout_constraintBottom_toTopOf="@id/btnSubmit">
+        <TextView
+            android:id="@+id/shimmerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*Cashback Ki Guarantee!"
+            android:textColor="@color/gray_black"
+            android:gravity="center"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/cashback"/>
+
+        <ImageView
+            android:id="@+id/cashback"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:src="@drawable/cashback_img"
+            app:layout_constraintStart_toEndOf="@id/shimmerTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/txtTerm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="*Terms and Conditions Applied"
+        android:gravity="center"
+        android:textColor="#330548AD"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="@id/txtShimmerWarning"
+        app:layout_constraintEnd_toEndOf="@id/txtShimmerWarning"
+        app:layout_constraintBottom_toTopOf="@id/btnSubmit"/>
+
+    <TextView
+        android:id="@+id/btnSubmit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/corner_circle_primary"
+        android:text="Recharge Now"
+        android:gravity="center"
+        android:padding="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toStartOf="@id/phone_layout"
+        app:layout_constraintEnd_toEndOf="@id/phone_layout"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#BA333333"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:indeterminateDrawable="@drawable/layout_process_bar" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

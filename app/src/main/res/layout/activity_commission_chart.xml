@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".modules.activities.newActivities.CommissionChartActivity">
+
+    <include layout="@layout/app_bar_custom"
+        android:id="@+id/mToolbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:nestedScrollingEnabled="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mToolbar"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_10sdp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/recharge_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/commission_chart_drawable"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_14sdp"
+                android:layout_marginEnd="@dimen/_14sdp"
+                android:paddingTop="@dimen/_20sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvPrepaidCommission"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:nestedScrollingEnabled="false"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/txtRecharge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prepaid"
+                android:background="@drawable/recharge_layout"
+                android:textColor="@color/colorPrimaryB"
+                android:textStyle="bold"
+                android:elevation="@dimen/_2sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingTop="@dimen/_2sdp"
+                android:paddingBottom="@dimen/_2sdp"
+                app:layout_constraintStart_toStartOf="@id/recharge_layout"
+                app:layout_constraintEnd_toEndOf="@id/recharge_layout"
+                app:layout_constraintTop_toTopOf="@id/recharge_layout"
+                app:layout_constraintBottom_toTopOf="@id/recharge_layout"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/tv_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/commission_chart_drawable"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:paddingTop="@dimen/_20sdp"
+                app:layout_constraintStart_toStartOf="@id/recharge_layout"
+                app:layout_constraintEnd_toEndOf="@id/recharge_layout"
+                app:layout_constraintTop_toBottomOf="@id/recharge_layout">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvDTHCommission"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:nestedScrollingEnabled="false"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/txtTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DTH"
+                android:background="@drawable/recharge_layout"
+                android:textColor="@color/colorPrimaryB"
+                android:textStyle="bold"
+                android:elevation="@dimen/_2sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingTop="@dimen/_2sdp"
+                android:paddingBottom="@dimen/_2sdp"
+                app:layout_constraintStart_toStartOf="@id/tv_layout"
+                app:layout_constraintEnd_toEndOf="@id/tv_layout"
+                app:layout_constraintTop_toTopOf="@id/tv_layout"
+                app:layout_constraintBottom_toTopOf="@id/tv_layout"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/other_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/commission_chart_drawable"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:paddingTop="@dimen/_20sdp"
+                app:layout_constraintStart_toStartOf="@id/tv_layout"
+                app:layout_constraintEnd_toEndOf="@id/tv_layout"
+                app:layout_constraintTop_toBottomOf="@id/tv_layout">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvOthersCommission"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:nestedScrollingEnabled="false"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/txtOther"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bill Payments"
+                android:background="@drawable/recharge_layout"
+                android:textColor="@color/colorPrimaryB"
+                android:textStyle="bold"
+                android:elevation="@dimen/_2sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingTop="@dimen/_2sdp"
+                android:paddingBottom="@dimen/_2sdp"
+                app:layout_constraintStart_toStartOf="@id/other_layout"
+                app:layout_constraintEnd_toEndOf="@id/other_layout"
+                app:layout_constraintTop_toTopOf="@id/other_layout"
+                app:layout_constraintBottom_toTopOf="@id/other_layout"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#BA333333"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:indeterminateDrawable="@drawable/layout_process_bar" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/no_internet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#31333333"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/wifi" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingRight="@dimen/_15sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:text="No Internet available.\nCheck connection"
+            android:textColor="@color/black_4" />
+
+        <TextView
+            android:id="@+id/retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/corner_primary"
+            android:gravity="center"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingRight="@dimen/_15sdp"
+            android:paddingBottom="@dimen/_10sdp"
+            android:text="Re-Try"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

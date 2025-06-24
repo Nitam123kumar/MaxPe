@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<!-- Drop Shadow Stack -->
+<item>
+    <shape>
+        <padding android:top="1dp" android:right="1dp" android:bottom="1dp" android:left="1dp" />
+        <stroke android:color="#02273469" android:width="1dp"  />
+        <corners android:radius="@dimen/_14sdp"/>
+    </shape>
+</item>
+<item>
+    <shape>
+        <padding android:top="1dp" android:right="1dp" android:bottom="1dp" android:left="1dp" />
+        <stroke android:color="#05273469" android:width="1dp" />
+        <corners android:radius="@dimen/_13sdp"/>
+    </shape>
+</item>
+<item>
+    <shape>
+        <padding android:top="1dp" android:right="1dp" android:bottom="1dp" android:left="1dp" />
+        <stroke android:color="#10273469" android:width="1dp" />
+        <corners android:radius="@dimen/_11sdp" />
+    </shape>
+</item>
+<item>
+    <shape>
+        <padding android:top="1dp" android:right="1dp" android:bottom="1dp" android:left="1dp" />
+        <stroke android:color="#15273469" android:width="1dp" />
+        <corners android:radius="@dimen/_10sdp"/>
+    </shape>
+</item>
+<item>
+    <shape>
+        <padding android:top="1dp" android:right="1dp" android:bottom="1dp" android:left="1dp" />
+        <stroke android:color="#20273469" android:width="1dp" />
+        <corners android:radius="@dimen/_8sdp"/>
+    </shape>
+</item>
+<item>
+    <shape>
+        <padding android:top="1dp" android:right="1dp" android:bottom="1dp" android:left="1dp" />
+        <stroke android:color="#25273469" android:width="1dp" />
+        <corners android:radius="@dimen/_7sdp"/>
+    </shape>
+</item>
+<item>
+    <shape>
+        <padding android:top="1dp" android:right="1dp" android:bottom="1dp" android:left="1dp" />
+        <stroke android:color="#30273469" android:width="1dp" />
+        <corners android:radius="@dimen/_7sdp"/>
+    </shape>
+</item>
+
+<!-- Background -->
+<item>
+    <shape>
+        <solid android:color="@color/transparent" />
+        <corners android:radius="@dimen/_7sdp"/>
+    </shape>
+</item>
+</layer-list>
