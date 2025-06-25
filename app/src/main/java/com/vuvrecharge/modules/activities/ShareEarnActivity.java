@@ -1,20 +1,26 @@
 package com.vuvrecharge.modules.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.squareup.picasso.Picasso;
 import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseActivity;
@@ -24,6 +30,8 @@ import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,40 +49,40 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
     @BindView(R.id.retry)
     TextView retry;
     @BindView(R.id.txtReferId)
-    TextView referCode;
+    EditText referCode;
 
     @BindView(R.id.btnReferCopy)
     TextView btnReferCopy;
-    @BindView(R.id.txtReferSlug)
-    TextView txtReferSlug;
+//    @BindView(R.id.txtReferSlug)
+//    TextView txtReferSlug;
 
     @BindView(R.id.btnInvite)
-    TextView btnInvite;
+    ConstraintLayout btnInvite;
     @BindView(R.id.txtMyReferralValue)
     TextView txtMyReferralValue;
     @BindView(R.id.txtReferralIncomeValue)
     TextView txtReferralIncomeValue;
-    @BindView(R.id.txtSuccessfulReferralCount)
-    TextView txtSuccessfulReferralCount;
-    @BindView(R.id.txtBonusEarnCount)
-    TextView txtBonusEarnCount;
-    @BindView(R.id.txtExpectedBonusCount)
-    TextView txtExpectedBonusCount;
-    @BindView(R.id.txtRefer)
-    TextView txtRefer;
-    @BindView(R.id.txtReferMessage)
-    TextView txtReferMessage;
-    @BindView(R.id.txtReferMaxSlug)
-    TextView txtReferMaxSlug;
-    @BindView(R.id.imgBg)
-    ImageView image_banner;
+//    @BindView(R.id.txtSuccessfulReferralCount)
+//    TextView txtSuccessfulReferralCount;
+//    @BindView(R.id.txtBonusEarnCount)
+//    TextView txtBonusEarnCount;
+//    @BindView(R.id.txtExpectedBonusCount)
+//    TextView txtExpectedBonusCount;
+//    @BindView(R.id.txtReferMessage)
+//    TextView txtReferMessage;
+//    @BindView(R.id.txtReferMaxSlug)
+//    TextView txtReferMaxSlug;
 
     @BindView(R.id.viewMyReferral)
     View viewMyReferral;
+    @BindView(R.id.top_earner_ImageSlider)
+    ImageSlider top_earner_ImageSlider;
     @BindView(R.id.viewReferralIncome)
     View viewReferralIncome;
     @BindView(R.id.txtTermsCondition)
     TextView txtTermsCondition;
+    @BindView(R.id.imageSlider)
+    ImageSlider imageSlider;
     String shareText = "";
     TextView submit;
     LinearLayout loading;
@@ -103,6 +111,27 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
             startActivity(intent);
         });
         mDefaultPresenter.totalReferrals(device_id);
+
+        ArrayList<SlideModel> imageList = new ArrayList<>();
+
+        imageList.add(new SlideModel(R.drawable.refer_and_earn_img,ScaleTypes.FIT));
+        imageList.add(new SlideModel(R.drawable.refer_and_earn_img,ScaleTypes.FIT));
+        imageList.add(new SlideModel(R.drawable.refer_and_earn_img,ScaleTypes.FIT));
+        imageList.add(new SlideModel(R.drawable.refer_and_earn_img,ScaleTypes.FIT));
+
+        imageSlider.setImageList(imageList, ScaleTypes.FIT);
+
+        ArrayList<SlideModel> top_earner_list = new ArrayList<>();
+
+        top_earner_list.add(new SlideModel(R.drawable. top_earner, ScaleTypes.FIT));
+        top_earner_list.add(new SlideModel(R.drawable. top_earner, ScaleTypes.FIT));
+        top_earner_list.add(new SlideModel(R.drawable. top_earner, ScaleTypes.FIT));
+        top_earner_list.add(new SlideModel(R.drawable. top_earner, ScaleTypes.FIT));
+
+        top_earner_ImageSlider.setImageList(top_earner_list, ScaleTypes.FIT);
+//        top_earner_ImageSlider.setIndicatorSelectedColor(Color.RED);
+
+
     }
 
     @Override
@@ -126,13 +155,13 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
             String referText = jsonObject.getString("referPageText");
             JSONObject object = new JSONObject(referText);
 
-            txtSuccessfulReferralCount.setText(object.getString("successfull_referals"));
-            txtBonusEarnCount.setText("\u20b9 " + object.getString("bonus_earned"));
-            txtExpectedBonusCount.setText("\u20b9 " + object.getString("expected_bonus"));
-            txtReferSlug.setText(jsonObject.getString("referal_slug"));
-            txtRefer.setText(jsonObject.getString("referal_text"));
-            txtReferMessage.setText(object.getString("refer"));
-            txtReferMaxSlug.setText(object.getString("reward"));
+//            txtSuccessfulReferralCount.setText(object.getString("successfull_referals"));
+//            txtBonusEarnCount.setText("\u20b9 " + object.getString("bonus_earned"));
+//            txtExpectedBonusCount.setText("\u20b9 " + object.getString("expected_bonus"));
+//            txtReferSlug.setText(jsonObject.getString("referal_slug"));
+//            txtRefer.setText(jsonObject.getString("referal_text"));
+//            txtReferMessage.setText(object.getString("refer"));
+//            txtReferMaxSlug.setText(object.getString("reward"));
 
             shareText = jsonObject.getString("shareText");
 

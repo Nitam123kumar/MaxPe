@@ -570,17 +570,25 @@
 
                         </ImageView>
 
+                        <LinearLayout
+                            android:id="@+id/snjLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/sony_white_shape"
+                            android:elevation="1dp"
+                            android:layout_marginHorizontal="@dimen/_8sdp"
+                            app:layout_constraintTop_toBottomOf="@id/ott_recharge"
+                            >
 
                         <LinearLayout
                             android:id="@+id/snj"
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="@dimen/_90sdp"
                             android:layout_gravity="center"
                             android:layout_marginHorizontal="@dimen/_30sdp"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:orientation="horizontal"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/ott_recharge"
 
                             >
 
@@ -711,6 +719,8 @@
 
                         </LinearLayout>
 
+                        </LinearLayout>
+
                         <LinearLayout
                             android:id="@+id/offer_for_you"
                             android:layout_width="0dp"
@@ -718,7 +728,7 @@
                             android:layout_marginHorizontal="@dimen/_15sdp"
                             android:orientation="horizontal"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/snj">
+                            app:layout_constraintTop_toBottomOf="@id/snjLayout">
 
 
                             <ImageView
@@ -1467,7 +1477,7 @@
                 <TextView
                     android:id="@+id/imgSupport"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_height="15dp"
                     android:gravity="center"
                     android:text="Commission"
                     android:textColor="@color/white"
@@ -1484,7 +1494,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Report"
+                    android:text="Chat"
                     android:textColor="@color/white"
                     android:textSize="11sp"
                     android:textStyle="bold"

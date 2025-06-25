@@ -32,6 +32,17 @@ public class AddPaymentHistoryAdapter extends RecyclerView.Adapter<AddPaymentHis
         this.mLayoutInflater = mLayoutInflater;
     }
 
+    public interface OnItemClickListener {
+        void onItemClick(DepositData depositData);
+    }
+
+    private OnItemClickListener listener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+
     @NonNull
     @Override
     public AddPaymentHistoryAdapter.AddPaymentHistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -69,6 +80,13 @@ public class AddPaymentHistoryAdapter extends RecyclerView.Adapter<AddPaymentHis
             super(itemView);
             mContext = itemView.getContext();
             ButterKnife.bind(this, itemView);
+
+            itemView.setOnClickListener(v -> {
+                if (listener != null && getAdapterPosition() != RecyclerView.NO_POSITION) {
+                    listener.onItemClick(mDepositData.get(getAdapterPosition()));
+                }
+            });
+
         }
 
         public void bind(@NonNull DepositData mDepositData) {
@@ -88,7 +106,7 @@ public class AddPaymentHistoryAdapter extends RecyclerView.Adapter<AddPaymentHis
             } else if (mDepositData.getPayment_status().toUpperCase().equals("SUCCESS")) {
 //                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_history_1);
                 Glide.with(mContext)
-                        .load(R.drawable.success_2)
+                        .load(R.drawable.success_img)
                         .into(imgPayment);
 //                txtStatus.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.success)));
             } else {

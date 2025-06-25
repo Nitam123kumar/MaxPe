@@ -70,7 +70,6 @@
             android:exported="false"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Recharge"
             android:windowSoftInputMode="stateHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity
@@ -201,7 +200,7 @@
         <activity
             android:name=".modules.activities.ShareEarnActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme.Recharge"
             android:windowSoftInputMode="stateHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity

@@ -2,23 +2,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/simple"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/toolbar1"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:background="@drawable/main_wallet_shape"
                 >
 
                 <LinearLayout
-                    android:id="@+id/toolbar_LinearLayout"
+                    android:id="@+id/toolbar_layout"
                     android:layout_width="34dp"
                     android:layout_height="34dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -42,21 +48,58 @@
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_marginEnd="@dimen/_44sdp"
                     android:ellipsize="end"
-                    android:gravity="center"
+                    android:gravity="center_horizontal|center_vertical"
                     android:maxLines="1"
-                    android:text="Refer &amp; Earn"
+                    android:text="Bill Payment"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toEndOf="@id/toolbar_layout"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-</com.google.android.material.appbar.AppBarLayout>
+
+            <EditText
+                android:id="@+id/edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/addMore"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="@dimen/_12sdp"
+                android:src="@drawable/refresh"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/invoice"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:background="@drawable/corner_white_circle"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/_10sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:text="Invoice"
+                android:textColor="@color/black_2"
+                android:textSize="@dimen/_10sdp"
+                android:visibility="gone" />
 
 
-            <LinearLayout
+        </RelativeLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
         android:id="@+id/no_internet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

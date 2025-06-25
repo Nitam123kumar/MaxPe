@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true"
     tools:context=".modules.activities.newActivities.ElectricityActivity">
 
-    <include layout="@layout/app_bar_custom"
+    <include layout="@layout/bill_payment_layout"
         android:id="@+id/mToolbar"/>
 
     <TextView
@@ -41,10 +41,10 @@
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_10sdp"
         app:boxStrokeWidth="1dp"
-        app:boxCornerRadiusBottomEnd="@dimen/_30sdp"
-        app:boxCornerRadiusBottomStart="@dimen/_30sdp"
-        app:boxCornerRadiusTopEnd="@dimen/_30sdp"
-        app:boxCornerRadiusTopStart="@dimen/_30sdp"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        app:boxCornerRadiusTopStart="10dp"
         app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
         app:cursorColor="@color/colorPrimaryB"
         app:boxStrokeColor="@color/colorPrimaryB"
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:maxLength="30"
             android:textStyle="bold"
-            android:drawableStart="@drawable/ic_search"
+            android:drawableStart="@drawable/search_img"
             android:imeOptions="actionSearch"
             android:textColor="@color/black_4"
             android:textColorHint="#B5B5B5"

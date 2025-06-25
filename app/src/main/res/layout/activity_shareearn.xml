@@ -1,436 +1,580 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ndroid="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_wallet_shape"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
 
-
-        <RelativeLayout
-            android:id="@+id/main_bg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white_f5"
-            android:orientation="vertical">
-
-        </RelativeLayout>
-
-    </RelativeLayout>
+    <include
+        android:id="@+id/mToolbar"
+        layout="@layout/app_bar_custom_refer" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="wrap_content">
 
-        <include layout="@layout/app_bar_custom_refer"
-            android:id="@+id/mToolbar"/>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:fillViewport="true"
-            android:scrollbars="none"
             android:fitsSystemWindows="true"
-            app:layout_constraintTop_toBottomOf="@id/mToolbar"
+            android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent">
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/imgBg"
-                    android:layout_width="0dp"
-                    android:layout_height="155dp"
-                    android:src="@drawable/clip_path_group"
-                    android:contentDescription="@string/app_name"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/mToolbar_constraint"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:background="@drawable/wallet_shape">
 
-                <TextView
-                    android:id="@+id/txtRefer"
-                    android:layout_width="0dp"
+
+                    <com.denzcoskun.imageslider.ImageSlider
+                        android:id="@+id/imageSlider"
+                        android:layout_width="match_parent"
+                        android:layout_height="240dp"
+                        app:iss_auto_cycle="true"
+                        app:iss_delay="3000"
+                        app:iss_period="3000"
+                        app:iss_text_align="CENTER"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+
+                        />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_25sdp"
-                    android:layout_marginEnd="@dimen/_25sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="@color/colorPrimaryB"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/imgBg"/>
+                    android:layout_marginTop="@dimen/_20sdp">
 
-                <TextView
-                    android:id="@+id/txtReferSlug"
-                    android:layout_width="0dp"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/referral_link"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginHorizontal="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:boxBackgroundColor="@color/white"
+                            app:boxBackgroundMode="outline"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxStrokeColor="@color/black"
+                            app:boxStrokeWidth="@dimen/_1sdp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <EditText
+                                android:id="@+id/txtReferId"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:cursorVisible="false"
+                                android:enabled="false"
+                                android:focusable="false"
+                                android:hint="Your Referral Link"
+                                android:paddingTop="@dimen/_5sdp"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/black"
+                                android:textSize="14sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:id="@+id/btnReferCopy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="30dp"
+                            android:text="Copy"
+                            android:textColor="#003770"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/invite_to_whatApp"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginHorizontal="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/invite_whatapp_shape"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/referral_link">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <ImageView
+                                android:id="@+id/whatApp_img"
+                                android:layout_width="27dp"
+                                android:layout_height="27dp"
+                                android:src="@drawable/whatapp_img"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:fontFamily="@font/roboto"
+                                android:text="Invite via WhatApp"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                app:layout_constraintBottom_toBottomOf="@id/whatApp_img"
+                                app:layout_constraintStart_toEndOf="@id/whatApp_img"
+                                app:layout_constraintTop_toTopOf="@id/whatApp_img" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/or"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        app:layout_constraintTop_toBottomOf="@id/invite_to_whatApp">
+
+                        <View
+                            android:id="@+id/view1"
+                            android:layout_width="133dp"
+                            android:layout_height="1.5dp"
+                            android:layout_marginStart="@dimen/_2sdp"
+                            android:background="#B1B1B1"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/or_TextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:text="OR"
+                            android:textColor="@color/black"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/view1"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:id="@+id/view2"
+                            android:layout_width="133dp"
+                            android:layout_height="1.5dp"
+                            android:layout_marginStart="@dimen/_13sdp"
+                            android:background="#B1B1B1"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/or_TextView"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/btnInvite"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginHorizontal="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/share_app_button_shape"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/or">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <ImageView
+                                android:id="@+id/share_img"
+                                android:layout_width="27dp"
+                                android:layout_height="27dp"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/share_img"
+                                app:layout_constraintBottom_toBottomOf="@id/shareTextView"
+                                app:layout_constraintStart_toEndOf="@id/shareTextView"
+                                app:layout_constraintTop_toTopOf="@id/shareTextView" />
+
+                            <TextView
+                                android:id="@+id/shareTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Share"
+                                android:textColor="@color/white"
+                                android:textSize="22sp"
+                                android:textStyle="normal"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_140sdp"
+                        android:layout_marginTop="@dimen/_25sdp"
+                        app:layout_constraintTop_toBottomOf="@id/btnInvite">
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/viewMyReferral"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="@dimen/_18sdp"
+                        android:elevation="@dimen/_4sdp"
+                        android:background="@drawable/shape_earn_page"
+                        app:layout_constraintEnd_toStartOf="@id/viewReferralIncome"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        >
+
+                            <ImageView
+                                android:id="@+id/imgMyReferral"
+                                android:layout_width="wrap_content"
+                                android:layout_height="75dp"
+                                android:src="@drawable/referal"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/viewMyReferralBottom"
+                                android:layout_width="170dp"
+                                android:layout_height="75dp"
+                                android:background="@drawable/refferal_drawable_side_corners"
+                                app:layout_constraintBottom_toBottomOf="@id/viewMyReferral"
+                                app:layout_constraintEnd_toEndOf="@id/viewMyReferral"
+                                app:layout_constraintStart_toStartOf="@id/viewMyReferral"
+                                app:layout_constraintTop_toBottomOf="@id/imgMyReferral"
+                                >
+
+                                <TextView
+                                    android:id="@+id/txtMyReferral"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center"
+                                    android:text="My Referral"
+                                    android:textColor="@color/black"
+                                    android:textSize="16sp"
+                                    app:layout_constraintBottom_toTopOf="@id/txtMyReferralValue"
+                                    app:layout_constraintEnd_toEndOf="@id/viewMyReferralBottom"
+                                    app:layout_constraintStart_toStartOf="@id/viewMyReferralBottom"
+                                    app:layout_constraintTop_toTopOf="@id/viewMyReferralBottom" />
+
+                                <TextView
+                                    android:id="@+id/txtMyReferralValue"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textColor="#6A6A6A"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toBottomOf="@id/viewMyReferralBottom"
+                                    app:layout_constraintEnd_toEndOf="@id/viewMyReferralBottom"
+                                    app:layout_constraintStart_toStartOf="@id/viewMyReferralBottom"
+                                    app:layout_constraintTop_toBottomOf="@id/txtMyReferral" />
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/viewReferralIncome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:background="@drawable/shape_earn_page"
+                        android:elevation="@dimen/_4sdp"
+                        app:layout_constraintBottom_toBottomOf="@id/viewMyReferral"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/viewMyReferral"
+                        app:layout_constraintTop_toTopOf="@id/viewMyReferral">
+
+                        <ImageView
+                            android:id="@+id/imgReferralIncome"
+                            android:layout_width="170dp"
+                            android:layout_height="75dp"
+                            android:src="@drawable/referarral_icon"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:layout_width="44.81dp"
+                            android:layout_height="61dp"
+                            android:src="@drawable/referarral_income"
+                            app:layout_constraintBottom_toBottomOf="@id/imgReferralIncome"
+                            app:layout_constraintEnd_toEndOf="@id/imgReferralIncome"
+                            app:layout_constraintStart_toStartOf="@id/imgReferralIncome"
+                            app:layout_constraintTop_toTopOf="@id/imgReferralIncome" />
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/viewReferralIncomeBottom"
+                            android:layout_width="170dp"
+                            android:layout_height="75dp"
+                            android:background="@drawable/refferal_drawable_side_corners"
+                            app:layout_constraintBottom_toBottomOf="@id/viewReferralIncome"
+                            app:layout_constraintEnd_toEndOf="@id/viewReferralIncome"
+                            app:layout_constraintStart_toStartOf="@id/viewReferralIncome"
+                            app:layout_constraintTop_toBottomOf="@id/imgReferralIncome">
+
+                            <TextView
+                                android:id="@+id/txtReferralIncome"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto"
+                                android:gravity="center"
+                                android:text="Referral Income"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toTopOf="@id/txtReferralIncomeValue"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/txtReferralIncomeValue"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textColor="#6A6A6A"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/txtReferralIncome" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_6sdp"
-                    android:layout_marginStart="@dimen/_16sdp"
-                    android:layout_marginEnd="@dimen/_16sdp"
-                    android:gravity="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/colorPrimaryB"
-                    app:layout_constraintStart_toStartOf="@id/txtRefer"
-                    app:layout_constraintEnd_toEndOf="@id/txtRefer"
-                    app:layout_constraintTop_toBottomOf="@id/txtRefer"/>
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/shape_earn_page"
+                    android:elevation="@dimen/_3sdp">
 
-                <TextView
-                    android:id="@+id/txtReferId"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/refer_id_drawable"
-                    android:paddingStart="@dimen/_30sdp"
-                    android:paddingTop="@dimen/_10sdp"
-                    android:paddingBottom="@dimen/_10sdp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:textColor="@color/colorPrimaryB"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    app:layout_constraintStart_toStartOf="@id/txtRefer"
-                    app:layout_constraintEnd_toEndOf="@id/txtRefer"
-                    app:layout_constraintTop_toBottomOf="@id/txtReferSlug"/>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/btnReferCopy"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Copy"
-                    android:background="@drawable/refer_id_button"
-                    android:paddingStart="@dimen/_16sdp"
-                    android:paddingEnd="@dimen/_16sdp"
-                    android:paddingTop="@dimen/_9sdp"
-                    android:paddingBottom="@dimen/_9sdp"
-                    android:layout_marginEnd="5dp"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    app:layout_constraintEnd_toEndOf="@id/txtReferId"
-                    app:layout_constraintTop_toTopOf="@id/txtReferId"
-                    app:layout_constraintBottom_toBottomOf="@id/txtReferId"/>
+                        <TextView
+                            android:id="@+id/how_It_Works"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/roboto"
+                            android:text="How It Works"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/txtReferMaxSlug"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/colorPrimaryB"
-                    app:layout_constraintStart_toStartOf="@id/txtReferId"
-                    app:layout_constraintEnd_toEndOf="@id/txtReferId"
-                    app:layout_constraintTop_toBottomOf="@id/txtReferId"/>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/link_share"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_35sdp"
+                            app:layout_constraintTop_toBottomOf="@id/how_It_Works">
 
-                <View
-                    android:id="@+id/viewSuccessful"
-                    android:layout_width="0dp"
-                    android:layout_height="95dp"
-                    android:background="@drawable/referral_bonus_drawable"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginStart="@dimen/_20sdp"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/viewBonusEarn"
-                    app:layout_constraintTop_toBottomOf="@id/txtReferMaxSlug"/>
+                            <ImageView
+                                android:id="@+id/share_with_friend_img"
+                                android:layout_width="103.01dp"
+                                android:layout_height="86.81dp"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/share_with_friend_img"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/imgSuccessReferral"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/sucessful_referral"
-                    app:layout_constraintStart_toStartOf="@id/viewSuccessful"
-                    app:layout_constraintEnd_toEndOf="@id/viewSuccessful"
-                    app:layout_constraintTop_toTopOf="@id/viewSuccessful"
-                    app:layout_constraintBottom_toTopOf="@id/txtMessageSuccessfulReferral"/>
+                            <TextView
+                                android:id="@+id/srl"
+                                android:layout_width="137dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_40sdp"
+                                android:fontFamily="@font/roboto"
+                                android:text="Share referral link \nwith friends!"
+                                android:textColor="#003770"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="@id/share_with_friend_img"
+                                app:layout_constraintStart_toEndOf="@+id/share_with_friend_img"
+                                app:layout_constraintTop_toTopOf="@id/share_with_friend_img" />
 
-                <TextView
-                    android:id="@+id/txtMessageSuccessfulReferral"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Successful Referrals"
-                    android:gravity="center"
-                    android:textColor="@color/colorPrimaryB"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                    app:layout_constraintStart_toStartOf="@id/viewSuccessful"
-                    app:layout_constraintEnd_toEndOf="@id/viewSuccessful"
-                    app:layout_constraintTop_toBottomOf="@id/imgSuccessReferral"
-                    app:layout_constraintBottom_toTopOf="@id/txtSuccessfulReferralCount"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/txtSuccessfulReferralCount"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorPrimaryB"
-                    app:layout_constraintStart_toStartOf="@id/viewSuccessful"
-                    app:layout_constraintEnd_toEndOf="@id/viewSuccessful"
-                    app:layout_constraintTop_toBottomOf="@id/txtMessageSuccessfulReferral"
-                    app:layout_constraintBottom_toBottomOf="@id/viewSuccessful"/>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/link_share2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_35sdp"
+                            app:layout_constraintTop_toBottomOf="@id/link_share">
 
-                <View
-                    android:id="@+id/viewBonusEarn"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:background="@drawable/referral_bonus_drawable"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    app:layout_constraintStart_toEndOf="@id/viewSuccessful"
-                    app:layout_constraintEnd_toStartOf="@id/viewExpectedBonus"
-                    app:layout_constraintTop_toTopOf="@id/viewSuccessful"
-                    app:layout_constraintBottom_toBottomOf="@id/viewSuccessful"/>
+                            <ImageView
+                                android:id="@+id/share_with_friend_img2"
+                                android:layout_width="103.01dp"
+                                android:layout_height="86.81dp"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/friends"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/imgBonusEarn"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/bonus_earn"
-                    app:layout_constraintStart_toStartOf="@id/viewBonusEarn"
-                    app:layout_constraintEnd_toEndOf="@id/viewBonusEarn"
-                    app:layout_constraintTop_toTopOf="@id/viewBonusEarn"
-                    app:layout_constraintBottom_toTopOf="@id/txtMessageBonusEarn"/>
+                            <TextView
+                                android:id="@+id/srl2"
+                                android:layout_width="164dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_40sdp"
+                                android:fontFamily="@font/roboto"
+                                android:text="As soon as your 5 \nfriends add Rs.100 to \ntheir wallet."
+                                android:textColor="#003770"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="@id/share_with_friend_img2"
+                                app:layout_constraintStart_toEndOf="@+id/share_with_friend_img2"
+                                app:layout_constraintTop_toTopOf="@id/share_with_friend_img2" />
 
-                <TextView
-                    android:id="@+id/txtMessageBonusEarn"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Bonus Earn"
-                    android:gravity="center"
-                    android:textColor="@color/colorPrimaryB"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                    app:layout_constraintStart_toStartOf="@id/viewBonusEarn"
-                    app:layout_constraintEnd_toEndOf="@id/viewBonusEarn"
-                    app:layout_constraintTop_toBottomOf="@id/imgBonusEarn"
-                    app:layout_constraintBottom_toTopOf="@id/txtBonusEarnCount"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/txtBonusEarnCount"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorPrimaryB"
-                    app:layout_constraintStart_toStartOf="@id/viewBonusEarn"
-                    app:layout_constraintEnd_toEndOf="@id/viewBonusEarn"
-                    app:layout_constraintTop_toBottomOf="@id/txtMessageBonusEarn"
-                    app:layout_constraintBottom_toBottomOf="@id/viewExpectedBonus"/>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/link_share3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_35sdp"
+                            app:layout_constraintTop_toBottomOf="@id/link_share2">
 
-                <View
-                    android:id="@+id/viewExpectedBonus"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:background="@drawable/referral_bonus_drawable"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    app:layout_constraintStart_toEndOf="@id/viewBonusEarn"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/viewSuccessful"
-                    app:layout_constraintBottom_toBottomOf="@id/viewSuccessful"/>
+                            <ImageView
+                                android:id="@+id/share_with_friend_img3"
+                                android:layout_width="103.01dp"
+                                android:layout_height="86.81dp"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/referral_bonus_img"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/imgExpectedBonus"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/expected_bonus"
-                    app:layout_constraintStart_toStartOf="@id/viewExpectedBonus"
-                    app:layout_constraintEnd_toEndOf="@id/viewExpectedBonus"
-                    app:layout_constraintTop_toTopOf="@id/viewExpectedBonus"
-                    app:layout_constraintBottom_toTopOf="@id/txtMessageExpectedBonus"/>
+                            <TextView
+                                android:id="@+id/srl3"
+                                android:layout_width="157dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_40sdp"
+                                android:fontFamily="@font/roboto"
+                                android:text="you will get a Rs.100 referral bonus."
+                                android:textColor="#003770"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="@id/share_with_friend_img3"
+                                app:layout_constraintStart_toEndOf="@+id/share_with_friend_img3"
+                                app:layout_constraintTop_toTopOf="@id/share_with_friend_img3" />
 
-                <TextView
-                    android:id="@+id/txtMessageExpectedBonus"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Expected Bonus"
-                    android:gravity="center"
-                    android:textColor="@color/colorPrimaryB"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                    app:layout_constraintStart_toStartOf="@id/viewExpectedBonus"
-                    app:layout_constraintEnd_toEndOf="@id/viewExpectedBonus"
-                    app:layout_constraintTop_toBottomOf="@id/imgExpectedBonus"
-                    app:layout_constraintBottom_toTopOf="@id/txtExpectedBonusCount"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/txtExpectedBonusCount"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorPrimaryB"
-                    app:layout_constraintStart_toStartOf="@id/viewExpectedBonus"
-                    app:layout_constraintEnd_toEndOf="@id/viewExpectedBonus"
-                    app:layout_constraintTop_toBottomOf="@id/txtMessageExpectedBonus"
-                    app:layout_constraintBottom_toBottomOf="@id/viewExpectedBonus" />
 
-                <TextView
-                    android:id="@+id/txtReferMessage"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="@dimen/_7sdp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:background="@drawable/refer_id_drawable"
-                    android:textColor="@color/colorPrimaryB"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    app:layout_constraintStart_toStartOf="@id/txtReferId"
-                    app:layout_constraintEnd_toEndOf="@id/txtReferId"
-                    app:layout_constraintTop_toBottomOf="@id/viewSuccessful"/>
+                        <TextView
+                            android:id="@+id/txtTermsCondition"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_28sdp"
+                            android:layout_marginBottom="@dimen/_16sdp"
+                            android:gravity="center"
+                            android:text="T&amp;C apply "
+                            android:textSize="10sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/link_share3" />
 
-                <View
-                    android:id="@+id/viewMyReferral"
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:background="@drawable/referral_bonus_drawable"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_marginStart="@dimen/_20sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/viewReferralIncome"
-                    app:layout_constraintTop_toBottomOf="@id/txtReferMessage"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <ImageView
-                    android:id="@+id/imgMyReferral"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:src="@drawable/my_referral"
-                    app:layout_constraintStart_toStartOf="@id/viewMyReferral"
-                    app:layout_constraintEnd_toEndOf="@id/viewMyReferral"
-                    app:layout_constraintTop_toTopOf="@id/viewMyReferral"
-                    app:layout_constraintBottom_toTopOf="@id/viewMyReferralBottom"/>
 
-                <View
-                    android:id="@+id/viewMyReferralBottom"
-                    android:layout_width="0dp"
-                    android:layout_height="55dp"
-                    android:background="@drawable/refferal_drawable_side_corners"
-                    app:layout_constraintStart_toStartOf="@id/viewMyReferral"
-                    app:layout_constraintEnd_toEndOf="@id/viewMyReferral"
-                    app:layout_constraintBottom_toBottomOf="@id/viewMyReferral"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/txtMyReferral"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="My Referral"
-                    android:gravity="center"
-                    android:textColor="@color/colorPrimaryB"
-                    app:layout_constraintStart_toStartOf="@id/viewMyReferralBottom"
-                    app:layout_constraintEnd_toEndOf="@id/viewMyReferralBottom"
-                    app:layout_constraintTop_toTopOf="@id/viewMyReferralBottom"
-                    app:layout_constraintBottom_toTopOf="@id/txtMyReferralValue"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_220sdp"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_20sdp">
 
-                <TextView
-                    android:id="@+id/txtMyReferralValue"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryB"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    app:layout_constraintStart_toStartOf="@id/viewMyReferralBottom"
-                    app:layout_constraintEnd_toEndOf="@id/viewMyReferralBottom"
-                    app:layout_constraintTop_toBottomOf="@id/txtMyReferral"
-                    app:layout_constraintBottom_toBottomOf="@id/viewMyReferralBottom"/>
 
-                <View
-                    android:id="@+id/viewReferralIncome"
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:background="@drawable/referral_bonus_drawable"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    app:layout_constraintStart_toEndOf="@id/viewMyReferral"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/viewMyReferral"
-                    app:layout_constraintBottom_toBottomOf="@id/viewMyReferral"/>
+                    <TextView
+                        android:id="@+id/top_Earner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:fontFamily="@font/roboto"
+                        android:text="Top Earner on MaxPe"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/imgReferralIncome"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:src="@drawable/referral_income"
-                    app:layout_constraintStart_toStartOf="@id/viewReferralIncome"
-                    app:layout_constraintEnd_toEndOf="@id/viewReferralIncome"
-                    app:layout_constraintTop_toTopOf="@id/viewReferralIncome"
-                    app:layout_constraintBottom_toTopOf="@id/viewReferralIncomeBottom"/>
+                    <com.denzcoskun.imageslider.ImageSlider
+                        android:id="@+id/top_earner_ImageSlider"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:elevation="@dimen/_1sdp"
+                        app:iss_auto_cycle="true"
+                        app:iss_delay="3000"
+                        app:iss_period="3000"
+                        app:iss_text_align="CENTER"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/top_Earner" />
 
-                <View
-                    android:id="@+id/viewReferralIncomeBottom"
-                    android:layout_width="0dp"
-                    android:layout_height="55dp"
-                    android:background="@drawable/refferal_drawable_side_corners"
-                    app:layout_constraintStart_toStartOf="@id/viewReferralIncome"
-                    app:layout_constraintEnd_toEndOf="@id/viewReferralIncome"
-                    app:layout_constraintBottom_toBottomOf="@id/viewReferralIncome"/>
 
-                <TextView
-                    android:id="@+id/txtReferralIncome"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Referral Income"
-                    android:textColor="@color/colorPrimaryB"
-                    android:gravity="center"
-                    app:layout_constraintStart_toStartOf="@id/viewReferralIncomeBottom"
-                    app:layout_constraintEnd_toEndOf="@id/viewReferralIncomeBottom"
-                    app:layout_constraintTop_toTopOf="@id/viewReferralIncomeBottom"
-                    app:layout_constraintBottom_toTopOf="@id/txtReferralIncomeValue"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/txtReferralIncomeValue"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryB"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    app:layout_constraintTop_toBottomOf="@id/txtReferralIncome"
-                    app:layout_constraintStart_toStartOf="@id/viewReferralIncomeBottom"
-                    app:layout_constraintEnd_toEndOf="@id/viewReferralIncomeBottom"
-                    app:layout_constraintBottom_toBottomOf="@id/viewReferralIncomeBottom"/>
-
-                <TextView
-                    android:id="@+id/btnInvite"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Invite"
-                    android:gravity="center"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:background="@drawable/refer_button_background"
-                    android:padding="10dp"
-                    android:textStyle="bold"
-                    android:layout_marginStart="@dimen/_20sdp"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/viewMyReferral" />
-
-                <TextView
-                    android:id="@+id/txtTermsCondition"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Terms and Conditions Apply"
-                    android:gravity="center"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginBottom="@dimen/_16sdp"
-                    app:layout_constraintStart_toStartOf="@id/btnInvite"
-                    app:layout_constraintEnd_toEndOf="@id/btnInvite"
-                    app:layout_constraintTop_toBottomOf="@id/btnInvite"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
         </ScrollView>
 
         <LinearLayout

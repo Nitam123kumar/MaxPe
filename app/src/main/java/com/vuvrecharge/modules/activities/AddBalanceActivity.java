@@ -1,7 +1,8 @@
 package com.vuvrecharge.modules.activities;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -13,35 +14,39 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
 import com.paytm.pgsdk.TransactionManager;
-import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseActivity;
+import com.vuvrecharge.modules.activities.newActivities.MobileBankingActivity;
+import com.vuvrecharge.modules.adapter.PaymentMethodSelectAdapter;
+import com.vuvrecharge.modules.adapter.PaymentSettingAdapter;
 import com.vuvrecharge.modules.model.PaymentSetting;
-import com.vuvrecharge.modules.model.UserData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Locale;
+
+import java.util.ArrayList;
 import java.util.Objects;
 
 //import androidmads.library.qrgenearator.QRGContents;
@@ -51,7 +56,7 @@ import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 
 public class AddBalanceActivity extends BaseActivity implements DefaultView, View.OnClickListener,
-        PaytmPaymentTransactionCallback, PaymentResultListener {
+        PaytmPaymentTransactionCallback, PaymentResultListener,PaymentMethodSelectAdapter.OnClickListener {
     DefaultPresenter mDefaultPresenter;
 
     @BindView(R.id.toolbar_layout)
@@ -78,6 +83,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
 //    TextView txtTwoThousand;
     @BindView(R.id.txtHundred)
     TextView txtHundred;
+
     @BindView(R.id.help)
     TextView help;
     @BindView(R.id.txtMsg)
@@ -89,11 +95,21 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
 
     @BindView(R.id.upi_tittle_textView)
      TextView upi_tittle_textView;
+    @BindView(R.id.pay_using_textView)
+    TextView pay_using_textView;
+    @BindView(R.id.pay_using_ConstraintLayout)
+    ConstraintLayout pay_using_ConstraintLayout;
+
+    ArrayList<PaymentSetting> list = new ArrayList<>();
+    JSONObject json = null;
+    String data= "";
     String m_id = "";
     String min = "0";
     String max = "0";
+    String dataPayment = null;
     String paytm_getway = "";
     DefaultView defaultView;
+    BottomSheetDialog bottomSheetDialog =null;
 
     String hashString, payu_key, payu_username, user_name, user_mobile, user_email, productinfo,
             orderid, razorpay_merchant_key = "", razorpay_min_amount = "0",
@@ -112,6 +128,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
         mDefaultPresenter = new DefaultPresenter(this);
         defaultView = this;
         add_balance.setOnClickListener(this);
+        pay_using_ConstraintLayout.setOnClickListener(this);
 //        try {
 //            UserData userData = mDatabase.getUserData();
 //            txtAvailableBalance.setText("Available Balance \u20b9 " + userData.getEarnings());
@@ -119,7 +136,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
 //            e.printStackTrace();
 //        }
         Intent intent = getIntent();
-        String data = intent.getStringExtra("data");
+        data = intent.getStringExtra("data");
         titleStr = intent.getStringExtra("title");
         title.setText(titleStr);
         upi_tittle_textView.setText(titleStr);
@@ -314,7 +331,15 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
                 String CHECKSUMHASH = jsonObject.getString("CHECKSUMHASH");
                 this.order_id = orderid;
                 initializePaytmPayment(CHECKSUMHASH, orderid, amount.getText().toString());
-            }else {
+            } else if (data_other.equals("timepass")){
+                try {
+                    dataPayment = data;
+                    json = new JSONObject(data);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            else {
                 Log.d("TAG_DATA", "onSuccessOther:  no payment gateway");
             }
         } catch (Exception e) {
@@ -375,6 +400,10 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
             case R.id.txtHundred:
                 amount.setText("500");
                 break;
+//
+//            case R.id.pay_using_ConstraintLayout:
+//                usingPaymentBottomSheet();
+//                break;
 
             case R.id.help:
                 Intent intent = new Intent(getActivity(), SupportActivity.class);
@@ -421,6 +450,62 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
                     break;
                 }
                 break;
+        }
+    }
+
+    private void usingPaymentBottomSheet(){
+        try {
+
+
+        FrameLayout bottomSheet = null;
+        list.clear();
+
+        bottomSheetDialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
+        View layout = getLayoutInflater().inflate(R.layout.using_payment_layout, null,false);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+        RecyclerView recyclerView = layout.findViewById(R.id.using_payment_recyclerView);
+
+        changeStatusBarColor(bottomSheetDialog);
+        bottomSheet = bottomSheetDialog.findViewById(R.id.design_bottom_sheet);
+        if (bottomSheet != null) {
+            BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+            behavior.setSkipCollapsed(false);
+            behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            behavior.setPeekHeight(600);
+        }
+
+        if (json.getString("phonepe_getway").equals("Yes")){
+            list.add(new PaymentSetting(R.drawable.phonepe_logo_2,"PhonePe","Payment Gateway"));
+        }
+        if (json.getString("hdfc_dynamic_getway").equals("Yes")){
+            list.add(new PaymentSetting(R.drawable.upi_logo_2,"UPI","Payment Gateway"));
+        }
+        if (json.getString("razorpay_getway").equals("Yes")){
+            list.add(new PaymentSetting(R.drawable.razorpay_logo_2,"Razorpay","Payment Gateway"));
+        }
+        if (json.getString("paytm_getway").equals("Yes")){
+            list.add(new PaymentSetting(R.drawable.paytm_logo_2,"Paytm","Payment Gateway"));
+        }
+        if (json.getString("manual_getway").equals("Yes")){
+            list.add(new PaymentSetting(R.drawable.mobile_banking_logo_2,"Mobile","Banking (IMPS)"));
+        }
+//            if (json.getString("manual_getway").equals("Yes")){
+//                list.add(new PaymentSetting(R.drawable.mobile_banking_logo_2,"Mobile","Banking (IMPS)"));
+//            }
+
+        if (!list.isEmpty()){
+            LinearLayoutManager manager = new LinearLayoutManager(this, RecyclerView.VERTICAL,false);
+            recyclerView.setLayoutManager(manager);
+        }
+
+        PaymentMethodSelectAdapter adapter1 = new PaymentMethodSelectAdapter((Context) this, (PaymentSettingAdapter.OnClickListener) this);
+        adapter1.addData(list);
+        recyclerView.setAdapter(adapter1);
+
+        bottomSheetDialog.setContentView(layout);
+        bottomSheetDialog.show();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -581,4 +666,41 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
         Toasty.error(getActivity(), "Payment failed", Toast.LENGTH_LONG, false).show();
     }
 
+    @Override
+    public void onClick(String name) {
+        switch (name){
+            case "Paytm":
+                data=dataPayment;
+                pay_using_textView.setText("Payment Getaway");
+                upi_tittle_textView.setText("Paytm Payment");
+                payment_using_imageView.setImageResource(R.drawable.paytm_logo_2);
+                bottomSheetDialog.cancel();
+                break;
+            case "Razorpay":
+                data=dataPayment;
+                pay_using_textView.setText("Payment Getaway");
+                upi_tittle_textView.setText("Razorpay Payment");
+                payment_using_imageView.setImageResource(R.drawable.paytm_logo_2);
+                bottomSheetDialog.cancel();
+                break;
+            case "UPI":
+                data=dataPayment;
+                pay_using_textView.setText("Payment Getaway");
+                upi_tittle_textView.setText("UPI Payment");
+                payment_using_imageView.setImageResource(R.drawable.paytm_logo_2);
+                bottomSheetDialog.cancel();
+                break;
+            case "PhonePe":
+                data=dataPayment;
+                pay_using_textView.setText("Payment Getaway");
+                upi_tittle_textView.setText("PhonePe Payment");
+                payment_using_imageView.setImageResource(R.drawable.paytm_logo_2);
+                bottomSheetDialog.cancel();
+                break;
+            case "Mobile":
+              Intent  intent = new Intent(getActivity(), MobileBankingActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
 }

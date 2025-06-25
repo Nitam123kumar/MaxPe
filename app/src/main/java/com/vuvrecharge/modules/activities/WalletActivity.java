@@ -4,11 +4,20 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,11 +25,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseActivity;
+import com.vuvrecharge.base.BaseMethod;
 import com.vuvrecharge.modules.adapter.AddPaymentHistoryAdapter;
 import com.vuvrecharge.modules.model.DepositData;
 import com.vuvrecharge.modules.model.UserData;
@@ -31,6 +45,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -72,13 +87,10 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallet);
         ButterKnife.bind(getActivity());
-
-
-
+        setStatusBarGradiant(this);
         mDefaultPresenter = new DefaultPresenter(this);
         device_id = Settings.Secure.getString(getActivity().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
-
 
 
         history_layout.setOnClickListener(this);
@@ -92,13 +104,105 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
         try {
             UserData userData = mDatabase.getUserData();
             name_TV.setText("Hello, \n" + userData.getName());
-            balance_TV.setText("₹"+userData.getEarnings());
+            balance_TV.setText("₹" + userData.getEarnings());
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
         onBack.setOnClickListener(this);
+        addPaymentHistoryAdapter.setOnItemClickListener(new AddPaymentHistoryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DepositData data) {
+                showBottomSheet(data);
+            }
+        });
+
+    }
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
+    }
+    private void showBottomSheet(DepositData data) {
+
+        FrameLayout bottomSheet = null;
+
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
+        View layout = getLayoutInflater().inflate(R.layout.add_amount_history_details_layout, null,false);
+        ImageView onSuccess = layout.findViewById(R.id.on_success);
+        ImageView details_cancel = layout.findViewById(R.id.details_cancel);
+        TextView success_amount = layout.findViewById(R.id.success_amount);
+        TextView order_Id = layout.findViewById(R.id.order_Id);
+        TextView charge_textView = layout.findViewById(R.id.charge_textView);
+        TextView payment_time = layout.findViewById(R.id.payment_time);
+        TextView needSupport = layout.findViewById(R.id.need_support);
+        TextView close_textView = layout.findViewById(R.id.close_textView);
+        TextView more_details = layout.findViewById(R.id.more_details);
+        TextView transaction_successful_textView = layout.findViewById(R.id.transaction_successful_textView);
+
+        bottomSheet = bottomSheetDialog.findViewById(R.id.design_bottom_sheet);
+        if (bottomSheet != null) {
+            BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+            behavior.setSkipCollapsed(false);
+            behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            behavior.setPeekHeight(600);
+        }
+
+        success_amount.setText("\u20b9" + data.getTotal_amount());
+        order_Id.setText(data.getOrder_id());
+        charge_textView.setText("\u20b9" + data.getCharge());
+
+        details_cancel.setOnClickListener(v -> {
+            bottomSheetDialog.cancel();
+        });
+        close_textView.setOnClickListener(v -> {
+            bottomSheetDialog.cancel();
+        });
+        needSupport.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SupportActivity.class);
+            startActivity(intent);
+        });
+        more_details.setOnClickListener(v -> {
+            Toast.makeText(getActivity(),"Coming Soon",Toast.LENGTH_SHORT).show();
+        });
+
+        try {
+            String dateFormatNew = "N/A";
+            Date date = new Date((Long.parseLong(data.getOrder_time())) * 1000);
+            dateFormatNew = BaseMethod.dateFormatNew.format(date);
+            payment_time.setText(dateFormatNew);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (data.getPayment_status().toUpperCase().equals("PENDING")) {
+            Glide.with(getActivity())
+                    .load(R.drawable.pending_2)
+                    .into(onSuccess);
+            transaction_successful_textView.setText("This transaction was pennding");
+        } else if (data.getPayment_status().toUpperCase().equals("SUCCESS")) {
+            Glide.with(getActivity())
+                    .load(R.drawable.success_img)
+                    .into(onSuccess);
+            transaction_successful_textView.setText("This transaction was successful");
+        } else {
+            Glide.with(getActivity())
+                    .load(R.drawable.close_1)
+                    .into(onSuccess);
+            transaction_successful_textView.setText("This transaction was failed");
+        }
+
+        bottomSheetDialog.setContentView(layout);
+
+        bottomSheetDialog.show();
 
     }
 

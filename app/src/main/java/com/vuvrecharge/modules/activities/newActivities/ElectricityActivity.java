@@ -3,12 +3,18 @@ package com.vuvrecharge.modules.activities.newActivities;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -86,6 +92,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
         toolbar.setOnClickListener(this);
         title1 = getIntent().getStringExtra("title");
         title.setText(title1);
+        setStatusBarGradiant(this);
         mDefaultPresenter = new DefaultPresenter(this);
         if (title1.equals("Electricity Bill")) {
             search_electricity_layout.setHint("Search by electricity board name");
@@ -478,6 +485,18 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
     protected void onResume() {
         super.onResume();
         setLayout(no_internet, retry, "Electricity");
+    }
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
     }
 
     private void searchData(@NonNull String searchableData) {
