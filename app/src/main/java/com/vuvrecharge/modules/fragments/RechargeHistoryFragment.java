@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -64,14 +65,14 @@ public class RechargeHistoryFragment extends BaseFragment implements DefaultView
     @BindView(R.id.txtNoData)
     TextView txtNoData;
     @BindView(R.id.select_from_date_img)
-    LinearLayout select_from_date_img;
+    ImageView select_from_date_img;
     @BindView(R.id.select_to_date_img)
-    LinearLayout select_to_date_img;
+    ImageView select_to_date_img;
     @BindView(R.id.ref_no)
     EditText ref_no;
     @BindView(R.id.search)
     TextView search;
-    TextView invoice;
+//    TextView invoice;
     String device_id = "";
 
     static Date fromDate;
@@ -95,9 +96,9 @@ public class RechargeHistoryFragment extends BaseFragment implements DefaultView
         View rootView = inflater.inflate(R.layout.fragment_recharge_history, parent, false);
         this.rootViewMain = parent;
         ButterKnife.bind(this, rootView);
-        invoice = requireActivity().findViewById(R.id.invoice);
-        invoice.setVisibility(VISIBLE);
-        invoice.setText("View Complains");
+//        invoice = requireActivity().findViewById(R.id.invoice);
+//        invoice.setVisibility(VISIBLE);
+//        invoice.setText("View Complains");
         mDefaultPresenter = new DefaultPresenter(this);
         Calendar cal = Calendar.getInstance();
         toDate = cal.getTime();
@@ -125,15 +126,17 @@ public class RechargeHistoryFragment extends BaseFragment implements DefaultView
         loadData("Yes");
     }
 
+
+
     private void onclickListener() {
-        invoice.setOnClickListener(v -> {
-            try {
-                Intent intent = new Intent(getActivity(), ComplainsActivity.class);
-                startActivity(intent);
-            }catch (Exception e){
-                Log.d("TAG_DATA", "onclickListener: "+e.getMessage());
-            }
-        });
+//        invoice.setOnClickListener(v -> {
+//            try {
+//                Intent intent = new Intent(getActivity(), ComplainsActivity.class);
+//                startActivity(intent);
+//            }catch (Exception e){
+//                Log.d("TAG_DATA", "onclickListener: "+e.getMessage());
+//            }
+//        });
 
         search.setOnClickListener(v -> {
             page = 1;

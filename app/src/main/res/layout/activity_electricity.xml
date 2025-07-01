@@ -4,69 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/main_wallet_shape"
     android:fitsSystemWindows="true"
     tools:context=".modules.activities.newActivities.ElectricityActivity">
 
-    <include layout="@layout/bill_payment_layout"
-        android:id="@+id/mToolbar"/>
+    <include
+        android:id="@+id/mToolbar"
+        layout="@layout/bill_payment_layout" />
 
-    <TextView
-        android:id="@+id/help"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Help?"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_10sdp"
-        android:paddingTop="@dimen/_5sdp"
-        android:paddingBottom="@dimen/_5sdp"
-        android:textColor="#242424"
-        android:background="@drawable/plan_drawable_background"
-        app:layout_constraintEnd_toEndOf="@id/mToolbar"
-        app:layout_constraintTop_toTopOf="@id/mToolbar"
-        app:layout_constraintBottom_toBottomOf="@id/mToolbar"/>
+        android:background="@drawable/biller_main_shape"
+        app:layout_constraintTop_toBottomOf="@id/mToolbar">
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/search_electricity_layout"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/search_electricity"
         android:layout_width="0dp"
-        android:layout_height="57dp"
-        app:hintTextColor="@color/colorPrimaryB"
-        android:textColorHint="#B3B3B3"
-        android:layout_marginBottom="@dimen/_4sdp"
-        android:layout_marginTop="@dimen/_6sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_height="36dp"
         android:layout_marginStart="@dimen/_10sdp"
-        app:boxStrokeWidth="1dp"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="10dp"
-        app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
-        app:cursorColor="@color/colorPrimaryB"
-        app:boxStrokeColor="@color/colorPrimaryB"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:layout_constraintTop_toBottomOf="@id/mToolbar"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:background="@drawable/search_for_biller_shape"
+        android:drawableStart="@drawable/search_img"
+        android:gravity="center_vertical"
+        android:hint="qws"
+        android:paddingStart="@dimen/_5sdp"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:maxLength="30"
+        android:textColor="@color/black_4"
+        android:textColorHint="#B5B5B5"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/imgBharatBillPay"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/imgBharatBillPay">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/search_electricity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLength="30"
-            android:textStyle="bold"
-            android:drawableStart="@drawable/search_img"
-            android:imeOptions="actionSearch"
-            android:textColor="@color/black_4"
-            android:textColorHint="#B5B5B5"
-            android:gravity="center_vertical"
-            android:textSize="@dimen/_12sdp"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
-
+        app:layout_constraintTop_toTopOf="parent" />
     <ImageView
         android:id="@+id/imgBharatBillPay"
         android:layout_width="@dimen/_60sdp"
@@ -74,18 +48,20 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:src="@drawable/bharat_connect"
-        app:layout_constraintTop_toBottomOf="@id/mToolbar"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/search_electricity"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/_16sdp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_56sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_electricity_layout"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_electricity">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/electricityListView"
             android:layout_width="match_parent"
@@ -96,16 +72,18 @@
         android:id="@+id/txtNoData"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="No operator found."
         android:textColor="@color/black"
-        android:gravity="center"
-        android:visibility="gone"
         android:textSize="@dimen/_14sdp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_electricity_layout"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_electricity" />
 
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/loading"

@@ -1,6 +1,8 @@
 package com.vuvrecharge.modules.activities;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -9,6 +11,7 @@ import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +21,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
@@ -176,8 +181,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
     PermissionUtil permissionUtil = new PermissionUtil();
     BottomSheetDialog dialog = null;
     AlertDialog dialog1 = null;
-    RecyclerViewSliderAdapter sliderAdapetr;
-    OfferSliderRecyclerViewAdapter offerSliderAdapetr;
+    RecyclerViewSliderAdapter sliderAdapter;
+    OfferSliderRecyclerViewAdapter offerSliderAdapter;
     Handler handler = new Handler();
     int position = 0;
 
@@ -188,6 +193,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(getActivity());
+        setStatusBarGradiant(this);
         add_balance.setOnClickListener(this);
         statements.setOnClickListener(this);
         open_account.setOnClickListener(this);
@@ -213,8 +219,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
 
         );
         image_slider.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        sliderAdapetr = new RecyclerViewSliderAdapter(this, imageList);
-        image_slider.setAdapter(sliderAdapetr);
+        sliderAdapter = new RecyclerViewSliderAdapter(this, imageList);
+        image_slider.setAdapter(sliderAdapter);
 
          List<Integer> imageList_offer = Arrays.asList(
 
@@ -223,8 +229,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
 
         );
         offer_for_you_recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        offerSliderAdapetr = new OfferSliderRecyclerViewAdapter(this, imageList_offer);
-        offer_for_you_recyclerView.setAdapter(offerSliderAdapetr);
+        offerSliderAdapter = new OfferSliderRecyclerViewAdapter(this, imageList_offer);
+        offer_for_you_recyclerView.setAdapter(offerSliderAdapter);
 
 
 
@@ -997,7 +1003,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
 //                startActivity(intent);
 //                break;
             case R.id.history:
-                intent = new Intent(getActivity(), SupportActivity.class);
+                intent = new Intent(getActivity(), StatementsActivity.class);
+                intent.putExtra("statementsActivity","StatementsActivity");
                 startActivity(intent);
                 break;
 //            case R.id.all_services:
@@ -1026,7 +1033,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 break;
 
             case R.id.commission_report_layout:
-                intent = new Intent(getActivity(), CommissionNewActivity.class);
+                intent = new Intent(getActivity(), CommissionChartActivity.class);
                 startActivity(intent);
                 break;
             case R.id.refresh:
@@ -1053,6 +1060,19 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 startActivity(intent);
                 break;
 
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
         }
     }
 

@@ -4,146 +4,146 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="10dp"
+    android:layout_marginHorizontal="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_10sdp"
+    android:elevation="@dimen/_2sdp"
     android:padding="@dimen/_10sdp"
     android:background="@drawable/pattern_logs">
 
-    <LinearLayout
-        android:id="@+id/layoutFrom"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/to"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        android:paddingStart="@dimen/_10sdp"
+        android:text="To:"
+        android:textColor="@color/black_2"
+        android:fontFamily="@font/roboto"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/layoutEnd"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+
+    <TextView
+        android:id="@+id/form"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="From:"
+        android:textColor="@color/black_2"
+        android:fontFamily="@font/roboto"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutFrom"
+        android:layout_width="144dp"
+        android:layout_height="43dp"
+        android:elevation="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        android:background="@drawable/search_order_id_shape"
+        app:layout_constraintStart_toStartOf="@+id/form"
         app:layout_constraintEnd_toStartOf="@id/layoutEnd"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="From"
-            android:textColor="@color/black_2"
-            android:textSize="@dimen/_12sdp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:text=":"
-            android:textColor="@color/black_2"
-            android:textSize="@dimen/_12sdp" />
-
-        <LinearLayout
-            android:id="@+id/select_from_date_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_10sdp">
+       app:layout_constraintTop_toBottomOf="@id/form">
 
             <TextView
                 android:id="@+id/select_from_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_5sdp"
                 android:text="DD MMM YYYY"
                 android:textColor="@color/black_2"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/layoutFrom"
+                app:layout_constraintTop_toTopOf="@id/layoutFrom"
+                app:layout_constraintBottom_toBottomOf="@id/layoutFrom"
+                android:layout_marginStart="@dimen/_10sdp"/>
 
             <ImageView
-                android:layout_width="@dimen/_8sdp"
-                android:layout_height="@dimen/_8sdp"
+                android:id="@+id/select_from_date_img"
+                android:layout_width="13dp"
+                android:layout_height="12.99dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:src="@drawable/edit_new" />
+                android:src="@drawable/select_date_img"
+                app:layout_constraintStart_toEndOf="@id/select_from_date"
+                app:layout_constraintTop_toTopOf="@id/select_from_date"
+                app:layout_constraintBottom_toBottomOf="@id/select_from_date"
+                app:layout_constraintEnd_toEndOf="@id/layoutFrom"/>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutEnd"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="144dp"
+        android:layout_height="43dp"
+        android:elevation="@dimen/_2sdp"
         android:gravity="center_vertical|end"
-        android:orientation="horizontal"
+        android:background="@drawable/search_order_id_shape"
         app:layout_constraintStart_toEndOf="@id/layoutFrom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/layoutFrom">
 
         <TextView
+            android:id="@+id/select_to_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="To"
+            android:text="DD MMM YYYY"
             android:textColor="@color/black_2"
-            android:textSize="@dimen/_12sdp" />
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/layoutEnd"
+            app:layout_constraintTop_toTopOf="@id/layoutEnd"
+            app:layout_constraintBottom_toBottomOf="@id/layoutEnd"
+            android:layout_marginStart="@dimen/_10sdp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:text=":"
-            android:textColor="@color/black_2"
-            android:textSize="@dimen/_12sdp" />
-
-        <LinearLayout
+        <ImageView
             android:id="@+id/select_to_date_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/_10sdp"
-            android:paddingEnd="@dimen/_10sdp"
-            android:paddingBottom="@dimen/_10sdp">
+            android:layout_width="13dp"
+            android:layout_height="12.99dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:src="@drawable/select_date_img"
+            app:layout_constraintStart_toEndOf="@id/select_to_date"
+            app:layout_constraintTop_toTopOf="@id/select_to_date"
+            app:layout_constraintBottom_toBottomOf="@id/select_to_date"
+            app:layout_constraintEnd_toEndOf="@id/layoutEnd"/>
 
-            <TextView
-                android:id="@+id/select_to_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:text="DD MMM YYYY"
-                android:textColor="@color/black_2"
-                android:textSize="@dimen/_12sdp" />
-
-            <ImageView
-                android:layout_width="@dimen/_8sdp"
-                android:layout_height="@dimen/_8sdp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:src="@drawable/edit_new" />
-        </LinearLayout>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
         android:id="@+id/ref_no"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_27sdp"
-        android:background="@drawable/corner_white_circle_st"
+        android:layout_width="209dp"
+        android:layout_height="43dp"
+        android:background="@drawable/search_order_id_shape"
         android:gravity="center_vertical"
         android:hint="Mobile No/Ref No/Order Id"
         android:inputType="text"
+        android:layout_marginTop="@dimen/_10sdp"
         android:paddingStart="@dimen/_10sdp"
         android:paddingTop="@dimen/_3sdp"
         android:paddingBottom="@dimen/_3sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:elevation="@dimen/_2sdp"
         android:layout_marginEnd="10dp"
         android:textColor="@color/black_2"
         android:textColorHint="@color/black_light"
         android:textSize="@dimen/_11sdp"
         app:layout_constraintTop_toBottomOf="@id/layoutFrom"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/search"
         app:layout_constraintStart_toStartOf="@id/layoutFrom"
         tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/search"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_25sdp"
-        android:background="@drawable/corner_circle_primary"
+        android:layout_width="88dp"
+        android:layout_height="43dp"
+        android:background="@drawable/search_bg_shape"
         android:gravity="center"
         android:paddingStart="@dimen/_13sdp"
+        android:elevation="@dimen/_2sdp"
         android:paddingEnd="@dimen/_13sdp"
         android:text="Search"
         android:textColor="@color/white"

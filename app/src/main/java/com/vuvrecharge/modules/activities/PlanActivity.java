@@ -1,9 +1,14 @@
 package com.vuvrecharge.modules.activities;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -14,6 +19,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -101,6 +107,7 @@ public class PlanActivity extends BaseActivity implements DefaultView,View.OnCli
     ButterKnife.bind(getActivity());
     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     mToolbar.setOnClickListener(this);
+    setStatusBarGradiant(this);
     mDefaultView = this;
     title.setText("Plans Details");
     intent = getIntent();
@@ -187,6 +194,9 @@ public class PlanActivity extends BaseActivity implements DefaultView,View.OnCli
     imgClose.setOnClickListener(v -> {
       if (!editSearch.getText().toString().trim().isEmpty()){
           editSearch.setText("");
+        mViewPager.setVisibility(View.VISIBLE);
+        txtSearch.setVisibility(View.VISIBLE);
+        mClassesTabLayout.setVisibility(View.VISIBLE);
       }
     });
   }
@@ -195,6 +205,19 @@ public class PlanActivity extends BaseActivity implements DefaultView,View.OnCli
   protected void onResume() {
     super.onResume();
     setLayout(no_internet, retry, "plan");
+  }
+
+  @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+  public static void setStatusBarGradiant(Activity activity) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      Window window = activity.getWindow();
+      Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
+      window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+      window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+      window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+      window.setBackgroundDrawable(background);
+    }
   }
 
   @Override
@@ -244,11 +267,13 @@ public class PlanActivity extends BaseActivity implements DefaultView,View.OnCli
         @Override
         public void onTabSelected(TabLayout.Tab tab) {
           mViewPager.setCurrentItem(tab.getPosition());
+//          mClassesTabLayout.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.tab_selected_bg));
 
         }
 
         @Override
         public void onTabUnselected(TabLayout.Tab tab) {
+          mClassesTabLayout.setBackground(null);
         }
 
         @Override

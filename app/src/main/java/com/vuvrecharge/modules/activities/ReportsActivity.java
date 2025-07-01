@@ -1,11 +1,17 @@
 package com.vuvrecharge.modules.activities;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -43,8 +49,8 @@ public class ReportsActivity extends BaseActivity implements DefaultView, View.O
     LinearLayout mToolbar;
     @BindView(R.id.title)
     TextView title;
-    @BindView(R.id.invoice)
-    TextView invoice;
+//    @BindView(R.id.invoice)
+//    TextView invoice;
 
     @BindView(R.id.ref_no)
     EditText ref_no;
@@ -94,11 +100,11 @@ public class ReportsActivity extends BaseActivity implements DefaultView, View.O
         select_to_date.setOnClickListener(this);
         select_from_date_img.setOnClickListener(this);
         select_to_date_img.setOnClickListener(this);
-        invoice.setOnClickListener(this);
+//        invoice.setOnClickListener(this);
         mDefaultPresenter = new DefaultPresenter(this);
         Calendar cal = Calendar.getInstance();
         toDate = cal.getTime();
-
+//        setStatusBarGradiant(this);
         Date today = new Date();
         Calendar cal1 = new GregorianCalendar();
         cal1.setTime(today);
@@ -112,8 +118,8 @@ public class ReportsActivity extends BaseActivity implements DefaultView, View.O
         select_from_date.setText(from_date_local);
         select_to_date.setText(to_date_local);
         mDefaultView = this;
-        invoice.setVisibility(View.VISIBLE);
-        invoice.setText("View Complains");
+//        invoice.setVisibility(View.VISIBLE);
+//        invoice.setText("View Complains");
         BaseMethod.refresh = "No";
 
         handler = new Handler();
@@ -126,6 +132,19 @@ public class ReportsActivity extends BaseActivity implements DefaultView, View.O
             }
         };
 
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
     }
 
     @Override
@@ -174,10 +193,10 @@ public class ReportsActivity extends BaseActivity implements DefaultView, View.O
                 newFragment = new SelectDate(select_from_date, select_to_date);
                 newFragment.show(getSupportFragmentManager(), "Select To Date");
                 break;
-            case R.id.invoice:
-                Intent intent = new Intent(getActivity(), ComplainsActivity.class);
-                startActivity(intent);
-                break;
+//            case R.id.invoice:
+//                Intent intent = new Intent(getActivity(), ComplainsActivity.class);
+//                startActivity(intent);
+//                break;
             case R.id.toolbar_layout:
                 onBackPressed();
                 getActivity().finish();
@@ -362,7 +381,6 @@ public class ReportsActivity extends BaseActivity implements DefaultView, View.O
             handler.removeCallbacks(runnable);
         }
     }
-
 
 
 }

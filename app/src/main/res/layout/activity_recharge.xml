@@ -1,379 +1,356 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:fitsSystemWindows="true">
+    android:background="@drawable/main_wallet_shape"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
-    <RelativeLayout
+    <include
+        android:id="@+id/mToolbar"
+        layout="@layout/bill_payment_layout" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginTop="@dimen/_54sdp"
+        android:background="@drawable/biller_main_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mToolbar">
 
-        <RelativeLayout
-            android:id="@+id/main_bg"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            android:orientation="vertical">
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/white">
+            android:fillViewport="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
-                <include layout="@layout/app_bar_custom"
-                    android:id="@+id/mToolbar"/>
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15sdp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ConstraintLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginBottom="@dimen/_4sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/txtTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:fontFamily="@font/roboto"
+                        android:text="Mobile Number"
+                        android:textColor="@color/black"
+                        android:textSize="11sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/mobile_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="55dp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="@drawable/corner_white_recharge_2"
+                        android:gravity="center_vertical"
+                        android:hint="Mobile Number"
+                        android:inputType="phone"
+                        android:maxLength="30"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:textColor="@color/black_4"
+                        android:textColorHint="#B5B5B5"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+                    <ImageView
+                        android:id="@+id/search_number"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_7sdp"
+                        android:padding="@dimen/_7sdp"
+                        android:src="@drawable/contact1"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="@id/mobile_number"
+                        app:layout_constraintEnd_toEndOf="@id/mobile_number"
+                        app:layout_constraintTop_toTopOf="@id/mobile_number"
+                        app:tint="@color/colorPrimaryB" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <TextView
-                    android:id="@+id/help"
+                    android:id="@+id/txtTitleOperator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Help?"
-                    android:layout_gravity="center"
-                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/roboto"
+                    android:text="Operator"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ConstraintLayout" />
+
+                <Spinner
+                    android:id="@+id/select_operator"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:background="@drawable/corner_white_recharge_2"
+                    android:theme="@style/MatchSpinnerTheme"
+                    app:layout_constraintTop_toBottomOf="@id/txtTitleOperator" />
+
+                <TextView
+                    android:id="@+id/txtCircleOperator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/roboto"
+                    android:text="Circle"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/select_operator" />
+
+
+                <TextView
+                    android:id="@+id/txtOperator"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:background="@drawable/corner_white_recharge_2"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:text="Select Circle"
+                    android:textColor="@color/black_2"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:drawableEndCompat="@drawable/ic_drop_down"
+                    app:layout_constraintTop_toBottomOf="@id/txtCircleOperator" />
+
+                <TextView
+                    android:id="@+id/txtAmountOperator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/roboto"
+                    android:text="Amount"
+                    android:textColor="@color/black"
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txtOperator" />
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:hint="Amount"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/black_4"
+                    android:textColorHint="#B5B5B5"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:background="@drawable/corner_white_recharge_2"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/txtAmountOperator"
+
+                    />
+
+
+                <TextView
+                    android:id="@+id/view_plan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:paddingEnd="@dimen/_10sdp"
-                    android:paddingTop="@dimen/_5sdp"
-                    android:paddingBottom="@dimen/_5sdp"
-                    android:textColor="#242424"
-                    android:background="@drawable/plan_drawable_background"
-                    app:layout_constraintEnd_toEndOf="@id/mToolbar"
-                    app:layout_constraintTop_toTopOf="@id/mToolbar"
-                    app:layout_constraintBottom_toBottomOf="@id/mToolbar"/>
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingRight="@dimen/_10sdp"
+                    android:text="View Plans"
+                    android:textAllCaps="false"
+                    android:textColor="#3D7EB9"
+                    android:textSize="@dimen/_13sdp"
+                    android:theme="@style/PrimaryButton"
+                    app:layout_constraintBottom_toBottomOf="@id/amount"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/amount" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/bbcR"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:layout_constraintTop_toBottomOf="@id/amount">
+
+                    <TextView
+                        android:id="@+id/btnBillFetch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginStart="@dimen/_11sdp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:background="@drawable/corner_circle_primary"
+                        android:gravity="center"
+                        android:paddingStart="@dimen/_20sdp"
+                        android:paddingEnd="@dimen/_20sdp"
+                        android:text="Bill Fetch"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="visible"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/wallet_amount" />
+
+                    <TextView
+                        android:id="@+id/btnRoffer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:gravity="center"
+                        android:text="R Offers"
+                        android:textAllCaps="false"
+                        android:textColor="#3D7EB9"
+                        android:textSize="12sp"
+                        android:theme="@style/PrimaryButton"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/view_cus_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@drawable/corner_circle_primary"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:paddingRight="@dimen/_10sdp"
+                        android:text="Customer Info"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_13sdp"
+                        android:theme="@style/PrimaryButton"
+                        android:visibility="visible"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/btnBillFetch" />
+
+                    <TextView
+                        android:id="@+id/wallet_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:text=""
+                        android:textColor="@color/black_2"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_36sdp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/ad_money_button_shape"
+                    android:gravity="center"
+                    android:onClick="doRecharge"
+                    android:text="Recharge Now"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:theme="@style/PrimaryButton"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bbcR" />
+
+
+
+                <TextView
+                    android:id="@+id/txtRecent_recharges"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:text="Recent Recharges"
+                    android:textColor="#BCBCBC"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/submit"/>
+
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewBillerInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/commission_chart_drawable"
+                    android:padding="@dimen/_5sdp"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/submit" />
+
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recent_recharges_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/txtRecent_recharges"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <androidx.core.widget.NestedScrollView
-                    android:id="@+id/scrollView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fillViewport="true">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:layout_gravity="center">
-                            <ImageView
-                                android:id="@+id/imgBBPS"
-                                android:layout_width="@dimen/_60sdp"
-                                android:layout_height="@dimen/_40sdp"
-                                android:layout_marginTop="2dp"
-                                android:layout_marginEnd="@dimen/_10sdp"
-                                android:padding="3dp"
-                                android:layout_gravity="end"
-                                android:src="@drawable/bharat_connect"/>
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="@dimen/_4sdp"
-                                android:layout_marginTop="@dimen/_15sdp"
-                                android:layout_marginEnd="@dimen/_10sdp"
-                                android:layout_marginStart="@dimen/_10sdp">
-
-                                <com.google.android.material.textfield.TextInputLayout
-                                    android:id="@+id/mobile_number_layout"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
-                                    app:hintTextColor="@color/colorPrimaryB"
-                                    android:textColorHint="#B3B3B3"
-                                    app:boxStrokeColor="@color/colorPrimaryB"
-                                    app:cursorColor="@color/colorPrimaryB"
-                                    style="@style/TextInputLayoutNew"
-                                    app:boxCornerRadiusBottomEnd="@dimen/_30sdp"
-                                    app:boxCornerRadiusBottomStart="@dimen/_30sdp"
-                                    app:boxCornerRadiusTopEnd="@dimen/_30sdp"
-                                    app:boxCornerRadiusTopStart="@dimen/_30sdp"
-                                    app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent">
-                                    <com.google.android.material.textfield.TextInputEditText
-                                        android:id="@+id/mobile_number"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:hint="Mobile Number"
-                                        android:maxLength="30"
-                                        android:textStyle="bold"
-                                        android:textColorHint="#B5B5B5"
-                                        android:textColor="@color/black_4"
-                                        android:gravity="center_vertical"
-                                        android:textSize="@dimen/_12sdp"
-                                        android:inputType="phone" />
-                                </com.google.android.material.textfield.TextInputLayout>
-
-                                <ImageView
-                                    android:id="@+id/search_number"
-                                    android:layout_width="@dimen/_30sdp"
-                                    android:layout_height="@dimen/_30sdp"
-                                    android:layout_marginEnd="@dimen/_7sdp"
-                                    android:padding="@dimen/_7sdp"
-                                    android:src="@drawable/contact"
-                                    android:textColor="@color/white"
-                                    app:tint="@color/colorPrimaryB"
-                                    app:layout_constraintTop_toTopOf="@id/mobile_number_layout"
-                                    app:layout_constraintBottom_toBottomOf="@id/mobile_number_layout"
-                                    app:layout_constraintEnd_toEndOf="@id/mobile_number_layout"/>
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_45sdp"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:layout_marginEnd="@dimen/_10sdp"
-                                android:layout_marginBottom="@dimen/_4sdp"
-                                android:layout_marginTop="@dimen/_8sdp"
-                                android:background="@drawable/corner_white_recharge_2">
-
-                                <Spinner
-                                    android:id="@+id/select_operator"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:theme="@style/MatchSpinnerTheme" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/select_circle_bg"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_45sdp"
-                                android:layout_marginLeft="@dimen/_10sdp"
-                                android:layout_marginRight="@dimen/_10sdp"
-                                android:layout_marginBottom="@dimen/_4sdp"
-                                android:layout_marginTop="@dimen/_8sdp"
-                                android:layout_gravity="center_vertical"
-                                android:background="@drawable/corner_white_recharge_2">
-
-                                <TextView
-                                    android:id="@+id/txtOperator"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:text="Select Circle"
-                                    android:textSize="14sp"
-                                    android:textStyle="bold"
-                                    android:gravity="center_vertical"
-                                    android:layout_marginEnd="@dimen/_10sdp"
-                                    app:drawableEndCompat="@drawable/ic_drop_down"
-                                    android:layout_centerVertical="true"
-                                    android:layout_marginStart="@dimen/_10sdp"
-                                    android:textColor="@color/black_2"/>
-
-<!--                                <com.toptoche.searchablespinnerlibrary.SearchableSpinner-->
-<!--                                    android:id="@+id/select_circle"-->
-<!--                                    android:layout_width="match_parent"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_gravity="center_vertical"-->
-<!--                                    android:theme="@style/MatchSpinnerTheme" />-->
-
-                            </LinearLayout>
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/amount_layout"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                app:hintTextColor="@color/colorPrimaryB"
-                                android:textColorHint="#B3B3B3"
-                                android:layout_marginBottom="@dimen/_4sdp"
-                                android:layout_marginTop="@dimen/_8sdp"
-                                android:layout_marginEnd="@dimen/_10sdp"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                app:cursorColor="@color/colorPrimaryB"
-                                app:boxStrokeWidth="1dp"
-                                app:boxCornerRadiusBottomEnd="@dimen/_30sdp"
-                                app:boxCornerRadiusBottomStart="@dimen/_30sdp"
-                                app:boxCornerRadiusTopEnd="@dimen/_30sdp"
-                                app:boxCornerRadiusTopStart="@dimen/_30sdp"
-                                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
-                                app:boxStrokeColor="@color/colorPrimaryB"
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/amount"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="Amount"
-                                    android:textColor="@color/black_4"
-                                    android:textStyle="bold"
-                                    android:textColorHint="#B5B5B5"
-                                    android:gravity="center_vertical"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:inputType="numberDecimal" />
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                            <TextView
-                                android:id="@+id/btnBillFetch"
-                                android:layout_width="wrap_content"
-                                android:layout_height="@dimen/_30sdp"
-                                android:text="Bill Fetch"
-                                android:textColor="@color/white"
-                                android:gravity="center"
-                                android:visibility="visible"
-                                android:textSize="@dimen/_12sdp"
-                                android:layout_marginTop="@dimen/_12sdp"
-                                android:layout_marginStart="@dimen/_11sdp"
-                                android:paddingStart="@dimen/_20sdp"
-                                android:paddingEnd="@dimen/_20sdp"
-                                android:background="@drawable/corner_circle_primary"/>
+        </androidx.core.widget.NestedScrollView>
 
 
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_marginLeft="@dimen/_10sdp"
-                                android:layout_marginRight="@dimen/_10sdp"
-                                android:layout_height="wrap_content">
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                                <RelativeLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/_10sdp">
-<!--                                    android:background="@drawable/corner_circle_primary"-->
-                                    <TextView
-                                        android:id="@+id/btnRoffer"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="@dimen/_30sdp"
-                                        android:paddingLeft="@dimen/_10sdp"
-                                        android:paddingRight="@dimen/_10sdp"
-                                        android:text="R Offers"
-                                        android:gravity="center"
-                                        android:visibility="visible"
-                                        android:textAllCaps="false"
-                                        android:textColor="@color/white"
-                                        android:textSize="@dimen/_13sdp"
-                                        android:theme="@style/PrimaryButton" />
-
-                                    <TextView
-                                        android:id="@+id/view_cus_info"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="@dimen/_30sdp"
-                                        android:background="@drawable/corner_circle_primary"
-                                        android:paddingLeft="@dimen/_10sdp"
-                                        android:paddingRight="@dimen/_10sdp"
-                                        android:text="Customer Info"
-                                        android:gravity="center"
-                                        android:textAllCaps="false"
-                                        android:visibility="visible"
-                                        android:textColor="@color/white"
-                                        android:textSize="@dimen/_13sdp"
-                                        android:theme="@style/PrimaryButton" />
-
-                                </RelativeLayout>
-
-                                <RelativeLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_marginTop="@dimen/_10sdp">
-
-                                    <TextView
-                                        android:id="@+id/view_plan"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="@dimen/_30sdp"
-                                        android:background="@drawable/corner_circle_primary"
-                                        android:paddingLeft="@dimen/_10sdp"
-                                        android:paddingRight="@dimen/_10sdp"
-                                        android:gravity="center"
-                                        android:text="View Plans"
-                                        android:textAllCaps="false"
-                                        android:textColor="@color/white"
-                                        android:textSize="@dimen/_13sdp"
-                                        android:theme="@style/PrimaryButton" />
-
-                                </RelativeLayout>
-
-                            </RelativeLayout>
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/recyclerViewBillerInfo"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:visibility="gone"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:layout_marginEnd="@dimen/_10sdp"
-                                android:padding="@dimen/_5sdp"
-                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                                android:background="@drawable/commission_chart_drawable" />
-
-                            <TextView
-                                android:id="@+id/wallet_amount"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_10sdp"
-                                android:layout_marginRight="@dimen/_10sdp"
-                                android:layout_marginTop="@dimen/_5sdp"
-                                android:text=""
-                                android:textColor="@color/black_2"
-                                android:textSize="@dimen/_12sdp"
-                                android:textStyle="bold" />
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/_10sdp"
-                                android:layout_marginRight="@dimen/_10sdp"
-                                android:layout_marginTop="@dimen/_16sdp"
-                                android:layout_marginBottom="@dimen/_25sdp">
-
-                                <TextView
-                                    android:id="@+id/submit"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="@dimen/_36sdp"
-                                    android:background="@drawable/corner_circle_primary"
-                                    android:onClick="doRecharge"
-                                    android:gravity="center"
-                                    android:text="Submit"
-                                    android:visibility="visible"
-                                    android:textAllCaps="false"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_15sdp"
-                                    android:theme="@style/PrimaryButton" />
-
-                            </RelativeLayout>
-
-                        </LinearLayout>
-                    </LinearLayout>
-                </androidx.core.widget.NestedScrollView>
-            </RelativeLayout>
-        </LinearLayout>
+    <LinearLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/_24sdp"
+        android:visibility="gone">
 
         <LinearLayout
-            android:id="@+id/loading"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/_24sdp"
-            android:visibility="gone">
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/transparent"
-                android:gravity="center"
-                android:orientation="vertical">
-                <ProgressBar
-                    android:layout_width="@dimen/_35sdp"
-                    android:layout_height="@dimen/_35sdp"
-                    android:indeterminateDrawable="@drawable/layout_process_bar" />
+            <ProgressBar
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:indeterminateDrawable="@drawable/layout_process_bar" />
 
-
-            </LinearLayout>
 
         </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,13 +5,17 @@ import static android.view.View.VISIBLE;
 import static com.vuvrecharge.api.ApiServices.IMAGE_LOGO;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -22,6 +26,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -37,6 +42,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -56,6 +63,8 @@ import com.vuvrecharge.databinding.TransactionDialogBinding;
 import com.vuvrecharge.databinding.WalletTransactionBottonDialogBinding;
 import com.vuvrecharge.modules.adapter.BillerInfoAdapter;
 import com.vuvrecharge.modules.adapter.OpreatorAdapter;
+import com.vuvrecharge.modules.adapter.RecentRechargesAdapter;
+import com.vuvrecharge.modules.adapter.ReportsAdapter;
 import com.vuvrecharge.modules.adapter.SearchableSpinnerCircleAdapter;
 import com.vuvrecharge.modules.model.BillInfo;
 import com.vuvrecharge.modules.model.CircleData;
@@ -66,6 +75,7 @@ import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 import com.vuvrecharge.preferences.OperatorPreferences;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
@@ -83,36 +93,43 @@ import es.dmoral.toasty.Toasty;
 public class RechargeActivity extends BaseActivity implements DefaultView,
         SearchableSpinnerCircleAdapter.OnItemClickListeners,View.OnClickListener{
 
+    DefaultView mDefaultView;
     private DefaultPresenter mDefaultPresenter;
     @BindView(R.id.toolbar_layout)
     LinearLayout mToolbar;
     @BindView(R.id.title)
     TextView title;
+    @BindView(R.id.txtCircleOperator)
+    TextView txtCircleOperator;
     @BindView(R.id.wallet_amount)
     TextView wallet_amount;
     @BindView(R.id.view_cus_info)
     TextView view_cus_info;
     @BindView(R.id.view_plan)
     TextView view_plan;
-    @BindView(R.id.select_circle_bg)
-    LinearLayout select_circle_bg;
+//    @BindView(R.id.select_circle_bg)
+//    LinearLayout select_circle_bg;
     @BindView(R.id.mobile_number)
     TextInputEditText mobile_number;
-    @BindView(R.id.amount_layout)
-    TextInputLayout amount_layout;
-    @BindView(R.id.mobile_number_layout)
-    TextInputLayout mobile_number_layout;
+    @BindView(R.id.txtTitle)
+    TextView txtTitle;
+//    @BindView(R.id.mobile_number_layout)
+//    TextInputLayout mobile_number_layout;
     @BindView(R.id.recyclerViewBillerInfo)
     RecyclerView recyclerViewBillerInfo;
     @BindView(R.id.amount)
     TextInputEditText amount;
     @BindView(R.id.select_operator)
     Spinner select_operator;
+    @BindView(R.id.recent_recharges_recyclerView)
+    RecyclerView recent_recharges_recyclerView;
     String string = "";
     ArrayList<String> operator_list = new ArrayList<>();
     ArrayList<String> circle_list = new ArrayList<>();
     String type = "";
     ArrayList<String> operator_list_img = new ArrayList<>();
+    ArrayList<ReportsData> recent_recharges_List = new ArrayList<>();
+    RecentRechargesAdapter recentRechargesAdapter;
     String operator_img = "";
     @BindView(R.id.search_number)
     ImageView search_number;
@@ -127,12 +144,10 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
     TextView btnRoffer;
     @BindView(R.id.txtOperator)
     TextView txtOperator;
-    @BindView(R.id.imgBBPS)
-    ImageView imgBBPS;
+//    @BindView(R.id.imgBBPS)
+//    ImageView imgBBPS;
     @BindView(R.id.submit)
     TextView submit;
-    @BindView(R.id.help)
-    TextView help;
     @BindView(R.id.btnBillFetch)
     TextView btnBillFetch;
     @BindView(R.id.scrollView)
@@ -154,6 +169,14 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
     List<BillInfo> infos = new ArrayList<>();
     String billAmount = "";
     BillerInfoAdapter adapter;
+
+    int page = 1;
+    int remaining_pages = 0;
+    int previousTotal = 0;
+    int pastVisibleItems;
+    int visibleItemCount;
+    int totalItemCount;
+    boolean isLoading = true;
     List<OperatorData> operatorDataList = new ArrayList<>();
     List<CircleData> circleDataList = new ArrayList<>();
     public BottomSheetDialog dialog = null;
@@ -178,6 +201,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recharge);
         ButterKnife.bind(this);
+        initializeEventsList();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         string = getIntent().getStringExtra("title");
         title.setText(string);
@@ -188,10 +212,8 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
         BaseMethod.mobile = "";
         mToolbar.setOnClickListener(this);
         mDefaultPresenter = new DefaultPresenter(this);
-        help.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(),SupportActivity.class);
-            startActivity(intent);
-        });
+        setStatusBarGradiant(this);
+
         scrollView.setOnTouchListener((v, event) -> {
             hideKeyBoard(mobile_number);
             hideKeyBoard(amount);
@@ -201,17 +223,18 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
         switch (string) {
             case "Prepaid Recharge":
                 type = "Prepaid";
-                select_circle_bg.setVisibility(VISIBLE);
+//                select_circle_bg.setVisibility(VISIBLE);
                 txtOperator.setText("Select Circle");
                 view_plan.setVisibility(VISIBLE);
                 view_cus_info.setVisibility(GONE);
                 search_number.setVisibility(VISIBLE);
                 btnRoffer.setVisibility(VISIBLE);
-                imgBBPS.setVisibility(GONE);
-                btnRoffer.setTextColor(Color.BLACK);
-                view_plan.setTextColor(Color.BLACK);
-                view_plan.setBackgroundResource(R.drawable.btn_drawable_disable);
-                mobile_number_layout.setHint("Mobile Number");
+//                imgBBPS.setVisibility(GONE);
+//                btnRoffer.setTextColor(Color.BLACK);
+//                view_plan.setTextColor(Color.BLACK);
+//                view_plan.setBackgroundResource(R.drawable.btn_drawable_disable);
+                mobile_number.setHint("Mobile Number");
+                txtTitle.setText("Mobile Number");
                 operatorPreferences = new OperatorPreferences(this,type);
                 operatorPreferences2 = new OperatorPreferences(this,type+"2");
                 map = operatorPreferences.getData();
@@ -249,6 +272,8 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                 }else {
                     mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
                 }
+
+
 
                 view_plan.setOnClickListener(v -> {
                     mobile_number_str = mobile_number.getText().toString();
@@ -350,13 +375,13 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                                 if (s.toString().length() > 9) {
                                     mobile_number.setFilters(filters);
                                     mDefaultPresenter.findOperatorCircle(device_id, s.toString());
-                                    btnRoffer.setTextColor(getResources().getColor(R.color.colorPrimaryB));
+//                                    btnRoffer.setTextColor(getResources().getColor(R.color.colorPrimaryB));
 //                                btnRoffer.setBackgroundResource(R.drawable.btn_drawable);
                                     view_cus_info.setBackgroundResource(R.drawable.btn_drawable);
                                     view_cus_info.setTextColor(Color.WHITE);
 
-                                    view_plan.setTextColor(Color.WHITE);
-                                    view_plan.setBackgroundResource(R.drawable.btn_drawable);
+//                                    view_plan.setTextColor(Color.WHITE);
+//                                    view_plan.setBackgroundResource(R.drawable.btn_drawable);
                                 }else {
                                     select_operator.setSelection(0);
                                     amount.setText("");
@@ -364,14 +389,14 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                                     InputFilter[] filters2 = new InputFilter[1];
                                     filters2[0] = new InputFilter.LengthFilter(13);
                                     mobile_number.setFilters(filters2);
-                                    btnRoffer.setTextColor(Color.BLACK);
+//                                    btnRoffer.setTextColor(Color.BLACK);
 //                                btnRoffer.setBackgroundResource(R.drawable.btn_drawable_disable);
 
                                     view_cus_info.setBackgroundResource(R.drawable.btn_drawable_disable);
                                     view_cus_info.setTextColor(Color.BLACK);
 
-                                    view_plan.setTextColor(Color.BLACK);
-                                    view_plan.setBackgroundResource(R.drawable.btn_drawable_disable);
+//                                    view_plan.setTextColor(Color.BLACK);
+//                                    view_plan.setBackgroundResource(R.drawable.btn_drawable_disable);
                                     if (s.toString().startsWith("+91")){
                                         String str = s.toString().replace("+91","");
                                         mobile_number.setText(str);
@@ -386,10 +411,10 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                 break;
             case "Postpaid Recharge":
                 type = "Postpaid";
-                select_circle_bg.setVisibility(GONE);
+//                select_circle_bg.setVisibility(GONE);
                 view_plan.setVisibility(GONE);
                 view_cus_info.setVisibility(GONE);
-                imgBBPS.setVisibility(VISIBLE);
+//                imgBBPS.setVisibility(VISIBLE);
                 search_number.setVisibility(VISIBLE);
                 btnRoffer.setVisibility(GONE);
                 operatorPreferences = new OperatorPreferences(this,type);
@@ -422,7 +447,8 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                 InputFilter[] filters2 = new InputFilter[1];
                 filters2[0] = new InputFilter.LengthFilter(10);
                 mobile_number.setFilters(filters2);
-                mobile_number_layout.setHint("Postpaid Mobile Number");
+                mobile_number.setHint("Postpaid Mobile Number");
+                txtTitle.setText("Postpaid Mobile Number");
                 btnBillFetch.setOnClickListener(v -> billFetch(selected_operator,
                         mobile_number.getText().toString().trim()));
                 mobile_number.addTextChangedListener(new TextWatcher() {
@@ -435,23 +461,23 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
                         if (findOperator.equals("1")) {
                             if (s.toString().length() == 10) {
-                                btnRoffer.setTextColor(Color.WHITE);
-                                btnRoffer.setBackgroundResource(R.drawable.btn_drawable);
+//                                btnRoffer.setTextColor(Color.WHITE);
+//                                btnRoffer.setBackgroundResource(R.drawable.btn_drawable);
 
                                 view_cus_info.setBackgroundResource(R.drawable.btn_drawable);
                                 view_cus_info.setTextColor(Color.WHITE);
 
-                                view_plan.setTextColor(Color.WHITE);
-                                view_plan.setBackgroundResource(R.drawable.btn_drawable);
+//                                view_plan.setTextColor(Color.WHITE);
+//                                view_plan.setBackgroundResource(R.drawable.btn_drawable);
                             }else {
-                                btnRoffer.setBackgroundResource(R.drawable.btn_drawable_disable);
-                                btnRoffer.setTextColor(Color.BLACK);
+//                                btnRoffer.setBackgroundResource(R.drawable.btn_drawable_disable);
+//                                btnRoffer.setTextColor(Color.BLACK);
 
                                 view_cus_info.setBackgroundResource(R.drawable.btn_drawable_disable);
                                 view_cus_info.setTextColor(Color.BLACK);
 
-                                view_plan.setTextColor(Color.BLACK);
-                                view_plan.setBackgroundResource(R.drawable.btn_drawable_disable);
+//                                view_plan.setTextColor(Color.BLACK);
+//                                view_plan.setBackgroundResource(R.drawable.btn_drawable_disable);
                             }
                         }
                     }
@@ -464,17 +490,19 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
             case "DTH Recharge":
                 type = "DTH";
                 btnBillFetch.setVisibility(GONE);
-                select_circle_bg.setVisibility(GONE);
+                txtOperator.setVisibility(GONE);
+                txtCircleOperator.setVisibility(GONE);
                 view_plan.setVisibility(VISIBLE);
                 view_cus_info.setVisibility(VISIBLE);
-                imgBBPS.setVisibility(GONE);
+//                imgBBPS.setVisibility(GONE);
                 view_cus_info.setBackgroundResource(R.drawable.btn_drawable_disable);
                 view_cus_info.setTextColor(Color.BLACK);
-                view_plan.setBackgroundResource(R.drawable.btn_drawable_disable);
-                view_plan.setTextColor(Color.BLACK);
+//                view_plan.setBackgroundResource(R.drawable.btn_drawable_disable);
+//                view_plan.setTextColor(Color.BLACK);
                 search_number.setVisibility(GONE);
                 btnRoffer.setVisibility(GONE);
-                mobile_number_layout.setHint("DTH Number");
+                mobile_number.setHint("DTH Number");
+                txtTitle.setText("DTH Number");
                 operatorPreferences = new OperatorPreferences(this,type);
                 map = operatorPreferences.getData();
                 if (map.get("type") != null){
@@ -543,23 +571,23 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
                         if (findOperator.equals("1")) {
                             if (s.toString().length() >= 10) {
-                                btnRoffer.setTextColor(Color.WHITE);
-                                btnRoffer.setBackgroundResource(R.drawable.btn_drawable);
+//                                btnRoffer.setTextColor(Color.WHITE);
+//                                btnRoffer.setBackgroundResource(R.drawable.btn_drawable);
 
                                 view_cus_info.setBackgroundResource(R.drawable.btn_drawable);
                                 view_cus_info.setTextColor(Color.WHITE);
 
-                                view_plan.setTextColor(Color.WHITE);
-                                view_plan.setBackgroundResource(R.drawable.btn_drawable);
+//                                view_plan.setTextColor(Color.WHITE);
+//                                view_plan.setBackgroundResource(R.drawable.btn_drawable);
                             }else {
-                                btnRoffer.setBackgroundResource(R.drawable.btn_drawable_disable);
-                                btnRoffer.setTextColor(Color.BLACK);
+//                                btnRoffer.setBackgroundResource(R.drawable.btn_drawable_disable);
+//                                btnRoffer.setTextColor(Color.BLACK);
 
                                 view_cus_info.setBackgroundResource(R.drawable.btn_drawable_disable);
                                 view_cus_info.setTextColor(Color.BLACK);
 
-                                view_plan.setTextColor(Color.BLACK);
-                                view_plan.setBackgroundResource(R.drawable.btn_drawable_disable);
+//                                view_plan.setTextColor(Color.BLACK);
+//                                view_plan.setBackgroundResource(R.drawable.btn_drawable_disable);
                             }
                         }
                     }
@@ -578,9 +606,9 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
             }
         });
 
-        submit.setTextColor(getResources().getColor(R.color.black_4));
-        submit.setTypeface(submit.getTypeface(), Typeface.BOLD);
-        submit.setBackgroundResource(R.drawable.btn_drawable_disable);
+//        submit.setTextColor(getResources().getColor(R.color.black_4));
+//        submit.setTypeface(submit.getTypeface(), Typeface.BOLD);
+//        submit.setBackgroundResource(R.drawable.btn_drawable_disable);
         amount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -594,15 +622,15 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 
             @Override
             public void afterTextChanged(Editable s) {
-                    if (!s.toString().isEmpty()){
-                        submit.setTextColor(Color.WHITE);
-                        submit.setBackgroundResource(R.drawable.btn_drawable);
-                        submit.setTypeface(submit.getTypeface(), Typeface.BOLD);
-                    }else {
-                        submit.setTextColor(getResources().getColor(R.color.black_4));
-                        submit.setTypeface(submit.getTypeface(), Typeface.BOLD);
-                        submit.setBackgroundResource(R.drawable.btn_drawable_disable);
-                    }
+//                    if (!s.toString().isEmpty()){
+//                        submit.setTextColor(Color.WHITE);
+//                        submit.setBackgroundResource(R.drawable.btn_drawable);
+//                        submit.setTypeface(submit.getTypeface(), Typeface.BOLD);
+//                    }else {
+//                        submit.setTextColor(getResources().getColor(R.color.black_4));
+//                        submit.setTypeface(submit.getTypeface(), Typeface.BOLD);
+//                        submit.setBackgroundResource(R.drawable.btn_drawable_disable);
+//                    }
             }
         });
         loadOperatorSpinner();
@@ -638,6 +666,56 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
         }
     }
 
+    private void initializeEventsList() {
+        recentRechargesAdapter = new RecentRechargesAdapter(getLayoutInflater(),this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
+        recent_recharges_recyclerView.setLayoutManager(linearLayoutManager);
+        recent_recharges_recyclerView.setAdapter(recentRechargesAdapter);
+        recent_recharges_recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                visibleItemCount = linearLayoutManager.getChildCount();
+                totalItemCount = linearLayoutManager.getItemCount();
+                pastVisibleItems = linearLayoutManager.findFirstVisibleItemPosition();
+                if (dy > 0){
+                    if (isLoading) {
+                        if (totalItemCount > previousTotal) {
+                            isLoading = false;
+                            previousTotal = totalItemCount;
+                        }
+                    }
+                    if (!isLoading && (totalItemCount - visibleItemCount) <= (pastVisibleItems)) {
+                        isLoading = true;
+                        page++;
+                        if (remaining_pages > 0) {
+                            loadData("No");
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    private void loadData(String value) {
+        mDefaultPresenter.userRechargeHistory(device_id + "", page + "",
+                "", "", "", value, value);
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
+    }
+
     private void loadOperatorSpinner() {
         OpreatorAdapter adapter = new OpreatorAdapter(getActivity(), operator_list, operator_list_img);
         select_operator.setAdapter(adapter);
@@ -660,7 +738,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 
             }
         });
-        select_circle_bg.setOnClickListener(this::openDialog);
+//        select_circle_bg.setOnClickListener(this::openDialog);
     }
 
     private void openDialog(View vi) {
@@ -1102,7 +1180,28 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                 }
                 loadOperatorSpinner();
             }
-        } catch (Exception e) {
+
+            JSONObject jsonObject = new JSONObject(message);
+            printLog(jsonObject.toString());
+            remaining_pages = Integer.parseInt(jsonObject.getString("remaining_pages"));
+            JSONArray jsonArray = jsonObject.getJSONArray("history_data");
+            if (jsonArray.length() > 0){
+                Gson gson = new Gson();
+                Type type_ = new TypeToken<List<ReportsData>>() {
+                }.getType();
+                List<ReportsData> passbookData = gson.fromJson(jsonArray.toString(), type_);
+                if (second_message.equals("Yes")) {
+                }
+                recentRechargesAdapter.addData(passbookData, second_message, jsonObject.getString("operator_img"),
+                        jsonObject.getString("operator_dunmy_img"), mDefaultView, mDatabase);
+                recent_recharges_recyclerView.setVisibility(VISIBLE);
+            }else {
+                recent_recharges_recyclerView.setVisibility(GONE);
+            }
+
+        }
+
+        catch (Exception e) {
             e.printStackTrace();
         }
 

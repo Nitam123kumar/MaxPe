@@ -56,8 +56,8 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
     LinearLayout toolbar;
     @BindView(R.id.title)
     TextView title;
-    @BindView(R.id.help)
-    TextView help;
+//    @BindView(R.id.help)
+//    TextView help;
     @BindView(R.id.no_internet)
     LinearLayout no_internet;
     @BindView(R.id.retry)
@@ -69,8 +69,8 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
     @BindView(R.id.search_electricity)
     TextInputEditText search_electricity;
 
-    @BindView(R.id.search_electricity_layout)
-    TextInputLayout search_electricity_layout;
+//    @BindView(R.id.search_electricity_layout)
+//    TextInputLayout search_electricity_layout;
     @BindView(R.id.loading)
     LinearLayout loading;
     @BindView(R.id.swipeRefreshLayout)
@@ -95,7 +95,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
         setStatusBarGradiant(this);
         mDefaultPresenter = new DefaultPresenter(this);
         if (title1.equals("Electricity Bill")) {
-            search_electricity_layout.setHint("Search by electricity board name");
+            search_electricity.setHint("Search by electricity board name");
             type = "Electricity";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -111,7 +111,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         }else if (title1.equals("Postpaid Recharge")) {
-            search_electricity_layout.setHint("Search by postpaid name");
+            search_electricity.setHint("Search by postpaid name");
             type = "Postpaid";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -127,7 +127,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         }else if (title1.equals("Fastag")) {
-            search_electricity_layout.setHint("Search by Fastag provider name");
+            search_electricity.setHint("Search by Fastag provider name");
             type = "Fastag";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -143,7 +143,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         }else if (title1.equals("Insurance")) {
-            search_electricity_layout.setHint("Search by Insurance provider name");
+            search_electricity.setHint("Search by Insurance provider name");
             type = "Insurance";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -159,7 +159,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         }else if (title1.equals("Cylinder Bill")) {
-            search_electricity_layout.setHint("Search by Cylinder provider name");
+            search_electricity.setHint("Search by Cylinder provider name");
             type = "Cylinder";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -175,7 +175,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         }else if (title1.equals("Gas Bill")) {
-            search_electricity_layout.setHint("Search by Gas provider name");
+            search_electricity.setHint("Search by Gas provider name");
             type = "Gas";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -191,7 +191,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         }else if (title1.equals("Water Bill")) {
-            search_electricity_layout.setHint("Search by Water board name");
+            search_electricity.setHint("Search by Water board name");
             type = "Water";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -207,7 +207,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         }else if (title1.equals("Broadband/Landline")) {
-            search_electricity_layout.setHint("Search by Water board name");
+            search_electricity.setHint("Search by Water board name");
             type = "Landline";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -223,7 +223,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         } else if (title1.equals("Credit Card Payment")) {
-            search_electricity_layout.setHint("Search by Credit Card name");
+            search_electricity.setHint("Search by Credit Card name");
             type = "CreditCardPayment";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -239,7 +239,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         } else if (title1.equals("Loan Re payment")) {
-            search_electricity_layout.setHint("Search by Loan Repayment name");
+            search_electricity.setHint("Search by Loan Repayment name");
             type = "LoanRePayment";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -255,7 +255,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         } else if (title1.equals("Cable TV")) {
-            search_electricity_layout.setHint("Search by Cable TV board name");
+            search_electricity.setHint("Search by Cable TV board name");
             type = "CableTV";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -271,7 +271,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         } else if (title1.equals("Municipal Tax")) {
-            search_electricity_layout.setHint("Search by Water board name");
+            search_electricity.setHint("Search by Water board name");
             type = "MunicipalTax";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -287,7 +287,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         } else if (title1.equals("Housing Society")) {
-            search_electricity_layout.setHint("Search by Water board name");
+            search_electricity.setHint("Search by Water board name");
             type = "HousingSociety";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -303,7 +303,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         } else if (title1.equals("Club Association")) {
-            search_electricity_layout.setHint("Search by Club Association name");
+            search_electricity.setHint("Search by Club Association name");
             type = "ClubAssociation";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -320,7 +320,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
             }
 
         } else if (title1.equals("Hospital Pathology")) {
-            search_electricity_layout.setHint("Search by Hospital Pathology name");
+            search_electricity.setHint("Search by Hospital Pathology name");
             type = "HospitalPathology";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -336,7 +336,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         } else if (title1.equals("Subscription Fees")) {
-            search_electricity_layout.setHint("Search by Subscription Fees name");
+            search_electricity.setHint("Search by Subscription Fees name");
             type = "Subscriptions";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -352,7 +352,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         } else if (title1.equals("Donation")) {
-            search_electricity_layout.setHint("Search by Donation name");
+            search_electricity.setHint("Search by Donation name");
             type = "Donation";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -368,7 +368,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         } else if (title1.equals("Recurring Deposit")) {
-            search_electricity_layout.setHint("Search by Recurring Deposit name");
+            search_electricity.setHint("Search by Recurring Deposit name");
             type = "RecurringDeposit";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -384,7 +384,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         } else if (title1.equals("Prepaid Meter")) {
-            search_electricity_layout.setHint("Search by Prepaid Meter name");
+            search_electricity.setHint("Search by Prepaid Meter name");
             type = "PrepaidMeter";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -400,7 +400,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         } else if (title1.equals("NCMC Recharge")) {
-            search_electricity_layout.setHint("Search by NCMC Recharge name");
+            search_electricity.setHint("Search by NCMC Recharge name");
             type = "NCMCRecharge";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -416,7 +416,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         } else if (title1.equals("Municipal Services")) {
-            search_electricity_layout.setHint("Search by Municipal Services name");
+            search_electricity.setHint("Search by Municipal Services name");
             type = "MunicipalServices";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -432,7 +432,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         } else if (title1.equals("Education Fees")) {
-            search_electricity_layout.setHint("Search by Education Fees name");
+            search_electricity.setHint("Search by Education Fees name");
             type = "EducationFees";
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
@@ -451,10 +451,10 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
         swipeRefreshLayout.setOnRefreshListener(this::loadOperatorData);
         loadOperatorData();
 
-        help.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), SupportActivity.class);
-            startActivity(intent);
-        });
+//        help.setOnClickListener(v -> {
+//            Intent intent = new Intent(getActivity(), SupportActivity.class);
+//            startActivity(intent);
+//        });
 
         search_electricity.addTextChangedListener(new TextWatcher() {
             @Override

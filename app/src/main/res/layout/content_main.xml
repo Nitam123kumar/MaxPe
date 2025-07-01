@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryB"
+    android:background="@drawable/main_wallet_shape"
     android:fitsSystemWindows="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".modules.activities.MainActivity">
@@ -130,7 +130,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_below="@id/toolbar_constraintlayout"
-                android:background="@color/colorPrimaryB"
                 android:scaleType="centerCrop" />
 
             <!--                <androidx.constraintlayout.widget.ConstraintLayout-->

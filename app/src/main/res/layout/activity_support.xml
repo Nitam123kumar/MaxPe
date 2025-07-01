@@ -4,10 +4,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@drawable/main_wallet_shape"
         android:orientation="vertical">
 
-        <include layout="@layout/app_bar_custom"
+        <include layout="@layout/bill_payment_layout"
             android:id="@+id/mToolBar"/>
 
         <ScrollView
@@ -18,7 +18,10 @@
             app:layout_constraintBottom_toBottomOf="parent">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -49,48 +52,53 @@
 
                 </RelativeLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <ImageView
+                    android:id="@+id/help_description"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent">
+                    android:layout_height="198dp"
+                    android:background="@drawable/help_section_shape"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/contactSupportLayout"
-                        android:layout_width="0dp"
-                        android:layout_height="110dp"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:layout_marginEnd="@dimen/_8sdp"
-                        android:background="@drawable/support_design_background"
+                        android:layout_width="160dp"
+                        android:layout_height="120dp"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/support_design_background_shape"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toBottomOf="@id/help_description">
 
                         <ImageView
                             android:id="@+id/imgContactSupport"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
+                            android:layout_width="31.67dp"
+                            android:layout_height="29.56dp"
                             android:contentDescription="@string/contact_us"
-                            android:src="@drawable/customer_service"
-                            android:layout_marginStart="@dimen/_32sdp"
+                            android:src="@drawable/call_us_img"
+                            android:layout_marginStart="@dimen/_8sdp"
                             app:layout_constraintVertical_chainStyle="packed"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toTopOf="@id/txtContactSupport"/>
+                            app:layout_constraintBottom_toTopOf="@id/txtContactSupport" />
 
                         <TextView
                             android:id="@+id/txtContactSupport"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Call Us"
+                            android:text="Call Support"
                             android:gravity="center"
-                            android:textColor="#6F6F6F"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:textSize="15sp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             app:layout_constraintStart_toStartOf="@id/imgContactSupport"
-                            app:layout_constraintEnd_toEndOf="@id/imgContactSupport"
                             app:layout_constraintTop_toBottomOf="@id/imgContactSupport"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
+                            app:layout_constraintBottom_toBottomOf="@id/mobile_tv"
+                            />
 
                         <TextView
                             android:id="@+id/mobile_tv"
@@ -98,32 +106,33 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textStyle="bold"
-                            android:textColor="@color/black_2"
+                            android:textSize="14sp"
+                            android:textColor="#B5B5B5"
+                            android:text="7390903230"
+                            android:layout_marginTop="@dimen/_3sdp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:layout_marginEnd="@dimen/_16sdp"
-                            app:layout_constraintStart_toEndOf="@id/imgContactSupport"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/imgContactSupport"
-                            app:layout_constraintBottom_toBottomOf="@id/txtContactSupport"/>
+                            app:layout_constraintTop_toBottomOf="@id/txtContactSupport"
+                            app:layout_constraintStart_toStartOf="@+id/txtContactSupport"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                        />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/whatsAppSupportLayout"
-                        android:layout_width="0dp"
-                        android:layout_height="110dp"
-                        android:background="@drawable/support_design_background"
-                        app:layout_constraintStart_toStartOf="@id/contactSupportLayout"
-                        app:layout_constraintEnd_toEndOf="@id/contactSupportLayout"
-                        app:layout_constraintTop_toBottomOf="@id/contactSupportLayout">
+                        android:layout_width="160dp"
+                        android:layout_height="120dp"
+                        android:background="@drawable/support_design_background_shape"
+                        app:layout_constraintTop_toTopOf="@id/contactSupportLayout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/contactSupportLayout">
 
                         <ImageView
                             android:id="@+id/imgWhatsAppSupport"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:src="@drawable/whatsapp"
-                            android:layout_marginStart="@dimen/_32sdp"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/chat_on_whatsapp"
+                            android:layout_marginStart="@dimen/_8sdp"
                             app:layout_constraintVertical_chainStyle="packed"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -133,15 +142,17 @@
                             android:id="@+id/txtWhatsAppSupport"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="WhatsApp"
-                            android:textColor="#6F6F6F"
+                            android:text="Chat on Whatsapp "
+                            android:textColor="@color/black"
                             android:gravity="center"
                             android:textStyle="bold"
+                            android:textSize="15sp"
+                            android:layout_marginTop="@dimen/_5sdp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             app:layout_constraintStart_toStartOf="@id/imgWhatsAppSupport"
-                            app:layout_constraintEnd_toEndOf="@id/imgWhatsAppSupport"
                             app:layout_constraintTop_toBottomOf="@id/imgWhatsAppSupport"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
+                            app:layout_constraintBottom_toBottomOf="@id/tv_whatsapp"
+                           />
 
                         <TextView
                             android:id="@+id/tv_whatsapp"
@@ -149,32 +160,32 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textStyle="bold"
-                            android:textColor="@color/black_2"
+                            android:textSize="14sp"
+                            android:textColor="#B5B5B5"
+                            android:text="7390903230"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:layout_marginEnd="@dimen/_16sdp"
-                            app:layout_constraintStart_toEndOf="@id/imgWhatsAppSupport"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/imgWhatsAppSupport"
-                            app:layout_constraintBottom_toBottomOf="@id/txtWhatsAppSupport"/>
+                            android:layout_marginTop="@dimen/_3sdp"
+                            app:layout_constraintTop_toBottomOf="@id/txtWhatsAppSupport"
+                            app:layout_constraintStart_toStartOf="@id/imgWhatsAppSupport"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/emailSupportLayout"
-                        android:layout_width="0dp"
-                        android:layout_height="110dp"
-                        android:background="@drawable/support_design_background"
+                        android:layout_width="160dp"
+                        android:layout_height="120dp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:background="@drawable/support_design_background_shape"
                         app:layout_constraintStart_toStartOf="@id/contactSupportLayout"
-                        app:layout_constraintEnd_toEndOf="@id/contactSupportLayout"
                         app:layout_constraintTop_toBottomOf="@id/whatsAppSupportLayout">
 
                         <ImageView
                             android:id="@+id/imgEmailSupport"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:src="@drawable/email_12"
-                            android:layout_marginStart="@dimen/_32sdp"
+                            android:layout_width="35.04dp"
+                            android:layout_height="24.28dp"
+                            android:src="@drawable/gmail_img"
+                            android:layout_marginStart="@dimen/_8sdp"
                             app:layout_constraintVertical_chainStyle="packed"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -182,50 +193,53 @@
 
                         <TextView
                             android:id="@+id/txtEmailSupport"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Email"
+                            android:text="Email Us"
                             android:gravity="center"
-                            android:textColor="#6F6F6F"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
                             android:textStyle="bold"
+                            android:layout_marginTop="@dimen/_5sdp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             app:layout_constraintStart_toStartOf="@id/imgEmailSupport"
-                            app:layout_constraintEnd_toEndOf="@id/imgEmailSupport"
                             app:layout_constraintTop_toBottomOf="@id/imgEmailSupport"
-                            app:layout_constraintBottom_toBottomOf="parent"/>
+                            app:layout_constraintBottom_toBottomOf="@id/email"
+                            />
 
                         <TextView
                             android:id="@+id/email"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
+                            android:gravity="center_vertical"
                             android:textStyle="bold"
-                            android:textColor="@color/black_2"
+                            android:textColor="#B5B5B5"
+                            android:text="Support@maxpe.in"
+                            android:textSize="14sp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:layout_marginEnd="@dimen/_16sdp"
-                            app:layout_constraintStart_toEndOf="@id/imgEmailSupport"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/imgEmailSupport"
-                            app:layout_constraintBottom_toBottomOf="@id/txtEmailSupport"/>
+                            android:layout_marginTop="@dimen/_3sdp"
+                            app:layout_constraintStart_toStartOf="@id/imgEmailSupport"
+                            app:layout_constraintTop_toBottomOf="@id/txtEmailSupport"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/addressSupportLayout"
-                        android:layout_width="0dp"
-                        android:layout_height="110dp"
-                        android:background="@drawable/support_design_background"
-                        app:layout_constraintStart_toStartOf="@id/contactSupportLayout"
-                        app:layout_constraintEnd_toEndOf="@id/contactSupportLayout"
-                        app:layout_constraintTop_toBottomOf="@id/emailSupportLayout">
+                        android:id="@+id/feedbackLayout"
+                        android:layout_width="160dp"
+                        android:layout_height="120dp"
+                        android:background="@drawable/support_design_background_shape"
+                        app:layout_constraintStart_toStartOf="@id/whatsAppSupportLayout"
+                        app:layout_constraintEnd_toEndOf="@id/whatsAppSupportLayout"
+                        app:layout_constraintTop_toTopOf="@id/emailSupportLayout"
+                        app:layout_constraintStart_toEndOf="@id/emailSupportLayout">
 
                         <ImageView
                             android:id="@+id/imgAddressSupport"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:src="@drawable/map_12"
-                            android:layout_marginStart="@dimen/_32sdp"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:src="@drawable/feedback_img"
+                            android:layout_marginStart="@dimen/_8sdp"
                             app:layout_constraintVertical_chainStyle="packed"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -235,142 +249,160 @@
                             android:id="@+id/txtAddressSupport"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Address"
-                            android:textColor="#6F6F6F"
+                            android:text="Share Your\nFeedback!"
+                            android:textColor="@color/black"
                             android:gravity="center"
                             android:textStyle="bold"
+                            android:textSize="12sp"
+                            android:layout_marginTop="@dimen/_5sdp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             app:layout_constraintStart_toStartOf="@id/imgAddressSupport"
-                            app:layout_constraintEnd_toEndOf="@id/imgAddressSupport"
                             app:layout_constraintTop_toBottomOf="@id/imgAddressSupport"
                             app:layout_constraintBottom_toBottomOf="parent"/>
-
-                        <TextView
-                            android:id="@+id/tvAddress"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="start"
-                            android:textStyle="bold"
-                            android:layout_marginTop="@dimen/_4sdp"
-                            android:textColor="@color/black_2"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:layout_marginEnd="@dimen/_16sdp"
-                            app:layout_constraintStart_toEndOf="@id/imgAddressSupport"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="@id/txtAddressSupport"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
                         android:id="@+id/time_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/support_design_background"
+                        android:layout_width="341dp"
+                        android:layout_height="56dp"
+                        android:background="@drawable/support_design_background_shape"
                         android:gravity="center"
                         android:textStyle="bold"
                         android:maxLines="1"
+                        android:textSize="16sp"
+                        android:layout_marginTop="@dimen/_15sdp"
                         android:textColor="@color/black"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         app:layout_constraintStart_toStartOf="@id/contactSupportLayout"
-                        app:layout_constraintEnd_toEndOf="@id/contactSupportLayout"
-                        app:layout_constraintTop_toBottomOf="@id/addressSupportLayout"/>
+                        app:layout_constraintEnd_toEndOf="@id/whatsAppSupportLayout"
+                        app:layout_constraintTop_toBottomOf="@id/emailSupportLayout"/>
+
+<!--                <View-->
+<!--                    android:id="@+id/view"-->
+<!--                    android:layout_width="337dp"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:background="#BEBEBE"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/contactSupportLayout"-->
+<!--                    app:layout_constraintEnd_toEndOf="@id/whatsAppSupportLayout"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/time_tv"-->
+<!--                    android:layout_marginTop="@dimen/_15sdp"-->
+<!--                    />-->
 
                     <TextView
                         android:id="@+id/llPrepaidNumber"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/support_button_background"
+                        android:layout_width="155dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/support_design_background_shape"
                         android:text="Prepaid Toll Free Number"
                         android:gravity="center"
                         android:textStyle="bold"
                         android:maxLines="1"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
                         android:padding="@dimen/_10sdp"
-                        android:textColor="@color/white"
-                        android:elevation="@dimen/_5sdp"
+                        android:textColor="@color/black"
+                        android:textSize="10sp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         app:layout_constraintStart_toStartOf="@id/contactSupportLayout"
-                        app:layout_constraintEnd_toEndOf="@id/contactSupportLayout"
                         app:layout_constraintTop_toBottomOf="@id/time_tv"/>
 
                     <TextView
                         android:id="@+id/llDTHNumber"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/support_button_background"
+                        android:layout_width="155dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/support_design_background_shape"
                         android:text="DTH Toll Free Number"
-                        android:gravity="center"
                         android:textStyle="bold"
                         android:maxLines="1"
-                        android:elevation="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
                         android:padding="@dimen/_10sdp"
-                        android:textColor="@color/white"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        app:layout_constraintStart_toStartOf="@id/contactSupportLayout"
-                        app:layout_constraintEnd_toEndOf="@id/contactSupportLayout"
-                        app:layout_constraintTop_toBottomOf="@id/llPrepaidNumber"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         android:gravity="center"
-                        android:layout_margin="@dimen/_8sdp"
-                        app:layout_constraintTop_toBottomOf="@id/llDTHNumber"
-                        app:layout_constraintBottom_toBottomOf="parent">
+                        android:textSize="10sp"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        app:layout_constraintStart_toEndOf="@id/llPrepaidNumber"
+                        app:layout_constraintEnd_toEndOf="@id/whatsAppSupportLayout"
+                        app:layout_constraintTop_toTopOf="@id/llPrepaidNumber"/>
 
                         <TextView
+                            android:id="@+id/follow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Connect with us"
+                            android:text="Follow Us"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="@dimen/_20sdp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                            android:textColor="#ADABAB" />
+                            android:textColor="@color/black"
+                            app:layout_constraintTop_toBottomOf="@id/llDTHNumber"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"/>
 
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:gravity="center"
-                            android:layout_marginTop="@dimen/_8sdp">
+                            android:layout_marginBottom="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            app:layout_constraintTop_toBottomOf="@id/follow"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent">
 
                             <ImageView
                                 android:id="@+id/instagram"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
+                                android:layout_width="16.9dp"
+                                android:layout_height="16.91dp"
                                 android:layout_marginEnd="@dimen/_10sdp"
                                 android:src="@drawable/instagram_2"
-                                android:contentDescription="@string/app_name"/>
+                                android:contentDescription="@string/app_name"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"/>
 
                             <ImageView
                                 android:id="@+id/youtube"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
+                                android:layout_width="18.32dp"
+                                android:layout_height="18.32dp"
                                 android:layout_marginEnd="@dimen/_10sdp"
                                 android:src="@drawable/youtube_2"
-                                android:contentDescription="@string/app_name"/>
+                                android:contentDescription="@string/app_name"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                app:layout_constraintStart_toEndOf="@id/instagram"
+                                app:layout_constraintTop_toTopOf="@id/instagram"/>
 
                             <ImageView
                                 android:id="@+id/facebook"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
+                                android:layout_width="18.32dp"
+                                android:layout_height="18.32dp"
                                 android:src="@drawable/facebook_2"
-                                android:layout_marginEnd="@dimen/_10sdp"
-                                android:contentDescription="@string/app_name"/>
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:contentDescription="@string/app_name"
+                                app:layout_constraintStart_toEndOf="@id/youtube"
+                                app:layout_constraintTop_toTopOf="@id/instagram"/>
 
                             <ImageView
-                                android:id="@+id/telegram"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:src="@drawable/telegram"
-                                android:contentDescription="@string/app_name"/>
+                                android:id="@+id/linkedln"
+                                android:layout_width="18.32dp"
+                                android:layout_height="18.32dp"
+                                android:src="@drawable/linkedln_img"
+                                android:contentDescription="@string/app_name"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                app:layout_constraintStart_toEndOf="@id/facebook"
+                                app:layout_constraintTop_toTopOf="@id/instagram"/>
 
-                        </LinearLayout>
+                            <ImageView
+                                android:id="@+id/xcode"
+                                android:layout_width="19.02dp"
+                                android:layout_height="19.02dp"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:contentDescription="@string/app_name"
+                                android:src="@drawable/xcode"
+                                app:layout_constraintStart_toEndOf="@id/linkedln"
+                                app:layout_constraintTop_toTopOf="@id/instagram" />
 
-                    </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <LinearLayout
                         android:id="@+id/no_internet"
@@ -414,7 +446,6 @@
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

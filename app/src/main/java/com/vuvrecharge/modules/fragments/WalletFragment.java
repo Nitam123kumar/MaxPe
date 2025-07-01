@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -52,9 +53,9 @@ public class WalletFragment extends BaseFragment implements DefaultView {
     @BindView(R.id.rvWalletDetails)
     RecyclerView rvWalletDetails;
     @BindView(R.id.select_from_date_img)
-    LinearLayout select_from_date_img;
+    ImageView select_from_date_img;
     @BindView(R.id.select_to_date_img)
-    LinearLayout select_to_date_img;
+    ImageView select_to_date_img;
     @BindView(R.id.select_from_date)
     TextView select_from_date;
     @BindView(R.id.select_to_date)
@@ -70,7 +71,7 @@ public class WalletFragment extends BaseFragment implements DefaultView {
     LinearLayout loading;
 
     WalletAdapter adapter;
-    TextView invoice;
+//    TextView invoice;
     String device_id = "";
 
     static Date fromDate;
@@ -97,8 +98,8 @@ public class WalletFragment extends BaseFragment implements DefaultView {
         mDefaultPresenter = new DefaultPresenter(this);
         device_id = Settings.Secure.getString(requireActivity().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
-        invoice = requireActivity().findViewById(R.id.invoice);
-        invoice.setVisibility(GONE);
+//        invoice = requireActivity().findViewById(R.id.invoice);
+//        invoice.setVisibility(GONE);
 
         Calendar cal = Calendar.getInstance();
         toDate = cal.getTime();

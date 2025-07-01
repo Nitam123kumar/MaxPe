@@ -18,7 +18,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <include layout="@layout/app_bar_custom" />
+                <include layout="@layout/bill_payment_layout" />
 
                 <include layout="@layout/statements_header" />
 

@@ -20,15 +20,15 @@ public interface ApiServices {
 //    String SLIDE = "http://192.168.0.10/vuvpayments.com/images/app_slides/";
 
 ////    chandan
-    String SITE_URL = "http://192.168.0.14/vuvpayments.com/home/";
-    String BBPS_IMAGE_URL = "http://192.168.0.14/vuvpayments.com/images/services_logo";
-    String SUBSCRIPTION_IMAGE_URL = "http://192.168.0.14/vuvpayments.com/images/operator_plans/";
-    String BASE_URL = "http://192.168.0.14/vuvpayments.com/";
-    String IMAGE_LOGO = "http://192.168.0.14/vuvpayments.com/images/operators";
-    String IMAGE_APP = "http://192.168.0.14/vuvpayments.com/images/logo";
-    String IMAGE_SLIDER = "http://192.168.0.14/vuvpayments.com/images/recharge_slides";
-    String IMAGE_FOLLOWS = "http://192.168.0.14/vuvpayments.com/images/followers_logo";
-    String SLIDE = "http://192.168.0.14/vuvpayments.com/images/app_slides/";
+    String SITE_URL = "http://192.168.0.16/vuvpayments.com/home/";
+    String BBPS_IMAGE_URL = "http://192.168.0.16/vuvpayments.com/images/services_logo";
+    String SUBSCRIPTION_IMAGE_URL = "http://192.168.0.16/vuvpayments.com/images/operator_plans/";
+    String BASE_URL = "http://192.168.0.16/vuvpayments.com/";
+    String IMAGE_LOGO = "http://192.168.0.16/vuvpayments.com/images/operators";
+    String IMAGE_APP = "http://192.168.0.16/vuvpayments.com/images/logo";
+    String IMAGE_SLIDER = "http://192.168.0.16/vuvpayments.com/images/recharge_slides";
+    String IMAGE_FOLLOWS = "http://192.168.0.16/vuvpayments.com/images/followers_logo";
+    String SLIDE = "http://192.168.0.16/vuvpayments.com/images/app_slides/";
 
 ////    live
 //    String BBPS_IMAGE_URL = "http://vuvpayments.com/images/services_logo";

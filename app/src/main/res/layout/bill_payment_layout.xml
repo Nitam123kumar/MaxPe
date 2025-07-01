@@ -8,18 +8,18 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/toolbar1"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="70dp"
                 android:background="@drawable/main_wallet_shape"
                 >
 
@@ -48,14 +48,14 @@
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/_14sdp"
-                    android:layout_marginEnd="@dimen/_44sdp"
                     android:ellipsize="end"
-                    android:gravity="center_horizontal|center_vertical"
+                    android:gravity="center"
                     android:maxLines="1"
                     android:text="Bill Payment"
                     android:textColor="@color/white"
                     android:textSize="20dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/toolbar_layout"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -77,21 +77,21 @@
                 android:src="@drawable/refresh"
                 android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/invoice"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:background="@drawable/corner_white_circle"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/_10sdp"
-                android:paddingRight="@dimen/_10sdp"
-                android:text="Invoice"
-                android:textColor="@color/black_2"
-                android:textSize="@dimen/_10sdp"
-                android:visibility="gone" />
+<!--            <TextView-->
+<!--                android:id="@+id/invoice"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="@dimen/_30sdp"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_marginRight="@dimen/_10sdp"-->
+<!--                android:background="@drawable/corner_white_circle"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:paddingLeft="@dimen/_10sdp"-->
+<!--                android:paddingRight="@dimen/_10sdp"-->
+<!--                android:text="Invoice"-->
+<!--                android:textColor="@color/black_2"-->
+<!--                android:textSize="@dimen/_10sdp"-->
+<!--                android:visibility="gone" />-->
 
 
         </RelativeLayout>

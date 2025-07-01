@@ -1,10 +1,16 @@
 package com.vuvrecharge.modules.activities;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -66,6 +72,7 @@ public class StatementsActivity extends BaseActivity implements DefaultView, OnF
         mToolbar.setOnClickListener(this);
         title.setText("History");
         mDefaultPresenter = new DefaultPresenter(this);
+        setStatusBarGradiant(this);
         initializeEventsList();
     }
 
@@ -75,28 +82,61 @@ public class StatementsActivity extends BaseActivity implements DefaultView, OnF
         setLayout(no_internet, retry, "statement");
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
+    }
+
+
     private void initializeEventsList() {
         addMore.setVisibility(View.GONE);
 
-        setFragment(new RechargeHistoryFragment());
-        viewStatements.setBackgroundResource(R.drawable.tab_background_drawable);
-        statementsView.setTextColor(Color.WHITE);
-        viewReports.setBackgroundResource(R.drawable.tab_background_drawable_selected);
-        reportsView.setTextColor(getResources().getColor(R.color.colorPrimaryB));
-        viewDeposit.setBackgroundResource(R.drawable.tab_background_drawable_selected);
-        depositView.setTextColor(getResources().getColor(R.color.colorPrimaryB));
-        statementsView.setText(Html.fromHtml("<b>Recharge History</b>"));
-        reportsView.setText(Html.fromHtml("Wallet History"));
-        depositView.setText(Html.fromHtml("Deposit History"));
+        String showFragment = getIntent().getStringExtra("statementsActivity");
+        if (showFragment != null && !showFragment.isEmpty()) {
+
+            setFragment(new RechargeHistoryFragment());
+            viewStatements.setBackgroundResource(R.drawable.statements_select_bg_shape);
+            statementsView.setTextColor(Color.WHITE);
+            viewReports.setBackgroundResource(R.drawable.null_shape);
+            reportsView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            viewDeposit.setBackgroundResource(R.drawable.null_shape);
+            depositView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            statementsView.setText(Html.fromHtml("<b>Recharge History</b>"));
+            reportsView.setText(Html.fromHtml("Wallet History"));
+            depositView.setText(Html.fromHtml("Deposit History"));
+
+        } else {
+
+            setFragment(new DepositFragment());
+            viewDeposit.setBackgroundResource(R.drawable.statements_select_bg_shape);
+            statementsView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            viewReports.setBackgroundResource(R.drawable.null_shape);
+            reportsView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            viewStatements.setBackgroundResource(R.drawable.null_shape);
+            depositView.setTextColor(Color.WHITE);
+            statementsView.setText(Html.fromHtml("<b>Recharge History</b>"));
+            reportsView.setText(Html.fromHtml("Wallet History"));
+            depositView.setText(Html.fromHtml("Deposit History"));
+
+        }
+
 
         viewStatements.setOnClickListener(v -> {
             setFragment(new RechargeHistoryFragment());
-            viewStatements.setBackgroundResource(R.drawable.tab_background_drawable);
+            viewStatements.setBackgroundResource(R.drawable.statements_select_bg_shape);
             statementsView.setTextColor(Color.WHITE);
-            viewReports.setBackgroundResource(R.drawable.tab_background_drawable_selected);
-            reportsView.setTextColor(getResources().getColor(R.color.colorPrimaryB));
-            viewDeposit.setBackgroundResource(R.drawable.tab_background_drawable_selected);
-            depositView.setTextColor(getResources().getColor(R.color.colorPrimaryB));
+            viewReports.setBackgroundResource(R.drawable.null_shape);
+            reportsView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            viewDeposit.setBackgroundResource(R.drawable.null_shape);
+            depositView.setTextColor(getResources().getColor(R.color.colorBlackU));
             statementsView.setText(Html.fromHtml("<b>Recharge History</b>"));
             reportsView.setText(Html.fromHtml("Wallet History"));
             depositView.setText(Html.fromHtml("Deposit History"));
@@ -104,12 +144,12 @@ public class StatementsActivity extends BaseActivity implements DefaultView, OnF
 
         viewReports.setOnClickListener(v -> {
             setFragment(new WalletFragment());
-            viewReports.setBackgroundResource(R.drawable.tab_background_drawable);
+            viewReports.setBackgroundResource(R.drawable.statements_select_bg_shape);
             reportsView.setTextColor(Color.WHITE);
-            viewStatements.setBackgroundResource(R.drawable.tab_background_drawable_selected);
-            statementsView.setTextColor(getResources().getColor(R.color.colorPrimaryB));
-            viewDeposit.setBackgroundResource(R.drawable.tab_background_drawable_selected);
-            depositView.setTextColor(getResources().getColor(R.color.colorPrimaryB));
+            viewStatements.setBackgroundResource(R.drawable.null_shape);
+            statementsView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            viewDeposit.setBackgroundResource(R.drawable.null_shape);
+            depositView.setTextColor(getResources().getColor(R.color.colorBlackU));
             statementsView.setText(Html.fromHtml("Recharge History"));
             depositView.setText(Html.fromHtml("Deposit History"));
             reportsView.setText(Html.fromHtml("<b>Wallet History</b>"));
@@ -117,12 +157,12 @@ public class StatementsActivity extends BaseActivity implements DefaultView, OnF
 
         viewDeposit.setOnClickListener(v -> {
             setFragment(new DepositFragment());
-            viewDeposit.setBackgroundResource(R.drawable.tab_background_drawable);
+            viewDeposit.setBackgroundResource(R.drawable.statements_select_bg_shape);
             depositView.setTextColor(Color.WHITE);
-            viewStatements.setBackgroundResource(R.drawable.tab_background_drawable_selected);
-            statementsView.setTextColor(getResources().getColor(R.color.colorPrimaryB));
-            viewReports.setBackgroundResource(R.drawable.tab_background_drawable_selected);
-            reportsView.setTextColor(getResources().getColor(R.color.colorPrimaryB));
+            viewStatements.setBackgroundResource(R.drawable.null_shape);
+            statementsView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            viewReports.setBackgroundResource(R.drawable.null_shape);
+            reportsView.setTextColor(getResources().getColor(R.color.colorBlackU));
             statementsView.setText(Html.fromHtml("Recharge History"));
             reportsView.setText(Html.fromHtml("Wallet History"));
             depositView.setText(Html.fromHtml("<b>Deposit History</b>"));

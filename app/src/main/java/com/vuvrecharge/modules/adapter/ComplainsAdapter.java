@@ -180,13 +180,13 @@ public class ComplainsAdapter extends RecyclerView.Adapter<ComplainsAdapter.Hold
             name.setText(resultsBean.getOperator_name().trim());
             status.setText(resultsBean.getStatus());
             if (resultsBean.getStatus().toUpperCase().equals("PENDING")) {
-                status_bg.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.yellow_new)));
+                status_bg.setBackgroundDrawable(BaseMethod.getGradientDrawableRe1(mContext.getResources().getColor(R.color.yellow_new)));
                 status.setTextColor(mContext.getResources().getColor(R.color.white));
             } else if (resultsBean.getStatus().toUpperCase().equals("SUCCESS")) {
-                status_bg.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.green_end)));
+                status_bg.setBackgroundDrawable(BaseMethod.getGradientDrawableRe1(mContext.getResources().getColor(R.color.green_end)));
                 status.setTextColor(mContext.getResources().getColor(R.color.white));
             } else {
-                status_bg.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.red)));
+                status_bg.setBackgroundDrawable(BaseMethod.getGradientDrawableRe1(mContext.getResources().getColor(R.color.red)));
                 status.setTextColor(mContext.getResources().getColor(R.color.white));
             }
 

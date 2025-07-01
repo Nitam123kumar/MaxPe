@@ -3,26 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_wallet_shape"
     android:fitsSystemWindows="true">
 
-    <include layout="@layout/app_bar_custom"
+    <include layout="@layout/bill_payment_layout"
         android:id="@+id/mToolBar"/>
 
-    <View
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_54sdp"
+        android:background="@drawable/biller_main_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mToolBar">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/viewTab"
         android:layout_width="0dp"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/white"
+        android:layout_height="69dp"
+        android:elevation="@dimen/_3sdp"
+        android:background="@drawable/pattern_logs"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mToolBar"/>
+        app:layout_constraintTop_toTopOf="parent">
 
     <View
         android:id="@+id/viewStatements"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="5dp"
+        android:layout_width="113dp"
+        android:layout_height="58dp"
         app:layout_constraintStart_toStartOf="@id/viewTab"
         app:layout_constraintEnd_toStartOf="@id/viewReports"
         app:layout_constraintTop_toTopOf="@id/viewTab"
@@ -41,10 +53,8 @@
 
     <View
         android:id="@+id/viewReports"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_width="113dp"
+        android:layout_height="58dp"
         app:layout_constraintStart_toEndOf="@id/viewStatements"
         app:layout_constraintEnd_toStartOf="@id/viewDeposit"
         app:layout_constraintTop_toTopOf="@id/viewTab"
@@ -63,10 +73,8 @@
 
     <View
         android:id="@+id/viewDeposit"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="10dp"
+        android:layout_width="113dp"
+        android:layout_height="58dp"
         app:layout_constraintStart_toEndOf="@id/viewReports"
         app:layout_constraintEnd_toEndOf="@id/viewTab"
         app:layout_constraintTop_toTopOf="@id/viewTab"
@@ -83,11 +91,20 @@
         app:layout_constraintTop_toTopOf="@id/viewDeposit"
         app:layout_constraintBottom_toBottomOf="@id/viewDeposit"/>
 
-    <FrameLayout
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/viewStatements"
+        app:layout_constraintTop_toBottomOf="@id/viewTab"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

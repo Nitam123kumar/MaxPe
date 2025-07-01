@@ -111,6 +111,11 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
         ImageView loading;
         @BindView(R.id.layoutDesignPattern)
         ConstraintLayout layoutDesignPattern;
+        @BindView(R.id.status_cons)
+        ConstraintLayout status_cons;
+
+        @BindView(R.id.status_imageView)
+        ImageView status_imageView;
 
 
         public Holder(@NonNull View itemView) {
@@ -154,8 +159,9 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
                 status.setText("Processing");
                 operator_referance.setVisibility(View.GONE);
                 user_type.setVisibility(View.GONE);
-                status.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.pending)));
-                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_pending_1);
+//                status_cons.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getDrawable(R.drawable.pending_history_bg)));
+                status_cons.setBackgroundResource(R.drawable.pending_history_bg);
+                status_imageView.setImageResource(R.drawable.pending_img);
                 status.setTextColor(mContext.getResources().getColor(R.color.white));
                 loading.setVisibility(View.VISIBLE);
                 Glide.with(mContext).asGif().load(R.drawable.load).into(loading);
@@ -168,8 +174,8 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
                             user_type.setVisibility(View.VISIBLE);
                             user_type.setText(resultsBean.getUsername() + " (" + resultsBean.getName() + " - " + resultsBean.getUser_type() + ")");
                         }
-                        status.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.success)));
-                        layoutDesignPattern.setBackgroundResource(R.drawable.pattern_history_1);
+//                        status_cons.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getDrawable(R.drawable.success_bg)));
+                        status_cons.setBackgroundResource(R.drawable.success_bg);
                         status.setTextColor(mContext.getResources().getColor(R.color.white));
                         loading.setVisibility(View.GONE);
                     }
@@ -177,9 +183,10 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
             } else {
                 user_type.setVisibility(View.GONE);
                 operator_referance.setVisibility(View.GONE);
-                status.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.failed)));
+//                status_cons.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getDrawable(R.drawable.failed_history_img)));
                 status.setTextColor(mContext.getResources().getColor(R.color.white));
-                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_report_1);
+                status_cons.setBackgroundResource(R.drawable.failed_history_img);
+                status_imageView.setImageResource(R.drawable.failed_img);
                 loading.setVisibility(View.GONE);
                 commission.setText("Com : \u20b90.00");
             }

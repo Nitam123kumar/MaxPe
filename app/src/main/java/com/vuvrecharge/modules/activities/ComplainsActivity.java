@@ -1,11 +1,18 @@
 package com.vuvrecharge.modules.activities;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -53,11 +60,11 @@ public class ComplainsActivity extends BaseActivity implements DefaultView, View
     @BindView(R.id.select_to_date)
     TextView select_to_date;
     @BindView(R.id.select_from_date_img)
-    LinearLayout select_from_date_img;
+    ImageView select_from_date_img;
     @BindView(R.id.select_from_date)
     TextView select_from_date;
     @BindView(R.id.select_to_date_img)
-    LinearLayout select_to_date_img;
+    ImageView select_to_date_img;
 
     ComplainsAdapter adapter;
     @BindView(R.id.list_item)
@@ -97,6 +104,7 @@ public class ComplainsActivity extends BaseActivity implements DefaultView, View
         select_from_date_img.setOnClickListener(this);
         select_to_date_img.setOnClickListener(this);
         invoice.setOnClickListener(this);
+        setStatusBarGradiant(this);
         mDefaultPresenter = new DefaultPresenter(this);
         Calendar cal = Calendar.getInstance();
 
@@ -169,6 +177,20 @@ public class ComplainsActivity extends BaseActivity implements DefaultView, View
             }
         });
     }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
+    }
+
 
     @Override
     public void onResume() {

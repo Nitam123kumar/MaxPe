@@ -159,18 +159,18 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MainListHo
                 }
             }
             date_time.setText("Date : " + resultsBean.getDate());
-            view_details.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.colorPrimary_other)));
-            add_balance.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.colorPrimary_other)));
-            balance_history.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.colorPrimary_other)));
+            view_details.setBackgroundDrawable(BaseMethod.getGradientDrawableRe1(mContext.getResources().getColor(R.color.colorPrimary_other)));
+            add_balance.setBackgroundDrawable(BaseMethod.getGradientDrawableRe1(mContext.getResources().getColor(R.color.colorPrimary_other)));
+            balance_history.setBackgroundDrawable(BaseMethod.getGradientDrawableRe1(mContext.getResources().getColor(R.color.colorPrimary_other)));
             status.setText(resultsBean.getStatus());
             if (resultsBean.getStatus().toUpperCase().equals("PENDING")) {
-                status_bg.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.yellow_new)));
+                status_bg.setBackgroundDrawable(BaseMethod.getGradientDrawableRe1(mContext.getResources().getColor(R.color.yellow_new)));
                 status.setTextColor(mContext.getResources().getColor(R.color.white));
             } else if (resultsBean.getStatus().toUpperCase().equals("ACTIVE")) {
-                status_bg.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.green_end)));
+                status_bg.setBackgroundDrawable(BaseMethod.getGradientDrawableRe1(mContext.getResources().getColor(R.color.green_end)));
                 status.setTextColor(mContext.getResources().getColor(R.color.white));
             } else {
-                status_bg.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.red)));
+                status_bg.setBackgroundDrawable(BaseMethod.getGradientDrawableRe1(mContext.getResources().getColor(R.color.red)));
                 status.setTextColor(mContext.getResources().getColor(R.color.white));
             }
 

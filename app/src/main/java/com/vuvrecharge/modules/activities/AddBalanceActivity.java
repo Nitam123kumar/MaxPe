@@ -40,8 +40,6 @@ import com.vuvrecharge.modules.model.PaymentSetting;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 
-import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -75,14 +73,14 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
     ConstraintLayout add_balance;
     @BindView(R.id.amount_textView)
     TextView add_amount_show;
-    @BindView(R.id.txtFiveHundred)
-    TextView txtFiveHundred;
     @BindView(R.id.txtThousand)
     TextView txtThousand;
+    @BindView(R.id.txtFiveThousandFiveHundred)
+    TextView txtFiveThousand;
 //    @BindView(R.id.buttonAddBalance)
 //    TextView txtTwoThousand;
-    @BindView(R.id.txtHundred)
-    TextView txtHundred;
+    @BindView(R.id.txtFiveHundred)
+    TextView txtFiveHundred;
 
     @BindView(R.id.help)
     TextView help;
@@ -156,10 +154,10 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
         }
 
 
-        txtFiveHundred.setOnClickListener(this);
         txtThousand.setOnClickListener(this);
+        txtFiveThousand.setOnClickListener(this);
 //        txtTwoThousand.setOnClickListener(this);
-        txtHundred.setOnClickListener(this);
+        txtFiveHundred.setOnClickListener(this);
         mToolbar.setOnClickListener(this);
         help.setOnClickListener(this);
         try {
@@ -381,6 +379,24 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
         printLog(message);
     }
 
+    private void addAmount(int valueToAdd) {
+        String currentText = amount.getText().toString();
+        int currentAmount = 0;
+
+
+        if (!currentText.isEmpty()) {
+            try {
+                currentAmount = Integer.parseInt(currentText);
+            } catch (NumberFormatException e) {
+                currentAmount = 0;
+            }
+        }
+
+        int newAmount = currentAmount + valueToAdd;
+        amount.setText(String.valueOf(newAmount));
+    }
+
+
     @Override
     public void onClick(@NonNull View v) {
         switch (v.getId()) {
@@ -388,17 +404,17 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
                 onBackPressed();
                 getActivity().finish();
                 break;
-            case R.id.txtFiveHundred:
-                amount.setText("1000");
-                break;
             case R.id.txtThousand:
-                amount.setText("1500");
+                addAmount(1000);
+                break;
+            case R.id.txtFiveThousandFiveHundred:
+               addAmount(1500);
                 break;
 //            case R.id.txtTwoThousand:
 //                amount.setText("2000");
 //                break;
-            case R.id.txtHundred:
-                amount.setText("500");
+            case R.id.txtFiveHundred:
+                addAmount(500);
                 break;
 //
 //            case R.id.pay_using_ConstraintLayout:

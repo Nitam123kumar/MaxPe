@@ -5,33 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@drawable/main_wallet_shape"
     android:fitsSystemWindows="true">
+
+
+    <include layout="@layout/bill_payment_layout"
+        android:id="@+id/mT"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/mT"
+        android:background="@drawable/biller_main_shape"
         android:orientation="vertical">
-
-        <include layout="@layout/app_bar_custom" />
 
         <LinearLayout
             android:id="@+id/infoLayout"
             android:layout_width="match_parent"
-            android:layout_height="110dp"
+            android:layout_height="75dp"
             android:orientation="horizontal"
-            android:background="@drawable/background_operator_information"
-            android:layout_margin="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/ad_money_button_shape"
+            android:layout_marginHorizontal="@dimen/_15sdp"
             android:layout_gravity="center_vertical">
 
             <ImageView
                 android:id="@+id/imgOperator"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
                 android:layout_gravity="center"
                 android:src="@drawable/upi"
                 android:padding="8dp"
                 android:contentDescription="@string/app_name"
-                android:background="@drawable/plan_drawable_background"
+                android:background="@drawable/recharge_logo_shape"
                 android:layout_marginStart="16dp"/>
 
             <LinearLayout
@@ -47,6 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textStyle="bold"
+                    android:textSize="12sp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/white"
@@ -56,10 +63,11 @@
                     android:id="@+id/txtPhoneProvider"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="3dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
+                    android:textSize="11sp"
                     android:textColor="@color/white"
                     android:layout_marginBottom="5dp"/>
 
@@ -70,6 +78,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
+                    android:textSize="10sp"
                     android:textColor="@color/color_c"
                     android:layout_marginBottom="@dimen/_10sdp"/>
 
@@ -79,13 +88,13 @@
             <TextView
                 android:id="@+id/txtRecharge"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="25sp"
                 android:layout_gravity="center"
                 android:text="Change"
-                android:padding="@dimen/_10sdp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textColor="@color/black"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/edit_txt_bg"/>
         </LinearLayout>
@@ -96,97 +105,100 @@
 
             <TextView
                 android:id="@+id/txtSearch"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:text="Search"
-                android:padding="8dp"
-                android:gravity="center_vertical"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_marginEnd="5dp"
-                android:drawablePadding="10dp"
-                android:drawableStart="@drawable/ic_search"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
                 android:background="@drawable/search_edit_drawable"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tab_layout"
-                app:layout_constraintTop_toTopOf="parent"
+                android:drawableEnd="@drawable/ic_search"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingEnd="@dimen/_15sdp"
+                android:text="Search"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tab_layout"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.364"
                 tools:ignore="UseCompatTextViewDrawableXml" />
 
             <EditText
                 android:id="@+id/editSearch"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="Search"
-                android:padding="8dp"
-                android:inputType="text"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
                 android:layout_marginBottom="5dp"
-                android:layout_marginEnd="5dp"
-                android:drawablePadding="10dp"
-                android:visibility="gone"
-                android:drawableStart="@drawable/ic_search"
-                android:imeOptions="actionSearch"
                 android:background="@drawable/search_edit_text_drawable"
-                app:layout_constraintStart_toStartOf="parent"
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="10dp"
+                android:hint="Search"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:paddingStart="10dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toStartOf="@id/txtCancel"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent">
-                <requestFocus/>
+                app:layout_constraintStart_toStartOf="@+id/txtSearch"
+                app:layout_constraintEnd_toEndOf="@+id/txtSearch"
+                app:layout_constraintTop_toTopOf="@+id/txtSearch">
+
+                <requestFocus />
             </EditText>
 
             <ImageView
                 android:id="@+id/imgClose"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:background="@drawable/circle_gray_drawable"
+                android:padding="3dp"
                 android:src="@drawable/ic_close"
                 android:visibility="gone"
-                app:tint="@color/black_4"
-                android:padding="3dp"
-                android:background="@drawable/circle_gray_drawable"
-                android:layout_marginEnd="@dimen/_5sdp"
+                app:layout_constraintBottom_toBottomOf="@id/editSearch"
                 app:layout_constraintEnd_toEndOf="@id/editSearch"
                 app:layout_constraintTop_toTopOf="@id/editSearch"
-                app:layout_constraintBottom_toBottomOf="@id/editSearch"/>
+                app:tint="@color/black_4" />
 
             <TextView
                 android:id="@+id/txtCancel"
                 android:layout_width="@dimen/_90sdp"
                 android:layout_height="wrap_content"
-                android:text="Cancel"
-                android:textColor="@color/colorPrimaryB"
-                android:padding="@dimen/_6sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 android:gravity="center"
-                android:visibility="gone"
+                android:padding="@dimen/_6sdp"
+                android:text="Cancel"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:layout_constraintStart_toEndOf="@id/editSearch"
+                android:textColor="@color/colorPrimaryB"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/editSearch"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/editSearch"
-                app:layout_constraintBottom_toBottomOf="@id/editSearch"/>
+                app:layout_constraintStart_toEndOf="@id/editSearch"
+                app:layout_constraintTop_toTopOf="@id/editSearch" />
 
             <com.vuvrecharge.custom.ClassesTabLayout
                 android:id="@+id/tab_layout"
                 style="@style/Costume_profile"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_28sdp"
-                app:tabMode="auto"
+                android:layout_height="23dp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_10sdp"
-                app:tabSelectedTextColor="@color/black_4"
-                app:tabTextColor="@color/black_new"
-                app:layout_constraintStart_toEndOf="@id/txtSearch"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtSearch"
+                app:tabMode="auto"
+                app:tabTextColor="@color/tab_selector"
+                app:tabBackground="@drawable/tab_selected_background"
+                app:tabIndicatorHeight="0dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/pager"
+            android:layout_marginTop="@dimen/_15sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="true"

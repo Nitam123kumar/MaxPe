@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/_5sdp"
-    android:layout_marginEnd="@dimen/_5sdp"
+    android:layout_margin="@dimen/_5sdp"
+    android:elevation="@dimen/_4sdp"
     android:id="@+id/layoutDesignPattern"
+    android:background="@drawable/histiry_shape"
     android:padding="@dimen/_5sdp">
     <TextView
         android:id="@+id/order_id"
@@ -15,6 +16,7 @@
         android:textColor="@color/black_2"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:textStyle="bold"
+        android:textSize="14sp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_18sdp"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,9 +27,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="-\u20b910"
-        android:layout_marginEnd="@dimen/_18sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
+        android:textSize="18sp"
+        android:paddingEnd="@dimen/_2sdp"
         android:textColor="@color/black_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/order_id"/>
@@ -38,7 +42,8 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:text="Amount: \u20b9720"
-        android:textColor="#434343"
+        android:textColor="#949494"
+        android:textSize="12sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         app:layout_constraintStart_toStartOf="@id/order_id"
         app:layout_constraintTop_toBottomOf="@id/order_id"/>
@@ -48,6 +53,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="end"
+        android:paddingEnd="@dimen/_2sdp"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         app:layout_constraintStart_toEndOf="@id/date_time"
         app:layout_constraintEnd_toEndOf="@id/amount"
@@ -68,16 +74,18 @@
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Order Id : 145258"
+        android:text="Jio"
         android:textColor="@color/black_2"
         android:textStyle="bold"
         android:maxLines="1"
+        android:textSize="14sp"
+        android:fontFamily="@font/roboto"
         android:ellipsize="end"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:layout_marginStart="@dimen/_10sdp"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@id/operator_img"
-        app:layout_constraintEnd_toStartOf="@id/status"
+        app:layout_constraintEnd_toStartOf="@id/status_cons"
         app:layout_constraintTop_toTopOf="@id/operator_img"
         app:layout_constraintBottom_toTopOf="@id/number"/>
 
@@ -87,28 +95,54 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:text="Amount: \u20b9720"
-        android:textColor="#434343"
-        android:textStyle="bold"
+        android:textColor="#747474"
+        android:textSize="14sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         app:layout_constraintStart_toStartOf="@id/name"
         app:layout_constraintTop_toBottomOf="@id/name"
         app:layout_constraintBottom_toBottomOf="@id/operator_img"/>
 
-    <TextView
-        android:id="@+id/status"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="success"
-        android:gravity="center"
-        android:padding="5dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/white"
-        android:background="@color/green"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/status_cons"
+        android:layout_width="92dp"
+        android:layout_height="25dp"
         app:layout_constraintStart_toEndOf="@id/name"
         app:layout_constraintEnd_toEndOf="@id/amount"
         app:layout_constraintTop_toTopOf="@id/name"
-        app:layout_constraintBottom_toBottomOf="@id/number"/>
+        android:background="@drawable/success_bg"
+        app:layout_constraintBottom_toBottomOf="@id/number"
+        >
+
+    <ImageView
+        android:id="@+id/status_imageView"
+        android:layout_width="14.51dp"
+        android:src="@drawable/success_history_img"
+        android:layout_height="14.51dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="@id/status_cons"
+        app:layout_constraintTop_toTopOf="@id/status_cons"
+        android:layout_marginStart="@dimen/_7sdp"
+        app:layout_constraintBottom_toBottomOf="@id/status_cons"/>
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="success"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:fontFamily="@font/roboto_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <ImageView
         android:id="@+id/loading"
@@ -118,19 +152,23 @@
         android:layout_marginLeft="@dimen/_2sdp"
         android:layout_marginBottom="@dimen/_5sdp"
         android:adjustViewBounds="true"
-        app:layout_constraintStart_toStartOf="@id/status"
-        app:layout_constraintEnd_toEndOf="@id/status"
-        app:layout_constraintTop_toTopOf="@id/status"
-        app:layout_constraintBottom_toBottomOf="@id/status"/>
+        app:layout_constraintStart_toStartOf="@id/status_cons"
+        app:layout_constraintEnd_toEndOf="@id/status_cons"
+        app:layout_constraintTop_toTopOf="@id/status_cons"
+        app:layout_constraintBottom_toBottomOf="@id/status_cons"/>
 
     <TextView
         android:id="@+id/operator_referance"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:text="Pending"
         android:textColor="#434343"
-        android:textSize="@dimen/_9sdp"
+        android:textSize="14sp"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/_20sdp"
+        android:background="@drawable/operator_shape"
         android:layout_marginBottom="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
         app:layout_constraintStart_toStartOf="@id/operator_img"
         app:layout_constraintTop_toBottomOf="@id/operator_img"
         app:layout_constraintEnd_toEndOf="@id/amount"

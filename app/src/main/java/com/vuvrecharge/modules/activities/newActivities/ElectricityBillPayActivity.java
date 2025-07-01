@@ -4,12 +4,16 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -23,11 +27,13 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -112,11 +118,11 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
     @BindView(R.id.retry)
     TextView retry;
     @BindView(R.id.provider_name)
-    EditText provider_name;
+    TextView provider_name;
     @BindView(R.id.consumerNumber)
-    TextInputEditText consumerNumber;
-    @BindView(R.id.consumer_number_layout)
-    TextInputLayout consumer_number_layout;
+    EditText consumerNumber;
+//    @BindView(R.id.consumer_number_layout)
+//    TextInputLayout consumer_number_layout;
     @BindView(R.id.sub_division_code_layout)
     TextInputLayout sub_division_code_layout;
     @BindView(R.id.amount_layout)
@@ -135,6 +141,8 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
     View viewBill;
     @BindView(R.id.viewLine)
     View viewLine;
+    @BindView(R.id.dueToDate)
+    TextView dueToDate;
     @BindView(R.id.consumerNumberText)
     TextView consumerNumberText;
     @BindView(R.id.sub_division_codeText)
@@ -157,12 +165,16 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
     TextView txtBillFetch;
     @BindView(R.id.wallet_amount)
     TextView wallet_amount;
-    @BindView(R.id.txtAmount)
-    TextView txtAmount;
+    @BindView(R.id.ProceedToPay)
+    TextView proceedToPay;
+//    @BindView(R.id.txtAmount)
+//    TextView txtAmount;
     @BindView(R.id.txtAmountValue)
     TextView txtAmountValue;
     @BindView(R.id.txtRupe)
     TextView txtRupees;
+    @BindView(R.id.provider_img)
+    ImageView providerImageView;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
     private String type = null;
@@ -202,18 +214,25 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
         toolbar.setOnClickListener(this);
         titleStr =  getIntent().getStringExtra("title");
         handler = new Handler();
+        proceedToPay.setOnClickListener(v -> {
+//            Toast.makeText(this,"")
+        });
         mDefaultPresenter = new DefaultPresenter(this);
         manager = new LinearLayoutManager(this);
         recyclerViewBillerInfo.setLayoutManager(manager);
+        setStatusBarGradiant(this);
         if(titleStr != null){
             title.setText(titleStr);
             if (titleStr.contains("Electricity Bill")) {
                 name = getIntent().getStringExtra("name");
                 String logo = getIntent().getStringExtra("logo");
+                Glide.with(this).load(logo).placeholder(R.drawable.btn_drawable).into(providerImageView);
                 id = getIntent().getStringExtra("id");
                 type = getIntent().getStringExtra("type");
                 warning_message = getIntent().getStringExtra("warning_message");
                 provider_name.setVisibility(VISIBLE);
+                providerImageView.setVisibility(VISIBLE);
+                proceedToPay.setVisibility(VISIBLE);
                 if (name != "" || name != null) {
                     provider_name.setText(name);
                     mDefaultPresenter.operatorsDetails(device_id, id);
@@ -282,7 +301,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 if (name != "" || name != null) {
                     provider_name.setText(name);
                     mDefaultPresenter.operatorsDetails(device_id, id);
-                    consumer_number_layout.setVisibility(VISIBLE);
+                    consumerNumber.setVisibility(VISIBLE);
                     UserData userData = mDatabase.getUserData();
                     wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
                 }
@@ -496,8 +515,8 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 }
             } else if (titleStr.contains("Google Play")) {
                 provider_name.setVisibility(GONE);
-                consumer_number_layout.setVisibility(VISIBLE);
-                consumer_number_layout.setHint("Mobile Number");
+                consumerNumber.setVisibility(VISIBLE);
+                consumerNumber.setHint("Mobile Number");
                 amount_layout.setVisibility(VISIBLE);
             }
         }
@@ -510,7 +529,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         hideKeyBoard(consumerNumber);
-        hideKeyBoard(provider_name);
+//        hideKeyBoard(provider_name);
         hideKeyBoard(sub_division_code);
         hideKeyBoard(field4);
         hideKeyBoard(amount);
@@ -562,6 +581,21 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             showErrorR(error);
     }
 
+    @SuppressLint({"UseRequiresApi", "ObsoleteSdkInt"})
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onSuccess(String data) {
         infos.clear();
@@ -589,30 +623,60 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 }
 
 
+//                txtViewMore.setOnClickListener(v -> {
+//                    if (adapter.getItemCount() == 2) {
+//                        txtViewMore.setText("Less More");
+//                        adapter = new BillerAdapter(infos, titleStr, type, infos.size());
+//                    }else if (adapter.getItemCount() == 3) {
+//                        txtViewMore.setText("Less More");
+//                        adapter = new BillerAdapter(infos, titleStr, type, infos.size());
+//                    }else {
+//                        adapter = new BillerAdapter(infos, titleStr, type,3);
+//                        txtViewMore.setText("View More");
+//                    }
+//                    recyclerViewBillerInfo.setAdapter(adapter);
+//                    adapter.notifyDataSetChanged();
+//                });
+                // Changes On 26/06/2025 By Nitan Singh
+
+
+                adapter = new BillerAdapter(infos, titleStr, type, 3);
+                recyclerViewBillerInfo.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
+// Show Due Date if available
+                for (BillFetch model : infos) {
+                    if (model.getKey().equalsIgnoreCase("Due Date")) {
+                        String dueDateValue = model.getValue();
+                        dueToDate.setText("Due Date: " + dueDateValue);
+                        break;
+                    }
+                }
+
                 txtViewMore.setOnClickListener(v -> {
-                    if (adapter.getItemCount() == 2) {
-                        txtViewMore.setText("Less More");
+                    if (adapter.getItemCount() == 3) {
                         adapter = new BillerAdapter(infos, titleStr, type, infos.size());
-                    }else if (adapter.getItemCount() == 3) {
                         txtViewMore.setText("Less More");
-                        adapter = new BillerAdapter(infos, titleStr, type, infos.size());
-                    }else {
-                        adapter = new BillerAdapter(infos, titleStr, type,3);
+                    } else {
+                        adapter = new BillerAdapter(infos, titleStr, type, 3);
                         txtViewMore.setText("View More");
                     }
+
                     recyclerViewBillerInfo.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 });
+
+
             }
 
             billAmount = object.getString("billAmount");
-            txtAmount.setText("Bill Amount");
+//            txtAmount.setText("Bill Amount");
             txtAmountValue.setText(billAmount);
             txtRupees.setVisibility(VISIBLE);
 
             if (titleStr.equals("Fastag")){
                 amount_layout.setVisibility(VISIBLE);
-                txtAmount.setVisibility(GONE);
+//                txtAmount.setVisibility(GONE);
                 txtAmountValue.setVisibility(GONE);
                 txtRupees.setVisibility(GONE);
                 viewLine.setVisibility(GONE);
@@ -620,8 +684,9 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             }
 
             recyclerViewBillerInfo.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
+//            adapter.notifyDataSetChanged();
             btnProcess.setVisibility(VISIBLE);
+            proceedToPay.setVisibility(GONE);
             txtBillFetch.setVisibility(GONE);
             constBillInfo.setVisibility(VISIBLE);
         }catch (JSONException e){
@@ -727,10 +792,12 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             if (is_billFetch.equals("1")) {
                 txtBillFetch.setVisibility(VISIBLE);
                 btnProcess.setVisibility(GONE);
+                proceedToPay.setVisibility(VISIBLE);
             } else {
                 txtBillFetch.setVisibility(GONE);
                 amount_layout.setVisibility(VISIBLE);
                 btnProcess.setVisibility(VISIBLE);
+                proceedToPay.setVisibility(GONE);
             }
 
             JSONObject numberField = new JSONObject(jsonNumberData);
@@ -786,9 +853,9 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                     }
                 });
             } else {
-                consumer_number_layout.setHint(numberField.getString("field_name"));
+                consumerNumber.setHint(numberField.getString("field_name"));
                 consumerNumberText.setText(numberField.getString("eg"));
-                consumer_number_layout.setVisibility(VISIBLE);
+                consumerNumber.setVisibility(VISIBLE);
                 consumerNumberText.setVisibility(VISIBLE);
                 int maxLength = Integer.parseInt(numberField.getString("max_length"));
                 InputFilter[] filters = new InputFilter[1];
@@ -812,10 +879,12 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                             if (is_billFetch.equals("1")) {
                                 txtBillFetch.setVisibility(VISIBLE);
                                 btnProcess.setVisibility(GONE);
+                                proceedToPay.setVisibility(VISIBLE);
                             } else {
                                 txtBillFetch.setVisibility(GONE);
                                 amount_layout.setVisibility(VISIBLE);
                                 btnProcess.setVisibility(VISIBLE);
+                                proceedToPay.setVisibility(GONE);
                             }
                             if (type.equals("Fastag")){
                                 amount_layout.setVisibility(GONE);
@@ -901,10 +970,12 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                                 if (is_billFetch.equals("1")) {
                                     txtBillFetch.setVisibility(VISIBLE);
                                     btnProcess.setVisibility(GONE);
+                                    proceedToPay.setVisibility(VISIBLE);
                                 } else {
                                     txtBillFetch.setVisibility(GONE);
                                     amount_layout.setVisibility(VISIBLE);
                                     btnProcess.setVisibility(VISIBLE);
+                                    proceedToPay.setVisibility(GONE);
                                 }
                                 constBillInfo.setVisibility(GONE);
                             }
@@ -969,10 +1040,12 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                                 if (is_billFetch.equals("1")) {
                                     txtBillFetch.setVisibility(VISIBLE);
                                     btnProcess.setVisibility(GONE);
+                                    proceedToPay.setVisibility(VISIBLE);
                                 } else {
                                     txtBillFetch.setVisibility(GONE);
                                     amount_layout.setVisibility(VISIBLE);
                                     btnProcess.setVisibility(VISIBLE);
+                                    proceedToPay.setVisibility(GONE);
                                 }
                                 constBillInfo.setVisibility(GONE);
                             }
@@ -1296,7 +1369,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         hideKeyBoard(consumerNumber);
-        hideKeyBoard(provider_name);
+//        hideKeyBoard(provider_name);
         hideKeyBoard(sub_division_code);
         hideKeyBoard(field4);
         hideKeyBoard(amount);

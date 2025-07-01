@@ -84,8 +84,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RechargeReportActivity extends BaseActivity implements DefaultView, View.OnClickListener {
 
-    @BindView(R.id.toolbar_layout)
-    LinearLayout mToolbar;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     @BindView(R.id.title)
     TextView title;
     @BindView(R.id.title_sub)
@@ -200,6 +200,13 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
             Glide.with(getActivity()).asGif().load(R.drawable.load).into(load);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            mToolbar.setNavigationOnClickListener(v -> onBackPressed());
+            Objects.requireNonNull(mToolbar.getNavigationIcon()).setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+            setTitle("");
         }
     }
 
@@ -396,6 +403,11 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
         switch (v.getId()) {
             case R.id.addMore:
                 screen = "No";
+                if (!selectFile()) {
+                    setToolbarFalse(mToolbar);
+                    takeScreenshot(share_view);
+                    new Handler().postDelayed(() -> setToolbar(mToolbar), 1000);
+                }
                 break;
             case R.id.toolbar_layout:
                 onBackPressed();
@@ -409,11 +421,11 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
                 finish();
                 break;
             case R.id.imgPDF:
-//                if (!selectFile()){
-//                    setToolbarFalse(mToolbar);
-//                    pdf(share_view);
-//                    new Handler().postDelayed(() -> setToolbar(mToolbar), 1000);
-//                }
+                if (!selectFile()){
+                    setToolbarFalse(mToolbar);
+                    pdf(share_view);
+                    new Handler().postDelayed(() -> setToolbar(mToolbar), 1000);
+                }
                 break;
         }
     }

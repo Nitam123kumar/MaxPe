@@ -35,7 +35,7 @@
                     android:id="@+id/mToolbar_constraint"
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
-                    android:background="@drawable/wallet_shape">
+                    android:background="@drawable/help_section_shape">
 
 
                     <com.denzcoskun.imageslider.ImageSlider

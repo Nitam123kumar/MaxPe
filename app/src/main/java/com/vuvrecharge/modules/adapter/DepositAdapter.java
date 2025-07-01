@@ -97,19 +97,19 @@ public class DepositAdapter extends RecyclerView.Adapter<DepositAdapter.Holder> 
                 Glide.with(mContext)
                         .load(R.drawable.pending_2)
                         .into(imgDone);
-                txtStatus.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.pending)));
+                txtStatus.setBackgroundDrawable(BaseMethod.getGradientDrawableRe1(mContext.getResources().getColor(R.color.pending)));
             } else if (mDepositData.getPayment_status().toUpperCase().equals("SUCCESS")) {
                 layoutDesignPattern.setBackgroundResource(R.drawable.pattern_history_1);
                 Glide.with(mContext)
                         .load(R.drawable.success_2)
                         .into(imgDone);
-                txtStatus.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.success)));
+                txtStatus.setBackgroundDrawable(BaseMethod.getGradientDrawableRe1(mContext.getResources().getColor(R.color.success)));
             } else {
                 layoutDesignPattern.setBackgroundResource(R.drawable.pattern_report_1);
                 Glide.with(mContext)
                         .load(R.drawable.close_1)
                         .into(imgDone);
-                txtStatus.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.failed)));
+                txtStatus.setBackgroundDrawable(BaseMethod.getGradientDrawableRe1(mContext.getResources().getColor(R.color.failed)));
             }
             txtStatus.setText(mDepositData.getPayment_status().toUpperCase());
 

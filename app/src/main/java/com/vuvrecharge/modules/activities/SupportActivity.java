@@ -2,13 +2,18 @@ package com.vuvrecharge.modules.activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,18 +49,20 @@ public class SupportActivity extends BaseActivity implements View.OnClickListene
     TextView mobile_tv;
     @BindView(R.id.email)
     TextView email;
-    @BindView(R.id.tvAddress)
-    TextView address;
+//    @BindView(R.id.tvAddress)
+//    TextView address;
     @BindView(R.id.tv_whatsapp)
     TextView tv_whatsapp;
     @BindView(R.id.youtube)
     ImageView youtube;
-    @BindView(R.id.telegram)
-    ImageView telegram;
+    @BindView(R.id.xcode)
+    ImageView xcode;
     @BindView(R.id.facebook)
     ImageView facebook;
     @BindView(R.id.instagram)
     ImageView instagram;
+    @BindView(R.id.linkedln)
+    ImageView linkedln;
     @BindView(R.id.imgContactSupport)
     ImageView imgContactSupport;
     @BindView(R.id.imgWhatsAppSupport)
@@ -73,6 +80,8 @@ public class SupportActivity extends BaseActivity implements View.OnClickListene
     TextView llPrepaidNumber;
     @BindView(R.id.whatsAppSupportLayout)
     ConstraintLayout whatsAppSupportLayout;
+    @BindView(R.id.feedbackLayout)
+    ConstraintLayout feedbackLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +93,12 @@ public class SupportActivity extends BaseActivity implements View.OnClickListene
         contactSupportLayout.setOnClickListener(this);
         whatsAppSupportLayout.setOnClickListener(this);
         instagram.setOnClickListener(this);
-        telegram.setOnClickListener(this);
+        xcode.setOnClickListener(this);
+        linkedln.setOnClickListener(this);
         facebook.setOnClickListener(this);
+        feedbackLayout.setOnClickListener(this);
         youtube.setOnClickListener(this);
+        setStatusBarGradiant(this);
         llPrepaidNumber.setOnClickListener(v -> {
             Intent intent1 = new Intent(getActivity(), HelpLineActivity.class);
             intent1.putExtra("title", "Prepaid Toll Free Number");
@@ -138,9 +150,9 @@ public class SupportActivity extends BaseActivity implements View.OnClickListene
             if (userData.getWhatsapp_number() != null) {
                 tv_whatsapp.setText(userData.getWhatsapp_number());
             }
-            if (userData.getAddress() != null) {
-                address.setText(userData.getAddress());
-            }
+//            if (userData.getAddress() != null) {
+//                address.setText(userData.getAddress());
+//            }
         }
 
     }
@@ -172,6 +184,13 @@ public class SupportActivity extends BaseActivity implements View.OnClickListene
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/maxpe_payments/"));
                 startActivity(intent);
                 break;
+            case R.id.xcode:
+                Toast.makeText(this, "coming soon", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.linkedln:
+                Toast.makeText(this, "coming soon", Toast.LENGTH_SHORT).show();
+                break;
+
             case R.id.youtube:
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/channel/UCkAdOopGYK6B6zkSdKhRJnA"));
                 startActivity(intent);
@@ -179,12 +198,16 @@ public class SupportActivity extends BaseActivity implements View.OnClickListene
             case R.id.facebook:
                 Toast.makeText(this, "coming soon", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.telegram:
-                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/MaxPePayments"));
-                startActivity(intent);
-                break;
+//            case R.id.telegram:
+//                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/MaxPePayments"));
+//                startActivity(intent);
+//                break;
             case R.id.toolbar_layout:
                 onBackPressed();
+                break;
+            case R.id.feedbackLayout:
+                Intent feedbackIntent = new Intent(this, FeedbackActivity.class);
+                startActivity(feedbackIntent);
                 break;
         }
     }
@@ -204,6 +227,19 @@ public class SupportActivity extends BaseActivity implements View.OnClickListene
             }
         }
         startActivity(callIntent);
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
     }
 
 }

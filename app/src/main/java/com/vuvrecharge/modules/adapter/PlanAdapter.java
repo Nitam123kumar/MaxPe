@@ -113,8 +113,8 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.Holder> {
         TextView dataValue;
         @BindView(R.id.data)
         TextView data;
-        @BindView(R.id.btnSelect)
-        TextView btnSelect;
+//        @BindView(R.id.btnSelect)
+//        TextView btnSelect;
         @BindView(R.id.txtSubscription)
         TextView txtSubscription;
         @BindView(R.id.imgSubscription)
@@ -273,22 +273,22 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.Holder> {
                 mDefaultView.onSuccess("");
             });
 
-            btnSelect.setOnClickListener(v -> {
-                Intent intent = new Intent(mContext, PlanDetailsActivity.class);
-                intent.putExtra("amount",resultsBean.getRs());
-                intent.putExtra("number",phone);
-                intent.putExtra("url",url);
-                intent.putExtra("provider",provider);
-                intent.putExtra("state",state);
-                intent.putExtra("des",description.getText().toString());
-                intent.putExtra("subscription",resultsBean.getSubscription());
-                intent.putExtra("validity",resultsBean.getValidity());
-                intent.putExtra("data",dataValue.getText().toString());
-                intent.putExtra("operator",selected_operator);
-                intent.putExtra("circle",selected_circle);
-                intent.putExtra("pageType","Prepaid");
-                mContext.startActivity(intent);
-            });
+//            btnSelect.setOnClickListener(v -> {
+//                Intent intent = new Intent(mContext, PlanDetailsActivity.class);
+//                intent.putExtra("amount",resultsBean.getRs());
+//                intent.putExtra("number",phone);
+//                intent.putExtra("url",url);
+//                intent.putExtra("provider",provider);
+//                intent.putExtra("state",state);
+//                intent.putExtra("des",description.getText().toString());
+//                intent.putExtra("subscription",resultsBean.getSubscription());
+//                intent.putExtra("validity",resultsBean.getValidity());
+//                intent.putExtra("data",dataValue.getText().toString());
+//                intent.putExtra("operator",selected_operator);
+//                intent.putExtra("circle",selected_circle);
+//                intent.putExtra("pageType","Prepaid");
+//                mContext.startActivity(intent);
+//            });
 
             itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(mContext, PlanDetailsActivity.class);

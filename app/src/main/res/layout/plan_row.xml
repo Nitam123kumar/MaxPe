@@ -3,39 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:layout_marginBottom="@dimen/_6sdp"
+        android:layout_height="130dp"
+        android:elevation="@dimen/_2sdp"
+       android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
         android:background="@drawable/plan_drawable_background">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingStart="20dp"
-            android:paddingBottom="@dimen/_10sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
-
-            <TextView
-                android:id="@+id/btnSelect"
-                android:layout_width="0dp"
-                android:text="Select"
-                android:paddingTop="2dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="2dp"
-                android:background="@drawable/select_button_drawable"
-                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                android:textColor="@color/white"
-                android:layout_marginEnd="2dp"
-                android:layout_marginBottom="2dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/amount"
@@ -44,18 +25,22 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textStyle="bold"
                 android:gravity="start"
+                android:textSize="18sp"
                 android:textColor="#242424"
-                android:layout_marginTop="@dimen/_9sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintEnd_toStartOf="@id/dataValue"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btnSelect" />
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
             <TextView
                 android:id="@+id/dataValue"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textSize="14sp"
+                android:maxLines="1"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 android:textColor="#242424"
                 android:visibility="gone"
@@ -68,6 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Data"
+                android:textSize="13sp"
                 android:visibility="gone"
                 android:textColor="#939498"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
@@ -83,6 +69,8 @@
                 android:layout_marginEnd="20dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 android:textColor="#242424"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/dataValue"
                 app:layout_constraintTop_toTopOf="@id/amount" />
@@ -93,6 +81,8 @@
                 android:layout_height="wrap_content"
                 android:text="Validity"
                 android:textColor="#939498"
+                android:textSize="10sp"
+                android:fontFamily="@font/roboto"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 app:layout_constraintEnd_toEndOf="@id/validity"
                 app:layout_constraintTop_toBottomOf="@id/validity" />
@@ -101,7 +91,7 @@
                 android:id="@+id/viewLinePlan"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_6sdp"
                 android:background="#1F919090"
                 app:layout_constraintEnd_toEndOf="@id/validity"
                 app:layout_constraintStart_toStartOf="parent"
@@ -111,9 +101,11 @@
                 android:id="@+id/description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:layout_marginBottom="@dimen/_12sdp"
-                android:textColor="#939498"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_6sdp"
+                android:textColor="#909090"
+                android:textSize="12sp"
+                android:maxLines="2"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 app:layout_constraintEnd_toStartOf="@id/txtMore"
                 app:layout_constraintStart_toStartOf="@id/amount"
@@ -125,20 +117,20 @@
                 android:layout_height="1dp"
                 android:background="#1F919090"
                 android:visibility="gone"
-                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 app:layout_constraintStart_toStartOf="@id/viewLinePlan"
                 app:layout_constraintEnd_toEndOf="@id/viewLinePlan"
                 app:layout_constraintTop_toBottomOf="@id/description"/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardImage"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="0dp"
                 android:visibility="gone"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_4sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/viewDescription">
 
@@ -157,7 +149,9 @@
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:visibility="gone"
-                android:textColor="@color/black_2"
+                android:textStyle="bold"
+                android:textSize="8sp"
+                android:textColor="#989898"
                 android:layout_marginStart="@dimen/_5sdp"
                 app:layout_constraintStart_toEndOf="@id/cardImage"
                 app:layout_constraintEnd_toStartOf="@id/txtMoreSubscription"

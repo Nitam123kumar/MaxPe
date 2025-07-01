@@ -2,6 +2,7 @@ package com.vuvrecharge.base;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -81,10 +82,8 @@ public class BaseMethod {
         return gD;
     }
 
-    public static GradientDrawable getGradientDrawableRe(int fill_color) {
+    public static GradientDrawable getGradientDrawableRe(Drawable fill_color) {
         GradientDrawable gD = new GradientDrawable();
-        gD.setColor(fill_color);
-        gD.setStroke(3, fill_color);
         gD.setShape(GradientDrawable.RECTANGLE);
         gD.setCornerRadius(5f);
         return gD;
@@ -97,5 +96,14 @@ public class BaseMethod {
         gD.setShape(GradientDrawable.RECTANGLE);
         return gD;
     }
+    public static GradientDrawable getGradientDrawableRe1(int fill_color) {
+        GradientDrawable gD = new GradientDrawable();
+        gD.setColor(fill_color);
+        gD.setStroke(3, fill_color);
+        gD.setShape(GradientDrawable.RECTANGLE);
+        gD.setCornerRadius(5f);
+        return gD;
+    }
+
 
 }
