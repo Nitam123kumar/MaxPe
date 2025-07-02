@@ -33,6 +33,7 @@ public class UserData {
     private List<DthCommissionBean> prepaid_commission;
     private List<DthCommissionBean> dth_commission;
     private  List<SliderData> slides;
+    private  List<youtube_slides> youtubeVideos;
     private List<SliderItems> recharge_slides_data;
     String referCode;
     private String shareText;
@@ -353,6 +354,10 @@ public class UserData {
 
     public void setWhatsapp_number(String whatsapp_number) {
         this.whatsapp_number = whatsapp_number;
+    }
+
+    public List<youtube_slides> getYoutubeVideo() {
+        return youtubeVideos;
     }
 
     public List<SliderData> getSlides() {

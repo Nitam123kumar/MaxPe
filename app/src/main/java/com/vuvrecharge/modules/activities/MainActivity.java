@@ -57,6 +57,7 @@ import com.google.android.play.core.install.InstallStateUpdatedListener;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.vuvrecharge.R;
+import com.vuvrecharge.api.ApiGetResponse;
 import com.vuvrecharge.base.BaseActivity;
 import com.vuvrecharge.base.BaseMethod;
 import com.vuvrecharge.custom.HtmlImageGetter;
@@ -77,6 +78,7 @@ import com.vuvrecharge.modules.model.PaymentSetting;
 import com.vuvrecharge.modules.model.SliderData;
 import com.vuvrecharge.modules.model.SliderItems;
 import com.vuvrecharge.modules.model.UserData;
+import com.vuvrecharge.modules.model.youtube_slides;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 import com.vuvrecharge.utils.permission.PermissionUtil;
@@ -93,6 +95,9 @@ import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends BaseActivity implements DefaultView,
         View.OnClickListener, DashboardAdapter.ItemClickListener,
@@ -170,6 +175,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
     List<SliderItems> sliderItemsList = new ArrayList<>();
     Timer timer1 = new Timer();
     ArrayList<PaymentSetting> list = new ArrayList<>();
+    ArrayList<youtube_slides> youtubeVideos = new ArrayList<>();
     String data = null;
     String allServices = null;
     String dataPayment = null;
@@ -212,15 +218,9 @@ public class MainActivity extends BaseActivity implements DefaultView,
         mDefaultPresenter = new DefaultPresenter(this);
         appUpdate();
         notifications();
-        List<Integer> imageList = Arrays.asList(
+        apiResponse();
 
-                R.drawable.maxpe_youtube_logo,
-                R.drawable.maxpe_youtube_logo
 
-        );
-        image_slider.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        sliderAdapter = new RecyclerViewSliderAdapter(this, imageList);
-        image_slider.setAdapter(sliderAdapter);
 
          List<Integer> imageList_offer = Arrays.asList(
 
@@ -307,6 +307,33 @@ public class MainActivity extends BaseActivity implements DefaultView,
         dialog.setCancelable(false);
         dialog.show();
     }
+
+    private void apiResponse(){
+
+        image_slider.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        sliderAdapter = new RecyclerViewSliderAdapter(this, youtubeVideos);
+        image_slider.setAdapter(sliderAdapter);
+
+        Call<youtube_slides> data=new ApiGetResponse().apiService.getThumbnail();
+        data.enqueue(new Callback<youtube_slides>() {
+            @Override
+            public void onResponse(Call<youtube_slides> call, Response<youtube_slides> response) {
+                youtube_slides data1 = response.body();
+                if (response.isSuccessful()){
+                    youtubeVideos.add(data1);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<youtube_slides> call, Throwable throwable) {
+
+            }
+        });
+
+
+    }
+
 
     private void setData(
             String from

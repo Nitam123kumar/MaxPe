@@ -1,9 +1,12 @@
 package com.vuvrecharge.api;
 
 import com.vuvrecharge.modules.model.DefaultResponse;
+import com.vuvrecharge.modules.model.youtube_slides;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ApiServices {
@@ -29,6 +32,7 @@ public interface ApiServices {
     String IMAGE_SLIDER = "http://192.168.0.16/vuvpayments.com/images/recharge_slides";
     String IMAGE_FOLLOWS = "http://192.168.0.16/vuvpayments.com/images/followers_logo";
     String SLIDE = "http://192.168.0.16/vuvpayments.com/images/app_slides/";
+    String YOUTUBE_VIDEO = "http://192.168.0.16/vuvpayments.com/images/youtube_thumbnail";
 
 ////    live
 //    String BBPS_IMAGE_URL = "http://vuvpayments.com/images/services_logo";
@@ -134,4 +138,9 @@ public interface ApiServices {
 //    @POST("apisf/")
     @POST("apise")
     Call<DefaultResponse> defaultRequest(@Field("data") String data);
+
+
+    @GET("images/youtube_thumbnail")
+    Call<youtube_slides> getThumbnail();
+
 }
