@@ -103,7 +103,7 @@ public abstract class BaseFragment extends Fragment {
         snackbar.setActionTextColor(Color.WHITE);
         snackbar.setDuration(Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
-        final Snackbar.SnackbarLayout snackBarView = (Snackbar.SnackbarLayout) snackbar.getView();
+      /*  final Snackbar.SnackbarLayout snackBarView = (Snackbar.SnackbarLayout) snackbar.getView();
         Snackbar.SnackbarLayout.LayoutParams params = (Snackbar.SnackbarLayout.LayoutParams) snackBarView.getChildAt(0).getLayoutParams();
         params.setMargins(0, 0, 0, 0);
         snackBarView.getChildAt(0).setLayoutParams(params);
@@ -113,7 +113,7 @@ public abstract class BaseFragment extends Fragment {
         textView.setBackgroundResource(R.drawable.sucess);
         textView.setMaxLines(5);
         textView.setPadding(3, 3, 3, 3);
-        textView.setGravity(Gravity.CENTER);
+        textView.setGravity(Gravity.CENTER);*/
         snackbar.show();
 
     }
@@ -129,7 +129,7 @@ public abstract class BaseFragment extends Fragment {
         snackbar.setActionTextColor(Color.WHITE);
         snackbar.setDuration(Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
-        final Snackbar.SnackbarLayout snackBarView = (Snackbar.SnackbarLayout) snackbar.getView();
+     /*   final Snackbar.SnackbarLayout snackBarView = (Snackbar.SnackbarLayout) snackbar.getView();
         Snackbar.SnackbarLayout.LayoutParams params = (Snackbar.SnackbarLayout.LayoutParams) snackBarView.getChildAt(0).getLayoutParams();
         params.setMargins(0, 0, 0, 0);
         snackBarView.getChildAt(0).setLayoutParams(params);
@@ -140,7 +140,7 @@ public abstract class BaseFragment extends Fragment {
         textView.setBackgroundResource(R.drawable.error);
         textView.setMaxLines(5);
         textView.setPadding(3, 3, 3, 3);
-        textView.setGravity(Gravity.CENTER);
+        textView.setGravity(Gravity.CENTER);*/
         snackbar.show();
     }
 
@@ -155,7 +155,7 @@ public abstract class BaseFragment extends Fragment {
         snackbar.setDuration(Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();
         @SuppressLint("RestrictedApi") final Snackbar.SnackbarLayout snackBarView = (Snackbar.SnackbarLayout) snackbar.getView();
-        Snackbar.SnackbarLayout.LayoutParams params = (Snackbar.SnackbarLayout.LayoutParams) snackBarView.getChildAt(0).getLayoutParams();
+     /*   Snackbar.SnackbarLayout.LayoutParams params = (Snackbar.SnackbarLayout.LayoutParams) snackBarView.getChildAt(0).getLayoutParams();
         params.setMargins(0, 0, 0, 0);
         snackBarView.getChildAt(0).setLayoutParams(params);
         snackbarView.setBackgroundColor(getResources().getColor(R.color.green_end));
@@ -164,7 +164,7 @@ public abstract class BaseFragment extends Fragment {
         textView.setBackgroundResource(R.drawable.sucess);
         textView.setMaxLines(5);
         textView.setPadding(3, 3, 3, 3);
-        textView.setGravity(Gravity.CENTER);
+        textView.setGravity(Gravity.CENTER);*/
         snackbar.show();
     }
 
@@ -178,7 +178,7 @@ public abstract class BaseFragment extends Fragment {
             snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG);
             snackbar.setActionTextColor(Color.WHITE);
             snackbar.setDuration(Snackbar.LENGTH_LONG);
-            View snackbarView = snackbar.getView();
+          /*  View snackbarView = snackbar.getView();
             @SuppressLint("RestrictedApi") final Snackbar.SnackbarLayout snackBarView = (Snackbar.SnackbarLayout) snackbar.getView();
             Snackbar.SnackbarLayout.LayoutParams params = (Snackbar.SnackbarLayout.LayoutParams) snackBarView.getChildAt(0).getLayoutParams();
             params.setMargins(0, 0, 0, 0);
@@ -191,7 +191,7 @@ public abstract class BaseFragment extends Fragment {
             textView.setMaxLines(5);
             textView.setPadding(3, 3, 3, 3);
             textView.setGravity(Gravity.CENTER);
-            snackbar.show();
+            snackbar.show();*/
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -211,7 +211,7 @@ public abstract class BaseFragment extends Fragment {
                 toastCountDown.cancel();
             }
             custom = Toasty.custom(mContext, message + " ",
-                    R.drawable.cross_new, R.color.errorColor, 5000, false,
+                    R.drawable.cross_new, R.color.red, 5000, false,
                     true);
             custom.setGravity(Gravity.TOP, 0, 50);
             toastCountDown = new CountDownTimer(5000, 1000 /*Tick duration*/) {

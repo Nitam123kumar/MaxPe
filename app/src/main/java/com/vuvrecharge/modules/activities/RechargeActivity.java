@@ -1217,7 +1217,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
             bottomSheetDialog.setContentView(_binding.getRoot());
             bottomSheetDialog.setCancelable(false);
             changeStatusBarColor(bottomSheetDialog);
-            bottomSheet = bottomSheetDialog.findViewById(R.id.design_bottom_sheet);
+            bottomSheet = bottomSheetDialog.findViewById(com.androidadvance.topsnackbar.R.id.design_bottom_sheet);
             if (bottomSheet != null) {
                 BottomSheetBehavior<FrameLayout> behavior = BottomSheetBehavior.from(bottomSheet);
                 behavior.setSkipCollapsed(false);
@@ -1364,7 +1364,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
             dialog2.setContentView(binding.getRoot());
             dialog2.setCancelable(true);
             changeStatusBarColor(dialog2);
-            bottomSheet = dialog2.findViewById(R.id.design_bottom_sheet);
+            bottomSheet = dialog2.findViewById(com.androidadvance.topsnackbar.R.id.design_bottom_sheet);
             if (bottomSheet != null) {
                 BottomSheetBehavior<FrameLayout> behavior = BottomSheetBehavior.from(bottomSheet);
                 behavior.setSkipCollapsed(false);

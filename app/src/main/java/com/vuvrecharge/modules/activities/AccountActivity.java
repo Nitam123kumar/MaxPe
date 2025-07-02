@@ -343,7 +343,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
             dialogBottomSheetDialog.setContentView(binding.getRoot());
             dialogBottomSheetDialog.setCancelable(true);
             changeStatusBarColor(dialogBottomSheetDialog);
-            bottomSheet = dialogBottomSheetDialog.findViewById(R.id.design_bottom_sheet);
+            bottomSheet = dialogBottomSheetDialog.findViewById(com.denzcoskun.imageslider.R.id.design_bottom_sheet);
             if (bottomSheet != null) {
                 BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
                 behavior.setSkipCollapsed(false);
@@ -404,7 +404,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
             dialog.setContentView(binding_.getRoot());
             changeStatusBarColor(dialog);
 
-            bottomSheet = dialog.findViewById(R.id.design_bottom_sheet);
+            bottomSheet = dialog.findViewById(com.denzcoskun.imageslider.R.id.design_bottom_sheet);
             if (bottomSheet != null) {
                 BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
                 behavior.setSkipCollapsed(false);
@@ -529,7 +529,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
             dialog.setCancelable(false);
             changeStatusBarColor(dialog);
 
-            bottomSheet = dialog.findViewById(R.id.design_bottom_sheet);
+            bottomSheet = dialog.findViewById(com.denzcoskun.imageslider.R.id.design_bottom_sheet);
             if (bottomSheet != null) {
                 BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
                 behavior.setSkipCollapsed(false);
@@ -578,7 +578,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         dialog.setContentView(binding.getRoot());
         changeStatusBarColor(dialog);
 
-        bottomSheet = dialog.findViewById(R.id.design_bottom_sheet);
+        bottomSheet = dialog.findViewById(com.denzcoskun.imageslider.R.id.design_bottom_sheet);
         if (bottomSheet != null) {
             BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
             behavior.setSkipCollapsed(false);
@@ -682,7 +682,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
             dialog.setCancelable(true);
             changeStatusBarColor(dialog);
 
-            bottomSheet = dialog.findViewById(R.id.design_bottom_sheet);
+            bottomSheet = dialog.findViewById(com.denzcoskun.imageslider.R.id.design_bottom_sheet);
             if (bottomSheet != null) {
                 BottomSheetBehavior<FrameLayout> behavior = BottomSheetBehavior.from(bottomSheet);
                 behavior.setSkipCollapsed(false);
@@ -990,7 +990,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         dialog.setContentView(binding.getRoot());
         dialog.setCancelable(true);
         changeStatusBarColor(dialog);
-        bottomSheet = dialog.findViewById(R.id.design_bottom_sheet);
+        bottomSheet = dialog.findViewById(com.denzcoskun.imageslider.R.id.design_bottom_sheet);
         if (bottomSheet != null) {
             BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
             behavior.setSkipCollapsed(false);

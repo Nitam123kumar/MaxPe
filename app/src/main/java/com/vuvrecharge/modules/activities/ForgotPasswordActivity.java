@@ -166,7 +166,7 @@ public class ForgotPasswordActivity extends BaseActivity implements DefaultView,
 
             changeStatusBarColor(dialog);
             binding_.mobileMessage.setText("Please enter the code sent to +91-" + mobile + "");
-            bottomSheet = dialog.findViewById(R.id.design_bottom_sheet);
+            bottomSheet = dialog.findViewById(com.androidadvance.topsnackbar.R.id.design_bottom_sheet);
             if (bottomSheet != null) {
                 BottomSheetBehavior<FrameLayout> behavior = BottomSheetBehavior.from(bottomSheet);
                 behavior.setSkipCollapsed(false);

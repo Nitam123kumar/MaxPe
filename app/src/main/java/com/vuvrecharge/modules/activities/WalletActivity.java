@@ -148,7 +148,7 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
         TextView more_details = layout.findViewById(R.id.more_details);
         TextView transaction_successful_textView = layout.findViewById(R.id.transaction_successful_textView);
 
-        bottomSheet = bottomSheetDialog.findViewById(R.id.design_bottom_sheet);
+        bottomSheet = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
         if (bottomSheet != null) {
             BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
             behavior.setSkipCollapsed(false);

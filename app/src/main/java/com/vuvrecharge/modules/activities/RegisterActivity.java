@@ -199,7 +199,7 @@ public class RegisterActivity extends BaseActivity implements DefaultView, View.
 
             changeStatusBarColor(dialog);
             binding_.mobileMessage.setText("Please enter the code sent to +91-" + enter_mobile_no.getText().toString() + "");
-            bottomSheet = dialog.findViewById(R.id.design_bottom_sheet);
+            bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
             if (bottomSheet != null) {
                 BottomSheetBehavior<FrameLayout> behavior = BottomSheetBehavior.from(bottomSheet);
                 behavior.setSkipCollapsed(false);

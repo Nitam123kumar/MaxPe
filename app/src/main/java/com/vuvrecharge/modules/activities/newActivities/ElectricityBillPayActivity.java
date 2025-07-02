@@ -1277,7 +1277,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             dialog1.setContentView(binding.getRoot());
             dialog1.setCancelable(true);
             changeStatusBarColor(dialog1);
-            bottomSheet = dialog1.findViewById(R.id.design_bottom_sheet);
+            bottomSheet = dialog1.findViewById(com.google.android.material.R.id.design_bottom_sheet);
             if (bottomSheet != null) {
                 BottomSheetBehavior<FrameLayout> behavior = BottomSheetBehavior.from(bottomSheet);
                 behavior.setSkipCollapsed(false);
@@ -1321,7 +1321,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             bottomSheetDialog.setContentView(_binding.getRoot());
             bottomSheetDialog.setCancelable(false);
             changeStatusBarColor(bottomSheetDialog);
-            bottomSheet = bottomSheetDialog.findViewById(R.id.design_bottom_sheet);
+            bottomSheet = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
             if (bottomSheet != null) {
                 BottomSheetBehavior<FrameLayout> behavior = BottomSheetBehavior.from(bottomSheet);
                 behavior.setSkipCollapsed(false);

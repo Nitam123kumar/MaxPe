@@ -318,7 +318,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.Holder> {
                 dialog = new BottomSheetDialog(mContext, R.style.AppBottomSheetDialogTheme);
                 dialog.setContentView(binding.getRoot());
                 dialog.setCancelable(true);
-                bottomSheet = dialog.findViewById(R.id.design_bottom_sheet);
+                bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
                 if (bottomSheet != null) {
                     BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
                     behavior.setSkipCollapsed(false);

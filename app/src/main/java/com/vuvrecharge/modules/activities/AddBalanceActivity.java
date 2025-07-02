@@ -482,7 +482,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
         RecyclerView recyclerView = layout.findViewById(R.id.using_payment_recyclerView);
 
         changeStatusBarColor(bottomSheetDialog);
-        bottomSheet = bottomSheetDialog.findViewById(R.id.design_bottom_sheet);
+        bottomSheet = bottomSheetDialog.findViewById(com.denzcoskun.imageslider.R.id.design_bottom_sheet);
         if (bottomSheet != null) {
             BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
             behavior.setSkipCollapsed(false);

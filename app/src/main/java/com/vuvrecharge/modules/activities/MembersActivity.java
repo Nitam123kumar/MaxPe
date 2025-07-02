@@ -270,7 +270,7 @@ public class MembersActivity extends BaseActivity implements DefaultView, View.O
             dialog.setCancelable(false);
             changeStatusBarColor(dialog);
 
-            bottomSheet = dialog.findViewById(R.id.design_bottom_sheet);
+            bottomSheet = dialog.findViewById(com.androidadvance.topsnackbar.R.id.design_bottom_sheet);
             if (bottomSheet != null) {
                 BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
                 behavior.setSkipCollapsed(false);

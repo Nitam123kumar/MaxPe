@@ -508,7 +508,7 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
             binding_.query.setHint("Describe you problem");
             submit = binding_.submit;
             loading_dialog = binding_.loading;
-            bottomSheet = dialog.findViewById(R.id.design_bottom_sheet);
+            bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
             if (bottomSheet != null) {
                 BottomSheetBehavior<FrameLayout> behavior = BottomSheetBehavior.from(bottomSheet);
                 behavior.setSkipCollapsed(false);

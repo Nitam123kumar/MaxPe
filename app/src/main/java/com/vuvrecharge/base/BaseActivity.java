@@ -580,7 +580,7 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
                 params.bottomMargin + 100);
         snackBarView.getChildAt(0).setLayoutParams(params);
         snackbarView.setBackgroundColor(Color.parseColor("#00000000"));
-        TextView textView = snackbarView.findViewById(R.id.snackbar_text);
+        TextView textView = snackbarView.findViewById(com.denzcoskun.imageslider.R.id.snackbar_text);
         textView.setTextColor(Color.WHITE);
         textView.setBackgroundResource(R.drawable.corner_primary_gr);
         textView.setPadding(10, 10, 10, 10);
@@ -732,7 +732,7 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
                     0);
             snackBarView.getChildAt(0).setLayoutParams(params);
             snackbarView.setBackgroundColor(getResources().getColor(R.color.green_end));
-            TextView textView = snackbarView.findViewById(R.id.snackbar_text);
+            TextView textView = snackbarView.findViewById(com.denzcoskun.imageslider.R.id.snackbar_text);
             textView.setTextColor(Color.WHITE);
             textView.setMaxLines(5);
             textView.setPadding(3, 3, 3, 3);
@@ -765,7 +765,7 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
                     0);
             snackBarView.getChildAt(0).setLayoutParams(params);
             snackbarView.setBackgroundColor(getResources().getColor(R.color.green_end));
-            TextView textView = snackbarView.findViewById(R.id.snackbar_text);
+            TextView textView = snackbarView.findViewById(com.denzcoskun.imageslider.R.id.snackbar_text);
             textView.setTextColor(Color.WHITE);
             textView.setMaxLines(5);
             textView.setPadding(3, 3, 3, 3);
@@ -792,7 +792,7 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
                 toastCountDown.cancel();
             }
             custom = Toasty.custom(getActivity(), message + " ",
-                    R.drawable.cross_new, R.color.errorColor, 5000, false,
+                    R.drawable.cross_new, es.dmoral.toasty.R.color.errorColor, 5000, false,
                     true);
             custom.setGravity(Gravity.TOP, 0, 10);
             toastCountDown = new CountDownTimer(5000, 1000 /*Tick duration*/) {
@@ -875,7 +875,7 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
             snackBarView.getChildAt(1).setLayoutParams(params);
             snackBarView.setOverScrollMode(1);
             snackbarView.setBackgroundColor(getResources().getColor(R.color.pending));
-            TextView textView = snackbarView.findViewById(R.id.snackbar_text);
+            TextView textView = snackbarView.findViewById(com.denzcoskun.imageslider.R.id.snackbar_text);
             textView.setTextColor(Color.WHITE);
             textView.setMaxLines(5);
             textView.setPadding(3, 0, 3, 0);
@@ -908,7 +908,7 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
             snackBarView.getChildAt(0).setLayoutParams(params);
             snackBarView.setOverScrollMode(1);
             snackbarView.setBackgroundColor(getResources().getColor(R.color.bgg_e));
-            TextView textView = snackbarView.findViewById(R.id.snackbar_text);
+            TextView textView = snackbarView.findViewById(com.denzcoskun.imageslider.R.id.snackbar_text);
             textView.setTextColor(Color.WHITE);
             textView.setMaxLines(5);
             textView.setPadding(3, 8, 3, 3);
