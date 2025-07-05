@@ -219,7 +219,7 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
                 if (mReportsData.getStatus().equals("PENDING")) {
                     changeStatusBarColorProcess();
                     load.setVisibility(VISIBLE);
-                    mToolbar.setBackgroundColor(getResources().getColor(R.color.pending));
+                    mToolbar.setBackgroundColor(getResources().getColor(R.color.pending1));
                     title.setText("Transaction Processing");
                     Glide.with(this)
                             .asGif()
@@ -227,9 +227,11 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
                             .into(imgResponse);
                     second_layout.setBackgroundResource(R.drawable.pending_transaction_drawable);
                     amountDebit.setVisibility(VISIBLE);
+                    commission_bg.setVisibility(GONE);
                 } else if (mReportsData.getStatus().equals("SUCCESS")) {
-                    changeStatusBarColorGreen();
+                    changeStatusBarColorGreen1();
                     amountDebit.setVisibility(VISIBLE);
+                    commission_bg.setVisibility(VISIBLE);
                     second_layout.setBackgroundResource(R.drawable.green_transaction_drawable);
                     Glide.with(this)
                             .asGif()
@@ -251,7 +253,7 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
                     }
 
                     remark.setVisibility(GONE);
-                    mToolbar.setBackgroundColor(getResources().getColor(R.color.success));
+                    mToolbar.setBackgroundColor(getResources().getColor(R.color.success1));
                     load.setVisibility(GONE);
                     title.setText("Transaction Successful");
                 } else {
@@ -262,9 +264,10 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
                             .asGif()
                             .load(R.drawable.animated_wrong)
                             .into(imgResponse);
-                    mToolbar.setBackgroundColor(getResources().getColor(R.color.failed));
+                    mToolbar.setBackgroundColor(getResources().getColor(R.color.failed1));
                     title.setText("Transaction Failed");
                     load.setVisibility(GONE);
+                    commission_bg.setVisibility(GONE);
                 }
             }
 
@@ -330,8 +333,9 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
             amount_wallet_2.setText("\u20b9" + mReportsData.getAmount());
             DecimalFormat decimalFormat = new DecimalFormat("0.000");
             double final_charge = Double.parseDouble(mReportsData.getFinal_charge());
+           double points = Double.parseDouble(mReportsData.getPoints());
             double amount = Double.parseDouble(mReportsData.getAmount());
-            double commission_details = amount - final_charge;
+            double commission_details = amount - final_charge-points;
             commission.setText("\u20b9" + decimalFormat.format(commission_details));
             debit.setText("\u20b9" + mReportsData.getFinal_charge());
 
@@ -342,15 +346,13 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
                     remark.setText("Reason : " + mReportsData.getOperator_ref());
                 }
                 remark.setVisibility(VISIBLE);
-                commission_bg.setVisibility(GONE);
             }
             else {
-                if (mReportsData.getStatus().toUpperCase().equals("PENDING")) {
+                if (mReportsData.getStatus().toUpperCase().equals("PENDING")){
                     remark.setVisibility(GONE);
-                    commission_bg.setVisibility(VISIBLE);
                 } else {
                     remark.setVisibility(VISIBLE);
-                    commission_bg.setVisibility(VISIBLE);
+
                 }
             }
 

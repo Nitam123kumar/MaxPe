@@ -1,6 +1,6 @@
 package com.vuvrecharge.modules.adapter;
 
-import static com.vuvrecharge.api.ApiServices.SLIDE;
+//import static com.vuvrecharge.api.ApiServices.SLIDE;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -47,12 +47,12 @@ public class AffiliateAdapter extends RecyclerView.Adapter<AffiliateAdapter.Affi
                 .placeholder(R.drawable.no)
                 .error(R.drawable.no);
 
-        if (!list.get(position).getSlide().isEmpty()) {
-            Glide.with(context)
-                    .load(SLIDE+list.get(position).getSlide())
-                    .apply(options)
-                    .into(holder.image_view);
-        }
+//        if (!list.get(position).getSlide().isEmpty()) {
+//            Glide.with(context)
+//                    .load(SLIDE+list.get(position).getSlide())
+//                    .apply(options)
+//                    .into(holder.image_view);
+//        }
 
         holder.image_view.setOnClickListener(v -> {
             try {

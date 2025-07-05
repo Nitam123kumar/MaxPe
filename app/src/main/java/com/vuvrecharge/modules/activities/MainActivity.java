@@ -1,5 +1,7 @@
 package com.vuvrecharge.modules.activities;
 
+import static com.vuvrecharge.api.ApiServices.OFFER_ZONE;
+
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -46,6 +48,7 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.tabs.TabLayout;
@@ -57,7 +60,6 @@ import com.google.android.play.core.install.InstallStateUpdatedListener;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.vuvrecharge.R;
-import com.vuvrecharge.api.ApiGetResponse;
 import com.vuvrecharge.base.BaseActivity;
 import com.vuvrecharge.base.BaseMethod;
 import com.vuvrecharge.custom.HtmlImageGetter;
@@ -74,11 +76,12 @@ import com.vuvrecharge.modules.adapter.RecyclerViewSliderAdapter;
 import com.vuvrecharge.modules.adapter.SliderAdapter;
 import com.vuvrecharge.modules.adapter.SliderAdapterBanner;
 import com.vuvrecharge.modules.model.DashboardMenu;
+import com.vuvrecharge.modules.model.OfferSlider;
 import com.vuvrecharge.modules.model.PaymentSetting;
 import com.vuvrecharge.modules.model.SliderData;
 import com.vuvrecharge.modules.model.SliderItems;
 import com.vuvrecharge.modules.model.UserData;
-import com.vuvrecharge.modules.model.youtube_slides;
+import com.vuvrecharge.modules.model.YoutubeSlides;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 import com.vuvrecharge.utils.permission.PermissionUtil;
@@ -95,9 +98,6 @@ import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends BaseActivity implements DefaultView,
         View.OnClickListener, DashboardAdapter.ItemClickListener,
@@ -133,6 +133,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
     ImageView share;
     @BindView(R.id.whatsup_alert)
     ImageView whatsup_alert;
+    @BindView(R.id.headerImage)
+    ImageView headerImage;
     @BindView(R.id.news)
     TextView news;
     @BindView(R.id.no_internet)
@@ -170,12 +172,14 @@ public class MainActivity extends BaseActivity implements DefaultView,
     @BindView(R.id.recyclerviewDashboard)
     RecyclerView recyclerviewDashboard;
     List<String> color;
+    List<String> youtubeVideosList;
+    List<String> imageList_offer;
     DashboardAdapter adapter;
     List<DashboardMenu> menus = new ArrayList<>();
     List<SliderItems> sliderItemsList = new ArrayList<>();
     Timer timer1 = new Timer();
     ArrayList<PaymentSetting> list = new ArrayList<>();
-    ArrayList<youtube_slides> youtubeVideos = new ArrayList<>();
+    ArrayList<YoutubeSlides> youtubeVideos = new ArrayList<>();
     String data = null;
     String allServices = null;
     String dataPayment = null;
@@ -229,14 +233,10 @@ public class MainActivity extends BaseActivity implements DefaultView,
 
         );
         offer_for_you_recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        offerSliderAdapter = new OfferSliderRecyclerViewAdapter(this, imageList_offer);
-        offer_for_you_recyclerView.setAdapter(offerSliderAdapter);
+        image_slider.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
 
 
-//        PagerSnapHelper snapHelper = new PagerSnapHelper();
-//        snapHelper.attachToRecyclerView(image_slider);
-//
 //        startAutoScroll();
 
     }
@@ -308,33 +308,6 @@ public class MainActivity extends BaseActivity implements DefaultView,
         dialog.show();
     }
 
-    private void apiResponse(){
-
-        image_slider.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        sliderAdapter = new RecyclerViewSliderAdapter(this, youtubeVideos);
-        image_slider.setAdapter(sliderAdapter);
-
-        Call<youtube_slides> data=new ApiGetResponse().apiService.getThumbnail();
-        data.enqueue(new Callback<youtube_slides>() {
-            @Override
-            public void onResponse(Call<youtube_slides> call, Response<youtube_slides> response) {
-                youtube_slides data1 = response.body();
-                if (response.isSuccessful()){
-                    youtubeVideos.add(data1);
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<youtube_slides> call, Throwable throwable) {
-
-            }
-        });
-
-
-    }
-
-
     private void setData(
             String from
     ) {
@@ -364,7 +337,6 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 color.add(mDatabase.getUserData().getSlide_path() + "/" + image.getSlide());
             }
 
-
             viewPager.setAdapter(new SliderAdapterBanner(getActivity(), color, userData.getSlides()));
             indicator.setupWithViewPager(viewPager, true);
             if (timer1 != null) {
@@ -372,6 +344,37 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 timer1 = new Timer();
                 timer1.schedule(new SliderTimer(),4000,4000);
             }
+
+            youtubeVideosList = new ArrayList<>();
+            List<YoutubeSlides> youtubeSlidesImages = (mDatabase.getUserData().getYoutubeVideoSliders());
+            for (YoutubeSlides youtubeSlidesImage : youtubeSlidesImages) {
+                youtubeVideosList.add(mDatabase.getUserData().getYoutube_path() + "/" + youtubeSlidesImage.getThumbnail()+youtubeSlidesImage.getTitle());
+            }
+
+            sliderAdapter = new RecyclerViewSliderAdapter(this,youtubeVideosList,userData.getYoutubeVideoSliders());
+            image_slider.setAdapter(sliderAdapter);
+
+
+            String main_hero_banner1=OFFER_ZONE+mDatabase.getUserData().getMain_hero_banner();
+            if (main_hero_banner1 != null){
+                Glide.with(getActivity()).load(main_hero_banner1).into(headerImage);
+            }
+
+            imageList_offer = new ArrayList<>();
+            List<OfferSlider> offer_sliders = (mDatabase.getUserData().getOffer_slides());
+            for (OfferSlider offerSlides : offer_sliders) {
+                youtubeVideosList.add(mDatabase.getUserData().getOffer_slides_path() + "/" + offerSlides.getLogo()+getTitle());
+            }
+
+            offerSliderAdapter = new OfferSliderRecyclerViewAdapter(this, imageList_offer,userData.getOffer_slides());
+            offer_for_you_recyclerView.setAdapter(offerSliderAdapter);
+
+
+
+
+
+
+
 
             if (from.equals("Api")) {
                 PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(),0);

@@ -1,8 +1,15 @@
 package com.vuvrecharge.modules.activities;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -77,6 +84,7 @@ public class HelpLineActivity extends BaseActivity implements DefaultView,View.O
         }
         mDefaultPresenter.getCustomerCareNumber(DTH);
         initializeEventsList();
+        setStatusBarGradiant(this);
 
 
     }
@@ -85,6 +93,18 @@ public class HelpLineActivity extends BaseActivity implements DefaultView,View.O
     protected void onResume() {
         super.onResume();
         setLayout(no_internet, retry, "helpLine");
+    }
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
     }
 
     private void initializeEventsList() {

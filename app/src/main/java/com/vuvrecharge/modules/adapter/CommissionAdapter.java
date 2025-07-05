@@ -1,5 +1,8 @@
 package com.vuvrecharge.modules.adapter;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +13,7 @@ import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -66,6 +70,8 @@ public class CommissionAdapter extends RecyclerView.Adapter<CommissionAdapter.Ho
         @BindView(R.id.imgLogo)
         CircleImageView imgLogo;
 
+        @BindView(R.id.hightLight)
+        ConstraintLayout hightLight;
         @BindView(R.id.txtOperator)
         TextView txtOperator;
         @BindView(R.id.txtOperatorValue)
@@ -83,6 +89,18 @@ public class CommissionAdapter extends RecyclerView.Adapter<CommissionAdapter.Ho
             Glide.with(mContext)
                     .load(url+"/"+mCommissionData.getLogo())
                     .into(imgLogo);
+
+            if (mCommissionData.getName().equals("Vi ( Voda & Idea )")
+                    || mCommissionData.getName().equals("VIDEOCON DTH TV")
+                    || mCommissionData.getName().equals("AIRTEL DIGITAL DTH TV")
+                    ){
+                hightLight.setVisibility(GONE);
+            }
+            else {
+                hightLight.setVisibility(VISIBLE);
+            }
+
+
         }
     }
 

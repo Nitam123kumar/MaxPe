@@ -1,5 +1,8 @@
 package com.vuvrecharge.modules.adapter;
 
+import static com.vuvrecharge.api.ApiServices.OFFER_ZONE;
+import static com.vuvrecharge.api.ApiServices.YOUTUBE_IMAGE_PATH;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +12,10 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.vuvrecharge.R;
+import com.vuvrecharge.modules.model.OfferSlider;
+import com.vuvrecharge.modules.model.YoutubeSlides;
 
 import java.util.List;
 
@@ -17,11 +23,13 @@ public class OfferSliderRecyclerViewAdapter extends RecyclerView.Adapter<OfferSl
 
 
     private Context context;
-    private List<Integer> imageList;
+    private List<OfferSlider> imageList;
+    private List<String> offer_Sliders;
 
-    public OfferSliderRecyclerViewAdapter(Context context, List<Integer> imageList) {
+    public OfferSliderRecyclerViewAdapter(Context context, List<String> offer_Sliders,  List<OfferSlider> imageList) {
         this.context = context;
         this.imageList = imageList;
+        this.offer_Sliders=offer_Sliders;
     }
 
     @NonNull
@@ -33,7 +41,15 @@ public class OfferSliderRecyclerViewAdapter extends RecyclerView.Adapter<OfferSl
 
     @Override
     public void onBindViewHolder(@NonNull OfferSliderViewHolder holder, int position) {
-        holder.imgSlide.setImageResource(imageList.get(position));
+        OfferSlider data = imageList.get(position);
+
+        String logoUrl = data.getLogo();
+        if (!logoUrl.startsWith("http")) {
+            logoUrl = OFFER_ZONE + logoUrl;
+        }
+
+        Glide.with(context).load(logoUrl).placeholder(R.drawable.airtel_icon).into(holder.imgSlide);
+
     }
 
     @Override

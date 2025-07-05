@@ -20,16 +20,21 @@
         android:layout_height="match_parent"
         android:fillViewport="true"
         android:fitsSystemWindows="true">
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            >
 
             <LinearLayout
                 android:id="@+id/share_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:elevation="0.5dp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:background="@drawable/payment_bg_color"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -290,17 +295,26 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/viewCircle"/>
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/shape"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/payment_section_shape"
+                        android:elevation="@dimen/_10sdp"
+                        app:layout_constraintTop_toBottomOf="@id/txtTransaction">
                     <LinearLayout
                         android:id="@+id/third_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:background="@drawable/transaction_details"
-                        android:elevation="@dimen/_12sdp"
                         android:layout_marginTop="@dimen/_12sdp"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        app:layout_constraintTop_toBottomOf="@id/txtTransaction">
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        >
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -442,7 +456,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:elevation="@dimen/_12sdp"
                         android:background="@drawable/transaction_details"
                         android:orientation="vertical"
                         android:layout_marginStart="@dimen/_10sdp"
@@ -591,6 +604,7 @@
                         </RelativeLayout>
 
                     </RelativeLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
@@ -599,12 +613,12 @@
                 android:id="@+id/commission_bg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:padding="@dimen/_5sdp"
                 android:background="@drawable/commission_details"
-                app:layout_constraintTop_toBottomOf="@id/forth_layout">
+                app:layout_constraintTop_toBottomOf="@id/share_view">
 
                 <TextView
                     android:id="@+id/txtCommission"
@@ -645,23 +659,28 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/done_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:padding="@dimen/_8sdp">
+                android:padding="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@+id/commission_bg"
+                >
 
                 <TextView
                     android:id="@+id/addMore"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="34dp"
                     android:text="Share Receipt"
-                    android:gravity="center"
+                    android:paddingStart="@dimen/_20sdp"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="@dimen/_10sdp"
                     android:textColor="@color/colorPrimaryB"
                     android:textStyle="bold"
-                    android:padding="@dimen/_8sdp"
+                    android:drawableStart="@drawable/share_receipt"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@drawable/share_drawable"
                     app:layout_constraintStart_toStartOf="parent"
@@ -672,13 +691,12 @@
                 <TextView
                     android:id="@+id/done"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="34dp"
                     android:text="Done"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:textColor="@color/white"
-                    android:padding="@dimen/_8sdp"
                     android:textStyle="bold"
-                    android:background="@drawable/add_balance_button_drawable"
+                    android:background="@drawable/ad_money_button_shape"
                     android:gravity="center"
                     app:layout_constraintStart_toEndOf="@id/addMore"
                     app:layout_constraintTop_toTopOf="@id/addMore"
@@ -699,7 +717,10 @@
                 android:padding="@dimen/_10sdp"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_11sdp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/done_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
             <TextView
                 android:id="@+id/electricity_notes"
@@ -710,8 +731,11 @@
                 android:text="Your service provider may take two working days to consider bill paid."
                 android:textColor="@color/black_2"
                 android:textSize="@dimen/_12sdp"
-                android:visibility="gone" />
-        </LinearLayout>
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/complain_details"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
 </RelativeLayout>

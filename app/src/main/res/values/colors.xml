@@ -88,7 +88,10 @@
     <color name="custom_input_border">#F2F2F2</color>
     <color name="re_yellow_light">#EEAB58</color>
     <color name="pending">#FFA51F</color>
+    <color name="pending1">#FFA520</color>
     <color name="success">#56BA4F</color>
+    <color name="success1">#26A652</color>
     <color name="failed">#FF3333</color>
+    <color name="failed1">#E30613</color>
 
 </resources>

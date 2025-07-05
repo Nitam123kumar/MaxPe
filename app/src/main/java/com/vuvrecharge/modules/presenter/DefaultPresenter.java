@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.animation.Animation;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -1392,11 +1393,12 @@ public class DefaultPresenter {
                     }
                     if (response.isSuccessful() && response.code() == 200) {
                         DefaultResponse body = response.body();
-//                        Log.d("TAG_DATA", "onResponse: "+body.getData());
+                        Log.d("TAG_DATA", "onResponse: "+body.getData());
                         if (body != null) {
                             try {
                                 if (body.getSuccess() == 1) {
 //                                    Log.d("TAG_DATA", "onResponse: "+body.getData());
+
                                     JSONObject jsonObject = new JSONObject(body.getData() + "\n" + body.getMessage());
                                     mDefaultView.onPrintLog(jsonObject.toString());
                                     mDefaultView.onSuccess(jsonObject.toString(), "");
@@ -1501,6 +1503,58 @@ public class DefaultPresenter {
 
             JSONObject data = new JSONObject();
             data.put("request_url", ApiServices.onlineDepositHistory);
+            data.put("post_data", post_data);
+            mDefaultView.onShowDialog("Loading...");
+
+
+            String data_final = data.toString();
+            String encrypted = Java_AES_Cipher.encrypt(BaseMethod.key, BaseMethod.iv, data_final);
+            Call<DefaultResponse> responseCall = MyApplication.getInstance()
+                    .getApiInterface()
+                    .defaultRequest(encrypted);
+            responseCall.enqueue(new Callback<DefaultResponse>() {
+                @Override
+                public void onResponse(@NotNull Call<DefaultResponse> call, @NotNull Response<DefaultResponse> response) {
+                    mDefaultView.onHideDialog();
+                    if (response.isSuccessful() && response.code() == 200) {
+                        DefaultResponse body = response.body();
+                        if (body != null) {
+                            try {
+                                if (body.getSuccess() == 1) {
+                                    JSONObject jsonObject = new JSONObject(body.getData());
+                                    mDefaultView.onPrintLog(jsonObject.toString());
+                                    mDefaultView.onSuccess(jsonObject.toString());
+                                } else {
+                                    mDefaultView.onSuccessOther(body.getMessage());
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    } else {
+                        mDefaultView.onError("Error Bad Url");
+                    }
+                }
+
+                @Override
+                public void onFailure(@NotNull Call<DefaultResponse> call, @NotNull Throwable t) {
+                    mDefaultView.onHideDialog();
+                    mDefaultView.onError("Error during " + t.getMessage());
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void recentSuccessDepositHistory(String device_id) {
+        try {
+            JSONObject post_data = new JSONObject();
+            post_data.put("device_id", device_id.trim());
+            post_data.put("token", mDatabase.getToken());
+
+            JSONObject data = new JSONObject();
+            data.put("request_url", ApiServices.recentSuccessDepositHistory);
             data.put("post_data", post_data);
             mDefaultView.onShowDialog("Loading...");
 
@@ -3823,12 +3877,13 @@ public class DefaultPresenter {
         }
     }
 
-    public void getFeedback(String device_id, String message) {
+    public void getFeedback(String device_id, String message,Integer ratings) {
         try {
             JSONObject post_data = new JSONObject();
             post_data.put("device_id", device_id);
             post_data.put("token", mDatabase.getToken());
             post_data.put("message", message);
+            post_data.put("ratings", ratings);
             JSONObject data = new JSONObject();
             data.put("request_url", ApiServices.getFeedback);
             data.put("post_data", post_data);

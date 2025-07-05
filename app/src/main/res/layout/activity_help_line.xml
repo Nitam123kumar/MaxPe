@@ -1,31 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_wallet_shape"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+            <include layout="@layout/bill_payment_layout"
+                android:id="@+id/toolbar"/>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <include layout="@layout/app_bar_custom" />
-
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="0dp"
+                android:padding="@dimen/_10sdp"
+                android:background="@drawable/biller_main_shape"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/customber_list"
@@ -41,13 +34,12 @@
                     android:text="Currently no package active"
                     android:textColor="@color/black_2"
                     android:textSize="@dimen/_13sdp"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/customber_list"/>
 
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/loading"
@@ -75,6 +67,5 @@
         </LinearLayout>
 
 
-    </RelativeLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

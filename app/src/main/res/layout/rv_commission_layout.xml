@@ -1,72 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="90dp"
+    android:background="@drawable/commission_item_bg"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    
+    
     <View
-        android:id="@+id/viewRow1"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/viewItem"
+        android:layout_width="60dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:background="@drawable/view_item_commission"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgLogo"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_5sdp"
-        app:layout_constraintStart_toStartOf="@id/viewRow1"
-        app:layout_constraintTop_toTopOf="@id/viewRow1"
-        app:layout_constraintBottom_toBottomOf="@id/viewRow1"/>
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        app:layout_constraintStart_toStartOf="@id/viewItem"
+        app:layout_constraintTop_toTopOf="@id/viewItem"
+        app:layout_constraintBottom_toBottomOf="@id/viewItem"
+        app:layout_constraintEnd_toEndOf="@id/viewItem"/>
 
     <TextView
         android:id="@+id/txtOperator"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Airtel"
-        android:textColor="#242424"
-        android:textSize="13sp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
         android:textStyle="bold"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_11sdp"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        app:layout_constraintEnd_toStartOf="@id/txtOperatorValue"
-        app:layout_constraintStart_toEndOf="@id/imgLogo"
-        app:layout_constraintTop_toTopOf="@id/viewRow1"
-        app:layout_constraintBottom_toBottomOf="@id/viewRow1"/>
+        app:layout_constraintStart_toEndOf="@id/viewItem"
+        app:layout_constraintTop_toTopOf="@id/viewItem"
+        app:layout_constraintBottom_toTopOf="@id/active"
+        />
 <!--    android:textColor="#242424"-->
 <!--    android:singleLine="true"-->
 
     <TextView
+        android:id="@+id/active"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Active"
+        android:textColor="#676767"
+        android:textSize="11sp"
+        app:layout_constraintTop_toBottomOf="@id/txtOperator"
+        app:layout_constraintStart_toStartOf="@id/txtOperator"
+        app:layout_constraintBottom_toBottomOf="@id/viewItem"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/hightLight"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:background="@drawable/highlight_bg"
+        app:layout_constraintTop_toTopOf="@id/txtOperator"
+        app:layout_constraintStart_toEndOf="@id/txtOperator"
+        app:layout_constraintBottom_toBottomOf="@id/txtOperator"
+        android:paddingEnd="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_7sdp"
+        >
+
+        <ImageView
+            android:id="@+id/star_ImgV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/star_img"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="@dimen/_5sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="Popular"
+            android:textSize="11sp"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@id/star_ImgV"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+    <TextView
         android:id="@+id/txtOperatorValue"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="34dp"
         android:text="1.60%"
-        android:textColor="@color/green_end"
-        android:background="@drawable/recharge_commission_text_drawable"
-        android:layout_marginEnd="@dimen/_8sdp"
+        android:background="@drawable/commission_bg"
+        android:layout_marginEnd="@dimen/_12sdp"
         android:elevation="@dimen/_3sdp"
         android:textStyle="bold"
+        android:gravity="center"
         android:ellipsize="start"
-        android:paddingStart="@dimen/_6sdp"
-        android:paddingEnd="@dimen/_6sdp"
-        android:paddingTop="@dimen/_1sdp"
-        android:paddingBottom="@dimen/_1sdp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        app:layout_constraintEnd_toEndOf="@id/viewRow1"
-        app:layout_constraintTop_toTopOf="@id/viewRow1"
-        app:layout_constraintBottom_toBottomOf="@id/viewRow1"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/viewItem"
+        app:layout_constraintBottom_toTopOf="@id/guaranteed"
+        />
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="#4DD9D9D9"
-        app:layout_constraintStart_toStartOf="@id/txtOperator"
+    <TextView
+        android:id="@+id/guaranteed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guaranteed"
+        android:textSize="11sp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:textColor="#676767"
+        app:layout_constraintBottom_toBottomOf="@id/viewItem"
+        app:layout_constraintTop_toBottomOf="@id/txtOperatorValue"
         app:layout_constraintEnd_toEndOf="@id/txtOperatorValue"
-        app:layout_constraintBottom_toBottomOf="@id/viewRow1"/>
-
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

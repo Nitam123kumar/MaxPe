@@ -1,11 +1,14 @@
 package com.vuvrecharge.modules.model;
 
-public class youtube_slides {
+import java.util.List;
+
+public class YoutubeSlides {
+
+
 
     private String title;
     private String link;
     private String thumbnail;
-    private String id;
 
     public String getTitle() {
         return title;
@@ -26,15 +29,6 @@ public class youtube_slides {
 
     public String getThumbnail() {
         return thumbnail;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-
-    public String getId() {
-        return id;
     }
 
     public void setThumbnail(String thumbnail) {

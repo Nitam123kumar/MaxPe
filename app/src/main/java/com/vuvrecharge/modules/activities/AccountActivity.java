@@ -557,7 +557,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                 }
 
                 hideKeyBoard(binding_.feedback);
-                mDefaultPresenter.getFeedback(device_id,binding_.feedback.getText().toString().trim());
+                mDefaultPresenter.getFeedback(device_id,binding_.feedback.getText().toString().trim(),5);
                 dialog.dismiss();
                 hideLoading(loading_dialog);
 

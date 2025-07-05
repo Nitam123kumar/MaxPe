@@ -99,7 +99,7 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
         recyclerView_latest_transitions.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         addPaymentHistoryAdapter = new AddPaymentHistoryAdapter(getLayoutInflater());
         recyclerView_latest_transitions.setAdapter(addPaymentHistoryAdapter);
-        mDefaultPresenter.onlineDepositHistory(device_id + "");
+        mDefaultPresenter.recentSuccessDepositHistory(device_id + "");
 
         try {
             UserData userData = mDatabase.getUserData();

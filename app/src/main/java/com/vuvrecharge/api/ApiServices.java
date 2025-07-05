@@ -1,7 +1,7 @@
 package com.vuvrecharge.api;
 
 import com.vuvrecharge.modules.model.DefaultResponse;
-import com.vuvrecharge.modules.model.youtube_slides;
+import com.vuvrecharge.modules.model.YoutubeSlides;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -32,7 +32,8 @@ public interface ApiServices {
     String IMAGE_SLIDER = "http://192.168.0.16/vuvpayments.com/images/recharge_slides";
     String IMAGE_FOLLOWS = "http://192.168.0.16/vuvpayments.com/images/followers_logo";
     String SLIDE = "http://192.168.0.16/vuvpayments.com/images/app_slides/";
-    String YOUTUBE_VIDEO = "http://192.168.0.16/vuvpayments.com/images/youtube_thumbnail";
+    String YOUTUBE_IMAGE_PATH = "http://192.168.0.16/vuvpayments.com/images/youtube_thumbnail/";
+    String OFFER_ZONE = "http://192.168.0.16/vuvpayments.com/images/offer_zone/";
 
 ////    live
 //    String BBPS_IMAGE_URL = "http://vuvpayments.com/images/services_logo";
@@ -44,6 +45,9 @@ public interface ApiServices {
 //    String IMAGE_FOLLOWS = "http://vuvpayments.com/images/followers_logo";
 //    String SLIDE = "http://vuvpayments.com/images/app_slides/";
 //    String SITE_URL = "https://vuvpayments.com/home/";
+//    String YOUTUBE_IMAGE_PATH = "http://vuvpayments.com/images/youtube_thumbnail/";
+//    String OFFER_ZONE = "http://vuvpayments.com/images/offer_zone/";
+
 
     String privacy = SITE_URL + "privacy_policy";
     String about_us = SITE_URL + "app_about";
@@ -88,6 +92,7 @@ public interface ApiServices {
     String generateChecksum = "generateChecksum";
     String payTMResponse = "payTMResponse";
     String onlineDepositHistory = "onlineDepositHistory";
+    String recentSuccessDepositHistory = "recentSuccessDepositHistory";
     String fundRequestHistory = "fundRequestHistory";
     String fundRequest = "fundRequest";
     String generateCashfreeChecksum = "generateCashfreeChecksum";
@@ -138,9 +143,5 @@ public interface ApiServices {
 //    @POST("apisf/")
     @POST("apise")
     Call<DefaultResponse> defaultRequest(@Field("data") String data);
-
-
-    @GET("images/youtube_thumbnail")
-    Call<youtube_slides> getThumbnail();
 
 }

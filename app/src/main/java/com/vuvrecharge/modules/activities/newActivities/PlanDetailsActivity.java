@@ -82,6 +82,8 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
     LinearLayout loading;
     @BindView(R.id.retry)
     TextView retry;
+    @BindView(R.id.title)
+    TextView title;
     @BindView(R.id.imgOperator)
     ImageView imgOperator;
     @BindView(R.id.txtPhoneNumber)
@@ -137,6 +139,8 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
         circle = getIntent().getStringExtra("circle");
         pageType = getIntent().getStringExtra("pageType");
         shimmerTextView.setText("*Cashback Ki Guarantee!");
+        txtRecharge.setText("Change");
+        title.setText("Plan Summary");
         mDefaultView = this;
         mDefaultPresenter = new DefaultPresenter(this);
         if (pageType.equals("Prepaid")){

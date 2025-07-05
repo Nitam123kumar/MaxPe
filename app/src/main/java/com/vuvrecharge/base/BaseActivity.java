@@ -14,6 +14,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -1000,22 +1001,34 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
         }
     }
 
-    public void changeStatusBarColorRed() {
+    public void changeStatusBarColorGreen1() {
         try {
             Window win = getWindow();
             if (win != null) {
-                win.setStatusBarColor(getResources().getColor(R.color.failed));
+                win.setStatusBarColor(getResources().getColor(R.color.success1));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public void changeStatusBarColorRed() {
+        try {
+            Window win = getWindow();
+            if (win != null) {
+                win.setStatusBarColor(getResources().getColor(R.color.failed1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public void changeStatusBarColorProcess() {
         try {
             Window win = getWindow();
             if (win != null) {
-                win.setStatusBarColor(getResources().getColor(R.color.pending));
+                win.setStatusBarColor(getResources().getColor(R.color.pending1));
             }
         } catch (Exception e) {
             e.printStackTrace();

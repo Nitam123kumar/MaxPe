@@ -10,6 +10,7 @@ public class ReportsData implements Serializable {
     private String number;
     private String amount;
     private String final_charge;
+    private String points;
     private String status;
     private String operator_name;
     private String order_id;
@@ -84,6 +85,14 @@ public class ReportsData implements Serializable {
 
     public void setFinal_charge(String final_charge) {
         this.final_charge = final_charge;
+    }
+
+    public String getPoints() {
+        return points;
+    }
+
+    public void setPoints(String points) {
+        this.points = points;
     }
 
     public String getStatus() {

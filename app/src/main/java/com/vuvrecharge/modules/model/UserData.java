@@ -33,10 +33,14 @@ public class UserData {
     private List<DthCommissionBean> prepaid_commission;
     private List<DthCommissionBean> dth_commission;
     private  List<SliderData> slides;
-    private  List<youtube_slides> youtubeVideos;
+    private  List<YoutubeSlides> youtube_slides;
+    private  List<OfferSlider> offer_slides;
+
     private List<SliderItems> recharge_slides_data;
     String referCode;
     private String shareText;
+    private String offer_slides_path;
+    private String main_hero_banner;
     private String support_number;
     private String support_email;
     private String address;
@@ -48,6 +52,9 @@ public class UserData {
     private String address_logo;
     private String email_logo;
     private String recharge_pay_bill_string;
+    private String youtube_path;
+    private String slide_path;
+
 
     public String getRecharge_pay_bill_string() {
         return recharge_pay_bill_string;
@@ -61,11 +68,35 @@ public class UserData {
         return slide_path;
     }
 
+    public void setMain_hero_banner(String main_hero_banner) {
+        this.main_hero_banner = main_hero_banner;
+    }
+
+    public String getMain_hero_banner() {
+        return main_hero_banner;
+    }
+
     public void setSlide_path(String slide_path) {
         this.slide_path = slide_path;
     }
 
-    private String slide_path;
+
+    public String getYoutube_path() {
+        return youtube_path;
+    }
+
+    public void setYoutube_path(String youtube_path) {
+        this.youtube_path = youtube_path;
+    }
+
+    public String getOffer_slides_path() {
+        return offer_slides_path;
+    }
+
+    public void setOffer_slides_path(String offer_slides_path) {
+        this.offer_slides_path = offer_slides_path;
+    }
+
 
     public String getReferCode() {
         return referCode;
@@ -356,8 +387,11 @@ public class UserData {
         this.whatsapp_number = whatsapp_number;
     }
 
-    public List<youtube_slides> getYoutubeVideo() {
-        return youtubeVideos;
+    public List<YoutubeSlides> getYoutubeVideoSliders() {
+        return youtube_slides;
+    }
+    public List<OfferSlider> getOffer_slides() {
+        return offer_slides;
     }
 
     public List<SliderData> getSlides() {
@@ -366,6 +400,12 @@ public class UserData {
 
     public void setSlides(List<SliderData> slides) {
         this.slides = slides;
+    }
+    public void setYoutubeVideoSliders(List<YoutubeSlides> youtubeVideos) {
+        this.youtube_slides = youtubeVideos;
+    }
+    public void setOffer_slides(List<OfferSlider> offer_slides) {
+        this.offer_slides = offer_slides;
     }
 
     public List<SliderItems> getSliderItemsList() {

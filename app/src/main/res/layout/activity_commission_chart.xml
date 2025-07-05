@@ -5,139 +5,323 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@drawable/main_wallet_shape"
     tools:context=".modules.activities.newActivities.CommissionChartActivity">
 
-    <include layout="@layout/app_bar_custom"
+    <include layout="@layout/bill_payment_layout"
         android:id="@+id/mToolbar"/>
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:fillViewport="true"
-        android:nestedScrollingEnabled="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mToolbar"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/biller_main_shape"
+        app:layout_constraintEnd_toEndOf="parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutFirst"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/_10sdp">
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/recharge_layout"
-                android:layout_width="0dp"
+            android:layout_height="85dp"
+            android:elevation="@dimen/_5sdp"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/rectangle"
+            android:layout_marginTop="@dimen/_20sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/upto1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/commission_chart_drawable"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginStart="@dimen/_14sdp"
-                android:layout_marginEnd="@dimen/_14sdp"
-                android:paddingTop="@dimen/_20sdp"
+                android:text="4%"
+                android:layout_marginEnd="@dimen/_60sdp"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#2563EB"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvPrepaidCommission"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:nestedScrollingEnabled="false"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/Operators"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/_12sdp"/>
 
             <TextView
-                android:id="@+id/txtRecharge"
+                android:id="@+id/upto2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Prepaid"
-                android:background="@drawable/recharge_layout"
-                android:textColor="@color/colorPrimaryB"
-                android:textStyle="bold"
-                android:elevation="@dimen/_2sdp"
-                android:paddingStart="@dimen/_10sdp"
-                android:paddingEnd="@dimen/_10sdp"
-                android:paddingTop="@dimen/_2sdp"
-                android:paddingBottom="@dimen/_2sdp"
-                app:layout_constraintStart_toStartOf="@id/recharge_layout"
-                app:layout_constraintEnd_toEndOf="@id/recharge_layout"
-                app:layout_constraintTop_toTopOf="@id/recharge_layout"
-                app:layout_constraintBottom_toTopOf="@id/recharge_layout"/>
+                android:text="Upto"
+                android:textSize="11sp"
+                android:textColor="#676767"
+                app:layout_constraintTop_toBottomOf="@+id/upto1"
+                app:layout_constraintStart_toStartOf="@id/upto1"
+                app:layout_constraintEnd_toEndOf="@id/upto1" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/tv_layout"
-                android:layout_width="0dp"
+              <TextView
+                android:id="@+id/Operators"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/commission_chart_drawable"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:paddingTop="@dimen/_20sdp"
-                app:layout_constraintStart_toStartOf="@id/recharge_layout"
-                app:layout_constraintEnd_toEndOf="@id/recharge_layout"
-                app:layout_constraintTop_toBottomOf="@id/recharge_layout">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvDTHCommission"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:nestedScrollingEnabled="false"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:text="8"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#3BB698"
+                app:layout_constraintStart_toEndOf="@id/upto1"
+                app:layout_constraintTop_toTopOf="@id/upto1"
+                  app:layout_constraintEnd_toStartOf="@id/Categories"/>
 
             <TextView
-                android:id="@+id/txtTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DTH"
-                android:background="@drawable/recharge_layout"
-                android:textColor="@color/colorPrimaryB"
-                android:textStyle="bold"
-                android:elevation="@dimen/_2sdp"
-                android:paddingStart="@dimen/_10sdp"
-                android:paddingEnd="@dimen/_10sdp"
-                android:paddingTop="@dimen/_2sdp"
-                android:paddingBottom="@dimen/_2sdp"
-                app:layout_constraintStart_toStartOf="@id/tv_layout"
-                app:layout_constraintEnd_toEndOf="@id/tv_layout"
-                app:layout_constraintTop_toTopOf="@id/tv_layout"
-                app:layout_constraintBottom_toTopOf="@id/tv_layout"/>
+                android:text="Operators"
+                android:textSize="11sp"
+                android:textColor="#676767"
+                app:layout_constraintTop_toBottomOf="@+id/Operators"
+                app:layout_constraintStart_toStartOf="@id/Operators"
+                app:layout_constraintEnd_toEndOf="@id/Operators"/>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/other_layout"
-                android:layout_width="0dp"
+              <TextView
+                android:id="@+id/Categories"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/commission_chart_drawable"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:paddingTop="@dimen/_20sdp"
-                app:layout_constraintStart_toStartOf="@id/tv_layout"
-                app:layout_constraintEnd_toEndOf="@id/tv_layout"
-                app:layout_constraintTop_toBottomOf="@id/tv_layout">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvOthersCommission"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:nestedScrollingEnabled="false"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:text="3"
+                  android:layout_marginStart="@dimen/_60sdp"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#9333EA"
+                app:layout_constraintStart_toEndOf="@id/Operators"
+                app:layout_constraintTop_toTopOf="@id/Operators"
+                  app:layout_constraintEnd_toEndOf="parent"/>
 
             <TextView
-                android:id="@+id/txtOther"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bill Payments"
-                android:background="@drawable/recharge_layout"
-                android:textColor="@color/colorPrimaryB"
-                android:textStyle="bold"
-                android:elevation="@dimen/_2sdp"
-                android:paddingStart="@dimen/_10sdp"
-                android:paddingEnd="@dimen/_10sdp"
-                android:paddingTop="@dimen/_2sdp"
-                android:paddingBottom="@dimen/_2sdp"
-                app:layout_constraintStart_toStartOf="@id/other_layout"
-                app:layout_constraintEnd_toEndOf="@id/other_layout"
-                app:layout_constraintTop_toTopOf="@id/other_layout"
-                app:layout_constraintBottom_toTopOf="@id/other_layout"/>
+                android:text="Categories"
+                android:textSize="11sp"
+                android:textColor="#676767"
+                app:layout_constraintTop_toBottomOf="@+id/Categories"
+                app:layout_constraintStart_toStartOf="@id/Categories"
+                app:layout_constraintEnd_toEndOf="@id/Categories"
+                />
+
+
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/commissionViewTab"
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:elevation="@dimen/_3sdp"
+            android:background="@drawable/rectangle"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutFirst">
+
+            <View
+                android:id="@+id/viewPrepaid"
+                android:layout_width="108dp"
+                android:layout_height="39dp"
+                app:layout_constraintStart_toStartOf="@id/commissionViewTab"
+                app:layout_constraintEnd_toStartOf="@id/viewDTH"
+                app:layout_constraintTop_toTopOf="@id/commissionViewTab"
+                app:layout_constraintBottom_toBottomOf="@id/commissionViewTab"/>
+
+            <TextView
+                android:id="@+id/prepaidTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold"
+                android:drawableStart="@drawable/mobile_icon1"
+                android:drawablePadding="10dp"
+                app:layout_constraintStart_toStartOf="@id/viewPrepaid"
+                app:layout_constraintEnd_toEndOf="@id/viewPrepaid"
+                app:layout_constraintTop_toTopOf="@id/viewPrepaid"
+                app:layout_constraintBottom_toBottomOf="@id/viewPrepaid"/>
+
+            <View
+                android:id="@+id/viewDTH"
+                android:layout_width="108dp"
+                android:layout_height="39dp"
+                app:layout_constraintStart_toEndOf="@id/viewPrepaid"
+                app:layout_constraintEnd_toStartOf="@id/viewBillPayments"
+                app:layout_constraintTop_toTopOf="@id/commissionViewTab"
+                app:layout_constraintBottom_toBottomOf="@id/commissionViewTab"/>
+
+            <TextView
+                android:id="@+id/DTHTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/dth_icon1"
+                app:layout_constraintStart_toStartOf="@id/viewDTH"
+                app:layout_constraintEnd_toEndOf="@id/viewDTH"
+                app:layout_constraintTop_toTopOf="@id/viewDTH"
+                app:layout_constraintBottom_toBottomOf="@id/viewDTH"/>
+
+            <View
+                android:id="@+id/viewBillPayments"
+                android:layout_width="115dp"
+                android:layout_height="39dp"
+                app:layout_constraintStart_toEndOf="@id/viewDTH"
+                app:layout_constraintEnd_toEndOf="@id/commissionViewTab"
+                app:layout_constraintTop_toTopOf="@id/commissionViewTab"
+                app:layout_constraintBottom_toBottomOf="@id/commissionViewTab"/>
+
+            <TextView
+                android:id="@+id/billPaymentsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold"
+                android:drawablePadding="5dp"
+                android:drawableStart="@drawable/bill_pay_icon"
+                app:layout_constraintStart_toStartOf="@id/viewBillPayments"
+                app:layout_constraintEnd_toEndOf="@id/viewBillPayments"
+                app:layout_constraintTop_toTopOf="@id/viewBillPayments"
+                app:layout_constraintBottom_toBottomOf="@id/viewBillPayments"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:fillViewport="true"-->
+<!--        android:nestedScrollingEnabled="true"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:layout_marginTop="@dimen/_30sdp"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/commissionViewTab"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent">-->
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:paddingBottom="@dimen/_10sdp">-->
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/recharge_layout"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/commission_chart_drawable"-->
+<!--                android:layout_marginTop="@dimen/_20sdp"-->
+<!--                android:layout_marginStart="@dimen/_14sdp"-->
+<!--                android:layout_marginEnd="@dimen/_14sdp"-->
+<!--                android:paddingTop="@dimen/_20sdp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/rvPrepaidCommission"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:nestedScrollingEnabled="false"/>-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/txtRecharge"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Prepaid"-->
+<!--                android:background="@drawable/recharge_layout"-->
+<!--                android:textColor="@color/colorPrimaryB"-->
+<!--                android:textStyle="bold"-->
+<!--                android:elevation="@dimen/_2sdp"-->
+<!--                android:paddingStart="@dimen/_10sdp"-->
+<!--                android:paddingEnd="@dimen/_10sdp"-->
+<!--                android:paddingTop="@dimen/_2sdp"-->
+<!--                android:paddingBottom="@dimen/_2sdp"-->
+<!--                app:layout_constraintStart_toStartOf="@id/recharge_layout"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/recharge_layout"-->
+<!--                app:layout_constraintTop_toTopOf="@id/recharge_layout"-->
+<!--                app:layout_constraintBottom_toTopOf="@id/recharge_layout"/>-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/tv_layout"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/commission_chart_drawable"-->
+<!--                android:layout_marginTop="@dimen/_20sdp"-->
+<!--                android:paddingTop="@dimen/_20sdp"-->
+<!--                app:layout_constraintStart_toStartOf="@id/recharge_layout"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/recharge_layout"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/recharge_layout">-->
+
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/rvDTHCommission"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:nestedScrollingEnabled="false"/>-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/txtTV"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="DTH"-->
+<!--                android:background="@drawable/recharge_layout"-->
+<!--                android:textColor="@color/colorPrimaryB"-->
+<!--                android:textStyle="bold"-->
+<!--                android:elevation="@dimen/_2sdp"-->
+<!--                android:paddingStart="@dimen/_10sdp"-->
+<!--                android:paddingEnd="@dimen/_10sdp"-->
+<!--                android:paddingTop="@dimen/_2sdp"-->
+<!--                android:paddingBottom="@dimen/_2sdp"-->
+<!--                app:layout_constraintStart_toStartOf="@id/tv_layout"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/tv_layout"-->
+<!--                app:layout_constraintTop_toTopOf="@id/tv_layout"-->
+<!--                app:layout_constraintBottom_toTopOf="@id/tv_layout"/>-->
+
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/other_layout"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/commission_chart_drawable"-->
+<!--                android:layout_marginTop="@dimen/_20sdp"-->
+<!--                android:paddingTop="@dimen/_20sdp"-->
+<!--                app:layout_constraintStart_toStartOf="@id/tv_layout"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/tv_layout"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/tv_layout">-->
+
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/rvOthersCommission"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:nestedScrollingEnabled="false"/>-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/txtOther"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Bill Payments"-->
+<!--                android:background="@drawable/recharge_layout"-->
+<!--                android:textColor="@color/colorPrimaryB"-->
+<!--                android:textStyle="bold"-->
+<!--                android:elevation="@dimen/_2sdp"-->
+<!--                android:paddingStart="@dimen/_10sdp"-->
+<!--                android:paddingEnd="@dimen/_10sdp"-->
+<!--                android:paddingTop="@dimen/_2sdp"-->
+<!--                android:paddingBottom="@dimen/_2sdp"-->
+<!--                app:layout_constraintStart_toStartOf="@id/other_layout"-->
+<!--                app:layout_constraintEnd_toEndOf="@id/other_layout"-->
+<!--                app:layout_constraintTop_toTopOf="@id/other_layout"-->
+<!--                app:layout_constraintBottom_toTopOf="@id/other_layout"/>-->
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--    </ScrollView>-->
 
     <LinearLayout
         android:id="@+id/loading"
@@ -202,5 +386,106 @@
             android:textColor="@color/white" />
 
     </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/commissionViewTab"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <FrameLayout
+                    android:id="@+id/commissionFrameLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/commissionConstraintLayout"
+                    />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/commissionConstraintLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_129sdp"
+                    android:layout_marginHorizontal="@dimen/_5sdp"
+                    app:layout_constraintTop_toBottomOf="@id/commissionFrameLayout"
+                    android:background="@drawable/commission_bg_page">
+
+                    <View
+                        android:id="@+id/viewGS"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/commission_bg_page2"
+                        android:layout_marginHorizontal="@dimen/_2sdp"
+                        android:paddingTop="@dimen/_3sdp"
+                        android:paddingBottom="@dimen/_15sdp"
+                        android:layout_marginVertical="@dimen/_5sdp"
+                        />
+
+                    <TextView
+                        android:id="@+id/turnTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@id/viewGS"
+                        app:layout_constraintEnd_toEndOf="@id/viewGS"
+                        app:layout_constraintTop_toTopOf="@id/viewGS"
+                        android:text="Turn Recharges into Rewards!"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toTopOf="@id/earnTV"
+                        />
+                     <TextView
+                         android:id="@+id/earnTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@id/viewGS"
+                        app:layout_constraintEnd_toEndOf="@id/viewGS"
+                        app:layout_constraintTop_toBottomOf="@id/turnTV"
+                        android:text="Earn instant commission on every recharges &amp; bill payments"
+                        android:textColor="@color/white"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                         app:layout_constraintBottom_toTopOf="@id/getStartedTV"
+                        />
+
+                    <TextView
+                        android:id="@+id/getStartedTV"
+                        android:layout_width="160dp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:text="Get Started"
+                        android:textColor="#084C97"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:gravity="center_vertical"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:paddingStart="@dimen/_20sdp"
+                        android:drawableStart="@drawable/get_start_icon"
+                        android:background="@drawable/get_started_shape"
+                        app:layout_constraintEnd_toEndOf="@id/viewGS"
+                        app:layout_constraintStart_toStartOf="@id/viewGS"
+                        app:layout_constraintTop_toBottomOf="@id/earnTV"
+                        app:layout_constraintBottom_toBottomOf="@id/viewGS"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
