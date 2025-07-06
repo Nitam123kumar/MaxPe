@@ -93,6 +93,7 @@ public class CommissionAdapter extends RecyclerView.Adapter<CommissionAdapter.Ho
             if (mCommissionData.getName().equals("Vi ( Voda & Idea )")
                     || mCommissionData.getName().equals("VIDEOCON DTH TV")
                     || mCommissionData.getName().equals("AIRTEL DIGITAL DTH TV")
+                    || mCommissionData.getName().equals("TATASKY DTH TV")
                     ){
                 hightLight.setVisibility(GONE);
             }

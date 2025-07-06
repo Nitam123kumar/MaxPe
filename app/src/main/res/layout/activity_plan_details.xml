@@ -4,92 +4,271 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/main_wallet_shape"
     tools:context=".modules.activities.newActivities.PlanDetailsActivity">
 
     <include layout="@layout/bill_payment_layout"
         android:id="@+id/mToolBar"/>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/biller_main_shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mToolBar">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/amount_layout"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_220sdp"
-        android:padding="16dp"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:background="@drawable/plan_recharge_dialog"
+        android:layout_height="@dimen/_280sdp"
         app:layout_constraintStart_toStartOf="@id/phone_layout"
         app:layout_constraintEnd_toEndOf="@id/phone_layout"
         app:layout_constraintTop_toBottomOf="@id/phone_layout">
 <!--        #7D7C7C-->
-        <TextView
-            android:id="@+id/txtRechargeAmount"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Recharge Amount"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="@color/black"
-            android:gravity="center"
-            app:layout_constraintVertical_chainStyle="packed"
-            android:layout_marginTop="@dimen/_6sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/viewAmount"
-            app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/viewAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/round_circle_plan_drawable"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:paddingStart="@dimen/_20sdp"
-            android:paddingEnd="@dimen/_20sdp"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            app:layout_constraintStart_toStartOf="@id/txtRechargeAmount"
-            app:layout_constraintEnd_toEndOf="@id/txtRechargeAmount"
-            app:layout_constraintTop_toBottomOf="@id/txtRechargeAmount"
-            app:layout_constraintBottom_toTopOf="@id/txtPlanDetails">
-            <ImageView
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
                 android:id="@+id/imgINR"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/inr"
-                app:tint="@color/colorPrimaryB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="#084C96"
                 android:layout_marginTop="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/txtAmount"
-                app:layout_constraintTop_toTopOf="@id/txtAmount"/>
+                app:layout_constraintStart_toStartOf="@id/viewAmount"
+                app:layout_constraintBottom_toBottomOf="@id/viewAmount"
+                app:layout_constraintTop_toTopOf="@id/viewAmount"/>
             <TextView
                 android:id="@+id/txtAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_30sdp"
-                android:textColor="@color/colorPrimaryB"
+                android:textSize="32sp"
+                android:text="1900"
+                android:textColor="#084C96"
                 android:textStyle="bold"
+                android:fontFamily="@font/roboto_bold"
                 app:layout_constraintStart_toEndOf="@id/imgINR"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/imgINR"
                 app:layout_constraintTop_toTopOf="@id/imgINR" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <View
+            android:id="@+id/viewValidity"
+            android:layout_width="176dp"
+            android:layout_height="69dp"
+            android:layout_marginTop="@dimen/_17sdp"
+            android:background="@drawable/view_validity_shape"
+            app:layout_constraintTop_toBottomOf="@id/viewAmount"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="@dimen/_5sdp"
+            app:layout_constraintEnd_toStartOf="@id/viewData"
+
+            />
+
+        <TextView
+            android:id="@+id/planValidityTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Plan Validity"
+            android:textSize="11sp"
+            android:textColor="#747474"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="@id/viewValidity"
+            app:layout_constraintTop_toTopOf="@id/viewValidity"
+            app:layout_constraintBottom_toTopOf="@id/planDateTV"
+            />
+        <TextView
+            android:id="@+id/planDateTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="84 Day"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/planValidityTV"
+            app:layout_constraintStart_toStartOf="@id/planValidityTV"
+            app:layout_constraintBottom_toBottomOf="@id/viewValidity"
+            />
+
+        <View
+            android:id="@+id/viewData"
+            android:layout_width="176dp"
+            android:layout_height="69dp"
+            android:background="@drawable/view_validity_shape"
+            app:layout_constraintStart_toEndOf="@id/viewValidity"
+            app:layout_constraintTop_toTopOf="@id/viewValidity"
+            app:layout_constraintBottom_toBottomOf="@id/viewValidity"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/_5sdp"
+
+            />
+
+        <TextView
+            android:id="@+id/planDataTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data"
+            android:textSize="11sp"
+            android:textColor="#747474"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="@id/viewData"
+            app:layout_constraintTop_toTopOf="@id/viewData"
+            app:layout_constraintBottom_toTopOf="@id/dataDetailsTV"
+            />
+        <TextView
+            android:id="@+id/dataDetailsTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2GB/Day"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/planDataTV"
+            app:layout_constraintStart_toStartOf="@id/planDataTV"
+            app:layout_constraintBottom_toBottomOf="@id/viewData"
+            />
+
+        <View
+            android:id="@+id/viewVoice"
+            android:layout_width="176dp"
+            android:layout_height="69dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/view_validity_shape"
+            app:layout_constraintTop_toBottomOf="@id/viewValidity"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="@dimen/_5sdp"
+            app:layout_constraintEnd_toStartOf="@id/viewSMS"
+
+            />
+
+        <TextView
+            android:id="@+id/planVoiceTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Voice"
+            android:textSize="11sp"
+            android:textColor="#747474"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="@id/viewVoice"
+            app:layout_constraintTop_toTopOf="@id/viewVoice"
+            app:layout_constraintBottom_toTopOf="@id/planUnlimitedTV"
+            />
+        <TextView
+            android:id="@+id/planUnlimitedTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Unlimited"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/planVoiceTV"
+            app:layout_constraintStart_toStartOf="@id/planVoiceTV"
+            app:layout_constraintBottom_toBottomOf="@id/viewVoice"
+            />
+
+        <View
+            android:id="@+id/viewSMS"
+            android:layout_width="176dp"
+            android:layout_height="69dp"
+            android:background="@drawable/view_validity_shape"
+            app:layout_constraintStart_toEndOf="@id/viewVoice"
+            app:layout_constraintTop_toTopOf="@id/viewVoice"
+            app:layout_constraintBottom_toBottomOf="@id/viewVoice"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/_5sdp"
+
+            />
+
+        <TextView
+            android:id="@+id/planSmsTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SMS"
+            android:textSize="11sp"
+            android:textColor="#747474"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="@id/viewSMS"
+            app:layout_constraintTop_toTopOf="@id/viewSMS"
+            app:layout_constraintBottom_toTopOf="@id/smsDetailsTV"
+            />
+        <TextView
+            android:id="@+id/smsDetailsTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100 SMS/Day"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/planSmsTV"
+            app:layout_constraintStart_toStartOf="@id/planSmsTV"
+            app:layout_constraintBottom_toBottomOf="@id/viewSMS"
+            />
+
+        <TextView
+            android:id="@+id/noteTView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Note:"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/viewVoice"
+            app:layout_constraintStart_toStartOf="@id/viewVoice"
+            />
+
+        <TextView
+            android:id="@+id/noteDet"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:textColor="#918F8F"
+            app:layout_constraintStart_toStartOf="@id/noteTView"
+            app:layout_constraintTop_toBottomOf="@id/noteTView"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Benefits include 6GB of 4G data and unlimited 5G data for users\nwith an active 1GB/day plan (valid up to 28 days) or a 1.5GB/day\nplan (valid for 28 to 56 days)."
+            android:textStyle="bold"
+            android:textSize="10sp"
+            />
+
+
         <TextView
             android:id="@+id/txtPlanDetails"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/view_plan_details"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="Additional Information "
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="#084AAA"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:layout_marginBottom="@dimen/_13sdp"
-            app:layout_constraintStart_toStartOf="@id/txtRechargeAmount"
-            app:layout_constraintEnd_toEndOf="@id/txtRechargeAmount"
-            app:layout_constraintTop_toBottomOf="@id/viewAmount"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:textColor="#918F8F"
+            android:layout_marginTop="15dp"
+            android:gravity="center_vertical"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:drawableEnd="@drawable/drap_icon"
+            android:paddingEnd="@dimen/_10sdp"
+            android:fontFamily="@font/roboto"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/noteDet"
+
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -98,10 +277,11 @@
         android:layout_width="match_parent"
         android:layout_height="110dp"
         android:orientation="horizontal"
-        android:background="@drawable/background_operator_information"
-        android:layout_margin="@dimen/_20sdp"
+        android:background="@drawable/plan_details_shape"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:layout_gravity="center_vertical"
-        app:layout_constraintTop_toBottomOf="@id/mToolBar">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imgOperator"
@@ -111,7 +291,7 @@
             android:src="@drawable/upi"
             android:padding="8dp"
             android:contentDescription="@string/app_name"
-            android:background="@drawable/plan_drawable_background"
+            android:background="@drawable/recharge_logo_shape"
             android:layout_marginStart="16dp"/>
 
         <LinearLayout
@@ -129,7 +309,7 @@
                 android:textStyle="bold"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:layout_marginTop="@dimen/_10sdp"/>
 
             <TextView
@@ -140,7 +320,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:layout_marginBottom="5dp"/>
 
             <TextView
@@ -150,7 +330,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/color_c"
+                android:textColor="@color/black"
                 android:layout_marginBottom="@dimen/_10sdp"/>
 
 
@@ -158,73 +338,103 @@
 
         <TextView
             android:id="@+id/txtRecharge"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="62dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:text="Change"
-            android:padding="@dimen/_10sdp"
             android:layout_weight="1"
+            android:textSize="12sp"
             android:gravity="center"
             android:textColor="@color/black"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/edit_txt_bg"/>
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/change_number_shape"/>
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/txtShimmerWarning"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="@dimen/_10sdp"
-        android:paddingBottom="@dimen/_10sdp"
-        android:background="@drawable/cashback_line_background"
+        android:layout_height="50dp"
+        android:background="@drawable/support_design_background_shape"
         app:layout_constraintStart_toStartOf="@id/amount_layout"
         app:layout_constraintEnd_toEndOf="@id/amount_layout"
-        app:layout_constraintTop_toBottomOf="@id/amount_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/_5sdp"
         app:layout_constraintBottom_toTopOf="@id/btnSubmit">
         <TextView
             android:id="@+id/shimmerTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="*Cashback Ki Guarantee!"
-            android:textColor="@color/gray_black"
+            android:text="Available MaxPoints"
+            android:textColor="#003770"
             android:gravity="center"
+            android:textSize="11sp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/roboto"
             app:layout_constraintHorizontal_chainStyle="packed"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layout_constraintBottom_toTopOf="@id/available_pointsTV"
+            app:layout_constraintStart_toEndOf="@id/cashback"/>
+
+        <TextView
+            android:id="@+id/available_pointsTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/cashback"/>
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="#5C5C5C"
+            android:text="100.00"
+            app:layout_constraintTop_toBottomOf="@id/shimmerTextView"
+            app:layout_constraintStart_toStartOf="@id/shimmerTextView"
+            android:layout_marginBottom="@dimen/_5sdp"
+            />
 
         <ImageView
             android:id="@+id/cashback"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginStart="@dimen/_5sdp"
-            android:src="@drawable/cashback_img"
-            app:layout_constraintStart_toEndOf="@id/shimmerTextView"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/points_icon"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/txtTerm"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="*Terms and Conditions Applied"
-        android:gravity="center"
-        android:textColor="#330548AD"
-        android:layout_marginBottom="@dimen/_10sdp"
-        app:layout_constraintStart_toStartOf="@id/txtShimmerWarning"
-        app:layout_constraintEnd_toEndOf="@id/txtShimmerWarning"
-        app:layout_constraintBottom_toTopOf="@id/btnSubmit"/>
+        <TextView
+            android:id="@+id/applyTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apply"
+            android:textColor="#003770"
+            android:textSize="12sp"
+            android:fontFamily="@font/roboto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="@dimen/_40sdp"
+
+            />
+
+        <ImageView
+            android:id="@+id/apply_ImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/apply_icon"
+            app:layout_constraintStart_toEndOf="@id/applyTV"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/btnSubmit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/corner_circle_primary"
+        android:background="@drawable/ad_money_button_shape"
         android:text="Recharge Now"
         android:gravity="center"
         android:padding="@dimen/_10sdp"
@@ -257,6 +467,10 @@
 
         </LinearLayout>
     </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

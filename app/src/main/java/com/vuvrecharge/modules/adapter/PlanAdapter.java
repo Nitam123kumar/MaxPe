@@ -298,6 +298,8 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.Holder> {
                 intent.putExtra("provider",provider);
                 intent.putExtra("state",state);
                 intent.putExtra("des",description.getText().toString());
+                intent.putExtra("desc",resultsBean.getDesc());
+                intent.putExtra("talktime",resultsBean.getTalktime());
                 intent.putExtra("subscription",resultsBean.getSubscription());
                 intent.putExtra("validity",resultsBean.getValidity());
                 intent.putExtra("data",dataValue.getText().toString());

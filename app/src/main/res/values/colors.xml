@@ -93,5 +93,7 @@
     <color name="success1">#26A652</color>
     <color name="failed">#FF3333</color>
     <color name="failed1">#E30613</color>
+    <color name="slider_dot_inactive">#B0BEC5</color> <!-- Light Gray -->
+    <color name="slider_dot_active">#FF5722</color>
 
 </resources>

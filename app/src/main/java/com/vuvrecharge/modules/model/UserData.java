@@ -7,6 +7,7 @@ public class UserData {
 
     private String mobile;
     private String name;
+    private String cashback_points;
     private String email;
     private String earnings;
     private String date;
@@ -185,6 +186,12 @@ public class UserData {
 
     public void setName(String name) {
         this.name = name;
+    }
+    public void setCashbackPoints(String cashback_points) {
+        this.cashback_points = cashback_points;
+    }
+    public String getCashbackPoints() {
+        return cashback_points;
     }
 
     public String getEmail() {

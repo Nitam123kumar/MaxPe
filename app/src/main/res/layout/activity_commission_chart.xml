@@ -28,7 +28,7 @@
             android:layout_marginHorizontal="@dimen/_5sdp"
             app:layout_constraintTop_toTopOf="parent"
             android:background="@drawable/rectangle"
-            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_13sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
@@ -71,6 +71,7 @@
                   app:layout_constraintEnd_toStartOf="@id/Categories"/>
 
             <TextView
+                android:id="@+id/operatorTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Operators"
@@ -118,7 +119,7 @@
             android:background="@drawable/rectangle"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginHorizontal="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_13sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layoutFirst">
 
@@ -131,15 +132,26 @@
                 app:layout_constraintTop_toTopOf="@id/commissionViewTab"
                 app:layout_constraintBottom_toBottomOf="@id/commissionViewTab"/>
 
+            <ImageView
+                android:id="@+id/mobile_ImgV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/mobile_icon1"
+                android:layout_marginStart="@dimen/_3sdp"
+                app:layout_constraintStart_toStartOf="@id/viewPrepaid"
+                app:layout_constraintTop_toTopOf="@id/viewPrepaid"
+                app:layout_constraintBottom_toBottomOf="@id/viewPrepaid"
+                app:layout_constraintEnd_toStartOf="@id/prepaidTextView"
+                />
+
             <TextView
                 android:id="@+id/prepaidTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_10sdp"
                 android:textStyle="bold"
-                android:drawableStart="@drawable/mobile_icon1"
-                android:drawablePadding="10dp"
-                app:layout_constraintStart_toStartOf="@id/viewPrepaid"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintStart_toEndOf="@id/mobile_ImgV"
                 app:layout_constraintEnd_toEndOf="@id/viewPrepaid"
                 app:layout_constraintTop_toTopOf="@id/viewPrepaid"
                 app:layout_constraintBottom_toBottomOf="@id/viewPrepaid"/>
@@ -153,15 +165,25 @@
                 app:layout_constraintTop_toTopOf="@id/commissionViewTab"
                 app:layout_constraintBottom_toBottomOf="@id/commissionViewTab"/>
 
+            <ImageView
+                android:id="@+id/dth_ImgV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintStart_toStartOf="@id/viewDTH"
+                app:layout_constraintTop_toTopOf="@id/viewDTH"
+                app:layout_constraintBottom_toBottomOf="@id/viewDTH"
+                app:layout_constraintEnd_toStartOf="@id/DTHTextView"
+                />
+
             <TextView
                 android:id="@+id/DTHTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_10sdp"
                 android:textStyle="bold"
-                android:drawablePadding="10dp"
-                android:drawableStart="@drawable/dth_icon1"
-                app:layout_constraintStart_toStartOf="@id/viewDTH"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintStart_toEndOf="@id/dth_ImgV"
                 app:layout_constraintEnd_toEndOf="@id/viewDTH"
                 app:layout_constraintTop_toTopOf="@id/viewDTH"
                 app:layout_constraintBottom_toBottomOf="@id/viewDTH"/>
@@ -175,15 +197,26 @@
                 app:layout_constraintTop_toTopOf="@id/commissionViewTab"
                 app:layout_constraintBottom_toBottomOf="@id/commissionViewTab"/>
 
+            <ImageView
+                android:id="@+id/bill_ImgV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bill_pay_icon"
+                android:layout_marginStart="@dimen/_5sdp"
+                app:layout_constraintStart_toStartOf="@id/viewBillPayments"
+                app:layout_constraintTop_toTopOf="@id/viewBillPayments"
+                app:layout_constraintBottom_toBottomOf="@id/viewBillPayments"
+                app:layout_constraintEnd_toStartOf="@id/billPaymentsTextView"
+                />
+
             <TextView
                 android:id="@+id/billPaymentsTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_10sdp"
                 android:textStyle="bold"
-                android:drawablePadding="5dp"
-                android:drawableStart="@drawable/bill_pay_icon"
-                app:layout_constraintStart_toStartOf="@id/viewBillPayments"
+                android:layout_marginEnd="@dimen/_5sdp"
+                app:layout_constraintStart_toEndOf="@id/bill_ImgV"
                 app:layout_constraintEnd_toEndOf="@id/viewBillPayments"
                 app:layout_constraintTop_toTopOf="@id/viewBillPayments"
                 app:layout_constraintBottom_toBottomOf="@id/viewBillPayments"/>
@@ -391,7 +424,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/commissionViewTab"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             >
 
@@ -438,7 +471,7 @@
                         android:text="Turn Recharges into Rewards!"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
+                        android:textSize="20sp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@id/earnTV"
                         />
@@ -451,7 +484,7 @@
                         app:layout_constraintTop_toBottomOf="@id/turnTV"
                         android:text="Earn instant commission on every recharges &amp; bill payments"
                         android:textColor="@color/white"
-                        android:textSize="11sp"
+                        android:textSize="13sp"
                         android:textStyle="bold"
                          app:layout_constraintBottom_toTopOf="@id/getStartedTV"
                         />
@@ -462,7 +495,7 @@
                         android:layout_height="@dimen/_35sdp"
                         android:text="Get Started"
                         android:textColor="#084C97"
-                        android:textSize="14sp"
+                        android:textSize="16sp"
                         android:textStyle="bold"
                         android:gravity="center_vertical"
                         android:drawablePadding="@dimen/_10sdp"

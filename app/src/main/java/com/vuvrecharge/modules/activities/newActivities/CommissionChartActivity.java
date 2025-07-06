@@ -2,13 +2,20 @@ package com.vuvrecharge.modules.activities.newActivities;
 
 import static com.vuvrecharge.api.ApiServices.IMAGE_LOGO;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -69,10 +76,21 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
     @BindView(R.id.viewDTH)
     View viewDTH;
 
+    @BindView(R.id.bill_ImgV)
+    ImageView bill_ImgV;
+ @BindView(R.id.dth_ImgV)
+    ImageView dth_ImgV;
+    @BindView(R.id.mobile_ImgV)
+    ImageView mobile_ImgV;
+
     @BindView(R.id.viewPrepaid)
     View viewPrepaid;
     @BindView(R.id.getStartedTV)
     TextView getStartedTV;
+    @BindView(R.id.Operators)
+    TextView Operators;
+    @BindView(R.id.operatorTV)
+    TextView operatorTV;
 
     @BindView(R.id.title)
     TextView title;
@@ -108,6 +126,7 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
         mDefaultPresenter = new DefaultPresenter(this);
         defaultView = this;
         getStartedTV.setOnClickListener(this);
+        setStatusBarGradiant(this);
 
 //        prepaidCommissionPreferences = new CommissionPreferences(this, "PrepaidCommission");
 //        otherCommissionPreferences = new CommissionPreferences(this, "OtherCommission");
@@ -156,7 +175,7 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
     private void initializeEventsList() {
 
         setFragment(new PrepaidFragment());
-        viewPrepaid.setBackgroundResource(R.drawable.statements_select_bg_shape);
+        viewPrepaid.setBackgroundResource(R.drawable.commission_tab_shape);
         prepaidTextView.setTextColor(Color.WHITE);
         viewDTH.setBackgroundResource(R.drawable.null_shape);
         DTHTextView.setTextColor(getResources().getColor(R.color.colorBlackU));
@@ -165,11 +184,15 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
         prepaidTextView.setText(Html.fromHtml("<b>Prepaid</b>"));
         DTHTextView.setText(Html.fromHtml("DTH"));
         billPaymentsTextView.setText(Html.fromHtml("Bill Payments"));
-
+        Operators.setText("5");
+        operatorTV.setText("Operators");
+        bill_ImgV.setImageResource(R.drawable.bill_pay_icon);
+        mobile_ImgV.setImageResource(R.drawable.mobile_icon);
+        dth_ImgV.setImageResource(R.drawable.dth_icon1);
 
         viewPrepaid.setOnClickListener(v -> {
             setFragment(new PrepaidFragment());
-            viewPrepaid.setBackgroundResource(R.drawable.statements_select_bg_shape);
+            viewPrepaid.setBackgroundResource(R.drawable.commission_tab_shape);
             prepaidTextView.setTextColor(Color.WHITE);
             viewDTH.setBackgroundResource(R.drawable.null_shape);
             DTHTextView.setTextColor(getResources().getColor(R.color.colorBlackU));
@@ -178,11 +201,16 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
             prepaidTextView.setText(Html.fromHtml("<b>Prepaid</b>"));
             DTHTextView.setText(Html.fromHtml("DTH"));
             billPaymentsTextView.setText(Html.fromHtml("Bill Payments"));
+            Operators.setText("5");
+            operatorTV.setText("Operators");
+            bill_ImgV.setImageResource(R.drawable.bill_pay_icon);
+            dth_ImgV.setImageResource(R.drawable.dth_icon);
+            mobile_ImgV.setImageResource(R.drawable.mobile_icon);
         });
 
         viewDTH.setOnClickListener(v -> {
             setFragment(new DTHFragment());
-            viewDTH.setBackgroundResource(R.drawable.statements_select_bg_shape);
+            viewDTH.setBackgroundResource(R.drawable.commission_tab_shape);
             DTHTextView.setTextColor(Color.WHITE);
             viewPrepaid.setBackgroundResource(R.drawable.null_shape);
             prepaidTextView.setTextColor(getResources().getColor(R.color.colorBlackU));
@@ -191,11 +219,16 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
             prepaidTextView.setText(Html.fromHtml("<b>Prepaid</b>"));
             DTHTextView.setText(Html.fromHtml("DTH"));
             billPaymentsTextView.setText(Html.fromHtml("Bill Payments"));
+            Operators.setText("5");
+            operatorTV.setText("Operators");
+            bill_ImgV.setImageResource(R.drawable.bill_pay_icon);
+            dth_ImgV.setImageResource(R.drawable.dth_white_icon);
+            mobile_ImgV.setImageResource(R.drawable.mobile_icon1);
         });
 
         viewBillPayments.setOnClickListener(v -> {
             setFragment(new BillPaymentsFragment());
-            viewBillPayments.setBackgroundResource(R.drawable.statements_select_bg_shape);
+            viewBillPayments.setBackgroundResource(R.drawable.commission_tab_shape);
             billPaymentsTextView.setTextColor(Color.WHITE);
             viewPrepaid.setBackgroundResource(R.drawable.null_shape);
             prepaidTextView.setTextColor(getResources().getColor(R.color.colorBlackU));
@@ -204,8 +237,26 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
             prepaidTextView.setText(Html.fromHtml("<b>Prepaid</b>"));
             DTHTextView.setText(Html.fromHtml("DTH"));
             billPaymentsTextView.setText(Html.fromHtml("Bill Payments"));
+            Operators.setText("5");
+            operatorTV.setText("Services");
+            bill_ImgV.setImageResource(R.drawable.biller_p_img);
+            dth_ImgV.setImageResource(R.drawable.dth_icon);
+            mobile_ImgV.setImageResource(R.drawable.mobile_icon1);
         });
 
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
     }
 
     private void initializePrepaidList() {

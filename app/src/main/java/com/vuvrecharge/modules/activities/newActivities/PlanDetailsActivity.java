@@ -3,11 +3,15 @@ package com.vuvrecharge.modules.activities.newActivities;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -16,7 +20,9 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -53,6 +59,7 @@ import com.vuvrecharge.modules.adapter.SubscriptionAdapter;
 import com.vuvrecharge.modules.model.PaymentModel;
 import com.vuvrecharge.modules.model.ReportsData;
 import com.vuvrecharge.modules.model.Subscriptions;
+import com.vuvrecharge.modules.model.UserData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 
@@ -70,7 +77,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 
-public class PlanDetailsActivity extends BaseActivity  implements DefaultView,View.OnClickListener{
+public class PlanDetailsActivity extends BaseActivity implements DefaultView, View.OnClickListener {
 
     private DefaultPresenter mDefaultPresenter;
 
@@ -102,24 +109,41 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
     TextView btnSubmit;
     @BindView(R.id.shimmerTextView)
     TextView shimmerTextView;
-    @BindView(R.id.txtTerm)
-    TextView txtTerm;
+    @BindView(R.id.planValidityTV)
+    TextView planValidityTV;
+    @BindView(R.id.planDataTV)
+    TextView planDataTV;
+    @BindView(R.id.planDateTV)
+    TextView planDateTV;
+    @BindView(R.id.planSmsTV)
+    TextView planSmsTV;
+    @BindView(R.id.planVoiceTV)
+    TextView planVoiceTV;
+    @BindView(R.id.dataDetailsTV)
+    TextView dataDetailsTV;
+    @BindView(R.id.planUnlimitedTV)
+    TextView planUnlimitedTV;
+    @BindView(R.id.smsDetailsTV)
+    TextView smsDetailsTV;
+    @BindView(R.id.available_pointsTV)
+    TextView available_pointsTV;
 
     DefaultView mDefaultView;
 
     String warning_message = "";
 
     String amount = null, number = null, urlProvider = null, provider = null, state = null,
-            data = null, des = null, validity = null, circle = null, operator = null, type = null,
+            data = null, des = null, validity = null, circle = null, operator = null, type = null,talktime = null, desc = null,
             pageType = null, subscription = null;
     String m_id = "";
-    String order_id = "",mPin = "";
+    String order_id = "", mPin = "";
     ReportsData mReportsData;
     Handler handler;
     Runnable runnable;
     BottomSheetDialog dialog2 = null;
     ArrayList<PaymentModel> list = new ArrayList<>();
     double releaseAmount = 0.000;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,6 +151,7 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
         ButterKnife.bind(this);
         mToolbar.setOnClickListener(this);
         handler = new Handler();
+        setStatusBarGradiant(this);
         amount = getIntent().getStringExtra("amount");
         number = getIntent().getStringExtra("number");
         urlProvider = getIntent().getStringExtra("url");
@@ -134,27 +159,46 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
         state = getIntent().getStringExtra("state");
         validity = getIntent().getStringExtra("validity");
         des = getIntent().getStringExtra("des");
+        desc = getIntent().getStringExtra("desc");
+        talktime = getIntent().getStringExtra("talktime");
         data = getIntent().getStringExtra("data");
         operator = getIntent().getStringExtra("operator");
         circle = getIntent().getStringExtra("circle");
         pageType = getIntent().getStringExtra("pageType");
-        shimmerTextView.setText("*Cashback Ki Guarantee!");
         txtRecharge.setText("Change");
         title.setText("Plan Summary");
         mDefaultView = this;
         mDefaultPresenter = new DefaultPresenter(this);
-        if (pageType.equals("Prepaid")){
+
+        planValidityTV.setVisibility(VISIBLE);
+        planDateTV.setText(validity);
+        planDataTV.setVisibility(VISIBLE);
+        dataDetailsTV.setText(data);
+        planVoiceTV.setVisibility(VISIBLE);
+        planUnlimitedTV.setText(talktime);
+        planSmsTV.setVisibility(VISIBLE);
+        smsDetailsTV.setText(desc);
+
+        try {
+            UserData userData = mDatabase.getUserData();
+            available_pointsTV.setText(userData.getCashbackPoints());
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        if (pageType.equals("Prepaid")) {
             type = "Prepaid";
             subscription = getIntent().getStringExtra("subscription");
             mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             txtPhoneOrigin.setText(state);
-        }else {
+        } else {
             type = "DTH";
             txtPhoneOrigin.setText("");
             txtPhoneOrigin.setVisibility(GONE);
-            mDefaultPresenter.historyCircleOperators(device_id + "",   type+"");
+            mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
         }
-        if (urlProvider != null){
+        if (urlProvider != null) {
             Glide.with(this)
                     .load(urlProvider)
                     .into(imgOperator);
@@ -162,34 +206,42 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
             txtPhoneProvider.setText(provider);
             txtAmount.setText(amount);
 
-            txtPlanDetails.setOnClickListener(v -> openPlan(amount,urlProvider,des,validity,data));
+            txtPlanDetails.setOnClickListener(v -> openPlan(amount, urlProvider, des, validity, data));
 
             btnSubmit.setOnClickListener(v -> rechargeDialog(number, circle, operator));
         }
 
         txtRecharge.setOnClickListener(v -> {
-            if (type.equals("Prepaid")){
+            if (type.equals("Prepaid")) {
                 Intent intent = new Intent(getActivity(), RechargeActivity.class);
                 intent.putExtra("title", "Prepaid Recharge");
                 startActivity(intent);
-            }else {
+            } else {
                 Intent intent = new Intent(getActivity(), RechargeActivity.class);
                 intent.putExtra("title", "DTH Recharge");
                 startActivity(intent);
             }
         });
 
-        txtTerm.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), AboutActivity.class);
-            intent.putExtra("from", "Terms & Conditions");
-            startActivity(intent);
-        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         setLayout(no_internet, retry, "plandetails");
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
     }
 
     private void openPlan(String rs, String url, String desc, String validity, String data) {
@@ -209,31 +261,31 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
                 behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 behavior.setPeekHeight(600);
             }
-            if (subscription == null){
+            if (subscription == null) {
                 binding.recyclerView.setVisibility(GONE);
                 binding.txt.setText("");
                 binding.txtData.setVisibility(View.INVISIBLE);
                 binding.txtDataValue.setVisibility(View.INVISIBLE);
                 binding.txtValidityValue.setVisibility(View.INVISIBLE);
                 binding.txtValidity.setVisibility(View.INVISIBLE);
-            }else if (subscription.isEmpty() || subscription.equals("[]")){
+            } else if (subscription.isEmpty() || subscription.equals("[]")) {
                 binding.recyclerView.setVisibility(GONE);
                 binding.txt.setText("");
-                if (type.equals("DTH")){
+                if (type.equals("DTH")) {
                     binding.txtData.setVisibility(GONE);
                     binding.txtDataValue.setVisibility(GONE);
-                }else {
+                } else {
                     binding.txtDataValue.setVisibility(VISIBLE);
                     binding.txtData.setVisibility(VISIBLE);
                     binding.txtDataValue.setText(data);
                 }
-            }else {
+            } else {
                 binding.txt.setText("ADDITIONAL BENEFITS");
                 binding.recyclerView.setVisibility(VISIBLE);
-                if (type.equals("DTH")){
+                if (type.equals("DTH")) {
                     binding.txtData.setVisibility(GONE);
                     binding.txtDataValue.setVisibility(GONE);
-                }else {
+                } else {
                     binding.txtDataValue.setVisibility(VISIBLE);
                     binding.txtData.setVisibility(VISIBLE);
                     binding.txtDataValue.setText(data);
@@ -241,7 +293,7 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
                 try {
                     ArrayList<Subscriptions> list = new ArrayList<>();
                     JSONArray array = new JSONArray(subscription);
-                    for(int i = 0; i < array.length(); i++){
+                    for (int i = 0; i < array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
                         Subscriptions subscriptions = new Subscriptions();
                         subscriptions.setOtt_name(object.getString("ott_name"));
@@ -251,8 +303,8 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
                     }
                     SubscriptionAdapter adapter = new SubscriptionAdapter(list, this);
                     binding.recyclerView.setAdapter(adapter);
-                }catch (JSONException e){
-                    Log.d("TAG_DATA", "openPlan: "+e.getMessage());
+                } catch (JSONException e) {
+                    Log.d("TAG_DATA", "openPlan: " + e.getMessage());
                 }
             }
 
@@ -268,77 +320,206 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
 
             binding.btnSubmit.setVisibility(GONE);
             dialog.show();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void rechargeDialog(String phone, String circle, String operator){
+//    private void rechargeDialog(String phone, String circle, String operator) {
+//        try {
+//            PlanMpinLayoutBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()),
+//                    R.layout.plan_mpin_layout, null, false);
+//
+//            Dialog dialog = new Dialog(getActivity(), R.style.CustomAlertDialog);
+//            dialog.setContentView(binding.getRoot());
+//
+//            dialog.setCancelable(true);
+//
+//            if (warning_message.isEmpty()) {
+//                binding.warningMessage.setVisibility(GONE);
+//            } else {
+//                binding.warningMessage.setVisibility(VISIBLE);
+//                binding.warningMessage.setText(warning_message);
+//            }
+//
+//            binding.mpinTxt.requestFocus();
+//            binding.mpinTxt.setShowSoftInputOnFocus(true);
+//            binding.mpinTxt.addTextChangedListener(new TextWatcher() {
+//                @Override
+//                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//                }
+//
+//                @Override
+//                public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//                }
+//
+//                @Override
+//                public void afterTextChanged(Editable s) {
+//                    if (!s.toString().isEmpty()) {
+//                        mPin = s.toString();
+//                    }
+//                }
+//            });
+//            Objects.requireNonNull(dialog.getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+//            binding.close.setOnClickListener(v -> {
+//                dialog.dismiss();
+//                hideKeyBoard(binding.mpinTxt);
+//            });
+//            binding.confirm.setOnClickListener(v -> {
+//                mPin = binding.mpinTxt.getText().toString();
+//                if (TextUtils.isEmpty(mPin)) {
+//                    Toasty.error(getActivity(), "Please enter your M Pin", Toasty.LENGTH_LONG, false).show();
+//                    return;
+//                }
+//                if (mPin.length() != 4) {
+//                    Toasty.error(getActivity(), "MPin length should be 4 digit", Toasty.LENGTH_LONG, false).show();
+//                    return;
+//                }
+//
+//                dialog.dismiss();
+//                hideKeyBoard(binding.mpinTxt);
+//                mDefaultPresenter.doMobileRecharge(phone + "", operator + "",
+//                        amount + "", type + "",
+//                        0 + "", 0 + "",
+//                        circle + "", 0 + "", device_id + "", mPin + "");
+//            });
+//
+//            dialog.show();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    private void rechargeDialog(String phone, String circle, String operator) {
         try {
-            PlanMpinLayoutBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()),
-                    R.layout.plan_mpin_layout, null, false);
+            PlanMpinLayoutBinding binding = DataBindingUtil.inflate(
+                    LayoutInflater.from(getActivity()),
+                    R.layout.plan_mpin_layout,
+                    null,
+                    false
+            );
 
             Dialog dialog = new Dialog(getActivity(), R.style.CustomAlertDialog);
             dialog.setContentView(binding.getRoot());
-
             dialog.setCancelable(true);
 
             if (warning_message.isEmpty()) {
-                binding.warningMessage.setVisibility(GONE);
+                binding.warningMessage.setVisibility(View.GONE);
             } else {
-                binding.warningMessage.setVisibility(VISIBLE);
+                binding.warningMessage.setVisibility(View.VISIBLE);
                 binding.warningMessage.setText(warning_message);
             }
 
-            binding.mpinTxt.requestFocus();
-            binding.mpinTxt.setShowSoftInputOnFocus(true);
-            binding.mpinTxt.addTextChangedListener(new TextWatcher() {
+            EditText[] mpinDigits = new EditText[]{
+                    binding.pinDigit1,
+                    binding.pinDigit2,
+                    binding.pinDigit3,
+                    binding.pinDigit4
+            };
+
+            // Initially disable confirm button
+            binding.confirm.setEnabled(false);
+            binding.confirm.setBackgroundResource(R.drawable.proceed_to_pay);
+            binding.confirm.setTextColor(getResources().getColor(R.color.black));
+
+            TextWatcher pinWatcher = new TextWatcher() {
                 @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
                 @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
+                public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    if (!s.toString().isEmpty()){
-                        mPin = s.toString();
+                    // Auto-focus jump
+                    for (int i = 0; i < mpinDigits.length; i++) {
+                        if (mpinDigits[i].getText().hashCode() == s.hashCode()) {
+                            if (s.length() == 1 && i < mpinDigits.length - 1) {
+                                mpinDigits[i + 1].requestFocus();
+                            } else if (s.length() == 0 && i > 0) {
+                                mpinDigits[i - 1].requestFocus();
+                            }
+                            break;
+                        }
+                    }
+
+                    // Check if all are filled
+                    boolean allFilled = true;
+                    for (EditText et : mpinDigits) {
+                        if (et.getText().toString().trim().isEmpty()) {
+                            allFilled = false;
+                            break;
+                        }
+                    }
+                    if (allFilled) {
+                        binding.confirm.setEnabled(true);
+                        binding.confirm.setBackgroundResource(R.drawable.ad_money_button_shape);
+                        binding.confirm.setTextColor(getResources().getColor(R.color.white));
+
+                    } else {
+                        binding.confirm.setEnabled(false);
+                        binding.confirm.setBackgroundResource(R.drawable.proceed_to_pay);
+                        binding.confirm.setTextColor(getResources().getColor(R.color.black));
+
                     }
                 }
-            });
-            Objects.requireNonNull(dialog.getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            };
+
+            for (EditText et : mpinDigits) {
+                et.addTextChangedListener(pinWatcher);
+            }
+
+            Objects.requireNonNull(dialog.getWindow())
+                    .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
             binding.close.setOnClickListener(v -> {
                 dialog.dismiss();
-                hideKeyBoard(binding.mpinTxt);
+                hideKeyBoard(mpinDigits[0]);
             });
+
             binding.confirm.setOnClickListener(v -> {
-                mPin = binding.mpinTxt.getText().toString();
-                if (TextUtils.isEmpty(mPin)) {
-                    Toasty.error(getActivity(),"Please enter your M Pin", Toasty.LENGTH_LONG, false).show();
-                    return;
+                StringBuilder pinBuilder = new StringBuilder();
+                for (EditText et : mpinDigits) {
+                    String digit = et.getText().toString().trim();
+                    if (digit.isEmpty()) {
+                        Toasty.error(getActivity(), "Please enter your M Pin completely", Toasty.LENGTH_LONG, false).show();
+                        return;
+                    }
+                    pinBuilder.append(digit);
                 }
+
+                mPin = pinBuilder.toString();
+
                 if (mPin.length() != 4) {
-                    Toasty.error(getActivity(),"MPin length should be 4 digit", Toasty.LENGTH_LONG, false).show();
+                    Toasty.error(getActivity(), "MPin length should be 4 digits", Toasty.LENGTH_LONG, false).show();
                     return;
                 }
 
                 dialog.dismiss();
-                hideKeyBoard(binding.mpinTxt);
-                mDefaultPresenter.doMobileRecharge(phone + "", operator + "",
-                        amount + "", type + "",
-                        0 + "", 0 + "",
-                        circle + "", 0 + "", device_id + "",mPin+"");
+                hideKeyBoard(mpinDigits[0]);
+
+                mDefaultPresenter.doMobileRecharge(
+                        phone,
+                        operator,
+                        amount + "",
+                        type + "",
+                        "0",
+                        "0",
+                        circle,
+                        "0",
+                        device_id,
+                        mPin
+                );
             });
 
             dialog.show();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     @Override
     protected void onPause() {
@@ -360,7 +541,7 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
     @Override
     public void onSuccess(String message, String second_message) {
         try {
-            if (second_message.equals("recharge")){
+            if (second_message.equals("recharge")) {
                 JSONObject jsonObject = new JSONObject(message);
                 String orderid = jsonObject.getString("orderid");
                 this.order_id = orderid;
@@ -369,7 +550,7 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
                 upiIntent.setData(Uri.parse(uri.trim()));
                 Intent chooser = Intent.createChooser(upiIntent, "Pay with...");
                 startActivityForResult(chooser, 104, null);
-            }else if (second_message.equals("orderDetails")){
+            } else if (second_message.equals("orderDetails")) {
                 Gson gson = new Gson();
                 Type type_ = new TypeToken<ReportsData>() {
                 }.getType();
@@ -387,25 +568,25 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
 //                    }
 //                };
 
-                if (payment_status.toLowerCase().equals("pending")){
+                if (payment_status.toLowerCase().equals("pending")) {
                     openPendingDialog();
-                }else if (payment_status.toLowerCase().equals("success")){
+                } else if (payment_status.toLowerCase().equals("success")) {
                     mDefaultPresenter.doMobileRecharge(
-                            number.trim(),operator,amount.trim(),type,
+                            number.trim(), operator, amount.trim(), type,
                             "0", "0",
-                            circle,"0",device_id, mPin);
-                }else if (payment_status.toLowerCase().equals("failed")){
+                            circle, "0", device_id, mPin);
+                } else if (payment_status.toLowerCase().equals("failed")) {
                     Toast.makeText(getActivity(), "Transaction Cancelled", Toast.LENGTH_LONG).show();
-                }else {
+                } else {
                     openPendingDialog();
                 }
-            }else if (second_message.equals("orderDetailsPending")){
+            } else if (second_message.equals("orderDetailsPending")) {
                 openPendingDialog();
-            }else {
+            } else {
                 JSONObject jsonObject = new JSONObject(message);
                 warning_message = jsonObject.getString("message");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -423,7 +604,7 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
             } else {
                 successDialog(data, data_other);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -457,14 +638,14 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
 //                _binding.imgGif.setGifImageResource(R.drawable.animated_wrong);
                 Glide.with(this).asGif().load(R.drawable.animated_wrong).into(_binding.imgGif);
                 _binding.btnComplete.setBackgroundResource(R.drawable.failed_button);
-            } else if (status.toUpperCase().equals("PENDING")){
+            } else if (status.toUpperCase().equals("PENDING")) {
                 _binding.btnComplete.setBackgroundResource(R.drawable.pending_button);
                 _binding.txtTitle.setText("Pending");
                 _binding.txtMessage.setText(message);
                 _binding.txtSlug.setText("CHILL!");
 //                _binding.imgGif.setGifImageResource(R.drawable.animated_pending);
                 Glide.with(this).asGif().load(R.drawable.animated_pending).into(_binding.imgGif);
-            }else {
+            } else {
                 _binding.btnComplete.setBackgroundResource(R.drawable.green_button);
                 _binding.txtTitle.setText("Success");
                 _binding.txtMessage.setText(message);
@@ -485,12 +666,12 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
                         intent.putExtra("operator_img", jsonObject.getString("operator_img"));
                         intent.putExtra("operator_dunmy_img", jsonObject.getString("operator_dunmy_img"));
                         intent.putExtra("mReportsData", data);
-                        if (jsonObject.getString("status").toLowerCase().equals("success")){
+                        if (jsonObject.getString("status").toLowerCase().equals("success")) {
                             intent.putExtra("bps", "1");
-                        }else {
+                        } else {
                             intent.putExtra("bps", "0");
                         }
-                        intent.putExtra("type",type);
+                        intent.putExtra("type", type);
                         startActivity(intent);
                         finish();
                     } catch (Exception e) {
@@ -566,33 +747,34 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
                 behavior.setPeekHeight(600);
             }
             JSONObject json = new JSONObject(data);
-            binding.txtTransactionAmountValue.setText("\u20b9"+txtAmount.getText().toString().trim());
-            if (mDatabase != null){
-                if (mDatabase.getEarnings() != null){
-                    binding.txtWalletAmountValue.setText("₹"+mDatabase.getEarnings());
+            binding.txtTransactionAmountValue.setText("\u20b9" + txtAmount.getText().toString().trim());
+            if (mDatabase != null) {
+                if (mDatabase.getEarnings() != null) {
+                    binding.txtWalletAmountValue.setText("₹" + mDatabase.getEarnings());
                 }
             }
-            binding.txtTotalDiscountValue.setText("₹"+json.getString("discount"));
+            binding.txtTotalDiscountValue.setText("₹" + json.getString("discount"));
             releaseAmount = (Double.parseDouble(txtAmount.getText().toString().trim()) - json.getDouble("discount"));
-            binding.txtPayableAmtValue.setText("₹"+releaseAmount);
+            binding.txtPayableAmtValue.setText("₹" + releaseAmount);
 
-            binding.btnPay.setText("Add on ₹"+json.getInt("required"));
+            binding.btnPay.setText("Add on ₹" + json.getInt("required"));
             binding.btnPay.setOnClickListener(v -> {
                 try {
                     mDefaultPresenter.addInsufficientBalance(device_id, json.getString("required"));
                     dialog2.dismiss();
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             });
             dialog2.show();
         } catch (Exception e) {
             e.printStackTrace();
-            Log.d("TAG_DATA", "addBalance: "+e.getMessage());
+            Log.d("TAG_DATA", "addBalance: " + e.getMessage());
         }
     }
 
     Timer timer;
+
     private void openPendingDialog() {
         try {
             timer = new Timer();
@@ -619,7 +801,7 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
                         public void run() {
                             mDefaultPresenter.orderDetails(device_id, order_id);
                         }
-                    },10000
+                    }, 10000
             );
 
             _binding.btnComplete.setOnClickListener(v -> {
@@ -638,8 +820,8 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 104){
-            if (resultCode == RESULT_OK){
+        if (requestCode == 104) {
+            if (resultCode == RESULT_OK) {
                 mDefaultPresenter.orderDetails(device_id, order_id);
             } else {
                 Toast.makeText(getActivity(), "Transaction Cancelled", Toast.LENGTH_LONG).show();
@@ -649,7 +831,7 @@ public class PlanDetailsActivity extends BaseActivity  implements DefaultView,Vi
 
     @Override
     public void onClick(@NonNull View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.toolbar_layout:
                 onBackPressed();
                 getActivity().finish();

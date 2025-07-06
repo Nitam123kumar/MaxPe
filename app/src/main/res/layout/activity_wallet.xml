@@ -274,9 +274,9 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/latest_transitions_ConstraintLayout_recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="280dp"
+                android:layout_height="360dp"
                 android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/latest_transitions_ConstraintLayout"
 
@@ -356,7 +356,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/ad_money_button_shape"
                 android:text="Add Money"
                 android:textAllCaps="false"
