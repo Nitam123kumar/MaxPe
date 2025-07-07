@@ -5,6 +5,7 @@ import static com.vuvrecharge.api.ApiServices.IMAGE_FOLLOWS;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
@@ -135,6 +136,14 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
     View viewComplaint;
     @BindView(R.id.viewFollow)
     View viewFollow;
+    @BindView(R.id.logo)
+    TextView nameLogo;
+    @BindView(R.id.available_maxPointsTV)
+    TextView available_maxPointsTV;
+    @BindView(R.id.available_earnTV)
+    TextView available_earnTV;
+    @BindView(R.id.available_referralTV)
+    TextView available_referralTV;
     @BindView(R.id.btnSwitch)
     Switch btnSwitch;
     DefaultView defaultView;
@@ -162,17 +171,17 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         passwordLess = new PasswordLess(this);
         HashMap<String, String> mapData = fingerprint.getDetails();
         HashMap<String, String> mapData2 = passwordLess.getPasswordLess();
-        if (Objects.equals(mapData.get(Fingerprint.FINGERPRINT), "true")){
+        if (Objects.equals(mapData.get(Fingerprint.FINGERPRINT), "true")) {
             btnSwitch.setChecked(true);
-        }else {
+        } else {
             btnSwitch.setChecked(false);
         }
 
         btnSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked){
+            if (isChecked) {
                 fingerprint();
                 fingerprint.setFingerprint("true");
-            }else {
+            } else {
                 fingerprint.setFingerprint("false");
             }
         });
@@ -196,37 +205,59 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         viewChangeMPin.setOnClickListener(this);
         viewResetMPin.setOnClickListener(this);
         mDefaultPresenter = new DefaultPresenter(this);
-        mDefaultPresenter.getPaymentSetting2(device_id + "","timepass");
+        mDefaultPresenter.getPaymentSetting2(device_id + "", "timepass");
+        mDefaultPresenter.totalReferrals(device_id);
     }
 
     private void setValues() {
         try {
             UserData userData = mDatabase.getUserData();
+            String shortName = mDatabase.getUserData().getName();
+            String initials = getInitials(shortName, 2);
+            nameLogo.setText(initials);
             name.setText(userData.getName());
+            available_maxPointsTV.setText(userData.getCashbackPoints());
+            available_earnTV.setText("\u20b9"+userData.getEarnings());
             title.setText("Profile");
             phoneNumber.setText(userData.getMobile());
-            email_id.setText(userData.getEmail());
-            walletBalance.setText("₹"+userData.getEarnings());
+            email_id.setText("Member Since " + userData.getDate());
+            walletBalance.setText("₹" + userData.getEarnings());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void fingerprint(){
-        BiometricManager biometricManager=BiometricManager.from(this);
-        switch (biometricManager.canAuthenticate())
-        {
+    private String getInitials(String name, int count) {
+        if (name == null || name.trim().isEmpty()) {
+            return "";
+        }
+
+        String[] words = name.trim().split("\\s+");
+        StringBuilder initials = new StringBuilder();
+
+        for (int i = 0; i < words.length && i < count; i++) {
+            if (!words[i].isEmpty()) {
+                initials.append(words[i].charAt(0));
+            }
+        }
+
+        return initials.toString().toUpperCase(); // optional uppercase
+    }
+
+    public void fingerprint() {
+        BiometricManager biometricManager = BiometricManager.from(this);
+        switch (biometricManager.canAuthenticate()) {
             case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
-                Toast.makeText(getApplicationContext(),"This device does not have a fingerprint sensor",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "This device does not have a fingerprint sensor", Toast.LENGTH_SHORT).show();
                 break;
             case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
-                Toast.makeText(getApplicationContext(),"The biometric sensor is currently unavailable",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "The biometric sensor is currently unavailable", Toast.LENGTH_SHORT).show();
                 break;
             case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
-                Toast.makeText(getApplicationContext(),"Your device doesn't have fingerprint saved,please check your security settings",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Your device doesn't have fingerprint saved,please check your security settings", Toast.LENGTH_SHORT).show();
                 break;
         }
-        Executor executor= ContextCompat.getMainExecutor(this);
+        Executor executor = ContextCompat.getMainExecutor(this);
         biometricPrompt = new BiometricPrompt(AccountActivity.this, executor, new BiometricPrompt.AuthenticationCallback() {
             @Override
             public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
@@ -234,18 +265,20 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                 System.exit(0);
                 Toast.makeText(AccountActivity.this, "Authenication failed", Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 startActivity(new Intent(AccountActivity.this, MainActivity.class));
                 finish();
             }
+
             @Override
             public void onAuthenticationFailed() {
                 super.onAuthenticationFailed();
             }
         });
-        promptInfo=new BiometricPrompt.PromptInfo.Builder().setTitle("MAXPe Payment")
+        promptInfo = new BiometricPrompt.PromptInfo.Builder().setTitle("MAXPe Payment")
                 .setDescription("Use fingerprint to login").setDeviceCredentialAllowed(true).build();
         biometricPrompt.authenticate(promptInfo);
     }
@@ -305,10 +338,10 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                 startActivity(intent);
                 break;
             case R.id.viewFingerPrint:
-                if (btnSwitch.isChecked()){
+                if (btnSwitch.isChecked()) {
                     btnSwitch.setChecked(false);
                     fingerprint.setFingerprint("false");
-                }else {
+                } else {
                     btnSwitch.setChecked(true);
                     fingerprint.setFingerprint("true");
                 }
@@ -351,39 +384,39 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                 behavior.setPeekHeight(600);
             }
 
-            if (json.getString("phonepe_getway").equals("Yes")){
-                list.add(new PaymentSetting(R.drawable.phonepe_logo_2,"PhonePe","Payment Gateway"));
+            if (json.getString("phonepe_getway").equals("Yes")) {
+                list.add(new PaymentSetting(R.drawable.phonepe_logo_2, "PhonePe", "Payment Gateway"));
             }
-            if (json.getString("hdfc_dynamic_getway").equals("Yes")){
-                list.add(new PaymentSetting(R.drawable.upi_logo_2,"UPI","Payment Gateway"));
+            if (json.getString("hdfc_dynamic_getway").equals("Yes")) {
+                list.add(new PaymentSetting(R.drawable.upi_logo_2, "UPI", "Payment Gateway"));
             }
-            if (json.getString("razorpay_getway").equals("Yes")){
-                list.add(new PaymentSetting(R.drawable.razorpay_logo_2,"Razorpay","Payment Gateway"));
+            if (json.getString("razorpay_getway").equals("Yes")) {
+                list.add(new PaymentSetting(R.drawable.razorpay_logo_2, "Razorpay", "Payment Gateway"));
             }
-            if (json.getString("paytm_getway").equals("Yes")){
-                list.add(new PaymentSetting(R.drawable.paytm_logo_2,"Paytm","Payment Gateway"));
+            if (json.getString("paytm_getway").equals("Yes")) {
+                list.add(new PaymentSetting(R.drawable.paytm_logo_2, "Paytm", "Payment Gateway"));
             }
-            if (json.getString("manual_getway").equals("Yes")){
-                list.add(new PaymentSetting(R.drawable.mobile_banking_logo_2,"Mobile","Banking (IMPS)"));
+            if (json.getString("manual_getway").equals("Yes")) {
+                list.add(new PaymentSetting(R.drawable.mobile_banking_logo_2, "Mobile", "Banking (IMPS)"));
             }
 //            if (json.getString("manual_getway").equals("Yes")){
 //                list.add(new PaymentSetting(R.drawable.mobile_banking_logo_2,"Mobile","Banking (IMPS)"));
 //            }
 
-            if (!list.isEmpty()){
-                LinearLayoutManager manager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL,false);
+            if (!list.isEmpty()) {
+                LinearLayoutManager manager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
                 binding.recyclerViewPaymentSetting.setLayoutManager(manager);
             }
-            if (list.size() > 1){
-                binding.recyclerViewPaymentSetting.setLayoutManager(new GridLayoutManager(this,2));
+            if (list.size() > 1) {
+                binding.recyclerViewPaymentSetting.setLayoutManager(new GridLayoutManager(this, 2));
             }
 
-            if (list.size() > 2){
-                binding.recyclerViewPaymentSetting.setLayoutManager(new GridLayoutManager(this,3));
+            if (list.size() > 2) {
+                binding.recyclerViewPaymentSetting.setLayoutManager(new GridLayoutManager(this, 3));
             }
 
-            if (list.size() > 3){
-                binding.recyclerViewPaymentSetting.setLayoutManager(new GridLayoutManager(this,4));
+            if (list.size() > 3) {
+                binding.recyclerViewPaymentSetting.setLayoutManager(new GridLayoutManager(this, 4));
             }
 
             PaymentSettingAdapter adapter1 = new PaymentSettingAdapter(this, this);
@@ -415,13 +448,13 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
             submit = binding_.submit;
             loading_dialog = binding_.loading;
 
-            TextView textView=binding_.resend;
+            TextView textView = binding_.resend;
             binding_.dialogImage.setOnClickListener(v -> {
 
                 if (submit.getVisibility() == View.VISIBLE) {
                     hideKeyBoard(binding_.oldPassword);
                     new Handler().postDelayed(() -> {
-                        if (dialog != null){
+                        if (dialog != null) {
                             dialog.dismiss();
                             bottomSheet = null;
                             dialog = null;
@@ -507,7 +540,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                 }
                 binding_.submit.setVisibility(View.GONE);
                 hideKeyBoard(binding_.reNewPassword);
-                if (dialog != null){
+                if (dialog != null) {
                     dialog.dismiss();
                 }
                 hideLoading(loading_dialog);
@@ -557,7 +590,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                 }
 
                 hideKeyBoard(binding_.feedback);
-                mDefaultPresenter.getFeedback(device_id,binding_.feedback.getText().toString().trim(),5);
+                mDefaultPresenter.getFeedback(device_id, binding_.feedback.getText().toString().trim(), 5);
                 dialog.dismiss();
                 hideLoading(loading_dialog);
 
@@ -590,21 +623,21 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
             String newmPin = binding.pinCon.getText().toString();
 
             if (TextUtils.isEmpty(oldmPin.trim())) {
-                showError(bottomSheet,"Please enter old Mpin");
+                showError(bottomSheet, "Please enter old Mpin");
                 binding.pin.setText("");
                 return;
             }
             if (oldmPin.length() < 4) {
-                showError(bottomSheet,"Please enter 4 digits  Mpin");
+                showError(bottomSheet, "Please enter 4 digits  Mpin");
                 return;
             }
             if (TextUtils.isEmpty(newmPin.trim())) {
-                showError(bottomSheet,"Please enter New Mpin");
+                showError(bottomSheet, "Please enter New Mpin");
                 binding.pinCon.setText("");
                 return;
             }
             if (newmPin.length() < 4) {
-                showError(bottomSheet,"Please enter 4 digits  Mpin");
+                showError(bottomSheet, "Please enter 4 digits  Mpin");
                 return;
             }
             hideKeyBoard(binding.pin);
@@ -737,7 +770,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         super.onResume();
         setLayout(no_internet, retry, "account");
         new Handler(Looper.getMainLooper())
-                .postDelayed(()-> mDefaultPresenter.getFollow(device_id),1000);
+                .postDelayed(() -> mDefaultPresenter.getFollow(device_id), 1000);
     }
 
     @Override
@@ -745,6 +778,16 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         if (countDownTimer != null) {
             countDownTimer.cancel();
         }
+
+        try {
+            JSONObject jsonObject = new JSONObject(message);
+
+            available_referralTV.setText("\u20b9" + jsonObject.getString("totalReferralPaid"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -763,43 +806,43 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
 
     public void showMessage(String message) {
         try {
-            View view = getLayoutInflater().inflate(R.layout.message_success_dialog_layout,null);
+            View view = getLayoutInflater().inflate(R.layout.message_success_dialog_layout, null);
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setView(view);
             AlertDialog dialog1 = builder.create();
-            if (dialog1.getWindow() != null){
+            if (dialog1.getWindow() != null) {
                 dialog1.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             }
             ImageView img = view.findViewById(R.id.imgRight);
             ConstraintLayout layout = view.findViewById(R.id.layout);
             TextView title = view.findViewById(R.id.txtTitle);
-            if (message.equals("Password updated successfully.")){
+            if (message.equals("Password updated successfully.")) {
                 img.setImageResource(R.drawable.right_image);
                 layout.setBackgroundResource(R.drawable.light_white_background_drawable);
                 title.setText(message);
-            }else if (message.equals("Mpin updated successfully.")){
+            } else if (message.equals("Mpin updated successfully.")) {
                 img.setImageResource(R.drawable.right_image);
                 layout.setBackgroundResource(R.drawable.light_white_background_drawable);
                 title.setText(message);
-            }else {
+            } else {
                 img.setImageResource(R.drawable.wrong_image);
                 layout.setBackgroundResource(R.drawable.light_white_background_drawable);
                 title.setText(message);
             }
 
             view.findViewById(R.id.btnOk)
-                            .setOnClickListener(v -> {
-                                dialog1.dismiss();
-                                dialog1.cancel();
-                            });
-            new Handler(Looper.getMainLooper()).postDelayed(()-> {
+                    .setOnClickListener(v -> {
+                        dialog1.dismiss();
+                        dialog1.cancel();
+                    });
+            new Handler(Looper.getMainLooper()).postDelayed(() -> {
                 dialog1.dismiss();
                 dialog1.cancel();
-            },4000);
+            }, 4000);
             dialog1.show();
         } catch (Exception e) {
-            Log.d("TAG_DATA", "showMessage: "+e.getMessage());
+            Log.d("TAG_DATA", "showMessage: " + e.getMessage());
         }
 
     }
@@ -810,7 +853,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
             JSONObject object = new JSONObject(data);
             String message = object.getString("message");
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -820,7 +863,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
     public void onSuccessOther(String data, @NonNull String data_other) {
         if (data_other.equals("")) {
             whatsAppDialog(data);
-        }else if (data_other.equals("UPI Payment")) {
+        } else if (data_other.equals("UPI Payment")) {
             Intent intent = new Intent(getActivity(), AddBalanceActivity.class);
             intent.putExtra("data", data);
             intent.putExtra("title", "UPI Payment");
@@ -835,7 +878,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
             intent.putExtra("data", data);
             intent.putExtra("title", "Razorpay Payment");
             startActivity(intent);
-        }else if (data_other.equals("Paytm Payment")) {
+        } else if (data_other.equals("Paytm Payment")) {
             Intent intent = new Intent(getActivity(), AddBalanceActivity.class);
             intent.putExtra("data", data);
             intent.putExtra("title", "Paytm Payment");
@@ -847,14 +890,14 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
 //            intent.putExtra("title", "CashFree Payment");
 //            startActivity(intent);
 //        }
-        else if (data_other.equals("timepass")){
+        else if (data_other.equals("timepass")) {
             try {
                 dataPayment = data;
                 json = new JSONObject(data);
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
-        }else if (data_other.equals("follows")){
+        } else if (data_other.equals("follows")) {
             this.data = data;
         }
     }
@@ -883,7 +926,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                     if (countDownTimer != null) {
                         countDownTimer.cancel();
                     }
-                    if (resend != null){
+                    if (resend != null) {
                         resend.setVisibility(View.GONE);
                     }
                 }
@@ -936,11 +979,11 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         hideAllDialog();
     }
 
-//    TODO Payment Clicks
+    //    TODO Payment Clicks
     @Override
     public void onClick(@NonNull String name) {
         Intent intent = null;
-        switch (name){
+        switch (name) {
             case "Paytm":
                 intent = new Intent(getActivity(), AddBalanceActivity.class);
                 intent.putExtra("data", dataPayment);
@@ -976,7 +1019,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         }
     }
 
-    public void followUs(){
+    public void followUs() {
         FrameLayout bottomSheet = null;
         TextView submit;
         LinearLayout loading_dialog;
@@ -1004,22 +1047,22 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
 
 
         try {
-            adapter = new FollowsAdapter(this,this);
+            adapter = new FollowsAdapter(this, this);
             JSONObject object = new JSONObject(data);
-            JSONArray array =object.getJSONArray("followers_data");
-            for (int i = 0; i< array.length(); i++){
+            JSONArray array = object.getJSONArray("followers_data");
+            for (int i = 0; i < array.length(); i++) {
                 String logo = array.getJSONObject(i).getString("logo");
                 String title = array.getJSONObject(i).getString("title");
                 String redirect_url = array.getJSONObject(i).getString("redirect_url");
 
-                followsList.add(new Follows(IMAGE_FOLLOWS+"/"+logo,title,redirect_url));
+                followsList.add(new Follows(IMAGE_FOLLOWS + "/" + logo, title, redirect_url));
                 adapter.addData(followsList);
             }
-            binding.recyclerViewPaymentSetting.setLayoutManager(new GridLayoutManager(this,3));
+            binding.recyclerViewPaymentSetting.setLayoutManager(new GridLayoutManager(this, 3));
             binding.recyclerViewPaymentSetting.setAdapter(adapter);
 
-        }catch (Exception e){
-            Log.d("TAG_DATA", "followUs: "+e.getMessage());
+        } catch (Exception e) {
+            Log.d("TAG_DATA", "followUs: " + e.getMessage());
         }
 
         dialog.show();

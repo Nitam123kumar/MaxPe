@@ -11,7 +11,7 @@
     <item android:state_checked="false">
         <shape android:dither="true" android:shape="rectangle" android:useLevel="false" android:visible="true">
             <corners android:radius="15dp" />
-            <gradient android:angle="270" android:endColor="@color/colorPrimaryB" android:startColor="@color/colorPrimaryB" />
+            <gradient android:angle="270" android:endColor="#003770" android:startColor="#003770" />
             <size android:width="20dp" android:height="20dp" />
             <stroke android:width="2dp" android:color="#0000ffff" />
         </shape>

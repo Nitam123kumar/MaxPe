@@ -8,86 +8,46 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/pattern_1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#4DDBFFFF"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textStyle="bold"
-            android:textColor="#242424"
-            app:layout_constraintStart_toStartOf="@id/toolbar"
-            app:layout_constraintTop_toTopOf="@id/toolbar"
-            app:layout_constraintEnd_toStartOf="@id/instagram"
-            app:layout_constraintBottom_toBottomOf="@id/toolbar"/>
-
-
-        <ImageView
-            android:id="@+id/instagram"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/instagram_2"
-            android:layout_marginEnd="@dimen/_10sdp"
-            app:layout_constraintTop_toTopOf="@id/toolbar"
-            app:layout_constraintBottom_toBottomOf="@id/toolbar"
-            app:layout_constraintEnd_toStartOf="@id/support"/>
-
-        <TextView
-            android:id="@+id/support"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:text="Help?"
-            android:padding="@dimen/_5sdp"
-            android:gravity="center"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:background="@drawable/plan_drawable_background"
-            app:layout_constraintEnd_toEndOf="@id/toolbar"
-            app:layout_constraintTop_toTopOf="@id/toolbar"
-            app:layout_constraintBottom_toBottomOf="@id/toolbar"/>
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:fillViewport="true"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/profileLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:background="@drawable/ad_money_button_shape"
+                    android:layout_margin="@dimen/_15sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardLogo"
-                    android:layout_width="@dimen/_45sdp"
-                    android:layout_height="@dimen/_45sdp"
-                    android:layout_margin="@dimen/_20sdp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     app:cardCornerRadius="@dimen/_22sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-                    <ImageView
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="#EFF6FF"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/name">
+                    <TextView
                         android:id="@+id/logo"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/app_logo"
+                        android:layout_gravity="center"
+                        android:textSize="18sp"
+                        android:textColor="#0B54A5"
+                        android:fontFamily="@font/roboto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:contentDescription="@string/app_name" />
                 </androidx.cardview.widget.CardView>
 
@@ -96,54 +56,251 @@
                     android:id="@+id/name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="#3C3F48"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:textColor="@color/white"
                     android:maxLines="1"
                     android:textStyle="bold"
                     android:ellipsize="end"
+                    android:gravity="center"
+                    android:textSize="20sp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     app:layout_constraintVertical_chainStyle="packed"
-                    app:layout_constraintStart_toEndOf="@id/cardLogo"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/cardLogo"
-                    app:layout_constraintBottom_toTopOf="@id/email_id"/>
-
-                <TextView
-                    android:id="@+id/email_id"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="#7D7C7C"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    app:layout_constraintStart_toStartOf="@id/name"
-                    app:layout_constraintEnd_toEndOf="@id/name"
-                    app:layout_constraintTop_toBottomOf="@id/name"
+                    app:layout_constraintEnd_toEndOf="@id/profileLayout"
+                    app:layout_constraintStart_toStartOf="@id/profileLayout"
+                    app:layout_constraintTop_toBottomOf="@id/cardLogo"
                     app:layout_constraintBottom_toTopOf="@id/phoneNumber"/>
 
                 <TextView
                     android:id="@+id/phoneNumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="#7D7C7C"
+                    android:textColor="@color/white"
                     android:maxLines="1"
                     android:ellipsize="end"
+                    android:textSize="16sp"
+                    android:gravity="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     app:layout_constraintStart_toStartOf="@id/name"
                     app:layout_constraintEnd_toEndOf="@id/name"
-                    app:layout_constraintTop_toBottomOf="@id/email_id"
-                    app:layout_constraintBottom_toBottomOf="@id/cardLogo"/>
+                    app:layout_constraintTop_toBottomOf="@id/name"
+                    app:layout_constraintBottom_toTopOf="@id/email_id"/>
+
+                <TextView
+                    android:id="@+id/email_id"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:maxLines="1"
+                    android:gravity="center"
+                    android:textSize="8sp"
+                    android:ellipsize="end"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:layout_constraintStart_toStartOf="@id/name"
+                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintTop_toBottomOf="@id/phoneNumber"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/maxPointsView"
+                    android:layout_width="106dp"
+                    android:layout_height="101dp"
+                    android:background="@drawable/max_points_shape"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@id/profileLayout"
+                    app:layout_constraintStart_toStartOf="@id/profileLayout"
+                    />
+
+                <ImageView
+                    android:id="@+id/maxPointsImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/max_points"
+                    app:layout_constraintTop_toTopOf="@id/maxPointsView"
+                    app:layout_constraintStart_toStartOf="@id/maxPointsView"
+                    app:layout_constraintEnd_toEndOf="@id/maxPointsView"
+                    app:layout_constraintBottom_toTopOf="@id/available_maxPointsTV"
+                    />
+                <TextView
+                    android:id="@+id/available_maxPointsTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100.00"
+                    android:gravity="center"
+                    android:textColor="#0B53A4"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    app:layout_constraintTop_toBottomOf="@id/maxPointsImg"
+                    app:layout_constraintStart_toStartOf="@id/maxPointsView"
+                    app:layout_constraintEnd_toEndOf="@id/maxPointsView"
+                    app:layout_constraintBottom_toTopOf="@id/maxPointsTxt"
+                    />
+
+                <TextView
+                    android:id="@+id/maxPointsTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Max Points"
+                    android:textSize="8sp"
+                    android:textStyle="bold"
+                    android:textColor="#0B53A4"
+                    app:layout_constraintTop_toBottomOf="@id/available_maxPointsTV"
+                    app:layout_constraintStart_toStartOf="@id/maxPointsView"
+                    app:layout_constraintEnd_toEndOf="@id/maxPointsView"
+                    app:layout_constraintBottom_toBottomOf="@id/maxPointsView"
+                    />
+
+                <View
+                    android:id="@+id/earnView"
+                    android:layout_width="106dp"
+                    android:layout_height="101dp"
+                    android:background="@drawable/earn_discount_shape"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@id/profileLayout"
+                    app:layout_constraintStart_toEndOf="@id/maxPointsView"
+                    app:layout_constraintEnd_toStartOf="@id/referralView"
+
+                    />
+
+                <ImageView
+                    android:id="@+id/earnImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/earn_img"
+                    app:layout_constraintTop_toTopOf="@id/earnView"
+                    app:layout_constraintStart_toStartOf="@id/earnView"
+                    app:layout_constraintEnd_toEndOf="@id/earnView"
+                    app:layout_constraintBottom_toTopOf="@id/available_earnTV"
+                    />
+                <TextView
+                    android:id="@+id/available_earnTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹549.4"
+                    android:gravity="center"
+                    android:textColor="#0B53A4"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    app:layout_constraintTop_toBottomOf="@id/maxPointsImg"
+                    app:layout_constraintStart_toStartOf="@id/earnView"
+                    app:layout_constraintEnd_toEndOf="@id/earnView"
+                    app:layout_constraintBottom_toTopOf="@id/earnTxt"
+                    />
+
+                <TextView
+                    android:id="@+id/earnTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Earned \nDiscount"
+                    android:textSize="8sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="#0B53A4"
+                    app:layout_constraintTop_toBottomOf="@id/available_maxPointsTV"
+                    app:layout_constraintStart_toStartOf="@id/earnView"
+                    app:layout_constraintEnd_toEndOf="@id/earnView"
+                    app:layout_constraintBottom_toBottomOf="@id/earnView"
+                    />
+
+                <View
+                    android:id="@+id/referralView"
+                    android:layout_width="106dp"
+                    android:layout_height="101dp"
+                    android:background="@drawable/referral_commission_shape"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@id/profileLayout"
+                    app:layout_constraintStart_toEndOf="@id/earnView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+                <ImageView
+                    android:id="@+id/referralImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/referral_commission_img"
+                    app:layout_constraintTop_toTopOf="@id/referralView"
+                    app:layout_constraintStart_toStartOf="@id/referralView"
+                    app:layout_constraintEnd_toEndOf="@id/referralView"
+                    app:layout_constraintBottom_toTopOf="@id/available_referralTV"
+                    />
+                <TextView
+                    android:id="@+id/available_referralTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹549.4"
+                    android:gravity="center"
+                    android:textColor="#0B53A4"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    app:layout_constraintTop_toBottomOf="@id/maxPointsImg"
+                    app:layout_constraintStart_toStartOf="@id/referralView"
+                    app:layout_constraintEnd_toEndOf="@id/referralView"
+                    app:layout_constraintBottom_toTopOf="@id/referralTxt"
+                    />
+
+                <TextView
+                    android:id="@+id/referralTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="    Referral \nCommission"
+                    android:textSize="8sp"
+                    android:textStyle="bold"
+                    android:textColor="#0B53A4"
+                    app:layout_constraintTop_toBottomOf="@id/available_maxPointsTV"
+                    app:layout_constraintStart_toStartOf="@id/referralView"
+                    app:layout_constraintEnd_toEndOf="@id/referralView"
+                    app:layout_constraintBottom_toBottomOf="@id/referralView"
+                    />
+
+                <View
+                    android:id="@+id/kycView"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    app:layout_constraintStart_toStartOf="@id/profileLayout"
+                    app:layout_constraintEnd_toEndOf="@id/profileLayout"
+                    app:layout_constraintTop_toBottomOf="@id/maxPointsView"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:background="@drawable/kyc_shape"
+                    />
+                <ImageView
+                    android:id="@+id/kycImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/kyc_img"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    app:layout_constraintStart_toStartOf="@id/kycView"
+                    app:layout_constraintTop_toTopOf="@id/kycView"
+                    app:layout_constraintBottom_toBottomOf="@id/kycView"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Complete your KYC"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:textColor="#FFAD33"
+                    app:layout_constraintStart_toEndOf="@id/kycImageView"
+                    app:layout_constraintTop_toTopOf="@id/kycView"
+                    app:layout_constraintBottom_toBottomOf="@id/kycView"
+                    app:layout_constraintEnd_toEndOf="@id/kycView"
+                    android:drawableEnd="@drawable/drop_down_img"
+                    android:paddingEnd="@dimen/_15sdp"
+                    />
+
 
                 <View
                     android:id="@+id/viewWallet"
                     android:layout_width="0dp"
                     android:layout_height="100dp"
+
                     android:layout_marginTop="@dimen/_20sdp"
                     android:background="@drawable/plan_drawable_background"
-                    app:layout_constraintStart_toStartOf="@id/cardLogo"
-                    app:layout_constraintEnd_toEndOf="@id/name"
-                    app:layout_constraintTop_toBottomOf="@id/cardLogo"/>
+                    app:layout_constraintStart_toStartOf="@id/profileLayout"
+                    app:layout_constraintEnd_toEndOf="@id/profileLayout"
+                    app:layout_constraintTop_toBottomOf="@id/kycView"/>
 
                 <TextView
                     android:id="@+id/txtWallet"
@@ -198,16 +355,16 @@
                 <View
                     android:id="@+id/viewProfile"
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="@dimen/_16sdp"
-                    app:layout_constraintStart_toStartOf="@id/cardLogo"
-                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintStart_toStartOf="@id/profileLayout"
+                    app:layout_constraintEnd_toEndOf="@id/profileLayout"
                     app:layout_constraintTop_toBottomOf="@id/viewWallet"/>
 
                 <ImageView
                     android:id="@+id/imgProfile"
-                    android:layout_width="35dp"
-                    android:layout_height="0dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/profile"
                     android:padding="6dp"
                     android:background="@drawable/light_blue_drawable"
@@ -215,26 +372,34 @@
                     app:layout_constraintStart_toStartOf="@id/viewProfile"
                     app:layout_constraintTop_toTopOf="@id/viewProfile"
                     app:layout_constraintBottom_toBottomOf="@id/viewProfile"
-                    android:contentDescription="@string/app_name" />
+                    />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="View Profile"
                     android:textStyle="bold"
+                    android:textSize="14sp"
                     android:textColor="#3C3F48"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgProfile"
-                    app:layout_constraintEnd_toEndOf="@id/viewProfile"
                     app:layout_constraintTop_toTopOf="@id/viewProfile"
                     app:layout_constraintBottom_toBottomOf="@id/viewProfile"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/viewProfile"
+                    app:layout_constraintEnd_toEndOf="@id/viewProfile"
+                    app:layout_constraintBottom_toBottomOf="@id/viewProfile"
+                    android:src="@drawable/next_arrow"
+                    />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:background="#4DD9D9D9"
                     android:layout_marginTop="@dimen/_2sdp"
-                    android:layout_marginStart="60dp"
                     app:layout_constraintStart_toStartOf="@id/viewProfile"
                     app:layout_constraintEnd_toEndOf="@id/viewProfile"
                     app:layout_constraintBottom_toBottomOf="@id/viewProfile"/>
@@ -242,7 +407,7 @@
                 <View
                     android:id="@+id/viewFingerPrint"
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="@dimen/_14sdp"
                     app:layout_constraintStart_toStartOf="@id/viewProfile"
                     app:layout_constraintEnd_toEndOf="@id/viewProfile"
@@ -250,8 +415,8 @@
 
                 <ImageView
                     android:id="@+id/imgFingerPrint"
-                    android:layout_width="35dp"
-                    android:layout_height="0dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/screen_lock"
                     android:padding="6dp"
                     android:background="@drawable/light_yellow_drawable"
@@ -287,7 +452,6 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:background="#4DD9D9D9"
-                    android:layout_marginStart="60dp"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewFingerPrint"
                     app:layout_constraintEnd_toEndOf="@id/viewFingerPrint"
@@ -341,25 +505,75 @@
 <!--                    android:layout_width="0dp"-->
 <!--                    android:layout_height="1dp"-->
 <!--                    android:background="#4DD9D9D9"-->
-<!--                    android:layout_marginStart="60dp"-->
 <!--                    android:layout_marginTop="@dimen/_2sdp"-->
 <!--                    app:layout_constraintStart_toStartOf="@id/viewPasswordLess"-->
 <!--                    app:layout_constraintEnd_toEndOf="@id/viewPasswordLess"-->
 <!--                    app:layout_constraintBottom_toBottomOf="@id/viewPasswordLess"/>-->
 <!--view password-->
+
                 <View
-                    android:id="@+id/viewChangePassword"
+                    android:id="@+id/viewLanguage"
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="@dimen/_14sdp"
-                    app:layout_constraintStart_toStartOf="@id/cardLogo"
-                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintStart_toStartOf="@id/viewProfile"
+                    app:layout_constraintEnd_toEndOf="@id/viewProfile"
                     app:layout_constraintTop_toBottomOf="@id/viewFingerPrint"/>
 
                 <ImageView
+                    android:id="@+id/imgLanguage"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/language"
+                    android:padding="6dp"
+                    app:layout_constraintStart_toStartOf="@id/viewLanguage"
+                    app:layout_constraintTop_toTopOf="@id/viewLanguage"
+                    app:layout_constraintBottom_toBottomOf="@id/viewLanguage"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Language"
+                    android:textColor="#3C3F48"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    app:layout_constraintStart_toEndOf="@id/imgLanguage"
+                    app:layout_constraintTop_toTopOf="@id/viewLanguage"
+                    app:layout_constraintBottom_toBottomOf="@id/viewLanguage"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/viewLanguage"
+                    app:layout_constraintEnd_toEndOf="@id/viewLanguage"
+                    app:layout_constraintBottom_toBottomOf="@id/viewLanguage"
+                    android:src="@drawable/next_arrow"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#4DD9D9D9"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    app:layout_constraintStart_toStartOf="@id/viewLanguage"
+                    app:layout_constraintEnd_toEndOf="@id/viewLanguage"
+                    app:layout_constraintBottom_toBottomOf="@id/viewLanguage"/>
+
+
+
+
+                <View
+                    android:id="@+id/viewChangePassword"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintStart_toStartOf="@id/profileLayout"
+                    app:layout_constraintEnd_toEndOf="@id/profileLayout"
+                    app:layout_constraintTop_toBottomOf="@id/viewLanguage"/>
+
+                <ImageView
                     android:id="@+id/imgChangePassword"
-                    android:layout_width="35dp"
-                    android:layout_height="0dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/password_c"
                     android:padding="6dp"
                     android:background="@drawable/light_voilate_drawable"
@@ -376,15 +590,22 @@
                     android:textStyle="bold"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgChangePassword"
-                    app:layout_constraintEnd_toEndOf="@id/viewChangePassword"
                     app:layout_constraintTop_toTopOf="@id/viewChangePassword"
                     app:layout_constraintBottom_toBottomOf="@id/viewChangePassword"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/viewChangePassword"
+                    app:layout_constraintEnd_toEndOf="@id/viewChangePassword"
+                    app:layout_constraintBottom_toBottomOf="@id/viewChangePassword"
+                    android:src="@drawable/next_arrow"
+                    />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:background="#4DD9D9D9"
-                    android:layout_marginStart="60dp"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewChangePassword"
                     app:layout_constraintEnd_toEndOf="@id/viewChangePassword"
@@ -393,16 +614,16 @@
                 <View
                     android:id="@+id/viewChangeMPin"
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="@dimen/_14sdp"
-                    app:layout_constraintStart_toStartOf="@id/cardLogo"
-                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintStart_toStartOf="@id/profileLayout"
+                    app:layout_constraintEnd_toEndOf="@id/profileLayout"
                     app:layout_constraintTop_toBottomOf="@id/viewChangePassword"/>
 
                 <ImageView
                     android:id="@+id/imgChangeMPin"
-                    android:layout_width="35dp"
-                    android:layout_height="0dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/password_c"
                     android:padding="6dp"
                     android:background="@drawable/dark_blue_drawable"
@@ -419,15 +640,22 @@
                     android:textStyle="bold"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgChangeMPin"
-                    app:layout_constraintEnd_toEndOf="@id/viewChangeMPin"
                     app:layout_constraintTop_toTopOf="@id/viewChangeMPin"
                     app:layout_constraintBottom_toBottomOf="@id/viewChangeMPin"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/viewChangeMPin"
+                    app:layout_constraintEnd_toEndOf="@id/viewChangeMPin"
+                    app:layout_constraintBottom_toBottomOf="@id/viewChangeMPin"
+                    android:src="@drawable/next_arrow"
+                    />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:background="#4DD9D9D9"
-                    android:layout_marginStart="60dp"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewChangeMPin"
                     app:layout_constraintEnd_toEndOf="@id/viewChangeMPin"
@@ -436,16 +664,16 @@
                 <View
                     android:id="@+id/viewResetMPin"
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="@dimen/_14sdp"
-                    app:layout_constraintStart_toStartOf="@id/cardLogo"
-                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintStart_toStartOf="@id/profileLayout"
+                    app:layout_constraintEnd_toEndOf="@id/profileLayout"
                     app:layout_constraintTop_toBottomOf="@id/viewChangeMPin"/>
 
                 <ImageView
                     android:id="@+id/imgResetMPin"
-                    android:layout_width="35dp"
-                    android:layout_height="0dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/password_c"
                     android:padding="6dp"
                     android:background="@drawable/dark_yellow_drawable"
@@ -462,15 +690,22 @@
                     android:textStyle="bold"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgResetMPin"
-                    app:layout_constraintEnd_toEndOf="@id/viewResetMPin"
                     app:layout_constraintTop_toTopOf="@id/viewResetMPin"
                     app:layout_constraintBottom_toBottomOf="@id/viewResetMPin"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/viewResetMPin"
+                    app:layout_constraintEnd_toEndOf="@id/viewResetMPin"
+                    app:layout_constraintBottom_toBottomOf="@id/viewResetMPin"
+                    android:src="@drawable/next_arrow"
+                    />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:background="#4DD9D9D9"
-                    android:layout_marginStart="60dp"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewResetMPin"
                     app:layout_constraintEnd_toEndOf="@id/viewResetMPin"
@@ -479,7 +714,7 @@
                 <View
                     android:id="@+id/viewPrivacy"
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="@dimen/_14sdp"
                     app:layout_constraintStart_toStartOf="@id/viewProfile"
                     app:layout_constraintEnd_toEndOf="@id/viewProfile"
@@ -487,8 +722,8 @@
 
                 <ImageView
                     android:id="@+id/imgPrivacy"
-                    android:layout_width="35dp"
-                    android:layout_height="0dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/privacy"
                     android:padding="6dp"
                     android:background="@drawable/light_gray_drawable"
@@ -505,15 +740,22 @@
                     android:textStyle="bold"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgPrivacy"
-                    app:layout_constraintEnd_toEndOf="@id/viewPrivacy"
                     app:layout_constraintTop_toTopOf="@id/viewPrivacy"
                     app:layout_constraintBottom_toBottomOf="@id/viewPrivacy"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/viewPrivacy"
+                    app:layout_constraintEnd_toEndOf="@id/viewPrivacy"
+                    app:layout_constraintBottom_toBottomOf="@id/viewPrivacy"
+                    android:src="@drawable/next_arrow"
+                    />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:background="#4DD9D9D9"
-                    android:layout_marginStart="60dp"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewPrivacy"
                     app:layout_constraintEnd_toEndOf="@id/viewPrivacy"
@@ -522,16 +764,16 @@
                 <View
                     android:id="@+id/viewCondition"
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="@dimen/_14sdp"
-                    app:layout_constraintStart_toStartOf="@id/cardLogo"
-                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintStart_toStartOf="@id/profileLayout"
+                    app:layout_constraintEnd_toEndOf="@id/profileLayout"
                     app:layout_constraintTop_toBottomOf="@id/viewPrivacy"/>
 
                 <ImageView
                     android:id="@+id/imgCondition"
-                    android:layout_width="35dp"
-                    android:layout_height="0dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/term_c"
                     android:padding="6dp"
                     android:background="@drawable/light_red_drawable"
@@ -548,15 +790,22 @@
                     android:textStyle="bold"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgCondition"
-                    app:layout_constraintEnd_toEndOf="@id/viewCondition"
                     app:layout_constraintTop_toTopOf="@id/viewCondition"
                     app:layout_constraintBottom_toBottomOf="@id/viewCondition"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/viewCondition"
+                    app:layout_constraintEnd_toEndOf="@id/viewCondition"
+                    app:layout_constraintBottom_toBottomOf="@id/viewCondition"
+                    android:src="@drawable/next_arrow"
+                    />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:background="#4DD9D9D9"
-                    android:layout_marginStart="60dp"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewCondition"
                     app:layout_constraintEnd_toEndOf="@id/viewCondition"
@@ -565,16 +814,16 @@
                 <View
                     android:id="@+id/viewRefund"
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="@dimen/_14sdp"
-                    app:layout_constraintStart_toStartOf="@id/cardLogo"
-                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintStart_toStartOf="@id/profileLayout"
+                    app:layout_constraintEnd_toEndOf="@id/profileLayout"
                     app:layout_constraintTop_toBottomOf="@id/viewCondition"/>
 
                 <ImageView
                     android:id="@+id/imgRefund"
-                    android:layout_width="35dp"
-                    android:layout_height="0dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/refund"
                     android:padding="6dp"
                     android:background="@drawable/light_green_drawable"
@@ -591,15 +840,22 @@
                     android:textStyle="bold"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgRefund"
-                    app:layout_constraintEnd_toEndOf="@id/viewRefund"
                     app:layout_constraintTop_toTopOf="@id/viewRefund"
                     app:layout_constraintBottom_toBottomOf="@id/viewRefund"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/viewRefund"
+                    app:layout_constraintEnd_toEndOf="@id/viewRefund"
+                    app:layout_constraintBottom_toBottomOf="@id/viewRefund"
+                    android:src="@drawable/next_arrow"
+                    />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:background="#4DD9D9D9"
-                    android:layout_marginStart="60dp"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewRefund"
                     app:layout_constraintEnd_toEndOf="@id/viewRefund"
@@ -609,16 +865,16 @@
                 <View
                     android:id="@+id/viewComplaint"
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="@dimen/_14sdp"
-                    app:layout_constraintStart_toStartOf="@id/cardLogo"
-                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintStart_toStartOf="@id/profileLayout"
+                    app:layout_constraintEnd_toEndOf="@id/profileLayout"
                     app:layout_constraintTop_toBottomOf="@id/viewRefund"/>
 
                 <ImageView
                     android:id="@+id/imgComplaint"
-                    android:layout_width="35dp"
-                    android:layout_height="0dp"
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
                     android:src="@drawable/bharat_logo"
                     android:padding="6dp"
                     app:layout_constraintStart_toStartOf="@id/viewComplaint"
@@ -628,20 +884,27 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Complaint Registration"
+                    android:text="B-Connect Complain Registration"
                     android:textColor="#3C3F48"
                     android:textStyle="bold"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgComplaint"
-                    app:layout_constraintEnd_toEndOf="@id/viewComplaint"
                     app:layout_constraintTop_toTopOf="@id/viewComplaint"
                     app:layout_constraintBottom_toBottomOf="@id/viewComplaint"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/viewComplaint"
+                    app:layout_constraintEnd_toEndOf="@id/viewComplaint"
+                    app:layout_constraintBottom_toBottomOf="@id/viewComplaint"
+                    android:src="@drawable/next_arrow"
+                    />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:background="#4DD9D9D9"
-                    android:layout_marginStart="55dp"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewComplaint"
                     app:layout_constraintEnd_toEndOf="@id/viewComplaint"
@@ -650,16 +913,16 @@
                 <View
                     android:id="@+id/viewRateUs"
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="@dimen/_14sdp"
-                    app:layout_constraintStart_toStartOf="@id/cardLogo"
-                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintStart_toStartOf="@id/profileLayout"
+                    app:layout_constraintEnd_toEndOf="@id/profileLayout"
                     app:layout_constraintTop_toBottomOf="@id/viewComplaint"/>
 
                 <ImageView
                     android:id="@+id/imgRateUs"
-                    android:layout_width="35dp"
-                    android:layout_height="0dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/rate"
                     android:padding="6dp"
                     android:background="@drawable/light_blue_drawable"
@@ -675,15 +938,22 @@
                     android:textStyle="bold"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgRateUs"
-                    app:layout_constraintEnd_toEndOf="@id/viewRateUs"
                     app:layout_constraintTop_toTopOf="@id/viewRateUs"
                     app:layout_constraintBottom_toBottomOf="@id/viewRateUs"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/viewRateUs"
+                    app:layout_constraintEnd_toEndOf="@id/viewRateUs"
+                    app:layout_constraintBottom_toBottomOf="@id/viewRateUs"
+                    android:src="@drawable/next_arrow"
+                    />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:background="#4DD9D9D9"
-                    android:layout_marginStart="55dp"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewRateUs"
                     app:layout_constraintEnd_toEndOf="@id/viewRateUs"
@@ -693,16 +963,16 @@
                 <View
                     android:id="@+id/viewFeedBack"
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="@dimen/_14sdp"
-                    app:layout_constraintStart_toStartOf="@id/cardLogo"
-                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintStart_toStartOf="@id/profileLayout"
+                    app:layout_constraintEnd_toEndOf="@id/profileLayout"
                     app:layout_constraintTop_toBottomOf="@id/viewRateUs"/>
 
                 <ImageView
                     android:id="@+id/imgFeedBack"
-                    android:layout_width="35dp"
-                    android:layout_height="0dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/feedback"
                     android:padding="6dp"
                     android:background="@drawable/light_yellow_drawable"
@@ -719,15 +989,22 @@
                     android:textStyle="bold"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgFeedBack"
-                    app:layout_constraintEnd_toEndOf="@id/viewFeedBack"
                     app:layout_constraintTop_toTopOf="@id/viewFeedBack"
                     app:layout_constraintBottom_toBottomOf="@id/viewFeedBack"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/viewFeedBack"
+                    app:layout_constraintEnd_toEndOf="@id/viewFeedBack"
+                    app:layout_constraintBottom_toBottomOf="@id/viewFeedBack"
+                    android:src="@drawable/next_arrow"
+                    />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:background="#4DD9D9D9"
-                    android:layout_marginStart="60dp"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewFeedBack"
                     app:layout_constraintEnd_toEndOf="@id/viewFeedBack"
@@ -736,16 +1013,16 @@
                 <View
                     android:id="@+id/viewInvite"
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="@dimen/_14sdp"
-                    app:layout_constraintStart_toStartOf="@id/cardLogo"
-                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintStart_toStartOf="@id/profileLayout"
+                    app:layout_constraintEnd_toEndOf="@id/profileLayout"
                     app:layout_constraintTop_toBottomOf="@id/viewFeedBack"/>
 
                 <ImageView
                     android:id="@+id/imgInvite"
-                    android:layout_width="35dp"
-                    android:layout_height="0dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/invite"
                     android:padding="6dp"
                     android:background="@drawable/light_gray_drawable"
@@ -762,15 +1039,22 @@
                     android:textStyle="bold"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgInvite"
-                    app:layout_constraintEnd_toEndOf="@id/viewInvite"
                     app:layout_constraintTop_toTopOf="@id/viewInvite"
                     app:layout_constraintBottom_toBottomOf="@id/viewInvite"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/viewInvite"
+                    app:layout_constraintEnd_toEndOf="@id/viewInvite"
+                    app:layout_constraintBottom_toBottomOf="@id/viewInvite"
+                    android:src="@drawable/next_arrow"
+                    />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:background="#4DD9D9D9"
-                    android:layout_marginStart="60dp"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewInvite"
                     app:layout_constraintEnd_toEndOf="@id/viewInvite"
@@ -779,16 +1063,16 @@
                 <View
                     android:id="@+id/viewFollow"
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="@dimen/_14sdp"
-                    app:layout_constraintStart_toStartOf="@id/cardLogo"
-                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintStart_toStartOf="@id/profileLayout"
+                    app:layout_constraintEnd_toEndOf="@id/profileLayout"
                     app:layout_constraintTop_toBottomOf="@id/viewInvite"/>
 
                 <ImageView
                     android:id="@+id/imgFollow"
-                    android:layout_width="35dp"
-                    android:layout_height="0dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/social"
                     android:padding="6dp"
                     android:background="@drawable/light_green_drawable"
@@ -805,33 +1089,89 @@
                     android:textStyle="bold"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgFollow"
-                    app:layout_constraintEnd_toEndOf="@id/viewFollow"
                     app:layout_constraintTop_toTopOf="@id/viewFollow"
                     app:layout_constraintBottom_toBottomOf="@id/viewFollow"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/viewFollow"
+                    app:layout_constraintEnd_toEndOf="@id/viewFollow"
+                    app:layout_constraintBottom_toBottomOf="@id/viewFollow"
+                    android:src="@drawable/next_arrow"
+                    />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:background="#4DD9D9D9"
-                    android:layout_marginStart="60dp"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewFollow"
                     app:layout_constraintEnd_toEndOf="@id/viewFollow"
                     app:layout_constraintBottom_toBottomOf="@id/viewFollow"/>
 
                 <View
-                    android:id="@+id/viewLogout"
+                    android:id="@+id/viewAccountDelete"
                     android:layout_width="0dp"
-                    android:layout_height="35dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="@dimen/_14sdp"
-                    app:layout_constraintStart_toStartOf="@id/cardLogo"
-                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintStart_toStartOf="@id/profileLayout"
+                    app:layout_constraintEnd_toEndOf="@id/profileLayout"
                     app:layout_constraintTop_toBottomOf="@id/viewFollow"/>
 
                 <ImageView
+                    android:id="@+id/imgAccountDelete"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/account_delete_img"
+                    android:padding="6dp"
+                    app:layout_constraintStart_toStartOf="@id/viewAccountDelete"
+                    app:layout_constraintTop_toTopOf="@id/viewAccountDelete"
+                    app:layout_constraintBottom_toBottomOf="@id/viewAccountDelete"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Delete My Account"
+                    android:textColor="#3C3F48"
+                    android:textStyle="bold"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    app:layout_constraintStart_toEndOf="@id/imgAccountDelete"
+                    app:layout_constraintTop_toTopOf="@id/viewAccountDelete"
+                    app:layout_constraintBottom_toBottomOf="@id/viewAccountDelete"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/viewAccountDelete"
+                    app:layout_constraintEnd_toEndOf="@id/viewAccountDelete"
+                    app:layout_constraintBottom_toBottomOf="@id/viewAccountDelete"
+                    android:src="@drawable/next_arrow"
+                    />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="#4DD9D9D9"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    app:layout_constraintStart_toStartOf="@id/viewAccountDelete"
+                    app:layout_constraintEnd_toEndOf="@id/viewAccountDelete"
+                    app:layout_constraintBottom_toBottomOf="@id/viewAccountDelete"/>
+
+
+                <View
+                    android:id="@+id/viewLogout"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="@dimen/_14sdp"
+                    app:layout_constraintStart_toStartOf="@id/profileLayout"
+                    app:layout_constraintEnd_toEndOf="@id/profileLayout"
+                    app:layout_constraintTop_toBottomOf="@id/viewAccountDelete"/>
+
+                <ImageView
                     android:id="@+id/imgLogout"
-                    android:layout_width="35dp"
-                    android:layout_height="0dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/logout"
                     android:padding="6dp"
                     android:background="@drawable/dark_red_drawable"
@@ -848,31 +1188,57 @@
                     android:textStyle="bold"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgLogout"
-                    app:layout_constraintEnd_toEndOf="@id/viewLogout"
                     app:layout_constraintTop_toTopOf="@id/viewLogout"
                     app:layout_constraintBottom_toBottomOf="@id/viewLogout"/>
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:background="#4DD9D9D9"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    app:layout_constraintStart_toStartOf="@id/viewLogout"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/viewLogout"
                     app:layout_constraintEnd_toEndOf="@id/viewLogout"
-                    app:layout_constraintBottom_toBottomOf="@id/viewLogout"/>
+                    app:layout_constraintBottom_toBottomOf="@id/viewLogout"
+                    android:src="@drawable/next_arrow"
+                    />
+
+                <TextView
+                    android:id="@+id/BHARAT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BHARAT\nKA\nAPNA PE!"
+                    android:layout_marginTop="@dimen/_40sdp"
+                    android:textSize="40sp"
+                    android:textColor="#F2F2F2"
+                    android:fontFamily="@font/roboto_bold"
+                    app:layout_constraintTop_toBottomOf="@id/viewLogout"
+                    app:layout_constraintStart_toStartOf="@id/profileLayout"
+                    />
+
+                <TextView
+                    android:id="@+id/india"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/BHARAT"
+                    app:layout_constraintStart_toStartOf="@id/BHARAT"
+                    android:text="Save Big with India’s #1 Discount App"
+                    android:textSize="14sp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:textColor="#C0C0C0"
+                    android:drawableEnd="@drawable/india"
+                    />
+
 
                 <View
+                    android:id="@+id/newView"
                     android:layout_width="0dp"
-                    android:layout_height="20dp"
-                    app:layout_constraintTop_toBottomOf="@id/viewLogout"
+                    android:layout_height="80dp"
+                    app:layout_constraintTop_toBottomOf="@id/india"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <LinearLayout
         android:id="@+id/loading"
