@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseActivity;
 import com.vuvrecharge.modules.fragments.DepositFragment;
+import com.vuvrecharge.modules.fragments.MaxPointFragment;
 import com.vuvrecharge.modules.fragments.RechargeHistoryFragment;
 import com.vuvrecharge.modules.fragments.WalletFragment;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
@@ -54,6 +55,10 @@ public class StatementsActivity extends BaseActivity implements DefaultView, OnF
 
     @BindView(R.id.viewReports)
     View viewReports;
+    @BindView(R.id.viewMaxPoints)
+    View viewMaxPoints;
+    @BindView(R.id.maxPointsTxt)
+    TextView maxPointsTxt;
 
     @BindView(R.id.addMore)
     ImageView addMore;
@@ -105,13 +110,16 @@ public class StatementsActivity extends BaseActivity implements DefaultView, OnF
             setFragment(new RechargeHistoryFragment());
             viewStatements.setBackgroundResource(R.drawable.statements_select_bg_shape);
             statementsView.setTextColor(Color.WHITE);
+            viewMaxPoints.setBackgroundResource(R.drawable.null_shape);
+            maxPointsTxt.setTextColor(getResources().getColor(R.color.colorBlackU));
             viewReports.setBackgroundResource(R.drawable.null_shape);
             reportsView.setTextColor(getResources().getColor(R.color.colorBlackU));
             viewDeposit.setBackgroundResource(R.drawable.null_shape);
             depositView.setTextColor(getResources().getColor(R.color.colorBlackU));
-            statementsView.setText(Html.fromHtml("<b>Recharge History</b>"));
-            reportsView.setText(Html.fromHtml("Wallet History"));
-            depositView.setText(Html.fromHtml("Deposit History"));
+            statementsView.setText(Html.fromHtml("<b>Recharge</b>"));
+            reportsView.setText(Html.fromHtml("Wallet"));
+            depositView.setText(Html.fromHtml("Deposit"));
+            maxPointsTxt.setText(Html.fromHtml("Max Point"));
 
         } else {
 
@@ -120,12 +128,14 @@ public class StatementsActivity extends BaseActivity implements DefaultView, OnF
             statementsView.setTextColor(getResources().getColor(R.color.colorBlackU));
             viewReports.setBackgroundResource(R.drawable.null_shape);
             reportsView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            viewMaxPoints.setBackgroundResource(R.drawable.null_shape);
             viewStatements.setBackgroundResource(R.drawable.null_shape);
+            maxPointsTxt.setTextColor(getResources().getColor(R.color.colorBlackU));
             depositView.setTextColor(Color.WHITE);
-            statementsView.setText(Html.fromHtml("<b>Recharge History</b>"));
-            reportsView.setText(Html.fromHtml("Wallet History"));
-            depositView.setText(Html.fromHtml("Deposit History"));
-
+            statementsView.setText(Html.fromHtml("Recharge"));
+            reportsView.setText(Html.fromHtml("Wallet"));
+            depositView.setText(Html.fromHtml("<b>Deposit</b>"));
+            maxPointsTxt.setText(Html.fromHtml("Max Point"));
         }
 
 
@@ -137,9 +147,12 @@ public class StatementsActivity extends BaseActivity implements DefaultView, OnF
             reportsView.setTextColor(getResources().getColor(R.color.colorBlackU));
             viewDeposit.setBackgroundResource(R.drawable.null_shape);
             depositView.setTextColor(getResources().getColor(R.color.colorBlackU));
-            statementsView.setText(Html.fromHtml("<b>Recharge History</b>"));
-            reportsView.setText(Html.fromHtml("Wallet History"));
-            depositView.setText(Html.fromHtml("Deposit History"));
+            viewMaxPoints.setBackgroundResource(R.drawable.null_shape);
+            maxPointsTxt.setTextColor(getResources().getColor(R.color.colorBlackU));
+            statementsView.setText(Html.fromHtml("<b>Recharge</b>"));
+            reportsView.setText(Html.fromHtml("Wallet"));
+            depositView.setText(Html.fromHtml("Deposit"));
+            maxPointsTxt.setText(Html.fromHtml("Max Point"));
         });
 
         viewReports.setOnClickListener(v -> {
@@ -150,9 +163,12 @@ public class StatementsActivity extends BaseActivity implements DefaultView, OnF
             statementsView.setTextColor(getResources().getColor(R.color.colorBlackU));
             viewDeposit.setBackgroundResource(R.drawable.null_shape);
             depositView.setTextColor(getResources().getColor(R.color.colorBlackU));
-            statementsView.setText(Html.fromHtml("Recharge History"));
-            depositView.setText(Html.fromHtml("Deposit History"));
-            reportsView.setText(Html.fromHtml("<b>Wallet History</b>"));
+            viewMaxPoints.setBackgroundResource(R.drawable.null_shape);
+            maxPointsTxt.setTextColor(getResources().getColor(R.color.colorBlackU));
+            statementsView.setText(Html.fromHtml("Recharge"));
+            depositView.setText(Html.fromHtml("Deposit"));
+            reportsView.setText(Html.fromHtml("<b>Wallet</b>"));
+            maxPointsTxt.setText(Html.fromHtml("Max Point"));
         });
 
         viewDeposit.setOnClickListener(v -> {
@@ -161,12 +177,32 @@ public class StatementsActivity extends BaseActivity implements DefaultView, OnF
             depositView.setTextColor(Color.WHITE);
             viewStatements.setBackgroundResource(R.drawable.null_shape);
             statementsView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            viewMaxPoints.setBackgroundResource(R.drawable.null_shape);
+            maxPointsTxt.setTextColor(getResources().getColor(R.color.colorBlackU));
             viewReports.setBackgroundResource(R.drawable.null_shape);
             reportsView.setTextColor(getResources().getColor(R.color.colorBlackU));
-            statementsView.setText(Html.fromHtml("Recharge History"));
-            reportsView.setText(Html.fromHtml("Wallet History"));
-            depositView.setText(Html.fromHtml("<b>Deposit History</b>"));
+            statementsView.setText(Html.fromHtml("Recharge"));
+            reportsView.setText(Html.fromHtml("Wallet"));
+            depositView.setText(Html.fromHtml("<b>Deposit</b>"));
+            maxPointsTxt.setText(Html.fromHtml("Max Point"));
         });
+        viewMaxPoints.setOnClickListener(v -> {
+            setFragment(new MaxPointFragment());
+            viewMaxPoints.setBackgroundResource(R.drawable.statements_select_bg_shape);
+            maxPointsTxt.setTextColor(Color.WHITE);
+            viewDeposit.setBackgroundResource(R.drawable.null_shape);
+            depositView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            viewStatements.setBackgroundResource(R.drawable.null_shape);
+            statementsView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            viewReports.setBackgroundResource(R.drawable.null_shape);
+            reportsView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            statementsView.setText(Html.fromHtml("Recharge"));
+            reportsView.setText(Html.fromHtml("Wallet"));
+            depositView.setText(Html.fromHtml("Deposit"));
+            maxPointsTxt.setText(Html.fromHtml("<b>Max Point</b>"));
+        });
+
+
 
     }
     @Override

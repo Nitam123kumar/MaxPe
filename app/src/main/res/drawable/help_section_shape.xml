@@ -6,7 +6,7 @@
         android:angle="360"
         />
 
-    <corners android:bottomLeftRadius="@dimen/_11sdp"
-        android:bottomRightRadius="@dimen/_11sdp"/>
+    <corners android:bottomLeftRadius="@dimen/_9sdp"
+        android:bottomRightRadius="@dimen/_9sdp"/>
 
 </shape>

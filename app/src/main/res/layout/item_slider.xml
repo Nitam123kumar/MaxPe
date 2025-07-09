@@ -10,7 +10,7 @@
         android:layout_height="@dimen/_130sdp"
         android:elevation="@dimen/_2sdp"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="16dp">
+        app:cardCornerRadius="@dimen/_12sdp">
 
         <ImageView
             android:id="@+id/imageView"

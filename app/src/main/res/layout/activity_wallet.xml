@@ -41,7 +41,7 @@
                     app:layout_constraintTop_toTopOf="@id/name_tv1">
 
                     <ImageView
-                        android:layout_width="13.6dp"
+                        android:layout_width="@dimen/_10sdp"
                         android:layout_height="7.65dp"
                         android:src="@drawable/wallet_back_vector" />
                 </LinearLayout>
@@ -57,7 +57,7 @@
                     android:text="Hello MaxPe User"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/white"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_10sdp"
                     android:gravity="center_vertical"
                     android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -77,11 +77,11 @@
 
                 <ImageView
                     android:id="@+id/refresh1"
-                    android:layout_width="17.88dp"
-                    android:layout_height="17.88dp"
+                    android:layout_width="@dimen/_14sdp"
+                    android:layout_height="@dimen/_14sdp"
                     android:layout_marginEnd="@dimen/_20sdp"
                     android:src="@drawable/setting_icon"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@id/name_tv1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/name_tv1" />
@@ -92,8 +92,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/balance_constraintLayout"
-            android:layout_width="337dp"
-            android:layout_height="166dp"
+            android:layout_width="@dimen/_260sdp"
+            android:layout_height="@dimen/_120sdp"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_35sdp"
             android:background="@drawable/wallet_bal_shape"
@@ -117,7 +117,7 @@
                     android:fontFamily="@font/roboto"
                     android:text="Your Balance"
                     android:textColor="@color/white"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -130,7 +130,7 @@
                     android:fontFamily="@font/roboto"
                     android:text="00.00"
                     android:textColor="@color/white"
-                    android:textSize="50sp"
+                    android:textSize="@dimen/_38sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/your_balance_TV" />
@@ -146,7 +146,7 @@
                     <LinearLayout
                         android:id="@+id/add_Money_Layout"
                         android:layout_width="wrap_content"
-                        android:layout_height="16dp"
+                        android:layout_height="@dimen/_12sdp"
                         android:gravity="center"
                         android:orientation="horizontal"
                         app:layout_constraintEnd_toStartOf="@id/view_money_line"
@@ -155,10 +155,10 @@
 
 
                         <ImageView
-                            android:layout_width="16dp"
-                            android:layout_height="16dp"
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
                             android:layout_gravity="center"
-                            android:src="@drawable/add_money_icon" />
+                            android:src="@drawable/add_money_svg" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -168,14 +168,14 @@
                             android:fontFamily="@font/roboto"
                             android:text="Add Money"
                             android:textColor="@color/white"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/_9sdp" />
 
                     </LinearLayout>
 
                     <View
                         android:id="@+id/view_money_line"
-                        android:layout_width="1dp"
-                        android:layout_height="20dp"
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="@dimen/_15sdp"
                         android:layout_marginStart="@dimen/_20sdp"
                         android:background="@color/white"
                         app:layout_constraintStart_toEndOf="@id/add_Money_Layout"
@@ -195,10 +195,10 @@
 
 
                         <ImageView
-                            android:layout_width="17.14dp"
-                            android:layout_height="16dp"
+                            android:layout_width="@dimen/_14sdp"
+                            android:layout_height="@dimen/_12sdp"
                             android:layout_gravity="center"
-                            android:src="@drawable/history_icon" />
+                            android:src="@drawable/history_img_svg" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -208,7 +208,7 @@
                             android:fontFamily="@font/roboto"
                             android:text="History"
                             android:textColor="@color/white"
-                            android:textSize="12sp" />
+                            android:textSize="@dimen/_9sdp" />
 
                     </LinearLayout>
 
@@ -274,9 +274,9 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/latest_transitions_ConstraintLayout_recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="360dp"
+                android:layout_height="@dimen/_285sdp"
                 android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_13sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/latest_transitions_ConstraintLayout"
 

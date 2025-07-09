@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="184dp"
-    android:layout_height="94dp"
-    android:layout_margin="6dp"
-    android:elevation="4dp"
-    app:cardCornerRadius="8dp">
+    android:layout_width="@dimen/_140sdp"
+    android:layout_height="@dimen/_70sdp"
+    android:layout_margin="@dimen/_4sdp"
+    android:elevation="@dimen/_3sdp"
+    app:cardCornerRadius="@dimen/_6sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,15 +15,15 @@
             android:id="@+id/imgSlide"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/maxpe_youtube_logo"
-            android:scaleType="centerCrop" />
+
+             />
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="102dp"
+            android:layout_width="@dimen/_80sdp"
             android:layout_height="wrap_content"
             android:text="How to Recharge \n    with MaxPe?"
-            android:textSize="13sp"
+            android:textSize="@dimen/_10sdp"
             android:gravity="center"
             android:textStyle="bold"
             android:textColor="@color/white"

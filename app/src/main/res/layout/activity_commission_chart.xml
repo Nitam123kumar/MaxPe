@@ -23,9 +23,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutFirst"
             android:layout_width="match_parent"
-            android:layout_height="85dp"
+            android:layout_height="@dimen/_65sdp"
             android:elevation="@dimen/_5sdp"
-            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:layout_marginHorizontal="@dimen/_2sdp"
             app:layout_constraintTop_toTopOf="parent"
             android:background="@drawable/rectangle"
             android:layout_marginTop="@dimen/_13sdp"
@@ -114,19 +114,19 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/commissionViewTab"
             android:layout_width="0dp"
-            android:layout_height="65dp"
+            android:layout_height="@dimen/_50sdp"
             android:elevation="@dimen/_3sdp"
             android:background="@drawable/rectangle"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:layout_marginHorizontal="@dimen/_2sdp"
             android:layout_marginTop="@dimen/_13sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/layoutFirst">
 
             <View
                 android:id="@+id/viewPrepaid"
-                android:layout_width="108dp"
-                android:layout_height="39dp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_30sdp"
                 app:layout_constraintStart_toStartOf="@id/commissionViewTab"
                 app:layout_constraintEnd_toStartOf="@id/viewDTH"
                 app:layout_constraintTop_toTopOf="@id/commissionViewTab"
@@ -158,8 +158,8 @@
 
             <View
                 android:id="@+id/viewDTH"
-                android:layout_width="108dp"
-                android:layout_height="39dp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_30sdp"
                 app:layout_constraintStart_toEndOf="@id/viewPrepaid"
                 app:layout_constraintEnd_toStartOf="@id/viewBillPayments"
                 app:layout_constraintTop_toTopOf="@id/commissionViewTab"
@@ -190,8 +190,8 @@
 
             <View
                 android:id="@+id/viewBillPayments"
-                android:layout_width="115dp"
-                android:layout_height="39dp"
+                android:layout_width="@dimen/_82sdp"
+                android:layout_height="@dimen/_30sdp"
                 app:layout_constraintStart_toEndOf="@id/viewDTH"
                 app:layout_constraintEnd_toEndOf="@id/commissionViewTab"
                 app:layout_constraintTop_toTopOf="@id/commissionViewTab"
@@ -437,7 +437,7 @@
                     android:id="@+id/commissionFrameLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_5sdp"
+                    android:layout_marginHorizontal="@dimen/_2sdp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/commissionConstraintLayout"
                     />
@@ -491,11 +491,11 @@
 
                     <TextView
                         android:id="@+id/getStartedTV"
-                        android:layout_width="160dp"
+                        android:layout_width="@dimen/_120sdp"
                         android:layout_height="@dimen/_35sdp"
                         android:text="Get Started"
                         android:textColor="#084C97"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/_12sdp"
                         android:textStyle="bold"
                         android:gravity="center_vertical"
                         android:drawablePadding="@dimen/_10sdp"

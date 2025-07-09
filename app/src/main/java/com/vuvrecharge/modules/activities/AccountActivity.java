@@ -84,26 +84,20 @@ import retrofit2.Response;
 public class AccountActivity extends BaseActivity implements DefaultView, View.OnClickListener, PaymentSettingAdapter.OnClickListener, FollowsAdapter.OnClickListener {
 
     private DefaultPresenter mDefaultPresenter;
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
-    @BindView(R.id.title)
-    TextView title;
     @BindView(R.id.phoneNumber)
     TextView phoneNumber;
     @BindView(R.id.email_id)
     TextView email_id;
-    @BindView(R.id.walletBalance)
-    TextView walletBalance;
     @BindView(R.id.viewPrivacy)
     View viewPrivacy;
     @BindView(R.id.viewCondition)
     View viewCondition;
     @BindView(R.id.viewRefund)
     View viewRefund;
-    @BindView(R.id.viewChangePassword)
-    View viewChangePassword;
-    @BindView(R.id.viewProfile)
-    View viewProfile;
+//    @BindView(R.id.viewChangePassword)
+//    View viewChangePassword;
+//    @BindView(R.id.viewProfile)
+//    View viewProfile;
     @BindView(R.id.viewLogout)
     View viewLogout;
     @BindView(R.id.loading)
@@ -114,12 +108,6 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
     TextView retry;
     @BindView(R.id.name)
     TextView name;
-    @BindView(R.id.support)
-    TextView support;
-    @BindView(R.id.btnWallet)
-    TextView btnWallet;
-    @BindView(R.id.instagram)
-    ImageView instagram;
     @BindView(R.id.viewChangeMPin)
     View viewChangeMPin;
     @BindView(R.id.viewInvite)
@@ -165,7 +153,6 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
         ButterKnife.bind(this);
-        setToolbar(mToolbar);
         defaultView = this;
         fingerprint = new Fingerprint(this);
         passwordLess = new PasswordLess(this);
@@ -190,16 +177,13 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         viewPrivacy.setOnClickListener(this);
         viewCondition.setOnClickListener(this);
         viewRefund.setOnClickListener(this);
-        viewChangePassword.setOnClickListener(this);
+//        viewChangePassword.setOnClickListener(this);
         viewComplaint.setOnClickListener(this);
-        btnWallet.setOnClickListener(this);
         viewFollow.setOnClickListener(this);
         viewFeedBack.setOnClickListener(this);
-        viewProfile.setOnClickListener(this);
+//        viewProfile.setOnClickListener(this);
         viewLogout.setOnClickListener(this);
-        support.setOnClickListener(this);
         viewRateUs.setOnClickListener(this);
-        instagram.setOnClickListener(this);
         viewInvite.setOnClickListener(this);
         viewFingerPrint.setOnClickListener(this);
         viewChangeMPin.setOnClickListener(this);
@@ -207,6 +191,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         mDefaultPresenter = new DefaultPresenter(this);
         mDefaultPresenter.getPaymentSetting2(device_id + "", "timepass");
         mDefaultPresenter.totalReferrals(device_id);
+//        statusBarColor();
     }
 
     private void setValues() {
@@ -218,10 +203,8 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
             name.setText(userData.getName());
             available_maxPointsTV.setText(userData.getCashbackPoints());
             available_earnTV.setText("\u20b9"+userData.getEarnings());
-            title.setText("Profile");
             phoneNumber.setText(userData.getMobile());
             email_id.setText("Member Since " + userData.getDate());
-            walletBalance.setText("₹" + userData.getEarnings());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -303,36 +286,36 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                 intent.putExtra("from", "Return, Refund and Cancellation policy");
                 startActivity(intent);
                 break;
-            case R.id.viewProfile:
-                intent = new Intent(getActivity(), ProfileActivity.class);
-                startActivity(intent);
-                break;
+//            case R.id.viewProfile:
+//                intent = new Intent(getActivity(), ProfileActivity.class);
+//                startActivity(intent);
+//                break;
             case R.id.viewComplaint:
                 intent = new Intent(getActivity(), ComplaintRegistrationActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.viewChangePassword:
-                openSetting();
-                break;
+//            case R.id.viewChangePassword:
+//                openSetting();
+//                break;
             case R.id.viewLogout:
                 makeLogout();
                 break;
             case R.id.viewChangeMPin:
                 setPin();
                 break;
-            case R.id.btnWallet:
-                addBalance();
-                break;
+//            case R.id.btnWallet:
+//                addBalance();
+//                break;
             case R.id.viewResetMPin:
                 ResetMpinPin(userData.getMobile());
                 break;
             case R.id.viewFollow:
                 followUs();
                 break;
-            case R.id.support:
-                intent = new Intent(getActivity(), SupportActivity.class);
-                startActivity(intent);
-                break;
+//            case R.id.support:
+//                intent = new Intent(getActivity(), SupportActivity.class);
+//                startActivity(intent);
+//                break;
             case R.id.viewInvite:
                 intent = new Intent(getActivity(), ShareEarnActivity.class);
                 startActivity(intent);
@@ -346,10 +329,10 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                     fingerprint.setFingerprint("true");
                 }
                 break;
-            case R.id.instagram:
-                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/maxpe_payments/"));
-                startActivity(intent);
-                break;
+//            case R.id.instagram:
+//                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/maxpe_payments/"));
+//                startActivity(intent);
+//                break;
             case R.id.viewRateUs:
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.vuvrecharge"));
                 startActivity(intent);

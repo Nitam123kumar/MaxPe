@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vuvrecharge.R;
@@ -70,16 +69,16 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.MainListHo
         TextView order_id;
         @BindView(R.id.date_time)
         TextView date_time;
-        @BindView(R.id.total_amount)
-        TextView total_amount;
+//        @BindView(R.id.total_amount)
+//        TextView total_amount;
         @BindView(R.id.remaining_amount)
         TextView remaining_amount;
         @BindView(R.id.reason)
         TextView reason;
         @BindView(R.id.imgDone)
         ImageView imgDone;
-        @BindView(R.id.layoutDesignPattern)
-        ConstraintLayout layoutDesignPattern;
+//        @BindView(R.id.layoutDesignPattern)
+//        ConstraintLayout layoutDesignPattern;
 
         public MainListHolder(View itemView) {
             super(itemView);
@@ -96,18 +95,18 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.MainListHo
                 order_id.setText("Order Id : N/A");
             }
             reason.setText(resultsBean.getComment());
-            total_amount.setText("Amount : \u20b9" + resultsBean.getTxn_amount());
+//            total_amount.setText("Amount : \u20b9" + resultsBean.getTxn_amount());
 
             if (resultsBean.getType().equals("Cr")) {
                 amount.setText("+ \u20b9" + resultsBean.getAmount());
-                amount.setTextColor(mContext.getResources().getColor(R.color.green_end));
-                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_history_1);
-                imgDone.setImageResource(R.drawable.wallet_success);
+                amount.setTextColor(mContext.getResources().getColor(R.color.success1));
+//                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_history_1);
+                imgDone.setImageResource(R.drawable.wallet_receved_svg);
             } else {
                 amount.setText("- \u20b9" + resultsBean.getAmount());
-                amount.setTextColor(mContext.getResources().getColor(R.color.red));
-                imgDone.setImageResource(R.drawable.wallet_failed);
-                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_report_1);
+                amount.setTextColor(mContext.getResources().getColor(R.color.failed1));
+                imgDone.setImageResource(R.drawable.walled_svg_img);
+//                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_report_1);
             }
             remaining_amount.setText("Closing Balance \u20b9" + resultsBean.getRemaining());
             date_time.setText(resultsBean.getDate_time());

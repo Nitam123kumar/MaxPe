@@ -16,8 +16,8 @@
 
             <View
                 android:id="@+id/view"
-                android:layout_width="40dp"
-                android:layout_height="4dp"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_3sdp"
                 android:background="#E8E8E8"
                 android:layout_marginTop="@dimen/_6sdp"
                 app:layout_constraintStart_toStartOf="parent"

@@ -34,14 +34,14 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/mToolbar_constraint"
                     android:layout_width="match_parent"
-                    android:layout_height="240dp"
+                    android:layout_height="@dimen/_180sdp"
                     android:background="@drawable/help_section_shape">
 
 
                     <com.denzcoskun.imageslider.ImageSlider
                         android:id="@+id/imageSlider"
                         android:layout_width="match_parent"
-                        android:layout_height="240dp"
+                        android:layout_height="@dimen/_180sdp"
                         app:iss_auto_cycle="true"
                         app:iss_delay="3000"
                         app:iss_period="3000"
@@ -62,7 +62,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/referral_link"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="@dimen/_45sdp"
                         android:layout_marginHorizontal="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -74,10 +74,10 @@
                             android:layout_height="match_parent"
                             app:boxBackgroundColor="@color/white"
                             app:boxBackgroundMode="outline"
-                            app:boxCornerRadiusBottomEnd="12dp"
-                            app:boxCornerRadiusBottomStart="12dp"
-                            app:boxCornerRadiusTopEnd="12dp"
-                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusBottomEnd="@dimen/_9sdp"
+                            app:boxCornerRadiusBottomStart="@dimen/_9sdp"
+                            app:boxCornerRadiusTopEnd="@dimen/_9sdp"
+                            app:boxCornerRadiusTopStart="@dimen/_9sdp"
                             app:boxStrokeColor="@color/black"
                             app:boxStrokeWidth="@dimen/_1sdp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -96,14 +96,14 @@
                                 android:paddingTop="@dimen/_5sdp"
                                 android:textColor="@color/black"
                                 android:textColorHint="@color/black"
-                                android:textSize="14sp" />
+                                android:textSize="@dimen/_11sdp" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <TextView
                             android:id="@+id/btnReferCopy"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="30dp"
+                            android:layout_marginEnd="@dimen/_23sdp"
                             android:text="Copy"
                             android:textColor="#003770"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -114,7 +114,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/invite_to_whatApp"
                         android:layout_width="match_parent"
-                        android:layout_height="60dp"
+                        android:layout_height="@dimen/_40sdp"
                         android:layout_marginHorizontal="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:background="@drawable/invite_whatapp_shape"
@@ -130,9 +130,9 @@
 
                             <ImageView
                                 android:id="@+id/whatApp_img"
-                                android:layout_width="27dp"
-                                android:layout_height="27dp"
-                                android:src="@drawable/whatapp_img"
+                                android:layout_width="@dimen/_21sdp"
+                                android:layout_height="@dimen/_21sdp"
+                                android:src="@drawable/whatsapp_svg"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -144,7 +144,7 @@
                                 android:fontFamily="@font/roboto"
                                 android:text="Invite via WhatApp"
                                 android:textColor="@color/white"
-                                android:textSize="12sp"
+                                android:textSize="@dimen/_9sdp"
                                 app:layout_constraintBottom_toBottomOf="@id/whatApp_img"
                                 app:layout_constraintStart_toEndOf="@id/whatApp_img"
                                 app:layout_constraintTop_toTopOf="@id/whatApp_img" />
@@ -163,8 +163,8 @@
 
                         <View
                             android:id="@+id/view1"
-                            android:layout_width="133dp"
-                            android:layout_height="1.5dp"
+                            android:layout_width="@dimen/_90sdp"
+                            android:layout_height="@dimen/_1sdp"
                             android:layout_marginStart="@dimen/_2sdp"
                             android:background="#B1B1B1"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -174,11 +174,11 @@
                         <TextView
                             android:id="@+id/or_TextView"
                             android:layout_width="wrap_content"
-                            android:layout_height="27dp"
+                            android:layout_height="@dimen/_21sdp"
                             android:layout_marginStart="@dimen/_20sdp"
                             android:text="OR"
                             android:textColor="@color/black"
-                            android:textSize="22sp"
+                            android:textSize="@dimen/_17sdp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/view1"
@@ -186,8 +186,8 @@
 
                         <View
                             android:id="@+id/view2"
-                            android:layout_width="133dp"
-                            android:layout_height="1.5dp"
+                            android:layout_width="@dimen/_90sdp"
+                            android:layout_height="@dimen/_1sdp"
                             android:layout_marginStart="@dimen/_13sdp"
                             android:background="#B1B1B1"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -200,7 +200,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/btnInvite"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="@dimen/_38sdp"
                         android:layout_marginHorizontal="@dimen/_15sdp"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:background="@drawable/share_app_button_shape"
@@ -216,10 +216,10 @@
 
                             <ImageView
                                 android:id="@+id/share_img"
-                                android:layout_width="27dp"
-                                android:layout_height="27dp"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_marginStart="@dimen/_10sdp"
-                                android:src="@drawable/share_img"
+                                android:src="@drawable/share_img_svg"
                                 app:layout_constraintBottom_toBottomOf="@id/shareTextView"
                                 app:layout_constraintStart_toEndOf="@id/shareTextView"
                                 app:layout_constraintTop_toTopOf="@id/shareTextView" />
@@ -230,7 +230,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Share"
                                 android:textColor="@color/white"
-                                android:textSize="22sp"
+                                android:textSize="@dimen/_17sdp"
                                 android:textStyle="normal"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -250,9 +250,9 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/viewMyReferral"
                         android:layout_width="wrap_content"
-                        android:layout_height="150dp"
-                        android:layout_marginStart="@dimen/_18sdp"
-                        android:elevation="@dimen/_4sdp"
+                        android:layout_height="@dimen/_115sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:elevation="@dimen/_3sdp"
                         android:background="@drawable/shape_earn_page"
                         app:layout_constraintEnd_toStartOf="@id/viewReferralIncome"
                         app:layout_constraintStart_toStartOf="parent"
@@ -263,7 +263,7 @@
                             <ImageView
                                 android:id="@+id/imgMyReferral"
                                 android:layout_width="wrap_content"
-                                android:layout_height="75dp"
+                                android:layout_height="wrap_content"
                                 android:src="@drawable/referal"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -271,8 +271,8 @@
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/viewMyReferralBottom"
-                                android:layout_width="170dp"
-                                android:layout_height="75dp"
+                                android:layout_width="@dimen/_120sdp"
+                                android:layout_height="@dimen/_55sdp"
                                 android:background="@drawable/refferal_drawable_side_corners"
                                 app:layout_constraintBottom_toBottomOf="@id/viewMyReferral"
                                 app:layout_constraintEnd_toEndOf="@id/viewMyReferral"
@@ -288,7 +288,7 @@
                                     android:gravity="center"
                                     android:text="My Referral"
                                     android:textColor="@color/black"
-                                    android:textSize="16sp"
+                                    android:textSize="@dimen/_12sdp"
                                     app:layout_constraintBottom_toTopOf="@id/txtMyReferralValue"
                                     app:layout_constraintEnd_toEndOf="@id/viewMyReferralBottom"
                                     app:layout_constraintStart_toStartOf="@id/viewMyReferralBottom"
@@ -301,7 +301,7 @@
                                     android:gravity="center"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                                     android:textColor="#6A6A6A"
-                                    android:textSize="18sp"
+                                    android:textSize="@dimen/_14sdp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="@id/viewMyReferralBottom"
                                     app:layout_constraintEnd_toEndOf="@id/viewMyReferralBottom"
@@ -317,11 +317,11 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/viewReferralIncome"
                         android:layout_width="wrap_content"
-                        android:layout_height="150dp"
+                        android:layout_height="@dimen/_115sdp"
                         android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
                         android:background="@drawable/shape_earn_page"
-                        android:elevation="@dimen/_4sdp"
+                        android:elevation="@dimen/_3sdp"
                         app:layout_constraintBottom_toBottomOf="@id/viewMyReferral"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/viewMyReferral"
@@ -329,17 +329,17 @@
 
                         <ImageView
                             android:id="@+id/imgReferralIncome"
-                            android:layout_width="170dp"
-                            android:layout_height="75dp"
+                            android:layout_width="@dimen/_120sdp"
+                            android:layout_height="wrap_content"
                             android:src="@drawable/referarral_icon"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
-                            android:layout_width="44.81dp"
-                            android:layout_height="61dp"
-                            android:src="@drawable/referarral_income"
+                            android:layout_width="@dimen/_35sdp"
+                            android:layout_height="@dimen/_40sdp"
+                            android:src="@drawable/referral_vaule_img_svg"
                             app:layout_constraintBottom_toBottomOf="@id/imgReferralIncome"
                             app:layout_constraintEnd_toEndOf="@id/imgReferralIncome"
                             app:layout_constraintStart_toStartOf="@id/imgReferralIncome"
@@ -348,8 +348,8 @@
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/viewReferralIncomeBottom"
-                            android:layout_width="170dp"
-                            android:layout_height="75dp"
+                            android:layout_width="@dimen/_120sdp"
+                            android:layout_height="@dimen/_55sdp"
                             android:background="@drawable/refferal_drawable_side_corners"
                             app:layout_constraintBottom_toBottomOf="@id/viewReferralIncome"
                             app:layout_constraintEnd_toEndOf="@id/viewReferralIncome"
@@ -364,7 +364,7 @@
                                 android:gravity="center"
                                 android:text="Referral Income"
                                 android:textColor="@color/black"
-                                android:textSize="16sp"
+                                android:textSize="@dimen/_12sdp"
                                 app:layout_constraintBottom_toTopOf="@id/txtReferralIncomeValue"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -377,7 +377,7 @@
                                 android:gravity="center"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                                 android:textColor="#6A6A6A"
-                                android:textSize="18sp"
+                                android:textSize="@dimen/_14sdp"
                                 android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -409,12 +409,12 @@
                             android:id="@+id/how_It_Works"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
                             android:fontFamily="@font/roboto"
                             android:text="How It Works"
                             android:textColor="@color/black"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/_12sdp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -428,23 +428,23 @@
 
                             <ImageView
                                 android:id="@+id/share_with_friend_img"
-                                android:layout_width="103.01dp"
-                                android:layout_height="86.81dp"
+                                android:layout_width="@dimen/_85sdp"
+                                android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_10sdp"
-                                android:src="@drawable/share_with_friend_img"
+                                android:src="@drawable/group_12510"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:id="@+id/srl"
-                                android:layout_width="137dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_40sdp"
                                 android:fontFamily="@font/roboto"
                                 android:text="Share referral link \nwith friends!"
                                 android:textColor="#003770"
-                                android:textSize="16sp"
+                                android:textSize="@dimen/_12sdp"
                                 app:layout_constraintBottom_toBottomOf="@id/share_with_friend_img"
                                 app:layout_constraintStart_toEndOf="@+id/share_with_friend_img"
                                 app:layout_constraintTop_toTopOf="@id/share_with_friend_img" />
@@ -461,23 +461,23 @@
 
                             <ImageView
                                 android:id="@+id/share_with_friend_img2"
-                                android:layout_width="103.01dp"
-                                android:layout_height="86.81dp"
+                                android:layout_width="@dimen/_85sdp"
+                                android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_10sdp"
-                                android:src="@drawable/friends"
+                                android:src="@drawable/group_12511"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:id="@+id/srl2"
-                                android:layout_width="164dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_40sdp"
                                 android:fontFamily="@font/roboto"
                                 android:text="As soon as your 5 \nfriends add Rs.100 to \ntheir wallet."
                                 android:textColor="#003770"
-                                android:textSize="16sp"
+                                android:textSize="@dimen/_12sdp"
                                 app:layout_constraintBottom_toBottomOf="@id/share_with_friend_img2"
                                 app:layout_constraintStart_toEndOf="@+id/share_with_friend_img2"
                                 app:layout_constraintTop_toTopOf="@id/share_with_friend_img2" />
@@ -494,23 +494,23 @@
 
                             <ImageView
                                 android:id="@+id/share_with_friend_img3"
-                                android:layout_width="103.01dp"
-                                android:layout_height="86.81dp"
+                                android:layout_width="@dimen/_85sdp"
+                                android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_10sdp"
-                                android:src="@drawable/referral_bonus_img"
+                                android:src="@drawable/gift__7_"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:id="@+id/srl3"
-                                android:layout_width="157dp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_40sdp"
                                 android:fontFamily="@font/roboto"
                                 android:text="you will get a Rs.100 referral bonus."
                                 android:textColor="#003770"
-                                android:textSize="16sp"
+                                android:textSize="@dimen/_12sdp"
                                 app:layout_constraintBottom_toBottomOf="@id/share_with_friend_img3"
                                 app:layout_constraintStart_toEndOf="@+id/share_with_friend_img3"
                                 app:layout_constraintTop_toTopOf="@id/share_with_friend_img3" />
@@ -526,7 +526,7 @@
                             android:layout_marginBottom="@dimen/_16sdp"
                             android:gravity="center"
                             android:text="T&amp;C apply "
-                            android:textSize="10sp"
+                            android:textSize="@dimen/_8sdp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -552,14 +552,14 @@
                         android:fontFamily="@font/roboto"
                         android:text="Top Earner on MaxPe"
                         android:textColor="@color/black"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/_12sdp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.denzcoskun.imageslider.ImageSlider
                         android:id="@+id/top_earner_ImageSlider"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="@dimen/_140sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:elevation="@dimen/_1sdp"
                         app:iss_auto_cycle="true"

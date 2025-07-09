@@ -2,8 +2,10 @@ package com.vuvrecharge.modules.adapter;
 
 import static com.vuvrecharge.api.ApiServices.YOUTUBE_IMAGE_PATH;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.graphics.drawable.PictureDrawable;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,25 +13,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
 import com.vuvrecharge.R;
 import com.vuvrecharge.modules.model.YoutubeSlides;
+import com.vuvrecharge.utils.SvgSoftwareLayerSetter;
 
 import java.util.List;
 
 public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerViewSliderAdapter.SliderViewHolder> {
 
     private final Context context;
+    private Activity mActivity;
     private List<YoutubeSlides> imageList;
     private List<String> youtube_Sliders;
-
-    public RecyclerViewSliderAdapter(Context context,List<String> youtube_Sliders,  List<YoutubeSlides> imageList) {
+    private RequestBuilder<PictureDrawable> requestBuilder;
+    public RecyclerViewSliderAdapter(Context context,Activity activity,List<String> youtube_Sliders,  List<YoutubeSlides> imageList) {
         this.context = context;
+        this.mActivity = activity;
         this.imageList = imageList;
         this.youtube_Sliders = youtube_Sliders;
     }
@@ -50,8 +57,14 @@ public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerView
             thumbnailUrl = YOUTUBE_IMAGE_PATH + thumbnailUrl;
         }
 
-     Glide.with(context).load(thumbnailUrl).placeholder(R.drawable.youtube_2).into(holder.imgSlide);
-    holder.title.setText(data.getTitle());
+        Glide.with(context).load(thumbnailUrl).placeholder(R.drawable.youtube_v_img).into(holder.imgSlide);
+
+      /*  GlideApp.with(context)
+                .as(PictureDrawable.class)
+                .listener(new SvgSoftwareLayerSetter())
+                .load(thumbnailUrl)
+                .into(holder.imgSlide);*/
+
 // "http://192.168.0.16/vuvpayments.com/images/youtube_thumbnail/cd656116413d4cf85cbb39223cdfd224.png"
 
 
@@ -84,4 +97,5 @@ public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerView
             title = itemView.findViewById(R.id.title);
         }
     }
+
 }

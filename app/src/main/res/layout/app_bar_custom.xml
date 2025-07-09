@@ -38,7 +38,7 @@
                     <ImageView
                         android:layout_width="13.6dp"
                         android:layout_height="7.65dp"
-                        android:src="@drawable/on_back_icon"
+                        android:src="@drawable/vector__3_"
                         />
                 </LinearLayout>
 

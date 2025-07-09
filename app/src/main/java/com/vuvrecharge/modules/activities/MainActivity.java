@@ -351,7 +351,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 youtubeVideosList.add(mDatabase.getUserData().getYoutube_path() + "/" + youtubeSlidesImage.getThumbnail()+youtubeSlidesImage.getTitle());
             }
 
-            sliderAdapter = new RecyclerViewSliderAdapter(this,youtubeVideosList,userData.getYoutubeVideoSliders());
+            sliderAdapter = new RecyclerViewSliderAdapter(this,MainActivity.this,youtubeVideosList,userData.getYoutubeVideoSliders());
             image_slider.setAdapter(sliderAdapter);
 
 
@@ -1046,7 +1046,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 addBalance();
                 break;
             case R.id.open_account:
-                intent = new Intent(getActivity(), AccountActivity.class);
+                intent = new Intent(getActivity(), SupportActivity.class);
                 startActivity(intent);
                 break;
             case R.id.img:

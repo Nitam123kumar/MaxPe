@@ -48,7 +48,7 @@ public class OfferSliderRecyclerViewAdapter extends RecyclerView.Adapter<OfferSl
             logoUrl = OFFER_ZONE + logoUrl;
         }
 
-        Glide.with(context).load(logoUrl).placeholder(R.drawable.airtel_icon).into(holder.imgSlide);
+        Glide.with(context).load(logoUrl).placeholder(R.drawable.airtel_svg).into(holder.imgSlide);
 
     }
 

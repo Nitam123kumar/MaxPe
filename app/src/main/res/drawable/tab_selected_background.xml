@@ -4,5 +4,5 @@
     <item android:state_selected="true" android:drawable="@drawable/tab_selected_bg" />
 
     <!-- Unselected tab background -->
-    <item android:drawable="@android:color/transparent" />
+<!--    <item android:drawable="@android:color/transparent" />-->
 </selector>

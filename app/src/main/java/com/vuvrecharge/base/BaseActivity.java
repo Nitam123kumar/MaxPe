@@ -970,6 +970,19 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
         }
     }
 
+    public void statusBarColor() {
+        try {
+            Window win = getWindow();
+            if (win != null) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    win.setStatusBarColor(getResources().getColor(R.color.white));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void changeStatusBarColorError() {
         try {
             Window win = getWindow();

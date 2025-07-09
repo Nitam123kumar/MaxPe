@@ -5,40 +5,55 @@
     android:layout_height="wrap_content"
     android:id="@+id/layoutDesignPattern"
     android:orientation="vertical"
-    android:padding="@dimen/_8sdp"
-    android:background="@drawable/pattern_history_1">
+    android:layout_margin="@dimen/_3sdp"
+    android:padding="@dimen/_5sdp"
+    >
 
     <ImageView
         android:id="@+id/imgDone"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:layout_marginStart="@dimen/_18sdp"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_10sdp"
         android:src="@drawable/done_1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/txtTotalAmount"/>
+        app:layout_constraintTop_toTopOf="@id/txtOrderId"
+        app:layout_constraintBottom_toBottomOf="@id/txtCharge"/>
 
     <TextView
         android:id="@+id/txtOrderId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Order Id: 12316545"
-        android:textColor="@color/black"
-        android:layout_marginStart="@dimen/_8sdp"
+        android:textColor="#6E6E6E"
+        android:textSize="@dimen/_9sdp"
+        android:layout_marginStart="@dimen/_10sdp"
         app:layout_constraintStart_toEndOf="@id/imgDone"
-        app:layout_constraintTop_toTopOf="@id/imgDone"
-        app:layout_constraintBottom_toTopOf="@id/txtCharge"/>
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/txtDateTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#B2B2B2"
+        android:text="date"
+        android:textSize="@dimen/_8sdp"
+        app:layout_constraintTop_toBottomOf="@id/txtOrderId"
+        app:layout_constraintStart_toStartOf="@id/txtOrderId"
+        />
+
 
     <TextView
         android:id="@+id/txtCharge"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Charge: 0"
+        android:textSize="@dimen/_6sdp"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/txtOrderId"
-        app:layout_constraintTop_toBottomOf="@id/txtOrderId"
-        app:layout_constraintBottom_toBottomOf="@id/imgDone"/>
+        app:layout_constraintTop_toBottomOf="@id/txtDateTime"
+        app:layout_constraintBottom_toTopOf="@id/view5"
+        />
 
     <TextView
         android:id="@+id/txtAmount"
@@ -51,7 +66,8 @@
         android:textColor="@color/black"
         android:layout_marginEnd="@dimen/_8sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/txtOrderId"/>
+        app:layout_constraintTop_toTopOf="@id/txtOrderId"
+        app:layout_constraintBottom_toTopOf="@id/txtTotalAmount"/>
 
     <TextView
         android:id="@+id/txtStatus"
@@ -70,21 +86,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Final Amount: 0"
-        android:textColor="@color/black"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:layout_marginBottom="@dimen/_8sdp"
-        app:layout_constraintStart_toStartOf="@id/imgDone"
-        app:layout_constraintEnd_toStartOf="@id/txtDateTime"
-        app:layout_constraintTop_toBottomOf="@id/imgDone"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-    
-    <TextView
-        android:id="@+id/txtDateTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="#B2B2B2"
+        android:textSize="@dimen/_8sdp"
+        app:layout_constraintTop_toBottomOf="@id/txtAmount"
         app:layout_constraintEnd_toEndOf="@id/txtAmount"
-        app:layout_constraintTop_toTopOf="@id/txtTotalAmount"
-        app:layout_constraintBottom_toBottomOf="@id/txtTotalAmount"/>
+        app:layout_constraintBottom_toBottomOf="@id/txtCharge"/>
+    <View
+        android:id="@+id/view5"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_13sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtCharge"
+        android:background="#E2E2E2"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

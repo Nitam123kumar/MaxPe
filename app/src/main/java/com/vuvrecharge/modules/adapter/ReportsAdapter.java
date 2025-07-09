@@ -76,7 +76,7 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
                 this.dataList.add(walletData);
             }
         } else {
-             this.dataList = dataList;
+            this.dataList = dataList;
         }
         notifyDataSetChanged();
     }
@@ -93,13 +93,13 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
         TextView name;
         @BindView(R.id.amount)
         TextView amount;
-        @BindView(R.id.user_type)
-        TextView user_type;
-        @BindView(R.id.number)
-        TextView number;
+//        @BindView(R.id.user_type)
+//        TextView user_type;
+//        @BindView(R.id.number)
+//        TextView number;
 
-        @BindView(R.id.commission)
-        TextView commission;
+        //        @BindView(R.id.commission)
+//        TextView commission;
         @BindView(R.id.operator_referance)
         TextView operator_referance;
 
@@ -111,11 +111,11 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
         ImageView loading;
         @BindView(R.id.layoutDesignPattern)
         ConstraintLayout layoutDesignPattern;
-        @BindView(R.id.status_cons)
-        ConstraintLayout status_cons;
-
-        @BindView(R.id.status_imageView)
-        ImageView status_imageView;
+//        @BindView(R.id.status_cons)
+//        ConstraintLayout status_cons;
+//
+//        @BindView(R.id.status_imageView)
+//        ImageView status_imageView;
 
 
         public Holder(@NonNull View itemView) {
@@ -152,44 +152,45 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
             DecimalFormat decimalFormat = new DecimalFormat("0.000");
             double charge = Double.parseDouble(resultsBean.getAmount()) - Double.parseDouble(resultsBean.getFinal_charge());
 //            - Double.parseDouble(resultsBean.getPoints())
-            commission.setText("Com : \u20b9" + decimalFormat.format(charge));
-            number.setText(resultsBean.getNumber());
+//            commission.setText("Com : \u20b9" + decimalFormat.format(charge));
+//            number.setText(resultsBean.getNumber());
             name.setText(resultsBean.getOperator_name().trim());
             status.setText(resultsBean.getStatus());
             if (resultsBean.getStatus().toUpperCase().equals("PENDING")) {
                 status.setText("Processing");
                 operator_referance.setVisibility(View.GONE);
-                user_type.setVisibility(View.GONE);
+//                user_type.setVisibility(View.GONE);
 //                status_cons.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getDrawable(R.drawable.pending_history_bg)));
-                status_cons.setBackgroundResource(R.drawable.pending_history_bg);
-                status_imageView.setImageResource(R.drawable.pending_img);
-                status.setTextColor(mContext.getResources().getColor(R.color.white));
+                status.setBackgroundResource(R.drawable.pending_recharge_bg);
+                status.setTextColor(mContext.getResources().getColor(R.color.pending1));
+                amount.setTextColor(mContext.getResources().getColor(R.color.pending1));
                 loading.setVisibility(View.VISIBLE);
                 Glide.with(mContext).asGif().load(R.drawable.load).into(loading);
             } else if (resultsBean.getStatus().toUpperCase().equals("SUCCESS")) {
-                if (mDatabase.getUserData() != null){
-                    if (mDatabase.getUserData().getUser_type() != null){
+                if (mDatabase.getUserData() != null) {
+                    if (mDatabase.getUserData().getUser_type() != null) {
                         if (mDatabase.getUserData().getUser_type().toUpperCase().equals("USER") || mDatabase.getUserData().getUser_type().toUpperCase().equals("RETAILER")) {
-                            user_type.setVisibility(View.GONE);
+//                            user_type.setVisibility(View.GONE);
                         } else {
-                            user_type.setVisibility(View.VISIBLE);
-                            user_type.setText(resultsBean.getUsername() + " (" + resultsBean.getName() + " - " + resultsBean.getUser_type() + ")");
+//                            user_type.setVisibility(View.VISIBLE);
+//                            user_type.setText(resultsBean.getUsername() + " (" + resultsBean.getName() + " - " + resultsBean.getUser_type() + ")");
                         }
 //                        status_cons.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getDrawable(R.drawable.success_bg)));
-                        status_cons.setBackgroundResource(R.drawable.success_bg);
-                        status.setTextColor(mContext.getResources().getColor(R.color.white));
+                        status.setBackgroundResource(R.drawable.recharge_success_bg);
+                        status.setTextColor(mContext.getResources().getColor(R.color.success1));
+                        amount.setTextColor(mContext.getResources().getColor(R.color.success1));
                         loading.setVisibility(View.GONE);
                     }
                 }
             } else {
-                user_type.setVisibility(View.GONE);
+//                user_type.setVisibility(View.GONE);
                 operator_referance.setVisibility(View.GONE);
 //                status_cons.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getDrawable(R.drawable.failed_history_img)));
-                status.setTextColor(mContext.getResources().getColor(R.color.white));
-                status_cons.setBackgroundResource(R.drawable.failed_history_img);
-                status_imageView.setImageResource(R.drawable.failed_img);
+                status.setTextColor(mContext.getResources().getColor(R.color.failed1));
+                amount.setTextColor(mContext.getResources().getColor(R.color.failed1));
+                status.setBackgroundResource(R.drawable.failed_recharge_bg);
                 loading.setVisibility(View.GONE);
-                commission.setText("Com : \u20b90.00");
+//                commission.setText("Com : \u20b90.00");
             }
 
             long date_t = Long.parseLong(resultsBean.getRequest_time().trim());
@@ -210,13 +211,14 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
                 intent.putExtra("operator_img", operator_img);
                 intent.putExtra("operator_dunmy_img", operator_dunmy_img);
                 intent.putExtra("mReportsData", mReportsData);
-                intent.putExtra("report","1");
+                intent.putExtra("report", "1");
                 /*if (resultsBean.getRecharge_type().toLowerCase().equals("prepaid") || resultsBean.getRecharge_type().toLowerCase().equals("dth")
                         || resultsBean.getRecharge_type().toLowerCase().equals("giftcards")){
                     intent.putExtra("bps", "0");
-                }*/if (resultsBean.getStatus().toLowerCase().equals("success") || resultsBean.getStatus().toLowerCase().equals("failed")){
+                }*/
+                if (resultsBean.getStatus().toLowerCase().equals("success") || resultsBean.getStatus().toLowerCase().equals("failed")) {
                     intent.putExtra("bps", "0");
-                }else {
+                } else {
                     intent.putExtra("bps", "1");
                 }
                 mContext.startActivity(intent);

@@ -38,10 +38,10 @@
 
                     <ImageView
                         android:id="@+id/img"
-                        android:layout_width="20dp"
-                        android:layout_height="17dp"
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_15sdp"
                         android:layout_marginStart="@dimen/_20sdp"
-                        android:src="@drawable/three_dout_icon"
+                        android:src="@drawable/menu_icon"
                         app:layout_constraintBottom_toBottomOf="@id/name_tv"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@id/name_tv" />
@@ -57,7 +57,7 @@
                         android:text=""
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@color/white"
-                        android:textSize="15dp"
+                        android:textSize="@dimen/_11sdp"
                         android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@id/img"
@@ -73,16 +73,16 @@
                         android:maxLines="1"
                         android:text=""
                         android:textColor="@color/white"
-                        android:textSize="18sp"
+                        android:textSize="@dimen/_14sdp"
                         android:visibility="gone"
                         tools:ignore="MissingConstraints" />
 
                     <ImageView
                         android:id="@+id/whatsup_alert"
-                        android:layout_width="26.25dp"
-                        android:layout_height="28dp"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_22sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:src="@drawable/wallet_icon"
+                        android:src="@drawable/wallet_icon2"
                         android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="@id/name_tv"
                         app:layout_constraintEnd_toStartOf="@id/refresh"
@@ -100,11 +100,11 @@
 
                     <ImageView
                         android:id="@+id/refresh"
-                        android:layout_width="34dp"
-                        android:layout_height="34dp"
+                        android:layout_width="@dimen/_28sdp"
+                        android:layout_height="@dimen/_28sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:padding="5dp"
-                        android:src="@drawable/question_icon"
+                        android:padding="@dimen/_3sdp"
+                        android:src="@drawable/m"
                         android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="@id/name_tv"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -128,7 +128,7 @@
             <ImageView
                 android:id="@+id/headerImage"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="@dimen/_145sdp"
                 android:layout_below="@id/toolbar_constraintlayout"
                 android:scaleType="centerCrop" />
 
@@ -155,7 +155,7 @@
                 android:layout_height="match_parent"
                 android:layout_below="@id/toolbar_constraintlayout"
                 android:clipToPadding="false"
-                android:paddingTop="200dp"
+                android:paddingTop="@dimen/_145sdp"
 
                 >
 
@@ -188,7 +188,7 @@
                                 android:id="@+id/txtYourBalance"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="10dp"
+                                android:layout_marginStart="@dimen/_8sdp"
                                 android:text="Your balance"
                                 android:textColor="@color/black"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -211,11 +211,11 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_10sdp"
-                                android:layout_marginEnd="5dp"
+                                android:layout_marginEnd="@dimen/_3sdp"
                                 android:background="@drawable/add_balance_button_drawable"
                                 android:gravity="center"
-                                android:paddingTop="5dp"
-                                android:paddingBottom="5dp"
+                                android:paddingTop="@dimen/_3sdp"
+                                android:paddingBottom="@dimen/_3sdp"
                                 android:text="Add Balance"
                                 android:textColor="@color/white"
                                 android:textStyle="bold"
@@ -228,12 +228,12 @@
                                 android:id="@+id/statements"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
+                                android:layout_marginStart="@dimen/_3sdp"
                                 android:layout_marginEnd="@dimen/_5sdp"
                                 android:background="@drawable/recharge_history_button_drawable"
                                 android:gravity="center"
-                                android:paddingTop="5dp"
-                                android:paddingBottom="5dp"
+                                android:paddingTop="@dimen/_3sdp"
+                                android:paddingBottom="@dimen/_3sdp"
                                 android:text="Commission Chart"
                                 android:textColor="#0549AE"
                                 android:textStyle="bold"
@@ -247,7 +247,7 @@
                         <LinearLayout
                             android:id="@+id/viewPagerLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="175dp"
+                            android:layout_height="@dimen/_125sdp"
                             android:background="@drawable/viewpager_bg"
                             android:orientation="vertical"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -257,7 +257,7 @@
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/card_slider"
                                 android:layout_width="match_parent"
-                                android:layout_height="140dp"
+                                android:layout_height="@dimen/_110sdp"
                                 android:layout_marginTop="@dimen/_12sdp"
                                 android:layout_marginHorizontal="@dimen/_10sdp"
                                 app:cardCornerRadius="@dimen/_10sdp">
@@ -273,12 +273,12 @@
 
                             <com.google.android.material.tabs.TabLayout
                                 android:id="@+id/indicator"
-                                android:layout_width="30dp"
-                                android:layout_height="20dp"
+                                android:layout_width="@dimen/_24sdp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:background="@color/white"
-                                android:paddingStart="-5dp"
+                                android:paddingStart="-3dp"
                                 app:layout_constraintEnd_toEndOf="@id/card_slider"
                                 app:layout_constraintStart_toStartOf="@id/card_slider"
                                 app:layout_constraintTop_toBottomOf="@id/card_slider"
@@ -304,7 +304,7 @@
                             android:id="@+id/recharge_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="@dimen/_12sdp"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <!--                                <ImageView-->
@@ -359,7 +359,7 @@
                             android:paddingTop="@dimen/_10sdp"
                             android:text="Recharge &amp; Bill Payment"
                             android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="@dimen/_11sdp"
                             android:visibility="visible"
                             app:layout_constraintBottom_toTopOf="@id/recharge_layout"
                             app:layout_constraintTop_toTopOf="@id/recharge_layout"
@@ -369,7 +369,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="26dp"
+                        android:layout_height="@dimen/_20sdp"
                         android:layout_marginHorizontal="@dimen/_15sdp"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_10sdp"
@@ -400,7 +400,7 @@
                                 android:singleLine="true"
                                 android:text=""
                                 android:textColor="#003770"
-                                android:textSize="12dp"
+                                android:textSize="@dimen/_9sdp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -423,9 +423,9 @@
 
                         <ImageView
                             android:id="@+id/insurance"
-                            android:layout_width="19.23dp"
-                            android:layout_height="19.23dp"
-                            android:src="@drawable/car_vector"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:src="@drawable/u_car"
                             app:layout_constraintBottom_toBottomOf="@id/umbrela"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="@id/umbrela" />
@@ -435,11 +435,11 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginStart="16dp"
+                            android:layout_marginStart="@dimen/_12sdp"
                             android:fontFamily="@font/roboto"
                             android:text="Bike/Car Insurance"
                             android:textColor="@color/black"
-                            android:textSize="15sp"
+                            android:textSize="@dimen/_11sdp"
                             app:layout_constraintStart_toEndOf="@id/insurance"
                             app:layout_constraintTop_toTopOf="@id/insurance" />
 
@@ -450,10 +450,9 @@
                         android:id="@+id/bike_insurance"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_45sdp"
-                        android:layout_marginHorizontal="@dimen/_5sdp"
+                        android:layout_marginHorizontal="@dimen/_7sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:orientation="horizontal"
-                        app:layout_constraintStart_toEndOf="@id/insurance"
                         app:layout_constraintTop_toBottomOf="@id/insurance">
 
 
@@ -465,14 +464,16 @@
                             android:background="@drawable/category_bg_selected"
                             android:orientation="horizontal"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="parent">
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/carLayout">
 
                             <ImageView
-                                android:layout_width="38.61dp"
-                                android:layout_height="39.28dp"
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_26sdp"
                                 android:layout_gravity="center"
-                                android:layout_marginStart="5dp"
-                                android:src="@drawable/bike" />
+                                android:layout_marginStart="@dimen/_3sdp"
+                                android:src="@drawable/bike_img" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -503,22 +504,21 @@
 
 
                         <LinearLayout
+                            android:id="@+id/carLayout"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/_2sdp"
                             android:layout_weight="1"
                             android:background="@drawable/category_bg_selected"
-                            android:elevation="@dimen/_3sdp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="parent">
+                            app:layout_constraintStart_toEndOf="@id/bike_layout">
 
 
                             <ImageView
-                                android:layout_width="45.54dp"
-                                android:layout_height="37.01dp"
+                                android:layout_width="@dimen/_32sdp"
+                                android:layout_height="@dimen/_25sdp"
                                 android:layout_gravity="center"
-                                android:layout_marginStart="5dp"
-                                android:src="@drawable/car" />
+                                android:layout_marginStart="@dimen/_3sdp"
+                                android:src="@drawable/car_img" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -552,42 +552,44 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
                         app:layout_constraintBottom_toBottomOf="@id/bike_layout">
 
-                        <ImageView
-                            android:id="@+id/ott_recharge"
-                            android:layout_width="375dp"
-                            android:layout_height="75dp"
-                            android:layout_marginHorizontal="@dimen/_5sdp"
-                            android:layout_marginTop="@dimen/_15sdp"
-                            android:background="@drawable/ott_recharge"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
 
-                            >
-
-                        </ImageView>
-
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/snjLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/sony_white_shape"
-                            android:elevation="1dp"
+                            android:elevation="@dimen/_1sdp"
                             android:layout_marginHorizontal="@dimen/_8sdp"
-                            app:layout_constraintTop_toBottomOf="@id/ott_recharge"
+                            app:layout_constraintTop_toTopOf="parent"
+
                             >
+                            <ImageView
+                                android:id="@+id/ott_recharge"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_58sdp"
+                                android:background="@drawable/ott_svg"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+
+                                >
+
+                            </ImageView>
 
                         <LinearLayout
                             android:id="@+id/snj"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_90sdp"
                             android:layout_gravity="center"
-                            android:layout_marginHorizontal="@dimen/_30sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginHorizontal="@dimen/_25sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
                             android:orientation="horizontal"
                             app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/ott_recharge"
+                            app:layout_constraintBottom_toBottomOf="@id/snjLayout"
 
                             >
 
@@ -611,8 +613,8 @@
                                     android:gravity="center">
 
                                     <ImageView
-                                        android:layout_width="39dp"
-                                        android:layout_height="39dp"
+                                        android:layout_width="@dimen/_30sdp"
+                                        android:layout_height="@dimen/_30sdp"
                                         android:layout_gravity="center"
                                         android:src="@drawable/sony_live_logo"
 
@@ -653,8 +655,8 @@
                                     android:gravity="center">
 
                                     <ImageView
-                                        android:layout_width="40dp"
-                                        android:layout_height="40dp"
+                                        android:layout_width="@dimen/_30sdp"
+                                        android:layout_height="@dimen/_30sdp"
                                         android:layout_gravity="center"
                                         android:src="@drawable/netflix"
 
@@ -718,7 +720,7 @@
 
                         </LinearLayout>
 
-                        </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <LinearLayout
                             android:id="@+id/offer_for_you"
@@ -732,10 +734,10 @@
 
                             <ImageView
                                 android:id="@+id/disscount"
-                                android:layout_width="14.3dp"
-                                android:layout_height="19.46dp"
+                                android:layout_width="@dimen/_11sdp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/disscount_logo"
+                                android:src="@drawable/discount_img"
                                 app:layout_constraintBottom_toBottomOf="@id/offer"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="@id/offer" />
@@ -745,11 +747,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_marginStart="16dp"
+                                android:layout_marginStart="@dimen/_12sdp"
                                 android:fontFamily="@font/roboto"
                                 android:text="Offers For You "
                                 android:textColor="@color/black"
-                                android:textSize="15sp"
+                                android:textSize="@dimen/_11sdp"
                                 app:layout_constraintStart_toEndOf="@id/disscount"
                                 app:layout_constraintTop_toTopOf="@id/disscount" />
 
@@ -759,7 +761,7 @@
                         <LinearLayout
                             android:id="@+id/airtel_offer"
                             android:layout_width="0dp"
-                            android:layout_height="165dp"
+                            android:layout_height="@dimen/_125sdp"
                             android:layout_marginHorizontal="@dimen/_10sdp"
                             android:elevation="@dimen/_10sdp"
                             android:orientation="horizontal"
@@ -789,10 +791,10 @@
 
                             <ImageView
                                 android:id="@+id/star"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="@dimen/_16sdp"
+                                android:layout_height="@dimen/_16sdp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/star_icon"
+                                android:src="@drawable/star_svg"
                                 app:layout_constraintBottom_toBottomOf="@id/spotlight_services_TV"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="@id/spotlight_services_TV" />
@@ -802,11 +804,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_marginStart="16dp"
+                                android:layout_marginStart="@dimen/_12sdp"
                                 android:fontFamily="@font/roboto"
                                 android:text="Spotlight Services"
                                 android:textColor="@color/black"
-                                android:textSize="15sp"
+                                android:textSize="@dimen/_11sdp"
                                 app:layout_constraintStart_toEndOf="@id/star"
                                 app:layout_constraintTop_toTopOf="@id/star" />
 
@@ -816,7 +818,7 @@
                         <LinearLayout
                             android:id="@+id/pdec"
                             android:layout_width="match_parent"
-                            android:layout_height="119dp"
+                            android:layout_height="@dimen/_90sdp"
                             android:layout_marginHorizontal="@dimen/_10sdp"
                             android:background="@drawable/spotlight_services_shape"
                             android:elevation="@dimen/_1sdp"
@@ -829,7 +831,7 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="94dp"
+                                android:layout_height="@dimen/_70sdp"
                                 android:layout_marginHorizontal="@dimen/_8sdp">
 
 
@@ -848,10 +850,10 @@
                                     app:layout_constraintTop_toBottomOf="@id/ott_recharge">
 
                                     <ImageView
-                                        android:layout_width="44dp"
-                                        android:layout_height="44dp"
+                                        android:layout_width="@dimen/_30sdp"
+                                        android:layout_height="@dimen/_30sdp"
                                         android:layout_gravity="center"
-                                        android:src="@drawable/prepaid_logo"
+                                        android:src="@drawable/capa_1"
 
                                         />
 
@@ -863,7 +865,7 @@
                                         android:fontFamily="@font/roboto"
                                         android:text="Prepaid"
                                         android:textColor="@color/black"
-                                        android:textSize="10sp" />
+                                        android:textSize="@dimen/_8sdp" />
 
                                 </LinearLayout>
 
@@ -883,10 +885,10 @@
 
 
                                     <ImageView
-                                        android:layout_width="38dp"
-                                        android:layout_height="41.55dp"
+                                        android:layout_width="@dimen/_30sdp"
+                                        android:layout_height="@dimen/_30sdp"
                                         android:layout_gravity="center"
-                                        android:src="@drawable/dth_logo"
+                                        android:src="@drawable/dth_logo1"
 
                                         />
 
@@ -898,7 +900,7 @@
                                         android:fontFamily="@font/roboto"
                                         android:text="DTH"
                                         android:textColor="@color/black"
-                                        android:textSize="10sp" />
+                                        android:textSize="@dimen/_8sdp" />
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -916,10 +918,10 @@
 
 
                                     <ImageView
-                                        android:layout_width="40dp"
-                                        android:layout_height="39.99dp"
+                                        android:layout_width="@dimen/_30sdp"
+                                        android:layout_height="@dimen/_30sdp"
                                         android:layout_gravity="center"
-                                        android:src="@drawable/electricity_logo"
+                                        android:src="@drawable/electricity_logo1"
 
                                         />
 
@@ -931,7 +933,7 @@
                                         android:fontFamily="@font/roboto"
                                         android:text="Electricity"
                                         android:textColor="@color/black"
-                                        android:textSize="10sp" />
+                                        android:textSize="@dimen/_8sdp" />
 
                                 </LinearLayout>
 
@@ -949,10 +951,10 @@
                                     app:layout_constraintTop_toTopOf="@id/netflix">
 
                                     <ImageView
-                                        android:layout_width="40dp"
-                                        android:layout_height="40dp"
+                                        android:layout_width="@dimen/_30sdp"
+                                        android:layout_height="@dimen/_30sdp"
                                         android:layout_gravity="center"
-                                        android:src="@drawable/credit_card"
+                                        android:src="@drawable/credit_card1"
 
                                         />
 
@@ -964,7 +966,7 @@
                                         android:fontFamily="@font/roboto"
                                         android:text="Credit Card"
                                         android:textColor="@color/black"
-                                        android:textSize="10dp" />
+                                        android:textSize="@dimen/_8sdp" />
 
                                 </LinearLayout>
 
@@ -986,11 +988,11 @@
 
                             <ImageView
                                 android:id="@+id/youtube_ImageView"
-                                android:layout_width="17.57dp"
-                                android:layout_height="17.08dp"
+                                android:layout_width="@dimen/_13sdp"
+                                android:layout_height="@dimen/_13sdp"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="@dimen/_5sdp"
-                                android:src="@drawable/youtube_icon"
+                                android:src="@drawable/youtube_svg"
                                 app:layout_constraintBottom_toBottomOf="@id/tutorials_TV"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="@id/tutorials_TV" />
@@ -1000,11 +1002,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_marginStart="16dp"
+                                android:layout_marginStart="@dimen/_12sdp"
                                 android:fontFamily="@font/roboto"
                                 android:text="Tutorials"
                                 android:textColor="@color/black"
-                                android:textSize="15sp"
+                                android:textSize="@dimen/_11sdp"
                                 app:layout_constraintStart_toEndOf="@id/youtube_ImageView"
                                 app:layout_constraintTop_toTopOf="@id/youtube_ImageView" />
 
@@ -1014,9 +1016,9 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerSlider"
                             android:layout_width="match_parent"
-                            android:layout_height="120dp"
+                            android:layout_height="@dimen/_90sdp"
                             android:layout_marginHorizontal="@dimen/_10sdp"
-                            android:layout_marginStart="12dp"
+                            android:layout_marginStart="@dimen/_9sdp"
                             android:clipToPadding="false"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             app:layout_constraintStart_toStartOf="parent"
@@ -1193,7 +1195,7 @@
                             android:layout_height="wrap_content"
                             android:text="MaxPe"
                             android:textColor="@color/colorPrimaryB"
-                            android:textSize="25sp"
+                            android:textSize="@dimen/_19sdp"
                             android:textStyle="bold"
                             app:layout_constraintEnd_toStartOf="@id/imgHeart"
                             app:layout_constraintHorizontal_chainStyle="packed"
@@ -1202,10 +1204,10 @@
 
                         <ImageView
                             android:id="@+id/imgHeart"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
+                            android:layout_width="@dimen/_19sdp"
+                            android:layout_height="@dimen/_19sdp"
+                            android:layout_marginStart="@dimen/_6sdp"
+                            android:layout_marginEnd="@dimen/_6sdp"
                             android:src="@drawable/heart"
                             app:layout_constraintBottom_toBottomOf="@id/txtMaxPe"
                             app:layout_constraintEnd_toStartOf="@id/txtYou"
@@ -1218,61 +1220,45 @@
                             android:layout_height="wrap_content"
                             android:text="You"
                             android:textColor="@color/colorPrimaryB"
-                            android:textSize="25sp"
+                            android:textSize="@dimen/_19sdp"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="@id/txtMaxPe"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/imgHeart"
                             app:layout_constraintTop_toTopOf="@id/txtMaxPe" />
 
-                        <!-- Your friends are going to -->
-                        <TextView
-                            android:id="@+id/txtAppName"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:gravity="center"
-                            android:text="Your friends are going to"
-                            android:textColor="#89929B"
-                            android:textSize="14sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/txtMaxPe" />
-
-                        <!-- love us too! -->
 
                         <TextView
                             android:id="@+id/txtMobileRecharge"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="love us too!"
-                            android:textColor="#89929B"
-                            android:textSize="14sp"
+                            android:text="Refer your friends &amp;"
+                            android:textColor="#000000"
+                            android:textSize="@dimen/_9sdp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/txtAppName" />
+                            app:layout_constraintTop_toBottomOf="@id/txtMaxPe" />
 
                         <TextView
                             android:id="@+id/txtRefer"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto"
-                            android:text=" Refer &amp; Earn up to ₹100"
+                            android:text="earn up to ₹300!"
                             android:textColor="@color/black"
-                            android:textSize="12sp"
+                            android:textSize="@dimen/_9sdp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/txtMobileRecharge" />
 
                         <ImageView
                             android:id="@+id/imgReferAndEarn"
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            android:src="@drawable/arrow"
+                            android:layout_width="@dimen/_10sdp"
+                            android:layout_height="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_6sdp"
+                            android:layout_marginEnd="@dimen/_6sdp"
+                            android:src="@drawable/arrow_14"
                             app:layout_constraintBottom_toBottomOf="@id/txtRefer"
                             app:layout_constraintStart_toEndOf="@id/txtRefer"
                             app:layout_constraintTop_toTopOf="@id/txtRefer" />
@@ -1280,8 +1266,8 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:src="@drawable/refer_and_earn_icon"
+                            android:layout_marginTop="@dimen/_9sdp"
+                            android:src="@drawable/reffer_earn_svg"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="1.0"
                             app:layout_constraintStart_toStartOf="parent"
@@ -1333,9 +1319,9 @@
 
                 <ImageView
                     android:id="@+id/imgAccount"
-                    android:layout_width="23.48dp"
-                    android:layout_height="25.92dp"
-                    android:src="@drawable/deposit_icon"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/support_icon"
                     app:layout_constraintBottom_toTopOf="@id/txtAccount"
                     app:layout_constraintEnd_toEndOf="@id/open_account"
                     app:layout_constraintStart_toStartOf="@id/open_account"
@@ -1349,9 +1335,9 @@
                     android:layout_marginStart="@dimen/_2sdp"
                     android:layout_marginTop="@dimen/_2sdp"
                     android:gravity="center"
-                    android:text="Fixed Deposit"
+                    android:text="Support"
                     android:textColor="#89929B"
-                    android:textSize="10sp"
+                    android:textSize="@dimen/_9sdp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/open_account"
                     app:layout_constraintEnd_toEndOf="@id/open_account"
@@ -1403,9 +1389,9 @@
 
                 <ImageView
                     android:id="@+id/refer_earn_imageView"
-                    android:layout_width="22.14dp"
-                    android:layout_height="22.14dp"
-                    android:src="@drawable/refer_icon"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/reffer_earn_2_"
                     app:layout_constraintBottom_toTopOf="@id/refer_earn_TV"
                     app:layout_constraintEnd_toEndOf="@id/share_earn_layout"
                     app:layout_constraintStart_toStartOf="@id/share_earn_layout"
@@ -1420,7 +1406,7 @@
                     android:gravity="center"
                     android:text="Refer &amp; Earn"
                     android:textColor="#89929B"
-                    android:textSize="10sp"
+                    android:textSize="@dimen/_9sdp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/share_earn_layout"
                     app:layout_constraintEnd_toEndOf="@id/share_earn_layout"
@@ -1438,9 +1424,9 @@
 
                 <ImageView
                     android:id="@+id/imgHistory"
-                    android:layout_width="21.43dp"
-                    android:layout_height="21.43dp"
-                    android:src="@drawable/report_icon"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/line_report"
                     app:layout_constraintBottom_toTopOf="@id/txtHistory"
                     app:layout_constraintEnd_toEndOf="@id/history"
                     app:layout_constraintStart_toStartOf="@id/history"
@@ -1456,7 +1442,7 @@
                     android:gravity="center"
                     android:text="Report"
                     android:textColor="#89929B"
-                    android:textSize="10sp"
+                    android:textSize="@dimen/_9sdp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/history"
                     app:layout_constraintEnd_toEndOf="@id/history"
@@ -1465,8 +1451,8 @@
 
                 <View
                     android:id="@+id/commission_report_layout"
-                    android:layout_width="90dp"
-                    android:layout_height="45dp"
+                    android:layout_width="@dimen/_75sdp"
+                    android:layout_height="@dimen/_32sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:background="@drawable/commission_chart_shape"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -1476,11 +1462,11 @@
                 <TextView
                     android:id="@+id/imgSupport"
                     android:layout_width="wrap_content"
-                    android:layout_height="15dp"
+                    android:layout_height="@dimen/_12sdp"
                     android:gravity="center"
                     android:text="Commission"
                     android:textColor="@color/white"
-                    android:textSize="11sp"
+                    android:textSize="@dimen/_9sdp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/txtSupport"
                     app:layout_constraintEnd_toEndOf="@id/commission_report_layout"
@@ -1495,7 +1481,7 @@
                     android:gravity="center"
                     android:text="Chat"
                     android:textColor="@color/white"
-                    android:textSize="11sp"
+                    android:textSize="@dimen/_9sdp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/commission_report_layout"
                     app:layout_constraintEnd_toEndOf="@id/commission_report_layout"

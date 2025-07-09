@@ -101,7 +101,8 @@ public class HtmlImageGetter implements Html.ImageGetter {
      * @param view
      * @param value
      */
-    @BindingAdapter("bind:htmlFromString")
+
+/*    @BindingAdapter("bind:htmlFromString")
     public static void loadUsingAHtml(View view, String value) {
         if (view != null) {
             if (view instanceof TextView) {
@@ -120,5 +121,5 @@ public class HtmlImageGetter implements Html.ImageGetter {
                 }
             }
         }
-    }
+    }*/
 }

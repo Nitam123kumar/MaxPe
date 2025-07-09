@@ -78,7 +78,7 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
 
     @BindView(R.id.bill_ImgV)
     ImageView bill_ImgV;
- @BindView(R.id.dth_ImgV)
+    @BindView(R.id.dth_ImgV)
     ImageView dth_ImgV;
     @BindView(R.id.mobile_ImgV)
     ImageView mobile_ImgV;
@@ -186,9 +186,9 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
         billPaymentsTextView.setText(Html.fromHtml("Bill Payments"));
         Operators.setText("5");
         operatorTV.setText("Operators");
-        bill_ImgV.setImageResource(R.drawable.bill_pay_icon);
-        mobile_ImgV.setImageResource(R.drawable.mobile_icon);
-        dth_ImgV.setImageResource(R.drawable.dth_icon1);
+        bill_ImgV.setImageResource(R.drawable.biller_svg);
+        mobile_ImgV.setImageResource(R.drawable.mobile_white_svg);
+        dth_ImgV.setImageResource(R.drawable.dth_svg);
 
         viewPrepaid.setOnClickListener(v -> {
             setFragment(new PrepaidFragment());
@@ -203,9 +203,9 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
             billPaymentsTextView.setText(Html.fromHtml("Bill Payments"));
             Operators.setText("5");
             operatorTV.setText("Operators");
-            bill_ImgV.setImageResource(R.drawable.bill_pay_icon);
-            dth_ImgV.setImageResource(R.drawable.dth_icon);
-            mobile_ImgV.setImageResource(R.drawable.mobile_icon);
+            bill_ImgV.setImageResource(R.drawable.biller_svg);
+            dth_ImgV.setImageResource(R.drawable.dth_svg);
+            mobile_ImgV.setImageResource(R.drawable.mobile_white_svg);
         });
 
         viewDTH.setOnClickListener(v -> {
@@ -221,9 +221,9 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
             billPaymentsTextView.setText(Html.fromHtml("Bill Payments"));
             Operators.setText("5");
             operatorTV.setText("Operators");
-            bill_ImgV.setImageResource(R.drawable.bill_pay_icon);
-            dth_ImgV.setImageResource(R.drawable.dth_white_icon);
-            mobile_ImgV.setImageResource(R.drawable.mobile_icon1);
+            bill_ImgV.setImageResource(R.drawable.biller_svg);
+            dth_ImgV.setImageResource(R.drawable.dth_white_svg);
+            mobile_ImgV.setImageResource(R.drawable.mobile_black_svg);
         });
 
         viewBillPayments.setOnClickListener(v -> {
@@ -239,9 +239,9 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
             billPaymentsTextView.setText(Html.fromHtml("Bill Payments"));
             Operators.setText("5");
             operatorTV.setText("Services");
-            bill_ImgV.setImageResource(R.drawable.biller_p_img);
-            dth_ImgV.setImageResource(R.drawable.dth_icon);
-            mobile_ImgV.setImageResource(R.drawable.mobile_icon1);
+            bill_ImgV.setImageResource(R.drawable.biller_white_svg);
+            dth_ImgV.setImageResource(R.drawable.dth_svg);
+            mobile_ImgV.setImageResource(R.drawable.mobile_black_svg);
         });
 
     }

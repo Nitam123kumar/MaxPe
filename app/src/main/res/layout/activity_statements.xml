@@ -22,7 +22,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/viewTab"
             android:layout_width="0dp"
-            android:layout_height="58dp"
+            android:layout_height="@dimen/_45sdp"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_15sdp"
             android:background="@drawable/pattern_logs"
@@ -34,8 +34,8 @@
 
             <View
                 android:id="@+id/viewStatements"
-                android:layout_width="115dp"
-                android:layout_height="39dp"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_30sdp"
                 app:layout_constraintBottom_toBottomOf="@id/viewTab"
                 app:layout_constraintEnd_toStartOf="@id/viewReports"
                 app:layout_constraintStart_toStartOf="@id/viewTab"
@@ -54,8 +54,8 @@
 
             <View
                 android:id="@+id/viewReports"
-                android:layout_width="113dp"
-                android:layout_height="39dp"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_30sdp"
                 app:layout_constraintBottom_toBottomOf="@id/viewTab"
                 app:layout_constraintEnd_toStartOf="@id/viewDeposit"
                 app:layout_constraintStart_toEndOf="@id/viewStatements"
@@ -72,14 +72,15 @@
                 app:layout_constraintStart_toStartOf="@id/viewReports"
                 app:layout_constraintTop_toTopOf="@id/viewReports" />
 
+
             <View
                 android:id="@+id/viewDeposit"
-                android:layout_width="113dp"
-                android:layout_height="39dp"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_30sdp"
                 app:layout_constraintBottom_toBottomOf="@id/viewTab"
-                app:layout_constraintEnd_toEndOf="@id/viewTab"
                 app:layout_constraintStart_toEndOf="@id/viewReports"
-                app:layout_constraintTop_toTopOf="@id/viewTab" />
+                app:layout_constraintTop_toTopOf="@id/viewTab"
+                app:layout_constraintEnd_toStartOf="@id/viewMaxPoints"/>
 
             <TextView
                 android:id="@+id/depositView"
@@ -91,6 +92,25 @@
                 app:layout_constraintEnd_toEndOf="@id/viewDeposit"
                 app:layout_constraintStart_toStartOf="@id/viewDeposit"
                 app:layout_constraintTop_toTopOf="@id/viewDeposit" />
+
+            <View
+                android:id="@+id/viewMaxPoints"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_30sdp"
+                app:layout_constraintBottom_toBottomOf="@id/viewTab"
+                app:layout_constraintStart_toEndOf="@id/viewDeposit"
+                app:layout_constraintTop_toTopOf="@id/viewTab"
+                app:layout_constraintEnd_toEndOf="@id/viewTab"/>
+            <TextView
+                android:id="@+id/maxPointsTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/viewMaxPoints"
+                app:layout_constraintEnd_toEndOf="@id/viewMaxPoints"
+                app:layout_constraintStart_toStartOf="@id/viewMaxPoints"
+                app:layout_constraintTop_toTopOf="@id/viewMaxPoints" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

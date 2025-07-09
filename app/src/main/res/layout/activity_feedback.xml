@@ -27,7 +27,7 @@
             android:layout_width="258.44dp"
             android:layout_height="189.91dp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:src="@drawable/feedback_image"
+            android:src="@drawable/feedback_image1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
