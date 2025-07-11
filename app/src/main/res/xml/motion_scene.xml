@@ -1,38 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+<MotionScene
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
-    <ConstraintSet android:id="@+id/start">
-        <Constraint android:id="@id/headerImage"
-            android:layout_height="200dp"
-            android:alpha="1"
-            motion:layout_constraintTop_toBottomOf="@id/toolbar_constraintlayout" />
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:layoutDuringTransition="callMeasure"
+        motion:transitionFlags="onInterceptTouchReturnSwipe"
+        motion:duration="100"
+        motion:pathMotionArc="startVertical"
+        motion:motionInterpolator="linear">
+        <KeyFrameSet>
+            <KeyAttribute motion:framePosition="0"
+                motion:motionTarget="@id/motion_bottom" />
+            <KeyAttribute motion:framePosition="1"
+                motion:motionTarget="@id/motion_bottom" />
+        </KeyFrameSet>
+        <OnSwipe
+            motion:dragDirection="dragUp"
+            motion:maxAcceleration="200"
+            motion:maxVelocity="300"
+            motion:touchAnchorId="@id/motion_bottom"/>
+    </Transition>
 
-<!--        <Constraint android:id="@id/nestedScrollView"-->
-<!--            motion:layout_constraintTop_toBottomOf="@id/headerImage"-->
-<!--            motion:layout_constraintBottom_toBottomOf="parent" />-->
+    <ConstraintSet android:id="@+id/start">
+        <Constraint android:id="@+id/headerImage" />
+        <Constraint android:id="@+id/motion_bottom"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent" />
+
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
-        <Constraint android:id="@id/headerImage"
-            android:layout_height="0dp"
-            android:alpha="0"
-            motion:layout_constraintTop_toBottomOf="@id/toolbar_constraintlayout" />
+        <Constraint android:id="@+id/headerImage" />
+        <Constraint android:id="@+id/motion_bottom"
+            android:layout_height="930dp"
+            motion:layout_constraintTop_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"/>
 
-<!--        <Constraint android:id="@id/nestedScrollView"-->
-<!--            motion:layout_constraintTop_toBottomOf="@id/headerImage"-->
-<!--            motion:layout_constraintBottom_toBottomOf="parent" />-->
     </ConstraintSet>
 
-    <Transition
-        motion:constraintSetStart="@id/start"
-        motion:constraintSetEnd="@id/end"
-        motion:duration="300">
-
-<!--        <OnSwipe-->
-<!--            motion:dragDirection="dragUp"-->
-<!--            motion:touchAnchorId="@id/nestedScrollView"-->
-<!--            motion:touchAnchorSide="top" />-->
-
-    </Transition>
 </MotionScene>

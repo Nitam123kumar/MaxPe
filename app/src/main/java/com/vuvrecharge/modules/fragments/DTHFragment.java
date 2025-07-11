@@ -14,6 +14,7 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -53,7 +54,8 @@ public class DTHFragment extends BaseFragment implements DefaultView {
 
     @BindView(R.id.rvDthCommission1)
     RecyclerView rvDthCommission1;
-
+    @BindView(R.id.loading)
+    LinearLayout loading;
 
 
     @Override
@@ -68,7 +70,7 @@ public class DTHFragment extends BaseFragment implements DefaultView {
         dTHCommissionPreferences = new CommissionPreferences(requireContext(), "DTHCommission");
         map3 = dTHCommissionPreferences.getData();
 
-
+        loading.setVisibility(View.VISIBLE);
 
         initializeDTHList();
 
@@ -95,6 +97,7 @@ public class DTHFragment extends BaseFragment implements DefaultView {
         rvDthCommission1.setHasFixedSize(true);
         rvDthCommission1.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         rvDthCommission1.setAdapter(dthAdapter);
+        loading.setVisibility(View.GONE);
     }
 
     @Override
@@ -123,7 +126,7 @@ public class DTHFragment extends BaseFragment implements DefaultView {
                 dthCommissionList.add(dthCommission);
             }
             dthAdapter.addEvents(dthCommissionList);
-
+            loading.setVisibility(View.GONE);
         } catch (JSONException | RuntimeException e) {
             e.printStackTrace();
         }
@@ -141,12 +144,22 @@ public class DTHFragment extends BaseFragment implements DefaultView {
 
     @Override
     public void onShowDialog(String message) {
-
+        if (bottomSheet != null) {
+            showLoading(loading_dialog);
+            submit.setVisibility(View.GONE);
+        } else {
+            showLoading(loading);
+        }
     }
 
     @Override
     public void onHideDialog() {
-
+        if (bottomSheet != null) {
+            hideLoading(loading_dialog);
+            submit.setVisibility(View.VISIBLE);
+        } else {
+            hideLoading(loading);
+        }
     }
 
     @Override

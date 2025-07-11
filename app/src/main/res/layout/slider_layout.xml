@@ -14,15 +14,16 @@
         <ImageView
             android:id="@+id/imgSlide"
             android:layout_width="match_parent"
+            android:scaleType="centerCrop"
             android:layout_height="match_parent"
 
              />
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="@dimen/_80sdp"
+            android:layout_width="@dimen/_90sdp"
             android:layout_height="wrap_content"
-            android:text="How to Recharge \n    with MaxPe?"
+            android:text="How to Recharge\nwith MaxPe?"
             android:textSize="@dimen/_10sdp"
             android:gravity="center"
             android:textStyle="bold"

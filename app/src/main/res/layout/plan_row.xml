@@ -126,10 +126,11 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardImage"
                 android:layout_width="@dimen/dimen_18dp"
-                android:layout_height="@dimen/_18sdp"
+                android:layout_height="@dimen/_14sdp"
                 app:cardCornerRadius="@dimen/_14sdp"
                 app:cardElevation="0dp"
                 android:visibility="gone"
+                android:background="@color/white"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_4sdp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -139,6 +140,7 @@
                     android:id="@+id/imgSubscription"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
                     android:contentDescription="@string/cancel"/>
 
             </androidx.cardview.widget.CardView>

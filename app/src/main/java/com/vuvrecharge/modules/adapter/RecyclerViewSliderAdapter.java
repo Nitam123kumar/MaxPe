@@ -58,6 +58,7 @@ public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerView
         }
 
         Glide.with(context).load(thumbnailUrl).placeholder(R.drawable.youtube_v_img).into(holder.imgSlide);
+        holder.title.setText(data.getTitle());
 
       /*  GlideApp.with(context)
                 .as(PictureDrawable.class)

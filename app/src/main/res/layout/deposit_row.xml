@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutDesignPattern"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/layoutDesignPattern"
-    android:orientation="vertical"
     android:layout_margin="@dimen/_3sdp"
-    android:padding="@dimen/_5sdp"
-    >
+    android:orientation="vertical"
+    android:padding="@dimen/_5sdp">
 
     <ImageView
         android:id="@+id/imgDone"
@@ -15,32 +14,30 @@
         android:layout_height="@dimen/_30sdp"
         android:layout_marginStart="@dimen/_10sdp"
         android:src="@drawable/done_1"
+        app:layout_constraintBottom_toBottomOf="@id/txtCharge"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/txtOrderId"
-        app:layout_constraintBottom_toBottomOf="@id/txtCharge"/>
+        app:layout_constraintTop_toTopOf="@id/txtOrderId" />
 
     <TextView
         android:id="@+id/txtOrderId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
         android:text="Order Id: 12316545"
         android:textColor="#6E6E6E"
         android:textSize="@dimen/_9sdp"
-        android:layout_marginStart="@dimen/_10sdp"
         app:layout_constraintStart_toEndOf="@id/imgDone"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtDateTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#B2B2B2"
         android:text="date"
+        android:textColor="#B2B2B2"
         android:textSize="@dimen/_8sdp"
-        app:layout_constraintTop_toBottomOf="@id/txtOrderId"
         app:layout_constraintStart_toStartOf="@id/txtOrderId"
-        />
+        app:layout_constraintTop_toBottomOf="@id/txtOrderId" />
 
 
     <TextView
@@ -48,39 +45,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Charge: 0"
-        android:textSize="@dimen/_6sdp"
         android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@id/txtOrderId"
-        app:layout_constraintTop_toBottomOf="@id/txtDateTime"
+        android:textSize="@dimen/_6sdp"
         app:layout_constraintBottom_toTopOf="@id/view5"
-        />
+        app:layout_constraintStart_toStartOf="@id/txtOrderId"
+        app:layout_constraintTop_toBottomOf="@id/txtDateTime" />
 
     <TextView
         android:id="@+id/txtAmount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="10"
-        android:gravity="end"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
-        android:textColor="@color/black"
         android:layout_marginEnd="@dimen/_8sdp"
+        android:gravity="end"
+        android:text="10"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/txtTotalAmount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/txtOrderId"
-        app:layout_constraintBottom_toTopOf="@id/txtTotalAmount"/>
+        app:layout_constraintTop_toTopOf="@id/txtOrderId" />
 
     <TextView
         android:id="@+id/txtStatus"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
         android:padding="5dp"
-        android:visibility="gone"
+        android:textColor="@color/white"
         android:textSize="@dimen/_8sdp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/txtDateTime"
         app:layout_constraintEnd_toEndOf="@id/txtAmount"
-        app:layout_constraintTop_toBottomOf="@id/txtAmount"
-        app:layout_constraintBottom_toTopOf="@id/txtDateTime"/>
-    
+        app:layout_constraintTop_toBottomOf="@id/txtAmount" />
+
     <TextView
         android:id="@+id/txtTotalAmount"
         android:layout_width="0dp"
@@ -88,17 +84,17 @@
         android:text="Final Amount: 0"
         android:textColor="#B2B2B2"
         android:textSize="@dimen/_8sdp"
-        app:layout_constraintTop_toBottomOf="@id/txtAmount"
+        app:layout_constraintBottom_toBottomOf="@id/txtCharge"
         app:layout_constraintEnd_toEndOf="@id/txtAmount"
-        app:layout_constraintBottom_toBottomOf="@id/txtCharge"/>
+        app:layout_constraintTop_toBottomOf="@id/txtAmount" />
+
     <View
         android:id="@+id/view5"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
         android:layout_marginTop="@dimen/_13sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtCharge"
         android:background="#E2E2E2"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtCharge" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,6 +15,7 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -54,7 +55,8 @@ public class BillPaymentsFragment extends BaseFragment implements DefaultView {
 
     @BindView(R.id.rvBillPaymentCommission)
     RecyclerView rvBillPaymentCommission;
-
+    @BindView(R.id.loading)
+    LinearLayout loading;
 
     @SuppressLint("HardwareIds")
     @Override
@@ -70,7 +72,7 @@ public class BillPaymentsFragment extends BaseFragment implements DefaultView {
         map3 = otherCommissionPreferences.getData();
 
 
-
+        loading.setVisibility(View.VISIBLE);
         initializeOtherList();
 
         if (map3.get("type") != null) {
@@ -118,6 +120,7 @@ public class BillPaymentsFragment extends BaseFragment implements DefaultView {
                 otherCommissionList.add(otherCommission);
             }
             othersAdapter.addEvents(otherCommissionList);
+            loading.setVisibility(View.GONE);
         } catch (JSONException | RuntimeException e) {
             e.printStackTrace();
         }
@@ -128,6 +131,7 @@ public class BillPaymentsFragment extends BaseFragment implements DefaultView {
         rvBillPaymentCommission.setHasFixedSize(true);
         rvBillPaymentCommission.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         rvBillPaymentCommission.setAdapter(othersAdapter);
+        loading.setVisibility(View.GONE);
     }
 
     @Override
@@ -142,12 +146,22 @@ public class BillPaymentsFragment extends BaseFragment implements DefaultView {
 
     @Override
     public void onShowDialog(String message) {
-
+        if (bottomSheet != null) {
+            showLoading(loading_dialog);
+            submit.setVisibility(View.GONE);
+        } else {
+            showLoading(loading);
+        }
     }
 
     @Override
     public void onHideDialog() {
-
+        if (bottomSheet != null) {
+            hideLoading(loading_dialog);
+            submit.setVisibility(View.VISIBLE);
+        } else {
+            hideLoading(loading);
+        }
     }
 
     @Override

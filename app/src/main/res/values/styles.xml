@@ -32,6 +32,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="CustomRatingBar" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/star_orange</item>
+        <item name="colorControlNormal">@color/star_inactive</item>
+    </style>
+
 
 <!--    <style name="AppThemeWithOutStatusBar" parent="AppTheme.NoActionBar">-->
 <!--        <item name="android:windowTranslucentStatus">true</item>-->

@@ -24,10 +24,10 @@
 
         <ImageView
             android:id="@+id/feedbackImageView"
-            android:layout_width="258.44dp"
-            android:layout_height="189.91dp"
+            android:layout_width="@dimen/_180sdp"
+            android:layout_height="@dimen/_130sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:src="@drawable/feedback_image1"
+            android:src="@drawable/group_12581"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,83 +35,152 @@
         <TextView
             android:id="@+id/user_TextView"
             android:layout_width="match_parent"
-            android:layout_height="58dp"
-            app:layout_constraintTop_toBottomOf="@id/feedbackImageView"
-            app:layout_constraintStart_toStartOf="parent"
-            android:paddingStart="@dimen/_15sdp"
-            android:textSize="16sp"
-            android:text="Maxpe User"
-            android:gravity="center_vertical"
-            android:textColor="#6E6E6E"
-            android:background="@drawable/support_design_background_shape"
+            android:layout_height="@dimen/_45sdp"
             android:layout_marginHorizontal="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_12sdp"
-            />
+            android:background="@drawable/support_design_background_shape"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/_15sdp"
+            android:text="Maxpe User"
+            android:textColor="#6E6E6E"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/feedbackImageView" />
 
         <TextView
             android:id="@+id/user_mobile_number"
             android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:textSize="16sp"
-            android:textColor="#6E6E6E"
-            android:text="7390903230"
-            android:gravity="center_vertical"
+            android:layout_height="@dimen/_45sdp"
             android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:background="@drawable/support_design_background_shape"
+            android:gravity="center_vertical"
             android:paddingStart="@dimen/_15sdp"
+            android:text="7390903230"
+            android:textColor="#6E6E6E"
+            android:textSize="@dimen/_12sdp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/user_TextView"
-            android:layout_marginTop="@dimen/_15sdp"/>
+            app:layout_constraintTop_toBottomOf="@id/user_TextView" />
 
         <EditText
             android:id="@+id/user_feedback_EditText"
             android:layout_width="match_parent"
-            android:layout_height="148dp"
-            android:hint="Your Message"
-            android:textSize="12sp"
+            android:layout_height="@dimen/_115sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/support_design_background_shape"
             android:gravity="top"
+            android:hint="Your Message"
+            android:paddingStart="@dimen/_15sdp"
             android:paddingTop="@dimen/_5sdp"
             android:textColor="#D1D0D0"
-            android:layout_marginHorizontal="@dimen/_15sdp"
-            android:background="@drawable/support_design_background_shape"
-            android:paddingStart="@dimen/_15sdp"
+            android:textSize="@dimen/_9sdp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/user_mobile_number"
-            android:layout_marginTop="@dimen/_15sdp"/>
+            app:layout_constraintTop_toBottomOf="@id/user_mobile_number" />
 
-        
-        <RatingBar
-            android:id="@+id/ratingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="46dp"
-            android:layout_marginTop="@dimen/_15sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/user_feedback_EditText"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:clickable="true"
-            android:stepSize="1"
-            android:minHeight="@dimen/_15sdp"
-            android:minWidth="@dimen/_15sdp"
-            />
+
+<!--        <RatingBar-->
+<!--            android:id="@+id/ratingBar"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginTop="@dimen/_10sdp"-->
+<!--            android:background="@android:color/transparent"-->
+<!--            android:isIndicator="false"-->
+<!--            android:numStars="5"-->
+<!--            android:rating="0"-->
+<!--            android:stepSize="1"-->
+<!--            android:theme="@style/CustomRatingBar"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/user_feedback_EditText" />-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ratingBar_ConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/user_feedback_EditText">
+
+            <ImageView
+                android:id="@+id/star1"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_35sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:padding="@dimen/_5sdp"
+                android:src="@drawable/star_empty"
+                android:background="@drawable/support_design_background_shape"
+                app:layout_constraintEnd_toStartOf="@id/star2"/>
+
+            <ImageView
+                android:id="@+id/star2"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_35sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/star1"
+                app:layout_constraintTop_toTopOf="parent"
+                android:padding="@dimen/_5sdp"
+                android:src="@drawable/star_empty"
+                android:background="@drawable/support_design_background_shape"
+                app:layout_constraintEnd_toStartOf="@id/star3"/>
+
+            <ImageView
+                android:id="@+id/star3"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_35sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/star2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:padding="@dimen/_5sdp"
+                android:src="@drawable/star_empty"
+                android:background="@drawable/support_design_background_shape"
+                app:layout_constraintEnd_toStartOf="@id/star4"/>
+
+            <ImageView
+                android:id="@+id/star4"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_35sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/star3"
+                app:layout_constraintTop_toTopOf="parent"
+                android:padding="@dimen/_5sdp"
+                android:src="@drawable/star_empty"
+                android:background="@drawable/support_design_background_shape"
+                app:layout_constraintEnd_toStartOf="@id/star5"/>
+
+            <ImageView
+                android:id="@+id/star5"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_35sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/star4"
+                app:layout_constraintTop_toTopOf="parent"
+                android:padding="@dimen/_5sdp"
+                android:src="@drawable/star_empty"
+                android:background="@drawable/support_design_background_shape"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/submit_feedback_Button"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/_38sdp"
             android:layout_marginHorizontal="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_20sdp"
             android:background="@drawable/ad_money_button_shape"
+            android:gravity="center"
             android:text="Submit"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:gravity="center"
+            android:textSize="@dimen/_15sdp"
             android:textStyle="bold"
-            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ratingBar"
-            />
-
-
+            app:layout_constraintTop_toBottomOf="@id/ratingBar_ConstraintLayout" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,13 @@
 package com.vuvrecharge.modules.activities.newActivities;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -88,9 +93,10 @@ public class ComplaintRegistrationActivity  extends BaseActivity implements Defa
         setContentView(R.layout.activity_complaint_registration);
         ButterKnife.bind(this);
         toolbar.setOnClickListener(this);
-        title.setText("COMPLAINT REGISTRATION");
+        title.setText("Complain Registration");
 
         mDefaultPresenter = new DefaultPresenter(this);
+        setStatusBarGradiant(this);
         btnSubmit.setOnClickListener(v -> {
             if (editTransactionRefId.getText().toString().isEmpty()){
                 showError("Please enter transaction reference id / Order Id");
@@ -224,6 +230,19 @@ public class ComplaintRegistrationActivity  extends BaseActivity implements Defa
     @Override
     public void onSuccess(String data, String data_other) {
 
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
     }
 
     @Override

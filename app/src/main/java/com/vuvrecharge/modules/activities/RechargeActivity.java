@@ -121,8 +121,6 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
     TextInputEditText amount;
     @BindView(R.id.select_operator)
     Spinner select_operator;
-    @BindView(R.id.recent_recharges_recyclerView)
-    RecyclerView recent_recharges_recyclerView;
     String string = "";
     ArrayList<String> operator_list = new ArrayList<>();
     ArrayList<String> circle_list = new ArrayList<>();
@@ -201,7 +199,6 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recharge);
         ButterKnife.bind(this);
-        initializeEventsList();
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         string = getIntent().getStringExtra("title");
         title.setText(string);
@@ -666,36 +663,6 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
         }
     }
 
-    private void initializeEventsList() {
-        recentRechargesAdapter = new RecentRechargesAdapter(getLayoutInflater(),this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
-        recent_recharges_recyclerView.setLayoutManager(linearLayoutManager);
-        recent_recharges_recyclerView.setAdapter(recentRechargesAdapter);
-        recent_recharges_recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                visibleItemCount = linearLayoutManager.getChildCount();
-                totalItemCount = linearLayoutManager.getItemCount();
-                pastVisibleItems = linearLayoutManager.findFirstVisibleItemPosition();
-                if (dy > 0){
-                    if (isLoading) {
-                        if (totalItemCount > previousTotal) {
-                            isLoading = false;
-                            previousTotal = totalItemCount;
-                        }
-                    }
-                    if (!isLoading && (totalItemCount - visibleItemCount) <= (pastVisibleItems)) {
-                        isLoading = true;
-                        page++;
-                        if (remaining_pages > 0) {
-                            loadData("No");
-                        }
-                    }
-                }
-            }
-        });
-    }
 
     private void loadData(String value) {
         mDefaultPresenter.userRechargeHistory(device_id + "", page + "",
@@ -1194,9 +1161,9 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                 }
                 recentRechargesAdapter.addData(passbookData, second_message, jsonObject.getString("operator_img"),
                         jsonObject.getString("operator_dunmy_img"), mDefaultView, mDatabase);
-                recent_recharges_recyclerView.setVisibility(VISIBLE);
+
             }else {
-                recent_recharges_recyclerView.setVisibility(GONE);
+
             }
 
         }

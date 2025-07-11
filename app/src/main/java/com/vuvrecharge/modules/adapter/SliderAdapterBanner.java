@@ -50,14 +50,14 @@ public class SliderAdapterBanner extends PagerAdapter {
         View view = inflater.inflate(R.layout.item_slider, null);
 
         ImageView image_view = view.findViewById(R.id.imageView);
-        RequestOptions options = new RequestOptions()
-                .placeholder(R.drawable.no)
-                .error(R.drawable.no);
+//        RequestOptions options = new RequestOptions()
+//                .placeholder(R.drawable.no)
+//                .error(R.drawable.no);
 
         if (!color.get(position).equals("")) {
             Glide.with(mContext)
                     .load(color.get(position))
-                    .apply(options)
+//                    .apply(options)
                     .into(image_view);
         }
         ViewPager viewPager = (ViewPager) container;

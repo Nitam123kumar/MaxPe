@@ -32,6 +32,7 @@
     <string name="Pincode">Pincode</string>
     <string name="gst_no">GST No</string>
     <string name="description">Description</string>
+    <string name="max_pe">MaxPe</string>
     <string name="add_member">Add Member</string>
     <string name="closing_amount">Closing Amount</string>
     <string name="country">Country</string>

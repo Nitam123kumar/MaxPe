@@ -40,11 +40,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="₹"
-                android:textSize="32sp"
+                android:textSize="@dimen/_24sdp"
                 android:textStyle="bold"
                 android:fontFamily="@font/roboto_bold"
                 android:textColor="#084C96"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/_8sdp"
                 app:layout_constraintStart_toStartOf="@id/viewAmount"
                 app:layout_constraintBottom_toBottomOf="@id/viewAmount"
                 app:layout_constraintTop_toTopOf="@id/viewAmount"/>
@@ -52,7 +52,7 @@
                 android:id="@+id/txtAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="32sp"
+                android:textSize="@dimen/_24sdp"
                 android:text="1900"
                 android:textColor="#084C96"
                 android:textStyle="bold"
@@ -65,8 +65,8 @@
 
         <View
             android:id="@+id/viewValidity"
-            android:layout_width="176dp"
-            android:layout_height="69dp"
+            android:layout_width="@dimen/_135sdp"
+            android:layout_height="@dimen/_45sdp"
             android:layout_marginTop="@dimen/_17sdp"
             android:background="@drawable/view_validity_shape"
             app:layout_constraintTop_toBottomOf="@id/viewAmount"
@@ -81,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Plan Validity"
-            android:textSize="11sp"
+            android:textSize="@dimen/_8sdp"
             android:textColor="#747474"
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_12sdp"
@@ -97,7 +97,7 @@
             android:layout_marginBottom="@dimen/_12sdp"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="14sp"
+            android:textSize="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/planValidityTV"
             app:layout_constraintStart_toStartOf="@id/planValidityTV"
             app:layout_constraintBottom_toBottomOf="@id/viewValidity"
@@ -105,8 +105,8 @@
 
         <View
             android:id="@+id/viewData"
-            android:layout_width="176dp"
-            android:layout_height="69dp"
+            android:layout_width="@dimen/_135sdp"
+            android:layout_height="@dimen/_45sdp"
             android:background="@drawable/view_validity_shape"
             app:layout_constraintStart_toEndOf="@id/viewValidity"
             app:layout_constraintTop_toTopOf="@id/viewValidity"
@@ -121,7 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Data"
-            android:textSize="11sp"
+            android:textSize="@dimen/_8sdp"
             android:textColor="#747474"
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_12sdp"
@@ -137,7 +137,7 @@
             android:layout_marginBottom="@dimen/_12sdp"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="14sp"
+            android:textSize="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/planDataTV"
             app:layout_constraintStart_toStartOf="@id/planDataTV"
             app:layout_constraintBottom_toBottomOf="@id/viewData"
@@ -145,8 +145,8 @@
 
         <View
             android:id="@+id/viewVoice"
-            android:layout_width="176dp"
-            android:layout_height="69dp"
+            android:layout_width="@dimen/_135sdp"
+            android:layout_height="@dimen/_45sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/view_validity_shape"
             app:layout_constraintTop_toBottomOf="@id/viewValidity"
@@ -161,7 +161,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Voice"
-            android:textSize="11sp"
+            android:textSize="@dimen/_8sdp"
             android:textColor="#747474"
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_12sdp"
@@ -177,7 +177,7 @@
             android:layout_marginBottom="@dimen/_12sdp"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="14sp"
+            android:textSize="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/planVoiceTV"
             app:layout_constraintStart_toStartOf="@id/planVoiceTV"
             app:layout_constraintBottom_toBottomOf="@id/viewVoice"
@@ -185,8 +185,8 @@
 
         <View
             android:id="@+id/viewSMS"
-            android:layout_width="176dp"
-            android:layout_height="69dp"
+            android:layout_width="@dimen/_135sdp"
+            android:layout_height="@dimen/_45sdp"
             android:background="@drawable/view_validity_shape"
             app:layout_constraintStart_toEndOf="@id/viewVoice"
             app:layout_constraintTop_toTopOf="@id/viewVoice"
@@ -201,7 +201,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SMS"
-            android:textSize="11sp"
+            android:textSize="@dimen/_8sdp"
             android:textColor="#747474"
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_12sdp"
@@ -217,7 +217,7 @@
             android:layout_marginBottom="@dimen/_12sdp"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="14sp"
+            android:textSize="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/planSmsTV"
             app:layout_constraintStart_toStartOf="@id/planSmsTV"
             app:layout_constraintBottom_toBottomOf="@id/viewSMS"
@@ -231,7 +231,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginStart="@dimen/_5sdp"
             android:textColor="@color/black"
-            android:textSize="12sp"
+            android:textSize="@dimen/_9sdp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/viewVoice"
             app:layout_constraintStart_toStartOf="@id/viewVoice"
@@ -240,31 +240,31 @@
         <TextView
             android:id="@+id/noteDet"
             android:layout_width="wrap_content"
-            android:layout_height="43dp"
+            android:layout_height="@dimen/_32sdp"
             android:textColor="#918F8F"
             app:layout_constraintStart_toStartOf="@id/noteTView"
             app:layout_constraintTop_toBottomOf="@id/noteTView"
             android:layout_marginTop="@dimen/_5sdp"
             android:text="Benefits include 6GB of 4G data and unlimited 5G data for users\nwith an active 1GB/day plan (valid up to 28 days) or a 1.5GB/day\nplan (valid for 28 to 56 days)."
             android:textStyle="bold"
-            android:textSize="10sp"
+            android:textSize="@dimen/_8sdp"
             />
 
 
         <TextView
             android:id="@+id/txtPlanDetails"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="@dimen/_15sdp"
             android:text="Additional Information "
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="#918F8F"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/_11sdp"
             android:gravity="center_vertical"
             android:layout_marginHorizontal="@dimen/_5sdp"
             android:drawableEnd="@drawable/drap_icon"
             android:paddingEnd="@dimen/_10sdp"
             android:fontFamily="@font/roboto"
-            android:textSize="13sp"
+            android:textSize="@dimen/_10sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/noteDet"
 
@@ -275,7 +275,7 @@
     <LinearLayout
         android:id="@+id/phone_layout"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="@dimen/_78sdp"
         android:orientation="horizontal"
         android:background="@drawable/plan_details_shape"
         android:layout_marginHorizontal="@dimen/_10sdp"
@@ -285,14 +285,14 @@
 
         <ImageView
             android:id="@+id/imgOperator"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
             android:layout_gravity="center"
             android:src="@drawable/upi"
-            android:padding="8dp"
+            android:padding="@dimen/_6sdp"
             android:contentDescription="@string/app_name"
             android:background="@drawable/recharge_logo_shape"
-            android:layout_marginStart="16dp"/>
+            android:layout_marginStart="@dimen/_12sdp"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -307,8 +307,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textStyle="bold"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
                 android:textColor="@color/black"
                 android:layout_marginTop="@dimen/_10sdp"/>
 
@@ -316,20 +316,20 @@
                 android:id="@+id/txtPhoneProvider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/_3sdp"
                 android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
                 android:textColor="@color/black"
-                android:layout_marginBottom="5dp"/>
+                android:layout_marginBottom="@dimen/_3sdp"/>
 
             <TextView
                 android:id="@+id/txtPhoneOrigin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
                 android:textColor="@color/black"
                 android:layout_marginBottom="@dimen/_10sdp"/>
 
@@ -338,22 +338,22 @@
 
         <TextView
             android:id="@+id/txtRecharge"
-            android:layout_width="62dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_22sdp"
             android:layout_gravity="center"
             android:text="Change"
             android:layout_weight="1"
-            android:textSize="12sp"
+            android:textSize="@dimen/_9sdp"
             android:gravity="center"
             android:textColor="@color/black"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="@dimen/_3sdp"
             android:background="@drawable/change_number_shape"/>
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/txtShimmerWarning"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/_38sdp"
         android:background="@drawable/support_design_background_shape"
         app:layout_constraintStart_toStartOf="@id/amount_layout"
         app:layout_constraintEnd_toEndOf="@id/amount_layout"
@@ -367,7 +367,7 @@
             android:text="Available MaxPoints"
             android:textColor="#003770"
             android:gravity="center"
-            android:textSize="11sp"
+            android:textSize="@dimen/_8sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:fontFamily="@font/roboto"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -383,7 +383,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             android:textStyle="bold"
-            android:textSize="12sp"
+            android:textSize="@dimen/_9sdp"
             android:textColor="#5C5C5C"
             android:text="100.00"
             app:layout_constraintTop_toBottomOf="@id/shimmerTextView"
@@ -393,8 +393,8 @@
 
         <ImageView
             android:id="@+id/cashback"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
             android:layout_marginStart="@dimen/_5sdp"
             android:src="@drawable/points_icon"
             android:scaleType="centerCrop"
@@ -408,7 +408,7 @@
             android:layout_height="wrap_content"
             android:text="Apply"
             android:textColor="#003770"
-            android:textSize="12sp"
+            android:textSize="@dimen/_9sdp"
             android:fontFamily="@font/roboto"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

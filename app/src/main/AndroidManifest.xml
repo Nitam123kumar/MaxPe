@@ -50,12 +50,19 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".modules.activities.MaxPointsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity
             android:name=".modules.activities.FeedbackActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Recharge"
             android:windowSoftInputMode="stateHidden"
-            tools:ignore="LockedOrientationActivity"/>
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".modules.activities.WalletActivity"
             android:exported="false"

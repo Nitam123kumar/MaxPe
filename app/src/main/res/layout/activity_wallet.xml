@@ -31,8 +31,8 @@
 
                 <LinearLayout
                     android:id="@+id/onBack"
-                    android:layout_width="34dp"
-                    android:layout_height="34dp"
+                    android:layout_width="@dimen/_27sdp"
+                    android:layout_height="@dimen/_27sdp"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:background="@drawable/wallet_back_shape"
                     android:gravity="center"
@@ -42,8 +42,8 @@
 
                     <ImageView
                         android:layout_width="@dimen/_10sdp"
-                        android:layout_height="7.65dp"
-                        android:src="@drawable/wallet_back_vector" />
+                        android:layout_height="@dimen/_6sdp"
+                        android:src="@drawable/back_arrow1" />
                 </LinearLayout>
 
 
@@ -318,7 +318,7 @@
                 android:id="@+id/no_data_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="@dimen/_60sdp"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -344,7 +344,7 @@
                         android:layout_marginTop="@dimen/_30sdp"
                         android:text="No Data Available"
                         android:textColor="#828282"
-                        android:textSize="20sp" />
+                        android:textSize="@dimen/_15sdp" />
 
                 </LinearLayout>
 
@@ -354,16 +354,18 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/add_amount_Btn"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/_38sdp"
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/ad_money_button_shape"
                 android:text="Add Money"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="22sp"
+                android:textSize="@dimen/_16sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/latest_transitions_ConstraintLayout_recyclerView" />
+                app:layout_constraintTop_toBottomOf="@id/latest_transitions_ConstraintLayout_recyclerView"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/_10sdp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

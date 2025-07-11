@@ -190,7 +190,7 @@
 
             <View
                 android:id="@+id/viewBillPayments"
-                android:layout_width="@dimen/_82sdp"
+                android:layout_width="@dimen/_90sdp"
                 android:layout_height="@dimen/_30sdp"
                 app:layout_constraintStart_toEndOf="@id/viewDTH"
                 app:layout_constraintEnd_toEndOf="@id/commissionViewTab"
@@ -202,7 +202,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/bill_pay_icon"
-                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_3sdp"
                 app:layout_constraintStart_toStartOf="@id/viewBillPayments"
                 app:layout_constraintTop_toTopOf="@id/viewBillPayments"
                 app:layout_constraintBottom_toBottomOf="@id/viewBillPayments"
@@ -216,6 +216,7 @@
                 android:textSize="@dimen/_10sdp"
                 android:textStyle="bold"
                 android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_3sdp"
                 app:layout_constraintStart_toEndOf="@id/bill_ImgV"
                 app:layout_constraintEnd_toEndOf="@id/viewBillPayments"
                 app:layout_constraintTop_toTopOf="@id/viewBillPayments"
@@ -436,7 +437,7 @@
                 <FrameLayout
                     android:id="@+id/commissionFrameLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/_2sdp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/commissionConstraintLayout"
@@ -448,7 +449,8 @@
                     android:layout_height="@dimen/_129sdp"
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     app:layout_constraintTop_toBottomOf="@id/commissionFrameLayout"
-                    android:background="@drawable/commission_bg_page">
+                    android:background="@drawable/commission_bg_page"
+                    app:layout_constraintBottom_toBottomOf="parent">
 
                     <View
                         android:id="@+id/viewGS"

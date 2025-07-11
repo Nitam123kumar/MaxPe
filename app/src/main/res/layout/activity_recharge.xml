@@ -49,7 +49,7 @@
                         android:fontFamily="@font/roboto"
                         android:text="Mobile Number"
                         android:textColor="@color/black"
-                        android:textSize="11sp"
+                        android:textSize="@dimen/_8sdp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,7 +57,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/mobile_number"
                         android:layout_width="match_parent"
-                        android:layout_height="55dp"
+                        android:layout_height="@dimen/_40sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:background="@drawable/corner_white_recharge_2"
                         android:gravity="center_vertical"
@@ -78,7 +78,7 @@
                         android:layout_height="@dimen/_30sdp"
                         android:layout_marginEnd="@dimen/_7sdp"
                         android:padding="@dimen/_7sdp"
-                        android:src="@drawable/contact1"
+                        android:src="@drawable/contect_logo_svg"
                         android:textColor="@color/white"
                         app:layout_constraintBottom_toBottomOf="@id/mobile_number"
                         app:layout_constraintEnd_toEndOf="@id/mobile_number"
@@ -94,14 +94,14 @@
                     android:fontFamily="@font/roboto"
                     android:text="Operator"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="@dimen/_8sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ConstraintLayout" />
 
                 <Spinner
                     android:id="@+id/select_operator"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
+                    android:layout_height="@dimen/_42sdp"
                     android:layout_marginTop="@dimen/_2sdp"
                     android:background="@drawable/corner_white_recharge_2"
                     android:theme="@style/MatchSpinnerTheme"
@@ -115,7 +115,7 @@
                     android:fontFamily="@font/roboto"
                     android:text="Circle"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="@dimen/_8sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/select_operator" />
 
@@ -123,7 +123,7 @@
                 <TextView
                     android:id="@+id/txtOperator"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
+                    android:layout_height="@dimen/_42sdp"
                     android:layout_centerVertical="true"
                     android:layout_marginTop="@dimen/_2sdp"
                     android:background="@drawable/corner_white_recharge_2"
@@ -144,7 +144,7 @@
                     android:fontFamily="@font/roboto"
                     android:text="Amount"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="@dimen/_8sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txtOperator" />
 
@@ -152,7 +152,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/amount"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
+                    android:layout_height="@dimen/_42sdp"
                     android:hint="Amount"
                     android:inputType="numberDecimal"
                     android:textColor="@color/black_4"
@@ -175,6 +175,7 @@
                     android:paddingLeft="@dimen/_10sdp"
                     android:paddingRight="@dimen/_10sdp"
                     android:text="View Plans"
+                    android:textStyle="bold"
                     android:textAllCaps="false"
                     android:textColor="#3D7EB9"
                     android:textSize="@dimen/_13sdp"
@@ -217,7 +218,7 @@
                         android:text="R Offers"
                         android:textAllCaps="false"
                         android:textColor="#3D7EB9"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/_10sdp"
                         android:theme="@style/PrimaryButton"
                         android:visibility="visible"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -261,14 +262,14 @@
                     android:id="@+id/submit"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_36sdp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="@dimen/_18sdp"
                     android:background="@drawable/ad_money_button_shape"
                     android:gravity="center"
                     android:onClick="doRecharge"
                     android:text="Recharge Now"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
+                    android:textSize="@dimen/_11sdp"
                     android:textStyle="bold"
                     android:theme="@style/PrimaryButton"
                     android:visibility="visible"
@@ -276,21 +277,6 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/bbcR" />
-
-
-
-                <TextView
-                    android:id="@+id/txtRecent_recharges"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_25sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:text="Recent Recharges"
-                    android:textColor="#BCBCBC"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/submit"/>
 
 
 
@@ -308,17 +294,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/submit" />
-
-
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recent_recharges_recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/txtRecent_recharges"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:layout_marginHorizontal="@dimen/_10sdp"
-                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

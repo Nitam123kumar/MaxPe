@@ -8,25 +8,25 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/top"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="@dimen/_50sdp"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="@dimen/_50sdp"
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/toolbar1"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="@dimen/_50sdp"
                 android:background="@drawable/main_wallet_shape"
                 >
 
                 <LinearLayout
                     android:id="@+id/toolbar_layout"
-                    android:layout_width="34dp"
-                    android:layout_height="34dp"
+                    android:layout_width="@dimen/_27sdp"
+                    android:layout_height="@dimen/_27sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:gravity="center"
@@ -36,8 +36,8 @@
                     >
 
                     <ImageView
-                        android:layout_width="13.6dp"
-                        android:layout_height="7.65dp"
+                        android:layout_width="@dimen/_10sdp"
+                        android:layout_height="@dimen/_6sdp"
                         android:src="@drawable/back_arrow1"
                         />
                 </LinearLayout>
@@ -53,7 +53,7 @@
                     android:maxLines="1"
                     android:text="Bill Payment"
                     android:textColor="@color/white"
-                    android:textSize="20dp"
+                    android:textSize="@dimen/_15sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/toolbar_layout"/>

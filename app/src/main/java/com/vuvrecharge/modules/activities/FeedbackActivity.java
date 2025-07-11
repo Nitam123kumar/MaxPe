@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -38,10 +39,13 @@ import butterknife.ButterKnife;
 public class FeedbackActivity extends BaseActivity implements DefaultView, View.OnClickListener {
 
     private DefaultPresenter mDefaultPresenter;
-    @BindView(R.id.ratingBar)
-    RatingBar ratingBar;
+//    @BindView(R.id.ratingBar)
+//    RatingBar ratingBar;
     @BindView(R.id.toolbar_layout)
     LinearLayout mToolBar;
+
+    @BindView(R.id.title)
+    TextView title;
 
     @BindView(R.id.user_TextView)
     TextView maxPe_user;
@@ -52,6 +56,10 @@ public class FeedbackActivity extends BaseActivity implements DefaultView, View.
     @BindView(R.id.submit_feedback_Button)
     AppCompatButton submit_feedback_Btn;
     FrameLayout bottomSheet = null;
+
+    ImageView[] stars1 = new ImageView[5];
+    int currentRating = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +69,7 @@ public class FeedbackActivity extends BaseActivity implements DefaultView, View.
         mToolBar.setOnClickListener(this);
         submit_feedback_Btn.setOnClickListener(this);
         mDefaultPresenter = new DefaultPresenter(this);
+        title.setText("Submit Your Feedback");
 
 
         try {
@@ -72,18 +81,32 @@ public class FeedbackActivity extends BaseActivity implements DefaultView, View.
             throw new RuntimeException(e);
         }
 
-        LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
-        stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
+//        LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
+//        stars.getDrawable(2).setColorFilter(ContextCompat.getColor(this, R.color.star_orange), PorterDuff.Mode.SRC_ATOP);
+//        stars.getDrawable(0).setColorFilter(ContextCompat.getColor(this, R.color.star_inactive), PorterDuff.Mode.SRC_ATOP);
+//
+//
+//        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+//            @Override
+//            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+////                if (fromUser) {
+////                    Toast.makeText(FeedbackActivity.this, "You selected " + (int) rating + " stars", Toast.LENGTH_SHORT).show();
+////                }
+//            }
+//        });
 
 
-        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                if (fromUser) {
-                    Toast.makeText(FeedbackActivity.this, "You selected " + (int) rating + " stars", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        stars1[0] = findViewById(R.id.star1);
+        stars1[1] = findViewById(R.id.star2);
+        stars1[2] = findViewById(R.id.star3);
+        stars1[3] = findViewById(R.id.star4);
+        stars1[4] = findViewById(R.id.star5);
+
+
+        for (int i = 0; i < stars1.length; i++) {
+            final int index = i;
+            stars1[i].setOnClickListener(v -> handleStarClick(index));
+        }
 
 
     }
@@ -105,6 +128,10 @@ public class FeedbackActivity extends BaseActivity implements DefaultView, View.
         }
         okay.setOnClickListener(v -> {
             bottomSheetDialog.cancel();
+            user_feedback.getText().clear();
+            clearRating();
+
+
         });
 
         bottomSheetDialog.setContentView(layout);
@@ -126,6 +153,12 @@ public class FeedbackActivity extends BaseActivity implements DefaultView, View.
             window.setBackgroundDrawable(background);
         }
     }
+    private void clearRating() {
+        currentRating = 0;
+        for (int i = 0; i < stars1.length; i++) {
+            stars1[i].setImageResource(R.drawable.star_empty);
+        }
+    }
 
     @Override
     public void onClick(View v) {
@@ -140,16 +173,17 @@ public class FeedbackActivity extends BaseActivity implements DefaultView, View.
                     return;
                 }
 
-                float rating = ratingBar.getRating();
+//                float rating = ratingBar.getRating();
 
-                if (rating == 0.0f) {
-                    Toast.makeText(FeedbackActivity.this, "Please select a rating before submitting.", Toast.LENGTH_SHORT).show();
+                if (currentRating == 0) {
+//                    Toast.makeText(FeedbackActivity.this, "Please select a rating before submitting.", Toast.LENGTH_SHORT).show();
+                    showError("Please select a rating before submitting.");
                     return;
                 }
-                Toast.makeText(FeedbackActivity.this, "Thanks for rating " + (int) rating + " stars!", Toast.LENGTH_LONG).show();
+//                Toast.makeText(FeedbackActivity.this, "Thanks for rating " + currentRating + " stars!", Toast.LENGTH_LONG).show();
 
                 hideKeyBoard(user_feedback);
-                mDefaultPresenter.getFeedback(device_id, user_feedback.getText().toString().trim(), (int) rating);
+                mDefaultPresenter.getFeedback(device_id, user_feedback.getText().toString().trim(),currentRating);
                 hideLoading(loading_dialog);
                 openDialog();
                 break;
@@ -176,6 +210,25 @@ public class FeedbackActivity extends BaseActivity implements DefaultView, View.
     public void onSuccessOther(String data, String data_other) {
 
     }
+
+
+
+
+private void handleStarClick(int index) {
+    currentRating = index + 1; // ratings are 1-indexed for user
+    updateStars(currentRating);
+    Toast.makeText(this, "You selected " + currentRating + " stars", Toast.LENGTH_SHORT).show();
+}
+
+private void updateStars(int rating) {
+    for (int i = 0; i < stars1.length; i++) {
+        if (i < rating) {
+            stars1[i].setImageResource(R.drawable.star_full); // filled star
+        } else {
+            stars1[i].setImageResource(R.drawable.star_empty); // empty star
+        }
+    }
+}
 
 
     @Override

@@ -14,6 +14,7 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -54,6 +55,10 @@ public class PrepaidFragment extends BaseFragment implements DefaultView {
     @BindView(R.id.rvPrepaidCommission1)
     RecyclerView rvPrepaidCommission;
 
+    @BindView(R.id.loading)
+    LinearLayout loading;
+
+
 
     @Override
     public View provideYourFragmentView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -67,6 +72,8 @@ public class PrepaidFragment extends BaseFragment implements DefaultView {
         prepaidCommissionPreferences = new CommissionPreferences(requireContext(), "PrepaidCommission");
         map = prepaidCommissionPreferences.getData();
 
+
+            loading.setVisibility(View.VISIBLE);
 
             initializePrepaidList();
 
@@ -98,6 +105,7 @@ public class PrepaidFragment extends BaseFragment implements DefaultView {
         rvPrepaidCommission.setHasFixedSize(true);
         rvPrepaidCommission.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         rvPrepaidCommission.setAdapter(prepaidAdapter);
+        loading.setVisibility(View.GONE);
     }
 
     @Override
@@ -122,6 +130,7 @@ public class PrepaidFragment extends BaseFragment implements DefaultView {
                 prepaidCommissionList.add(prepaidCommission);
             }
             prepaidAdapter.addEvents(prepaidCommissionList);
+            loading.setVisibility(View.GONE);
 
         } catch (JSONException | RuntimeException e) {
             e.printStackTrace();
@@ -141,12 +150,22 @@ public class PrepaidFragment extends BaseFragment implements DefaultView {
 
     @Override
     public void onShowDialog(String message) {
-
+        if (bottomSheet != null) {
+            showLoading(loading_dialog);
+            submit.setVisibility(View.GONE);
+        } else {
+            showLoading(loading);
+        }
     }
 
     @Override
     public void onHideDialog() {
-
+        if (bottomSheet != null) {
+            hideLoading(loading_dialog);
+            submit.setVisibility(View.VISIBLE);
+        } else {
+            hideLoading(loading);
+        }
     }
 
     @Override
@@ -156,7 +175,7 @@ public class PrepaidFragment extends BaseFragment implements DefaultView {
 
     @Override
     public void onPrintLog(String message) {
-
+        printLog(message);
     }
     @Override
     public void onAttach(@NonNull Context context) {

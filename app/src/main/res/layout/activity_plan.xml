@@ -35,7 +35,7 @@
                 android:layout_height="@dimen/_40sdp"
                 android:layout_gravity="center"
                 android:src="@drawable/upi"
-                android:padding="8dp"
+                android:padding="@dimen/_6sdp"
                 android:contentDescription="@string/app_name"
                 android:background="@drawable/recharge_logo_shape"
                 android:layout_marginStart="16dp"/>
@@ -53,9 +53,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textStyle="bold"
-                    android:textSize="12sp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
+                    android:textSize="@dimen/_9sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
                     android:textColor="@color/white"
                     android:layout_marginTop="@dimen/_10sdp"/>
 
@@ -69,7 +69,7 @@
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:textSize="@dimen/_10sdp"
                     android:textColor="@color/white"
-                    android:layout_marginBottom="5dp"/>
+                    android:layout_marginBottom="@dimen/_3sdp"/>
 
                 <TextView
                     android:id="@+id/txtPhoneOrigin"
@@ -78,7 +78,7 @@
                     android:layout_gravity="center"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
-                    android:textSize="10sp"
+                    android:textSize="@dimen/_8sdp"
                     android:textColor="@color/color_c"
                     android:layout_marginBottom="@dimen/_10sdp"/>
 
@@ -110,7 +110,7 @@
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:background="@drawable/search_edit_drawable"
                 android:drawableEnd="@drawable/ic_search"
-                android:drawablePadding="10dp"
+                android:drawablePadding="@dimen/_8sdp"
                 android:gravity="center_vertical"
                 android:paddingStart="@dimen/_15sdp"
                 android:paddingEnd="@dimen/_15sdp"
@@ -185,6 +185,7 @@
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:paddingEnd="@dimen/_10sdp"
+                android:background="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

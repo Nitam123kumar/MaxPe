@@ -1067,7 +1067,9 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 startActivity(intent);
                 break;
             case R.id.refresh:
-                refreshDataWithoutLoader();
+                intent=new Intent(this,MaxPointsActivity.class);
+                startActivity(intent);
+//                refreshDataWithoutLoader();
                 break;
 //            case R.id.whatsup_alert:
 //                try{
