@@ -479,15 +479,17 @@
                         />
                      <TextView
                          android:id="@+id/earnTV"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="@id/viewGS"
                         app:layout_constraintEnd_toEndOf="@id/viewGS"
                         app:layout_constraintTop_toBottomOf="@id/turnTV"
                         android:text="Earn instant commission on every recharges &amp; bill payments"
                         android:textColor="@color/white"
-                        android:textSize="13sp"
+                        android:textSize="@dimen/_10sdp"
                         android:textStyle="bold"
+                         android:paddingHorizontal="@dimen/_10sdp"
+                         android:gravity="center"
                          app:layout_constraintBottom_toTopOf="@id/getStartedTV"
                         />
 
@@ -502,7 +504,7 @@
                         android:gravity="center_vertical"
                         android:drawablePadding="@dimen/_10sdp"
                         android:paddingStart="@dimen/_20sdp"
-                        android:drawableStart="@drawable/get_start_icon"
+                        android:drawableStart="@drawable/path2221"
                         android:background="@drawable/get_started_shape"
                         app:layout_constraintEnd_toEndOf="@id/viewGS"
                         app:layout_constraintStart_toStartOf="@id/viewGS"

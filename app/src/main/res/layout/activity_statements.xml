@@ -22,7 +22,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/viewTab"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_45sdp"
+            android:layout_height="@dimen/_38sdp"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_15sdp"
             android:background="@drawable/pattern_logs"
@@ -34,7 +34,7 @@
 
             <View
                 android:id="@+id/viewStatements"
-                android:layout_width="@dimen/_60sdp"
+                android:layout_width="@dimen/_67sdp"
                 android:layout_height="@dimen/_30sdp"
                 app:layout_constraintBottom_toBottomOf="@id/viewTab"
                 app:layout_constraintEnd_toStartOf="@id/viewReports"
@@ -54,7 +54,7 @@
 
             <View
                 android:id="@+id/viewReports"
-                android:layout_width="@dimen/_60sdp"
+                android:layout_width="@dimen/_67sdp"
                 android:layout_height="@dimen/_30sdp"
                 app:layout_constraintBottom_toBottomOf="@id/viewTab"
                 app:layout_constraintEnd_toStartOf="@id/viewDeposit"
@@ -75,7 +75,7 @@
 
             <View
                 android:id="@+id/viewDeposit"
-                android:layout_width="@dimen/_60sdp"
+                android:layout_width="@dimen/_67sdp"
                 android:layout_height="@dimen/_30sdp"
                 app:layout_constraintBottom_toBottomOf="@id/viewTab"
                 app:layout_constraintStart_toEndOf="@id/viewReports"
@@ -95,7 +95,7 @@
 
             <View
                 android:id="@+id/viewMaxPoints"
-                android:layout_width="@dimen/_60sdp"
+                android:layout_width="@dimen/_67sdp"
                 android:layout_height="@dimen/_30sdp"
                 app:layout_constraintBottom_toBottomOf="@id/viewTab"
                 app:layout_constraintStart_toEndOf="@id/viewDeposit"

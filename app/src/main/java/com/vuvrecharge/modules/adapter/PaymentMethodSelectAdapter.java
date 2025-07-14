@@ -1,13 +1,18 @@
 package com.vuvrecharge.modules.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -22,15 +27,20 @@ public class PaymentMethodSelectAdapter extends RecyclerView.Adapter<PaymentMeth
     Context context;
     ArrayList<PaymentSetting> list;
 
-    PaymentSettingAdapter.OnClickListener listener;
+    OnClickListener listener;
+    private int lastSelectedPosition = 0;
+    private String amount="";
 
-
-    public PaymentMethodSelectAdapter(Context context, PaymentSettingAdapter.OnClickListener listener) {
+    public PaymentMethodSelectAdapter(Context context, OnClickListener listener, ArrayList<PaymentSetting> listArray) {
+        Log.d("list", String.valueOf(list));
         this.context = context;
         this.listener = listener;
+        this.list=listArray;
+        Log.d("list", String.valueOf(listArray));
     }
-    public void addData(ArrayList<PaymentSetting> list){
+    public void addData(ArrayList<PaymentSetting> list,String amount){
         this.list = list;
+        this.amount=amount;
         notifyDataSetChanged();
     }
 
@@ -46,32 +56,73 @@ public class PaymentMethodSelectAdapter extends RecyclerView.Adapter<PaymentMeth
         PaymentSetting setting = list.get(position);
 
         holder.txtUpiTitle.setText(setting.getStr());
-        holder.txtUpiTitle2.setText(setting.getStr2());
+//        holder.txtUpiTitle2.setText(setting.getStr2());
+        Log.d("Name Data", setting.getStr());
         Glide.with(context)
                 .load(setting.getImage())
                 .into(holder.imgUpi);
-        holder.itemView.setOnClickListener(v -> listener.onClick(setting.getStr()));
+        holder.add_money_btn.setOnClickListener(v -> listener.onClick(amount,setting.getStr()));
+
+        holder.radioButton.setChecked(position == lastSelectedPosition);
+
+        if (position == lastSelectedPosition) {
+            holder.add_money_btn.setVisibility(View.VISIBLE);
+            holder.radioButton.setSelected(true);
+            holder.add_money_btn.setText("Add ₹"+amount);
+        } else {
+            holder.add_money_btn.setVisibility(View.GONE);
+            holder.radioButton.setSelected(false);
+        }
+
+        holder.radioButton.setOnClickListener(v -> {
+            int previousSelected = lastSelectedPosition;
+            lastSelectedPosition = holder.getAdapterPosition();
+
+
+            notifyItemChanged(previousSelected); // Unselect previous
+            notifyItemChanged(lastSelectedPosition);
+            // Select current
+
+        });
+
+        holder.itemView.setOnClickListener(v -> {
+            int previousSelected = lastSelectedPosition;
+            lastSelectedPosition = holder.getAdapterPosition();
+
+            notifyItemChanged(previousSelected);
+            notifyItemChanged(lastSelectedPosition);
+
+        });
+
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     public class Holder extends RecyclerView.ViewHolder {
 
         ImageView imgUpi;
         TextView txtUpiTitle;
-        TextView txtUpiTitle2;
+//        TextView txtUpiTitle2;
+        RadioGroup radioGroup1;
+        RadioButton radioButton;
+        AppCompatButton add_money_btn;
         public Holder(@NonNull View itemView) {
             super(itemView);
             imgUpi = itemView.findViewById(R.id.payment_icon);
             txtUpiTitle = itemView.findViewById(R.id.payment_title);
-            txtUpiTitle2 = itemView.findViewById(R.id.payment_getaway);
+            add_money_btn = itemView.findViewById(R.id.add_money_btn);
+            radioGroup1 = itemView.findViewById(R.id.radioGroup1);
+            radioButton = itemView.findViewById(R.id.radioBtn);
+
+
         }
     }
     public interface OnClickListener{
-        void onClick(String name);
+        void onClick(String amount,String name);
     }
 
 }

@@ -95,24 +95,24 @@ public class DepositAdapter extends RecyclerView.Adapter<DepositAdapter.Holder> 
             if (mDepositData.getPayment_status().toUpperCase().equals("PENDING")) {
 //                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_pending);
                 Glide.with(mContext)
-                        .load(R.drawable.deposit_pending_svg)
+                        .load(R.drawable.pending_icon_svg)
                         .into(imgDone);
                 txtStatus.setBackgroundDrawable(BaseMethod.getGradientDrawableRe1(mContext.getResources().getColor(R.color.pending)));
-                txtAmount.setTextColor(mContext.getResources().getColor(R.color.pending1));
+                txtAmount.setTextColor(mContext.getResources().getColor(R.color.black));
             } else if (mDepositData.getPayment_status().toUpperCase().equals("SUCCESS")) {
 //                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_history_1);
                 Glide.with(mContext)
-                        .load(R.drawable.deposit_svg)
+                        .load(R.drawable.send_success_icon)
                         .into(imgDone);
                 txtStatus.setBackgroundDrawable(BaseMethod.getGradientDrawableRe1(mContext.getResources().getColor(R.color.success)));
-                txtAmount.setTextColor(mContext.getResources().getColor(R.color.success1));
+                txtAmount.setTextColor(mContext.getResources().getColor(R.color.black));
             } else {
 //                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_report_1);
                 Glide.with(mContext)
-                        .load(R.drawable.deposit_failed_svg)
+                        .load(R.drawable.failed_icon_svg)
                         .into(imgDone);
                 txtStatus.setBackgroundDrawable(BaseMethod.getGradientDrawableRe1(mContext.getResources().getColor(R.color.failed)));
-                txtAmount.setTextColor(mContext.getResources().getColor(R.color.failed1));
+                txtAmount.setTextColor(mContext.getResources().getColor(R.color.black));
             }
             txtStatus.setText(mDepositData.getPayment_status().toUpperCase());
 

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_10sdp">
+
+    <TextView
+        android:id="@+id/logoutTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Log Out"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@id/are_you_sureTV"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/are_you_sureTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are you sure for logout?"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_9sdp"
+        app:layout_constraintStart_toStartOf="@id/logoutTV"
+        app:layout_constraintTop_toBottomOf="@+id/logoutTV" />
+
+    <ImageView
+        android:id="@+id/cancel_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/cancel_icon_svg"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="@id/are_you_sureTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/logoutTV" />
+
+    <View
+        android:id="@+id/logout_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="#4DD9D9D9"
+        app:layout_constraintTop_toBottomOf="@id/are_you_sureTV" />
+
+    <TextView
+        android:id="@+id/yes"
+        android:layout_width="@dimen/_125sdp"
+        android:layout_height="@dimen/_27sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/need_support_shape"
+        android:gravity="center"
+        android:text="Yes"
+        android:textColor="#013973"
+        android:textSize="@dimen/_11sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/logoutTV"
+        app:layout_constraintTop_toBottomOf="@id/logout_line"
+        app:layout_constraintEnd_toStartOf="@id/no"/>
+
+    <TextView
+        android:id="@+id/no"
+        android:layout_width="@dimen/_125sdp"
+        android:layout_height="@dimen/_27sdp"
+        android:gravity="center"
+        android:text="No"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_11sdp"
+        android:textStyle="bold"
+        android:elevation="@dimen/_1sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:background="@drawable/ad_money_button_shape"
+        app:layout_constraintBottom_toBottomOf="@id/yes"
+        app:layout_constraintTop_toTopOf="@id/yes"
+        app:layout_constraintStart_toEndOf="@id/yes"
+        app:layout_constraintEnd_toEndOf="@id/cancel_img"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

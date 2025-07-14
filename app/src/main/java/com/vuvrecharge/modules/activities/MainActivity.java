@@ -222,16 +222,6 @@ public class MainActivity extends BaseActivity implements DefaultView,
         mDefaultPresenter = new DefaultPresenter(this);
         appUpdate();
         notifications();
-     //   apiResponse();
-
-
-
-         List<Integer> imageList_offer = Arrays.asList(
-
-                R.drawable.airtel_icon,
-                R.drawable.airtel_icon
-
-        );
         offer_for_you_recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         image_slider.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
@@ -335,6 +325,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
             List<SliderData> slide = (mDatabase.getUserData().getSlides());
             for (SliderData image : slide) {
                 color.add(mDatabase.getUserData().getSlide_path() + "/" + image.getSlide());
+                Log.d("Url Data",mDatabase.getUserData().getSlide_path());
             }
 
             viewPager.setAdapter(new SliderAdapterBanner(getActivity(), color, userData.getSlides()));

@@ -26,6 +26,12 @@
         <item name="android:statusBarColor">@color/colorPrimaryB</item>
         <item name="statusBarBackground">@color/colorPrimaryB</item>
     </style>
+ <style name="AppTheme.NoActionBar3" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+<!--        <item name="android:statusBarColor">@color/colorPrimaryB</item>-->
+<!--        <item name="statusBarBackground">@color/colorPrimaryB</item>-->
+    </style>
 
     <style name="AppTheme.NoActionBar1">
         <item name="windowActionBar">false</item>

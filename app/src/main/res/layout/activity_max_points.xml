@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
-    android:background="@drawable/main_wallet_shape"
     tools:context=".modules.activities.MaxPointsActivity">
 
     <LinearLayout
@@ -30,7 +30,7 @@
             android:background="@drawable/wallet_back_shape"
             android:contentDescription="@string/max_pe"
             android:padding="@dimen/_8sdp"
-            android:src="@drawable/back_arrow1"
+            android:src="@drawable/black_arrow_svg"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +44,7 @@
             android:gravity="center_vertical"
             android:text="Your Max Points"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="@dimen/_11sdp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -71,7 +71,7 @@
         android:layout_height="@dimen/_120sdp"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/_20sdp"
-        android:background="@drawable/wallet_bal_shape"
+        android:background="@drawable/rectangle_100aa"
         android:elevation="@dimen/_1sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,7 +106,6 @@
             android:id="@+id/maxPointsTV"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_27sdp"
-            android:background="@drawable/life_time_max_points_shape"
             android:gravity="center"
             android:text="Lifetime Max Points : 50050.00"
             android:textColor="@color/white"

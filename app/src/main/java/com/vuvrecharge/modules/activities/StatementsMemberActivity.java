@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -129,7 +128,7 @@ public class StatementsMemberActivity extends BaseActivity implements DefaultVie
 
     private void initializeEventsList() {
         addMore.setVisibility(View.GONE);
-        addMore.setImageResource(R.drawable.add);
+        addMore.setImageResource(R.drawable.add_money_shape);
         adapter = new StatementsMemberAdapter(getLayoutInflater());
         list_item.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);

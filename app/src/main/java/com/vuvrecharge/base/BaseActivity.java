@@ -23,8 +23,10 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -32,6 +34,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,13 +44,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.databinding.DataBindingUtil;
 
 import com.androidadvance.topsnackbar.TSnackbar;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.inappmessaging.FirebaseInAppMessaging;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.vuvrecharge.R;
+import com.vuvrecharge.databinding.FeedbackBinding;
 import com.vuvrecharge.modules.activities.LoginActivity;
 import com.vuvrecharge.preferences.UserPreferences;
 import com.vuvrecharge.preferences.UserPreferencesImpl;
@@ -259,46 +265,99 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
 
     }
 
-    public void makeLogout() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(getActivity()
-                .getResources().getText(R.string.logout));
-        builder.setMessage(getActivity()
-                .getResources().getText(R.string.logout_text));
-        builder.setPositiveButton(getActivity()
-                .getResources().getText(R.string.yes), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                new Handler().postDelayed(new Runnable() {
+    public void makeLogout(){
+        try {
 
-                    @Override
-                    public void run() {
-                        mDatabase.clearUser();
-                        Intent intent = new Intent(getActivity(), LoginActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        getActivity().finish();
-                    }
-                }, 000);
+            BottomSheetDialog dialogLogout = new BottomSheetDialog(getActivity(),R.style.AppBottomSheetDialogTheme);
+            View view= LayoutInflater.from(getActivity()).inflate(R.layout.logout_layout,null,false);
+            ImageView cancelImg=view.findViewById(R.id.cancel_img);
+            TextView logoutYes=view.findViewById(R.id.yes);
+            TextView logoutNo=view.findViewById(R.id.no);
+            dialogLogout.setContentView(view);
+            dialogLogout.setCancelable(false);
+            changeStatusBarColor(dialogLogout);
+
+            bottomSheet = dialogLogout.findViewById(com.denzcoskun.imageslider.R.id.design_bottom_sheet);
+            if (bottomSheet != null) {
+                BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+                behavior.setSkipCollapsed(false);
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                behavior.setPeekHeight(600);
             }
-        });
-        builder.setNegativeButton(getActivity()
-                .getResources().getText(R.string.no), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
+
+
+            logoutYes.setOnClickListener(v -> {
+                mDatabase.clearUser();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                getActivity().finish();
+
+
+            });
+            logoutNo.setOnClickListener(v -> {
+                dialogLogout.cancel();
+
+            });
+            cancelImg.setOnClickListener(v -> {
+                dialogLogout.cancel();
+
+            });
+
+            dialogLogout.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void makeDeleteAccount() {
+
+        try {
+
+            BottomSheetDialog dialogDeleteAccount = new BottomSheetDialog(getActivity(),R.style.AppBottomSheetDialogTheme);
+            View view= LayoutInflater.from(getActivity()).inflate(R.layout.account_delete_layout,null,false);
+            ImageView cancelImg=view.findViewById(R.id.cancel_img);
+            TextView accountDeleteYes=view.findViewById(R.id.accountDelete);
+            TextView accountDeleteNo=view.findViewById(R.id.no);
+            dialogDeleteAccount.setContentView(view);
+            dialogDeleteAccount.setCancelable(false);
+            changeStatusBarColor(dialogDeleteAccount);
+
+            bottomSheet = dialogDeleteAccount.findViewById(com.denzcoskun.imageslider.R.id.design_bottom_sheet);
+            if (bottomSheet != null) {
+                BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+                behavior.setSkipCollapsed(false);
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                behavior.setPeekHeight(600);
             }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
 
-        Button nbutton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-        nbutton.setTextColor(Color.parseColor("#D6483F"));
 
-        Button pbutton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        pbutton.setTextColor(Color.parseColor("#008000"));
+            accountDeleteYes.setOnClickListener(v -> {
+//                    mDatabase.clearUser();
+//                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    startActivity(intent);
+//                    getActivity().finish();
+
+
+            });
+            accountDeleteNo.setOnClickListener(v -> {
+                dialogDeleteAccount.cancel();
+
+            });
+            cancelImg.setOnClickListener(v -> {
+                dialogDeleteAccount.cancel();
+
+            });
+
+            dialogDeleteAccount.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -921,7 +980,7 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
         }
     }
 
-    public void changeStatusBarColor(BottomSheetDialog dialog) {
+    public  void changeStatusBarColor(BottomSheetDialog dialog) {
         try {
             Window win = dialog.getWindow();
             if (win != null) {

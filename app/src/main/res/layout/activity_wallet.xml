@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_wallet_shape"
     android:fitsSystemWindows="true"
+    android:background="@color/white"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".modules.activities.WalletActivity">
 
@@ -43,7 +43,7 @@
                     <ImageView
                         android:layout_width="@dimen/_10sdp"
                         android:layout_height="@dimen/_6sdp"
-                        android:src="@drawable/back_arrow1" />
+                        android:src="@drawable/black_arrow_svg" />
                 </LinearLayout>
 
 
@@ -51,19 +51,19 @@
                     android:id="@+id/name_tv1"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_30sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
                     android:adjustViewBounds="true"
                     android:fontFamily="@font/roboto"
-                    android:text="Hello MaxPe User"
+                    android:text="Balance &amp; History"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp"
-                    android:gravity="center_vertical"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sdp"
+                    android:gravity="center"
                     android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/onBack"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="MissingConstraints" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                     />
 
                 <ImageView
                     android:id="@+id/share1"

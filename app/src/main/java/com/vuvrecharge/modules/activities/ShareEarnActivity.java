@@ -48,10 +48,10 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
 
     @BindView(R.id.btnInvite)
     ConstraintLayout btnInvite;
-    @BindView(R.id.txtMyReferralValue)
-    TextView txtMyReferralValue;
-    @BindView(R.id.txtReferralIncomeValue)
-    TextView txtReferralIncomeValue;
+//    @BindView(R.id.txtMyReferralValue)
+//    TextView txtMyReferralValue;
+//    @BindView(R.id.txtReferralIncomeValue)
+//    TextView txtReferralIncomeValue;
 //    @BindView(R.id.txtSuccessfulReferralCount)
 //    TextView txtSuccessfulReferralCount;
 //    @BindView(R.id.txtBonusEarnCount)
@@ -63,12 +63,12 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
 //    @BindView(R.id.txtReferMaxSlug)
 //    TextView txtReferMaxSlug;
 
-    @BindView(R.id.viewMyReferral)
-    View viewMyReferral;
+//    @BindView(R.id.viewMyReferral)
+//    View viewMyReferral;
     @BindView(R.id.top_earner_ImageSlider)
     ImageSlider top_earner_ImageSlider;
-    @BindView(R.id.viewReferralIncome)
-    View viewReferralIncome;
+//    @BindView(R.id.viewReferralIncome)
+//    View viewReferralIncome;
     @BindView(R.id.txtTermsCondition)
     TextView txtTermsCondition;
     @BindView(R.id.imageSlider)
@@ -87,8 +87,8 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
         mToolbar.setOnClickListener(this);
         btnInvite.setOnClickListener(this);
         btnReferCopy.setOnClickListener(this);
-        viewMyReferral.setOnClickListener(this);
-        viewReferralIncome.setOnClickListener(this);
+//        viewMyReferral.setOnClickListener(this);
+//        viewReferralIncome.setOnClickListener(this);
         if (mDatabase != null) {
             if (mDatabase.getUserData() != null) {
                 if (mDatabase.getUserData().getReferCode() != null) {
@@ -140,8 +140,8 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
     public void onSuccess(String userData) {
         try {
             JSONObject jsonObject = new JSONObject(userData);
-            txtMyReferralValue.setText(jsonObject.getString("totalReferrals"));
-            txtReferralIncomeValue.setText("\u20b9 " + jsonObject.getString("totalReferralPaid"));
+//            txtMyReferralValue.setText(jsonObject.getString("totalReferrals"));
+//            txtReferralIncomeValue.setText("\u20b9 " + jsonObject.getString("totalReferralPaid"));
             String referText = jsonObject.getString("referPageText");
             JSONObject object = new JSONObject(referText);
 
@@ -232,13 +232,14 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
                     }
                 }
             }
-        } else if (v.getId() == R.id.viewMyReferral) {
-            Intent intent = new Intent(getActivity(), MyReferralsActivity.class);
-            startActivity(intent);
-        } else if (v.getId() == R.id.viewReferralIncome) {
-            Intent intent = new Intent(getActivity(), ReferralsIncomeActivity.class);
-            startActivity(intent);
         }
+//        else if (v.getId() == R.id.viewMyReferral) {
+//            Intent intent = new Intent(getActivity(), MyReferralsActivity.class);
+//            startActivity(intent);
+//        } else if (v.getId() == R.id.viewReferralIncome) {
+//            Intent intent = new Intent(getActivity(), ReferralsIncomeActivity.class);
+//            startActivity(intent);
+//        }
         else if (v.getId() == R.id.toolbar_LinearLayout) {
             onBackPressed();
             getActivity().finish();

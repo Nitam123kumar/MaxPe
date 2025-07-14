@@ -21,6 +21,7 @@
     <color name="dial_color">#e0f2f1</color>
     <color name="light">#138996</color>
     <color name="dark">#056F7B</color>
+    <color name="proceed_to_add">#F0F0F0</color>
     <color name="gray_shape">#F2F2F2</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#CCCCCC</color>
     <color name="accept">#FF6700</color>

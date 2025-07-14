@@ -75,7 +75,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:textColor="#B2B2B2"
         android:textSize="@dimen/_8sdp"
-        app:layout_constraintBottom_toTopOf="@id/operator_referance"
+        app:layout_constraintBottom_toTopOf="@id/number"
         app:layout_constraintStart_toStartOf="@id/order_id"
         app:layout_constraintTop_toBottomOf="@id/order_id" />
     <!--    <TextView-->
@@ -95,16 +95,16 @@
     <TextView
         android:id="@+id/status"
         android:layout_width="@dimen/_48sdp"
-        android:layout_height="@dimen/_18sdp"
+        android:layout_height="@dimen/_17sdp"
         android:background="@drawable/recharge_success_bg"
         android:fontFamily="@font/roboto_bold"
         android:gravity="center"
         android:text="success"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:textColor="#26A652"
-        android:textSize="@dimen/_7sdp"
+        android:textSize="@dimen/_6sdp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/operator_referance"
+        app:layout_constraintBottom_toBottomOf="@id/number"
         app:layout_constraintEnd_toEndOf="@id/amount"
         app:layout_constraintTop_toBottomOf="@id/amount" />
 
@@ -118,11 +118,11 @@
         app:layout_constraintStart_toStartOf="@id/status" />
 
     <TextView
-        android:id="@+id/operator_referance"
+        android:id="@+id/number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:text="Pending"
+        android:text="Number"
         android:textColor="@color/black"
         android:textSize="@dimen/_6sdp"
         app:layout_constraintBottom_toTopOf="@id/view5"
@@ -149,7 +149,7 @@
         android:layout_marginTop="@dimen/_13sdp"
         android:background="#E2E2E2"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/operator_referance" />
+        app:layout_constraintTop_toBottomOf="@id/number" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

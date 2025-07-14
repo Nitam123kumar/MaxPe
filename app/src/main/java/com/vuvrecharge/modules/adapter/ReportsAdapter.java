@@ -68,6 +68,7 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
                         String operator_dunmy_img, DefaultView mDefaultView, UserPreferences mDatabase) {
         this.from = from;
         this.operator_img = operator_img;
+        Log.d("operator_img",operator_img);
         this.operator_dunmy_img = operator_dunmy_img;
         this.mDefaultView = mDefaultView;
         this.mDatabase = mDatabase;
@@ -95,13 +96,13 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
         TextView amount;
 //        @BindView(R.id.user_type)
 //        TextView user_type;
-//        @BindView(R.id.number)
-//        TextView number;
+        @BindView(R.id.number)
+        TextView number;
 
         //        @BindView(R.id.commission)
 //        TextView commission;
-        @BindView(R.id.operator_referance)
-        TextView operator_referance;
+//        @BindView(R.id.operator_referance)
+//        TextView operator_referance;
 
         @BindView(R.id.status)
         TextView status;
@@ -125,16 +126,16 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
         }
 
         public void bind(@NonNull ReportsData resultsBean) {
-            if (resultsBean.getOperator_ref() != null) {
-                if (resultsBean.getOperator_ref().equals("")) {
-                    operator_referance.setVisibility(View.GONE);
-                } else {
-                    operator_referance.setVisibility(View.VISIBLE);
-                    operator_referance.setText("Operator Ref : " + resultsBean.getOperator_ref());
-                }
-            } else {
-                operator_referance.setVisibility(View.GONE);
-            }
+//            if (resultsBean.getOperator_ref() != null) {
+//                if (resultsBean.getOperator_ref().equals("")) {
+//                    operator_referance.setVisibility(View.GONE);
+//                } else {
+//                    operator_referance.setVisibility(View.VISIBLE);
+//                    operator_referance.setText("Operator Ref : " + resultsBean.getOperator_ref());
+//                }
+//            } else {
+//                operator_referance.setVisibility(View.GONE);
+//            }
 
             order_id.setText("Order Id : " + resultsBean.getOrder_id());
             amount.setText("\u20b9" + resultsBean.getAmount());
@@ -153,17 +154,17 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
             double charge = Double.parseDouble(resultsBean.getAmount()) - Double.parseDouble(resultsBean.getFinal_charge());
 //            - Double.parseDouble(resultsBean.getPoints())
 //            commission.setText("Com : \u20b9" + decimalFormat.format(charge));
-//            number.setText(resultsBean.getNumber());
+            number.setText("Number: "+resultsBean.getNumber());
             name.setText(resultsBean.getOperator_name().trim());
             status.setText(resultsBean.getStatus());
             if (resultsBean.getStatus().toUpperCase().equals("PENDING")) {
                 status.setText("Processing");
-                operator_referance.setVisibility(View.GONE);
+//                operator_referance.setVisibility(View.GONE);
 //                user_type.setVisibility(View.GONE);
 //                status_cons.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getDrawable(R.drawable.pending_history_bg)));
                 status.setBackgroundResource(R.drawable.pending_recharge_bg);
                 status.setTextColor(mContext.getResources().getColor(R.color.pending1));
-                amount.setTextColor(mContext.getResources().getColor(R.color.pending1));
+                amount.setTextColor(mContext.getResources().getColor(R.color.black));
                 loading.setVisibility(View.VISIBLE);
                 Glide.with(mContext).asGif().load(R.drawable.load).into(loading);
             } else if (resultsBean.getStatus().toUpperCase().equals("SUCCESS")) {
@@ -178,16 +179,16 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
 //                        status_cons.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getDrawable(R.drawable.success_bg)));
                         status.setBackgroundResource(R.drawable.recharge_success_bg);
                         status.setTextColor(mContext.getResources().getColor(R.color.success1));
-                        amount.setTextColor(mContext.getResources().getColor(R.color.success1));
+                        amount.setTextColor(mContext.getResources().getColor(R.color.black));
                         loading.setVisibility(View.GONE);
                     }
                 }
             } else {
 //                user_type.setVisibility(View.GONE);
-                operator_referance.setVisibility(View.GONE);
+//                operator_referance.setVisibility(View.GONE);
 //                status_cons.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getDrawable(R.drawable.failed_history_img)));
                 status.setTextColor(mContext.getResources().getColor(R.color.failed1));
-                amount.setTextColor(mContext.getResources().getColor(R.color.failed1));
+                amount.setTextColor(mContext.getResources().getColor(R.color.black));
                 status.setBackgroundResource(R.drawable.failed_recharge_bg);
                 loading.setVisibility(View.GONE);
 //                commission.setText("Com : \u20b90.00");

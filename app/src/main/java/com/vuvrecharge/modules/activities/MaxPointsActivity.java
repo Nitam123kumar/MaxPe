@@ -30,7 +30,7 @@ public class MaxPointsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_max_points);
         ButterKnife.bind(this);
-        setStatusBarGradiant(this);
+//        setStatusBarGradiant(this);
 
         back_to_home.setOnClickListener(v -> {
             onBackPressed();

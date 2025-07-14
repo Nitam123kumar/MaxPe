@@ -261,150 +261,27 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="78dp"
+                android:layout_height="@dimen/_45sdp"
                 android:background="@drawable/add_money_bottom_shape"
                 android:elevation="@dimen/_2sdp"
-                android:layout_marginBottom="0.3dp"
+                android:layout_marginBottom="@dimen/_5sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/txtAvailableBalance1"
                 app:layout_constraintStart_toStartOf="@id/txtAvailableBalance1"
                 >
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    >
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/pay_using_ConstraintLayout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        >
-                        <ImageView
-                            android:id="@+id/payment_using_imageView"
-                            android:layout_width="21.08dp"
-                            android:layout_height="21.08dp"
-                            android:src="@drawable/payment_icon"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            />
-
-                        <TextView
-                            android:id="@+id/pay_using_textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Pay using"
-                            android:textSize="14dp"
-                            android:textColor="#787878"
-                            app:layout_constraintStart_toEndOf="@id/payment_using_imageView"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:layout_marginStart="@dimen/_5sdp"
-                            />
-
-                        <ImageView
-                            android:layout_width="10dp"
-                            android:layout_height="7dp"
-                            android:src="@drawable/payusing_spinner_icon"
-                            app:layout_constraintStart_toEndOf="@id/pay_using_textView"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:layout_marginStart="@dimen/_5sdp"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            />
-                        <TextView
-                            android:id="@+id/upi_tittle_textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="PhonePe UPI"
-                            android:textColor="@color/black"
-                            android:textSize="19sp"
-                            app:layout_constraintTop_toBottomOf="@id/pay_using_textView"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                    
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="194dp"
-                        android:layout_height="50dp"
-                        android:elevation="2dp"
-                        android:background="@drawable/show_add_amount_shape"
-                        app:layout_constraintStart_toEndOf="@id/pay_using_ConstraintLayout"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        >
-                        <TextView
-                            android:id="@+id/amount_textView"
-                            android:layout_width="60dp"
-                            android:layout_height="20dp"
-                            android:text="₹000.00"
-                            android:textColor="@color/white"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:textSize="14sp"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Total"
-                            android:textColor="@color/white"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/amount_textView"
-                            android:textSize="14sp"
-                            />
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/buttonAddBalance"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintStart_toEndOf="@id/amount_textView"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            android:layout_marginStart="@dimen/_18sdp"
-                            >
-
-                        <TextView
-                            android:id="@+id/add_amount_textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Add Money"
-                            android:textColor="@color/white"
-                            android:textSize="14sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            />
-
-
-                            <ImageView
-                                android:layout_width="17dp"
-                                android:layout_height="17dp"
-                                android:src="@drawable/polygon"
-                                app:layout_constraintStart_toEndOf="@id/add_amount_textView"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                />
-
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/selectPaymentMethodBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Proceed to add"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:background="@color/proceed_to_add"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:gravity="center"
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

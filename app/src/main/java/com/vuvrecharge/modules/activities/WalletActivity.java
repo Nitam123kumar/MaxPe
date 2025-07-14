@@ -87,7 +87,7 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wallet);
         ButterKnife.bind(getActivity());
-        setStatusBarGradiant(this);
+//        setStatusBarGradiant();
         mDefaultPresenter = new DefaultPresenter(this);
         device_id = Settings.Secure.getString(getActivity().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
@@ -103,7 +103,7 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
 
         try {
             UserData userData = mDatabase.getUserData();
-            name_TV.setText("Hello, \n" + userData.getName());
+//            name_TV.setText("Hello, \n" + userData.getName());
             balance_TV.setText("₹" + userData.getEarnings());
 
         } catch (Exception e) {
@@ -120,15 +120,16 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
 
     }
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public static void setStatusBarGradiant(Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = activity.getWindow();
-            Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
-            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
-            window.setBackgroundDrawable(background);
+    private void setStatusBarGradiant() {
+        try {
+            Window win = getWindow();
+            if (win != null) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    win.setStatusBarColor(getResources().getColor(R.color.white));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     private void showBottomSheet(DepositData data) {
