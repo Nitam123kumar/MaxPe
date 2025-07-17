@@ -35,6 +35,7 @@ public class UserData {
     private List<DthCommissionBean> dth_commission;
     private  List<SliderData> slides;
     private  List<YoutubeSlides> youtube_slides;
+    private  List<OTTSubscriptionsData> ott_slides;
     private  List<OfferSlider> offer_slides;
 
     private List<SliderItems> recharge_slides_data;
@@ -54,6 +55,7 @@ public class UserData {
     private String email_logo;
     private String recharge_pay_bill_string;
     private String youtube_path;
+    private String ott_path;
     private String slide_path;
 
 
@@ -88,6 +90,13 @@ public class UserData {
 
     public void setYoutube_path(String youtube_path) {
         this.youtube_path = youtube_path;
+    }
+  public String getOtt_slides_path() {
+        return ott_path;
+    }
+
+    public void setOtt_slides_path(String ott_path) {
+        this.ott_path = ott_path;
     }
 
     public String getOffer_slides_path() {
@@ -397,6 +406,10 @@ public class UserData {
     public List<YoutubeSlides> getYoutubeVideoSliders() {
         return youtube_slides;
     }
+
+    public List<OTTSubscriptionsData> getLogoSliders() {
+        return ott_slides;
+    }
     public List<OfferSlider> getOffer_slides() {
         return offer_slides;
     }
@@ -410,6 +423,10 @@ public class UserData {
     }
     public void setYoutubeVideoSliders(List<YoutubeSlides> youtubeVideos) {
         this.youtube_slides = youtubeVideos;
+    }
+
+    public void setLogoSliders(List<OTTSubscriptionsData> ottSlides) {
+        this.ott_slides = ottSlides;
     }
     public void setOffer_slides(List<OfferSlider> offer_slides) {
         this.offer_slides = offer_slides;

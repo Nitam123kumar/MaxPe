@@ -3,6 +3,7 @@ package com.vuvrecharge.modules.adapter;
 import static com.vuvrecharge.api.ApiServices.BBPS_IMAGE_URL;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,7 @@ public class AllServiceAdapter extends RecyclerView.Adapter<AllServiceAdapter.Al
         Glide.with(context)
                 .load(BBPS_IMAGE_URL+"/"+menu.getLogo())
                 .into(holder.imgLogo);
+        Log.d("dashBoardData", BBPS_IMAGE_URL + "/" + menu.getLogo());
 
         if (menu.getHighlight_text().equals("")){
             holder.shimmerTextView.setVisibility(View.INVISIBLE);

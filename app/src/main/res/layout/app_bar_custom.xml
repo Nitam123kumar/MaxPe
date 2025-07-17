@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
@@ -13,20 +14,20 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/_50sdp"
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/toolbar1"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="@dimen/_50sdp"
                 android:background="@color/white"
                  >
 
                 <LinearLayout
                     android:id="@+id/toolbar_layout"
-                    android:layout_width="34dp"
-                    android:layout_height="34dp"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:gravity="center"
@@ -36,27 +37,26 @@
                     >
 
                     <ImageView
-                        android:layout_width="13.6dp"
-                        android:layout_height="7.65dp"
-                        android:src="@drawable/vector__3_"
+                        android:layout_width="@dimen/_11sdp"
+                        android:layout_height="@dimen/_7sdp"
+                        android:src="@drawable/black_arrow_svg"
                         />
                 </LinearLayout>
-
 
 
                 <TextView
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/_14sdp"
-                    android:layout_marginEnd="@dimen/_44sdp"
+                    android:layout_marginStart="16dp"
                     android:ellipsize="end"
                     android:gravity="center_horizontal|center_vertical"
                     android:maxLines="1"
                     android:text="Add money"
-                    android:textColor="@color/black_4"
-                    android:textSize="20dp"
-                    app:layout_constraintStart_toEndOf="@id/toolbar_layout"/>
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sdp"
+                    app:layout_constraintStart_toEndOf="@id/toolbar_layout"
+                    tools:layout_editor_absoluteY="0dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

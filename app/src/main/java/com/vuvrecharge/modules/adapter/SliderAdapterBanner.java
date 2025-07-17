@@ -53,7 +53,7 @@ public class SliderAdapterBanner extends PagerAdapter {
 //        RequestOptions options = new RequestOptions()
 //                .placeholder(R.drawable.no)
 //                .error(R.drawable.no);
-
+            Log.d("logo",color.get(position));
         if (!color.get(position).equals("")) {
             Glide.with(mContext)
                     .load(color.get(position))

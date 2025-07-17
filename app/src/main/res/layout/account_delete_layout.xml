@@ -98,7 +98,7 @@
         android:textStyle="bold"
         android:layout_marginBottom="@dimen/_20sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/logoutTV"
+        app:layout_constraintStart_toStartOf="@id/deleteImg"
         app:layout_constraintTop_toBottomOf="@id/missYou"
         app:layout_constraintEnd_toStartOf="@id/no"/>
 

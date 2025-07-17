@@ -125,7 +125,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
         super.onCreate(state);
         setContentView(R.layout.activity_add_balance);
         ButterKnife.bind(this);
-        title.setText("Online Deposit");
+        title.setText("Add Money");
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         mDefaultPresenter = new DefaultPresenter(this);
         mDefaultPresenter.getPaymentSetting2(device_id + "", "timepass");
@@ -141,7 +141,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
         Intent intent = getIntent();
 //        data = intent.getStringExtra("data");
 //        titleStr = intent.getStringExtra("title");
-        title.setText(titleStr);
+//        title.setText(titleStr);
 //        upi_tittle_textView.setText(titleStr);
 
 

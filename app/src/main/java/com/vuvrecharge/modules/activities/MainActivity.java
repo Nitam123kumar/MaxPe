@@ -344,6 +344,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
 
             sliderAdapter = new RecyclerViewSliderAdapter(this,MainActivity.this,youtubeVideosList,userData.getYoutubeVideoSliders());
             image_slider.setAdapter(sliderAdapter);
+            Log.d("youtubeVideosList", String.valueOf(youtubeVideosList));
 
 
             String main_hero_banner1=OFFER_ZONE+mDatabase.getUserData().getMain_hero_banner();

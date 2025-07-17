@@ -98,6 +98,8 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
 //    View viewChangePassword;
 //    @BindView(R.id.viewProfile)
 //    View viewProfile;
+    @BindView(R.id.viewAccountDelete)
+    View viewAccountDelete;
     @BindView(R.id.viewLogout)
     View viewLogout;
     @BindView(R.id.loading)
@@ -182,6 +184,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         viewFollow.setOnClickListener(this);
         viewFeedBack.setOnClickListener(this);
 //        viewProfile.setOnClickListener(this);
+        viewAccountDelete.setOnClickListener(this);
         viewLogout.setOnClickListener(this);
         viewRateUs.setOnClickListener(this);
         viewInvite.setOnClickListener(this);
@@ -338,7 +341,11 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                 startActivity(intent);
                 break;
             case R.id.viewFeedBack:
-                feedback(userData.getMobile());
+                intent = new Intent(getActivity(),FeedbackActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.viewAccountDelete:
+                makeDeleteAccount();
                 break;
             default:
                 Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show();
@@ -1009,11 +1016,11 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         BottomSheetDialog dialog = null;
         followsList.clear();
 
-        BottomAddWalletBalanceLayoutBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this),
-                R.layout.bottom_add_wallet_balance_layout, null, false);
-
         dialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
-        dialog.setContentView(binding.getRoot());
+        View layout = LayoutInflater.from(getActivity()).inflate(R.layout.follows_layout, null,false);
+        RecyclerView recyclerView=layout.findViewById(R.id.followUsRecyclerView);
+        ImageView cancel=layout.findViewById(R.id.img2);
+        dialog.setContentView(layout);
         dialog.setCancelable(true);
         changeStatusBarColor(dialog);
         bottomSheet = dialog.findViewById(com.denzcoskun.imageslider.R.id.design_bottom_sheet);
@@ -1025,9 +1032,9 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         }
 
         BottomSheetDialog finalDialog = dialog;
-
-        binding.txtPaymentMethod.setText("Follow Us");
-
+        cancel.setOnClickListener(v -> {
+            finalDialog.cancel();
+        });
 
         try {
             adapter = new FollowsAdapter(this, this);
@@ -1041,8 +1048,8 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                 followsList.add(new Follows(IMAGE_FOLLOWS + "/" + logo, title, redirect_url));
                 adapter.addData(followsList);
             }
-            binding.recyclerViewPaymentSetting.setLayoutManager(new GridLayoutManager(this, 3));
-            binding.recyclerViewPaymentSetting.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
+            recyclerView.setAdapter(adapter);
 
         } catch (Exception e) {
             Log.d("TAG_DATA", "followUs: " + e.getMessage());

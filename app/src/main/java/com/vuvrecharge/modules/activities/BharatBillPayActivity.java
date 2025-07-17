@@ -1,10 +1,15 @@
 package com.vuvrecharge.modules.activities;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -12,6 +17,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -19,7 +26,11 @@ import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseActivity;
 import com.vuvrecharge.modules.activities.newActivities.ElectricityActivity;
 import com.vuvrecharge.modules.adapter.BharatBillPayAdapter;
+import com.vuvrecharge.modules.adapter.OTTSubscriptionsAdapter;
+import com.vuvrecharge.modules.adapter.RecyclerViewSliderAdapter;
 import com.vuvrecharge.modules.model.BharatBillPayModel;
+import com.vuvrecharge.modules.model.OTTSubscriptionsData;
+import com.vuvrecharge.modules.model.YoutubeSlides;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 
@@ -47,11 +58,16 @@ public class BharatBillPayActivity extends BaseActivity implements BharatBillPay
     TextView retry;
     @BindView(R.id.recycler_view_provider)
     RecyclerView recyclerView;
+    @BindView(R.id.ott_recharge_recyclerView)
+    RecyclerView ott_recharge_recyclerView;
 //    @BindView(R.id.swipeRefreshLayout)
 //    SwipeRefreshLayout swipeRefreshLayout;
     String stringTitle = null;
     BharatBillPayAdapter adapter;
+    OTTSubscriptionsAdapter ottAdapter;
+    List<String> ott_List;
     List<BharatBillPayModel> bbpsList = new ArrayList<>();
+    List<OTTSubscriptionsData> oTTList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +81,10 @@ public class BharatBillPayActivity extends BaseActivity implements BharatBillPay
         adapter = new BharatBillPayAdapter(this, bbpsList, this);
         recyclerView.setAdapter(adapter);
         mToolbar.setOnClickListener(this);
+        setStatusBarGradiant(this);
 //        swipeRefreshLayout.setRefreshing(false);
         if (data != null){
+            Log.d("AllSe",data);
             try {
                 JSONObject object = new JSONObject(data);
                 JSONArray array = object.getJSONArray("bbps_pay_data");
@@ -80,9 +98,25 @@ public class BharatBillPayActivity extends BaseActivity implements BharatBillPay
                     bbpsList.add(payModel);
                     adapter.notifyDataSetChanged();
                 }
+
+                ott_List = new ArrayList<>();
+                List<OTTSubscriptionsData> ottItem = (mDatabase.getUserData().getLogoSliders());
+                for (OTTSubscriptionsData ottData : ottItem) {
+                    ott_List.add(mDatabase.getUserData().getOtt_slides_path() + "/" + ottData.getLogo());
+
+                    Log.d("OTTData", ottData.getLogo()+" "+ottData.getTitle());
+                }
+                oTTList.addAll(ottItem);
+                ottAdapter = new OTTSubscriptionsAdapter(this, oTTList, ott_List);
+                ott_recharge_recyclerView.setLayoutManager(new GridLayoutManager(this,3));
+                ott_recharge_recyclerView.setAdapter(ottAdapter);
+
+
+
             }catch (Exception e){
                 Log.d("TAG_BBPS", "onSuccess: "+e.getMessage());
             }
+
         }
     }
 
@@ -92,7 +126,19 @@ public class BharatBillPayActivity extends BaseActivity implements BharatBillPay
         setLayout(no_internet, retry, "Bill Pay");
     }
 
-    @Override
+   private void setStatusBarGradiant(Activity activity) {
+       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+           Window window = activity.getWindow();
+           Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
+           window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+           window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+           window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+           window.setBackgroundDrawable(background);
+       }
+   }
+
+        @Override
     public void onClickListener(@NonNull String name) {
         Intent intent;
         switch (name){

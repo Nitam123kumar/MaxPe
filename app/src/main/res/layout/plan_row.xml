@@ -7,6 +7,7 @@
         android:elevation="@dimen/_2sdp"
        android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
         android:paddingBottom="@dimen/_5sdp"
         android:background="@drawable/plan_drawable_background">
 

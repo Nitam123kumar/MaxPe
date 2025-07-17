@@ -286,7 +286,7 @@
                     app:layout_constraintTop_toTopOf="@id/kycView"
                     app:layout_constraintBottom_toBottomOf="@id/kycView"
                     app:layout_constraintEnd_toEndOf="@id/kycView"
-                    android:drawableEnd="@drawable/drop_down_img"
+                    android:drawableEnd="@drawable/drop_down_img_svg"
                     android:paddingEnd="@dimen/_15sdp"
                     />
 
@@ -894,7 +894,7 @@ android:textSize="14sp" -->
                     android:id="@+id/imgFeedBack"
                     android:layout_width="@dimen/_16sdp"
                     android:layout_height="@dimen/_16sdp"
-                    android:src="@drawable/feedback_image4"
+                    android:src="@drawable/feedback_image"
                     app:layout_constraintStart_toStartOf="@id/viewFeedBack"
                     app:layout_constraintTop_toTopOf="@id/viewFeedBack"
                     app:layout_constraintBottom_toBottomOf="@id/viewFeedBack"/>
@@ -1117,14 +1117,25 @@ android:textSize="14sp" -->
                     android:id="@+id/BHARAT"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="BHARAT\nKA\nAPNA PE!"
-                    android:layout_marginTop="@dimen/_40sdp"
+                    android:text="BHARAT KA\nAPNA PE!"
                     android:textSize="@dimen/_30sdp"
                     android:textColor="#F2F2F2"
                     android:fontFamily="@font/roboto_bold"
-                    app:layout_constraintTop_toBottomOf="@id/viewLogout"
+                    app:layout_constraintTop_toBottomOf="@id/MAXPE"
                     app:layout_constraintStart_toStartOf="@id/profileLayout"
                     />
+
+                <TextView
+                    android:id="@+id/MAXPE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_40sdp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="MAXPE"
+                    android:textColor="#F2F2F2"
+                    android:textSize="@dimen/_48sdp"
+                    app:layout_constraintStart_toStartOf="@id/profileLayout"
+                    app:layout_constraintTop_toBottomOf="@id/viewLogout" />
 
                 <TextView
                     android:id="@+id/india"

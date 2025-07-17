@@ -22,10 +22,11 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/viewTab"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_38sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginHorizontal="@dimen/_2sdp"
             android:layout_marginTop="@dimen/_15sdp"
-            android:background="@drawable/pattern_logs"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:background="@drawable/rectangle"
             android:elevation="@dimen/_3sdp"
             app:layout_constraintEnd_toEndOf="parent"
 

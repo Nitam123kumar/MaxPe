@@ -5,15 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@drawable/main_wallet_shape"
     tools:context=".modules.activities.newActivities.AllServicesActivity">
 
-    <include layout="@layout/app_bar_custom"
+    <include layout="@layout/bill_payment_layout"
         android:id="@+id/mToolBar"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@drawable/biller_main_shape"
         app:layout_constraintTop_toBottomOf="@id/mToolBar"
         app:layout_constraintBottom_toBottomOf="parent">
 <!--        android:background="@drawable/corner_white_new"-->
@@ -21,7 +23,6 @@
             android:id="@+id/recyclerViewAllService"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@drawable/corner_white_new"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="4"
             android:layout_margin="@dimen/_10sdp"

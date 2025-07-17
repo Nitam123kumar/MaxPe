@@ -51,14 +51,27 @@
 
                 </RelativeLayout>
 
-                <ImageView
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/help_description"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_150sdp"
                     android:background="@drawable/help_section_shape"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent">
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        app:layout_constraintTop_toTopOf="@id/help_description"-->
+<!--                        app:layout_constraintEnd_toEndOf="@id/help_description"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@id/help_description"-->
+<!--                        android:src="@drawable/hadn_01_1"-->
+<!--                        />-->
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -130,7 +143,7 @@
                             android:id="@+id/imgWhatsAppSupport"
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="@dimen/_20sdp"
-                            android:src="@drawable/chat_on_whatsapp"
+                            android:src="@drawable/whatsapp_icon_svg1"
                             android:layout_marginStart="@dimen/_8sdp"
                             app:layout_constraintVertical_chainStyle="packed"
                             app:layout_constraintStart_toStartOf="parent"
@@ -459,8 +472,8 @@
 
                             <ImageView
                                 android:id="@+id/instagram"
-                                android:layout_width="@dimen/_12sdp"
-                                android:layout_height="@dimen/_12sdp"
+                                android:layout_width="@dimen/_14sdp"
+                                android:layout_height="@dimen/_14sdp"
                                 android:layout_marginEnd="@dimen/_10sdp"
                                 android:src="@drawable/instagram_2"
                                 android:contentDescription="@string/app_name"

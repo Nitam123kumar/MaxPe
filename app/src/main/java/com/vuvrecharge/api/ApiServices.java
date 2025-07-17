@@ -34,6 +34,7 @@ public interface ApiServices {
     String SLIDE = "http://192.168.0.6/vuvpayments.com/images/app_slides/";
     String YOUTUBE_IMAGE_PATH = "http://192.168.0.6/vuvpayments.com/images/youtube_thumbnail/";
     String OFFER_ZONE = "http://192.168.0.6/vuvpayments.com/images/offer_zone/";
+    String OTT_SLIDES = "http://192.168.0.6/vuvpayments.com/images/home_page/";
 
 ////    live
 //    String BBPS_IMAGE_URL = "http://vuvpayments.com/images/services_logo";
@@ -47,6 +48,7 @@ public interface ApiServices {
 //    String SITE_URL = "https://vuvpayments.com/home/";
 //    String YOUTUBE_IMAGE_PATH = "http://vuvpayments.com/images/youtube_thumbnail/";
 //    String OFFER_ZONE = "http://vuvpayments.com/images/offer_zone/";
+//    String OTT_SLIDES = "http://vuvpayments.com/images/home_page/";
 
 
     String privacy = SITE_URL + "privacy_policy";

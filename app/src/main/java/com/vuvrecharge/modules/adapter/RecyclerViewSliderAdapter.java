@@ -57,6 +57,8 @@ public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerView
             thumbnailUrl = YOUTUBE_IMAGE_PATH + thumbnailUrl;
         }
 
+        Log.d("youtube_Sliders",thumbnailUrl);
+
         Glide.with(context).load(thumbnailUrl).placeholder(R.drawable.youtube_v_img).into(holder.imgSlide);
         holder.title.setText(data.getTitle());
 

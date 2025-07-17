@@ -22,6 +22,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -127,7 +129,12 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
     TextView smsDetailsTV;
     @BindView(R.id.available_pointsTV)
     TextView available_pointsTV;
-
+    @BindView(R.id.applyTV)
+    CheckBox applyTV;
+    @BindView(R.id.applied)
+    TextView applied;
+    @BindView(R.id.applied_amount)
+    TextView applied_amount;
     DefaultView mDefaultView;
 
     String warning_message = "";
@@ -181,7 +188,29 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
 
         try {
             UserData userData = mDatabase.getUserData();
-            available_pointsTV.setText(userData.getCashbackPoints());
+            available_pointsTV.setText("Available "+userData.getCashbackPoints());
+            if (applyTV.isChecked()) {
+               applied.setVisibility(VISIBLE);
+               applied_amount.setVisibility(VISIBLE);
+            } else {
+                applied.setVisibility(GONE);
+                applied_amount.setVisibility(GONE);
+            }
+
+            applyTV.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        applied.setVisibility(VISIBLE);
+                        applied_amount.setVisibility(VISIBLE);
+                    } else {
+                        applied.setVisibility(GONE);
+                        applied_amount.setVisibility(GONE);
+                    }
+                }
+            });
+
+
 
         } catch (Exception e) {
             throw new RuntimeException(e);

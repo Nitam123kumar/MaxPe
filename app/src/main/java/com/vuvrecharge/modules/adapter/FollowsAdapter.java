@@ -44,7 +44,7 @@ public class FollowsAdapter extends RecyclerView.Adapter<FollowsAdapter.FollowsV
     public void onBindViewHolder(@NonNull FollowsAdapter.FollowsVH holder, int position) {
         Follows follow = list.get(position);
 
-        holder.txtFollow.setText(follow.getTitle());
+//        holder.txtFollow.setText(follow.getTitle());
         Glide.with(context)
                 .load(follow.getLogo())
                 .into(holder.imgFollow);
@@ -59,11 +59,11 @@ public class FollowsAdapter extends RecyclerView.Adapter<FollowsAdapter.FollowsV
     public class FollowsVH extends RecyclerView.ViewHolder {
 
         ImageView imgFollow;
-        TextView txtFollow;
+//        TextView txtFollow;
         public FollowsVH(@NonNull View itemView) {
             super(itemView);
             imgFollow = itemView.findViewById(R.id.imgFollow);
-            txtFollow = itemView.findViewById(R.id.txtFollow);
+//            txtFollow = itemView.findViewById(R.id.txtFollow);
         }
     }
 

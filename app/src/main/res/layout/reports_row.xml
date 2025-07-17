@@ -17,7 +17,7 @@
         android:layout_marginTop="@dimen/_4sdp"
         android:layout_marginBottom="@dimen/_8sdp"
         android:src="@drawable/done_1"
-        app:layout_constraintBottom_toBottomOf="@id/operator_referance"
+        app:layout_constraintBottom_toBottomOf="@id/number"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/name" />
 

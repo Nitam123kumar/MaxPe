@@ -170,7 +170,7 @@ public class PrepaidFragment extends BaseFragment implements DefaultView {
 
     @Override
     public void onShowToast(String message) {
-
+        listener.onShowToast(message);
     }
 
     @Override

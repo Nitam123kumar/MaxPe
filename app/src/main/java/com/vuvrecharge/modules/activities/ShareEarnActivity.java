@@ -48,12 +48,12 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
 
     @BindView(R.id.btnInvite)
     ConstraintLayout btnInvite;
-//    @BindView(R.id.txtMyReferralValue)
-//    TextView txtMyReferralValue;
-//    @BindView(R.id.txtReferralIncomeValue)
-//    TextView txtReferralIncomeValue;
-//    @BindView(R.id.txtSuccessfulReferralCount)
-//    TextView txtSuccessfulReferralCount;
+    @BindView(R.id.available_referralTV)
+    TextView txtMyReferralValue;
+    @BindView(R.id.myBonus_availableTxt)
+    TextView txtReferralIncomeValue;
+    @BindView(R.id.available_SuccessfulReferralTV)
+    TextView txtSuccessfulReferralCount;
 //    @BindView(R.id.txtBonusEarnCount)
 //    TextView txtBonusEarnCount;
 //    @BindView(R.id.txtExpectedBonusCount)
@@ -65,6 +65,9 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
 
 //    @BindView(R.id.viewMyReferral)
 //    View viewMyReferral;
+
+    @BindView(R.id.maxPoints_availableTxt)
+    TextView maxPoints_availableTxt;
     @BindView(R.id.top_earner_ImageSlider)
     ImageSlider top_earner_ImageSlider;
 //    @BindView(R.id.viewReferralIncome)
@@ -140,12 +143,13 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
     public void onSuccess(String userData) {
         try {
             JSONObject jsonObject = new JSONObject(userData);
-//            txtMyReferralValue.setText(jsonObject.getString("totalReferrals"));
-//            txtReferralIncomeValue.setText("\u20b9 " + jsonObject.getString("totalReferralPaid"));
+            txtMyReferralValue.setText(jsonObject.getString("totalReferrals"));
+            txtReferralIncomeValue.setText("\u20b9 " + jsonObject.getString("totalReferralPaid"));
             String referText = jsonObject.getString("referPageText");
             JSONObject object = new JSONObject(referText);
+            maxPoints_availableTxt.setText(mDatabase.getUserData().getCashbackPoints());
 
-//            txtSuccessfulReferralCount.setText(object.getString("successfull_referals"));
+            txtSuccessfulReferralCount.setText(object.getString("successfull_referals"));
 //            txtBonusEarnCount.setText("\u20b9 " + object.getString("bonus_earned"));
 //            txtExpectedBonusCount.setText("\u20b9 " + object.getString("expected_bonus"));
 //            txtReferSlug.setText(jsonObject.getString("referal_slug"));
