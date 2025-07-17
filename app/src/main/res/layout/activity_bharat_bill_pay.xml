@@ -40,7 +40,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/_20sdp">
 
 
                 <ImageView
@@ -57,6 +58,7 @@
                     android:id="@+id/recharge_section"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:drawableStart="@drawable/mobile_svg"
                     android:drawablePadding="@dimen/_10sdp"
@@ -72,9 +74,8 @@
                     android:id="@+id/recycler_view_provider"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:elevation="@dimen/_2sdp"
                     android:paddingTop="@dimen/_5sdp"
@@ -85,6 +86,51 @@
                     app:layout_constraintTop_toBottomOf="@+id/recharge_section"
                     app:layout_constraintVertical_chainStyle="spread_inside"
                     app:spanCount="4" />
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="#F3F3F3"
+                    app:layout_constraintTop_toBottomOf="@id/recycler_view_provider" />
+
+                <TextView
+                    android:id="@+id/utility_billsTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:drawableStart="@drawable/utility_bills_icon"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:text="Utility Bills"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/recharge_section"
+                    app:layout_constraintTop_toBottomOf="@id/line" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/utility_bills_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="@+id/recycler_view_provider"
+                    app:layout_constraintStart_toStartOf="@+id/recycler_view_provider"
+                    app:layout_constraintTop_toBottomOf="@id/utility_billsTV"
+                    app:spanCount="3" />
+
+                <View
+                    android:id="@+id/line1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="#F3F3F3"
+                    app:layout_constraintTop_toBottomOf="@id/utility_bills_recyclerView" />
 
                 <TextView
                     android:id="@+id/ott_rechargeTV"
@@ -98,19 +144,110 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/platform_fees"
-                    app:layout_constraintTop_toBottomOf="@id/recycler_view_provider" />
+                    app:layout_constraintStart_toStartOf="@id/recharge_section"
+                    app:layout_constraintTop_toBottomOf="@id/line1" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/ott_recharge_recyclerView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_100sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="@+id/recycler_view_provider"
+                    app:layout_constraintStart_toStartOf="@+id/recycler_view_provider"
                     app:layout_constraintTop_toBottomOf="@id/ott_rechargeTV"
+                    app:spanCount="3" />
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_20sdp"
-                    app:spanCount="3"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="#F3F3F3"
+                    app:layout_constraintTop_toBottomOf="@id/ott_recharge_recyclerView" />
+
+                <TextView
+                    android:id="@+id/FinancialServices"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:drawableStart="@drawable/financial_services_icon"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:text="Financial Services"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/recharge_section"
+                    app:layout_constraintTop_toBottomOf="@id/line2" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/financial_services_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="@+id/recycler_view_provider"
+                    app:layout_constraintStart_toStartOf="@+id/recycler_view_provider"
+                    app:layout_constraintTop_toBottomOf="@id/FinancialServices"
+                    app:spanCount="4" />
+
+                <View
+                    android:id="@+id/line3"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:background="#F3F3F3"
+                    app:layout_constraintTop_toBottomOf="@id/financial_services_recyclerView" />
+
+                <TextView
+                    android:id="@+id/BHARAT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="BHARAT KA\nAPNA PE!"
+                    android:textColor="#F2F2F2"
+                    android:textSize="@dimen/_30sdp"
+                    app:layout_constraintStart_toStartOf="@id/FinancialServices"
+                    app:layout_constraintTop_toBottomOf="@id/MAXPE" />
+
+                <TextView
+                    android:id="@+id/MAXPE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="MAXPE"
+                    android:textColor="#F2F2F2"
+                    android:textSize="@dimen/_48sdp"
+                    app:layout_constraintStart_toStartOf="@id/FinancialServices"
+                    app:layout_constraintTop_toBottomOf="@id/line3" />
+
+                <TextView
+                    android:id="@+id/india"
+                    android:layout_width="@dimen/_220sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:drawableEnd="@drawable/india_svg"
+                    android:text="Save Big with India’s #1 Discount App"
+                    android:textColor="#C0C0C0"
+                    android:textSize="@dimen/_11sdp"
+                    app:layout_constraintStart_toStartOf="@id/BHARAT"
+                    app:layout_constraintTop_toBottomOf="@id/BHARAT" />
+
+
+                <View
+                    android:id="@+id/newView"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_65sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/india" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

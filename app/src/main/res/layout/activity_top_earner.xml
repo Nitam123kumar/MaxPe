@@ -5,6 +5,216 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_wallet_shape"
     tools:context=".modules.activities.TopEarnerActivity">
+
+    <include
+        android:id="@+id/mToolBar"
+        layout="@layout/bill_payment_layout" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_ranker_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/mToolBar">
+
+        <TextView
+            android:id="@+id/top_referral"
+            android:layout_width="@dimen/_110sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/top_earner_shape"
+            android:gravity="center"
+            android:text="Top Referral"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_9sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/top_transaction"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/top_transaction"
+            android:layout_width="@dimen/_110sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@drawable/top_transaction"
+            android:gravity="center"
+            android:text="Top Transaction"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_9sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/top_referral"
+            app:layout_constraintTop_toTopOf="@id/top_referral" />
+
+
+        <TextView
+            android:id="@+id/top_referral_no_2"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:background="@drawable/ranking_shape1"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:text="NS"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_22sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/top_referral_no_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_referral" />
+
+        <TextView
+            android:id="@+id/top_referral_no_1"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/ranking_shape1"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:text="NS"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_22sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/top_referral_no_3"
+            app:layout_constraintStart_toEndOf="@id/top_referral_no_2"
+            app:layout_constraintTop_toBottomOf="@+id/top_referral" />
+
+        <TextView
+            android:id="@+id/top_referral_no_3"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_14sdp"
+            android:background="@drawable/ranking_shape1"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:text="NS"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_22sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/top_referral_no_1"
+            app:layout_constraintTop_toBottomOf="@+id/top_referral"
+            app:layout_constraintTop_toTopOf="@id/top_referral_no_2" />
+
+        <TextView
+            android:id="@+id/no_2_nameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Nitam"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="@id/top_referral_no_2"
+            app:layout_constraintStart_toStartOf="@id/top_referral_no_2"
+            app:layout_constraintTop_toBottomOf="@id/top_referral_no_2" />
+
+        <TextView
+            android:id="@+id/no_1_nameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Nitam"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="@id/top_referral_no_1"
+            app:layout_constraintStart_toStartOf="@id/top_referral_no_1"
+            app:layout_constraintTop_toBottomOf="@id/top_referral_no_1" />
+
+        <TextView
+            android:id="@+id/no_3_nameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Nitam"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="@id/top_referral_no_3"
+            app:layout_constraintStart_toStartOf="@id/top_referral_no_3"
+            app:layout_constraintTop_toBottomOf="@id/top_referral_no_3" />
+
+        <TextView
+            android:id="@+id/rank_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/no_2_top_earner"
+            android:gravity="center"
+            android:text="2"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_38sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/top_referral_no_2"
+            app:layout_constraintStart_toStartOf="@id/top_referral_no_2"
+            app:layout_constraintTop_toBottomOf="@id/no_2_nameTV" />
+
+        <TextView
+            android:id="@+id/rank_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/no_1_top_earner"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_38sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/top_referral_no_1"
+            app:layout_constraintStart_toStartOf="@id/top_referral_no_1"
+            app:layout_constraintTop_toBottomOf="@id/no_1_nameTV" />
+
+        <TextView
+            android:id="@+id/rank_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/no_3_top_earner"
+            android:gravity="center"
+            android:text="3"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_38sdp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/rank_2"
+            app:layout_constraintEnd_toEndOf="@id/top_referral_no_3"
+            app:layout_constraintStart_toStartOf="@id/top_referral_no_3"
+            app:layout_constraintTop_toBottomOf="@id/no_3_nameTV" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_28sdp"
+        android:background="@drawable/orange_line"
+        app:layout_constraintBottom_toBottomOf="@id/top_ranker_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintTop_toTopOf="@id/ranker_list_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/_12sdp"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ranker_list_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/top_ranker_layout"
+        android:background="@drawable/biller_main_shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/top_earner_RecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

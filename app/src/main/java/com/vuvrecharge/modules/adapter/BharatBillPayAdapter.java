@@ -45,7 +45,7 @@ public class BharatBillPayAdapter extends RecyclerView.Adapter<BharatBillPayAdap
     public BharatBillPayVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new BharatBillPayVH(
                 LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.bbps_layout, parent, false)
+                        .inflate(R.layout.ott_service_item_layout, parent, false)
         );
     }
 
@@ -69,12 +69,12 @@ public class BharatBillPayAdapter extends RecyclerView.Adapter<BharatBillPayAdap
                 Toast.makeText(context, "Service is down", Toast.LENGTH_SHORT).show();
             }
         });
-        holder.shimmerTextView.setText(list.get(position).getHighlight_text());
-        if (list.get(position).getHighlight_text().isEmpty()){
-            holder.shimmerTextView.setVisibility(View.INVISIBLE);
-        }else {
-            holder.shimmerTextView.setVisibility(View.VISIBLE);
-        }
+//        holder.shimmerTextView.setText(list.get(position).getHighlight_text());
+//        if (list.get(position).getHighlight_text().isEmpty()){
+//            holder.shimmerTextView.setVisibility(View.INVISIBLE);
+//        }else {
+//            holder.shimmerTextView.setVisibility(View.VISIBLE);
+//        }
     }
 
     private static boolean checkString(@NonNull String str) {
@@ -102,15 +102,15 @@ public class BharatBillPayAdapter extends RecyclerView.Adapter<BharatBillPayAdap
     static class BharatBillPayVH extends RecyclerView.ViewHolder{
         TextView title;
         ImageView imgLogo;
-        ShimmerTextView shimmerTextView;
-        Shimmer shimmer;
+//        ShimmerTextView shimmerTextView;
+//        Shimmer shimmer;
         public BharatBillPayVH(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.txtTitle);
             imgLogo = itemView.findViewById(R.id.imgLogo);
-            shimmerTextView = itemView.findViewById(R.id.shimmerTextView);
-            shimmer = new Shimmer();
-            shimmer.start(shimmerTextView);
+//            shimmerTextView = itemView.findViewById(R.id.shimmerTextView);
+//            shimmer = new Shimmer();
+//            shimmer.start(shimmerTextView);
         }
     }
 

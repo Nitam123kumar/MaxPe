@@ -1,6 +1,7 @@
 package com.vuvrecharge.modules.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,24 +22,43 @@ import butterknife.ButterKnife;
 public class MaxPointsAdapter extends RecyclerView.Adapter<MaxPointsAdapter.ViewHolder> {
 
 
-    private LayoutInflater mLayoutInflater;
+    private Context mContext;
+    private List<MaxPePointsData> mMaxPePointsData ;
 
-    private List<MaxPePointsData> mMaxPePointsData = new ArrayList<>();
+    public MaxPointsAdapter(Context context ,List<MaxPePointsData> list) {
+        this.mContext=context;
+        this.mMaxPePointsData=list;
+    }
 
-    public MaxPointsAdapter(LayoutInflater mLayoutInflater) {
-        this.mLayoutInflater = mLayoutInflater;
+    public void addEvents(List<MaxPePointsData> list){
+        this.mMaxPePointsData=list;
+        Log.d("pointsAmountTV", String.valueOf(list));
+        notifyDataSetChanged();
     }
 
 
     @NonNull
     @Override
     public MaxPointsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mLayoutInflater.inflate(R.layout.max_points_row, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.max_points_row, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MaxPointsAdapter.ViewHolder holder, int position) {
+
+        MaxPePointsData data = mMaxPePointsData.get(position);
+        holder.points_dateTV.setText(data.getDate_time());
+
+        if (data.getCredit().equals("0.000")){
+            holder.pointsAmountTV.setText("- \u20b9" + data.getDebit());
+        }
+        else {
+            holder.pointsAmountTV.setText("+ \u20b9" + data.getCredit());
+        }
+
+        holder.pointsUsedTV.setText(data.getType());
+        holder.points_orderIdTV.setText("Order Id : " + data.getOrder_id());
 
     }
 
@@ -49,7 +69,7 @@ public class MaxPointsAdapter extends RecyclerView.Adapter<MaxPointsAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-       private Context mContext;
+
 
         @BindView(R.id.points_usedTV)
         TextView pointsUsedTV;
@@ -62,7 +82,6 @@ public class MaxPointsAdapter extends RecyclerView.Adapter<MaxPointsAdapter.View
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mContext=itemView.getContext();
             ButterKnife.bind(this, itemView);
         }
 

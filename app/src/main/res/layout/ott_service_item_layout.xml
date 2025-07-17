@@ -4,14 +4,11 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
-    android:layout_marginStart="@dimen/_10sdp"
-    android:layout_marginEnd="@dimen/_10sdp"
-    android:layout_marginTop="@dimen/_10sdp"
-    android:layout_marginBottom="@dimen/_10sdp">
+    android:padding="@dimen/_5sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/sonyLiv"
-        android:layout_width="@dimen/_75sdp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
@@ -21,9 +18,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         >
             <ImageView
-                android:id="@+id/ott_logo"
-                android:layout_width="@dimen/_45sdp"
-                android:layout_height="@dimen/_45sdp"
+                android:id="@+id/imgLogo"
+                android:layout_width="@dimen/_43sdp"
+                android:layout_height="@dimen/_43sdp"
                 android:padding="@dimen/_8sdp"
                 android:layout_gravity="center"
                 android:background="@drawable/sony_live_shape"
@@ -36,18 +33,19 @@
 
 
         <TextView
-            android:id="@+id/ott_title"
+            android:id="@+id/txtTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_4sdp"
             android:fontFamily="@font/roboto"
             android:text="Sony LIV"
             android:textColor="@color/black"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="@dimen/_8sdp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/ott_logo"
-            app:layout_constraintStart_toStartOf="@id/ott_logo"
-            app:layout_constraintEnd_toEndOf="@id/ott_logo"/>
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/imgLogo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

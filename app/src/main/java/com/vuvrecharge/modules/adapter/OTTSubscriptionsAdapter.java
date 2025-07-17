@@ -68,8 +68,8 @@ public class OTTSubscriptionsAdapter extends RecyclerView.Adapter<OTTSubscriptio
         TextView ottTitle;
         ViewHolder(@Nullable View itemVIew){
             super(itemVIew);
-            ottLogo=itemVIew.findViewById(R.id.ott_logo);
-            ottTitle=itemVIew.findViewById(R.id.ott_title);
+            ottLogo=itemVIew.findViewById(R.id.imgLogo);
+            ottTitle=itemVIew.findViewById(R.id.txtTitle);
         }
 
     }

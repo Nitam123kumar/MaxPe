@@ -68,6 +68,8 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
 
     @BindView(R.id.maxPoints_availableTxt)
     TextView maxPoints_availableTxt;
+    @BindView(R.id.top_Earner)
+    TextView top_EarnerTV;
     @BindView(R.id.top_earner_ImageSlider)
     ImageSlider top_earner_ImageSlider;
 //    @BindView(R.id.viewReferralIncome)
@@ -90,6 +92,7 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
         mToolbar.setOnClickListener(this);
         btnInvite.setOnClickListener(this);
         btnReferCopy.setOnClickListener(this);
+        top_EarnerTV.setOnClickListener(this);
 //        viewMyReferral.setOnClickListener(this);
 //        viewReferralIncome.setOnClickListener(this);
         if (mDatabase != null) {
@@ -247,6 +250,9 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
         else if (v.getId() == R.id.toolbar_LinearLayout) {
             onBackPressed();
             getActivity().finish();
+        }else if (v.getId() == R.id.top_Earner) {
+            Intent intent=new Intent(this,TopEarnerActivity.class);
+            startActivity(intent);
         }
 
 
