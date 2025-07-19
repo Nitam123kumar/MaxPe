@@ -91,7 +91,7 @@
                                 android:layout_height="@dimen/_38sdp"
                                 android:background="@color/transparent"
                                 android:gravity="center_vertical"
-                                android:hint="Enter Reference Number/UTR"
+                                android:hint="@string/enter_reference_number_utr"
                                 android:inputType="text"
                                 android:paddingLeft="@dimen/_10sdp"
                                 android:paddingTop="@dimen/_1sdp"
@@ -118,7 +118,7 @@
                                 android:layout_height="@dimen/_38sdp"
                                 android:background="@color/transparent"
                                 android:gravity="center_vertical"
-                                android:hint="Amount"
+                                android:hint="@string/amount_"
                                 android:inputType="number"
                                 android:paddingLeft="@dimen/_10sdp"
                                 android:paddingTop="@dimen/_1sdp"
@@ -147,7 +147,7 @@
                                 android:layout_height="@dimen/_38sdp"
                                 android:background="@color/transparent"
                                 android:gravity="center_vertical"
-                                android:hint="Enter Comment"
+                                android:hint="@string/enter_comment"
                                 android:inputType="textAutoComplete"
                                 android:paddingLeft="@dimen/_10sdp"
                                 android:paddingTop="@dimen/_1sdp"
@@ -174,7 +174,7 @@
                                 android:layout_height="@dimen/_38sdp"
                                 android:background="@color/transparent"
                                 android:gravity="center_vertical"
-                                android:hint="Referral Id"
+                                android:hint="@string/referral_id"
                                 android:inputType="text"
                                 android:paddingLeft="@dimen/_10sdp"
                                 android:paddingTop="@dimen/_1sdp"
@@ -206,7 +206,7 @@
                                 android:gravity="center"
                                 android:paddingLeft="@dimen/_30sdp"
                                 android:paddingRight="@dimen/_30sdp"
-                                android:text="REQUEST"
+                                android:text="@string/request"
                                 android:textColor="@color/white" />
 
                         </RelativeLayout>
@@ -271,7 +271,7 @@
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingRight="@dimen/_15sdp"
                 android:paddingBottom="@dimen/_10sdp"
-                android:text="No Internet available.\nCheck connection"
+                android:text="@string/no_internet_available_ncheck_connection"
                 android:textColor="@color/white_5" />
 
             <TextView
@@ -284,7 +284,7 @@
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingRight="@dimen/_15sdp"
                 android:paddingBottom="@dimen/_10sdp"
-                android:text="Re-Try"
+                android:text="@string/re_try"
                 android:textColor="@color/white" />
 
         </LinearLayout>

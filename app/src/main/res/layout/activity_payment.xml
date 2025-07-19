@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center_vertical"
-                    android:text="Payment Successfully"
+                    android:text="@string/payment_successfully"
                     android:textColor="@color/green_end"
                     android:textSize="28sp" />
 

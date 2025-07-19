@@ -904,7 +904,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                 mDefaultPresenter.doMobileRecharge(number + "", operator + "",
                         amount + "", type + "",
                         std_code + "", dob + "",
-                        circle + "", ac_number + "", device_id + "", mPin + "");
+                        circle + "", ac_number + "", device_id + "", mPin + "",false);
                 dialog.dismiss();
             });
             dialog.show();
@@ -1063,7 +1063,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                     mDefaultPresenter.doMobileRecharge(
                             mobile_number.getText().toString().trim(),selected_operator,amount.getText().toString().trim(),type,
                             "0", "0",
-                            selected_circle,"0",device_id, mPin);
+                            selected_circle,"0",device_id, mPin,false);
                 }else if (payment_status.toLowerCase().equals("failed")){
                     Toast.makeText(getActivity(), "Transaction Cancelled", Toast.LENGTH_LONG).show();
                 }else {

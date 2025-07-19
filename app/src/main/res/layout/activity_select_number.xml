@@ -54,7 +54,7 @@
                         android:textColorHint="@color/black_new"
                         android:textSize="@dimen/_13sdp"
                         android:visibility="visible"
-                        android:hint="Select Number"/>
+                        android:hint="@string/select_number"/>
 
                     <ImageView
                         android:id="@+id/addMore"
@@ -77,7 +77,7 @@
                         android:gravity="center_vertical"
                         android:paddingLeft="@dimen/_10sdp"
                         android:paddingRight="@dimen/_10sdp"
-                        android:text="Invoice"
+                        android:text="@string/invoice"
                         android:textColor="@color/black_2"
                         android:textSize="@dimen/_10sdp"
                         android:visibility="gone" />
@@ -112,7 +112,7 @@
                     android:paddingTop="@dimen/_10sdp"
                     android:paddingRight="@dimen/_15sdp"
                     android:paddingBottom="@dimen/_10sdp"
-                    android:text="No Internet available.\nCheck connection"
+                    android:text="@string/no_internet_available_ncheck_connection"
                     android:textColor="@color/black_4" />
 
                 <TextView
@@ -125,7 +125,7 @@
                     android:paddingTop="@dimen/_10sdp"
                     android:paddingRight="@dimen/_15sdp"
                     android:paddingBottom="@dimen/_10sdp"
-                    android:text="Re-Try"
+                    android:text="@string/re_try"
                     android:textColor="@color/white" />
 
             </LinearLayout>
@@ -151,7 +151,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Total Refer Cashback Received"
+                    android:text="@string/total_refer_cashback_received"
                     android:textColor="@color/black_2"
                     android:textSize="@dimen/_14sdp" />
 
@@ -188,7 +188,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_30sdp"
                     android:gravity="center_horizontal"
-                    android:text="Data not available"
+                    android:text="@string/data_not_available"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_15sdp"
                     android:visibility="gone" />

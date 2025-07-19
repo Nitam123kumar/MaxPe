@@ -30,7 +30,7 @@
         android:id="@+id/txtNoData"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="No data found."
+        android:text="@string/no_data_found"
         android:textColor="@color/black"
         android:gravity="center"
         android:visibility="gone"

@@ -31,7 +31,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="No data found."
+        android:text="@string/no_data_found"
         android:textColor="@color/black"
         android:textSize="@dimen/_14sdp"
         android:visibility="gone"

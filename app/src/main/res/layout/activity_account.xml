@@ -9,7 +9,82 @@
     android:orientation="vertical">
 
 
-        <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar_constraintlayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <LinearLayout
+                android:id="@+id/onBack"
+                android:layout_width="@dimen/_27sdp"
+                android:layout_height="@dimen/_27sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:background="@drawable/on_back_shape1"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="@id/name_tv1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/name_tv1">
+
+                <ImageView
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_6sdp"
+                    android:src="@drawable/black_arrow_svg" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/name_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                android:adjustViewBounds="true"
+                android:fontFamily="@font/roboto"
+                android:text="@string/your_account"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                android:gravity="center"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <ImageView
+                android:id="@+id/share1"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:padding="@dimen/_3sdp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/refresh1"
+                android:layout_width="@dimen/_14sdp"
+                android:layout_height="@dimen/_14sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:contentDescription="@string/max_pe"
+                android:src="@drawable/setting_icon"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/name_tv1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/name_tv1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
@@ -22,30 +97,31 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/profileLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_110sdp"
+                    android:layout_height="@dimen/_90sdp"
                     android:background="@drawable/ad_money_button_shape"
-                    android:layout_margin="@dimen/_15sdp"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardLogo"
-                    android:layout_width="@dimen/_30sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    app:cardCornerRadius="@dimen/_22sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_55sdp"
+                    app:cardCornerRadius="@dimen/_27sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:background="#EFF6FF"
+                    android:background="@drawable/shot_name_shape"
+                    android:backgroundTint="@color/white"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/name">
+                    app:layout_constraintBottom_toBottomOf="parent">
                     <TextView
                         android:id="@+id/logo"
                         android:layout_gravity="center"
-                        android:textSize="@dimen/_14sdp"
+                        android:textSize="@dimen/_25sdp"
                         android:textColor="#0B54A5"
-                        android:fontFamily="@font/roboto"
+                        android:fontFamily="@font/roboto_bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/app_name" />
@@ -54,7 +130,7 @@
 
                 <TextView
                     android:id="@+id/name"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:maxLines="1"
@@ -62,11 +138,11 @@
                     android:ellipsize="end"
                     android:gravity="center"
                     android:textSize="@dimen/_16sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     app:layout_constraintVertical_chainStyle="packed"
-                    app:layout_constraintEnd_toEndOf="@id/profileLayout"
-                    app:layout_constraintStart_toStartOf="@id/profileLayout"
-                    app:layout_constraintTop_toBottomOf="@id/cardLogo"
+                    app:layout_constraintStart_toEndOf="@+id/cardLogo"
+                    app:layout_constraintTop_toTopOf="@+id/cardLogo"
                     app:layout_constraintBottom_toTopOf="@id/phoneNumber"/>
 
                 <TextView
@@ -77,32 +153,72 @@
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:textSize="@dimen/_13sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
                     android:gravity="center"
+                    android:layout_marginTop="@dimen/_2sdp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    app:layout_constraintStart_toStartOf="@id/name"
-                    app:layout_constraintEnd_toEndOf="@id/name"
+                    app:layout_constraintStart_toEndOf="@+id/phone_img"
                     app:layout_constraintTop_toBottomOf="@id/name"
-                    app:layout_constraintBottom_toTopOf="@id/email_id"/>
+                    app:layout_constraintBottom_toTopOf="@id/email_TV"/>
+
+                    <ImageView
+                        android:id="@+id/phone_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@+id/cardLogo"
+                        app:layout_constraintTop_toTopOf="@id/phoneNumber"
+                        app:layout_constraintBottom_toBottomOf="@id/phoneNumber"
+                        android:src="@drawable/calls_icon"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        />
+
+
+                    <ImageView
+                        android:id="@+id/email_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@+id/cardLogo"
+                        app:layout_constraintTop_toTopOf="@id/email_TV"
+                        app:layout_constraintBottom_toBottomOf="@id/email_TV"
+                        android:src="@drawable/gmail_icon_svg"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        />
+
+                    <TextView
+                        android:id="@+id/email_TV"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        app:layout_constraintBottom_toTopOf="@id/email_id"
+                        app:layout_constraintStart_toEndOf="@+id/email_img"
+                        app:layout_constraintTop_toBottomOf="@id/phoneNumber" />
 
                 <TextView
                     android:id="@+id/email_id"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    android:textColor="#C0C0C0"
                     android:maxLines="1"
                     android:gravity="center"
-                    android:textSize="@dimen/_6sdp"
+                    android:textSize="@dimen/_7sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:ellipsize="end"
-                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    app:layout_constraintStart_toStartOf="@id/name"
-                    app:layout_constraintEnd_toEndOf="@id/name"
-                    app:layout_constraintTop_toBottomOf="@id/phoneNumber"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                   app:layout_constraintStart_toEndOf="@id/cardLogo"
+                    app:layout_constraintTop_toBottomOf="@id/email_TV"
+                    app:layout_constraintBottom_toBottomOf="@+id/cardLogo"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <View
+               <!-- <View
                     android:id="@+id/maxPointsView"
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
@@ -177,9 +293,9 @@
                     android:id="@+id/available_earnTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="₹549.4"
+                    android:text=""
                     android:gravity="center"
-                    android:textColor="#0B53A4"
+                    android:textColor="#064E3B"
                     android:textStyle="bold"
                     android:textSize="18sp"
                     app:layout_constraintTop_toBottomOf="@id/maxPointsImg"
@@ -228,9 +344,9 @@
                     android:id="@+id/available_referralTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="₹549.4"
+                    android:text=""
                     android:gravity="center"
-                    android:textColor="#0B53A4"
+                    android:textColor="#6766BD"
                     android:textStyle="bold"
                     android:textSize="18sp"
                     app:layout_constraintTop_toBottomOf="@id/maxPointsImg"
@@ -252,43 +368,43 @@
                     app:layout_constraintEnd_toEndOf="@id/referralView"
                     app:layout_constraintBottom_toBottomOf="@id/referralView"
                     />
+-->
+<!--                <View-->
+<!--                    android:id="@+id/kycView"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="@dimen/_45sdp"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/profileLayout"-->
+<!--                    app:layout_constraintEnd_toEndOf="@id/profileLayout"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/maxPointsView"-->
+<!--                    android:layout_margin="@dimen/_15sdp"-->
+<!--                    android:background="@drawable/kyc_shape"-->
+<!--                    />-->
+<!--                <ImageView-->
+<!--                    android:id="@+id/kycImageView"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:src="@drawable/complete_kyc_svg"-->
+<!--                    android:layout_marginStart="@dimen/_10sdp"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/kycView"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/kycView"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/kycView"-->
+<!--                    />-->
 
-                <View
-                    android:id="@+id/kycView"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_45sdp"
-                    app:layout_constraintStart_toStartOf="@id/profileLayout"
-                    app:layout_constraintEnd_toEndOf="@id/profileLayout"
-                    app:layout_constraintTop_toBottomOf="@id/maxPointsView"
-                    android:layout_margin="@dimen/_15sdp"
-                    android:background="@drawable/kyc_shape"
-                    />
-                <ImageView
-                    android:id="@+id/kycImageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/complete_kyc_svg"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    app:layout_constraintStart_toStartOf="@id/kycView"
-                    app:layout_constraintTop_toTopOf="@id/kycView"
-                    app:layout_constraintBottom_toBottomOf="@id/kycView"
-                    />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Complete your KYC"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold"
-                    android:paddingStart="@dimen/_10sdp"
-                    android:textColor="#FFAD33"
-                    app:layout_constraintStart_toEndOf="@id/kycImageView"
-                    app:layout_constraintTop_toTopOf="@id/kycView"
-                    app:layout_constraintBottom_toBottomOf="@id/kycView"
-                    app:layout_constraintEnd_toEndOf="@id/kycView"
-                    android:drawableEnd="@drawable/drop_down_img_svg"
-                    android:paddingEnd="@dimen/_15sdp"
-                    />
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Complete your KYC"-->
+<!--                    android:textSize="@dimen/_12sdp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:paddingStart="@dimen/_10sdp"-->
+<!--                    android:textColor="#FFAD33"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/kycImageView"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/kycView"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/kycView"-->
+<!--                    app:layout_constraintEnd_toEndOf="@id/kycView"-->
+<!--                    android:drawableEnd="@drawable/drop_down_img_svg"-->
+<!--                    android:paddingEnd="@dimen/_15sdp"-->
+<!--                    />-->
 
 <!--                <View-->
 <!--                    android:id="@+id/viewFingerPrint"-->
@@ -346,7 +462,7 @@
                     android:layout_marginTop="@dimen/_12sdp"
                     app:layout_constraintStart_toStartOf="@id/profileLayout"
                     app:layout_constraintEnd_toEndOf="@id/profileLayout"
-                    app:layout_constraintTop_toBottomOf="@id/kycView"/>
+                    app:layout_constraintTop_toBottomOf="@id/profileLayout"/>
 
                 <ImageView
                     android:id="@+id/imgFingerPrint"
@@ -360,9 +476,9 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Fingerprint"
+                    android:text="@string/fingerprint"
                     android:textColor="#3C3F48"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
                     android:textSize="@dimen/_11sdp"
                     android:layout_marginStart="@dimen/_12sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
@@ -416,7 +532,7 @@
 <!--                    android:layout_height="wrap_content"-->
 <!--                    android:text="Password less login"-->
 <!--                    android:textColor="#3C3F48"-->
-<!--                    android:textStyle="bold"
+<!--                    android:fontFamily="@font/roboto"
 android:textSize="14sp" -->
 <!--                    android:layout_marginStart="@dimen/_12sdp"-->
 <!--                    android:layout_marginEnd="@dimen/_12sdp"-->
@@ -456,19 +572,20 @@ android:textSize="14sp" -->
 
                 <ImageView
                     android:id="@+id/imgLanguage"
-                    android:layout_width="@dimen/_16sdp"
-                    android:layout_height="@dimen/_16sdp"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
                     android:src="@drawable/language2"
                     app:layout_constraintStart_toStartOf="@id/viewLanguage"
                     app:layout_constraintTop_toTopOf="@id/viewLanguage"
                     app:layout_constraintBottom_toBottomOf="@id/viewLanguage"/>
 
                 <TextView
+                    android:id="@+id/language"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Language"
+                    android:text="@string/language"
                     android:textColor="#3C3F48"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
                     android:textSize="@dimen/_11sdp"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgLanguage"
@@ -518,7 +635,7 @@ android:textSize="14sp" -->
 <!--                    android:layout_height="wrap_content"-->
 <!--                    android:text="Change Password"-->
 <!--                    android:textColor="#3C3F48"-->
-<!--                    android:textStyle="bold"-->
+<!--                    android:fontFamily="@font/roboto" -->
 <!--                    android:textSize="@dimen/_11sdp"-->
 <!--                    android:layout_marginStart="@dimen/_12sdp"-->
 <!--                    app:layout_constraintStart_toEndOf="@id/imgChangePassword"-->
@@ -554,8 +671,8 @@ android:textSize="14sp" -->
 
                 <ImageView
                     android:id="@+id/imgChangeMPin"
-                    android:layout_width="@dimen/_16sdp"
-                    android:layout_height="@dimen/_16sdp"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
                     android:src="@drawable/change_mpin"
                     app:layout_constraintStart_toStartOf="@id/viewChangeMPin"
                     app:layout_constraintTop_toTopOf="@id/viewChangeMPin"
@@ -564,9 +681,9 @@ android:textSize="14sp" -->
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Change Mpin"
+                    android:text="@string/change_mpin"
                     android:textColor="#3C3F48"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
                     android:textSize="@dimen/_11sdp"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgChangeMPin"
@@ -612,9 +729,9 @@ android:textSize="14sp" -->
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Reset Mpin"
+                    android:text="@string/reset_mpin"
                     android:textColor="#3C3F48"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
                     android:textSize="@dimen/_11sdp"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgResetMPin"
@@ -660,9 +777,9 @@ android:textSize="14sp" -->
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Privacy Policy"
+                    android:text="@string/privacy_policy"
                     android:textColor="#3C3F48"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
                     android:textSize="@dimen/_11sdp"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgPrivacy"
@@ -708,9 +825,9 @@ android:textSize="14sp" -->
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Term &amp; Conditions"
+                    android:text="@string/term_amp_conditions"
                     android:textColor="#3C3F48"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
                     android:textSize="@dimen/_11sdp"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgCondition"
@@ -756,9 +873,9 @@ android:textSize="14sp" -->
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Refund, Cancellation &amp; refund Policy"
+                    android:text="@string/refund_cancellation_amp_refund_policy"
                     android:textColor="#3C3F48"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
                     android:textSize="@dimen/_11sdp"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgRefund"
@@ -805,9 +922,9 @@ android:textSize="14sp" -->
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="B-Connect Complain Registration"
+                    android:text="@string/b_connect_complain_registration"
                     android:textColor="#3C3F48"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
                     android:textSize="@dimen/_11sdp"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgComplaint"
@@ -843,8 +960,8 @@ android:textSize="14sp" -->
 
                 <ImageView
                     android:id="@+id/imgRateUs"
-                    android:layout_width="@dimen/_16sdp"
-                    android:layout_height="@dimen/_16sdp"
+                    android:layout_width="@dimen/_19sdp"
+                    android:layout_height="@dimen/_19sdp"
                     android:src="@drawable/rate_image"
                     app:layout_constraintStart_toStartOf="@id/viewRateUs"
                     app:layout_constraintTop_toTopOf="@id/viewRateUs"
@@ -853,9 +970,9 @@ android:textSize="14sp" -->
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Rate Us"
+                    android:text="@string/rate_us"
                     android:textColor="#3C3F48"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
                     android:textSize="@dimen/_11sdp"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgRateUs"
@@ -902,9 +1019,9 @@ android:textSize="14sp" -->
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Feedback"
+                    android:text="@string/feedback"
                     android:textColor="#3C3F48"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
                     android:textSize="@dimen/_11sdp"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgFeedBack"
@@ -950,9 +1067,9 @@ android:textSize="14sp" -->
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Invite &amp; Earn"
+                    android:text="@string/invite_amp_earn"
                     android:textColor="#3C3F48"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
                     android:textSize="@dimen/_11sdp"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgInvite"
@@ -998,9 +1115,9 @@ android:textSize="14sp" -->
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Follow Us"
+                    android:text="@string/follow_us"
                     android:textColor="#3C3F48"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
                     android:textSize="@dimen/_11sdp"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgFollow"
@@ -1025,53 +1142,53 @@ android:textSize="14sp" -->
                     app:layout_constraintEnd_toEndOf="@id/viewFollow"
                     app:layout_constraintBottom_toBottomOf="@id/viewFollow"/>
 
-                <View
-                    android:id="@+id/viewAccountDelete"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_50sdp"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    app:layout_constraintStart_toStartOf="@id/profileLayout"
-                    app:layout_constraintEnd_toEndOf="@id/profileLayout"
-                    app:layout_constraintTop_toBottomOf="@id/viewFollow"/>
+<!--                <View-->
+<!--                    android:id="@+id/viewAccountDelete"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="@dimen/_50sdp"-->
+<!--                    android:layout_marginTop="@dimen/_2sdp"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/profileLayout"-->
+<!--                    app:layout_constraintEnd_toEndOf="@id/profileLayout"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/viewFollow"/>-->
 
-                <ImageView
-                    android:id="@+id/imgAccountDelete"
-                    android:layout_width="@dimen/_16sdp"
-                    android:layout_height="@dimen/_16sdp"
-                    android:src="@drawable/delete_icon1"
-                    app:layout_constraintStart_toStartOf="@id/viewAccountDelete"
-                    app:layout_constraintTop_toTopOf="@id/viewAccountDelete"
-                    app:layout_constraintBottom_toBottomOf="@id/viewAccountDelete"/>
+<!--                <ImageView-->
+<!--                    android:id="@+id/imgAccountDelete"-->
+<!--                    android:layout_width="@dimen/_16sdp"-->
+<!--                    android:layout_height="@dimen/_16sdp"-->
+<!--                    android:src="@drawable/delete_icon1"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/viewAccountDelete"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/viewAccountDelete"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/viewAccountDelete"/>-->
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Delete My Account"
-                    android:textColor="#3C3F48"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_11sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    app:layout_constraintStart_toEndOf="@id/imgAccountDelete"
-                    app:layout_constraintTop_toTopOf="@id/viewAccountDelete"
-                    app:layout_constraintBottom_toBottomOf="@id/viewAccountDelete"/>
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Delete My Account"-->
+<!--                    android:textColor="#3C3F48"-->
+<!--                    android:fontFamily="@font/roboto" -->
+<!--                    android:textSize="@dimen/_11sdp"-->
+<!--                    android:layout_marginStart="@dimen/_10sdp"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/imgAccountDelete"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/viewAccountDelete"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/viewAccountDelete"/>-->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="@id/viewAccountDelete"
-                    app:layout_constraintEnd_toEndOf="@id/viewAccountDelete"
-                    app:layout_constraintBottom_toBottomOf="@id/viewAccountDelete"
-                    android:src="@drawable/next_arrow1"
-                    />
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/viewAccountDelete"-->
+<!--                    app:layout_constraintEnd_toEndOf="@id/viewAccountDelete"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/viewAccountDelete"-->
+<!--                    android:src="@drawable/next_arrow1"-->
+<!--                    />-->
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="#4DD9D9D9"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    app:layout_constraintStart_toStartOf="@id/viewAccountDelete"
-                    app:layout_constraintEnd_toEndOf="@id/viewAccountDelete"
-                    app:layout_constraintBottom_toBottomOf="@id/viewAccountDelete"/>
+<!--                <View-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="@dimen/_1sdp"-->
+<!--                    android:background="#4DD9D9D9"-->
+<!--                    android:layout_marginTop="@dimen/_2sdp"-->
+<!--                    app:layout_constraintStart_toStartOf="@id/viewAccountDelete"-->
+<!--                    app:layout_constraintEnd_toEndOf="@id/viewAccountDelete"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/viewAccountDelete"/>-->
 
 
                 <View
@@ -1081,7 +1198,7 @@ android:textSize="14sp" -->
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/profileLayout"
                     app:layout_constraintEnd_toEndOf="@id/profileLayout"
-                    app:layout_constraintTop_toBottomOf="@id/viewAccountDelete"/>
+                    app:layout_constraintTop_toBottomOf="@id/viewFollow"/>
 
                 <ImageView
                     android:id="@+id/imgLogout"
@@ -1095,9 +1212,9 @@ android:textSize="14sp" -->
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Log Out"
+                    android:text="@string/log_out"
                     android:textColor="#3C3F48"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
                     android:textSize="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_12sdp"
                     app:layout_constraintStart_toEndOf="@id/imgLogout"
@@ -1117,7 +1234,7 @@ android:textSize="14sp" -->
                     android:id="@+id/BHARAT"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="BHARAT KA\nAPNA PE!"
+                    android:text="@string/bharat_ka_napna_pe"
                     android:textSize="@dimen/_30sdp"
                     android:textColor="#F2F2F2"
                     android:fontFamily="@font/roboto_bold"
@@ -1131,7 +1248,7 @@ android:textSize="14sp" -->
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:fontFamily="@font/roboto_bold"
-                    android:text="MAXPE"
+                    android:text="@string/maxpe"
                     android:textColor="#F2F2F2"
                     android:textSize="@dimen/_48sdp"
                     app:layout_constraintStart_toStartOf="@id/profileLayout"
@@ -1143,7 +1260,7 @@ android:textSize="14sp" -->
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@id/BHARAT"
                     app:layout_constraintStart_toStartOf="@id/BHARAT"
-                    android:text="Save Big with India’s #1 Discount App"
+                    android:text="@string/save_big_with_india_s_1_discount_app"
                     android:textSize="@dimen/_11sdp"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:textColor="#C0C0C0"
@@ -1207,7 +1324,7 @@ android:textSize="14sp" -->
             android:paddingTop="@dimen/_10sdp"
             android:paddingRight="@dimen/_13sdp"
             android:paddingBottom="@dimen/_10sdp"
-            android:text="No Internet available.\nCheck connection"
+            android:text="@string/no_internet_available_ncheck_connection"
             android:textColor="@color/white_5" />
 
         <TextView
@@ -1220,7 +1337,7 @@ android:textSize="14sp" -->
             android:paddingTop="@dimen/_10sdp"
             android:paddingRight="@dimen/_13sdp"
             android:paddingBottom="@dimen/_10sdp"
-            android:text="Re-Try"
+            android:text="@string/re_try"
             android:textColor="@color/white" />
 
     </LinearLayout>

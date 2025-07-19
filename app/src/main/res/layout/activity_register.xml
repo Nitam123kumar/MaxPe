@@ -68,7 +68,7 @@
                                     android:id="@+id/full_name"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="Full Name"
+                                    android:hint="@string/full_name"
                                     android:textStyle="bold"
                                     android:textColorHint="#B5B5B5"
                                     android:textColor="@color/black_4"
@@ -99,7 +99,7 @@
                                     android:id="@+id/enter_mobile_no"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="Mobile Number"
+                                    android:hint="@string/mobile_number"
                                     android:maxLength="10"
                                     android:textStyle="bold"
                                     android:textColorHint="#B5B5B5"
@@ -131,7 +131,7 @@
                                     android:id="@+id/email"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="Email Address"
+                                    android:hint="@string/email_address"
                                     android:textStyle="bold"
                                     android:textColorHint="#B5B5B5"
                                     android:textColor="@color/black_4"
@@ -164,7 +164,7 @@
                                     android:id="@+id/enter_password"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="Password"
+                                    android:hint="@string/password"
                                     android:textStyle="bold"
                                     android:textColorHint="#B5B5B5"
                                     android:textColor="@color/black_4"
@@ -195,7 +195,7 @@
                                     android:id="@+id/enter_referral_id"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="Referral Id (Optional)"
+                                    android:hint="@string/referral_id_optional"
                                     android:textStyle="bold"
                                     android:textColorHint="#B5B5B5"
                                     android:textColor="@color/black_4"
@@ -221,7 +221,7 @@
                                     android:onClick="doRegister"
                                     android:paddingLeft="@dimen/_30sdp"
                                     android:paddingRight="@dimen/_30sdp"
-                                    android:text="Register"
+                                    android:text="@string/register"
                                     android:textSize="@dimen/_17sdp"
                                     android:textColor="@color/white" />
 
@@ -235,7 +235,7 @@
                                 android:layout_gravity="right"
                                 android:layout_marginTop="@dimen/_4sdp"
                                 android:gravity="center"
-                                android:text="OR"
+                                android:text="@string/or"
                                 android:textAllCaps="false"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_12sdp" />
@@ -251,7 +251,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Have an account."
+                                    android:text="@string/have_an_account"
                                     android:textAlignment="center"
                                     android:textAllCaps="false"
                                     android:textColor="@color/black"
@@ -263,7 +263,7 @@
                                     android:layout_height="wrap_content"
                                     android:paddingLeft="@dimen/_5sdp"
                                     android:paddingBottom="@dimen/_10sdp"
-                                    android:text="Login?"
+                                    android:text="@string/login"
                                     android:textStyle="bold"
                                     android:textAlignment="center"
                                     android:textAllCaps="false"
@@ -342,7 +342,7 @@
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingRight="@dimen/_15sdp"
                 android:paddingBottom="@dimen/_10sdp"
-                android:text="No Internet available.\nCheck connection"
+                android:text="@string/no_internet_available_ncheck_connection"
                 android:textColor="@color/white_5" />
 
             <TextView
@@ -355,7 +355,7 @@
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingRight="@dimen/_15sdp"
                 android:paddingBottom="@dimen/_10sdp"
-                android:text="Re-Try"
+                android:text="@string/re_try"
                 android:textColor="@color/white" />
 
         </LinearLayout>

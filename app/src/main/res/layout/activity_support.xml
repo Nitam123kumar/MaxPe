@@ -42,7 +42,7 @@
                             android:layout_marginTop="@dimen/_12sdp"
                             android:gravity="center"
                             android:padding="@dimen/_8sdp"
-                            android:text=""
+                            android:text="@string/impty"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_14sdp"
                             android:textStyle="bold"
@@ -62,14 +62,27 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-<!--                    <ImageView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        app:layout_constraintTop_toTopOf="@id/help_description"-->
-<!--                        app:layout_constraintEnd_toEndOf="@id/help_description"-->
-<!--                        app:layout_constraintBottom_toBottomOf="@id/help_description"-->
-<!--                        android:src="@drawable/hadn_01_1"-->
-<!--                        />-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:text="@string/need_help_nwe_re_here_nfor_you"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_22sdp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        />
+
+                    <ImageView
+                        android:layout_width="@dimen/_200sdp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="@id/help_description"
+                        app:layout_constraintEnd_toEndOf="@id/help_description"
+                        app:layout_constraintBottom_toBottomOf="@id/help_description"
+                        android:src="@drawable/support_icon_svg"
+                        />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -101,7 +114,7 @@
                             android:id="@+id/txtContactSupport"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Call Support"
+                            android:text="@string/call_support"
                             android:gravity="center"
                             android:textColor="@color/black"
                             android:textStyle="bold"
@@ -121,7 +134,7 @@
                             android:textStyle="bold"
                             android:textSize="@dimen/_8sdp"
                             android:textColor="#B5B5B5"
-                            android:text="7390903230"
+                            android:text="@string/_7390903230"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             app:layout_constraintTop_toBottomOf="@id/txtContactSupport"
                             app:layout_constraintStart_toStartOf="@+id/txtContactSupport"
@@ -154,7 +167,7 @@
                             android:id="@+id/txtWhatsAppSupport"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Chat on Whatsapp "
+                            android:text="@string/chat_on_whatsapp"
                             android:textColor="@color/black"
                             android:gravity="center"
                             android:textStyle="bold"
@@ -173,7 +186,7 @@
                             android:textStyle="bold"
                             android:textSize="@dimen/_8sdp"
                             android:textColor="#B5B5B5"
-                            android:text="7390903230"
+                            android:text="@string/_7390903230"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             app:layout_constraintTop_toBottomOf="@id/txtWhatsAppSupport"
                             app:layout_constraintStart_toStartOf="@id/txtWhatsAppSupport"
@@ -207,7 +220,7 @@
                             android:id="@+id/txtEmailSupport"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Email Us"
+                            android:text="@string/email_us"
                             android:gravity="center"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_9sdp"
@@ -226,7 +239,7 @@
                             android:gravity="center_vertical"
                             android:textStyle="bold"
                             android:textColor="#B5B5B5"
-                            android:text="Support@maxpe.in"
+                            android:text="@string/support_maxpe_in"
                             android:textSize="@dimen/_8sdp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             app:layout_constraintStart_toStartOf="@id/txtEmailSupport"
@@ -260,7 +273,7 @@
                             android:id="@+id/txtAddressSupport"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Share Your\nFeedback!"
+                            android:text="@string/share_your_nfeedback"
                             android:textColor="@color/black"
                             android:gravity="center"
                             android:textStyle="bold"
@@ -305,7 +318,7 @@
                         android:layout_width="@dimen/_120sdp"
                         android:layout_height="@dimen/_28sdp"
                         android:background="@drawable/support_design_background_shape"
-                        android:text="Prepaid Toll Free Number"
+                        android:text="@string/prepaid_toll_free_number"
                         android:gravity="center"
                         android:textStyle="bold"
                         android:maxLines="1"
@@ -343,7 +356,7 @@
                         android:id="@+id/txtStayUpdate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Stay Updated!"
+                        android:text="@string/stay_updated"
                         android:gravity="center"
                         android:textColor="@color/black"
                         android:textStyle="bold"
@@ -361,7 +374,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_6sdp"
                         android:textColor="#B5B5B5"
-                        android:text="Follow our WhatApp channel"
+                        android:text="@string/follow_our_whatapp_channel"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         app:layout_constraintTop_toBottomOf="@id/txtStayUpdate"
                         app:layout_constraintStart_toStartOf="@+id/txtStayUpdate"
@@ -396,7 +409,7 @@
                         android:id="@+id/txtInstaSupport"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Daily Updated!"
+                        android:text="@string/daily_updated"
                         android:gravity="center"
                         android:textColor="@color/black"
                         android:textStyle="bold"
@@ -414,7 +427,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/_6sdp"
                         android:textColor="#B5B5B5"
-                        android:text="Follow our Instagram"
+                        android:text="@string/follow_our_instagram"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         app:layout_constraintTop_toBottomOf="@id/txtInstaSupport"
                         app:layout_constraintStart_toStartOf="@+id/txtInstaSupport"
@@ -428,7 +441,7 @@
                         android:layout_width="@dimen/_120sdp"
                         android:layout_height="@dimen/_28sdp"
                         android:background="@drawable/support_design_background_shape"
-                        android:text="DTH Toll Free Number"
+                        android:text="@string/dth_toll_free_number"
                         android:textStyle="bold"
                         android:maxLines="1"
                         android:gravity="center"
@@ -444,7 +457,7 @@
                             android:id="@+id/follow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Follow Us"
+                            android:text="@string/follow_us"
                             android:textSize="@dimen/_9sdp"
                             android:textStyle="bold"
                             android:gravity="center_vertical"
@@ -546,7 +559,7 @@
                             android:paddingTop="@dimen/_10sdp"
                             android:paddingRight="@dimen/_15sdp"
                             android:paddingBottom="@dimen/_10sdp"
-                            android:text="No Internet available.\nCheck connection"
+                            android:text="@string/no_internet_available_ncheck_connection"
                             android:textColor="@color/black_4" />
 
                         <TextView
@@ -559,7 +572,7 @@
                             android:paddingTop="@dimen/_10sdp"
                             android:paddingRight="@dimen/_15sdp"
                             android:paddingBottom="@dimen/_10sdp"
-                            android:text="Re-Try"
+                            android:text="@string/re_try"
                             android:textColor="@color/white" />
 
                     </LinearLayout>

@@ -21,7 +21,7 @@
         android:id="@+id/points_usedTV"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Bonus on Balance add "
+        android:text="@string/bonus_on_balance_add"
         android:textColor="@color/black"
         android:textSize="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_15sdp"
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#6E6E6E"
-        android:text="Oder Id : 52422222"
+        android:text="@string/oder_id_52422222"
         android:textSize="@dimen/_8sdp"
         app:layout_constraintTop_toBottomOf="@id/points_usedTV"
         app:layout_constraintStart_toStartOf="@id/points_usedTV"
@@ -45,7 +45,7 @@
         android:id="@+id/points_dateTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="20 March 2025,  10:00 PM"
+        android:text="@string/_20_march_2025_10_00_pm"
         android:textSize="@dimen/_6sdp"
         android:textColor="#B2B2B2"
         app:layout_constraintStart_toStartOf="@id/points_usedTV"
@@ -57,17 +57,27 @@
         android:id="@+id/pointsAmountTV"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="10"
+        android:text="@string/_10"
         android:gravity="end"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
         android:textSize="@dimen/_10sdp"
         android:textColor="@color/black"
-        android:layout_marginEnd="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/points_orderIdTV"
-
         />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_3sdp"
+        android:src="@drawable/group_12772"
+        app:layout_constraintStart_toEndOf="@id/pointsAmountTV"
+        app:layout_constraintTop_toTopOf="@id/pointsAmountTV"
+        app:layout_constraintBottom_toBottomOf="@id/pointsAmountTV"
+        />
+
     <View
         android:id="@+id/viewPoints"
         android:layout_width="match_parent"

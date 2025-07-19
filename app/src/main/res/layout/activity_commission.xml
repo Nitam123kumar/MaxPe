@@ -75,7 +75,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_marginEnd="@dimen/_5sdp"
                                             android:gravity="center"
-                                            android:text="Today Recharge"
+                                            android:text="@string/today_recharge"
                                             android:textColor="@color/black"
                                             android:textSize="@dimen/_15sdp" />
 
@@ -95,7 +95,7 @@
                                                 android:id="@+id/today_total"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:text="0"
+                                                android:text="@string/_0"
                                                 android:textColor="@color/green_end"
                                                 android:textSize="@dimen/_12sdp" />
 
@@ -104,7 +104,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:paddingLeft="@dimen/_2sdp"
-                                                android:text="(0)"
+                                                android:text="@string/_0_"
                                                 android:textColor="@color/green_end"
                                                 android:textSize="@dimen/_12sdp" />
 
@@ -127,7 +127,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:gravity="center"
-                                            android:text="Yesterday Recharge"
+                                            android:text="@string/yesterday_recharge"
                                             android:textColor="@color/black"
                                             android:textSize="@dimen/_15sdp" />
 
@@ -147,7 +147,7 @@
                                                 android:id="@+id/yesterday_total"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:text="0"
+                                                android:text="@string/_0"
                                                 android:textColor="@color/green_end"
                                                 android:textSize="@dimen/_12sdp" />
 
@@ -156,7 +156,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:paddingLeft="@dimen/_2sdp"
-                                                android:text="(0)"
+                                                android:text="@string/_0_"
                                                 android:textColor="@color/green_end"
                                                 android:textSize="@dimen/_12sdp" />
 
@@ -180,7 +180,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:gravity="center"
-                                            android:text="This Month Recharge"
+                                            android:text="@string/this_month_recharge"
                                             android:textColor="@color/black"
                                             android:textSize="@dimen/_15sdp" />
 
@@ -200,7 +200,7 @@
                                                 android:id="@+id/this_month_total"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:text="0"
+                                                android:text="@string/_0"
                                                 android:textColor="@color/green_end"
                                                 android:textSize="@dimen/_12sdp" />
 
@@ -209,7 +209,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:paddingLeft="@dimen/_2sdp"
-                                                android:text="(0)"
+                                                android:text="@string/_0_"
                                                 android:textColor="@color/green_end"
                                                 android:textSize="@dimen/_12sdp" />
 
@@ -233,7 +233,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:gravity="center"
-                                            android:text="Last Month Recharge"
+                                            android:text="@string/last_month_recharge"
                                             android:textColor="@color/black"
                                             android:textSize="@dimen/_15sdp" />
 
@@ -253,7 +253,7 @@
                                                 android:id="@+id/last_month"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:text="0"
+                                                android:text="@string/_0"
                                                 android:textColor="@color/green_end"
                                                 android:textSize="@dimen/_12sdp" />
 
@@ -262,7 +262,7 @@
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
                                                 android:paddingLeft="@dimen/_2sdp"
-                                                android:text="(0)"
+                                                android:text="@string/_0_"
                                                 android:textColor="@color/green_end"
                                                 android:textSize="@dimen/_12sdp" />
 
@@ -287,7 +287,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_marginRight="@dimen/_5sdp"
                                             android:gravity="center"
-                                            android:text="Commission Earned"
+                                            android:text="@string/commission_earned"
                                             android:textColor="@color/black"
                                             android:textSize="@dimen/_15sdp" />
 
@@ -295,7 +295,7 @@
                                             android:id="@+id/total_commission"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="0"
+                                            android:text="@string/_0"
                                             android:textColor="@color/green_end"
                                             android:textSize="@dimen/_12sdp"
                                             android:elevation="@dimen/_3sdp"
@@ -324,7 +324,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:gravity="center"
-                                            android:text="Today Recharge"
+                                            android:text="@string/today_recharge"
                                             android:textColor="@color/white"
                                             android:textSize="@dimen/_11sdp" />
 

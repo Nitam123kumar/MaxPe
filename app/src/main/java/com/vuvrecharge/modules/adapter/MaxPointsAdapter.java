@@ -5,11 +5,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.vuvrecharge.R;
 import com.vuvrecharge.modules.model.MaxPePointsData;
 
@@ -30,10 +32,14 @@ public class MaxPointsAdapter extends RecyclerView.Adapter<MaxPointsAdapter.View
         this.mMaxPePointsData=list;
     }
 
-    public void addEvents(List<MaxPePointsData> list){
-        this.mMaxPePointsData=list;
-        Log.d("pointsAmountTV", String.valueOf(list));
+    public void addEvents(List<MaxPePointsData> list , @NonNull String second_message) {
+        if (second_message.equals("No")) {
+            this.mMaxPePointsData.addAll(list);
+        } else {
+            this.mMaxPePointsData = list;
+        }
         notifyDataSetChanged();
+
     }
 
 
@@ -52,9 +58,15 @@ public class MaxPointsAdapter extends RecyclerView.Adapter<MaxPointsAdapter.View
 
         if (data.getCredit().equals("0.000")){
             holder.pointsAmountTV.setText("- \u20b9" + data.getDebit());
+            Glide.with(mContext)
+                    .load(R.drawable.send_success_icon)
+                    .into(holder.imgMaxLogo);
         }
         else {
             holder.pointsAmountTV.setText("+ \u20b9" + data.getCredit());
+            Glide.with(mContext)
+                    .load(R.drawable.recived_icon_svg)
+                    .into(holder.imgMaxLogo);
         }
 
         holder.pointsUsedTV.setText(data.getType());
@@ -79,6 +91,8 @@ public class MaxPointsAdapter extends RecyclerView.Adapter<MaxPointsAdapter.View
         TextView points_dateTV;
         @BindView(R.id.pointsAmountTV)
         TextView pointsAmountTV;
+        @BindView(R.id.imgMaxLogo)
+        ImageView imgMaxLogo;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

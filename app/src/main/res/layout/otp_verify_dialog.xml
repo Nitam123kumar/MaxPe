@@ -26,7 +26,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:gravity="center"
-                android:text="Verification Code"
+                android:text="@string/verification_code"
                 android:textColor="@color/black_2"
                 android:textSize="15sp" />
 

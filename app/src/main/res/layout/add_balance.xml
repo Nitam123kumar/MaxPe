@@ -29,7 +29,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="@dimen/_3sdp"
-                        android:text="Amount"
+                        android:text="@string/amount_"
                         android:textColor="@color/black_2"
                         android:textSize="@dimen/_12sdp" />
 
@@ -45,7 +45,7 @@
                             android:layout_height="@dimen/_30sdp"
                             android:background="@color/transparent"
                             android:gravity="center_vertical"
-                            android:hint="Amount"
+                            android:hint="@string/amount_"
 
                             android:inputType="number"
                             android:paddingLeft="@dimen/_10sdp"
@@ -72,7 +72,7 @@
                             android:layout_marginLeft="@dimen/_10sdp"
                             android:background="@color/transparent"
                             android:gravity="center_vertical"
-                            android:hint="Enter Your Mpin"
+                            android:hint="@string/enter_your_mpin"
                             android:maxLength="4"
                             android:inputType="numberPassword"
                             android:paddingTop="@dimen/_1sdp"
@@ -99,7 +99,7 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/black_2"
                             android:checked="true"
-                            android:text="Add" />
+                            android:text="@string/add" />
 
                         <androidx.appcompat.widget.AppCompatRadioButton
                             android:id="@+id/less"
@@ -107,7 +107,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_15sdp"
                             android:backgroundTint="@color/black_2"
-                            android:text="Less" />
+                            android:text="@string/less" />
 
                     </RadioGroup>
 
@@ -128,7 +128,7 @@
                             android:gravity="center"
                             android:paddingLeft="30dp"
                             android:paddingRight="30dp"
-                            android:text="Submit"
+                            android:text="@string/submit"
                             android:textColor="@color/white"
                             android:textSize="15sp" />
 

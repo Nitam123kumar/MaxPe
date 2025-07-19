@@ -37,6 +37,7 @@ public class UserData {
     private  List<YoutubeSlides> youtube_slides;
     private  List<OTTSubscriptionsData> ott_slides;
     private  List<OfferSlider> offer_slides;
+    private  List<SpotlightData> spotlight_services;
 
     private List<SliderItems> recharge_slides_data;
     String referCode;
@@ -414,6 +415,10 @@ public class UserData {
         return offer_slides;
     }
 
+    public List<SpotlightData> getSpotlight_services() {
+        return spotlight_services;
+    }
+
     public List<SliderData> getSlides() {
         return slides;
     }
@@ -430,6 +435,10 @@ public class UserData {
     }
     public void setOffer_slides(List<OfferSlider> offer_slides) {
         this.offer_slides = offer_slides;
+    }
+
+    public void setSpotlight_services(List<SpotlightData> spotlight_services) {
+        this.spotlight_services = spotlight_services;
     }
 
     public List<SliderItems> getSliderItemsList() {

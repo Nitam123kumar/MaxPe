@@ -20,6 +20,9 @@ import com.bumptech.glide.Glide;
 import com.vuvrecharge.R;
 import com.vuvrecharge.modules.model.OTTSubscriptionsData;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 public class OTTSubscriptionsAdapter extends RecyclerView.Adapter<OTTSubscriptionsAdapter.ViewHolder> {
@@ -27,11 +30,13 @@ public class OTTSubscriptionsAdapter extends RecyclerView.Adapter<OTTSubscriptio
     private Context mContext;
     List<OTTSubscriptionsData> ottSubscriptionsDataList;
     List<String> ott_slides;
+    ItemClickListener listener;
 
-    public OTTSubscriptionsAdapter(Context context,List<OTTSubscriptionsData> ottSubscriptionsDataList,List<String> ott_slides){
+    public OTTSubscriptionsAdapter(Context context, List<OTTSubscriptionsData> ottSubscriptionsDataList, List<String> ott_slides, ItemClickListener listener){
         this.mContext=context;
         this.ottSubscriptionsDataList=ottSubscriptionsDataList;
         this.ott_slides=ott_slides;
+        this.listener=listener;
     }
 
     @NonNull
@@ -47,13 +52,21 @@ public class OTTSubscriptionsAdapter extends RecyclerView.Adapter<OTTSubscriptio
         OTTSubscriptionsData ottData=ottSubscriptionsDataList.get(position);
 
         String ottLogo = ottData.getLogo();
-        if (!ottLogo.startsWith("http")) {
             ottLogo = OTT_SLIDES + ottLogo;
-        }
+
 
         Glide.with(mContext).load(ottLogo).placeholder(R.drawable.sony_live_logo).into(holder.ottLogo);
         Log.d("imageLogo",ottLogo);
         holder.ottTitle.setText(ottData.getTitle());
+
+        holder.itemView.setOnClickListener(v -> {
+//            try {
+//                JSONObject object = new JSONObject(ottData.getData());
+//                listener.onClickListener(ottData.getRedirection_type(),object.getString("title"),object.getString("intent_name"));
+//            } catch (JSONException e) {
+//                throw new RuntimeException(e);
+//            }
+        });
 
     }
 
@@ -73,5 +86,7 @@ public class OTTSubscriptionsAdapter extends RecyclerView.Adapter<OTTSubscriptio
         }
 
     }
-
+    public interface ItemClickListener{
+        void onClickListener(String redirection_type,String title,String inten_name) throws ClassNotFoundException;
+    }
 }

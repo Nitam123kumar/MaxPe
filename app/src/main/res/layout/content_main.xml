@@ -88,6 +88,19 @@
                         app:layout_constraintEnd_toStartOf="@id/refresh"
                         app:layout_constraintTop_toTopOf="@id/name_tv" />
 
+                    <TextView
+                        android:id="@+id/total_ban"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="@id/whatsup_alert"
+                        app:layout_constraintEnd_toEndOf="@id/whatsup_alert"
+                        app:layout_constraintTop_toBottomOf="@id/whatsup_alert"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_7sdp"
+
+                        />
+
                     <ImageView
                         android:id="@+id/share"
                         android:layout_width="@dimen/_35sdp"
@@ -189,7 +202,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_8sdp"
-                                android:text="Your balance"
+                                android:text="@string/your_balance"
                                 android:textColor="@color/black"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -216,7 +229,7 @@
                                 android:gravity="center"
                                 android:paddingTop="@dimen/_3sdp"
                                 android:paddingBottom="@dimen/_3sdp"
-                                android:text="Add Balance"
+                                android:text="@string/add_balance"
                                 android:textColor="@color/white"
                                 android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="@id/add_balance_layout"
@@ -234,7 +247,7 @@
                                 android:gravity="center"
                                 android:paddingTop="@dimen/_3sdp"
                                 android:paddingBottom="@dimen/_3sdp"
-                                android:text="Commission Chart"
+                                android:text="@string/commission_chart"
                                 android:textColor="#0549AE"
                                 android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="@id/add_balance"
@@ -266,6 +279,7 @@
                                     android:id="@+id/viewPager"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
+                                    android:background="@color/white"
                                     tools:ignore="MissingConstraints" />
 
                             </androidx.cardview.widget.CardView>
@@ -357,7 +371,7 @@
                             android:gravity="center"
                             android:paddingStart="@dimen/_10sdp"
                             android:paddingTop="@dimen/_10sdp"
-                            android:text="Recharge &amp; Bill Payment"
+                            android:text="@string/recharge_amp_bill_payment"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_11sdp"
                             android:visibility="visible"
@@ -437,7 +451,7 @@
                             android:layout_gravity="center"
                             android:layout_marginStart="@dimen/_12sdp"
                             android:fontFamily="@font/roboto"
-                            android:text="Bike/Car Insurance"
+                            android:text="@string/bike_car_insurance"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_11sdp"
                             app:layout_constraintStart_toEndOf="@id/insurance"
@@ -481,7 +495,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="@dimen/_10sdp"
                                 android:fontFamily="@font/roboto_bold"
-                                android:text="Bike Insurance"
+                                android:text="@string/bike_insurance"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_8sdp"
                                 android:textStyle="bold" />
@@ -494,7 +508,7 @@
                                 android:background="@drawable/insurance"
                                 android:fontFamily="@font/roboto_bold"
                                 android:gravity="center"
-                                android:text="10% OFF"
+                                android:text="@string/_10_off"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_8sdp"
                                 android:textStyle="bold" />
@@ -526,7 +540,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginLeft="@dimen/_10sdp"
                                 android:fontFamily="@font/roboto_bold"
-                                android:text="Car Insurance"
+                                android:text="@string/car_insurance"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_8sdp"
                                 android:textStyle="bold" />
@@ -539,7 +553,7 @@
                                 android:background="@drawable/insurance"
                                 android:fontFamily="@font/roboto_bold"
                                 android:gravity="center"
-                                android:text="15% OFF"
+                                android:text="@string/_15_off"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_8sdp" />
 
@@ -582,141 +596,24 @@
                         <LinearLayout
                             android:id="@+id/snj"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_90sdp"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:layout_marginHorizontal="@dimen/_25sdp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:orientation="horizontal"
+                            android:paddingBottom="@dimen/_5sdp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/ott_recharge"
                             app:layout_constraintBottom_toBottomOf="@id/snjLayout"
-
                             >
 
-                            <LinearLayout
-                                android:id="@+id/sonyLiv"
-                                android:layout_width="@dimen/_75sdp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toStartOf="@id/netflix"
-                                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                                app:layout_constraintStart_toStartOf="@id/ott_recharge"
-                                app:layout_constraintTop_toBottomOf="@id/ott_recharge">
-
-                                <LinearLayout
-                                    android:layout_width="@dimen/_45sdp"
-                                    android:layout_height="@dimen/_45sdp"
-                                    android:background="@drawable/sony_live_shape"
-                                    android:gravity="center">
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_30sdp"
-                                        android:layout_height="@dimen/_30sdp"
-                                        android:layout_gravity="center"
-                                        android:src="@drawable/sony_live_logo"
-
-                                        />
-
-                                </LinearLayout>
-
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/_2sdp"
-                                    android:fontFamily="@font/roboto"
-                                    android:text="Sony LIV"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/_10sdp"
-                                    android:textStyle="bold" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/netflix"
-                                android:layout_width="@dimen/_75sdp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/_13sdp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                app:layout_constraintBottom_toBottomOf="@id/sonyLiv"
-                                app:layout_constraintEnd_toStartOf="@id/jioHotstar"
-                                app:layout_constraintStart_toEndOf="@id/sonyLiv"
-                                app:layout_constraintTop_toTopOf="@id/sonyLiv">
-
-                                <LinearLayout
-                                    android:layout_width="@dimen/_45sdp"
-                                    android:layout_height="@dimen/_45sdp"
-                                    android:background="@drawable/sony_live_shape"
-                                    android:gravity="center">
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_30sdp"
-                                        android:layout_height="@dimen/_30sdp"
-                                        android:layout_gravity="center"
-                                        android:src="@drawable/netflix"
-
-                                        />
-
-                                </LinearLayout>
-
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/_2sdp"
-                                    android:fontFamily="@font/roboto"
-                                    android:text="Netflix"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/_10sdp"
-                                    android:textStyle="bold" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:id="@+id/jioHotstar"
-                                android:layout_width="@dimen/_75sdp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="@dimen/_13sdp"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                app:layout_constraintBottom_toBottomOf="@id/netflix"
-                                app:layout_constraintStart_toEndOf="@id/sonyLiv"
-                                app:layout_constraintTop_toTopOf="@id/netflix">
-
-                                <LinearLayout
-                                    android:layout_width="@dimen/_45sdp"
-                                    android:layout_height="@dimen/_45sdp"
-                                    android:background="@drawable/sony_live_shape"
-                                    android:gravity="center">
-
-                                    <ImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_gravity="center"
-                                        android:src="@drawable/jiohotstar"
-
-                                        />
-
-                                </LinearLayout>
-
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/_2sdp"
-                                    android:fontFamily="@font/roboto"
-                                    android:text="JioHotstar"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/_10sdp"
-                                    android:textStyle="bold" />
-
-                            </LinearLayout>
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/ottRecyclerView"
+                                android:layout_width="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_height="wrap_content"
+                                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                                app:spanCount="3"
+                                />
 
                         </LinearLayout>
 
@@ -749,7 +646,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginStart="@dimen/_12sdp"
                                 android:fontFamily="@font/roboto"
-                                android:text="Offers For You "
+                                android:text="@string/offers_for_you"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_11sdp"
                                 app:layout_constraintStart_toEndOf="@id/disscount"
@@ -758,26 +655,6 @@
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:id="@+id/airtel_offer"
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/_125sdp"
-                            android:layout_marginHorizontal="@dimen/_10sdp"
-                            android:elevation="@dimen/_10sdp"
-                            android:orientation="horizontal"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/offer_for_you">
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/offer_for_you_recyclerView"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_gravity="center"
-                                app:layout_constraintStart_toStartOf="parent"
-                                tools:listitem="@layout/offer_slider_layout"
-
-                                />
-                        </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/spotlight_services"
@@ -787,7 +664,7 @@
                             android:orientation="horizontal"
                             android:layout_marginTop="@dimen/_1sdp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/airtel_offer">
+                            app:layout_constraintTop_toBottomOf="@id/offer_for_you_recyclerView">
 
 
                             <ImageView
@@ -808,7 +685,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginStart="@dimen/_12sdp"
                                 android:fontFamily="@font/roboto"
-                                android:text="Spotlight Services"
+                                android:text="@string/spotlight_services"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_11sdp"
                                 app:layout_constraintStart_toEndOf="@id/star"
@@ -836,146 +713,33 @@
                                 android:layout_height="@dimen/_70sdp"
                                 android:layout_marginHorizontal="@dimen/_8sdp">
 
-
-                                <LinearLayout
-                                    android:id="@+id/prepaid"
-                                    android:layout_width="@dimen/_60sdp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:background="@drawable/prepaid_shape"
-                                    android:gravity="center"
-                                    android:orientation="vertical"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toStartOf="@id/netflix"
-                                    app:layout_constraintHorizontal_chainStyle="spread_inside"
-                                    app:layout_constraintStart_toStartOf="@id/ott_recharge"
-                                    app:layout_constraintTop_toBottomOf="@id/ott_recharge">
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_30sdp"
-                                        android:layout_height="@dimen/_30sdp"
-                                        android:layout_gravity="center"
-                                        android:src="@drawable/capa_1"
-
-                                        />
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/spotlight_services_recyclerView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                                tools:listitem="@layout/spotlight_services_row"
+                                app:spanCount="4"
 
 
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="@dimen/_5sdp"
-                                        android:fontFamily="@font/roboto"
-                                        android:text="Prepaid"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/_8sdp" />
+                                />
 
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/DTH"
-                                    android:layout_width="@dimen/_60sdp"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginStart="@dimen/_10sdp"
-                                    android:layout_weight="1"
-                                    android:background="@drawable/dth_shape"
-                                    android:gravity="center"
-                                    android:orientation="vertical"
-                                    app:layout_constraintBottom_toBottomOf="@id/sonyLiv"
-                                    app:layout_constraintEnd_toStartOf="@id/jioHotstar"
-                                    app:layout_constraintStart_toEndOf="@id/sonyLiv"
-                                    app:layout_constraintTop_toTopOf="@id/sonyLiv">
-
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_30sdp"
-                                        android:layout_height="@dimen/_30sdp"
-                                        android:layout_gravity="center"
-                                        android:src="@drawable/dth_logo1"
-
-                                        />
-
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="@dimen/_5sdp"
-                                        android:fontFamily="@font/roboto"
-                                        android:text="DTH"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/_8sdp" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/Electricity"
-                                    android:layout_width="@dimen/_60sdp"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginStart="@dimen/_10sdp"
-                                    android:layout_weight="1"
-                                    android:background="@drawable/electricity_shape"
-                                    android:gravity="center"
-                                    android:orientation="vertical"
-                                    app:layout_constraintBottom_toBottomOf="@id/netflix"
-                                    app:layout_constraintStart_toEndOf="@id/sonyLiv"
-                                    app:layout_constraintTop_toTopOf="@id/netflix">
-
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_30sdp"
-                                        android:layout_height="@dimen/_30sdp"
-                                        android:layout_gravity="center"
-                                        android:src="@drawable/electricity_logo1"
-
-                                        />
-
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="@dimen/_5sdp"
-                                        android:fontFamily="@font/roboto"
-                                        android:text="Electricity"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/_8sdp" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/credit_card"
-                                    android:layout_width="@dimen/_60sdp"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginStart="@dimen/_10sdp"
-                                    android:layout_weight="1"
-                                    android:background="@drawable/credit_card_shape"
-                                    android:gravity="center"
-                                    android:orientation="vertical"
-                                    app:layout_constraintBottom_toBottomOf="@id/netflix"
-                                    app:layout_constraintStart_toEndOf="@id/sonyLiv"
-                                    app:layout_constraintTop_toTopOf="@id/netflix">
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_30sdp"
-                                        android:layout_height="@dimen/_30sdp"
-                                        android:layout_gravity="center"
-                                        android:src="@drawable/credit_card1"
-
-                                        />
-
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="@dimen/_5sdp"
-                                        android:fontFamily="@font/roboto"
-                                        android:text="Credit Card"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/_8sdp" />
-
-                                </LinearLayout>
 
                             </LinearLayout>
 
 
                         </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/offer_for_you_recyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_125sdp"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_9sdp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/offer_for_you"
+ />
 
                         <LinearLayout
                             android:id="@+id/tutorials"
@@ -1006,7 +770,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginStart="@dimen/_12sdp"
                                 android:fontFamily="@font/roboto"
-                                android:text="Tutorials"
+                                android:text="@string/tutorials"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_11sdp"
                                 app:layout_constraintStart_toEndOf="@id/youtube_ImageView"
@@ -1081,7 +845,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/_2sdp"
-                                android:text="COMMISSION REPORT"
+                                android:text="@string/commission_report"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_11sdp"
                                 android:textStyle="bold" />
@@ -1123,7 +887,7 @@
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 android:paddingStart="@dimen/_4sdp"
-                                android:text="View\nMember"
+                                android:text="@string/view_nmember"
                                 android:textColor="@color/white" />
 
                         </LinearLayout>
@@ -1151,7 +915,7 @@
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 android:paddingStart="@dimen/_4sdp"
-                                android:text="New\nMember"
+                                android:text="@string/new_nmember"
                                 android:textColor="@color/white" />
 
                         </LinearLayout>
@@ -1178,7 +942,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:paddingStart="@dimen/_4sdp"
-                                android:text="Downline\nPackages"
+                                android:text="@string/downline_npackages"
                                 android:textColor="@color/white" />
 
                         </LinearLayout>
@@ -1195,7 +959,7 @@
                             android:id="@+id/txtMaxPe"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="MaxPe"
+                            android:text="@string/max_pe"
                             android:textColor="@color/colorPrimaryB"
                             android:textSize="@dimen/_19sdp"
                             android:textStyle="bold"
@@ -1220,7 +984,7 @@
                             android:id="@+id/txtYou"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="You"
+                            android:text="@string/you"
                             android:textColor="@color/colorPrimaryB"
                             android:textSize="@dimen/_19sdp"
                             android:textStyle="bold"
@@ -1235,7 +999,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Refer your friends &amp;"
+                            android:text="@string/refer_your_friends_amp"
                             android:textColor="#000000"
                             android:textSize="@dimen/_9sdp"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -1247,7 +1011,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto"
-                            android:text="earn up to ₹300!"
+                            android:text="@string/earn_up_to_300"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_9sdp"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -1337,7 +1101,7 @@
                     android:layout_marginStart="@dimen/_2sdp"
                     android:layout_marginTop="@dimen/_2sdp"
                     android:gravity="center"
-                    android:text="Support"
+                    android:text="@string/support"
                     android:textColor="#89929B"
                     android:textSize="@dimen/_9sdp"
                     android:textStyle="bold"
@@ -1406,7 +1170,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_2sdp"
                     android:gravity="center"
-                    android:text="Refer &amp; Earn"
+                    android:text="@string/refer_amp_earn"
                     android:textColor="#89929B"
                     android:textSize="@dimen/_9sdp"
                     android:textStyle="bold"
@@ -1442,7 +1206,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_2sdp"
                     android:gravity="center"
-                    android:text="Report"
+                    android:text="@string/report"
                     android:textColor="#89929B"
                     android:textSize="@dimen/_9sdp"
                     android:textStyle="bold"
@@ -1466,7 +1230,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_12sdp"
                     android:gravity="center"
-                    android:text="Commission"
+                    android:text="@string/commission"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_9sdp"
                     android:textStyle="bold"
@@ -1481,7 +1245,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Chat"
+                    android:text="@string/chat"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_9sdp"
                     android:textStyle="bold"

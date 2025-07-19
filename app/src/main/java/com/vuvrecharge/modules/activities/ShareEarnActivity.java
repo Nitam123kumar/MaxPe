@@ -1,8 +1,15 @@
 package com.vuvrecharge.modules.activities;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,7 +37,7 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
 
     private DefaultPresenter mDefaultPresenter;
 
-    @BindView(R.id.toolbar_LinearLayout)
+    @BindView(R.id.toolbar_layout)
     LinearLayout mToolbar;
     @BindView(R.id.title)
     TextView title;
@@ -82,6 +89,7 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
     TextView submit;
     LinearLayout loading;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +101,7 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
         btnInvite.setOnClickListener(this);
         btnReferCopy.setOnClickListener(this);
         top_EarnerTV.setOnClickListener(this);
+        setStatusBarGradiant(this);
 //        viewMyReferral.setOnClickListener(this);
 //        viewReferralIncome.setOnClickListener(this);
         if (mDatabase != null) {
@@ -119,10 +128,10 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
 
         ArrayList<SlideModel> top_earner_list = new ArrayList<>();
 
-        top_earner_list.add(new SlideModel(R.drawable. top_earner, ScaleTypes.FIT));
-        top_earner_list.add(new SlideModel(R.drawable. top_earner, ScaleTypes.FIT));
-        top_earner_list.add(new SlideModel(R.drawable. top_earner, ScaleTypes.FIT));
-        top_earner_list.add(new SlideModel(R.drawable. top_earner, ScaleTypes.FIT));
+        top_earner_list.add(new SlideModel(R.drawable. image_dummy, ScaleTypes.FIT));
+        top_earner_list.add(new SlideModel(R.drawable. image_dummy, ScaleTypes.FIT));
+        top_earner_list.add(new SlideModel(R.drawable. image_dummy, ScaleTypes.FIT));
+        top_earner_list.add(new SlideModel(R.drawable. image_dummy, ScaleTypes.FIT));
 
         top_earner_ImageSlider.setImageList(top_earner_list, ScaleTypes.FIT);
 //        top_earner_ImageSlider.setIndicatorSelectedColor(Color.RED);
@@ -256,5 +265,17 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
         }
 
 
+    }
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    static void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
     }
 }

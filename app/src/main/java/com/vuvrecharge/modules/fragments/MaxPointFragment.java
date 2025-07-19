@@ -1,66 +1,392 @@
 package com.vuvrecharge.modules.fragments;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.vuvrecharge.R;
+import com.vuvrecharge.base.BaseFragment;
+import com.vuvrecharge.base.BaseMethod;
+import com.vuvrecharge.modules.activities.MaxPointsActivity;
+import com.vuvrecharge.modules.adapter.MaxPointsAdapter;
+import com.vuvrecharge.modules.adapter.WalletAdapter;
+import com.vuvrecharge.modules.model.CashBackPintsModel;
+import com.vuvrecharge.modules.model.MaxPePointsData;
+import com.vuvrecharge.modules.presenter.DefaultPresenter;
+import com.vuvrecharge.modules.presenter.OnFragmentListener;
+import com.vuvrecharge.modules.view.DefaultView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MaxPointFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class MaxPointFragment extends Fragment {
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    public MaxPointFragment() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MaxPointFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MaxPointFragment newInstance(String param1, String param2) {
-        MaxPointFragment fragment = new MaxPointFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+public class MaxPointFragment extends BaseFragment implements DefaultView {
+    ViewGroup rootViewMain;
+
+    DefaultPresenter defaultPresenter;
+
+    @BindView(R.id.rvMaxPoints)
+    RecyclerView rvMaxPoints;
+    @BindView(R.id.select_from_date_img)
+    ImageView select_from_date_img;
+    @BindView(R.id.select_to_date_img)
+    ImageView select_to_date_img;
+    @BindView(R.id.select_from_date)
+    TextView select_from_date;
+    @BindView(R.id.select_to_date)
+    TextView select_to_date;
+    @BindView(R.id.ref_no)
+    EditText ref_no;
+    @BindView(R.id.search)
+    TextView search;
+    @BindView(R.id.txtNoData)
+    TextView txtNoData;
+
+    @BindView(R.id.loading)
+    LinearLayout loading;
+
+    MaxPointsAdapter adapter;
+
+    static Date fromDate;
+    static Date toDate;
+    static String from_date = "";
+    static String to_date = "";
+
+    int page = 1;
+    int remaining_pages = 0;
+    int previousTotal = 0;
+    int pastVisibleItems;
+    int visibleItemCount;
+    int totalItemCount;
+    String device_id;
+    boolean isLoading = true;
+    DialogFragment newFragment;
+    OnFragmentListener listener = null;
+    private List<MaxPePointsData> mPointsList = new ArrayList<>();
+
+    @Override
+    public View provideYourFragmentView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_max_point, parent, false);
+        this.rootViewMain = parent;
+        ButterKnife.bind(this, rootView);
+        device_id = Settings.Secure.getString(requireActivity().getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+        defaultPresenter = new DefaultPresenter(this);
+        defaultPresenter.cashbackPointsHistory(device_id + "",
+                  "",  "", "");
+
+        initializeEventsList();
+        Calendar cal = Calendar.getInstance();
+        toDate = cal.getTime();
+        Date today = new Date();
+        Calendar cal1 = new GregorianCalendar();
+        cal1.setTime(today);
+        cal1.add(Calendar.DAY_OF_MONTH, -0);
+        fromDate = cal1.getTime();
+        from_date = BaseMethod.format1.format(fromDate);
+        to_date = BaseMethod.format1.format(toDate);
+        select_from_date.setText("DD MM YYYY");
+        select_to_date.setText("DD MM YYYY");
+        loadData("Yes");
+        onclickListener();
+
+        return rootView;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onError(String error) {
+
+    }
+
+    @Override
+    public void onSuccess(String data) {
+
+    }
+
+    @Override
+    public void onSuccess(String data, String data_other) {
+
+    }
+
+    @Override
+    public void onSuccessOther(String data) {
+
+    }
+
+    private void onclickListener() {
+        search.setOnClickListener(v -> {
+
+            page = 1;
+            remaining_pages = 0;
+            pastVisibleItems = 0;
+            visibleItemCount = 0;
+            totalItemCount = 0;
+            previousTotal = 0;
+
+            String ref_no_ = ref_no.getText().toString().trim();
+            defaultPresenter.cashbackPointsHistory(device_id + "",
+                    from_date + "", to_date + "", ref_no_ + "");
+        });
+
+        select_from_date_img.setOnClickListener(v -> {
+            newFragment = new SelectDate(select_from_date, select_to_date);
+            newFragment.show(getChildFragmentManager(), "Select From Date");
+        });
+        select_to_date_img.setOnClickListener(v -> {
+            newFragment = new SelectDate(select_from_date, select_to_date);
+            newFragment.show(getChildFragmentManager(), "Select To Date");
+        });
+
+    }
+
+
+    @Override
+    public void onSuccessOther(String data, String data_other) {
+        Log.d("cashbackLogs", String.valueOf(data));
+        try {
+            JSONObject object = new JSONObject(data);
+            JSONArray array = object.getJSONArray("cashbackLogs");
+
+
+            if (array.length() > 0) {
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject object1 = array.getJSONObject(i);
+                    MaxPePointsData maxPePointData = new MaxPePointsData();
+                    maxPePointData.setOrder_id(object1.getString("order_id"));
+                    maxPePointData.setAmount(object1.getString("amount"));
+                    maxPePointData.setRemark(object1.getString("remark"));
+                    maxPePointData.setCredit(object1.getString("credit"));
+                    maxPePointData.setDate_time(object1.getString("date_time"));
+                    maxPePointData.setClosing_points(object1.getString("closing_points"));
+                    maxPePointData.setDebit(object1.getString("debit"));
+                    maxPePointData.setType(object1.getString("type"));
+                    maxPePointData.setOpening_points(object1.getString("opening_points"));
+                    mPointsList.add(maxPePointData);
+                    adapter.notifyDataSetChanged();
+                    txtNoData.setVisibility(GONE);
+
+                }
+
+                rvMaxPoints.setVisibility(VISIBLE);
+                txtNoData.setVisibility(GONE);
+            } else {
+                rvMaxPoints.setVisibility(GONE);
+                txtNoData.setVisibility(VISIBLE);
+            }
+            txtNoData.setVisibility(GONE);
+
+
+            if (object.has("cashbackPoints")) {
+                JSONObject pointsObject = object.getJSONObject("cashbackPoints");
+
+                CashBackPintsModel model = new CashBackPintsModel();
+                model.setMax_balance_slab(pointsObject.getString("max_balance_slab"));
+                model.setCashback_points(pointsObject.getString("cashback_points"));
+                model.setTxn_balance_count(pointsObject.getString("txn_balance_count"));
+
+
+            }
+
+            if (array.length() > 0) {
+                Gson gson = new Gson();
+                Type type_ = new TypeToken<List<MaxPePointsData>>() {
+                }.getType();
+                List<MaxPePointsData> passbookData = gson.fromJson(array.toString(), type_);
+                if (data_other.equals("Yes")) {
+                    initializeEventsList();
+                }
+                adapter.addEvents(passbookData, data_other);
+                rvMaxPoints.setVisibility(VISIBLE);
+                txtNoData.setVisibility(GONE);
+            } else {
+//                onError("no Data found");
+                txtNoData.setVisibility(VISIBLE);
+                rvMaxPoints.setVisibility(GONE);
+            }
+
+
+        } catch (Exception e) {
+
+            txtNoData.setVisibility(VISIBLE);
+        }
+    }
+
+    private void initializeEventsList() {
+
+        adapter = new MaxPointsAdapter(requireContext(), mPointsList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
+        rvMaxPoints.setLayoutManager(linearLayoutManager);
+        rvMaxPoints.setAdapter(adapter);
+        rvMaxPoints.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                visibleItemCount = linearLayoutManager.getChildCount();
+                totalItemCount = linearLayoutManager.getItemCount();
+                pastVisibleItems = linearLayoutManager.findFirstVisibleItemPosition();
+                if (dy > 0) {
+                    if (isLoading) {
+                        if (totalItemCount > previousTotal) {
+                            isLoading = false;
+                            previousTotal = totalItemCount;
+                        }
+                    }
+                    if (!isLoading && (totalItemCount - visibleItemCount) <= (pastVisibleItems)) {
+                        isLoading = true;
+                        page++;
+                        if (remaining_pages > 0) {
+                            loadData("No");
+                        }
+                    }
+                }
+            }
+        });
+
+    }
+
+    private void loadData(String value) {
+        defaultPresenter.cashbackPointsHistory(device_id + "",
+                /*from_date +*/ "", /*to_date +*/ "", "");
+    }
+
+    @Override
+    public void onShowDialog(String message) {
+        if (bottomSheet != null) {
+            showLoading(loading_dialog);
+            submit.setVisibility(GONE);
+        } else {
+            showLoading(loading);
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_max_point, container, false);
+    public void onHideDialog() {
+        if (bottomSheet != null) {
+            hideLoading(loading_dialog);
+            submit.setVisibility(VISIBLE);
+        } else {
+            hideLoading(loading);
+        }
     }
+
+    @Override
+    public void onShowToast(String message) {
+
+    }
+
+    @Override
+    public void onPrintLog(String message) {
+
+    }
+
+
+    public static class SelectDate extends DialogFragment {
+
+        TextView from_;
+        TextView to_;
+
+        public SelectDate(TextView from_, TextView to_) {
+            this.from_ = from_;
+            this.to_ = to_;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Calendar calendar = Calendar.getInstance();
+            String tag = getTag();
+            if (tag != null) {
+                switch (tag) {
+                    case "Select From Date":
+                        calendar.setTime(fromDate);
+                        break;
+                    case "Select To Date":
+                        calendar.setTime(toDate);
+                        break;
+                }
+            }
+
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog dpd = new DatePickerDialog(requireContext(), R.style.DialogTheme, (view, year1, month1, day1) -> {
+                Calendar cal = Calendar.getInstance();
+                cal.setTimeInMillis(0);
+                cal.set(year1, month1, day1, 0, 0, 0);
+                String tag1 = getTag();
+                if (tag1 != null) {
+                    switch (tag1) {
+                        case "Select From Date":
+                            fromDate = cal.getTime();
+                            from_date = BaseMethod.format1.format(fromDate);
+                            String from_date_local = BaseMethod.dateFormat.format(fromDate);
+                            if (toDate.before(fromDate)) {
+                                toDate = cal.getTime();
+                                to_date = BaseMethod.format1.format(toDate);
+                                to_.setText(from_date_local);
+                            }
+                            from_.setText(from_date_local);
+                            break;
+                        case "Select To Date":
+                            toDate = cal.getTime();
+                            to_date = BaseMethod.format1.format(toDate);
+                            String to_date_local = BaseMethod.dateFormat.format(toDate);
+                            to_.setText(to_date_local);
+                            break;
+                    }
+                }
+            }, year, month, day);
+            if (tag != null) {
+                if ("Select To Date".equals(tag)) {
+                    Calendar calendar1 = Calendar.getInstance();
+                    calendar1.setTime(fromDate);
+                    dpd.getDatePicker().setMinDate(calendar1.getTimeInMillis());
+                }
+            }
+            dpd.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
+            return dpd;
+        }
+    }
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentListener){
+            listener = (OnFragmentListener) context;
+        }else {
+
+        }
+    }
+
 }

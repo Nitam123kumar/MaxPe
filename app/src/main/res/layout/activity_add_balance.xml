@@ -22,7 +22,7 @@
         android:paddingTop="@dimen/_5sdp"
         android:paddingEnd="@dimen/_10sdp"
         android:paddingBottom="@dimen/_5sdp"
-        android:text="Help?"
+        android:text="@string/help"
         android:textColor="#242424"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/mToolbar"
@@ -60,7 +60,7 @@
                 android:layout_marginEnd="20dp"
                 android:fontFamily="@font/roboto"
                 android:gravity="center"
-                android:text="Enter amount to add"
+                android:text="@string/enter_amount_to_add"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 android:textColor="#979797"
                 android:visibility="visible"
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@android:color/transparent"
-                android:hint="0"
+                android:hint="@string/_0"
                 android:inputType="number"
                 android:maxLength="7"
                 android:textAppearance="@style/TextAppearance.AppCompat.Display3"
@@ -105,7 +105,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="You can add a maximum of ₹1,00,000 in this month"
+                android:text="@string/you_can_add_a_maximum_of_1_00_000_in_this_month"
                 android:textColor="#979797"
                 app:layout_constraintEnd_toEndOf="@id/editAmount"
                 app:layout_constraintStart_toStartOf="@id/editAmount"
@@ -123,11 +123,11 @@
 
                 <TextView
                     android:id="@+id/txtFiveHundred"
-                    android:layout_width="92dp"
-                    android:layout_height="38dp"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:background="@drawable/rupees_drawable"
                     android:gravity="center"
-                    android:text="+ &#8377;500"
+                    android:text="@string/_8377_500"
                     android:textColor="#898989"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -135,12 +135,12 @@
 
                 <TextView
                     android:id="@+id/txtThousand"
-                    android:layout_width="92dp"
-                    android:layout_height="38dp"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_marginStart="@dimen/_20sdp"
                     android:background="@drawable/rupees_drawable"
                     android:gravity="center"
-                    android:text="+ &#8377;1000"
+                    android:text="@string/_8377_1000"
                     android:textColor="#898989"
                     app:layout_constraintEnd_toStartOf="@id/txtFiveThousandFiveHundred"
                     app:layout_constraintStart_toEndOf="@id/txtFiveHundred"
@@ -149,12 +149,12 @@
 
                 <TextView
                     android:id="@+id/txtFiveThousandFiveHundred"
-                    android:layout_width="92dp"
-                    android:layout_height="38dp"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_marginStart="@dimen/_20sdp"
                     android:background="@drawable/rupees_drawable"
                     android:gravity="center"
-                    android:text="+ &#8377;1500"
+                    android:text="@string/_8377_1500"
                     android:textColor="#898989"
                     app:layout_constraintStart_toEndOf="@id/txtThousand"
                     app:layout_constraintTop_toTopOf="@id/txtThousand" />
@@ -176,7 +176,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto"
-                    android:text="Note"
+                    android:text="@string/note"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -188,7 +188,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_2sdp"
                     android:layout_marginTop="14dp"
-                    android:text="•"
+                    android:text="@string/dout"
                     android:textColor="#787878"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -200,9 +200,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_3sdp"
-                    android:text="MaxPe Money balance is valid for 4 years from the date of money added"
+                    android:text="@string/maxpe_money_balance_is_valid_for_4_years_from_the_date_of_money_added"
                     android:textColor="#787878"
-                    android:textSize="12dp"
+                    android:textSize="@dimen/_9sdp"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintTop_toTopOf="@id/dot_TextView1"
                     app:layout_constraintStart_toEndOf="@id/dot_TextView1"/>
@@ -213,9 +213,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_2sdp"
-                    android:text="•"
+                    android:text="@string/dout"
                     android:textColor="#787878"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/_12sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/note_TextView2" />
 
@@ -226,9 +226,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_3sdp"
                     android:layout_marginTop="@dimen/_2sdp"
-                    android:text="MaxPe Money is useable only on MaxPe"
+                    android:text="@string/maxpe_money_is_useable_only_on_maxpe"
                     android:textColor="#787878"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/_9sdp"
                     app:layout_constraintTop_toTopOf="@id/dot_TextView2"
                     app:layout_constraintStart_toEndOf="@id/dot_TextView2" />
 
@@ -237,9 +237,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_2sdp"
-                    android:text="•"
+                    android:text="@string/dout"
                     android:textColor="#787878"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/_12sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/note_TextView3" />
 
@@ -250,9 +250,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_3sdp"
                     android:layout_marginTop="@dimen/_2sdp"
-                    android:text="MaxPe Money cannot be transferred to a bank account as per RBI guidelines"
+                    android:text="@string/maxpe_money_cannot_be_transferred_to_a_bank_account_as_per_rbi_guidelines"
                     android:textColor="#787878"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/_9sdp"
                     app:layout_constraintTop_toTopOf="@id/dot_TextView3"
                     app:layout_constraintStart_toEndOf="@id/dot_TextView3" />
 
@@ -274,7 +274,7 @@
                     android:id="@+id/selectPaymentMethodBtn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Proceed to add"
+                    android:text="@string/proceed_to_add"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
                     android:background="@color/proceed_to_add"
@@ -333,7 +333,7 @@
             android:paddingTop="@dimen/_10sdp"
             android:paddingRight="@dimen/_15sdp"
             android:paddingBottom="@dimen/_10sdp"
-            android:text="No Internet available.\nCheck connection"
+            android:text="@string/no_internet_available_ncheck_connection"
             android:textColor="@color/black_4" />
 
         <TextView
@@ -346,7 +346,7 @@
             android:paddingTop="@dimen/_10sdp"
             android:paddingRight="@dimen/_15sdp"
             android:paddingBottom="@dimen/_10sdp"
-            android:text="Re-Try"
+            android:text="@string/re_try"
             android:textColor="@color/white" />
 
     </LinearLayout>

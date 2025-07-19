@@ -40,7 +40,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-3dp"
                         android:layout_toLeftOf="@id/amount"
-                        android:text="Order Id : 125478"
+                        android:text="@string/order_id_125478"
                         android:textColor="@color/black_2"
                         android:textSize="@dimen/_12sdp"
                         android:textStyle="bold" />
@@ -52,7 +52,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="-3dp"
                         android:paddingLeft="@dimen/_10sdp"
-                        android:text="\u20b950"
+                        android:text="@string/u20b950"
                         android:textColor="@color/black_2"
                         android:textSize="@dimen/_13sdp"
                         android:textStyle="bold" />
@@ -64,7 +64,7 @@
                     android:id="@+id/date_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="16-02-2020, 04:25 PM"
+                    android:text="@string/_16_02_2020_04_25_pm"
                     android:textColor="@color/black_2"
                     android:textSize="@dimen/_11sdp" />
 
@@ -78,7 +78,7 @@
                         android:id="@+id/date_time_complain"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="16-02-2020, 04:25 PM"
+                        android:text="@string/_16_02_2020_04_25_pm"
                         android:textColor="@color/black_2"
                         android:textSize="@dimen/_11sdp"
                         android:layout_margin="@dimen/_2sdp"/>
@@ -97,7 +97,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:paddingLeft="@dimen/_5sdp"
-                            android:text="Pending"
+                            android:text="@string/pending"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_9sdp" />
 
@@ -144,7 +144,7 @@
                                 android:id="@+id/number"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="8058625069"
+                                android:text="@string/_8058625069"
                                 android:textColor="@color/black_2"
                                 android:textSize="@dimen/_11sdp" />
 

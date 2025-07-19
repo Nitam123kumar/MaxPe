@@ -34,7 +34,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="From"
+                        android:text="@string/from"
                         android:textColor="@color/black_2"
                         android:textSize="@dimen/_12sdp" />
 
@@ -42,7 +42,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_5sdp"
-                        android:text=":"
+                        android:text="@string/dout_2"
                         android:textColor="@color/black_2"
                         android:textSize="@dimen/_12sdp" />
 
@@ -59,7 +59,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_5sdp"
-                            android:text="05-06-2020"
+                            android:text="@string/_05_06_2020"
                             android:textColor="@color/black_2"
                             android:textSize="@dimen/_12sdp" />
 
@@ -85,7 +85,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="To"
+                        android:text="@string/to"
                         android:textColor="@color/black_2"
                         android:textSize="@dimen/_12sdp" />
 
@@ -93,7 +93,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_5sdp"
-                        android:text=":"
+                        android:text="@string/dout_2"
                         android:textColor="@color/black_2"
                         android:textSize="@dimen/_12sdp" />
 
@@ -111,7 +111,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_5sdp"
-                            android:text="05-06-2020"
+                            android:text="@string/_05_06_2020"
                             android:textColor="@color/black_2"
                             android:textSize="@dimen/_12sdp" />
 
@@ -148,7 +148,7 @@
                         android:layout_height="@dimen/_27sdp"
                         android:background="@color/transparent"
                         android:gravity="center_vertical"
-                        android:hint="Name/Mobile No/Username"
+                        android:hint="@string/name_mobile_no_username"
                         android:inputType="textEmailAddress"
                         android:paddingLeft="@dimen/_10sdp"
                         android:paddingTop="@dimen/_1sdp"
@@ -170,7 +170,7 @@
                     android:maxLines="1"
                     android:paddingLeft="@dimen/_10sdp"
                     android:paddingRight="@dimen/_10sdp"
-                    android:text="Search"
+                    android:text="@string/search"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_11sdp" />
 

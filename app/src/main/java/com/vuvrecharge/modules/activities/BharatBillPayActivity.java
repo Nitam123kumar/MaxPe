@@ -47,7 +47,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 @SuppressLint("NotifyDataSetChanged,NonConstantResourceId")
-public class BharatBillPayActivity extends BaseActivity implements DefaultView, BharatBillPayAdapter.ItemClickListener,FinancialServicesAdapter.ItemClickListener, View.OnClickListener {
+public class BharatBillPayActivity extends BaseActivity implements DefaultView, BharatBillPayAdapter.ItemClickListener,FinancialServicesAdapter.ItemClickListener, View.OnClickListener,OTTSubscriptionsAdapter.ItemClickListener {
 
     private DefaultPresenter mDefaultPresenter;
 
@@ -128,7 +128,7 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
                     Log.d("OTTData", ottData.getLogo()+" "+ottData.getTitle());
                 }
                 oTTList.addAll(ottItem);
-                ottAdapter = new OTTSubscriptionsAdapter(this, oTTList, ott_List);
+                ottAdapter = new OTTSubscriptionsAdapter(this, oTTList, ott_List,this);
                 ott_recharge_recyclerView.setLayoutManager(new GridLayoutManager(this,3));
                 ott_recharge_recyclerView.setAdapter(ottAdapter);
 
@@ -425,5 +425,34 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
     @Override
     public void onPrintLog(String message) {
 
+    }
+
+    @Override
+    public void onClickListener(String redirection_type, String title, String inten_name) {
+        Intent intent;
+        switch (inten_name) {
+            case "RechargeActivity":
+                intent = new Intent(getActivity(), RechargeActivity.class);
+                intent.putExtra("title", title);
+                startActivity(intent);
+                break;
+            case "ElectricityActivity":
+                intent = new Intent(getActivity(), ElectricityActivity.class);
+                intent.putExtra("title", title);
+                startActivity(intent);
+                break;
+            case "BharatBillPayActivity":
+                intent = new Intent(getActivity(), BharatBillPayActivity.class);
+                intent.putExtra("title", title);
+                startActivity(intent);
+                break;
+            case "BillActivity":
+                intent = new Intent(getActivity(), BillActivity.class);
+                intent.putExtra("title", title);
+                startActivity(intent);
+                break;
+            default:
+                showToast("Coming Soon");
+        }
     }
 }

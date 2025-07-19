@@ -1444,6 +1444,7 @@ public class DefaultPresenter {
             data.put("post_data", post_data);
             String data_final = data.toString();
             String encrypted = Java_AES_Cipher.encrypt(BaseMethod.key, BaseMethod.iv, data_final);
+            Log.d("fgjksfgj",encrypted+"\n"+post_data.toString());
             if (rotation != null) {
                 mDefaultView.onShowDialog("Loading...");
             }
@@ -1465,7 +1466,6 @@ public class DefaultPresenter {
                                 if (body.getSuccess() == 1) {
 //                                    Log.d("TAG_DATA", "onResponse: "+body.getData());
                                     JSONObject jsonObject = new JSONObject(body.getData() + "\n" + body.getMessage());
-                                    mDefaultView.onPrintLog(jsonObject.toString());
                                     mDefaultView.onSuccess(jsonObject.toString(), "");
                                 } else {
 //                                    Log.d("TAG_DATA", "onResponse: "+body.getData()+"\n"+body.getMessage());
@@ -2492,7 +2492,7 @@ public class DefaultPresenter {
 
     public void doMobileRecharge(String number, String operator, String amount, String type,
                                  String std_code, String sub_division, String circle,
-                                 String ac_number, String device_id, String mpin) {
+                                 String ac_number, String device_id, String mpin,Boolean isUsingCashbackPoints) {
         try {
             JSONObject post_data = new JSONObject();
             post_data.put("number", number);
@@ -2506,6 +2506,7 @@ public class DefaultPresenter {
             post_data.put("device_id", device_id + "");
             post_data.put("account_no", ac_number);
             post_data.put("m_pin", mpin);
+            post_data.put("isUsingCashbackPoints", isUsingCashbackPoints.toString().trim());
             JSONObject data = new JSONObject();
             data.put("request_url", ApiServices.doMobileRecharge);
             data.put("post_data", post_data);
@@ -3660,12 +3661,14 @@ public class DefaultPresenter {
             e.printStackTrace();
         }
     }
-public void cashbackPointsHistory(String device_id) {
+public void cashbackPointsHistory(String device_id,String from,String to,String keyword) {
         try {
             JSONObject post_data = new JSONObject();
             post_data.put("device_id", device_id);
             post_data.put("token", mDatabase.getToken());
-
+            post_data.put("from", from.trim());
+            post_data.put("to", to.trim());
+            post_data.put("keyword", keyword.trim());
             JSONObject data = new JSONObject();
             data.put("request_url", ApiServices.cashbackPointsHistory);
             data.put("post_data", post_data);

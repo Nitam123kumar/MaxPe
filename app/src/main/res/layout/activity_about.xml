@@ -31,7 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="115dp"
-                    android:text="Loading, please wait .."
+                    android:text="@string/loading_please_wait"
                     android:textColor="#222"
                     android:textSize="17sp" />
 
@@ -66,7 +66,7 @@
                     android:paddingTop="@dimen/_10sdp"
                     android:paddingRight="@dimen/_15sdp"
                     android:paddingBottom="@dimen/_10sdp"
-                    android:text="No Internet available.\nCheck connection"
+                    android:text="@string/no_internet_available_ncheck_connection"
                     android:textColor="@color/black_4" />
 
                 <TextView
@@ -79,7 +79,7 @@
                     android:paddingTop="@dimen/_10sdp"
                     android:paddingRight="@dimen/_15sdp"
                     android:paddingBottom="@dimen/_10sdp"
-                    android:text="Re-Try"
+                    android:text="@string/re_try"
                     android:textColor="@color/white" />
 
             </LinearLayout>

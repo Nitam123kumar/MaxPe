@@ -63,7 +63,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/_10sdp"
                 android:paddingRight="@dimen/_10sdp"
-                android:text="Invoice"
+                android:text="@string/invoice"
                 android:textColor="@color/black_2"
                 android:textSize="@dimen/_10sdp"
                 android:visibility="gone" />

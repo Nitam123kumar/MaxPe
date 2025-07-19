@@ -17,6 +17,9 @@ import com.vuvrecharge.R;
 import com.vuvrecharge.modules.model.OfferSlider;
 import com.vuvrecharge.modules.model.YoutubeSlides;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 public class OfferSliderRecyclerViewAdapter extends RecyclerView.Adapter<OfferSliderRecyclerViewAdapter.OfferSliderViewHolder>{
@@ -25,11 +28,13 @@ public class OfferSliderRecyclerViewAdapter extends RecyclerView.Adapter<OfferSl
     private Context context;
     private List<OfferSlider> imageList;
     private List<String> offer_Sliders;
+    ItemClickListener listener;
 
-    public OfferSliderRecyclerViewAdapter(Context context, List<String> offer_Sliders,  List<OfferSlider> imageList) {
+    public OfferSliderRecyclerViewAdapter(Context context, List<String> offer_Sliders,  List<OfferSlider> imageList,ItemClickListener listener) {
         this.context = context;
         this.imageList = imageList;
         this.offer_Sliders=offer_Sliders;
+        this.listener=listener;
     }
 
     @NonNull
@@ -41,14 +46,25 @@ public class OfferSliderRecyclerViewAdapter extends RecyclerView.Adapter<OfferSl
 
     @Override
     public void onBindViewHolder(@NonNull OfferSliderViewHolder holder, int position) {
-        OfferSlider data = imageList.get(position);
+        OfferSlider offerSlider = imageList.get(position);
 
-        String logoUrl = data.getLogo();
-        if (!logoUrl.startsWith("http")) {
+        String logoUrl = offerSlider.getLogo();
+
             logoUrl = OFFER_ZONE + logoUrl;
-        }
 
-        Glide.with(context).load(logoUrl).placeholder(R.drawable.airtel_svg).into(holder.imgSlide);
+
+        Glide.with(context).load(logoUrl).into(holder.imgSlide);
+
+        holder.itemView.setOnClickListener(v -> {
+            try {
+                JSONObject object = new JSONObject(offerSlider.getData());
+                listener.onClickListener(offerSlider.getRedirection_type(),object.getString("title"),object.getString("intent_name"));
+            } catch (JSONException e) {
+                new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
     }
 
@@ -63,5 +79,8 @@ public class OfferSliderRecyclerViewAdapter extends RecyclerView.Adapter<OfferSl
             super(itemView);
             imgSlide = itemView.findViewById(R.id.imgOfferSlide);
         }
+    }
+    public interface ItemClickListener{
+        void onClickListener(String redirection_type,String title,String inten_name) throws ClassNotFoundException;
     }
 }

@@ -25,7 +25,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Total Refer Cashback Received"
+                    android:text="@string/total_refer_cashback_received"
                     android:textColor="@color/black_2"
                     android:textSize="@dimen/_14sdp" />
 
@@ -62,7 +62,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_30sdp"
                     android:gravity="center_horizontal"
-                    android:text="Data not available"
+                    android:text="@string/data_not_available"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_15sdp"
                     android:visibility="gone" />

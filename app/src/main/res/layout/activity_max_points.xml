@@ -42,7 +42,7 @@
             android:adjustViewBounds="true"
             android:fontFamily="@font/roboto"
             android:gravity="center_vertical"
-            android:text="Your Max Points"
+            android:text="@string/your_max_points"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/black"
             android:textSize="@dimen/_16sdp"
@@ -94,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
-            android:text="00.00"
+            android:text="@string/_00_00"
             android:textColor="@color/white"
             android:textSize="@dimen/_32sdp"
             app:layout_constraintBottom_toTopOf="@id/maxPointsTV"
@@ -107,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_27sdp"
             android:gravity="center"
-            android:text="Lifetime Max Points : 50050.00"
+            android:text="@string/lifetime_max_points_50050_00"
             android:textColor="@color/white"
             android:textSize="@dimen/_9sdp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -137,14 +137,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Transactions"
+                android:text="@string/transactions"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_20sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-            
+
             <ImageView
                 android:id="@+id/filter_ImageView"
                 android:layout_width="wrap_content"
@@ -160,7 +160,7 @@
                 android:id="@+id/transitions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Filter"
+                android:text="@string/filter"
                 android:textColor="#828282"
                 android:textSize="@dimen/_7sdp"
                 android:layout_marginTop="@dimen/_3sdp"
@@ -188,7 +188,7 @@
                 android:id="@+id/to"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="To:"
+                android:text="@string/to"
                 android:textColor="@color/black_2"
                 android:fontFamily="@font/roboto"
                 android:textStyle="bold"
@@ -200,7 +200,7 @@
                 android:id="@+id/form"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="From:"
+                android:text="@string/from"
                 android:textColor="@color/black_2"
                 android:fontFamily="@font/roboto"
                 android:textStyle="bold"
@@ -225,7 +225,7 @@
                     android:id="@+id/select_from_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DD MM YYYY"
+                    android:text="@string/dd_mm_yyyy"
                     android:textColor="@color/black_2"
                     android:textSize="@dimen/_9sdp"
                     app:layout_constraintStart_toStartOf="@id/layoutFrom"
@@ -262,7 +262,7 @@
                     android:id="@+id/select_to_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="DD MM YYYY"
+                    android:text="@string/dd_mm_yyyy"
                     android:textColor="@color/black_2"
                     android:textSize="@dimen/_9sdp"
                     app:layout_constraintStart_toStartOf="@id/layoutEnd"
@@ -290,7 +290,7 @@
                 android:layout_height="@dimen/_28sdp"
                 android:background="@drawable/rectangle_18996"
                 android:gravity="center_vertical"
-                android:hint="Mobile No/Ref No/Order Id"
+                android:hint="@string/mobile_no_ref_no_order_id"
                 android:inputType="text"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:paddingStart="@dimen/_10sdp"
@@ -315,7 +315,7 @@
                 android:paddingStart="@dimen/_13sdp"
                 android:elevation="@dimen/_1sdp"
                 android:paddingEnd="@dimen/_13sdp"
-                android:text="Search"
+                android:text="@string/search"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_9sdp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -339,7 +339,7 @@
                     android:id="@+id/maxPointRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
+                    android:nestedScrollingEnabled="true"
                     tools:listitem="@layout/max_points_row"
                     app:layout_constraintTop_toTopOf="parent"
                     android:paddingBottom="@dimen/_10sdp"/>
@@ -348,15 +348,42 @@
                     android:id="@+id/txtNoData"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="No data found."
+                    android:text="@string/no_data_found"
                     android:textColor="@color/black"
                     android:gravity="center"
                     android:visibility="gone"
                     android:textSize="@dimen/_14sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/maxPointRecyclerView"
                     app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <LinearLayout
+                    android:id="@+id/loading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    app:layout_constraintTop_toTopOf="@id/maxPointRecyclerView"
+                    app:layout_constraintStart_toStartOf="@id/maxPointRecyclerView"
+                    app:layout_constraintEnd_toEndOf="@id/maxPointRecyclerView"
+                    app:layout_constraintBottom_toBottomOf="@id/maxPointRecyclerView">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ProgressBar
+                            android:layout_width="@dimen/_35sdp"
+                            android:layout_height="@dimen/_35sdp"
+                            android:indeterminateDrawable="@drawable/layout_process_bar" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

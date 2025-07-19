@@ -135,6 +135,12 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
     TextView applied;
     @BindView(R.id.applied_amount)
     TextView applied_amount;
+    @BindView(R.id.discount_amount)
+    TextView discount_amount;
+    @BindView(R.id.discount)
+    TextView discount;
+    @BindView(R.id.transaction_amount)
+    TextView transaction_amount;
     DefaultView mDefaultView;
 
     String warning_message = "";
@@ -148,6 +154,7 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
     Handler handler;
     Runnable runnable;
     BottomSheetDialog dialog2 = null;
+    Boolean isUsingCashbackPoints = false;
     ArrayList<PaymentModel> list = new ArrayList<>();
     double releaseAmount = 0.000;
 
@@ -174,6 +181,7 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
         pageType = getIntent().getStringExtra("pageType");
         txtRecharge.setText("Change");
         title.setText("Plan Summary");
+        transaction_amount.setText("\u20b9" +amount);
         mDefaultView = this;
         mDefaultPresenter = new DefaultPresenter(this);
 
@@ -188,24 +196,68 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
 
         try {
             UserData userData = mDatabase.getUserData();
-            available_pointsTV.setText("Available "+userData.getCashbackPoints());
+            double cashbackPoints = Double.parseDouble(userData.getCashbackPoints());
+            if (cashbackPoints > 0) {
+                available_pointsTV.setText("Available " + cashbackPoints);
+            } else {
+                available_pointsTV.setText("available "+0);
+            }
+
+
             if (applyTV.isChecked()) {
                applied.setVisibility(VISIBLE);
                applied_amount.setVisibility(VISIBLE);
+                discount.setVisibility(VISIBLE);
+                discount_amount.setVisibility(VISIBLE);
             } else {
                 applied.setVisibility(GONE);
                 applied_amount.setVisibility(GONE);
+                discount.setVisibility(GONE);
+                discount_amount.setVisibility(GONE);
             }
 
             applyTV.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (cashbackPoints > 0){
+
                     if (isChecked) {
                         applied.setVisibility(VISIBLE);
                         applied_amount.setVisibility(VISIBLE);
+                        discount.setVisibility(VISIBLE);
+                        discount_amount.setVisibility(VISIBLE);
+
+                        double rechargeAmount = Double.parseDouble(amount.trim());
+                        double userMaxPoints = Double.parseDouble(userData.getCashbackPoints());
+
+                        double fivePercent = rechargeAmount * 0.05;
+                        double pointsToApply;
+
+                        if (userMaxPoints >= fivePercent) {
+                            pointsToApply = fivePercent;
+                            isUsingCashbackPoints=true;
+                        } else {
+                            pointsToApply = userMaxPoints;
+                            isUsingCashbackPoints=true;
+                        }
+                        discount_amount.setText("-\u20b9"+String.format("%.2f", pointsToApply));
+                        applied_amount.setText("+\u20b9" + String.format("%.2f", pointsToApply));
+
+                        double finalPayable = rechargeAmount - pointsToApply;
+//                        payableAmountTV.setText("Payable Amount: ₹" + String.format("%.2f", finalPayable));
+
+
                     } else {
                         applied.setVisibility(GONE);
                         applied_amount.setVisibility(GONE);
+                        isUsingCashbackPoints=false;
+                        discount.setVisibility(GONE);
+                        discount_amount.setVisibility(GONE);
+                    }
+
+                    }else {
+                        Toast.makeText(getActivity(), "Not Available MaxPoints",Toast.LENGTH_SHORT).show();
+                        isUsingCashbackPoints=false;
                     }
                 }
             });
@@ -234,6 +286,7 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
             txtPhoneNumber.setText(number);
             txtPhoneProvider.setText(provider);
             txtAmount.setText(amount);
+            transaction_amount.setText("\u20b9" +amount);
 
             txtPlanDetails.setOnClickListener(v -> openPlan(amount, urlProvider, des, validity, data));
 
@@ -539,7 +592,7 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
                         circle,
                         "0",
                         device_id,
-                        mPin
+                        mPin,isUsingCashbackPoints
                 );
             });
 
@@ -603,7 +656,7 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
                     mDefaultPresenter.doMobileRecharge(
                             number.trim(), operator, amount.trim(), type,
                             "0", "0",
-                            circle, "0", device_id, mPin);
+                            circle, "0", device_id, mPin,isUsingCashbackPoints);
                 } else if (payment_status.toLowerCase().equals("failed")) {
                     Toast.makeText(getActivity(), "Transaction Cancelled", Toast.LENGTH_LONG).show();
                 } else {

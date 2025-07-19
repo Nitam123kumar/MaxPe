@@ -19,9 +19,9 @@
         >
             <ImageView
                 android:id="@+id/imgLogo"
-                android:layout_width="@dimen/_43sdp"
-                android:layout_height="@dimen/_43sdp"
-                android:padding="@dimen/_8sdp"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
+                android:padding="@dimen/_4sdp"
                 android:layout_gravity="center"
                 android:background="@drawable/sony_live_shape"
                 android:src="@drawable/sony_live_logo"
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
             android:fontFamily="@font/roboto"
-            android:text="Sony LIV"
+            android:text="@string/sony_liv"
             android:textColor="@color/black"
             android:textSize="@dimen/_8sdp"
             android:textStyle="bold"

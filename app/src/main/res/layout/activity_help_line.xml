@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_100sdp"
                     android:gravity="center_horizontal"
-                    android:text="Currently no package active"
+                    android:text="@string/currently_no_package_active"
                     android:textColor="@color/black_2"
                     android:textSize="@dimen/_13sdp"
                     android:visibility="gone"

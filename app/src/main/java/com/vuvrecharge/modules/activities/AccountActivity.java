@@ -98,8 +98,8 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
 //    View viewChangePassword;
 //    @BindView(R.id.viewProfile)
 //    View viewProfile;
-    @BindView(R.id.viewAccountDelete)
-    View viewAccountDelete;
+//    @BindView(R.id.viewAccountDelete)
+//    View viewAccountDelete;
     @BindView(R.id.viewLogout)
     View viewLogout;
     @BindView(R.id.loading)
@@ -108,6 +108,8 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
     LinearLayout no_internet;
     @BindView(R.id.retry)
     TextView retry;
+    @BindView(R.id.email_TV)
+    TextView email_TV;
     @BindView(R.id.name)
     TextView name;
     @BindView(R.id.viewChangeMPin)
@@ -128,14 +130,16 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
     View viewFollow;
     @BindView(R.id.logo)
     TextView nameLogo;
-    @BindView(R.id.available_maxPointsTV)
-    TextView available_maxPointsTV;
-    @BindView(R.id.available_earnTV)
-    TextView available_earnTV;
-    @BindView(R.id.available_referralTV)
-    TextView available_referralTV;
+//    @BindView(R.id.available_maxPointsTV)
+//    TextView available_maxPointsTV;
+//    @BindView(R.id.available_earnTV)
+//    TextView available_earnTV;
+//    @BindView(R.id.available_referralTV)
+//    TextView available_referralTV;
     @BindView(R.id.btnSwitch)
     Switch btnSwitch;
+    @BindView(R.id.onBack)
+    LinearLayout onBack;
     DefaultView defaultView;
     Fingerprint fingerprint;
     PasswordLess passwordLess;
@@ -184,16 +188,18 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         viewFollow.setOnClickListener(this);
         viewFeedBack.setOnClickListener(this);
 //        viewProfile.setOnClickListener(this);
-        viewAccountDelete.setOnClickListener(this);
+//        viewAccountDelete.setOnClickListener(this);
         viewLogout.setOnClickListener(this);
         viewRateUs.setOnClickListener(this);
         viewInvite.setOnClickListener(this);
+        onBack.setOnClickListener(this);
         viewFingerPrint.setOnClickListener(this);
         viewChangeMPin.setOnClickListener(this);
         viewResetMPin.setOnClickListener(this);
         mDefaultPresenter = new DefaultPresenter(this);
         mDefaultPresenter.getPaymentSetting2(device_id + "", "timepass");
         mDefaultPresenter.totalReferrals(device_id);
+        email_TV.setText("nitamsingh304@gmai.com");
 //        statusBarColor();
     }
 
@@ -203,10 +209,10 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
             String shortName = mDatabase.getUserData().getName();
             String initials = getInitials(shortName, 2);
             nameLogo.setText(initials);
-            name.setText(userData.getName());
-            available_maxPointsTV.setText(userData.getCashbackPoints());
-            available_earnTV.setText("\u20b9"+userData.getEarnings());
-            phoneNumber.setText(userData.getMobile());
+            name.setText("Hi, "+userData.getName());
+//            available_maxPointsTV.setText(userData.getCashbackPoints());
+//            available_earnTV.setText("\u20b9"+userData.getEarnings());
+            phoneNumber.setText("+91-"+userData.getMobile());
             email_id.setText("Member Since " + userData.getDate());
         } catch (Exception e) {
             e.printStackTrace();
@@ -344,8 +350,12 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                 intent = new Intent(getActivity(),FeedbackActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.viewAccountDelete:
-                makeDeleteAccount();
+//            case R.id.viewAccountDelete:
+//                makeDeleteAccount();
+//                break;
+            case R.id.onBack:
+                onBackPressed();
+                finish();
                 break;
             default:
                 Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show();
@@ -772,7 +782,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         try {
             JSONObject jsonObject = new JSONObject(message);
 
-            available_referralTV.setText("\u20b9" + jsonObject.getString("totalReferralPaid"));
+//            available_referralTV.setText("\u20b9" + jsonObject.getString("totalReferralPaid"));
 
         } catch (Exception e) {
             e.printStackTrace();

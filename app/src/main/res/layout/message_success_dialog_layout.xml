@@ -20,7 +20,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
-        android:text="Password updated successfully."
+        android:text="@string/password_updated_successfully"
         android:textColor="@color/black"
         android:gravity="center"
         android:layout_marginEnd="@dimen/_5sdp"

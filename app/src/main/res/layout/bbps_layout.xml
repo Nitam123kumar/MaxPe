@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_7sdp"
                 android:gravity="center"
-                android:text="Prepaid"
+                android:text="@string/prepaid"
                 android:textColor="@color/black_2"
                 android:textSize="12sp"
                 android:textStyle="bold" />

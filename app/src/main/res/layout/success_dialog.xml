@@ -36,7 +36,7 @@
             android:paddingLeft="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:paddingRight="@dimen/_16sdp"
-            android:text="OK"
+            android:text="@string/ok"
             android:gravity="center"
             android:textAllCaps="false"
             android:textColor="@color/white"

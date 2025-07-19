@@ -103,7 +103,7 @@
                                         android:gravity="center_vertical"
                                         android:maxLines="1"
                                         android:visibility="gone"
-                                        android:text="05 June 2020 05:16 PM"
+                                        android:text="@string/impty"
                                         android:textColor="@color/black"
                                         android:textSize="12sp" />
                                 </LinearLayout>
@@ -135,7 +135,7 @@
                                     android:gravity="center_vertical"
                                     android:paddingLeft="@dimen/_10sdp"
                                     android:paddingRight="@dimen/_10sdp"
-                                    android:text="Invoice"
+                                    android:text="@string/invoice"
                                     android:textColor="@color/black_2"
                                     android:textSize="@dimen/_10sdp"
                                     android:visibility="gone" />
@@ -190,7 +190,7 @@
                                 android:paddingTop="@dimen/_10sdp"
                                 android:paddingRight="@dimen/_15sdp"
                                 android:paddingBottom="@dimen/_10sdp"
-                                android:text="No Internet available.\nCheck connection"
+                                android:text="@string/no_internet_available_ncheck_connection"
                                 android:textColor="@color/black_4" />
 
                             <TextView
@@ -203,7 +203,7 @@
                                 android:paddingTop="@dimen/_10sdp"
                                 android:paddingRight="@dimen/_15sdp"
                                 android:paddingBottom="@dimen/_10sdp"
-                                android:text="Re-Try"
+                                android:text="@string/re_try"
                                 android:textColor="@color/white" />
 
                         </LinearLayout>
@@ -426,7 +426,7 @@
                         android:layout_height="wrap_content"
                         android:visibility="gone"
                         android:paddingTop="@dimen/_2sdp"
-                        android:text="8058625069"
+                        android:text="@string/_8058625069"
                         android:layout_gravity="center"
                         android:textColor="@color/black_2"
                         android:textSize="@dimen/_13sdp"
@@ -448,7 +448,7 @@
                         android:textSize="@dimen/_12sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:elevation="@dimen/_3sdp"
-                        android:text="Copy Gift Card"
+                        android:text="@string/copy_gift_card"
                         app:layout_constraintTop_toBottomOf="@id/gift_number"/>
 
                     <RelativeLayout
@@ -512,7 +512,7 @@
                                 android:ellipsize="end"
                                 android:gravity="center_vertical"
                                 android:maxLines="1"
-                                android:text="Payment Mode"
+                                android:text="@string/payment_mode"
                                 android:textColor="#555454"
                                 android:textSize="@dimen/_11sdp" />
 
@@ -520,7 +520,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
-                                android:text="UPI"
+                                android:text="@string/upi"
                                 android:textColor="#555454"
                                 android:textSize="@dimen/_11sdp" />
 
@@ -544,7 +544,7 @@
                                     android:id="@+id/nuhgmber"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Txn Amount"
+                                    android:text="@string/txn_amount"
                                     android:textColor="#555454"
                                     android:textSize="@dimen/_11sdp" />
 
@@ -582,7 +582,7 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Amount Debited"
+                                    android:text="@string/amount_debited"
                                     android:textColor="@color/black_2"
                                     android:textSize="@dimen/_11sdp" />
 
@@ -624,7 +624,7 @@
                     android:id="@+id/txtCommission"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Discount"
+                    android:text="@string/discount"
                     android:textStyle="bold"
                     android:layout_gravity="center"
                     android:textColor="@color/black_2"
@@ -674,7 +674,7 @@
                     android:id="@+id/addMore"
                     android:layout_width="0dp"
                     android:layout_height="34dp"
-                    android:text="Share Receipt"
+                    android:text="@string/share_receipt"
                     android:paddingStart="@dimen/_20sdp"
                     android:gravity="center_vertical"
                     android:drawablePadding="@dimen/_10sdp"
@@ -692,7 +692,7 @@
                     android:id="@+id/done"
                     android:layout_width="0dp"
                     android:layout_height="34dp"
-                    android:text="Done"
+                    android:text="@string/done"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:textColor="@color/white"
                     android:textStyle="bold"
@@ -728,7 +728,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:gravity="center_horizontal"
-                android:text="Your service provider may take two working days to consider bill paid."
+                android:text="@string/your_service_provider_may_take_two_working_days_to_consider_bill_paid"
                 android:textColor="@color/black_2"
                 android:textSize="@dimen/_12sdp"
                 android:visibility="gone"
