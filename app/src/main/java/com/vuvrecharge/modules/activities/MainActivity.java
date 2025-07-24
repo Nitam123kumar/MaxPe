@@ -19,6 +19,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -64,6 +65,7 @@ import com.google.android.play.core.install.InstallState;
 import com.google.android.play.core.install.InstallStateUpdatedListener;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.UpdateAvailability;
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseActivity;
 import com.vuvrecharge.base.BaseMethod;
@@ -169,11 +171,11 @@ public class MainActivity extends BaseActivity implements DefaultView,
     @BindView(R.id.loading)
     LinearLayout loading;
     @BindView(R.id.viewPager)
-    ViewPager viewPager;
+    ViewPager2 viewPager;
     @BindView(R.id.img)
     ImageView home_menu_imageView;
     @BindView(R.id.indicator)
-    TabLayout indicator;
+    DotsIndicator indicator;
     @BindView(R.id.commission_report_layout)
     View commission_report_layout;
     @BindView(R.id.slider_layout)
@@ -242,7 +244,6 @@ public class MainActivity extends BaseActivity implements DefaultView,
     OfferSliderRecyclerViewAdapter offerSliderAdapter;
     SpotlightServicesAdapter spotlightServicesAdapter;
     OTTSubscriptionsAdapter oTTAdapter;
-    Handler handler = new Handler();
     List<String> ott_List;
     List<OTTSubscriptionsData> oTTList = new ArrayList<>();
     List<OfferSlider> main_hero_banner = new ArrayList<>();
@@ -251,6 +252,10 @@ public class MainActivity extends BaseActivity implements DefaultView,
     String redirection_type = null;
     String redirection_url = null;
     int position = 0;
+    private Handler sliderHandler = new Handler((Looper.getMainLooper()));
+    private Runnable sliderRunnable;
+    SliderAdapterBanner imageSliderAdapter;
+
 
     @Override
     protected void onCreate(
@@ -292,8 +297,6 @@ public class MainActivity extends BaseActivity implements DefaultView,
         spotlight_services_recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         ottRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
 
-//        startAutoScroll();
-
         refresh_layout.setOnRefreshListener(this::refreshData);
         refresh_layout.setRefreshing(true);
 
@@ -323,20 +326,6 @@ public class MainActivity extends BaseActivity implements DefaultView,
         }
         return true;
     }
-
-    private void startAutoScroll() {
-        final int delay = 3000; // 3 seconds
-
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (position == adapter.getItemCount()) position = 0;
-                image_slider.smoothScrollToPosition(position++);
-                handler.postDelayed(this, delay);
-            }
-        }, delay);
-    }
-
     private void appUpdate() {
         appUpdateManager = AppUpdateManagerFactory.create(this);
         appUpdateManager.getAppUpdateInfo().addOnSuccessListener(appUpdateInfo -> {
@@ -401,14 +390,30 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 color.add(mDatabase.getUserData().getSlide_path() + "/" + image.getSlide());
                 Log.d("Url Data", mDatabase.getUserData().getSlide_path());
             }
+            imageSliderAdapter = new SliderAdapterBanner(getActivity(), color, userData.getSlides(), this);
+            viewPager.setAdapter(imageSliderAdapter);
+            indicator.setViewPager2(viewPager);
+            sliderRunnable = () -> {
+                int currentItem = viewPager.getCurrentItem();
+                int totalItem = imageSliderAdapter.getItemCount();
+                if (currentItem < totalItem - 1) {
+                    viewPager.setCurrentItem(currentItem + 1, true);
+                } else {
+                    viewPager.setCurrentItem(0, true);
+                }
+            };
 
-            viewPager.setAdapter(new SliderAdapterBanner(getActivity(), color, userData.getSlides(), this));
-            indicator.setupWithViewPager(viewPager, true);
-            if (timer1 != null) {
-                timer1.cancel();
-                timer1 = new Timer();
-                timer1.schedule(new SliderTimer(), 4000, 4000);
-            }
+
+            sliderHandler.postDelayed(sliderRunnable, 3000);
+
+            viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+                @Override
+                public void onPageSelected(int position) {
+                    super.onPageSelected(position);
+                    sliderHandler.removeCallbacks(sliderRunnable);
+                    sliderHandler.postDelayed(sliderRunnable, 3000);
+                }
+            });
 
             youtubeVideosList = new ArrayList<>();
             List<YoutubeSlides> youtubeSlidesImages = (mDatabase.getUserData().getYoutubeVideoSliders());

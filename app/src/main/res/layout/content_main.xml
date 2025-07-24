@@ -272,7 +272,7 @@
                                 android:layout_marginHorizontal="@dimen/_10sdp"
                                 app:cardCornerRadius="@dimen/_10sdp">
 
-                                <androidx.viewpager.widget.ViewPager
+                                <androidx.viewpager2.widget.ViewPager2
                                     android:id="@+id/viewPager"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
@@ -281,22 +281,21 @@
 
                             </androidx.cardview.widget.CardView>
 
-
-                            <com.google.android.material.tabs.TabLayout
+                            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
                                 android:id="@+id/indicator"
-                                android:layout_width="@dimen/_24sdp"
-                                android:layout_height="@dimen/_15sdp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:dotsColor="@color/gray"
+                                app:dotsCornerRadius="@dimen/_2sdp"
+                                app:selectedDotColor="@color/colorPrimaryB"
+                                app:dotsSize="@dimen/_3sdp"
+                                app:dotsSpacing="@dimen/_2sdp"
+                                android:layout_marginTop="@dimen/_7sdp"
                                 android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/_3sdp"
-                                android:background="@color/white"
-                                android:paddingStart="-3dp"
+                                android:visibility="visible"
                                 app:layout_constraintEnd_toEndOf="@id/card_slider"
                                 app:layout_constraintStart_toStartOf="@id/card_slider"
-                                app:layout_constraintTop_toBottomOf="@id/card_slider"
-                                app:tabBackground="@drawable/indicator_selector"
-                                app:tabGravity="center"
-                                app:tabIndicatorHeight="0dp"
-                                tools:ignore="NotSibling" />
+                                app:layout_constraintTop_toBottomOf="@id/card_slider"/>
 
                         </LinearLayout>
 

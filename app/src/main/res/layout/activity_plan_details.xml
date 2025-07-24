@@ -256,7 +256,6 @@
                 android:layout_height="@dimen/_15sdp"
                 android:layout_marginHorizontal="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_11sdp"
-                android:drawableEnd="@drawable/drop_down_img"
                 android:fontFamily="@font/roboto"
                 android:gravity="center_vertical"
                 android:paddingEnd="@dimen/_10sdp"
@@ -264,6 +263,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="#918F8F"
                 android:textSize="@dimen/_10sdp"
+                app:drawableEndCompat="@drawable/drop_down_img"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/noteDet"
 

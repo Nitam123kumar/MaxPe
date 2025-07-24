@@ -162,6 +162,18 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/discountRecyclerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:spanCount="2"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="@id/txtMsg"
+                app:layout_constraintStart_toStartOf="@id/txtMsg"
+                app:layout_constraintTop_toBottomOf="@id/all_amount"
+                android:layout_marginTop="@dimen/_30sdp"
+                />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -169,7 +181,7 @@
                 android:layout_marginTop="@dimen/_40sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/all_amount">
+                app:layout_constraintTop_toBottomOf="@id/discountRecyclerView">
 
                 <TextView
                     android:id="@+id/note_TV"

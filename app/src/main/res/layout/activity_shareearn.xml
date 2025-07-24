@@ -849,13 +849,10 @@
             android:background="#BA333333"
             android:gravity="center"
             android:orientation="vertical">
-
-
             <ProgressBar
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:indeterminateDrawable="@drawable/layout_process_bar" />
-
         </LinearLayout>
 
     </LinearLayout>

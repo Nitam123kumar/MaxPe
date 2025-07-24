@@ -317,6 +317,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
     @Override
     public void onSuccessOther(String data,@NonNull String data_other) {
         try {
+            Log.d("TAG_DATA", "onSuccessOther: "+data);
             if (data_other.equals("hdfc")) {
                 JSONObject jsonObject = new JSONObject(data);
                 String orderid = jsonObject.getString("orderid");

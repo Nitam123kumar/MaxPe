@@ -684,89 +684,164 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
             if (data_other.equals("INSUFFICIENT")) {
                 openGatewaysDialog(data);
             } else {
-                successDialog(data, data_other);
+                successBottomSheet(data, data_other);
+//                successDialog(data, data_other);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void successDialog(String data, String message) {
+//    private void successDialog(String data, String message) {
+//        try {
+//            TransactionDialogBinding _binding = DataBindingUtil.inflate(LayoutInflater.from(this),
+//                    R.layout.transaction_dialog, null, false);
+//
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//            builder.setView(_binding.getRoot());
+//            AlertDialog dialog = builder.create();
+//            dialog.setCancelable(false);
+//
+//            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+//            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+//
+//            String status = "";
+//            try {
+//                JSONObject jsonObject = new JSONObject(data);
+//                status = jsonObject.getString("status");
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//            if (status.toUpperCase().equals("FAILED")) {
+//                _binding.txtTitle.setText("Failed");
+//                _binding.txtMessage.setText(message);
+//                _binding.txtSlug.setText("Oops!");
+//                _binding.txtSlug.setVisibility(GONE);
+////                _binding.imgGif.setGifImageResource(R.drawable.animated_wrong);
+//                Glide.with(this).asGif().load(R.drawable.animated_wrong).into(_binding.imgGif);
+//                _binding.btnComplete.setBackgroundResource(R.drawable.failed_button);
+//            } else if (status.toUpperCase().equals("PENDING")) {
+//                _binding.btnComplete.setBackgroundResource(R.drawable.pending_button);
+//                _binding.txtTitle.setText("Pending");
+//                _binding.txtMessage.setText(message);
+//                _binding.txtSlug.setText("CHILL!");
+////                _binding.imgGif.setGifImageResource(R.drawable.animated_pending);
+//                Glide.with(this).asGif().load(R.drawable.animated_pending).into(_binding.imgGif);
+//            } else {
+//                _binding.btnComplete.setBackgroundResource(R.drawable.green_button);
+//                _binding.txtTitle.setText("Success");
+//                _binding.txtMessage.setText(message);
+//                _binding.txtSlug.setText("Thank You!");
+////                _binding.imgGif.setGifImageResource(R.drawable.animated_right);
+//                Glide.with(this).asGif().load(R.drawable.animated_right).into(_binding.imgGif);
+//            }
+//
+//            String finalStatus = status;
+//            _binding.btnComplete.setOnClickListener(v -> {
+//                if (finalStatus.toUpperCase().equals("FAILED")) {
+//                    dialog.dismiss();
+//                } else {
+//                    try {
+//                        dialog.dismiss();
+//                        JSONObject jsonObject = new JSONObject(data);
+//                        Intent intent = new Intent(getActivity(), RechargeReportActivity.class);
+//                        intent.putExtra("operator_img", jsonObject.getString("operator_img"));
+//                        intent.putExtra("operator_dunmy_img", jsonObject.getString("operator_dunmy_img"));
+//                        intent.putExtra("mReportsData", data);
+//                        if (jsonObject.getString("status").toLowerCase().equals("success")) {
+//                            intent.putExtra("bps", "1");
+//                        } else {
+//                            intent.putExtra("bps", "0");
+//                        }
+//                        intent.putExtra("type", type);
+//                        startActivity(intent);
+//                        finish();
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            });
+//
+//            dialog.show();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+
+private void successBottomSheet(String data, String message) {
+    try {
+        TransactionDialogBinding _binding = DataBindingUtil.inflate(
+                LayoutInflater.from(this),
+                R.layout.transaction_dialog,
+                null,
+                false
+        );
+
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
+        bottomSheetDialog.setContentView(_binding.getRoot());
+        bottomSheetDialog.setCancelable(false);
+
+        String status = "";
         try {
-            TransactionDialogBinding _binding = DataBindingUtil.inflate(LayoutInflater.from(this),
-                    R.layout.transaction_dialog, null, false);
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setView(_binding.getRoot());
-            AlertDialog dialog = builder.create();
-            dialog.setCancelable(false);
-
-            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
-            String status = "";
-            try {
-                JSONObject jsonObject = new JSONObject(data);
-                status = jsonObject.getString("status");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            if (status.toUpperCase().equals("FAILED")) {
-                _binding.txtTitle.setText("Failed");
-                _binding.txtMessage.setText(message);
-                _binding.txtSlug.setText("Oops!");
-                _binding.txtSlug.setVisibility(GONE);
-//                _binding.imgGif.setGifImageResource(R.drawable.animated_wrong);
-                Glide.with(this).asGif().load(R.drawable.animated_wrong).into(_binding.imgGif);
-                _binding.btnComplete.setBackgroundResource(R.drawable.failed_button);
-            } else if (status.toUpperCase().equals("PENDING")) {
-                _binding.btnComplete.setBackgroundResource(R.drawable.pending_button);
-                _binding.txtTitle.setText("Pending");
-                _binding.txtMessage.setText(message);
-                _binding.txtSlug.setText("CHILL!");
-//                _binding.imgGif.setGifImageResource(R.drawable.animated_pending);
-                Glide.with(this).asGif().load(R.drawable.animated_pending).into(_binding.imgGif);
-            } else {
-                _binding.btnComplete.setBackgroundResource(R.drawable.green_button);
-                _binding.txtTitle.setText("Success");
-                _binding.txtMessage.setText(message);
-                _binding.txtSlug.setText("Thank You!");
-//                _binding.imgGif.setGifImageResource(R.drawable.animated_right);
-                Glide.with(this).asGif().load(R.drawable.animated_right).into(_binding.imgGif);
-            }
-
-            String finalStatus = status;
-            _binding.btnComplete.setOnClickListener(v -> {
-                if (finalStatus.toUpperCase().equals("FAILED")) {
-                    dialog.dismiss();
-                } else {
-                    try {
-                        dialog.dismiss();
-                        JSONObject jsonObject = new JSONObject(data);
-                        Intent intent = new Intent(getActivity(), RechargeReportActivity.class);
-                        intent.putExtra("operator_img", jsonObject.getString("operator_img"));
-                        intent.putExtra("operator_dunmy_img", jsonObject.getString("operator_dunmy_img"));
-                        intent.putExtra("mReportsData", data);
-                        if (jsonObject.getString("status").toLowerCase().equals("success")) {
-                            intent.putExtra("bps", "1");
-                        } else {
-                            intent.putExtra("bps", "0");
-                        }
-                        intent.putExtra("type", type);
-                        startActivity(intent);
-                        finish();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            dialog.show();
+            JSONObject jsonObject = new JSONObject(data);
+            status = jsonObject.getString("status");
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        if (status.equalsIgnoreCase("FAILED")) {
+            _binding.txtTitle.setText("Failed");
+            _binding.txtMessage.setText(message);
+            _binding.txtSlug.setText("Oops!");
+            _binding.txtSlug.setVisibility(View.GONE);
+            Glide.with(this).asGif().load(R.drawable.animated_wrong).into(_binding.imgGif);
+            _binding.btnComplete.setBackgroundResource(R.drawable.ad_money_button_shape);
+        } else if (status.equalsIgnoreCase("PENDING")) {
+            _binding.txtTitle.setText("Pending");
+            _binding.txtMessage.setText(message);
+            _binding.txtSlug.setText("CHILL!");
+            Glide.with(this).asGif().load(R.drawable.animated_pending).into(_binding.imgGif);
+            _binding.btnComplete.setBackgroundResource(R.drawable.ad_money_button_shape);
+        } else {
+            _binding.txtTitle.setText("Success");
+            _binding.txtMessage.setText(message);
+            _binding.txtSlug.setText("Thank You!");
+            Glide.with(this).asGif().load(R.drawable.animated_right).into(_binding.imgGif);
+            _binding.btnComplete.setBackgroundResource(R.drawable.ad_money_button_shape);
+        }
+
+        String finalStatus = status;
+        _binding.btnComplete.setOnClickListener(v -> {
+            if (finalStatus.equalsIgnoreCase("FAILED")) {
+                bottomSheetDialog.dismiss();
+            } else {
+                try {
+                    bottomSheetDialog.dismiss();
+                    JSONObject jsonObject = new JSONObject(data);
+                    Intent intent = new Intent(this, RechargeReportActivity.class);
+                    intent.putExtra("operator_img", jsonObject.getString("operator_img"));
+                    intent.putExtra("operator_dunmy_img", jsonObject.getString("operator_dunmy_img"));
+                    intent.putExtra("mReportsData", data);
+                    intent.putExtra("bps", jsonObject.getString("status").equalsIgnoreCase("success") ? "1" : "0");
+                    intent.putExtra("type", type);
+                    startActivity(intent);
+                    finish();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        bottomSheetDialog.show();
+
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
+
+
 
     @Override
     public void onShowDialog(String message) {

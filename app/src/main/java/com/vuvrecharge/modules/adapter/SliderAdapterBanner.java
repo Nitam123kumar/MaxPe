@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -25,7 +27,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-public class SliderAdapterBanner extends PagerAdapter {
+public class SliderAdapterBanner extends RecyclerView.Adapter<SliderAdapterBanner.SliderViewHolder> {
 
     private Context mContext;
     private List<String> color;
@@ -38,37 +40,25 @@ public class SliderAdapterBanner extends PagerAdapter {
         this.listener=listener;
     }
 
+
+    @NonNull
     @Override
-    public int getCount() {
-        return color.size();
+    public SliderAdapterBanner.SliderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_slider, parent, false);
+        return new SliderViewHolder(view);
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
-        return view == object;
-    }
-
-    @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.item_slider, null);
-
-        ImageView image_view = view.findViewById(R.id.imageView);
-//        RequestOptions options = new RequestOptions()
-//                .placeholder(R.drawable.no)
-//                .error(R.drawable.no);
+    public void onBindViewHolder(@NonNull SliderAdapterBanner.SliderViewHolder holder, int position) {
         SliderData sliderData = banners.get(position);
-            Log.d("logo",color.get(position));
+        Log.d("logo",color.get(position));
         if (!color.get(position).equals("")) {
             Glide.with(mContext)
                     .load(color.get(position))
 //                    .apply(options)
-                    .into(image_view);
+                    .into(holder.imageView);
         }
-        ViewPager viewPager = (ViewPager) container;
-        viewPager.addView(view, 0);
-
-        image_view.setOnClickListener(v -> {
+        holder.imageView.setOnClickListener(v -> {
             try {
 //                if (!sliderData.getUrl().isEmpty()) {
 //                    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
@@ -85,16 +75,20 @@ public class SliderAdapterBanner extends PagerAdapter {
                 throw new RuntimeException(e);
             }
         });
-
-        return view;
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        ViewPager viewPager = (ViewPager) container;
-        View view = (View) object;
-        viewPager.removeView(view);
+    public int getItemCount() {
+        return color.size();
     }
+    public class SliderViewHolder extends RecyclerView.ViewHolder {
+        ImageView imageView;
+        public SliderViewHolder(@NonNull View itemView) {
+            super(itemView);
+            imageView = itemView.findViewById(R.id.imageView);
+        }
+    }
+
     public interface ItemClickListener{
         void onClickListener(String redirection_type,String intent_name,String extra_data,String link) throws ClassNotFoundException;
     }

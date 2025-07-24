@@ -77,7 +77,7 @@
                 android:gravity="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="@color/white"
-                android:background="@drawable/green_button"
+                android:background="@drawable/ad_money_button_shape"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginBottom="@dimen/_20sdp"
                 app:layout_constraintStart_toStartOf="@id/txtTitle"
