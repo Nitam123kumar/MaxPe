@@ -58,6 +58,7 @@
         android:layout_marginEnd="@dimen/_8sdp"
         android:gravity="end"
         android:text="@string/_10"
+        android:textSize="@dimen/_12sdp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/black"
         android:textStyle="bold"

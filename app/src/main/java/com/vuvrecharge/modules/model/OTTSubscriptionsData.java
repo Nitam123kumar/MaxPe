@@ -4,9 +4,18 @@ public class OTTSubscriptionsData {
     private String title;
     private String logo;
     private String redirection_type;
+    private String url;
     private String data;
     public String getData() {
         return data;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
     }
 
     public void setData(String data) {

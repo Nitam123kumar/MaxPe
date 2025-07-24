@@ -102,7 +102,7 @@ public class DTHFragment extends BaseFragment implements DefaultView {
 
     @Override
     public void onError(String error) {
-        listener.onError(error);
+//        listener.onError(error);
     }
 
     @Override

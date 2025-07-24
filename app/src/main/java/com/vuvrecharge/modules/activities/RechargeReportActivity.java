@@ -34,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.FileProvider;
@@ -167,7 +168,7 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
         setContentView(R.layout.activity_recharge_report);
         ButterKnife.bind(this);
         mToolbar.setOnClickListener(this);
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         addMore.setOnClickListener(this);
         done.setOnClickListener(this);
         imgPDF.setOnClickListener(this);

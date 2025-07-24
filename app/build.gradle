@@ -141,6 +141,8 @@ dependencies {
     implementation 'com.caverock:androidsvg:1.4'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
 //    implementation 'com.github.corouteam:GlideToVectorYou:v2.0.0'
+    implementation 'com.tbuonomo:dotsindicator:4.3'
+
 
 
 

@@ -27,6 +27,9 @@ public class PermissionUtil {
     private final String[] callPermissions = {
             "android.permission.CALL_PHONE"
     };
+    private final String[] emailPermissions = {
+            "android.permission.GET_ACCOUNTS"
+    };
 
     private final String[] locationPermissions = {
             "android.permission.ACCESS_FINE_LOCATION",
@@ -47,6 +50,10 @@ public class PermissionUtil {
 
     public String[] getCallPermissions() {
         return callPermissions;
+    }
+
+    public String[] getEmailPermissions() {
+        return emailPermissions;
     }
 
     public String[] getCameraPermissions() {

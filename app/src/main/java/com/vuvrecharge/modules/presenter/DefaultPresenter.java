@@ -1115,7 +1115,7 @@ public class DefaultPresenter {
                         DefaultResponse body = response.body();
                         if (body != null) {
                             if (body.getSuccess() == 1) {
-                                Log.d("TAG_DATA", "onResponse12: "+body.getData());
+                                Log.d("TAG_DATA", "onResponse12: " + body.getData());
 
                                 mDefaultView.onSuccessOther(body.getData(), title + "");
                             } else {
@@ -1393,7 +1393,7 @@ public class DefaultPresenter {
                     }
                     if (response.isSuccessful() && response.code() == 200) {
                         DefaultResponse body = response.body();
-                        Log.d("TAG_DATA", "onResponse: "+body.getData());
+                        Log.d("TAG_DATA", "onResponse: " + body.getData());
                         if (body != null) {
                             try {
                                 if (body.getSuccess() == 1) {
@@ -1444,7 +1444,7 @@ public class DefaultPresenter {
             data.put("post_data", post_data);
             String data_final = data.toString();
             String encrypted = Java_AES_Cipher.encrypt(BaseMethod.key, BaseMethod.iv, data_final);
-            Log.d("fgjksfgj",encrypted+"\n"+post_data.toString());
+            Log.d("fgjksfgj", encrypted + "\n" + post_data.toString());
             if (rotation != null) {
                 mDefaultView.onShowDialog("Loading...");
             }
@@ -1547,6 +1547,7 @@ public class DefaultPresenter {
             e.printStackTrace();
         }
     }
+
     public void recentSuccessDepositHistory(String device_id) {
         try {
             JSONObject post_data = new JSONObject();
@@ -2492,7 +2493,7 @@ public class DefaultPresenter {
 
     public void doMobileRecharge(String number, String operator, String amount, String type,
                                  String std_code, String sub_division, String circle,
-                                 String ac_number, String device_id, String mpin,Boolean isUsingCashbackPoints) {
+                                 String ac_number, String device_id, String mpin, Boolean isUsingCashbackPoints) {
         try {
             JSONObject post_data = new JSONObject();
             post_data.put("number", number);
@@ -3661,7 +3662,8 @@ public class DefaultPresenter {
             e.printStackTrace();
         }
     }
-public void cashbackPointsHistory(String device_id,String from,String to,String keyword) {
+
+    public void cashbackPointsHistory(String device_id, String from, String to, String keyword) {
         try {
             JSONObject post_data = new JSONObject();
             post_data.put("device_id", device_id);
@@ -3925,7 +3927,7 @@ public void cashbackPointsHistory(String device_id,String from,String to,String 
         }
     }
 
-    public void getFeedback(String device_id, String message,Integer ratings) {
+    public void getFeedback(String device_id, String message, Integer ratings) {
         try {
             JSONObject post_data = new JSONObject();
             post_data.put("device_id", device_id);
@@ -3934,6 +3936,49 @@ public void cashbackPointsHistory(String device_id,String from,String to,String 
             post_data.put("ratings", ratings);
             JSONObject data = new JSONObject();
             data.put("request_url", ApiServices.getFeedback);
+            data.put("post_data", post_data);
+            String data_final = data.toString();
+            String encrypted = Java_AES_Cipher.encrypt(BaseMethod.key, BaseMethod.iv, data_final);
+            MyApplication.getInstance()
+                    .getApiInterface()
+                    .defaultRequest(encrypted)
+                    .enqueue(new Callback<DefaultResponse>() {
+                        @Override
+                        public void onResponse(@NonNull Call<DefaultResponse> call, @NonNull Response<DefaultResponse> response) {
+                            if (response.isSuccessful() && response.code() == 200) {
+                                DefaultResponse body = response.body();
+                                if (body != null) {
+                                    if (body.getSuccess() == 1) {
+                                        mDefaultView.onSuccessOther(body.getData());
+                                    } else {
+                                        mDefaultView.onError(body.getMessage());
+                                    }
+                                }
+                            } else {
+                                mDefaultView.onError("Error Bad Request");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<DefaultResponse> call, @NonNull Throwable t) {
+                            Log.d("TAG_DATA", "onFailure: " + t.getMessage());
+                            mDefaultView.onError(t.getMessage());
+                        }
+                    });
+
+        } catch (Exception e) {
+            Log.d("TAG_DATA", "getfeedback1: " + e.getMessage());
+        }
+    }
+
+    public void topRankers(String device_id, String type) {
+        try {
+            JSONObject post_data = new JSONObject();
+            post_data.put("device_id", device_id);
+            post_data.put("token", mDatabase.getToken());
+            post_data.put("type", type);
+            JSONObject data = new JSONObject();
+            data.put("request_url", ApiServices.topRankers);
             data.put("post_data", post_data);
             String data_final = data.toString();
             String encrypted = Java_AES_Cipher.encrypt(BaseMethod.key, BaseMethod.iv, data_final);

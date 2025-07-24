@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
@@ -94,6 +95,7 @@ public class ReportsActivity extends BaseActivity implements DefaultView, View.O
         setContentView(R.layout.activity_statements);
         ButterKnife.bind(this);
         mToolbar.setOnClickListener(this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         title.setText("Recharges");
         search.setOnClickListener(this);
         select_from_date.setOnClickListener(this);

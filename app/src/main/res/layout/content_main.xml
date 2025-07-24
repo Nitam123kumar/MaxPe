@@ -137,41 +137,38 @@
 
                 <requestFocus />
             </View>
-            <!--  // android:src="@drawable/img"-->
-            <ImageView
-                android:id="@+id/headerImage"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/headerImage_layout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_145sdp"
-                android:layout_below="@id/toolbar_constraintlayout"
-                android:scaleType="centerCrop" />
+                android:layout_below="@id/toolbar_constraintlayout">
 
-            <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="match_parent"-->
-            <!--                    android:paddingTop="200dp"-->
-            <!--                    android:id="@+id/viewScrollPoint">-->
+                <ImageView
+                    android:id="@+id/headerImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:padding="@dimen/_5sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                     />
 
-            <!--                    <View-->
-            <!--                        android:layout_width="0dp"-->
-            <!--                        android:layout_height="0dp"-->
-            <!--                        android:background="@drawable/main_shape"-->
-            <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                        app:layout_constraintStart_toStartOf="parent"-->
-            <!--                        app:layout_constraintTop_toTopOf="parent"-->
-            <!--                        app:layout_constraintBottom_toBottomOf="parent"/>-->
 
-            <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+           android:id="@+id/refresh_layout"
+           android:layout_width="match_parent"
+           android:layout_below="@id/toolbar_constraintlayout"
+           android:layout_height="wrap_content">
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/toolbar_constraintlayout"
                 android:clipToPadding="false"
                 android:paddingTop="@dimen/_145sdp"
-
                 >
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -318,8 +315,9 @@
                             android:id="@+id/recharge_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_12sdp"
-                            app:layout_constraintTop_toTopOf="parent">
+                            android:paddingBottom="@dimen/_10sdp"
+                            app:layout_constraintTop_toBottomOf="@+id/recharge_and_txt"
+                            >
 
                             <!--                                <ImageView-->
                             <!--                                    android:layout_width="match_parent"-->
@@ -334,11 +332,291 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_10sdp"
-                                android:paddingBottom="@dimen/_10sdp"
+                                android:paddingBottom="@dimen/_15sdp"
+                                android:visibility="gone"
                                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:spanCount="4" />
+                            <LinearLayout
+                                android:id="@+id/prepaid"
+                                android:layout_width="@dimen/_60sdp"
+                                android:layout_height="@dimen/_75sdp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintEnd_toStartOf="@id/postpaid"
+                                app:layout_constraintStart_toStartOf="parent"
+                                >
+
+                                <ImageView
+                                    android:id="@+id/prepaid_img"
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/sony_live_shape"
+                                    android:src="@drawable/prepaid_mobile"
+
+                                    />
+
+
+                                <TextView
+                                    android:id="@+id/prepaidTxt"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_7sdp"
+                                    android:fontFamily="@font/roboto"
+                                    android:text="@string/prepaid"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_9sdp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/postpaid"
+                                android:layout_width="@dimen/_60sdp"
+                                android:layout_height="@dimen/_75sdp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintEnd_toStartOf="@id/DTH"
+                                app:layout_constraintStart_toEndOf="@+id/prepaid"
+                                >
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/sony_live_shape"
+                                    android:src="@drawable/prepaid_mobile"
+
+                                    />
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_7sdp"
+                                    android:fontFamily="@font/roboto"
+                                    android:text="@string/postpaid"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_9sdp" />
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:id="@+id/DTH"
+                                android:layout_width="@dimen/_60sdp"
+                                android:layout_height="@dimen/_75sdp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintEnd_toStartOf="@id/Landline"
+                                app:layout_constraintStart_toEndOf="@+id/postpaid"
+                                >
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/sony_live_shape"
+                                    android:src="@drawable/layer_1aa"
+
+                                    />
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_7sdp"
+                                    android:fontFamily="@font/roboto"
+                                    android:text="@string/dth_"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_9sdp" />
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:id="@+id/Landline"
+                                android:layout_width="@dimen/_60sdp"
+                                android:layout_height="@dimen/_75sdp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/DTH"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                >
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/sony_live_shape"
+                                    android:src="@drawable/layer_1"
+
+                                    />
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_7sdp"
+                                    android:fontFamily="@font/roboto"
+                                    android:text="@string/landline"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_9sdp" />
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:id="@+id/Electricity"
+                                android:layout_width="@dimen/_60sdp"
+                                android:layout_height="@dimen/_75sdp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                app:layout_constraintEnd_toStartOf="@id/Fastag"
+                                android:orientation="vertical"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                app:layout_constraintTop_toBottomOf="@id/prepaid"
+                                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                                app:layout_constraintStart_toStartOf="parent"
+                                >
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/sony_live_shape"
+                                    android:src="@drawable/layer_2"
+
+                                    />
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_7sdp"
+                                    android:fontFamily="@font/roboto"
+                                    android:text="@string/electricity"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_9sdp" />
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:id="@+id/Fastag"
+                                android:layout_width="@dimen/_60sdp"
+                                android:layout_height="@dimen/_75sdp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                app:layout_constraintEnd_toStartOf="@id/Cylinder"
+                                android:orientation="vertical"
+                                app:layout_constraintTop_toBottomOf="@id/prepaid"
+                                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                                app:layout_constraintTop_toTopOf="@+id/Electricity"
+                                app:layout_constraintStart_toEndOf="@+id/Electricity"
+                                >
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/sony_live_shape"
+                                    android:src="@drawable/layer_1__1_"
+
+                                    />
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_7sdp"
+                                    android:fontFamily="@font/roboto"
+                                    android:text="@string/fastag"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_9sdp" />
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:id="@+id/Cylinder"
+                                android:layout_width="@dimen/_60sdp"
+                                android:layout_height="@dimen/_75sdp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                app:layout_constraintEnd_toStartOf="@id/ViewAll"
+                                android:orientation="vertical"
+                                app:layout_constraintTop_toBottomOf="@id/prepaid"
+                                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                                app:layout_constraintTop_toTopOf="@+id/Electricity"
+                               app:layout_constraintStart_toEndOf="@id/Fastag"
+                                >
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/sony_live_shape"
+                                    android:src="@drawable/layer_1aa__1_"
+
+                                    />
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_7sdp"
+                                    android:fontFamily="@font/roboto"
+                                    android:text="@string/cylinder"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_9sdp" />
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:id="@+id/ViewAll"
+                                android:layout_width="@dimen/_60sdp"
+                                android:layout_height="@dimen/_75sdp"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                app:layout_constraintStart_toEndOf="@id/Cylinder"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                android:orientation="vertical"
+                                app:layout_constraintTop_toBottomOf="@id/prepaid"
+                                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                                app:layout_constraintTop_toTopOf="@+id/Electricity"
+                                >
+
+                                <ImageView
+                                    android:layout_width="@dimen/_45sdp"
+                                    android:layout_height="@dimen/_45sdp"
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/sony_live_shape"
+                                    android:src="@drawable/bharat_logo"
+
+                                    />
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_7sdp"
+                                    android:fontFamily="@font/roboto"
+                                    android:text="@string/view_all"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_9sdp" />
+
+                            </LinearLayout>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -362,15 +640,15 @@
                         <!--                                app:layout_constraintBottom_toTopOf="@id/recharge_layout"/>-->
 
                         <TextView
-
+                            android:id="@+id/recharge_and_txt"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/_30sdp"
                             android:layout_marginVertical="@dimen/_20sdp"
                             android:elevation="@dimen/_2sdp"
                             android:fontFamily="@font/roboto"
-                            android:gravity="center"
+                            android:gravity="center_vertical"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingTop="@dimen/_10sdp"
+                            android:paddingTop="@dimen/_5sdp"
                             android:text="@string/recharge_amp_bill_payment"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_11sdp"
@@ -612,7 +890,7 @@
                                 android:layout_gravity="center"
                                 android:layout_height="wrap_content"
                                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                                app:spanCount="3"
+                                app:spanCount="4"
                                 />
 
                         </LinearLayout>
@@ -735,9 +1013,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_125sdp"
                             android:layout_gravity="center"
-                            android:layout_marginHorizontal="@dimen/_10sdp"
-                            android:layout_marginStart="@dimen/_9sdp"
+                            android:layout_marginHorizontal="@dimen/_8sdp"
                             app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/offer_for_you"
  />
 
@@ -746,7 +1024,6 @@
                             android:layout_width="0dp"
                             android:layout_height="@dimen/_30sdp"
                             android:layout_marginHorizontal="@dimen/_15sdp"
-
                             android:orientation="horizontal"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/pdec">
@@ -783,11 +1060,11 @@
                             android:id="@+id/recyclerSlider"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_90sdp"
-                            android:layout_marginHorizontal="@dimen/_10sdp"
-                            android:layout_marginStart="@dimen/_9sdp"
+                            android:layout_marginHorizontal="@dimen/_8sdp"
                             android:clipToPadding="false"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tutorials"
                             tools:listitem="@layout/slider_layout" />
 
@@ -1045,6 +1322,8 @@
                 </LinearLayout>
 
             </androidx.core.widget.NestedScrollView>
+
+       </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
         </RelativeLayout>

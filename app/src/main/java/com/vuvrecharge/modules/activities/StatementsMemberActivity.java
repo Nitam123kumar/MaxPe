@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -91,7 +92,7 @@ public class StatementsMemberActivity extends BaseActivity implements DefaultVie
         setContentView(R.layout.activity_statements);
         ButterKnife.bind(this);
         mToolbar.setOnClickListener(this);
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         addMore.setOnClickListener(this);
         search.setOnClickListener(this);
         select_from_date.setOnClickListener(this);

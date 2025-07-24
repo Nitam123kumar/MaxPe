@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,9 +39,11 @@ import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -86,6 +89,7 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bharat_bill_pay);
         ButterKnife.bind(this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         mDefaultPresenter = new DefaultPresenter(this);
         mDefaultPresenter.getAllRechargeServices(device_id);
         stringTitle = getIntent().getStringExtra("title");
@@ -109,7 +113,7 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
             try {
 //                JSONObject object = new JSONObject(data);
 //                JSONArray array = object.getJSONArray("bbps_pay_data");
-//                for (int i = 0; i < array.length(); i++){
+//                for (int i = 0; i < yarra.length(); i++){
 //                    BharatBillPayModel payModel = new BharatBillPayModel();
 //                    payModel.setLogo(array.getJSONObject(i).getString("logo"));
 //                    payModel.setTitle(array.getJSONObject(i).getString("title"));
@@ -160,144 +164,169 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
            window.setBackgroundDrawable(background);
        }
    }
-
-        @Override
-    public void onClickListener(@NonNull String name) {
+   @Override
+    public void onClickListener(@NonNull String redirection_type,String intent_name,String activityExtraData,String link) {
         Intent intent;
-        switch (name){
-            case "Electricity":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Electricity Bill");
-                startActivity(intent);
-                break;
-            case "Water":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Water Bill");
-                startActivity(intent);
-                break;
-            case "Insurance":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Insurance");
-                startActivity(intent);
-                break;
-            case "Cylinder":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Cylinder Bill");
-                startActivity(intent);
-                break;
-            case "Fastag":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Fastag");
-                startActivity(intent);
-                break;
-            case "Postpaid":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Postpaid Recharge");
-                startActivity(intent);
-                break;
-            case "GiftCards":
-                intent = new Intent(getActivity(), BillActivity.class);
-                intent.putExtra("title", "Purchase Gift cards");
-                startActivity(intent);
-                break;
-            case "Landline":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Broadband/Landline");
-                startActivity(intent);
-                break;
-            case "DTH":
-                intent = new Intent(getActivity(), RechargeActivity.class);
-                intent.putExtra("title", "DTH Recharge");
-                startActivity(intent);
-                break;
-            case "Gas":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Gas Bill");
-                startActivity(intent);
-                break;
-            case "Prepaid":
-                intent = new Intent(getActivity(), RechargeActivity.class);
-                intent.putExtra("title", "Prepaid Recharge");
-                startActivity(intent);
-                break;
-            case "CreditCardPayment":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Credit Card Payment");
-                startActivity(intent);
-                break;
-            case "LoanRePayment":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Loan Re payment");
-                startActivity(intent);
-                break;
-            case "CableTV":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Cable TV");
-                startActivity(intent);
-                break;
-            case "MunicipalTax":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Municipal Tax");
-                startActivity(intent);
-                break;
-            case "HousingSociety":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Housing Society");
-                startActivity(intent);
-                break;
-            case "ClubAssociation":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Club Association");
-                startActivity(intent);
-                break;
-            case "HospitalPathology":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Hospital Pathology");
-                startActivity(intent);
-                break;
-            case "Subscriptions":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Subscription Fees");
-                startActivity(intent);
-                break;
-            case "Donation":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Donation");
-                startActivity(intent);
-                break;
-            case "Hospital":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Hospital");
-                startActivity(intent);
-                break;
-            case "RecurringDeposit":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Recurring Deposit");
-                startActivity(intent);
-                break;
-            case "PrepaidMeter":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Prepaid Meter");
-                startActivity(intent);
-                break;
-            case "NCMCRecharge":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "NCMC Recharge");
-                startActivity(intent);
-                break;
-            case "MunicipalServices":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Municipal Services");
-                startActivity(intent);
-                break;
-            case "EducationFees":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", "Education Fees");
-                startActivity(intent);
-                break;
-            default:
-                Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show();
-        }
+
+       Class<?> clazz = null;
+       try {
+           clazz = Class.forName(intent_name);
+           intent = new Intent(getActivity(), clazz);
+           JSONObject object = new JSONObject(activityExtraData);
+
+           if (object.length() > 0) {
+
+               Iterator<String> keys = object.keys();
+               while (keys.hasNext()) {
+                   String key = keys.next();
+                   String value = object.optString(key, "");
+
+                   intent.putExtra(key,value);
+               }
+
+           }
+           startActivity(intent);
+       } catch (ClassNotFoundException e) {
+           throw new RuntimeException(e);
+       } catch (JSONException e) {
+           throw new RuntimeException(e);
+       }
+
+
+//        switch (name){
+//            case "Electricity":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Electricity Bill");
+//                startActivity(intent);
+//                break;
+//            case "Water":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Water Bill");
+//                startActivity(intent);
+//                break;
+//            case "Insurance":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Insurance");
+//                startActivity(intent);
+//                break;
+//            case "Cylinder":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Cylinder Bill");
+//                startActivity(intent);
+//                break;
+//            case "Fastag":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Fastag");
+//                startActivity(intent);
+//                break;
+//            case "Postpaid":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Postpaid Recharge");
+//                startActivity(intent);
+//                break;
+//            case "GiftCards":
+//                intent = new Intent(getActivity(), BillActivity.class);
+//                intent.putExtra("title", "Purchase Gift cards");
+//                startActivity(intent);
+//                break;
+//            case "Landline":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Broadband/Landline");
+//                startActivity(intent);
+//                break;
+//            case "DTH":
+//                intent = new Intent(getActivity(), RechargeActivity.class);
+//                intent.putExtra("title", "DTH Recharge");
+//                startActivity(intent);
+//                break;
+//            case "Gas":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Gas Bill");
+//                startActivity(intent);
+//                break;
+//            case "Prepaid":
+//                intent = new Intent(getActivity(), RechargeActivity.class);
+//                intent.putExtra("title", "Prepaid Recharge");
+//                startActivity(intent);
+//                break;
+//            case "CreditCardPayment":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Credit Card Payment");
+//                startActivity(intent);
+//                break;
+//            case "LoanRePayment":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Loan Re payment");
+//                startActivity(intent);
+//                break;
+//            case "CableTV":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Cable TV");
+//                startActivity(intent);
+//                break;
+//            case "MunicipalTax":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Municipal Tax");
+//                startActivity(intent);
+//                break;
+//            case "HousingSociety":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Housing Society");
+//                startActivity(intent);
+//                break;
+//            case "ClubAssociation":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Club Association");
+//                startActivity(intent);
+//                break;
+//            case "HospitalPathology":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Hospital Pathology");
+//                startActivity(intent);
+//                break;
+//            case "Subscriptions":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Subscription Fees");
+//                startActivity(intent);
+//                break;
+//            case "Donation":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Donation");
+//                startActivity(intent);
+//                break;
+//            case "Hospital":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Hospital");
+//                startActivity(intent);
+//                break;
+//            case "RecurringDeposit":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Recurring Deposit");
+//                startActivity(intent);
+//                break;
+//            case "PrepaidMeter":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Prepaid Meter");
+//                startActivity(intent);
+//                break;
+//            case "NCMCRecharge":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "NCMC Recharge");
+//                startActivity(intent);
+//                break;
+//            case "MunicipalServices":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Municipal Services");
+//                startActivity(intent);
+//                break;
+//            case "EducationFees":
+//                intent = new Intent(getActivity(), ElectricityActivity.class);
+//                intent.putExtra("title", "Education Fees");
+//                startActivity(intent);
+//                break;
+//            default:
+//                Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     @Override
@@ -338,6 +367,7 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
                         model.setRedirect_link(obj.getString("redirect_link"));
                         model.setUp_down_msg(obj.getString("up_down_msg"));
                         model.setHighlight_text(obj.getString("highlight_text"));
+                        model.setData(obj.getString("activity_data"));
                         rechargeAndBillPaymentDataList.add(model);
                         adapter.searchData(rechargeAndBillPaymentDataList);
                         adapter.notifyDataSetChanged();
@@ -354,6 +384,7 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
                         model.setRedirect_link(obj.getString("redirect_link"));
                         model.setUp_down_msg(obj.getString("up_down_msg"));
                         model.setHighlight_text(obj.getString("highlight_text"));
+                        model.setData(obj.getString("activity_data"));
                         utility_billsList.add(model);
                         utility_bills_adapter.searchData(utility_billsList);
                     }
@@ -369,6 +400,7 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
                         model.setRedirect_link(obj.getString("redirect_link"));
                         model.setUp_down_msg(obj.getString("up_down_msg"));
                         model.setHighlight_text(obj.getString("highlight_text"));
+                        model.setData(obj.getString("activity_data"));
                         financialServicesList.add(model);
                         Log.d("financialServicesList", String.valueOf(obj));
                         adapter1.notifyDataSetChanged();
@@ -386,6 +418,7 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
                         model.setRedirect_link(obj.getString("redirect_link"));
                         model.setUp_down_msg(obj.getString("up_down_msg"));
                         model.setHighlight_text(obj.getString("highlight_text"));
+                        model.setData(obj.getString("activity_data"));
 //                        insuranceDataList.add(model);
                     }
                 }
@@ -428,31 +461,30 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
     }
 
     @Override
-    public void onClickListener(String redirection_type, String title, String inten_name) {
+    public void onClickListener(String redirection_type, String intent_name, String extra_data) {
         Intent intent;
-        switch (inten_name) {
-            case "RechargeActivity":
-                intent = new Intent(getActivity(), RechargeActivity.class);
-                intent.putExtra("title", title);
-                startActivity(intent);
-                break;
-            case "ElectricityActivity":
-                intent = new Intent(getActivity(), ElectricityActivity.class);
-                intent.putExtra("title", title);
-                startActivity(intent);
-                break;
-            case "BharatBillPayActivity":
-                intent = new Intent(getActivity(), BharatBillPayActivity.class);
-                intent.putExtra("title", title);
-                startActivity(intent);
-                break;
-            case "BillActivity":
-                intent = new Intent(getActivity(), BillActivity.class);
-                intent.putExtra("title", title);
-                startActivity(intent);
-                break;
-            default:
-                showToast("Coming Soon");
+
+        Class<?> clazz = null;
+        try {
+            clazz = Class.forName(intent_name);
+            intent = new Intent(getActivity(), clazz);
+            JSONObject object = new JSONObject(extra_data);
+
+            if (object.length() > 0) {
+                Iterator<String> keys = object.keys();
+                while (keys.hasNext()) {
+                    String key = keys.next();
+                    String value = object.optString(key, "");
+
+                    intent.putExtra(key,value);
+                }
+
+            }
+            startActivity(intent);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
         }
     }
 }

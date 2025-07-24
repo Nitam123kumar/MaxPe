@@ -30,6 +30,7 @@ import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseFragment;
 import com.vuvrecharge.base.BaseMethod;
 import com.vuvrecharge.modules.activities.MaxPointsActivity;
+import com.vuvrecharge.modules.adapter.MaxPointFragmentAdapter;
 import com.vuvrecharge.modules.adapter.MaxPointsAdapter;
 import com.vuvrecharge.modules.adapter.WalletAdapter;
 import com.vuvrecharge.modules.model.CashBackPintsModel;
@@ -77,7 +78,7 @@ public class MaxPointFragment extends BaseFragment implements DefaultView {
     @BindView(R.id.loading)
     LinearLayout loading;
 
-    MaxPointsAdapter adapter;
+    MaxPointFragmentAdapter adapter;
 
     static Date fromDate;
     static Date toDate;
@@ -245,7 +246,7 @@ public class MaxPointFragment extends BaseFragment implements DefaultView {
 
     private void initializeEventsList() {
 
-        adapter = new MaxPointsAdapter(requireContext(), mPointsList);
+        adapter = new MaxPointFragmentAdapter(requireContext(), mPointsList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
         rvMaxPoints.setLayoutManager(linearLayoutManager);
         rvMaxPoints.setAdapter(adapter);

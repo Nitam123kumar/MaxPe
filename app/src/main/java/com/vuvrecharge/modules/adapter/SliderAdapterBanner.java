@@ -17,7 +17,11 @@ import androidx.viewpager.widget.ViewPager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.vuvrecharge.R;
+import com.vuvrecharge.modules.model.OfferSlider;
 import com.vuvrecharge.modules.model.SliderData;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -26,12 +30,12 @@ public class SliderAdapterBanner extends PagerAdapter {
     private Context mContext;
     private List<String> color;
     private List<SliderData> banners;
-
-    public SliderAdapterBanner(Context context, List<String> color, List<SliderData> banners) {
+   ItemClickListener listener;
+    public SliderAdapterBanner(Context context, List<String> color, List<SliderData> banners,ItemClickListener listener) {
         this.mContext = context;
         this.color = color;
         this.banners = banners;
-
+        this.listener=listener;
     }
 
     @Override
@@ -53,6 +57,7 @@ public class SliderAdapterBanner extends PagerAdapter {
 //        RequestOptions options = new RequestOptions()
 //                .placeholder(R.drawable.no)
 //                .error(R.drawable.no);
+        SliderData sliderData = banners.get(position);
             Log.d("logo",color.get(position));
         if (!color.get(position).equals("")) {
             Glide.with(mContext)
@@ -65,14 +70,19 @@ public class SliderAdapterBanner extends PagerAdapter {
 
         image_view.setOnClickListener(v -> {
             try {
-                if (!banners.get(position).getUrl().isEmpty()) {
-                    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-                    CustomTabsIntent customTabsIntent = builder.build();
-                    customTabsIntent.intent.setPackage("com.android.chrome");
-                    customTabsIntent.launchUrl(mContext, Uri.parse(banners.get(position).getUrl()));
-                }
-            }catch (ActivityNotFoundException e){
-                Log.d("TAG_DATA", "instantiateItem: "+e.getMessage());
+//                if (!sliderData.getUrl().isEmpty()) {
+//                    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+//                    CustomTabsIntent customTabsIntent = builder.build();
+//                    customTabsIntent.intent.setPackage("com.android.chrome");
+//                    customTabsIntent.launchUrl(mContext, Uri.parse(banners.get(position).getUrl()));
+//                }
+                JSONObject object = new JSONObject(sliderData.getData());
+
+                listener.onClickListener(sliderData.getRedirection_type(),object.getString("intent_name"),object.getString("extra_data"),sliderData.getUrl());
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
             }
         });
 
@@ -84,5 +94,8 @@ public class SliderAdapterBanner extends PagerAdapter {
         ViewPager viewPager = (ViewPager) container;
         View view = (View) object;
         viewPager.removeView(view);
+    }
+    public interface ItemClickListener{
+        void onClickListener(String redirection_type,String intent_name,String extra_data,String link) throws ClassNotFoundException;
     }
 }

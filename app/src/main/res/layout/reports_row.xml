@@ -28,7 +28,6 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:ellipsize="end"
         android:fontFamily="@font/roboto"
-        android:maxLines="1"
         android:text="@string/jio"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/black"
@@ -36,6 +35,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/order_id"
         app:layout_constraintStart_toEndOf="@id/operator_img"
+        app:layout_constraintEnd_toStartOf="@id/amount"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 

@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 
@@ -65,6 +66,7 @@ public class FeedbackActivity extends BaseActivity implements DefaultView, View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
         ButterKnife.bind(this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setStatusBarGradiant(this);
         mToolBar.setOnClickListener(this);
         submit_feedback_Btn.setOnClickListener(this);

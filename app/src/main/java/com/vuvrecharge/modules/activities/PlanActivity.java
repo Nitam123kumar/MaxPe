@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -105,6 +106,7 @@ public class PlanActivity extends BaseActivity implements DefaultView,View.OnCli
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_plan);
     ButterKnife.bind(getActivity());
+    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     mToolbar.setOnClickListener(this);
     setStatusBarGradiant(this);

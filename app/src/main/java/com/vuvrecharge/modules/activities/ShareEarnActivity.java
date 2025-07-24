@@ -1,5 +1,7 @@
 package com.vuvrecharge.modules.activities;
 
+import static com.vuvrecharge.api.ApiServices.BASE_URL;
+
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -7,21 +9,32 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
+import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseActivity;
+import com.vuvrecharge.modules.adapter.ImageSliderAdapter;
 import com.vuvrecharge.modules.model.UserData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
@@ -29,6 +42,8 @@ import com.vuvrecharge.modules.view.DefaultView;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,7 +62,6 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
     TextView retry;
     @BindView(R.id.txtReferId)
     EditText referCode;
-
     @BindView(R.id.btnReferCopy)
     TextView btnReferCopy;
 //    @BindView(R.id.txtReferSlug)
@@ -70,8 +84,8 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
 //    @BindView(R.id.txtReferMaxSlug)
 //    TextView txtReferMaxSlug;
 
-//    @BindView(R.id.viewMyReferral)
-//    View viewMyReferral;
+    @BindView(R.id.SuccessfulReferralView)
+    View viewMyReferral;
 
     @BindView(R.id.maxPoints_availableTxt)
     TextView maxPoints_availableTxt;
@@ -79,15 +93,28 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
     TextView top_EarnerTV;
     @BindView(R.id.top_earner_ImageSlider)
     ImageSlider top_earner_ImageSlider;
-//    @BindView(R.id.viewReferralIncome)
-//    View viewReferralIncome;
-    @BindView(R.id.txtTermsCondition)
-    TextView txtTermsCondition;
-    @BindView(R.id.imageSlider)
-    ImageSlider imageSlider;
+    @BindView(R.id.myBonusView)
+    View viewReferralIncome;
+    @BindView(R.id.available_earnTV)
+    TextView available_earnTV;
+    @BindView(R.id.viewPager)
+    ViewPager2 viewPager;
+    @BindView(R.id.webView)
+    WebView webView;
     String shareText = "";
     TextView submit;
     LinearLayout loading;
+//    @BindView(R.id.swipeRefreshLayout)
+//    SwipeRefreshLayout refresh_layout;
+
+    @BindView(R.id.worm_dots_indicator)
+    DotsIndicator wormDotsIndicator;
+    ImageSliderAdapter imageSliderAdapter;
+    private Handler sliderHandler = new Handler();
+    private Runnable sliderRunnable;
+
+
+    ArrayList<String> top_earner_list1 = new ArrayList<>();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -95,6 +122,7 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shareearn);
         ButterKnife.bind(this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         title.setText("Refer & Earn");
         mDefaultPresenter = new DefaultPresenter(this);
         mToolbar.setOnClickListener(this);
@@ -102,8 +130,8 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
         btnReferCopy.setOnClickListener(this);
         top_EarnerTV.setOnClickListener(this);
         setStatusBarGradiant(this);
-//        viewMyReferral.setOnClickListener(this);
-//        viewReferralIncome.setOnClickListener(this);
+        viewMyReferral.setOnClickListener(this);
+        viewReferralIncome.setOnClickListener(this);
         if (mDatabase != null) {
             if (mDatabase.getUserData() != null) {
                 if (mDatabase.getUserData().getReferCode() != null) {
@@ -111,27 +139,45 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
                 }
             }
         }
-        txtTermsCondition.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), ReferandEarnTermsActivity.class);
-            startActivity(intent);
-        });
         mDefaultPresenter.totalReferrals(device_id);
 
-        ArrayList<SlideModel> imageList = new ArrayList<>();
+        imageSliderAdapter = new ImageSliderAdapter(top_earner_list1, this);
+        viewPager.setAdapter(imageSliderAdapter);
+        wormDotsIndicator.setViewPager2(viewPager);
+        sliderRunnable = new Runnable() {
+            @Override
+            public void run() {
+                int currentItem = viewPager.getCurrentItem();
+                int totalItem = imageSliderAdapter.getItemCount();
+                if (currentItem < totalItem - 1) {
+                    viewPager.setCurrentItem(currentItem + 1, true);
+                } else {
+                    viewPager.setCurrentItem(0, true);
+                }
+                sliderHandler.postDelayed(this, 3000);
+            }
+        };
+        sliderHandler.postDelayed(sliderRunnable, 3000);
 
-        imageList.add(new SlideModel(R.drawable.refer_and_earn_img,ScaleTypes.FIT));
-        imageList.add(new SlideModel(R.drawable.refer_and_earn_img,ScaleTypes.FIT));
-        imageList.add(new SlideModel(R.drawable.refer_and_earn_img,ScaleTypes.FIT));
-        imageList.add(new SlideModel(R.drawable.refer_and_earn_img,ScaleTypes.FIT));
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                sliderHandler.removeCallbacks(sliderRunnable);
+                sliderHandler.postDelayed(sliderRunnable, 3000);
+            }
+        });
 
-        imageSlider.setImageList(imageList, ScaleTypes.FIT);
+//        refresh_layout.setOnRefreshListener(this::refreshData);
+//        refresh_layout.setRefreshing(true);
+
 
         ArrayList<SlideModel> top_earner_list = new ArrayList<>();
 
-        top_earner_list.add(new SlideModel(R.drawable. image_dummy, ScaleTypes.FIT));
-        top_earner_list.add(new SlideModel(R.drawable. image_dummy, ScaleTypes.FIT));
-        top_earner_list.add(new SlideModel(R.drawable. image_dummy, ScaleTypes.FIT));
-        top_earner_list.add(new SlideModel(R.drawable. image_dummy, ScaleTypes.FIT));
+        top_earner_list.add(new SlideModel(R.drawable.image_dummy, ScaleTypes.FIT));
+        top_earner_list.add(new SlideModel(R.drawable.image_dummy, ScaleTypes.FIT));
+        top_earner_list.add(new SlideModel(R.drawable.image_dummy, ScaleTypes.FIT));
+        top_earner_list.add(new SlideModel(R.drawable.image_dummy, ScaleTypes.FIT));
 
         top_earner_ImageSlider.setImageList(top_earner_list, ScaleTypes.FIT);
 //        top_earner_ImageSlider.setIndicatorSelectedColor(Color.RED);
@@ -143,17 +189,22 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
     protected void onResume() {
         super.onResume();
         setLayout(no_internet, retry, "shareEarn");
+        sliderHandler.postDelayed(sliderRunnable, 3000);
     }
-
+    void refreshData() {
+        mDefaultPresenter.totalReferrals(device_id);
+    }
     @Override
     protected void onPause() {
         hideAllDialog();
         super.onPause();
+        sliderHandler.removeCallbacks(sliderRunnable);
     }
-
+    @SuppressLint({"SetJavaScriptEnabled", "NotifyDataSetChanged", "SetTextI18n"})
     @Override
     public void onSuccess(String userData) {
         try {
+//            refresh_layout.setRefreshing(false);
             JSONObject jsonObject = new JSONObject(userData);
             txtMyReferralValue.setText(jsonObject.getString("totalReferrals"));
             txtReferralIncomeValue.setText("\u20b9 " + jsonObject.getString("totalReferralPaid"));
@@ -162,6 +213,8 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
             maxPoints_availableTxt.setText(mDatabase.getUserData().getCashbackPoints());
 
             txtSuccessfulReferralCount.setText(object.getString("successfull_referals"));
+
+            available_earnTV.setText(object.getString("refer"));
 //            txtBonusEarnCount.setText("\u20b9 " + object.getString("bonus_earned"));
 //            txtExpectedBonusCount.setText("\u20b9 " + object.getString("expected_bonus"));
 //            txtReferSlug.setText(jsonObject.getString("referal_slug"));
@@ -169,7 +222,29 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
 //            txtReferMessage.setText(object.getString("refer"));
 //            txtReferMaxSlug.setText(object.getString("reward"));
 
+            String webViewHtml = jsonObject.getString("referal_html");
+            webView.loadDataWithBaseURL(BASE_URL, webViewHtml, "text/html", "UTF-8", null);
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.getSettings().setLoadWithOverviewMode(true);
+            webView.getSettings().setUseWideViewPort(true);
+            webView.getSettings().setBuiltInZoomControls(true);
+            webView.getSettings().setDisplayZoomControls(false);
+            webView.setWebViewClient(new WebViewClient());
+
+            Log.d("referal_slides", webViewHtml);
             shareText = jsonObject.getString("shareText");
+
+            JSONObject sliderObject = jsonObject.getJSONObject("referal_slides");
+            top_earner_list1.clear();
+            if (sliderObject.length() > 0) {
+
+                for (int i = 0; i < sliderObject.length(); i++) {
+                    top_earner_list1.add(sliderObject.getString(String.valueOf(i)));
+                }
+                imageSliderAdapter.notifyDataSetChanged();
+
+
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -248,25 +323,23 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
                     }
                 }
             }
-        }
-//        else if (v.getId() == R.id.viewMyReferral) {
-//            Intent intent = new Intent(getActivity(), MyReferralsActivity.class);
-//            startActivity(intent);
-//        } else if (v.getId() == R.id.viewReferralIncome) {
-//            Intent intent = new Intent(getActivity(), ReferralsIncomeActivity.class);
-//            startActivity(intent);
-//        }
-        else if (v.getId() == R.id.toolbar_LinearLayout) {
+        } else if (v.getId() == R.id.SuccessfulReferralView) {
+            Intent intent = new Intent(getActivity(), MyReferralsActivity.class);
+            startActivity(intent);
+        } else if (v.getId() == R.id.myBonusView) {
+            Intent intent = new Intent(getActivity(), ReferralsIncomeActivity.class);
+            startActivity(intent);
+        } else if (v.getId() == R.id.toolbar_layout) {
             onBackPressed();
             getActivity().finish();
-        }else if (v.getId() == R.id.top_Earner) {
-            Intent intent=new Intent(this,TopEarnerActivity.class);
+        } else if (v.getId() == R.id.top_Earner) {
+            Intent intent = new Intent(this, TopEarnerActivity.class);
             startActivity(intent);
         }
-
-
     }
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+
+    @SuppressLint({"ObsoleteSdkInt,UseCompatLoadingForDrawables"})
+    @androidx.annotation.RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     static void setStatusBarGradiant(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = activity.getWindow();

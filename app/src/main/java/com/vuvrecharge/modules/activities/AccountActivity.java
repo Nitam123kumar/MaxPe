@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
@@ -159,6 +160,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
         ButterKnife.bind(this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         defaultView = this;
         fingerprint = new Fingerprint(this);
         passwordLess = new PasswordLess(this);
@@ -199,7 +201,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         mDefaultPresenter = new DefaultPresenter(this);
         mDefaultPresenter.getPaymentSetting2(device_id + "", "timepass");
         mDefaultPresenter.totalReferrals(device_id);
-        email_TV.setText("nitamsingh304@gmai.com");
+
 //        statusBarColor();
     }
 
@@ -209,7 +211,8 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
             String shortName = mDatabase.getUserData().getName();
             String initials = getInitials(shortName, 2);
             nameLogo.setText(initials);
-            name.setText("Hi, "+userData.getName());
+            name.setText(userData.getName());
+            email_TV.setText(userData.getEmail());
 //            available_maxPointsTV.setText(userData.getCashbackPoints());
 //            available_earnTV.setText("\u20b9"+userData.getEarnings());
             phoneNumber.setText("+91-"+userData.getMobile());

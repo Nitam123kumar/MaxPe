@@ -8,11 +8,12 @@
 
     <ImageView
         android:id="@+id/operator_img"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_28sdp"
         android:layout_marginStart="@dimen/_15sdp"
         android:contentDescription="@string/app_name"
         android:background="@drawable/biller_img_shape"
+        android:padding="@dimen/_4sdp"
         android:elevation="@dimen/_2sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,7 +26,7 @@
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="@dimen/_11sdp"
         app:layout_constraintStart_toEndOf="@id/operator_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -35,7 +36,7 @@
     <View
         android:id="@+id/view"
         android:layout_width="0dp"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/dimen_1dp"
         android:background="#4DD9D9D9"
         app:layout_constraintStart_toStartOf="@id/title"
         app:layout_constraintEnd_toEndOf="@id/title"

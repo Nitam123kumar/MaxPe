@@ -5,7 +5,8 @@ public class FinancialServicesData {
     String title;
     String redirect_link;
     String up_down_msg;
-    private String highlight_text;;
+    private String highlight_text;
+    private String activity_data;
 
 public FinancialServicesData(){
 
@@ -48,5 +49,12 @@ public FinancialServicesData(){
 
     public void setRedirect_link(String redirect_link) {
         this.redirect_link = redirect_link;
+    }
+    public String getData() {
+        return activity_data;
+    }
+
+    public void setData(String activity_data) {
+        this.activity_data = activity_data;
     }
 }

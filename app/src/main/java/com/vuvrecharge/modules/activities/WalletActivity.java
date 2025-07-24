@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
@@ -88,6 +89,7 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
         setContentView(R.layout.activity_wallet);
         ButterKnife.bind(getActivity());
 //        setStatusBarGradiant();
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         mDefaultPresenter = new DefaultPresenter(this);
         device_id = Settings.Secure.getString(getActivity().getContentResolver(),
                 Settings.Secure.ANDROID_ID);

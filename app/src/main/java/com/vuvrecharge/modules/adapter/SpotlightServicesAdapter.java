@@ -58,7 +58,7 @@ public class SpotlightServicesAdapter  extends RecyclerView.Adapter<SpotlightSer
         holder.itemView.setOnClickListener(v -> {
             try {
                 JSONObject object = new JSONObject(spotlightData.getData());
-                listener.onClickListener(spotlightData.getRedirectLink(),object.getString("title"),object.getString("intent_name"));
+                listener.onClickListener(spotlightData.getType(),object.getString("intent_name"),object.getString("extra_data"),spotlightData.getRedirectLink());
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {
@@ -86,7 +86,7 @@ public class SpotlightServicesAdapter  extends RecyclerView.Adapter<SpotlightSer
         }
     }
     public interface ItemClickListener{
-        void onClickListener(String redirection_type,String title,String inten_name) throws ClassNotFoundException;
+        void onClickListener(String redirection_type,String intent_name,String extra_data,String link) throws ClassNotFoundException;
     }
 
 }

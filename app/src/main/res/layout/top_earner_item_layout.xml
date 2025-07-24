@@ -3,26 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_38sdp"
-    android:layout_marginTop="@dimen/_10sdp"
-    android:layout_marginBottom="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:id="@+id/topEarnerBackground"
+    android:layout_marginBottom="@dimen/_5sdp"
     android:background="@drawable/top_earner_item_shape">
 
     <TextView
         android:id="@+id/rank_no"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
+        android:background="@drawable/ellipse_609"
+        android:gravity="center"
+        android:textSize="@dimen/_12sdp"
+        android:textColor="#0B54A5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/ranker_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_20sdp"
         android:textSize="@dimen/_11sdp"
         android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@id/ranker_amount"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/rank_no"
         app:layout_constraintTop_toTopOf="parent" />

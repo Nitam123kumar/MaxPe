@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -56,6 +57,7 @@ public class ReferandEarnTermsActivity extends BaseActivity implements DefaultVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_referand_earn_terms);
         ButterKnife.bind(this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         mToolbar.setOnClickListener(this);
         title.setText("FAQ's");
         initializeEventsList();

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -90,7 +91,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/contactSupportLayout"
                         android:layout_width="@dimen/_125sdp"
-                        android:layout_height="@dimen/_54sdp"
+                        android:layout_height="@dimen/_48sdp"
 
                         android:layout_marginTop="@dimen/_20sdp"
                         android:background="@drawable/support_design_background_shape"
@@ -146,7 +147,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/whatsAppSupportLayout"
                         android:layout_width="@dimen/_125sdp"
-                        android:layout_height="@dimen/_54sdp"
+                        android:layout_height="@dimen/_48sdp"
                         android:background="@drawable/support_design_background_shape"
                         app:layout_constraintTop_toTopOf="@id/contactSupportLayout"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -197,8 +198,8 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/emailSupportLayout"
                         android:layout_width="@dimen/_125sdp"
-                        android:layout_height="@dimen/_54sdp"
-                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_height="@dimen/_48sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:background="@drawable/support_design_background_shape"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/contactSupportLayout"
@@ -251,7 +252,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/feedbackLayout"
                         android:layout_width="@dimen/_125sdp"
-                        android:layout_height="@dimen/_54sdp"
+                        android:layout_height="@dimen/_48sdp"
                         android:background="@drawable/support_design_background_shape"
                         app:layout_constraintStart_toStartOf="@id/whatsAppSupportLayout"
                         app:layout_constraintEnd_toEndOf="@id/whatsAppSupportLayout"
@@ -296,7 +297,7 @@
                         android:maxLines="1"
                         android:layout_marginHorizontal="@dimen/_20sdp"
                         android:textSize="@dimen/_12sdp"
-                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
                         android:textColor="@color/black"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -322,7 +323,7 @@
                         android:gravity="center"
                         android:textStyle="bold"
                         android:maxLines="1"
-                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_8sdp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -332,9 +333,9 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/updatedLayout"
                     android:layout_width="@dimen/_134sdp"
-                    android:layout_height="@dimen/_42sdp"
+                    android:layout_height="@dimen/_38sdp"
                     android:layout_marginStart="@dimen/_13sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/stay_update_shape"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/llPrepaidNumber"
@@ -385,7 +386,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/updateLayout2"
                     android:layout_width="@dimen/_134sdp"
-                    android:layout_height="@dimen/_42sdp"
+                    android:layout_height="@dimen/_38sdp"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:background="@drawable/stay_update_shape"
                     app:layout_constraintTop_toTopOf="@id/updatedLayout"
@@ -459,14 +460,14 @@
                             android:layout_height="wrap_content"
                             android:text="@string/follow_us"
                             android:textSize="@dimen/_9sdp"
+                            android:fontFamily="@font/roboto"
                             android:textStyle="bold"
                             android:gravity="center_vertical"
-                            android:layout_marginTop="@dimen/_50sdp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                             android:textColor="@color/black"
-                            app:layout_constraintTop_toBottomOf="@id/updateLayout2"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginBottom="@dimen/_13sdp"
                             app:layout_constraintBottom_toTopOf="@id/contrant"/>
 
 
@@ -478,20 +479,9 @@
                             android:gravity="center"
                             android:layout_marginBottom="@dimen/_30sdp"
                             android:layout_marginTop="@dimen/_10sdp"
-                            app:layout_constraintTop_toBottomOf="@id/follow"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent">
-
-                            <ImageView
-                                android:id="@+id/instagram"
-                                android:layout_width="@dimen/_14sdp"
-                                android:layout_height="@dimen/_14sdp"
-                                android:layout_marginEnd="@dimen/_10sdp"
-                                android:src="@drawable/instagram_2"
-                                android:contentDescription="@string/app_name"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"/>
 
                             <ImageView
                                 android:id="@+id/youtube"
@@ -500,9 +490,9 @@
                                 android:layout_marginEnd="@dimen/_10sdp"
                                 android:src="@drawable/youtube_svg"
                                 android:contentDescription="@string/app_name"
-                                android:layout_marginStart="@dimen/_5sdp"
-                                app:layout_constraintStart_toEndOf="@id/instagram"
-                                app:layout_constraintTop_toTopOf="@id/instagram"/>
+
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"/>
 
                             <ImageView
                                 android:id="@+id/facebook"

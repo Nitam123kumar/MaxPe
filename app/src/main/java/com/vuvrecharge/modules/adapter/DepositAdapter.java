@@ -102,7 +102,7 @@ public class DepositAdapter extends RecyclerView.Adapter<DepositAdapter.Holder> 
             } else if (mDepositData.getPayment_status().toUpperCase().equals("SUCCESS")) {
 //                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_history_1);
                 Glide.with(mContext)
-                        .load(R.drawable.send_success_icon)
+                        .load(R.drawable.deposit_susccess_image_svg)
                         .into(imgDone);
                 txtStatus.setBackgroundDrawable(BaseMethod.getGradientDrawableRe1(mContext.getResources().getColor(R.color.success)));
                 txtAmount.setTextColor(mContext.getResources().getColor(R.color.black));

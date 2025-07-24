@@ -400,7 +400,7 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
     PermissionUtil permissionUtil = new PermissionUtil();
 
     public static final int SELECT_CALL = 99, SELECT_CONTACT = 100, SELECT_FILE = 101, REQUEST_APP_DETAILS = 111, SELECT_PICTURE = 201, CROP_IMAGE = 301,
-            LOCATION_CHANGE = 401, ALL_PERMISSION = 401, MY_PERMISSIONS_REQUEST_ACTIVITY_RECOGNITION = 501;
+            LOCATION_CHANGE = 401,EMAIL_PERMISSION = 123, ALL_PERMISSION = 401, MY_PERMISSIONS_REQUEST_ACTIVITY_RECOGNITION = 501;
     public boolean selectContact() {
         if (permissionUtil.checkMarshMellowPermission()) {
             if (permissionUtil.verifyPermissions(getActivity(), permissionUtil.getContactPermissions()))
@@ -420,6 +420,19 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
                 return true;
             else {
                 ActivityCompat.requestPermissions(getActivity(), permissionUtil.getCallPermissions(), SELECT_CALL);
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    public boolean selectEmail() {
+        if (permissionUtil.checkMarshMellowPermission()) {
+            if (permissionUtil.verifyPermissions(getActivity(), permissionUtil.getEmailPermissions()))
+                return true;
+            else {
+                ActivityCompat.requestPermissions(getActivity(), permissionUtil.getEmailPermissions(), EMAIL_PERMISSION);
                 return false;
             }
         } else {
@@ -529,6 +542,21 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
                     }
                     if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), result)) {
                         selectCall();
+                    }/* else {
+                        openAppSetting();
+                    }*/
+                    return;
+                }
+            }
+        }
+        if (requestCode == EMAIL_PERMISSION) {
+            for (String result : permissions) {
+                if (ActivityCompat.checkSelfPermission(getActivity(), result) != PackageManager.PERMISSION_GRANTED) {
+                    if (getActivity() == null) {
+                        return;
+                    }
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), result)) {
+                        selectEmail();
                     }/* else {
                         openAppSetting();
                     }*/

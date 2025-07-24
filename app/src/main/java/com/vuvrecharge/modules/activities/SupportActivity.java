@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -59,8 +60,6 @@ public class SupportActivity extends BaseActivity implements View.OnClickListene
     ImageView xcode;
     @BindView(R.id.facebook)
     ImageView facebook;
-    @BindView(R.id.instagram)
-    ImageView instagram;
     @BindView(R.id.linkedln)
     ImageView linkedln;
     @BindView(R.id.imgContactSupport)
@@ -74,12 +73,18 @@ public class SupportActivity extends BaseActivity implements View.OnClickListene
 
     @BindView(R.id.contactSupportLayout)
     ConstraintLayout contactSupportLayout;
+    @BindView(R.id.emailSupportLayout)
+    ConstraintLayout emailSupportLayout;
     @BindView(R.id.llDTHNumber)
     TextView llDTHNumber;
     @BindView(R.id.llPrepaidNumber)
     TextView llPrepaidNumber;
     @BindView(R.id.whatsAppSupportLayout)
     ConstraintLayout whatsAppSupportLayout;
+    @BindView(R.id.updateLayout2)
+    ConstraintLayout updateLayout2;
+    @BindView(R.id.updatedLayout)
+    ConstraintLayout updatedLayout;
     @BindView(R.id.feedbackLayout)
     ConstraintLayout feedbackLayout;
 
@@ -92,11 +97,14 @@ public class SupportActivity extends BaseActivity implements View.OnClickListene
         mToolbar.setOnClickListener(this);
         contactSupportLayout.setOnClickListener(this);
         whatsAppSupportLayout.setOnClickListener(this);
-        instagram.setOnClickListener(this);
+        updateLayout2.setOnClickListener(this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         xcode.setOnClickListener(this);
         linkedln.setOnClickListener(this);
         facebook.setOnClickListener(this);
+        emailSupportLayout.setOnClickListener(this);
         feedbackLayout.setOnClickListener(this);
+        updatedLayout.setOnClickListener(this);
         youtube.setOnClickListener(this);
         setStatusBarGradiant(this);
         llPrepaidNumber.setOnClickListener(v -> {
@@ -111,10 +119,7 @@ public class SupportActivity extends BaseActivity implements View.OnClickListene
             intent.putExtra("type", "DTH");
             startActivity(intent);
         });
-        instagram.setOnClickListener(view -> {
-           Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/maxpe_payments/"));
-            startActivity(intent);
-        });
+        Log.d("Email",mDatabase.getUserData().getSupport_email());
     }
 
     public void onBackPressed() {
@@ -180,9 +185,24 @@ public class SupportActivity extends BaseActivity implements View.OnClickListene
                 Intent chooser = Intent.createChooser(i, "Chat with...");
                 startActivity(chooser);
                 break;
-            case R.id.instagram:
+            case R.id.updatedLayout:
+                UserData userData1 = mDatabase.getUserData();
+                String url1 = "https://api.whatsapp.com/send/?phone=91" + userData1.getWhatsapp_number() + "&text=" + "Hello MaxPe Support, My registered mobile number is " + userData1.getMobile();
+                Intent in = new Intent(Intent.ACTION_VIEW);
+                in.setData(Uri.parse(url1));
+                Intent chooser1 = Intent.createChooser(in, "Chat with...");
+                startActivity(chooser1);
+                break;
+            case R.id.updateLayout2:
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/maxpe_payments/"));
                 startActivity(intent);
+                break;
+            case R.id.emailSupportLayout:
+                UserData emailUserData = mDatabase.getUserData();
+                if (selectEmail()){
+                    Intent email_intent = new Intent(Intent.ACTION_VIEW,Uri.parse("mailto:"+emailUserData.getSupport_email()));
+                    startActivity(Intent.createChooser(email_intent, "Send Email"));
+                }
                 break;
             case R.id.xcode:
                 Toast.makeText(this, "coming soon", Toast.LENGTH_SHORT).show();

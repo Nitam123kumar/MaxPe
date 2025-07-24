@@ -51,12 +51,10 @@
                     android:ellipsize="end"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:text="@string/bill_payment"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_15sdp"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/toolbar_layout"/>
+                    app:layout_constraintStart_toStartOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

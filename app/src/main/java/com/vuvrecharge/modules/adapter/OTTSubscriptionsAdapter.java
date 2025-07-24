@@ -60,14 +60,15 @@ public class OTTSubscriptionsAdapter extends RecyclerView.Adapter<OTTSubscriptio
         holder.ottTitle.setText(ottData.getTitle());
 
         holder.itemView.setOnClickListener(v -> {
-//            try {
-//                JSONObject object = new JSONObject(ottData.getData());
-//                listener.onClickListener(ottData.getRedirection_type(),object.getString("title"),object.getString("intent_name"));
-//            } catch (JSONException e) {
-//                throw new RuntimeException(e);
-//            }
+            try {
+                JSONObject object = new JSONObject(ottData.getData());
+                listener.onClickListener(ottData.getRedirection_type(),object.getString("intent_name"),object.getString("extra_data"),ottData.getUrl());
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         });
-
     }
 
     @Override
@@ -87,6 +88,6 @@ public class OTTSubscriptionsAdapter extends RecyclerView.Adapter<OTTSubscriptio
 
     }
     public interface ItemClickListener{
-        void onClickListener(String redirection_type,String title,String inten_name) throws ClassNotFoundException;
+        void onClickListener(String redirection_type,String intent_name,String extra_data,String link) throws ClassNotFoundException;
     }
 }

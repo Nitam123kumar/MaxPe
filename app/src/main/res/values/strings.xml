@@ -441,5 +441,11 @@
     <string name="select_upi_app">Select UPI App</string>
     <string name="whatsapp_alert">WhatsApp Alert</string>
     <string name="x">X</string>
+    <string name="postpaid">Postpaid</string>
+    <string name="dth_">DTH</string>
+    <string name="landline">Landline</string>
+    <string name="fastag">Fastag</string>
+    <string name="cylinder">Cylinder</string>
+    <string name="top_earners">Top Earners</string>
 
 </resources>

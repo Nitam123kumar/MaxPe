@@ -39,6 +39,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;
 import androidx.databinding.DataBindingUtil;
@@ -76,11 +77,13 @@ import com.vuvrecharge.modules.view.DefaultView;
 import com.vuvrecharge.preferences.OperatorPreferences;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Timer;
@@ -91,7 +94,7 @@ import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 
 public class RechargeActivity extends BaseActivity implements DefaultView,
-        SearchableSpinnerCircleAdapter.OnItemClickListeners,View.OnClickListener{
+        SearchableSpinnerCircleAdapter.OnItemClickListeners, View.OnClickListener {
 
     DefaultView mDefaultView;
     private DefaultPresenter mDefaultPresenter;
@@ -107,13 +110,13 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
     TextView view_cus_info;
     @BindView(R.id.view_plan)
     TextView view_plan;
-//    @BindView(R.id.select_circle_bg)
+    //    @BindView(R.id.select_circle_bg)
 //    LinearLayout select_circle_bg;
     @BindView(R.id.mobile_number)
     TextInputEditText mobile_number;
     @BindView(R.id.txtTitle)
     TextView txtTitle;
-//    @BindView(R.id.mobile_number_layout)
+    //    @BindView(R.id.mobile_number_layout)
 //    TextInputLayout mobile_number_layout;
     @BindView(R.id.recyclerViewBillerInfo)
     RecyclerView recyclerViewBillerInfo;
@@ -142,7 +145,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
     TextView btnRoffer;
     @BindView(R.id.txtOperator)
     TextView txtOperator;
-//    @BindView(R.id.imgBBPS)
+    //    @BindView(R.id.imgBBPS)
 //    ImageView imgBBPS;
     @BindView(R.id.submit)
     TextView submit;
@@ -155,7 +158,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
     String operator_dummy = "", mobile_number_str = "";
     OperatorPreferences operatorPreferences;
     OperatorPreferences operatorPreferences2;
-    HashMap<String, String> map,map2;
+    HashMap<String, String> map, map2;
     String selected_operator = "Select Operator";
     String selected_operator_str = "";
     String selected_circle = "Select Circle";
@@ -179,13 +182,14 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
     List<CircleData> circleDataList = new ArrayList<>();
     public BottomSheetDialog dialog = null;
     public FrameLayout bottomSheet = null;
-    String m_id = "",order_id = "",mPin = "";
+    String m_id = "", order_id = "", mPin = "";
     ReportsData mReportsData;
     Handler handler;
     Runnable runnable;
     BottomSheetDialog dialog2 = null;
     ArrayList<PaymentModel> list = new ArrayList<>();
     double releaseAmount = 0.000;
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         hideKeyBoard(mobile_number);
@@ -199,6 +203,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recharge);
         ButterKnife.bind(this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         string = getIntent().getStringExtra("title");
         title.setText(string);
@@ -232,15 +237,16 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 //                view_plan.setBackgroundResource(R.drawable.btn_drawable_disable);
                 mobile_number.setHint("Mobile Number");
                 txtTitle.setText("Mobile Number");
-                operatorPreferences = new OperatorPreferences(this,type);
-                operatorPreferences2 = new OperatorPreferences(this,type+"2");
+                operatorPreferences = new OperatorPreferences(this, type);
+                operatorPreferences2 = new OperatorPreferences(this, type + "2");
                 map = operatorPreferences.getData();
                 map2 = operatorPreferences2.getData();
-                if (map.get("type") != null){
+                if (map.get("type") != null) {
                     operatorDataList.clear();
                     circleDataList.clear();
                     Gson gson = new Gson();
-                    Type type_ = new TypeToken<List<OperatorData>>() {}.getType();
+                    Type type_ = new TypeToken<List<OperatorData>>() {
+                    }.getType();
                     List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
                     this.operatorDataList = operatorDataList;
                     operator_list = new ArrayList<>();
@@ -253,10 +259,10 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                     for (OperatorData operatorData : operatorDataList) {
                         image = operatorData.getLogo();
                         if (image != null && !image.isEmpty() && !image.equals("null")) {
-                            operator_list_img.add(IMAGE_LOGO+"/" + operatorData.getLogo());
+                            operator_list_img.add(IMAGE_LOGO + "/" + operatorData.getLogo());
                             operator_list.add(operatorData.getName());
                         } else {
-                            operator_list_img.add(IMAGE_LOGO +"/" + operator_dummy);
+                            operator_list_img.add(IMAGE_LOGO + "/" + operator_dummy);
                             operator_list.add(operatorData.getName());
                         }
                     }
@@ -266,10 +272,9 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                     List<CircleData> circleDataList = gson2.fromJson(map2.get("list"), type_2);
                     this.circleDataList = circleDataList;
                     loadOperatorSpinner();
-                }else {
+                } else {
                     mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
                 }
-
 
 
                 view_plan.setOnClickListener(v -> {
@@ -354,20 +359,20 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 
                     @Override
                     public void afterTextChanged(Editable s) {
-                        if (s.toString().startsWith("+91")){
-                            String str = s.toString().replace("+91","");
+                        if (s.toString().startsWith("+91")) {
+                            String str = s.toString().replace("+91", "");
                             mobile_number.setText(str);
                             mobile_number.setFilters(filters);
                             if (findOperator.equals("1")) {
                                 if (s.toString().length() > 9) {
                                     mDefaultPresenter.findOperatorCircle(device_id, s.toString());
-                                }else {
+                                } else {
                                     select_operator.setSelection(0);
                                     amount.setText("");
                                     txtOperator.setText("Select Circle");
                                 }
                             }
-                        }else {
+                        } else {
                             if (findOperator.equals("1")) {
                                 if (s.toString().length() > 9) {
                                     mobile_number.setFilters(filters);
@@ -379,7 +384,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 
 //                                    view_plan.setTextColor(Color.WHITE);
 //                                    view_plan.setBackgroundResource(R.drawable.btn_drawable);
-                                }else {
+                                } else {
                                     select_operator.setSelection(0);
                                     amount.setText("");
                                     txtOperator.setText("Select Circle");
@@ -394,8 +399,8 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 
 //                                    view_plan.setTextColor(Color.BLACK);
 //                                    view_plan.setBackgroundResource(R.drawable.btn_drawable_disable);
-                                    if (s.toString().startsWith("+91")){
-                                        String str = s.toString().replace("+91","");
+                                    if (s.toString().startsWith("+91")) {
+                                        String str = s.toString().replace("+91", "");
                                         mobile_number.setText(str);
                                         mobile_number.setFilters(filters);
                                     }
@@ -414,9 +419,9 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 //                imgBBPS.setVisibility(VISIBLE);
                 search_number.setVisibility(VISIBLE);
                 btnRoffer.setVisibility(GONE);
-                operatorPreferences = new OperatorPreferences(this,type);
+                operatorPreferences = new OperatorPreferences(this, type);
                 map = operatorPreferences.getData();
-                if (map.get("type") != null){
+                if (map.get("type") != null) {
                     operatorDataList.clear();
                     findOperator = "1";
                     Gson gson = new Gson();
@@ -431,14 +436,14 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                     for (OperatorData operatorData : operatorDataList) {
                         image = operatorData.getLogo();
                         if (image != null && !image.isEmpty() && !image.equals("null")) {
-                            operator_list_img.add(IMAGE_LOGO+"/" + operatorData.getLogo());
+                            operator_list_img.add(IMAGE_LOGO + "/" + operatorData.getLogo());
                             operator_list.add(operatorData.getName());
                         } else {
-                            operator_list_img.add(IMAGE_LOGO+"/" + operator_dummy);
+                            operator_list_img.add(IMAGE_LOGO + "/" + operator_dummy);
                             operator_list.add(operatorData.getName());
                         }
                     }
-                }else {
+                } else {
                     mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
                 }
                 InputFilter[] filters2 = new InputFilter[1];
@@ -466,7 +471,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 
 //                                view_plan.setTextColor(Color.WHITE);
 //                                view_plan.setBackgroundResource(R.drawable.btn_drawable);
-                            }else {
+                            } else {
 //                                btnRoffer.setBackgroundResource(R.drawable.btn_drawable_disable);
 //                                btnRoffer.setTextColor(Color.BLACK);
 
@@ -478,6 +483,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                             }
                         }
                     }
+
                     @Override
                     public void afterTextChanged(Editable s) {
 
@@ -500,9 +506,9 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                 btnRoffer.setVisibility(GONE);
                 mobile_number.setHint("DTH Number");
                 txtTitle.setText("DTH Number");
-                operatorPreferences = new OperatorPreferences(this,type);
+                operatorPreferences = new OperatorPreferences(this, type);
                 map = operatorPreferences.getData();
-                if (map.get("type") != null){
+                if (map.get("type") != null) {
                     operatorDataList.clear();
                     Gson gson = new Gson();
                     Type type_ = new TypeToken<List<OperatorData>>() {
@@ -517,14 +523,14 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                     for (OperatorData operatorData : operatorDataList) {
                         image = operatorData.getLogo();
                         if (image != null && !image.isEmpty() && !image.equals("null")) {
-                            operator_list_img.add(IMAGE_LOGO+"/" + operatorData.getLogo());
+                            operator_list_img.add(IMAGE_LOGO + "/" + operatorData.getLogo());
                             operator_list.add(operatorData.getName());
                         } else {
-                            operator_list_img.add(IMAGE_LOGO+"/" + operator_dummy);
+                            operator_list_img.add(IMAGE_LOGO + "/" + operator_dummy);
                             operator_list.add(operatorData.getName());
                         }
                     }
-                }else {
+                } else {
                     mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
                 }
                 view_cus_info.setOnClickListener(v -> {
@@ -576,7 +582,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 
 //                                view_plan.setTextColor(Color.WHITE);
 //                                view_plan.setBackgroundResource(R.drawable.btn_drawable);
-                            }else {
+                            } else {
 //                                btnRoffer.setBackgroundResource(R.drawable.btn_drawable_disable);
 //                                btnRoffer.setTextColor(Color.BLACK);
 
@@ -588,6 +594,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                             }
                         }
                     }
+
                     @Override
                     public void afterTextChanged(Editable s) {
 
@@ -635,7 +642,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
     }
 
     private void billFetch(String operatorId, String phoneNumber) {
-        mDefaultPresenter.fetchBillPostpaidInfo(device_id, operatorId, phoneNumber,"");
+        mDefaultPresenter.fetchBillPostpaidInfo(device_id, operatorId, phoneNumber, "");
     }
 
     void pendingstatus() {
@@ -736,18 +743,18 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().isEmpty()){
+                if (!s.toString().isEmpty()) {
                     ArrayList<CircleData> data = new ArrayList<>();
-                    for (CircleData circleData: circleDataList){
-                        if (circleData.getState_name().toUpperCase().toLowerCase().contains(s.toString().toUpperCase().toLowerCase())){
+                    for (CircleData circleData : circleDataList) {
+                        if (circleData.getState_name().toUpperCase().toLowerCase().contains(s.toString().toUpperCase().toLowerCase())) {
                             data.add(circleData);
                         }
                     }
-                    if (data == null || data.isEmpty()){
+                    if (data == null || data.isEmpty()) {
                         showToast("Not data found");
                         circleAdapter.searchData(circleDataList);
 
-                    }else {
+                    } else {
                         circleAdapter.searchData(data);
                     }
                 }
@@ -761,16 +768,15 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
         txtOperator.setText(model.getState_name());
         dialog1.cancel();
         dialog1.dismiss();
-        if (!txtOperator.getText().toString().equals("Select Circle")){
-            if (position == 0){
+        if (!txtOperator.getText().toString().equals("Select Circle")) {
+            if (position == 0) {
                 selected_circle_str = model.getState_name();
                 selected_circle = model.getId();
-            }else {
+            } else {
                 selected_circle_str = model.getState_name();
                 selected_circle = model.getId();
             }
-        }
-        else {
+        } else {
             showError("Please Select service provider.");
         }
     }
@@ -851,7 +857,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                                String std_code, String dob, String circle, String ac_number,
                                @NonNull String selected_operator_str) {
 
-        try{
+        try {
             RechargeDialogBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()),
                     R.layout.recharge_dialog, null, false);
 
@@ -904,12 +910,12 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                 mDefaultPresenter.doMobileRecharge(number + "", operator + "",
                         amount + "", type + "",
                         std_code + "", dob + "",
-                        circle + "", ac_number + "", device_id + "", mPin + "",false);
+                        circle + "", ac_number + "", device_id + "", mPin + "", false);
                 dialog.dismiss();
             });
             dialog.show();
-        }catch (Exception e){
-            Log.d("TAG_DATA", "rechargeDialog: "+e.getMessage());
+        } catch (Exception e) {
+            Log.d("TAG_DATA", "rechargeDialog: " + e.getMessage());
         }
     }
 
@@ -943,7 +949,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 //                _binding.imgGif.setGifImageResource(R.drawable.animated_wrong);
                 Glide.with(this).asGif().load(R.drawable.animated_wrong).into(_binding.imgGif);
                 _binding.btnComplete.setBackgroundResource(R.drawable.failed_button);
-            } else if (status.toUpperCase().equals("PENDING")){
+            } else if (status.toUpperCase().equals("PENDING")) {
                 _binding.btnComplete.setBackgroundResource(R.drawable.pending_button);
                 _binding.txtTitle.setText("Pending");
 //                _binding.txtMessage.setText("Your transaction is under process.\nPlease check your history after a few min.");
@@ -951,7 +957,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                 _binding.txtSlug.setText("CHILL!");
 //                _binding.imgGif.setGifImageResource(R.drawable.animated_pending);
                 Glide.with(this).asGif().load(R.drawable.animated_pending).into(_binding.imgGif);
-            }else {
+            } else {
                 _binding.btnComplete.setBackgroundResource(R.drawable.green_button);
                 _binding.txtTitle.setText("Success");
 //                _binding.txtMessage.setText("Your transaction has been\ncompleted successfully.");
@@ -971,13 +977,13 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                         Intent intent = new Intent(getActivity(), RechargeReportActivity.class);
                         intent.putExtra("operator_img", jsonObject.getString("operator_img"));
                         intent.putExtra("operator_dunmy_img", jsonObject.getString("operator_dunmy_img"));
-                        if (jsonObject.getString("status").toLowerCase().equals("success")){
+                        if (jsonObject.getString("status").toLowerCase().equals("success")) {
                             intent.putExtra("bps", "1");
-                        }else {
+                        } else {
                             intent.putExtra("bps", "0");
                         }
                         intent.putExtra("mReportsData", data);
-                        intent.putExtra("type",type);
+                        intent.putExtra("type", type);
                         startActivity(intent);
                         finish();
                     } catch (Exception e) {
@@ -1018,7 +1024,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
     public void onSuccess(String message, String second_message) {
         infos.clear();
         try {
-            if (second_message.equals("razorPayMethod")){
+            if (second_message.equals("razorPayMethod")) {
                 JSONObject jsonObject = new JSONObject(message);
                 String orderid = jsonObject.getString("orderid");
                 this.order_id = orderid;
@@ -1028,7 +1034,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                 upiIntent.setData(Uri.parse(uriString.trim()));
                 Intent chooser = Intent.createChooser(upiIntent, "Pay with...");
                 startActivityForResult(chooser, 104, null);
-            }else if (second_message.equals("recharge")){
+            } else if (second_message.equals("recharge")) {
                 JSONObject jsonObject = new JSONObject(message);
                 String orderid = jsonObject.getString("orderid");
                 this.order_id = orderid;
@@ -1038,8 +1044,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                 upiIntent.setData(Uri.parse(uriString.trim()));
                 Intent chooser = Intent.createChooser(upiIntent, "Pay with...");
                 startActivityForResult(chooser, 108, null);
-            }
-            else if (second_message.equals("orderDetails")){
+            } else if (second_message.equals("orderDetails")) {
                 Gson gson = new Gson();
                 Type type_ = new TypeToken<ReportsData>() {
                 }.getType();
@@ -1057,23 +1062,21 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 //                    }
 //                };
 
-                if (payment_status.toLowerCase().equals("pending")){
+                if (payment_status.toLowerCase().equals("pending")) {
                     openPendingDialog();
-                }else if (payment_status.toLowerCase().equals("success")){
+                } else if (payment_status.toLowerCase().equals("success")) {
                     mDefaultPresenter.doMobileRecharge(
-                            mobile_number.getText().toString().trim(),selected_operator,amount.getText().toString().trim(),type,
+                            mobile_number.getText().toString().trim(), selected_operator, amount.getText().toString().trim(), type,
                             "0", "0",
-                            selected_circle,"0",device_id, mPin,false);
-                }else if (payment_status.toLowerCase().equals("failed")){
+                            selected_circle, "0", device_id, mPin, false);
+                } else if (payment_status.toLowerCase().equals("failed")) {
                     Toast.makeText(getActivity(), "Transaction Cancelled", Toast.LENGTH_LONG).show();
-                }else {
+                } else {
                     openPendingDialog();
                 }
-            }
-            else if (second_message.equals("orderDetailsPending")){
+            } else if (second_message.equals("orderDetailsPending")) {
                 openPendingDialog();
-            }
-            else if (second_message.equals("postpaid")){
+            } else if (second_message.equals("postpaid")) {
                 JSONObject object = new JSONObject(message);
                 BillInfo info = new BillInfo();
 
@@ -1101,19 +1104,18 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                 adapter.notifyDataSetChanged();
                 btnBillFetch.setVisibility(GONE);
                 recyclerViewBillerInfo.setVisibility(VISIBLE);
-            }
-            else {
+            } else {
                 JSONObject jsonObject = new JSONObject(message);
                 Gson gson = new Gson();
                 Type type_ = new TypeToken<List<OperatorData>>() {
                 }.getType();
                 List<OperatorData> operatorDataList = gson.fromJson(jsonObject.getString("operators"), type_);
-                operatorPreferences.setOperator(type,jsonObject.getString("operators"));
+                operatorPreferences.setOperator(type, jsonObject.getString("operators"));
                 Type type_1 = new TypeToken<List<CircleData>>() {
                 }.getType();
                 List<CircleData> circleDataList = gson.fromJson(jsonObject.getString("circles"), type_1);
-                if (type.equals("Prepaid")){
-                    operatorPreferences2.setOperator(type+"2",jsonObject.getString("circles"));
+                if (type.equals("Prepaid")) {
+                    operatorPreferences2.setOperator(type + "2", jsonObject.getString("circles"));
                 }
                 warning_message = jsonObject.getString("message");
                 findOperator = jsonObject.getString("findOperator");
@@ -1152,7 +1154,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
             printLog(jsonObject.toString());
             remaining_pages = Integer.parseInt(jsonObject.getString("remaining_pages"));
             JSONArray jsonArray = jsonObject.getJSONArray("history_data");
-            if (jsonArray.length() > 0){
+            if (jsonArray.length() > 0) {
                 Gson gson = new Gson();
                 Type type_ = new TypeToken<List<ReportsData>>() {
                 }.getType();
@@ -1162,19 +1164,18 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                 recentRechargesAdapter.addData(passbookData, second_message, jsonObject.getString("operator_img"),
                         jsonObject.getString("operator_dunmy_img"), mDefaultView, mDatabase);
 
-            }else {
+            } else {
 
             }
 
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
     Timer timer;
+
     private void openPendingDialog() {
         try {
             timer = new Timer();
@@ -1201,7 +1202,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                         public void run() {
                             mDefaultPresenter.orderDetails(device_id, order_id);
                         }
-                    },10000
+                    }, 10000
             );
 
             _binding.btnComplete.setOnClickListener(v -> {
@@ -1261,7 +1262,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
             } else {
                 successDialog(data, data_other);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -1339,17 +1340,17 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                 behavior.setPeekHeight(600);
             }
             JSONObject json = new JSONObject(data);
-            binding.txtTransactionAmountValue.setText("\u20b9"+amount.getText().toString().trim());
-            if (mDatabase != null){
-                if (mDatabase.getEarnings() != null){
-                    binding.txtWalletAmountValue.setText("₹"+mDatabase.getEarnings());
+            binding.txtTransactionAmountValue.setText("\u20b9" + amount.getText().toString().trim());
+            if (mDatabase != null) {
+                if (mDatabase.getEarnings() != null) {
+                    binding.txtWalletAmountValue.setText("₹" + mDatabase.getEarnings());
                 }
             }
-            binding.txtTotalDiscountValue.setText("₹"+json.getString("discount"));
+            binding.txtTotalDiscountValue.setText("₹" + json.getString("discount"));
             releaseAmount = (Double.parseDouble(amount.getText().toString().trim()) - json.getDouble("discount"));
-            binding.txtPayableAmtValue.setText("₹"+releaseAmount);
+            binding.txtPayableAmtValue.setText("₹" + releaseAmount);
 
-            binding.btnPay.setText("Add on ₹"+json.getInt("required"));
+            binding.btnPay.setText("Add on ₹" + json.getInt("required"));
 
 //            if(binding.checkWallet.isChecked()){
 //                binding.txtMessage.setVisibility(VISIBLE);
@@ -1386,7 +1387,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                 try {
                     mDefaultPresenter.addInsufficientBalance(device_id, json.getString("required"));
                     dialog2.dismiss();
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 //                binding.btnPay.setText("Pay \u20b9"+amt);
@@ -1430,31 +1431,31 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
             dialog2.show();
         } catch (Exception e) {
             e.printStackTrace();
-            Log.d("TAG_DATA", "addBalance: "+e.getMessage());
+            Log.d("TAG_DATA", "addBalance: " + e.getMessage());
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 108){
-            if (resultCode == RESULT_OK){
+        if (requestCode == 108) {
+            if (resultCode == RESULT_OK) {
                 mDefaultPresenter.orderDetails(device_id, order_id);
             } else {
                 Toast.makeText(getActivity(), "Transaction Cancelled", Toast.LENGTH_LONG).show();
             }
         }
 
-        if (requestCode == 102){
-            if (resultCode == RESULT_OK){
+        if (requestCode == 102) {
+            if (resultCode == RESULT_OK) {
                 mDefaultPresenter.orderDetails(device_id, order_id);
             } else {
                 Toast.makeText(getActivity(), "Transaction Cancelled", Toast.LENGTH_LONG).show();
             }
         }
 
-        if (requestCode == 103){
-            if (resultCode == RESULT_OK){
+        if (requestCode == 103) {
+            if (resultCode == RESULT_OK) {
                 mDefaultPresenter.orderDetails(device_id, order_id);
             } else {
                 Toast.makeText(getActivity(), "Transaction Cancelled", Toast.LENGTH_LONG).show();
@@ -1464,7 +1465,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 
     @Override
     public void onClick(@NonNull View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.toolbar_layout:
                 onBackPressed();
                 getActivity().finish();

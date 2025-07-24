@@ -117,19 +117,12 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:padding="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/balance_constraintLayout4"
-        android:background="@drawable/latest_transitions_shape">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/filter_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             >
@@ -140,19 +133,26 @@
                 android:text="@string/transactions"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_20sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/filter_View"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_25sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
             <ImageView
                 android:id="@+id/filter_ImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/filter_View"
+                app:layout_constraintTop_toTopOf="@id/filter_View"
                 android:src="@drawable/filter_icon_svg"
-                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
                 app:layout_constraintBottom_toTopOf="@id/transitions"
                 />
 
@@ -163,9 +163,10 @@
                 android:text="@string/filter"
                 android:textColor="#828282"
                 android:textSize="@dimen/_7sdp"
-                android:layout_marginTop="@dimen/_3sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="@dimen/_1sdp"
+                app:layout_constraintBottom_toBottomOf="@id/filter_View"
                 app:layout_constraintEnd_toEndOf="@id/filter_ImageView"
+                app:layout_constraintStart_toStartOf="@id/filter_ImageView"
                 app:layout_constraintTop_toBottomOf="@id/filter_ImageView"
 
                 />
@@ -177,10 +178,10 @@
             android:id="@+id/date_picker_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_3sdp"
+            android:layout_marginHorizontal="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:padding="@dimen/_10sdp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/filter_layout"
             android:background="@drawable/rectangle_18971__1_">
 
@@ -325,24 +326,33 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/date_picker_layout">
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_20sdp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/_12sdp">
+
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/maxPointRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="true"
-                    tools:listitem="@layout/max_points_row"
+                    android:layout_marginTop="@dimen/_6sdp"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:paddingBottom="@dimen/_10sdp"/>
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:listitem="@layout/max_points_row"
+                    />
 
                 <TextView
                     android:id="@+id/txtNoData"
@@ -358,16 +368,31 @@
                     app:layout_constraintTop_toTopOf="@id/maxPointRecyclerView"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
-                <LinearLayout
-                    android:id="@+id/loading"
+                <TextView
+                    android:id="@+id/view_all_maxPoints"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/maxPointRecyclerView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@string/view_all"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:textSize="@dimen/_12sdp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:id="@+id/loading"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:visibility="visible"
-                    app:layout_constraintTop_toTopOf="@id/maxPointRecyclerView"
-                    app:layout_constraintStart_toStartOf="@id/maxPointRecyclerView"
-                    app:layout_constraintEnd_toEndOf="@id/maxPointRecyclerView"
-                    app:layout_constraintBottom_toBottomOf="@id/maxPointRecyclerView">
+                    android:visibility="gone"
+                    >
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -385,12 +410,6 @@
 
                 </LinearLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.core.widget.NestedScrollView>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

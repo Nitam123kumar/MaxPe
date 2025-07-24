@@ -7,10 +7,12 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -21,6 +23,8 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -81,10 +85,20 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
     TextView select_to_date;
     @BindView(R.id.search)
     TextView search;
+    @BindView(R.id.date_picker_layout)
+    ConstraintLayout date_picker_layout;
+    @BindView(R.id.filter_View)
+    View filter_View;
     @BindView(R.id.ref_no)
     EditText ref_no;
     @BindView(R.id.loading)
     LinearLayout loading;
+
+
+    @BindView(R.id.view_all_maxPoints)
+    TextView view_all_maxPoints;
+
+
     CashBackPintsModel data;
     private List<MaxPePointsData> mMaxPePointsData = new ArrayList<>();
     MaxPointsAdapter maxPointsAdapter;
@@ -102,12 +116,14 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
     boolean isLoading = true;
     DialogFragment newFragment;
     OnFragmentListener listener = null;
+    Boolean isFrom = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_max_points);
         ButterKnife.bind(this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         defaultPresenter = new DefaultPresenter(this);
 //        defaultPresenter.cashbackPointsHistory(device_id+"","03 Jul 2025","18 Jul 2025","175281101911308");
         initializeEventsList();
@@ -129,6 +145,24 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
         select_to_date.setText("DD MM YYYY");
         loadData("Yes");
         onclickListener();
+
+        date_picker_layout.setVisibility(GONE);
+        filter_View.setOnClickListener(v -> {
+            if (isFrom==false){
+                date_picker_layout.setVisibility(GONE);
+                isFrom=true;
+            }else {
+                date_picker_layout.setVisibility(VISIBLE);
+                isFrom=false;
+            }
+        });
+
+
+        view_all_maxPoints.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(),StatementsActivity.class);
+            intent.putExtra("maxPointsActivity","maxPointsActivity");
+            startActivity(intent);
+        });
 
     }
 

@@ -1,6 +1,8 @@
 
 package com.vuvrecharge.modules.model;
 
+import com.airbnb.lottie.L;
+
 import java.util.List;
 
 public class UserData {
@@ -43,7 +45,7 @@ public class UserData {
     String referCode;
     private String shareText;
     private String offer_slides_path;
-    private String main_hero_banner;
+//    private List<String> main_hero_banner;
     private String support_number;
     private String support_email;
     private String address;
@@ -72,13 +74,13 @@ public class UserData {
         return slide_path;
     }
 
-    public void setMain_hero_banner(String main_hero_banner) {
-        this.main_hero_banner = main_hero_banner;
-    }
-
-    public String getMain_hero_banner() {
-        return main_hero_banner;
-    }
+//    public void setMain_hero_banner(List<String> main_hero_banner) {
+//        this.main_hero_banner = main_hero_banner;
+//    }
+//
+//    public List<String> getMain_hero_banner() {
+//        return main_hero_banner;
+//    }
 
     public void setSlide_path(String slide_path) {
         this.slide_path = slide_path;

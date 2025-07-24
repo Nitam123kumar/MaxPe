@@ -103,6 +103,11 @@
           <theme>@android:style/Theme.Material.Light</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/default_indicator.xml">
+        <config>
+          <theme>@android:style/Theme.Material.Light</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/deposit_pending_svg.xml">
         <config>
           <theme>@android:style/Theme.Material.Light</theme>
@@ -124,6 +129,11 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/earn_discount_shape.xml">
+        <config>
+          <theme>@android:style/Theme.Material.Light</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/ellipse_609.xml">
         <config>
           <theme>@android:style/Theme.Material.Light</theme>
         </config>
@@ -184,6 +194,11 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/in_link.xml">
+        <config>
+          <theme>@android:style/Theme.Material.Light</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/indicator_selector.xml">
         <config>
           <theme>@android:style/Theme.Material.Light</theme>
         </config>
@@ -353,6 +368,11 @@
           <theme>@android:style/Theme.Material.Light</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/selected_indicator.xml">
+        <config>
+          <theme>@android:style/Theme.Material.Light</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/share_drawable.xml">
         <config>
           <theme>@android:style/Theme.Material.Light</theme>
@@ -414,6 +434,11 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/top_earner_item_shape.xml">
+        <config>
+          <theme>@android:style/Theme.Material.Light</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/top_earner_item_shape_even.xml">
         <config>
           <theme>@android:style/Theme.Material.Light</theme>
         </config>
@@ -733,6 +758,11 @@
           <theme>@android:style/Theme.Material.Light</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/add_money_header_layout.xml">
+        <config>
+          <theme>@android:style/Theme.Material.Light</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/add_wallet_balance_dialog.xml">
         <config>
           <theme>@android:style/Theme.Material.Light</theme>
@@ -1003,7 +1033,17 @@
           <theme>@android:style/Theme.Material.Light</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/main_header_layout.xml">
+        <config>
+          <theme>@android:style/Theme.Material.Light</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/manual_row.xml">
+        <config>
+          <theme>@android:style/Theme.Material.Light</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/max_point_row_layout.xml">
         <config>
           <theme>@android:style/Theme.Material.Light</theme>
         </config>
@@ -1269,136 +1309,96 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5334b43-0456-4b0b-815c-b3826a2035cf" name="Changes" comment="Some Changes All Activity On 17/07/2025">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/SpotlightServicesAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/model/CashBackPintsModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/model/SlideData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/model/SpotlightData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/calls_icon.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/gmail_icon_svg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/group_12772.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/group_12799.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/image_dummy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/on_back_shape1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/shot_name_shape.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/support_icon_svg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/spotlight_services_row.xml" afterDir="false" />
+    <list default="true" id="b5334b43-0456-4b0b-815c-b3826a2035cf" name="Changes" comment="Some Changes All Activity On 19/07/2025">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/ImageSliderAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/MaxPointFragmentAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/TopEarnerAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/model/TopEarnerData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/deposit_susccess_image_svg.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ellipse_609.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/layer_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/layer_1__1_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/layer_1aa.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/layer_1aa__1_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/layer_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/prepaid_mobile.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/top_earner_item_shape_even.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/add_money_header_layout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/main_header_layout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/max_point_row_layout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/api/ApiServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/api/ApiServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/base/BaseActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/base/BaseActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/AccountActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/AccountActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/AddBalanceActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/AddBalanceActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/BharatBillPayActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/BharatBillPayActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/BillActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/BillActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/FeedbackActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/FeedbackActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/ForgotPasswordActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/ForgotPasswordActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/LoginActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/MaxPointsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/MaxPointsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/PlanActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/PlanActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/RechargeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/RechargeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/RechargeReportActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/RechargeReportActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/ReferandEarnTermsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/ReferandEarnTermsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/ReferralsIncomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/ReferralsIncomeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/ReportsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/ReportsActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/ShareEarnActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/ShareEarnActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/StatementsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/StatementsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/StatementsMemberActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/StatementsMemberActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/SupportActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/SupportActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/TopEarnerActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/TopEarnerActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/PlanDetailsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/PlanDetailsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/MaxPointsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/MaxPointsAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/WalletActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/WalletActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/BharatBillPayAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/BharatBillPayAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/DepositAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/DepositAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/FinancialServicesAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/FinancialServicesAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/OTTSubscriptionsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/OTTSubscriptionsAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/OfferSliderRecyclerViewAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/OfferSliderRecyclerViewAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/SliderAdapterBanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/SliderAdapterBanner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/SpotlightServicesAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/SpotlightServicesAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/fragments/DTHFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/fragments/DTHFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/fragments/MaxPointFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/fragments/MaxPointFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/fragments/PrepaidFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/fragments/PrepaidFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/model/BharatBillPayModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/model/BharatBillPayModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/model/FinancialServicesData.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/model/FinancialServicesData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/model/OTTSubscriptionsData.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/model/OTTSubscriptionsData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/model/OfferSlider.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/model/OfferSlider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/model/SliderData.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/model/SliderData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/model/UserData.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/model/UserData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/presenter/DefaultPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/presenter/DefaultPresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/max_points_shape.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/max_points_shape.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/account_delete_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/account_delete_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_about.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_about.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_account.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_account.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/utils/permission/PermissionUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/utils/permission/PermissionUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_balance.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_balance.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_member.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_member.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_after_deposit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_after_deposit.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_bharat_bill_pay.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_bharat_bill_pay.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_bill.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_bill.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_cashfree.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_cashfree.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_commission.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_commission.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_commission_chart.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_commission_chart.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_complaint_registration.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_complaint_registration.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_deposit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_deposit.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_electricity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_electricity.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_electricity_bill_pay.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_electricity_bill_pay.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_feedback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_feedback.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_forgot_password.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_forgot_password.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_help_line.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_help_line.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_intro.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_intro.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_manual.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_manual.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_max_points.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_max_points.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_member_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_member_profile.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_mobile_banking.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_mobile_banking.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_mycommison_package.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_mycommison_package.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_payment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_payment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_plan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_plan.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_plan_details.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_plan_details.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_recharge.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_recharge.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_recharge_report.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_recharge_report.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_referand_earn_terms.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_referand_earn_terms.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_referral_i_ncome.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_referral_i_ncome.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_referrals.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_referrals.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_select_number.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_select_number.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_shareearn.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_shareearn.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_splash.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_splash.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_support.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_support.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_top_earner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_top_earner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_wallet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_wallet.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/add_amount_history_details_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/add_amount_history_details_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/add_balance.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/add_balance.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_custom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_custom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_custom_all_audio.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_custom_all_audio.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_custom_refer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_custom_refer.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/bbps_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/bbps_layout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/bill_payment_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/bill_payment_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/complains_row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/complains_row.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/dashboard_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dashboard_layout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/deposit_row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/deposit_row.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/downlinepackage_row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/downlinepackage_row.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/dth_plan_row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dth_plan_row.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/feedback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/feedback.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/feedback_dailog_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/feedback_dailog_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/follows_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/follows_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_deposit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_deposit.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_first.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_first.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_max_point.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_max_point.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_second.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_second.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_third.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_third.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_wallet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_wallet.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/help_line_dth_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/help_line_dth_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/help_line_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/help_line_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/latest_transitions_history_item_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/latest_transitions_history_item_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/logout_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/logout_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/manual_row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/manual_row.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/max_points_row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/max_points_row.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/members_header.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/members_header.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/message_success_dialog_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/message_success_dialog_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/offer_slider_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/offer_slider_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/opreator_item_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/opreator_item_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/otp_verify_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/otp_verify_dialog.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/otp_verify_password_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/otp_verify_password_dialog.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/ott_service_item_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/ott_service_item_layout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/passbook_row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/passbook_row.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/payment_item_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/payment_item_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/payment_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/payment_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/plan_mpin_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/plan_mpin_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/plan_row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/plan_row.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/register_bg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/register_bg.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/reports_row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/reports_row.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/resetmpin_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/resetmpin_dialog.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/rv_commission_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/rv_commission_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/searchable_spinner_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/searchable_spinner_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/set_mpin_alert_dailog_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/set_mpin_alert_dailog_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/set_pin_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/set_pin_dialog.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/setting_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/setting_dialog.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/statements_header.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/statements_header.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/success_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/success_dialog.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/transaction_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/transaction_dialog.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/using_payment_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/using_payment_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/wallet_transaction_botton_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/wallet_transaction_botton_dialog.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/whatsapp_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/whatsapp_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/rv_electricity_data_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/rv_electricity_data_layout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/slider_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/slider_layout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/top_earner_item_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/top_earner_item_layout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/xml/motion_scene.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/xml/motion_scene.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -1409,7 +1409,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=PhysicalDevice, isTemplate=false, identifier=serial=1396838704000DP)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=PhysicalDevice, isTemplate=false, identifier=serial=GYX8Z5YDJ7NBGITC)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -1435,8 +1435,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="resourceFile" />
         <option value="layoutResourceFile" />
+        <option value="resourceFile" />
         <option value="Class" />
       </list>
     </option>
@@ -1473,31 +1473,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Android App.app.executor": "Run",
-    "DEBUGGABLE_DEVICE": "vivo-v2153-1396838704000DP",
-    "DEBUGGABLE_PROCESS": "com.vuvrecharge",
-    "DEBUGGER_ID": "Auto",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Notification.DisplayName-DoNotAsk-Debugger messages": "Debugger messages",
-    "Notification.DoNotAsk-Debugger messages": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "SHOW_ALL_PROCESSES": "false",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/MaxPe/app/src/main/res/drawable",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.17",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Android App.app.executor&quot;: &quot;Run&quot;,
+    &quot;DEBUGGABLE_DEVICE&quot;: &quot;vivo-v2153-1396838704000DP&quot;,
+    &quot;DEBUGGABLE_PROCESS&quot;: &quot;com.vuvrecharge&quot;,
+    &quot;DEBUGGER_ID&quot;: &quot;Auto&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Notification.DisplayName-DoNotAsk-Debugger messages&quot;: &quot;Debugger messages&quot;,
+    &quot;Notification.DoNotAsk-Debugger messages&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;SHOW_ALL_PROCESSES&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/MaxPe/app/src/main/res/drawable&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.android.studio.ml.bot.mainConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="PsdUISettings">
     <option name="MODULE_TAB" value="Properties" />
     <option name="LAST_EDITED_SIGNING_CONFIG" value="debug" />
@@ -1661,7 +1661,15 @@
       <option name="project" value="LOCAL" />
       <updated>1752754325647</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Some Changes All Activity On 19/07/2025">
+      <option name="closed" value="true" />
+      <created>1752935836888</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1752935836888</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -1672,14 +1680,15 @@
     <MESSAGE value="Some Changes All Activity On 11/07/2025" />
     <MESSAGE value="Some Changes All Activity On 14/07/2025" />
     <MESSAGE value="Some Changes All Activity On 17/07/2025" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some Changes All Activity On 17/07/2025" />
+    <MESSAGE value="Some Changes All Activity On 19/07/2025" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some Changes All Activity On 19/07/2025" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/base/BaseActivity.java</url>
-          <line>957</line>
+          <line>985</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1698,38 +1707,33 @@
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
-          <line>526</line>
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/AccountActivity.java</url>
-          <line>895</line>
+          <line>898</line>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/AccountActivity.java</url>
-          <line>894</line>
+          <line>897</line>
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/AccountActivity.java</url>
-          <line>866</line>
+          <line>869</line>
           <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/AccountActivity.java</url>
-          <line>867</line>
+          <line>870</line>
           <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/AccountActivity.java</url>
-          <line>868</line>
+          <line>871</line>
           <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/AddBalanceActivity.java</url>
-          <line>443</line>
+          <line>445</line>
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1738,19 +1742,74 @@
           <option name="timeStamp" value="87" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/MainActivity.java</url>
-          <line>1020</line>
-          <option name="timeStamp" value="95" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/RecyclerViewSliderAdapter.java</url>
+          <line>79</line>
+          <option name="timeStamp" value="109" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/MainActivity.java</url>
-          <line>997</line>
-          <option name="timeStamp" value="96" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
+          <line>559</line>
+          <option name="timeStamp" value="119" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/MainActivity.java</url>
-          <line>229</line>
-          <option name="timeStamp" value="98" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
+          <line>574</line>
+          <option name="timeStamp" value="120" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
+          <line>590</line>
+          <option name="timeStamp" value="121" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
+          <line>593</line>
+          <option name="timeStamp" value="122" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
+          <line>607</line>
+          <option name="timeStamp" value="123" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
+          <line>718</line>
+          <option name="timeStamp" value="124" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
+          <line>771</line>
+          <option name="timeStamp" value="125" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
+          <line>839</line>
+          <option name="timeStamp" value="126" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
+          <line>1107</line>
+          <option name="timeStamp" value="137" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
+          <line>1119</line>
+          <option name="timeStamp" value="138" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
+          <line>1210</line>
+          <option name="timeStamp" value="139" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
+          <line>1209</line>
+          <option name="timeStamp" value="140" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
+          <line>1436</line>
+          <option name="timeStamp" value="141" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/PaymentSettingAdapter.java</url>
@@ -1774,12 +1833,12 @@
       <map>
         <entry key="com.vuvrecharge">
           <value>
-            <CheckInfo lastCheckTimestamp="1752898076466" />
+            <CheckInfo lastCheckTimestamp="1753333791930" />
           </value>
         </entry>
         <entry key="com.vuvrecharge.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1752898076467" />
+            <CheckInfo lastCheckTimestamp="1753333791931" />
           </value>
         </entry>
       </map>

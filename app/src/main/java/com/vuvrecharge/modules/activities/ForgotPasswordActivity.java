@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 
@@ -56,6 +57,7 @@ public class ForgotPasswordActivity extends BaseActivity implements DefaultView,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
         ButterKnife.bind(this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         mToolbar.setOnClickListener(this);
 //        if (getSupportActionBar() != null){
 //            mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryB));

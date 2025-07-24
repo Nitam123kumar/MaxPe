@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/mToolbar"
-        layout="@layout/app_bar_custom" />
+        layout="@layout/add_money_header_layout" />
 
     <TextView
         android:id="@+id/help"

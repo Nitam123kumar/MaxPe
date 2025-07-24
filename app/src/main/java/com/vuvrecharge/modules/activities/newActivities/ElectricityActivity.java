@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.airbnb.lottie.L;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
@@ -38,11 +39,13 @@ import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 import com.vuvrecharge.preferences.OperatorPreferences;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -91,355 +94,20 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
         ButterKnife.bind(this);
         toolbar.setOnClickListener(this);
         title1 = getIntent().getStringExtra("title");
+        type = getIntent().getStringExtra("type");
         title.setText(title1);
         setStatusBarGradiant(this);
         mDefaultPresenter = new DefaultPresenter(this);
-        if (title1.equals("Electricity Bill")) {
-            search_electricity.setHint("Search by electricity board name");
-            type = "Electricity";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                Gson gson = new Gson();
-                warning_message = map.get("message");
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        }else if (title1.equals("Postpaid Recharge")) {
-            search_electricity.setHint("Search by postpaid name");
-            type = "Postpaid";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                Gson gson = new Gson();
-                warning_message = map.get("message");
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        }else if (title1.equals("Fastag")) {
-            search_electricity.setHint("Search by Fastag provider name");
-            type = "Fastag";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                Gson gson = new Gson();
-                warning_message = map.get("message");
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        }else if (title1.equals("Insurance")) {
-            search_electricity.setHint("Search by Insurance provider name");
-            type = "Insurance";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                Gson gson = new Gson();
-                warning_message = map.get("message");
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        }else if (title1.equals("Cylinder Bill")) {
-            search_electricity.setHint("Search by Cylinder provider name");
-            type = "Cylinder";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                Gson gson = new Gson();
-                warning_message = map.get("message");
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        }else if (title1.equals("Gas Bill")) {
-            search_electricity.setHint("Search by Gas provider name");
-            type = "Gas";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                warning_message = map.get("message");
-                Gson gson = new Gson();
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        }else if (title1.equals("Water Bill")) {
-            search_electricity.setHint("Search by Water board name");
-            type = "Water";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                Gson gson = new Gson();
-                warning_message = map.get("message");
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        }else if (title1.equals("Broadband/Landline")) {
-            search_electricity.setHint("Search by Water board name");
-            type = "Landline";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                warning_message = map.get("message");
-                Gson gson = new Gson();
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        } else if (title1.equals("Credit Card Payment")) {
-            search_electricity.setHint("Search by Credit Card name");
-            type = "CreditCardPayment";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                warning_message = map.get("message");
-                Gson gson = new Gson();
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        } else if (title1.equals("Loan Re payment")) {
-            search_electricity.setHint("Search by Loan Repayment name");
-            type = "LoanRePayment";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                warning_message = map.get("message");
-                Gson gson = new Gson();
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        } else if (title1.equals("Cable TV")) {
-            search_electricity.setHint("Search by Cable TV board name");
-            type = "CableTV";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                warning_message = map.get("message");
-                Gson gson = new Gson();
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        } else if (title1.equals("Municipal Tax")) {
-            search_electricity.setHint("Search by Water board name");
-            type = "MunicipalTax";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                warning_message = map.get("message");
-                Gson gson = new Gson();
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        } else if (title1.equals("Housing Society")) {
-            search_electricity.setHint("Search by Water board name");
-            type = "HousingSociety";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                warning_message = map.get("message");
-                Gson gson = new Gson();
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        } else if (title1.equals("Club Association")) {
-            search_electricity.setHint("Search by Club Association name");
-            type = "ClubAssociation";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                warning_message = map.get("message");
-                Gson gson = new Gson();
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
 
-        } else if (title1.equals("Hospital Pathology")) {
-            search_electricity.setHint("Search by Hospital Pathology name");
-            type = "HospitalPathology";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                warning_message = map.get("message");
-                Gson gson = new Gson();
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        } else if (title1.equals("Subscription Fees")) {
-            search_electricity.setHint("Search by Subscription Fees name");
-            type = "Subscriptions";
+
+        if (title1 != null) {
+            search_electricity.setHint("Search Operater");
             operatorPreferences = new OperatorPreferences(this,type);
             map = operatorPreferences.getData();
             if (map.get("type") != null){
                 operatorDataList.clear();
                 Gson gson = new Gson();
                 warning_message = map.get("message");
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        } else if (title1.equals("Donation")) {
-            search_electricity.setHint("Search by Donation name");
-            type = "Donation";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                Gson gson = new Gson();
-                warning_message = map.get("message");
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        } else if (title1.equals("Recurring Deposit")) {
-            search_electricity.setHint("Search by Recurring Deposit name");
-            type = "RecurringDeposit";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                Gson gson = new Gson();
-                warning_message = map.get("message");
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        } else if (title1.equals("Prepaid Meter")) {
-            search_electricity.setHint("Search by Prepaid Meter name");
-            type = "PrepaidMeter";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                warning_message = map.get("message");
-                Gson gson = new Gson();
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        } else if (title1.equals("NCMC Recharge")) {
-            search_electricity.setHint("Search by NCMC Recharge name");
-            type = "NCMCRecharge";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                warning_message = map.get("message");
-                Gson gson = new Gson();
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        } else if (title1.equals("Municipal Services")) {
-            search_electricity.setHint("Search by Municipal Services name");
-            type = "MunicipalServices";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                warning_message = map.get("message");
-                Gson gson = new Gson();
-                Type type_ = new TypeToken<List<OperatorData>>() {
-                }.getType();
-                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
-                this.operatorDataList = operatorDataList;
-            }else {
-                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
-            }
-        } else if (title1.equals("Education Fees")) {
-            search_electricity.setHint("Search by Education Fees name");
-            type = "EducationFees";
-            operatorPreferences = new OperatorPreferences(this,type);
-            map = operatorPreferences.getData();
-            if (map.get("type") != null){
-                operatorDataList.clear();
-                warning_message = map.get("message");
-                Gson gson = new Gson();
                 Type type_ = new TypeToken<List<OperatorData>>() {
                 }.getType();
                 List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
@@ -448,6 +116,344 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         }
+//        else if (title1.equals("Postpaid Recharge")) {
+//            search_electricity.setHint("Search by postpaid name");
+//            type = "Postpaid";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                Gson gson = new Gson();
+//                warning_message = map.get("message");
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        }else if (title1.equals("Fastag")) {
+//            search_electricity.setHint("Search by Fastag provider name");
+//            type = "Fastag";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                Gson gson = new Gson();
+//                warning_message = map.get("message");
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        }else if (title1.equals("Insurance")) {
+//            search_electricity.setHint("Search by Insurance provider name");
+//            type = "Insurance";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                Gson gson = new Gson();
+//                warning_message = map.get("message");
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        }else if (title1.equals("Cylinder Bill")) {
+//            search_electricity.setHint("Search by Cylinder provider name");
+//            type = "Cylinder";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                Gson gson = new Gson();
+//                warning_message = map.get("message");
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        }else if (title1.equals("Gas Bill")) {
+//            search_electricity.setHint("Search by Gas provider name");
+//            type = "Gas";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                warning_message = map.get("message");
+//                Gson gson = new Gson();
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        }else if (title1.equals("Water Bill")) {
+//            search_electricity.setHint("Search by Water board name");
+//            type = "Water";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                Gson gson = new Gson();
+//                warning_message = map.get("message");
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        }else if (title1.equals("Broadband/Landline")) {
+//            search_electricity.setHint("Search by Water board name");
+//            type = "Landline";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                warning_message = map.get("message");
+//                Gson gson = new Gson();
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        } else if (title1.equals("Credit Card Payment")) {
+//            search_electricity.setHint("Search by Credit Card name");
+//            type = "CreditCardPayment";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                warning_message = map.get("message");
+//                Gson gson = new Gson();
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        } else if (title1.equals("Loan Re payment")) {
+//            search_electricity.setHint("Search by Loan Repayment name");
+//            type = "LoanRePayment";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                warning_message = map.get("message");
+//                Gson gson = new Gson();
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        } else if (title1.equals("Cable TV")) {
+//            search_electricity.setHint("Search by Cable TV board name");
+//            type = "CableTV";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                warning_message = map.get("message");
+//                Gson gson = new Gson();
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        } else if (title1.equals("Municipal Tax")) {
+//            search_electricity.setHint("Search by Water board name");
+//            type = "MunicipalTax";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                warning_message = map.get("message");
+//                Gson gson = new Gson();
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        } else if (title1.equals("Housing Society")) {
+//            search_electricity.setHint("Search by Water board name");
+//            type = "HousingSociety";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                warning_message = map.get("message");
+//                Gson gson = new Gson();
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        } else if (title1.equals("Club Association")) {
+//            search_electricity.setHint("Search by Club Association name");
+//            type = "ClubAssociation";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                warning_message = map.get("message");
+//                Gson gson = new Gson();
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//
+//        } else if (title1.equals("Hospital Pathology")) {
+//            search_electricity.setHint("Search by Hospital Pathology name");
+//            type = "HospitalPathology";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                warning_message = map.get("message");
+//                Gson gson = new Gson();
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        } else if (title1.equals("Subscription Fees")) {
+//            search_electricity.setHint("Search by Subscription Fees name");
+//            type = "Subscriptions";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                Gson gson = new Gson();
+//                warning_message = map.get("message");
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        } else if (title1.equals("Donation")) {
+//            search_electricity.setHint("Search by Donation name");
+//            type = "Donation";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                Gson gson = new Gson();
+//                warning_message = map.get("message");
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        } else if (title1.equals("Recurring Deposit")) {
+//            search_electricity.setHint("Search by Recurring Deposit name");
+//            type = "RecurringDeposit";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                Gson gson = new Gson();
+//                warning_message = map.get("message");
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        } else if (title1.equals("Prepaid Meter")) {
+//            search_electricity.setHint("Search by Prepaid Meter name");
+//            type = "PrepaidMeter";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                warning_message = map.get("message");
+//                Gson gson = new Gson();
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        } else if (title1.equals("NCMC Recharge")) {
+//            search_electricity.setHint("Search by NCMC Recharge name");
+//            type = "NCMCRecharge";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                warning_message = map.get("message");
+//                Gson gson = new Gson();
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        } else if (title1.equals("Municipal Services")) {
+//            search_electricity.setHint("Search by Municipal Services name");
+//            type = "MunicipalServices";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                warning_message = map.get("message");
+//                Gson gson = new Gson();
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        } else if (title1.equals("Education Fees")) {
+//            search_electricity.setHint("Search by Education Fees name");
+//            type = "EducationFees";
+//            operatorPreferences = new OperatorPreferences(this,type);
+//            map = operatorPreferences.getData();
+//            if (map.get("type") != null){
+//                operatorDataList.clear();
+//                warning_message = map.get("message");
+//                Gson gson = new Gson();
+//                Type type_ = new TypeToken<List<OperatorData>>() {
+//                }.getType();
+//                List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+//                this.operatorDataList = operatorDataList;
+//            }else {
+//                mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            }
+//        }
         swipeRefreshLayout.setOnRefreshListener(this::loadOperatorData);
         loadOperatorData();
 
@@ -541,6 +547,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
         try {
             swipeRefreshLayout.setRefreshing(true);
             JSONObject jsonObject = new JSONObject(message);
+            Log.d("warning_message",message);
             Gson gson = new Gson();
             Type type_ = new TypeToken<List<OperatorData>>() {
             }.getType();

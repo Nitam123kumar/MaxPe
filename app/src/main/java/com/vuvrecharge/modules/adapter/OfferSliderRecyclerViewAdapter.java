@@ -58,7 +58,8 @@ public class OfferSliderRecyclerViewAdapter extends RecyclerView.Adapter<OfferSl
         holder.itemView.setOnClickListener(v -> {
             try {
                 JSONObject object = new JSONObject(offerSlider.getData());
-                listener.onClickListener(offerSlider.getRedirection_type(),object.getString("title"),object.getString("intent_name"));
+//                JSONObject activityExtraData = new JSONObject();
+                listener.onClickListener(offerSlider.getRedirection_type(),object.getString("intent_name"),object.getString("extra_data"),offerSlider.getUrl());
             } catch (JSONException e) {
                 new RuntimeException(e);
             } catch (ClassNotFoundException e) {
@@ -81,6 +82,6 @@ public class OfferSliderRecyclerViewAdapter extends RecyclerView.Adapter<OfferSl
         }
     }
     public interface ItemClickListener{
-        void onClickListener(String redirection_type,String title,String inten_name) throws ClassNotFoundException;
+        void onClickListener(String redirection_type,String intent_name,String extra_data,String link) throws ClassNotFoundException;
     }
 }

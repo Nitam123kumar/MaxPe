@@ -7,6 +7,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -37,12 +38,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
@@ -111,7 +116,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
         PaymentSettingAdapter.OnClickListener,
         OfferSliderRecyclerViewAdapter.ItemClickListener,
         SpotlightServicesAdapter.ItemClickListener,
-OTTSubscriptionsAdapter.ItemClickListener,
+        OTTSubscriptionsAdapter.ItemClickListener,
+        SliderAdapterBanner.ItemClickListener,
         InstallStateUpdatedListener {
 
     @BindView(R.id.hide_keyboard)
@@ -188,6 +194,27 @@ OTTSubscriptionsAdapter.ItemClickListener,
     TabLayout into_tab_layout;
     @BindView(R.id.recyclerviewDashboard)
     RecyclerView recyclerviewDashboard;
+    @BindView(R.id.refresh_layout)
+    SwipeRefreshLayout refresh_layout;
+    @BindView(R.id.prepaid)
+    LinearLayout prepaid;
+    @BindView(R.id.postpaid)
+    LinearLayout postpaid;
+    @BindView(R.id.DTH)
+    LinearLayout dTH;
+    @BindView(R.id.Landline)
+    LinearLayout landline;
+    @BindView(R.id.Electricity)
+    LinearLayout electricity;
+    @BindView(R.id.Fastag)
+    LinearLayout fasTag;
+    @BindView(R.id.Cylinder)
+    LinearLayout cylinder;
+    @BindView(R.id.ViewAll)
+    LinearLayout viewAll;
+    @BindView(R.id.headerImage_layout)
+    ConstraintLayout headerImage_layout;
+
     List<String> color;
     List<String> youtubeVideosList;
     List<String> imageList_offer;
@@ -218,6 +245,11 @@ OTTSubscriptionsAdapter.ItemClickListener,
     Handler handler = new Handler();
     List<String> ott_List;
     List<OTTSubscriptionsData> oTTList = new ArrayList<>();
+    List<OfferSlider> main_hero_banner = new ArrayList<>();
+    String intentName = null;
+    String extraData = null;
+    String redirection_type = null;
+    String redirection_url = null;
     int position = 0;
 
     @Override
@@ -227,6 +259,7 @@ OTTSubscriptionsAdapter.ItemClickListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(getActivity());
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setStatusBarGradiant(this);
         add_balance.setOnClickListener(this);
         statements.setOnClickListener(this);
@@ -240,6 +273,14 @@ OTTSubscriptionsAdapter.ItemClickListener,
         share_earn_layout.setOnClickListener(this);
         support_layout.setOnClickListener(this);
         home_menu_imageView.setOnClickListener(this);
+        prepaid.setOnClickListener(this);
+        postpaid.setOnClickListener(this);
+        dTH.setOnClickListener(this);
+        landline.setOnClickListener(this);
+        electricity.setOnClickListener(this);
+        fasTag.setOnClickListener(this);
+        cylinder.setOnClickListener(this);
+        viewAll.setOnClickListener(this);
         history.setOnClickListener(this);
 //        all_services.setOnClickListener(this);
         downline_pckage.setOnClickListener(this);
@@ -249,9 +290,16 @@ OTTSubscriptionsAdapter.ItemClickListener,
         offer_for_you_recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         image_slider.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         spotlight_services_recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
-        ottRecyclerView.setLayoutManager(new GridLayoutManager(this,3));
+        ottRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
 
 //        startAutoScroll();
+
+        refresh_layout.setOnRefreshListener(this::refreshData);
+        refresh_layout.setRefreshing(true);
+
+        headerImage_layout.setOnClickListener(v -> {
+            onClickMainHeroBanner(redirection_type, intentName, extraData, redirection_url);
+        });
 
     }
 
@@ -260,6 +308,7 @@ OTTSubscriptionsAdapter.ItemClickListener,
         super.onStart();
         refreshData();
     }
+
 
     private boolean notifications() {
         if (!NotificationManagerCompat.from(this).areNotificationsEnabled()) {
@@ -326,11 +375,11 @@ OTTSubscriptionsAdapter.ItemClickListener,
             String from
     ) {
         try {
+            refresh_layout.setRefreshing(false);
             UserData userData = mDatabase.getUserData();
             available_balance.setText("\u20b9" + userData.getEarnings());
             total_ban.setText("\u20b9" + userData.getEarnings());
             name_tv.setText("Welcome, " + userData.getName());
-
 //            txtTitleMain.setText(userData.getRecharge_pay_bill_string());
 
             if (mDatabase.getUserData().getUser_type().equals("Distributor") ||
@@ -353,7 +402,7 @@ OTTSubscriptionsAdapter.ItemClickListener,
                 Log.d("Url Data", mDatabase.getUserData().getSlide_path());
             }
 
-            viewPager.setAdapter(new SliderAdapterBanner(getActivity(), color, userData.getSlides()));
+            viewPager.setAdapter(new SliderAdapterBanner(getActivity(), color, userData.getSlides(), this));
             indicator.setupWithViewPager(viewPager, true);
             if (timer1 != null) {
                 timer1.cancel();
@@ -371,12 +420,6 @@ OTTSubscriptionsAdapter.ItemClickListener,
             image_slider.setAdapter(sliderAdapter);
             Log.d("youtubeVideosList", String.valueOf(youtubeVideosList));
 
-
-            String main_hero_banner1 = OFFER_ZONE + mDatabase.getUserData().getMain_hero_banner();
-            if (main_hero_banner1 != null) {
-                Glide.with(getActivity()).load(main_hero_banner1).into(headerImage);
-            }
-
             imageList_offer = new ArrayList<>();
             List<OfferSlider> offer_sliders = (mDatabase.getUserData().getOffer_slides());
             for (OfferSlider offerSlides : offer_sliders) {
@@ -388,7 +431,7 @@ OTTSubscriptionsAdapter.ItemClickListener,
                     JSONObject activityData = new JSONObject(offerSlides.getData());
                     JSONObject activityExtraData = new JSONObject(activityData.getString("extra_data"));
 
-                    if (activityExtraData.length()>0){
+                    if (activityExtraData.length() > 0) {
 
                         Iterator<String> keys = activityExtraData.keys();
                         while (keys.hasNext()) {
@@ -398,9 +441,6 @@ OTTSubscriptionsAdapter.ItemClickListener,
                         }
 
                     }
-
-
-
                     Log.d("activityExtraData", "Data Title: " + activityExtraData);
 //                    Log.d("OfferSlider", "Data Intent: " + object.getString("intent_name"));
 
@@ -413,11 +453,11 @@ OTTSubscriptionsAdapter.ItemClickListener,
             for (OTTSubscriptionsData ottData : ottItem) {
                 ott_List.add(mDatabase.getUserData().getOtt_slides_path() + "/" + ottData.getLogo());
 
-                Log.d("OTTData", ottData.getLogo()+" "+ottData.getTitle());
+                Log.d("OTTData", ottData.getLogo() + " " + ottData.getTitle());
             }
             oTTList.clear();
             oTTList.addAll(ottItem);
-            oTTAdapter = new OTTSubscriptionsAdapter(this, oTTList, ott_List,this);
+            oTTAdapter = new OTTSubscriptionsAdapter(this, oTTList, ott_List, this);
             ottRecyclerView.setAdapter(oTTAdapter);
 
             spotlight = new ArrayList<>();
@@ -429,7 +469,7 @@ OTTSubscriptionsAdapter.ItemClickListener,
                     String intentData = spotlightData1.getData();
                     JSONObject object = new JSONObject(spotlightData1.getData());
 
-                    Log.d("Spotlight", "Data Title: " + object.getString("title"));
+                    Log.d("Spotlight", "Data Title: " + object.getString("extra_data"));
                     Log.d("Spotlight", "Data Intent: " + object.getString("intent_name"));
                 }
             }
@@ -630,6 +670,66 @@ OTTSubscriptionsAdapter.ItemClickListener,
                 break;
             default:
                 showToast("Coming Soon");
+        }
+    }
+
+    private void onClickMainHeroBanner(String redirection_type, String intent_name, String activityExtraData, String link) {
+        Intent intent;
+        Class<?> clazz = null;
+        if (redirection_type.equals("activity")) {
+            if (intent_name != null) {
+                try {
+                    clazz = Class.forName(intent_name);
+                    intent = new Intent(getActivity(), clazz);
+                    intent.putExtra("activityExtraData", activityExtraData.toString());
+                    startActivity(intent);
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } else if (redirection_type.equals("activity")) {
+            if (intent_name != null) {
+                try {
+                    clazz = Class.forName(intent_name);
+                    intent = new Intent(getActivity(), clazz);
+                    intent.putExtra("activityExtraData", activityExtraData.toString());
+                    startActivity(intent);
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } else if (redirection_type.equals("in_app")) {
+            if (redirection_type != null && !redirection_type.isEmpty()) {
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                CustomTabsIntent customTabsIntent = builder.build();
+
+                String chromePackage = "com.android.chrome";
+                PackageManager pm = getActivity().getPackageManager();
+                try {
+                    pm.getPackageInfo(chromePackage, 0);
+                    customTabsIntent.intent.setPackage(chromePackage);
+                } catch (PackageManager.NameNotFoundException e) {
+
+                }
+
+                customTabsIntent.launchUrl(getActivity(), Uri.parse(link));
+            } else {
+
+            }
+
+        } else if (redirection_type.equals("external")) {
+            if (redirection_type != null && !redirection_type.isEmpty()) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+                try {
+                    startActivity(browserIntent);
+                } catch (ActivityNotFoundException e) {
+
+                }
+            } else {
+
+            }
         }
     }
 
@@ -864,9 +964,12 @@ OTTSubscriptionsAdapter.ItemClickListener,
             } else if (data_other.equals("allServices")) {
                 allServices = message;
             } else {
-                Log.d("SLIDERDATA", message);
                 mDatabase.setUserData(message);
 
+                JSONObject message1 = new JSONObject(message);
+                JSONObject data = message1.getJSONObject("main_hero_banner");
+                mainHeroBanner(data);
+                refresh_layout.setRefreshing(false);
                 setData("Api");
                 JSONObject object = new JSONObject(message);
                 JSONArray array = object.getJSONArray("recharge_pay_data");
@@ -904,6 +1007,25 @@ OTTSubscriptionsAdapter.ItemClickListener,
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    void mainHeroBanner(JSONObject data) throws JSONException {
+
+        String title = data.getString("title");
+        String logo = data.getString("logo");
+        String data1 = data.getString("data");
+        redirection_type = data.getString("redirection_type");
+        redirection_url = data.getString("url");
+        Glide.with(getActivity()).load(OFFER_ZONE + logo).into(headerImage);
+
+        if (data1 != null) {
+            JSONObject activityData = new JSONObject(data1);
+            extraData = activityData.getString("extra_data");
+            intentName = activityData.getString("intent_name");
+
+            Log.d("activityExtraData", "Data Title: " + extraData);
+            Log.d("intent_Name", "Data Intent: " + intentName);
         }
     }
 
@@ -1065,12 +1187,67 @@ OTTSubscriptionsAdapter.ItemClickListener,
 
     //    TODO Service Click
     @Override
-    public void onClickListener(String redirection_type, String title, String inten_name) throws ClassNotFoundException {
+    public void onClickListener(String redirection_type, String intent_name, String activityExtraData, String link) throws ClassNotFoundException {
         Intent intent;
-        Class<?> clazz = Class.forName(inten_name);
-        intent = new Intent(getActivity(), clazz);
-        intent.putExtra("title", title);
-        startActivity(intent);
+        Class<?> clazz = null;
+        if (redirection_type.equals("activity")) {
+            if (intent_name != null) {
+                try {
+                    clazz = Class.forName(intent_name);
+                    intent = new Intent(getActivity(), clazz);
+
+                    JSONObject object = new JSONObject(activityExtraData);
+
+                    if (object.length() > 0) {
+
+                        Iterator<String> keys = object.keys();
+                        while (keys.hasNext()) {
+                            String key = keys.next();
+                            String value = object.optString(key, "");
+
+                            intent.putExtra(key, value);
+                        }
+
+                    }
+                    startActivity(intent);
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+        } else if (redirection_type.equals("in_app")) {
+            if (redirection_type != null && !redirection_type.isEmpty()) {
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                CustomTabsIntent customTabsIntent = builder.build();
+
+                String chromePackage = "com.android.chrome";
+                PackageManager pm = getActivity().getPackageManager();
+                try {
+                    pm.getPackageInfo(chromePackage, 0);
+                    customTabsIntent.intent.setPackage(chromePackage);
+                } catch (PackageManager.NameNotFoundException e) {
+
+                }
+
+                customTabsIntent.launchUrl(getActivity(), Uri.parse(link));
+            } else {
+
+            }
+
+        } else if (redirection_type.equals("external")) {
+            if (redirection_type != null && !redirection_type.isEmpty()) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+                try {
+                    startActivity(browserIntent);
+                } catch (ActivityNotFoundException e) {
+
+                }
+            } else {
+
+            }
+        }
 
     }
 
@@ -1080,6 +1257,7 @@ OTTSubscriptionsAdapter.ItemClickListener,
             @NonNull View v
     ) {
         Intent intent;
+        String jsonString;
         switch (v.getId()) {
             case R.id.members_bg:
                 intent = new Intent(getActivity(), MembersActivity.class);
@@ -1122,6 +1300,59 @@ OTTSubscriptionsAdapter.ItemClickListener,
                 break;
             case R.id.open_account:
                 intent = new Intent(getActivity(), SupportActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.prepaid:
+                intent = new Intent(getActivity(), RechargeActivity.class);
+                intent.putExtra("title", "Prepaid Recharge");
+                intent.putExtra("type", "Prepaid");
+                startActivity(intent);
+
+                break;
+            case R.id.postpaid:
+
+                intent = new Intent(getActivity(), ElectricityActivity.class);
+                intent.putExtra("title", "Postpaid Recharge");
+                intent.putExtra("type", "Postpaid");
+                startActivity(intent);
+                break;
+            case R.id.DTH:
+                intent = new Intent(getActivity(), RechargeActivity.class);
+                intent.putExtra("title", "DTH Recharge");
+                intent.putExtra("type", "DTH");
+                startActivity(intent);
+
+                break;
+            case R.id.Landline:
+                intent = new Intent(getActivity(), ElectricityActivity.class);
+                intent.putExtra("title", "Landline");
+                intent.putExtra("type", "Landline");
+                startActivity(intent);
+                break;
+            case R.id.Electricity:
+
+                intent = new Intent(getActivity(), ElectricityActivity.class);
+                intent.putExtra("title", "Electricity Bill");
+                intent.putExtra("type", "Electricity");
+                startActivity(intent);
+                break;
+            case R.id.Fastag:
+
+                intent = new Intent(getActivity(), ElectricityActivity.class);
+                intent.putExtra("title", "Fastag");
+                intent.putExtra("type", "Fastag");
+                startActivity(intent);
+                break;
+            case R.id.Cylinder:
+                intent = new Intent(getActivity(), ElectricityActivity.class);
+                intent.putExtra("title", "Cylinder Bill");
+                intent.putExtra("type", "Cylinder");
+                startActivity(intent);
+                break;
+            case R.id.ViewAll:
+                intent = new Intent(getActivity(), BharatBillPayActivity.class);
+                intent.putExtra("title", "Bharat Bill Pay");
+                intent.putExtra("data", data);
                 startActivity(intent);
                 break;
             case R.id.img:
@@ -1186,7 +1417,7 @@ OTTSubscriptionsAdapter.ItemClickListener,
     private void refreshData() {
         rotation = AnimationUtils.loadAnimation(getActivity(), R.anim.rotation);
         rotation.setRepeatCount(100);
-        refresh.startAnimation(rotation);
+//        refresh.startAnimation(rotation);
         new Handler().postDelayed(() -> mDefaultPresenter.dashboardDataWithoutRefresh(fcmToken + "", device_id + "", null), 500);
         new Handler().postDelayed(() -> {
             mDefaultPresenter.getPaymentSetting2(device_id + "", "timepass");

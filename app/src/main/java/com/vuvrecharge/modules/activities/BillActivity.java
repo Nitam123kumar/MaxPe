@@ -55,7 +55,9 @@ import com.vuvrecharge.modules.model.PaymentModel;
 import com.vuvrecharge.modules.model.ReportsData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.preferences.OperatorPreferences;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
@@ -143,6 +145,7 @@ public class BillActivity extends BaseActivity implements DefaultView,
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         mToolbar.setOnClickListener(this);
         string = getIntent().getStringExtra("title");
+        type = getIntent().getStringExtra("type");
         mDefaultPresenter = new DefaultPresenter(this);
         title.setText(string);
         handler = new Handler();
@@ -154,6 +157,8 @@ public class BillActivity extends BaseActivity implements DefaultView,
             startActivity(intent);
         });
         wallet_amount.setText("Your balance : \u20b9" + mDatabase.getEarnings());
+
+
         switch (string) {
             case "Electricity Bill":
                 type = "Electricity";

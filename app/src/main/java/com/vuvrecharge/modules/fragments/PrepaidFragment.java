@@ -98,7 +98,7 @@ public class PrepaidFragment extends BaseFragment implements DefaultView {
 
     @Override
     public void onError(String error) {
-        listener.onError(error);
+//        listener.onError(error);
     }
     private void initializePrepaidList() {
         prepaidAdapter = new CommissionAdapter(getLayoutInflater(), IMAGE_LOGO);
@@ -170,7 +170,7 @@ public class PrepaidFragment extends BaseFragment implements DefaultView {
 
     @Override
     public void onShowToast(String message) {
-        listener.onShowToast(message);
+//        listener.onShowToast(message);
     }
 
     @Override

@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
@@ -74,6 +75,7 @@ public class StatementsActivity extends BaseActivity implements DefaultView, OnF
         super.onCreate(state);
         setContentView(R.layout.activity_statements);
         ButterKnife.bind(this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         mToolbar.setOnClickListener(this);
         title.setText("History");
         mDefaultPresenter = new DefaultPresenter(this);
@@ -105,6 +107,7 @@ public class StatementsActivity extends BaseActivity implements DefaultView, OnF
         addMore.setVisibility(View.GONE);
 
         String showFragment = getIntent().getStringExtra("statementsActivity");
+        String maxPointsData = getIntent().getStringExtra("maxPointsActivity");
         if (showFragment != null && !showFragment.isEmpty()) {
 
             setFragment(new RechargeHistoryFragment());
@@ -120,6 +123,21 @@ public class StatementsActivity extends BaseActivity implements DefaultView, OnF
             reportsView.setText(Html.fromHtml("Wallet"));
             depositView.setText(Html.fromHtml("Deposit"));
             maxPointsTxt.setText(Html.fromHtml("Max Point"));
+
+        } else if (maxPointsData !=null && !maxPointsData.isEmpty()) {
+            setFragment(new MaxPointFragment());
+            viewMaxPoints.setBackgroundResource(R.drawable.statements_select_bg_shape);
+            maxPointsTxt.setTextColor(Color.WHITE);
+            viewStatements.setBackgroundResource(R.drawable.null_shape);
+            statementsView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            viewReports.setBackgroundResource(R.drawable.null_shape);
+            reportsView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            viewDeposit.setBackgroundResource(R.drawable.null_shape);
+            depositView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            statementsView.setText(Html.fromHtml("Recharge"));
+            reportsView.setText(Html.fromHtml("Wallet"));
+            depositView.setText(Html.fromHtml("Deposit"));
+            maxPointsTxt.setText(Html.fromHtml("<b>Max Point</b>"));
 
         } else {
 

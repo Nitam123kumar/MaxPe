@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -248,7 +249,7 @@ public class LoginActivity extends BaseActivity implements DefaultView, View.OnC
     }
 
     private void validateCredentials() {
-        if (binding.btnLogin.getText().equals("Login")) {
+        if (binding.btnLogin.getText().equals("Login?")) {
             if (tryCount < 5) {
                 mDefaultPresenter.loginUser(Objects.requireNonNull(binding.username.getText()).toString(),
                         Objects.requireNonNull(binding.password.getText()).toString(), device_id);
@@ -303,7 +304,7 @@ public class LoginActivity extends BaseActivity implements DefaultView, View.OnC
                 startActivity(intent);
                 break;
             case R.id.button_forgot:
-                if (binding.buttonForgot.getText().equals("Reset Password?")) {
+                if (binding.buttonForgot.getText().equals("Reset Password")) {
                     intent = new Intent(getActivity(), ForgotPasswordActivity.class);
                     startActivity(intent);
                 }

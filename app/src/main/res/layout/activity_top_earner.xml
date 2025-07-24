@@ -8,15 +8,53 @@
     android:background="@drawable/main_wallet_shape"
     tools:context=".modules.activities.TopEarnerActivity">
 
-    <include
-        android:id="@+id/mToolBar"
-        layout="@layout/bill_payment_layout" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back_home"
+            android:layout_width="@dimen/_27sdp"
+            android:layout_height="@dimen/_27sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:background="@drawable/wallet_back_shape"
+            android:contentDescription="@string/max_pe"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/back_arrow1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:fontFamily="@font/roboto"
+            android:gravity="center_vertical"
+            android:text="@string/top_earners"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/top_ranker_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/mToolBar">
+        app:layout_constraintTop_toBottomOf="@id/topBar">
 
         <TextView
             android:id="@+id/top_referral"
@@ -57,7 +95,6 @@
             android:background="@drawable/ranking_shape1"
             android:fontFamily="@font/roboto_bold"
             android:gravity="center"
-            android:text="@string/ns"
             android:textColor="@color/black"
             android:textSize="@dimen/_22sdp"
             android:textStyle="bold"
@@ -73,7 +110,6 @@
             android:background="@drawable/ranking_shape1"
             android:fontFamily="@font/roboto_bold"
             android:gravity="center"
-            android:text="@string/ns"
             android:textColor="@color/black"
             android:textSize="@dimen/_22sdp"
             android:textStyle="bold"
@@ -90,7 +126,6 @@
             android:background="@drawable/ranking_shape1"
             android:fontFamily="@font/roboto_bold"
             android:gravity="center"
-            android:text="@string/ns"
             android:textColor="@color/black"
             android:textSize="@dimen/_22sdp"
             android:textStyle="bold"
@@ -104,7 +139,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
-            android:text="@string/nitam"
             android:textColor="@color/white"
             android:textSize="@dimen/_8sdp"
             app:layout_constraintEnd_toEndOf="@id/top_referral_no_2"
@@ -116,7 +150,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
-            android:text="@string/nitam"
             android:textColor="@color/white"
             android:textSize="@dimen/_8sdp"
             app:layout_constraintEnd_toEndOf="@id/top_referral_no_1"
@@ -128,7 +161,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
-            android:text="@string/nitam"
             android:textColor="@color/white"
             android:textSize="@dimen/_8sdp"
             app:layout_constraintEnd_toEndOf="@id/top_referral_no_3"
@@ -212,6 +244,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginHorizontal="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

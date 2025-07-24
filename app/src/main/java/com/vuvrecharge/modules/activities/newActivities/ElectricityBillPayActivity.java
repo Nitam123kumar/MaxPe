@@ -40,8 +40,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
@@ -147,6 +149,8 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
     View viewLine;
     @BindView(R.id.dueToDate)
     TextView dueToDate;
+    @BindView(R.id.star_img)
+    TextView star_img;
     @BindView(R.id.consumerNumberText)
     TextView consumerNumberText;
     @BindView(R.id.sub_division_codeText)
@@ -213,6 +217,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_electricity_bill_pay);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         ButterKnife.bind(this);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         toolbar.setOnClickListener(this);
@@ -225,300 +230,327 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
         manager = new LinearLayoutManager(this);
         recyclerViewBillerInfo.setLayoutManager(manager);
         setStatusBarGradiant(this);
+
         if(titleStr != null){
             title.setText(titleStr);
-            if (titleStr.contains("Electricity Bill")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                Glide.with(this).load(logo).placeholder(R.drawable.btn_drawable).into(providerImageView);
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                providerImageView.setVisibility(VISIBLE);
-                proceedToPay.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            }else if (titleStr.contains("Postpaid Recharge")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            }else if (titleStr.contains("Cylinder Bill")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.contains("Gas Bill")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.contains("Water Bill")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.equals("Fastag")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    consumerNumber.setVisibility(VISIBLE);
-                    Consumer_Number.setVisibility(VISIBLE);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.equals("Insurance")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.equals("Broadband/Landline")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.equals("Subscription Fees")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.equals("Hospital Pathology")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.equals("Club Association")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.equals("Housing Society")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (!Objects.equals(name, "") || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.equals("Municipal Tax")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.equals("Cable TV")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.equals("Loan Re payment")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.equals("Credit Card Payment")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.equals("Education Fees")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.equals("Municipal Services")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.equals("NCMC Recharge")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.equals("Prepaid Meter")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.equals("Recurring Deposit")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.equals("Donation")) {
-                name = getIntent().getStringExtra("name");
-                String logo = getIntent().getStringExtra("logo");
-                id = getIntent().getStringExtra("id");
-                type = getIntent().getStringExtra("type");
-                warning_message = getIntent().getStringExtra("warning_message");
-                provider_name.setVisibility(VISIBLE);
-                if (name != "" || name != null) {
-                    provider_name.setText(name);
-                    mDefaultPresenter.operatorsDetails(device_id, id);
-                    UserData userData = mDatabase.getUserData();
-                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
-                }
-            } else if (titleStr.contains("Google Play")) {
+            name = getIntent().getStringExtra("name");
+            String logo1 = getIntent().getStringExtra("logo");
+            if (logo1 != null){
+                Glide.with(this).load(logo1).into(providerImageView);
+            }
+            else {
+                providerImageView.setVisibility(GONE);
+            }
+            id = getIntent().getStringExtra("id");
+            type = getIntent().getStringExtra("type");
+            warning_message = getIntent().getStringExtra("warning_message");
+            provider_name.setVisibility(VISIBLE);
+            providerImageView.setVisibility(VISIBLE);
+            proceedToPay.setVisibility(VISIBLE);
+            if (name != "" || name != null) {
+                provider_name.setText(name);
+                mDefaultPresenter.operatorsDetails(device_id, id);
+                UserData userData = mDatabase.getUserData();
+                wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+            }
+
+//            if (titleStr.contains("Electricity Bill")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                Glide.with(this).load(logo).placeholder(R.drawable.btn_drawable).into(providerImageView);
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                providerImageView.setVisibility(VISIBLE);
+//                proceedToPay.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            }else if (titleStr.contains("Postpaid Recharge")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                consumerNumber.setVisibility(VISIBLE);
+//                Consumer_Number.setVisibility(VISIBLE);
+//                Consumer_Number.setText("Mobile Number");
+//                consumerNumber.setHint("Mobile Number");
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            }else if (titleStr.contains("Cylinder Bill")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else if (titleStr.contains("Gas Bill")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else if (titleStr.contains("Water Bill")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else if (titleStr.equals("Fastag")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    consumerNumber.setVisibility(VISIBLE);
+//                    Consumer_Number.setVisibility(VISIBLE);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else if (titleStr.equals("Insurance")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else if (titleStr.equals("Broadband/Landline")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else if (titleStr.equals("Subscription Fees")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else if (titleStr.equals("Hospital Pathology")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else if (titleStr.equals("Club Association")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else if (titleStr.equals("Housing Society")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (!Objects.equals(name, "") || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else if (titleStr.equals("Municipal Tax")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else if (titleStr.equals("Cable TV")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else if (titleStr.equals("Loan Re payment")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else if (titleStr.equals("Credit Card Payment")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else if (titleStr.equals("Education Fees")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else if (titleStr.equals("Municipal Services")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else if (titleStr.equals("NCMC Recharge")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else if (titleStr.equals("Prepaid Meter")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else if (titleStr.equals("Recurring Deposit")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else if (titleStr.equals("Donation")) {
+//                name = getIntent().getStringExtra("name");
+//                String logo = getIntent().getStringExtra("logo");
+//                id = getIntent().getStringExtra("id");
+//                type = getIntent().getStringExtra("type");
+//                warning_message = getIntent().getStringExtra("warning_message");
+//                provider_name.setVisibility(VISIBLE);
+//                if (name != "" || name != null) {
+//                    provider_name.setText(name);
+//                    mDefaultPresenter.operatorsDetails(device_id, id);
+//                    UserData userData = mDatabase.getUserData();
+//                    wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+//                }
+//            } else
+                if (titleStr.contains("Google Play")) {
                 provider_name.setVisibility(GONE);
                 consumerNumber.setVisibility(VISIBLE);
                 Consumer_Number.setVisibility(VISIBLE);
@@ -863,12 +895,24 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                     }
                 });
             } else {
+
+                if (is_billFetch.equals("1")) {
+                    consumerNumber.setVisibility(VISIBLE);
+                    Consumer_Number.setVisibility(VISIBLE);
+                    consumerNumberText.setVisibility(VISIBLE);
+                    star_img.setVisibility(VISIBLE);
+                }
+                else {
+                    consumerNumber.setVisibility(GONE);
+                    Consumer_Number.setVisibility(GONE);
+                    consumerNumberText.setVisibility(GONE);
+                    star_img.setVisibility(GONE);
+                }
                 consumerNumber.setHint(numberField.getString("field_name"));
                 Consumer_Number.setText(numberField.getString("field_name"));
                 consumerNumberText.setText(numberField.getString("eg"));
-                consumerNumber.setVisibility(VISIBLE);
-                Consumer_Number.setVisibility(VISIBLE);
-                consumerNumberText.setVisibility(VISIBLE);
+                amount_layout.setText(numberField.getString("field_name"));
+
                 int maxLength = Integer.parseInt(numberField.getString("max_length"));
                 InputFilter[] filters = new InputFilter[1];
                 filters[0] = new InputFilter.LengthFilter(maxLength);
@@ -1027,10 +1071,12 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                     }
                     setSpinner(spinnerData, spinner3, spinnerText3, spinner_layout3);
                 } else {
-                    amount_layout.setHint(field2Data.getString("field_name"));
+                    amount_layout.setText(field2Data.getString("field_name"));
                     amountText.setText(field2Data.getString("eg"));
                     amount_layout.setVisibility(VISIBLE);
-                    amountText.setVisibility(VISIBLE);
+//                    amountText.setVisibility(VISIBLE);
+                    amount.setVisibility(VISIBLE);
+                    amount.setHint(field2Data.getString("eg"));
 
                     int field2DataMaxLength = Integer.parseInt(field2Data.getString("max_length"));
                     InputFilter[] filters3 = new InputFilter[1];

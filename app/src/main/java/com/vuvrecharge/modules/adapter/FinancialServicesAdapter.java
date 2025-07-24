@@ -21,6 +21,9 @@ import com.romainpiel.shimmer.ShimmerTextView;
 import com.vuvrecharge.R;
 import com.vuvrecharge.modules.model.FinancialServicesData;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 public class FinancialServicesAdapter extends RecyclerView.Adapter<FinancialServicesAdapter.ViewHolder> {
@@ -48,7 +51,7 @@ public class FinancialServicesAdapter extends RecyclerView.Adapter<FinancialServ
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             return new ViewHolder(
                     LayoutInflater.from(parent.getContext())
-                            .inflate(R.layout.ott_service_item_layout, parent, false)
+                            .inflate(R.layout.bbps_layout, parent, false)
             );
         }
 
@@ -67,11 +70,18 @@ public class FinancialServicesAdapter extends RecyclerView.Adapter<FinancialServ
                     .load(BBPS_IMAGE_URL+"/"+list.get(position).getLogo())
                     .into(holder.imgLogo);
             holder.itemView.setOnClickListener(v -> {
-                if (list.get(position).getUp_down_msg().isEmpty()){
-                    listener.onClickListener(list.get(position).getRedirect_link());
-                }else {
-                    Toast.makeText(context, "Service is down", Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject object = new JSONObject(list.get(position).getData());
+                    if (list.get(position).getUp_down_msg().isEmpty()){
+
+                        listener.onClickListener(list.get(position).getRedirect_link(),object.getString("intent_name"),object.getString("extra_data"));
+                    }else {
+                        Toast.makeText(context, "Service is down", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
                 }
+
             });
 //            holder.shimmerTextView.setText(list.get(position).getHighlight_text());
 //            if (list.get(position).getHighlight_text().isEmpty()){
@@ -119,7 +129,7 @@ public class FinancialServicesAdapter extends RecyclerView.Adapter<FinancialServ
         }
 
         public interface ItemClickListener{
-            void onClickListener(String name);
+            void onClickListener(String redirection_type,String intent_name,String extra_data);
         }
     }
 
