@@ -41,9 +41,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -257,8 +260,6 @@ public class MainActivity extends BaseActivity implements DefaultView,
     private Handler sliderHandler = new Handler((Looper.getMainLooper()));
     private Runnable sliderRunnable;
     SliderAdapterBanner imageSliderAdapter;
-
-
     @Override
     protected void onCreate(
             @Nullable Bundle savedInstanceState
@@ -302,13 +303,14 @@ public class MainActivity extends BaseActivity implements DefaultView,
 
         refresh_layout.setOnRefreshListener(this::refreshData);
         refresh_layout.setRefreshing(true);
-
         headerImage_layout.setOnClickListener(v -> {
             onClickMainHeroBanner(redirection_type, intentName, extraData, redirection_url);
         });
 
-    }
 
+
+
+    }
     @Override
     protected void onStart() {
         super.onStart();

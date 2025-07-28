@@ -25,24 +25,23 @@
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
-        <Constraint android:id="@+id/toolbar_constraintlayout" />
+        <Constraint android:id="@+id/headerImage_layout" />
         <Constraint android:id="@+id/refresh_layout"
-            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/toolbar_constraintlayout"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintBottom_toBottomOf="parent" />
+            motion:layout_constraintBottom_toTopOf="@+id/bottom_nav_RelativeLayout" />
 
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
-        <Constraint android:id="@+id/toolbar_constraintlayout" />
+        <Constraint android:id="@+id/headerImage_layout" />
         <Constraint android:id="@+id/refresh_layout"
-            android:layout_height="930dp"
-            motion:layout_constraintTop_toBottomOf="parent"
+            android:layout_height="@dimen/_390sdp"
+            motion:layout_constraintTop_toBottomOf="@+id/headerImage_layout"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintBottom_toBottomOf="parent"/>
-
+            motion:layout_constraintBottom_toTopOf="@+id/bottom_nav_RelativeLayout" />
     </ConstraintSet>
 
 </MotionScene>
