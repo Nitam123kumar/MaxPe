@@ -447,5 +447,13 @@
     <string name="fastag">Fastag</string>
     <string name="cylinder">Cylinder</string>
     <string name="top_earners">Top Earners</string>
+    <string name="extra_2_points">Extra 2 points</string>
+    <string name="appied">Appied</string>
+    <string name="applied">Applied</string>
+    <string name="t_amp_c_applied"><![CDATA[T&C Applied*]]></string>
+    <string name="thank_you_for_your_order_with_us">Thank you for your order with us</string>
+    <string name="total_payment">Total Payment</string>
+    <string name="share_screenshot">Share Screenshot</string>
+    <string name="chart">Chart</string>
 
 </resources>

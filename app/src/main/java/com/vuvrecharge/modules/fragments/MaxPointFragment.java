@@ -9,10 +9,11 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.provider.Settings;
 import android.util.Log;
@@ -29,10 +30,7 @@ import com.google.gson.reflect.TypeToken;
 import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseFragment;
 import com.vuvrecharge.base.BaseMethod;
-import com.vuvrecharge.modules.activities.MaxPointsActivity;
 import com.vuvrecharge.modules.adapter.MaxPointFragmentAdapter;
-import com.vuvrecharge.modules.adapter.MaxPointsAdapter;
-import com.vuvrecharge.modules.adapter.WalletAdapter;
 import com.vuvrecharge.modules.model.CashBackPintsModel;
 import com.vuvrecharge.modules.model.MaxPePointsData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
@@ -60,10 +58,10 @@ public class MaxPointFragment extends BaseFragment implements DefaultView {
 
     @BindView(R.id.rvMaxPoints)
     RecyclerView rvMaxPoints;
-    @BindView(R.id.select_from_date_img)
-    ImageView select_from_date_img;
-    @BindView(R.id.select_to_date_img)
-    ImageView select_to_date_img;
+    @BindView(R.id.layoutFrom)
+    ConstraintLayout select_from_date_img;
+    @BindView(R.id.layoutEnd)
+    ConstraintLayout select_to_date_img;
     @BindView(R.id.select_from_date)
     TextView select_from_date;
     @BindView(R.id.select_to_date)
@@ -77,7 +75,8 @@ public class MaxPointFragment extends BaseFragment implements DefaultView {
 
     @BindView(R.id.loading)
     LinearLayout loading;
-
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout refresh_layout;
     MaxPointFragmentAdapter adapter;
 
     static Date fromDate;
@@ -123,6 +122,9 @@ public class MaxPointFragment extends BaseFragment implements DefaultView {
         loadData("Yes");
         onclickListener();
 
+        refresh_layout.setOnRefreshListener(this::refreshData);
+        refresh_layout.setRefreshing(true);
+
         return rootView;
     }
 
@@ -144,6 +146,12 @@ public class MaxPointFragment extends BaseFragment implements DefaultView {
     @Override
     public void onSuccessOther(String data) {
 
+    }
+    void refreshData() {
+        defaultPresenter.cashbackPointsHistory(device_id + "",
+                "",  "", "");
+        select_from_date.setText("DD MM YYYY");
+        select_to_date.setText("DD MM YYYY");
     }
 
     private void onclickListener() {
@@ -177,11 +185,13 @@ public class MaxPointFragment extends BaseFragment implements DefaultView {
     public void onSuccessOther(String data, String data_other) {
         Log.d("cashbackLogs", String.valueOf(data));
         try {
+            refresh_layout.setRefreshing(false);
             JSONObject object = new JSONObject(data);
             JSONArray array = object.getJSONArray("cashbackLogs");
 
 
             if (array.length() > 0) {
+                mPointsList.clear();
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject object1 = array.getJSONObject(i);
                     MaxPePointsData maxPePointData = new MaxPePointsData();

@@ -3,13 +3,17 @@ package com.vuvrecharge.modules.activities;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -19,6 +23,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -31,6 +36,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -86,22 +92,22 @@ public class BillActivity extends BaseActivity implements DefaultView,
     TextView title;
     @BindView(R.id.wallet_amount)
     TextView wallet_amount;
-    @BindView(R.id.std_code_bg_layout)
-    TextInputLayout std_code_bg;
-    @BindView(R.id.account_no_bg_layout)
-    TextInputLayout account_no_bg;
-    @BindView(R.id.mobile_number_layout)
-    TextInputLayout mobile_number_layout;
+//    @BindView(R.id.std_code_bg_layout)
+//    TextInputLayout std_code_bg;
+//    @BindView(R.id.account_no_bg_layout)
+//    TextInputLayout account_no_bg;
+//    @BindView(R.id.mobile_number_layout)
+//    TextInputLayout mobile_number_layout;
     @BindView(R.id.std_code)
-    TextInputEditText std_code;
+    EditText std_code;
     @BindView(R.id.mobile_number)
-    TextInputEditText mobile_number;
+    EditText mobile_number;
     @BindView(R.id.account_no)
-    TextInputEditText account_no;
+    EditText account_no;
     @BindView(R.id.amount)
-    TextInputEditText amount;
+    EditText amount;
     @BindView(R.id.selectCircle)
-    RelativeLayout selectCircle;
+    ConstraintLayout selectCircle;
     @BindView(R.id.txtOperator)
     TextView txtOperator;
     String string = "";
@@ -149,6 +155,7 @@ public class BillActivity extends BaseActivity implements DefaultView,
         mDefaultPresenter = new DefaultPresenter(this);
         title.setText(string);
         handler = new Handler();
+        setStatusBarGradiant(this);
         txtOperator.setText("Google Play Gift Card");
         BaseMethod.amount = "";
         BaseMethod.mobile = "";
@@ -163,10 +170,10 @@ public class BillActivity extends BaseActivity implements DefaultView,
             case "Electricity Bill":
                 type = "Electricity";
                 selected_operator = "Select Service Provider";
-                std_code_bg.setVisibility(GONE);
-                account_no_bg.setVisibility(VISIBLE);
-                mobile_number_layout.setHint("Consumer/Account/K Number");
-                account_no_bg.setHint("Sub Division/Code (If any)");
+                std_code.setVisibility(GONE);
+                account_no.setVisibility(VISIBLE);
+                mobile_number.setHint("Consumer/Account/K Number");
+//                account_no.setHint("Sub Division/Code (If any)");
                 amount.setVisibility(VISIBLE);
                 imgBBPS.setVisibility(VISIBLE);
                 btnBillFetch.setVisibility(GONE);
@@ -174,10 +181,10 @@ public class BillActivity extends BaseActivity implements DefaultView,
             case "Landline Postpaid":
                 selected_operator = "Select Operator";
                 type = "Landline";
-                std_code_bg.setVisibility(GONE);
-                account_no_bg.setVisibility(GONE);
+                std_code.setVisibility(GONE);
+                account_no.setVisibility(GONE);
                 amount.setVisibility(VISIBLE);
-                mobile_number_layout.setHint("Landline Number/User Id with STD code");
+                mobile_number.setHint("Landline Number/User Id with STD code");
 //                amount.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
                 imgBBPS.setVisibility(VISIBLE);
                 btnBillFetch.setVisibility(GONE);
@@ -185,10 +192,10 @@ public class BillActivity extends BaseActivity implements DefaultView,
             case "Gas Bill":
                 selected_operator = "Select Service Provider";
                 type = "Gas";
-                std_code_bg.setVisibility(GONE);
-                account_no_bg.setVisibility(GONE);
+                std_code.setVisibility(GONE);
+                account_no.setVisibility(GONE);
                 amount.setVisibility(VISIBLE);
-                mobile_number_layout.setHint("Customer Number");
+                mobile_number.setHint("Customer Number");
 //                amount.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
                 imgBBPS.setVisibility(VISIBLE);
                 btnBillFetch.setVisibility(VISIBLE);
@@ -198,20 +205,23 @@ public class BillActivity extends BaseActivity implements DefaultView,
                 type = "Water";
                 imgBBPS.setVisibility(VISIBLE);
                 amount.setVisibility(VISIBLE);
-                std_code_bg.setVisibility(GONE);
-                account_no_bg.setVisibility(GONE);
-                mobile_number_layout.setHint("Consumer/Account/K Number");
+                std_code.setVisibility(GONE);
+                account_no.setVisibility(GONE);
+                mobile_number.setHint("Consumer/Account/K Number");
 //                amount.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
                 btnBillFetch.setVisibility(GONE);
                 break;
             case "Purchase Gift cards":
                 type = "GiftCards";
-                account_no_bg.setVisibility(GONE);
+//                account_no_bg.setVisibility(GONE);
+                account_no.setVisibility(GONE);
                 InputFilter[] filters3 = new InputFilter[1];
                 filters3[0] = new InputFilter.LengthFilter(10);
                 mobile_number.setFilters(filters3);
-                mobile_number_layout.setHint("Mobile Number");
-                std_code_bg.setVisibility(GONE);
+//                mobile_number_layout.setHint("Mobile Number");
+                mobile_number.setHint("Mobile Number");
+//                std_code.setVisibility(GONE);
+                std_code.setVisibility(GONE);
                 tvservice.setVisibility(GONE);
                 selected_operator = "Select Operator";
                 imgBBPS.setVisibility(GONE);
@@ -230,7 +240,7 @@ public class BillActivity extends BaseActivity implements DefaultView,
         }
         circle_list.add("Select Circle");
 
-        submit.setBackgroundResource(R.drawable.btn_drawable_disable);
+        submit.setBackgroundResource(R.drawable.proceed_to_pay);
         submit.setTextColor(getResources().getColor(R.color.black_4));
         submit.setTypeface(submit.getTypeface(), Typeface.BOLD);
 
@@ -249,11 +259,11 @@ public class BillActivity extends BaseActivity implements DefaultView,
             public void afterTextChanged(Editable s) {
                 if (!s.toString().isEmpty()){
                     submit.setTextColor(Color.WHITE);
-                    submit.setBackgroundResource(R.drawable.btn_drawable);
+                    submit.setBackgroundResource(R.drawable.ad_money_button_shape);
                     submit.setTypeface(submit.getTypeface(), Typeface.BOLD);
                 }else {
                     submit.setTextColor(getResources().getColor(R.color.black_4));
-                    submit.setBackgroundResource(R.drawable.btn_drawable_disable);
+                    submit.setBackgroundResource(R.drawable.proceed_to_pay);
                     submit.setTypeface(submit.getTypeface(), Typeface.BOLD);
                 }
             }
@@ -269,7 +279,18 @@ public class BillActivity extends BaseActivity implements DefaultView,
     private void loadOperatorSpinner() {
         selectCircle.setOnClickListener(this::openDialog);
     }
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void setStatusBarGradiant(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
+            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+            window.setBackgroundDrawable(background);
+        }
+    }
     private void openDialog(View vi) {
         View view = getLayoutInflater().inflate(R.layout.searchable_spinner_layout, null, false);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -489,9 +510,9 @@ public class BillActivity extends BaseActivity implements DefaultView,
                 _binding.txtSlug.setVisibility(GONE);
 //                _binding.imgGif.setGifImageResource(R.drawable.animated_wrong);
                 Glide.with(this).asGif().load(R.drawable.animated_wrong).into(_binding.imgGif);
-                _binding.btnComplete.setBackgroundResource(R.drawable.failed_button);
+                _binding.btnComplete.setBackgroundResource(R.drawable.ad_money_button_shape);
             } else if (status.toUpperCase().equals("PENDING")){
-                _binding.btnComplete.setBackgroundResource(R.drawable.pending_button);
+                _binding.btnComplete.setBackgroundResource(R.drawable.ad_money_button_shape);
                 _binding.txtTitle.setText("Pending");
 //                _binding.txtMessage.setText("Your transaction is under process.\nPlease check your history after a few min.");
                 _binding.txtMessage.setText(message);
@@ -499,7 +520,7 @@ public class BillActivity extends BaseActivity implements DefaultView,
 //                _binding.imgGif.setGifImageResource(R.drawable.animated_pending);
                 Glide.with(this).asGif().load(R.drawable.animated_pending).into(_binding.imgGif);
             }else {
-                _binding.btnComplete.setBackgroundResource(R.drawable.green_button);
+                _binding.btnComplete.setBackgroundResource(R.drawable.ad_money_button_shape);
                 _binding.txtTitle.setText("Success");
 //                _binding.txtMessage.setText("Your transaction has been\ncompleted successfully.");
                 _binding.txtMessage.setText(message);

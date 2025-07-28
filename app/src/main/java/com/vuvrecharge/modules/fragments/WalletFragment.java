@@ -10,11 +10,14 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +32,7 @@ import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseFragment;
 import com.vuvrecharge.base.BaseMethod;
 import com.vuvrecharge.modules.adapter.WalletAdapter;
+import com.vuvrecharge.modules.model.MaxPePointsData;
 import com.vuvrecharge.modules.model.WalletData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.presenter.OnFragmentListener;
@@ -38,6 +42,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -52,10 +57,10 @@ public class WalletFragment extends BaseFragment implements DefaultView {
     ViewGroup rootViewMain;
     @BindView(R.id.rvWalletDetails)
     RecyclerView rvWalletDetails;
-    @BindView(R.id.select_from_date_img)
-    ImageView select_from_date_img;
-    @BindView(R.id.select_to_date_img)
-    ImageView select_to_date_img;
+    @BindView(R.id.layoutFrom)
+    ConstraintLayout select_from_date_img;
+    @BindView(R.id.layoutEnd)
+    ConstraintLayout select_to_date_img;
     @BindView(R.id.select_from_date)
     TextView select_from_date;
     @BindView(R.id.select_to_date)
@@ -69,7 +74,8 @@ public class WalletFragment extends BaseFragment implements DefaultView {
 
     @BindView(R.id.loading)
     LinearLayout loading;
-
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout refresh_layout;
     WalletAdapter adapter;
 //    TextView invoice;
     String device_id = "";
@@ -88,6 +94,7 @@ public class WalletFragment extends BaseFragment implements DefaultView {
     boolean isLoading = true;
     DialogFragment newFragment;
     OnFragmentListener listener = null;
+    List<WalletData> list= new ArrayList<>();
 
     @SuppressLint("HardwareIds")
     @Override
@@ -117,6 +124,10 @@ public class WalletFragment extends BaseFragment implements DefaultView {
         initializeEventsList();
 
         onclickListener();
+
+        refresh_layout.setOnRefreshListener(this::refreshData);
+        refresh_layout.setRefreshing(true);
+
         return rootView;
     }
 
@@ -142,7 +153,21 @@ public class WalletFragment extends BaseFragment implements DefaultView {
             newFragment.show(getChildFragmentManager(), "Select To Date");
         });
     }
+    void refreshData() {
+        refresh_layout.setRefreshing(true);
+        page = 1;
+        remaining_pages = 0;
+        previousTotal = 0;
+        pastVisibleItems = 0;
+        visibleItemCount = 0;
+        totalItemCount = 0;
+        isLoading = true;
 
+        mDefaultPresenter.userPassbook(device_id + "", page + "",
+                "", "", "", "No");
+        select_from_date.setText("DD MM YYYY");
+        select_to_date.setText("DD MM YYYY");
+    }
     private void initializeEventsList() {
         adapter = new WalletAdapter();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -193,25 +218,30 @@ public class WalletFragment extends BaseFragment implements DefaultView {
     @Override
     public void onSuccess(String data, String data_other) {
         try {
+            refresh_layout.setRefreshing(false);
             JSONObject jsonObject = new JSONObject(data);
             printLog(jsonObject.toString());
             remaining_pages = Integer.parseInt(jsonObject.getString("remaining_pages"));
             JSONArray jsonArray = jsonObject.getJSONArray("history_data");
-            if (jsonArray.length() > 0){
+
+            Log.d("history_data", String.valueOf(jsonArray));
+            if (jsonArray.length() > 0) {
                 Gson gson = new Gson();
-                Type type_ = new TypeToken<List<WalletData>>() {
-                }.getType();
+                Type type_ = new TypeToken<List<WalletData>>() {}.getType();
                 List<WalletData> passbookData = gson.fromJson(jsonArray.toString(), type_);
-                if (data_other.equals("Yes")) {
-                    initializeEventsList();
+
+                if (page == 1) {
+                    adapter.setData(passbookData); // clear and add fresh data
+                } else {
+                    adapter.addData(passbookData); // add data for pagination
                 }
-                adapter.addData(passbookData, data_other);
                 rvWalletDetails.setVisibility(VISIBLE);
                 txtNoData.setVisibility(GONE);
-            }else {
-//                onError("no Data found");
-                txtNoData.setVisibility(VISIBLE);
-                rvWalletDetails.setVisibility(GONE);
+            } else {
+                if (page == 1) {
+                    rvWalletDetails.setVisibility(GONE);
+                    txtNoData.setVisibility(VISIBLE);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

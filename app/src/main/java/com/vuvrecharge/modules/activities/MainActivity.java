@@ -216,6 +216,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
     LinearLayout viewAll;
     @BindView(R.id.headerImage_layout)
     ConstraintLayout headerImage_layout;
+    @BindView(R.id.imgReferAndEarn)
+    ImageView imgReferAndEarn;
 
     List<String> color;
     List<String> youtubeVideosList;
@@ -282,6 +284,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         postpaid.setOnClickListener(this);
         dTH.setOnClickListener(this);
         landline.setOnClickListener(this);
+        imgReferAndEarn.setOnClickListener(this);
         electricity.setOnClickListener(this);
         fasTag.setOnClickListener(this);
         cylinder.setOnClickListener(this);
@@ -326,6 +329,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         }
         return true;
     }
+
     private void appUpdate() {
         appUpdateManager = AppUpdateManagerFactory.create(this);
         appUpdateManager.getAppUpdateInfo().addOnSuccessListener(appUpdateInfo -> {
@@ -1400,6 +1404,10 @@ public class MainActivity extends BaseActivity implements DefaultView,
 
             case R.id.whatsup_alert:
                 intent = new Intent(getActivity(), WalletActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.imgReferAndEarn:
+                intent = new Intent(getActivity(), ShareEarnActivity.class);
                 startActivity(intent);
                 break;
 

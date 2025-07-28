@@ -27,6 +27,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,17 +40,21 @@ import com.razorpay.PaymentResultListener;
 import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseActivity;
 import com.vuvrecharge.modules.activities.newActivities.MobileBankingActivity;
+import com.vuvrecharge.modules.adapter.ExtraCashBackAdapter;
 import com.vuvrecharge.modules.adapter.PaymentMethodSelectAdapter;
 import com.vuvrecharge.modules.adapter.PaymentSettingAdapter;
+import com.vuvrecharge.modules.model.ExtraCashBackPoints;
 import com.vuvrecharge.modules.model.PaymentSetting;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 //import androidmads.library.qrgenearator.QRGContents;
@@ -59,7 +64,7 @@ import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 
 public class AddBalanceActivity extends BaseActivity implements DefaultView, View.OnClickListener,
-        PaytmPaymentTransactionCallback, PaymentResultListener,PaymentMethodSelectAdapter.OnClickListener {
+        PaytmPaymentTransactionCallback, PaymentResultListener, PaymentMethodSelectAdapter.OnClickListener {
     DefaultPresenter mDefaultPresenter;
 
     @BindView(R.id.toolbar_layout)
@@ -68,7 +73,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
     TextView title;
     @BindView(R.id.editAmount)
     EditText amount;
-//    @BindView(R.id.txtAvailableBalance)
+    //    @BindView(R.id.txtAvailableBalance)
 //    TextView txtAvailableBalance;
     @BindView(R.id.no_internet)
     LinearLayout no_internet;
@@ -76,36 +81,39 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
     TextView retry;
     @BindView(R.id.selectPaymentMethodBtn)
     AppCompatButton add_balance;
-//    @BindView(R.id.amount_textView)
+    //    @BindView(R.id.amount_textView)
 //    TextView add_amount_show;
     @BindView(R.id.txtThousand)
     TextView txtThousand;
     @BindView(R.id.txtFiveThousandFiveHundred)
     TextView txtFiveThousand;
-//    @BindView(R.id.buttonAddBalance)
+    //    @BindView(R.id.buttonAddBalance)
 //    TextView txtTwoThousand;
     @BindView(R.id.txtFiveHundred)
     TextView txtFiveHundred;
 
-    @BindView(R.id.help)
-    TextView help;
+    //    @BindView(R.id.help)
+//    TextView help;
     @BindView(R.id.txtMsg)
     TextView txtMsg;
+    @BindView(R.id.discountRecyclerView)
+    RecyclerView discountRecyclerView;
     @BindView(R.id.loading)
     LinearLayout loading;
 //    @BindView(R.id.payment_using_imageView)
 //    ImageView payment_using_imageView;
 
-//    @BindView(R.id.upi_tittle_textView)
+    //    @BindView(R.id.upi_tittle_textView)
 //     TextView upi_tittle_textView;
 //    @BindView(R.id.pay_using_textView)
 //    TextView pay_using_textView;
 //    @BindView(R.id.pay_using_ConstraintLayout)
 //    ConstraintLayout pay_using_ConstraintLayout;
-
+    @BindView(R.id.txtTermsCondition)
+    TextView txtTermsCondition;
     ArrayList<PaymentSetting> list = new ArrayList<>();
     JSONObject json;
-    String data= "";
+    String data = "";
     String m_id = "";
     String min = "0";
     String max = "0";
@@ -116,10 +124,13 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
 
     String hashString, payu_key, payu_username, user_name, user_mobile, user_email, productinfo,
             orderid, razorpay_merchant_key = "", razorpay_min_amount = "0",
-            razorpay_max_amount = "0", phonePackage = "", hdfc_dynamic_getway = "",razorpay_getway ="",
-            hdfcminamount = "0", hdfcmaxamount = "0", paumin = "", paumax = "", phonepe_getway = "", hdfc_api = "",payu_getway="";
+            razorpay_max_amount = "0", phonePackage = "", hdfc_dynamic_getway = "", razorpay_getway = "",
+            hdfcminamount = "0", hdfcmaxamount = "0", paumin = "", paumax = "", phonepe_getway = "", hdfc_api = "", payu_getway = "";
     String titleStr = "";
     private static int B2B_PG_REQUEST_CODE = 777;
+
+    List<ExtraCashBackPoints> extraCashBackPointsList = new ArrayList<>();
+    ExtraCashBackAdapter extraCashBackAdapter;
 
     @Override
     public void onCreate(Bundle state) {
@@ -132,6 +143,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
         mDefaultPresenter = new DefaultPresenter(this);
         mDefaultPresenter.getPaymentSetting2(device_id + "", "timepass");
         defaultView = this;
+        txtTermsCondition.setOnClickListener(this);
         add_balance.setOnClickListener(this);
 //        pay_using_ConstraintLayout.setOnClickListener(this);
 //        try {
@@ -159,6 +171,9 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
 //         if (Objects.equals(intent.getStringExtra("title"), "Razorpay Payment")){
 //            payment_using_imageView.setImageResource(R.drawable.razorpay_logo_2);
 //        }
+        discountRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        extraCashBackAdapter = new ExtraCashBackAdapter(this, extraCashBackPointsList);
+        discountRecyclerView.setAdapter(extraCashBackAdapter);
 
 
         txtThousand.setOnClickListener(this);
@@ -166,7 +181,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
 //        txtTwoThousand.setOnClickListener(this);
         txtFiveHundred.setOnClickListener(this);
         mToolbar.setOnClickListener(this);
-        help.setOnClickListener(this);
+//        help.setOnClickListener(this);
         try {
 //            add_amount_show.setText("Continue");
 //            add_amount_show.setTextColor(getResources().getColor(R.color.black_4));
@@ -188,7 +203,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    if (s.toString().isEmpty()){
+                    if (s.toString().isEmpty()) {
 //                        add_amount_show.setTextColor(getResources().getColor(R.color.black_4));
 //                        add_amount_show.setTypeface(add_amount_show.getTypeface(), Typeface.BOLD);
                         add_balance.setBackgroundResource(R.color.proceed_to_add);
@@ -196,7 +211,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
 
 
 //                        add_amount_show.setText("Continue");
-                    }else {
+                    } else {
 //                        add_amount_show.setText("\u20b9"+s.toString());
 //                        add_amount_show.setTextColor(Color.WHITE);
 //                        add_amount_show.setTypeface(add_amount_show.getTypeface(), Typeface.BOLD);
@@ -204,6 +219,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
                         add_balance.setTextColor(getActivity().getResources().getColor(R.color.white));
 
                     }
+                    extraCashBackAdapter.filterByAmount(amount.getText().toString());
                 }
             });
             JSONObject jsonObject = new JSONObject(data);
@@ -300,6 +316,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
     public void onSuccessOther(String data) {
         try {
             JSONObject jsonObject = new JSONObject(data);
+            Log.d("status", "onSuccessOther: " + data);
             if (jsonObject.getString("status").equals("success")) {
                 Toasty.success(getActivity(), "Payment Success", Toast.LENGTH_LONG, false).show();
             } else if (jsonObject.getString("status").equals("pending")) {
@@ -315,9 +332,9 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
     }
 
     @Override
-    public void onSuccessOther(String data,@NonNull String data_other) {
+    public void onSuccessOther(String data, @NonNull String data_other) {
         try {
-            Log.d("TAG_DATA", "onSuccessOther: "+data);
+            JSONObject object = new JSONObject(data);
             if (data_other.equals("hdfc")) {
                 JSONObject jsonObject = new JSONObject(data);
                 String orderid = jsonObject.getString("orderid");
@@ -339,13 +356,13 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
                 Intent chooser = Intent.createChooser(upiIntent, "Pay with...");
                 startActivityForResult(chooser, 103, null);
                 System.out.println("orderIdPhonePay===" + orderid);
-            } else if (data_other.equals("paytm")){
+            } else if (data_other.equals("paytm")) {
                 JSONObject jsonObject = new JSONObject(data);
                 String orderid = jsonObject.getString("orderid");
                 String CHECKSUMHASH = jsonObject.getString("CHECKSUMHASH");
                 this.order_id = orderid;
                 initializePaytmPayment(CHECKSUMHASH, orderid, amount.getText().toString());
-            } else if (data_other.equals("timepass")){
+            } else if (data_other.equals("timepass")) {
                 try {
                     dataPayment = data;
                     json = new JSONObject(data);
@@ -353,11 +370,34 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
                     throw new RuntimeException(e);
                 }
             }
-            else {
-                Log.d("TAG_DATA", "onSuccessOther:  no payment gateway");
+
+            if (object.has("cashbackSlabs")) {
+                JSONObject cashbackSlabs = object.getJSONObject("cashbackSlabs");
+
+                double totalCashbackPoints = cashbackSlabs.getDouble("totalCashbackPoints");
+                Log.d("Cashback", "Total Cashback Points: " + totalCashbackPoints);
+
+                JSONArray addBalanceCashbacks = cashbackSlabs.getJSONArray("addBalanceCashbacks");
+
+                extraCashBackPointsList.clear();
+
+                for (int i = 0; i < addBalanceCashbacks.length(); i++) {
+                    JSONObject cashbackItem = addBalanceCashbacks.getJSONObject(i);
+                    ExtraCashBackPoints extraCashBackPoints = new ExtraCashBackPoints();
+                    extraCashBackPoints.setBonus(cashbackItem.getString("bonus"));
+                    extraCashBackPoints.setMax(cashbackItem.getString("max"));
+                    extraCashBackPoints.setMin(cashbackItem.getString("min"));
+                    extraCashBackPointsList.add(extraCashBackPoints);
+                }
+
+                extraCashBackAdapter.notifyDataSetChanged();
+
+
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -425,7 +465,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
                 addAmount(1000);
                 break;
             case R.id.txtFiveThousandFiveHundred:
-               addAmount(1500);
+                addAmount(1500);
                 break;
 //            case R.id.txtTwoThousand:
 //                amount.setText("2000");
@@ -438,19 +478,18 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
 //                usingPaymentBottomSheet();
 //                break;
 
-            case R.id.help:
-                Intent intent = new Intent(getActivity(), SupportActivity.class);
-                startActivity(intent);
-                break;
+//            case R.id.help:
+//                Intent intent = new Intent(getActivity(), SupportActivity.class);
+//                startActivity(intent);
+//                break;
             case R.id.selectPaymentMethodBtn:
 
 //                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
-                    if (amount.getText().isEmpty()){
-                        showError("Please Enter Amount");
-                    }
-                    else {
-                        usingPaymentBottomSheet();
-                    }
+                if (amount.getText().isEmpty()) {
+                    showError("Please Enter Amount");
+                } else {
+                    usingPaymentBottomSheet();
+                }
 //                }
 
 //                String hdfcstrAmount = amount.getText().toString();
@@ -493,64 +532,68 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
 //                    break;
 //                }
                 break;
+            case R.id.txtTermsCondition:
+                Intent intent = new Intent(this, ReferandEarnTermsActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 
-    private void usingPaymentBottomSheet(){
+    private void usingPaymentBottomSheet() {
         try {
 
 
-        FrameLayout bottomSheet = null;
-        list.clear();
+            FrameLayout bottomSheet = null;
+            list.clear();
 
-        bottomSheetDialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
-        View layout = LayoutInflater.from(getActivity()).inflate(R.layout.using_payment_layout, null,false);
-        RecyclerView recyclerView = layout.findViewById(R.id.using_payment_recyclerView);
-        ImageView img2 = layout.findViewById(R.id.img2);
-        bottomSheetDialog.setContentView(layout);
-        changeStatusBarColor(bottomSheetDialog);
-        bottomSheet = bottomSheetDialog.findViewById(com.denzcoskun.imageslider.R.id.design_bottom_sheet);
-        if (bottomSheet != null) {
-            BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
-            behavior.setSkipCollapsed(false);
-            behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            behavior.setPeekHeight(600);
-        }
+            bottomSheetDialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
+            View layout = LayoutInflater.from(getActivity()).inflate(R.layout.using_payment_layout, null, false);
+            RecyclerView recyclerView = layout.findViewById(R.id.using_payment_recyclerView);
+            ImageView img2 = layout.findViewById(R.id.img2);
+            bottomSheetDialog.setContentView(layout);
+            changeStatusBarColor(bottomSheetDialog);
+            bottomSheet = bottomSheetDialog.findViewById(com.denzcoskun.imageslider.R.id.design_bottom_sheet);
+            if (bottomSheet != null) {
+                BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+                behavior.setSkipCollapsed(false);
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                behavior.setPeekHeight(600);
+            }
 
             img2.setOnClickListener(v -> {
                 bottomSheetDialog.cancel();
             });
 
-        if (json.getString("phonepe_getway").equals("Yes")){
-            list.add(new PaymentSetting(R.drawable.phonepe_logo_2,"PhonePe","Payment Gateway"));
-        }
-        if (json.getString("hdfc_dynamic_getway").equals("Yes")){
-            list.add(new PaymentSetting(R.drawable.upi_logo_2,"UPI","Payment Gateway"));
-        }
-        if (json.getString("razorpay_getway").equals("Yes")){
-            list.add(new PaymentSetting(R.drawable.razorpay_logo_2,"Razorpay","Payment Gateway"));
-        }
-        if (json.getString("paytm_getway").equals("Yes")){
-            list.add(new PaymentSetting(R.drawable.paytm_logo_2,"Paytm","Payment Gateway"));
-        }
-        if (json.getString("manual_getway").equals("Yes")){
-            list.add(new PaymentSetting(R.drawable.mobile_banking_logo_2,"Mobile","Banking (IMPS)"));
-        }
-            if (json.getString("manual_getway").equals("Yes")){
-                list.add(new PaymentSetting(R.drawable.mobile_banking_logo_2,"Mobile","Banking (IMPS)"));
+            if (json.getString("phonepe_getway").equals("Yes")) {
+                list.add(new PaymentSetting(R.drawable.phonepe_logo_2, "PhonePe", "Payment Gateway"));
+            }
+            if (json.getString("hdfc_dynamic_getway").equals("Yes")) {
+                list.add(new PaymentSetting(R.drawable.upi_logo_2, "UPI", "Payment Gateway"));
+            }
+            if (json.getString("razorpay_getway").equals("Yes")) {
+                list.add(new PaymentSetting(R.drawable.razorpay_logo_2, "Razorpay", "Payment Gateway"));
+            }
+            if (json.getString("paytm_getway").equals("Yes")) {
+                list.add(new PaymentSetting(R.drawable.paytm_logo_2, "Paytm", "Payment Gateway"));
+            }
+            if (json.getString("manual_getway").equals("Yes")) {
+                list.add(new PaymentSetting(R.drawable.mobile_banking_logo_2, "Mobile", "Banking (IMPS)"));
+            }
+            if (json.getString("manual_getway").equals("Yes")) {
+                list.add(new PaymentSetting(R.drawable.mobile_banking_logo_2, "Mobile", "Banking (IMPS)"));
             }
 
-        if (!list.isEmpty()){
-            LinearLayoutManager manager = new LinearLayoutManager(this, RecyclerView.VERTICAL,false);
-            recyclerView.setLayoutManager(manager);
-        }
+            if (!list.isEmpty()) {
+                LinearLayoutManager manager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+                recyclerView.setLayoutManager(manager);
+            }
 
-        PaymentMethodSelectAdapter adapter1 = new PaymentMethodSelectAdapter(this,this,list);
-        adapter1.addData(list,amount.getText().toString());
-        recyclerView.setAdapter(adapter1);
+            PaymentMethodSelectAdapter adapter1 = new PaymentMethodSelectAdapter(this, this, list);
+            adapter1.addData(list, amount.getText().toString());
+            recyclerView.setAdapter(adapter1);
 
 
-        bottomSheetDialog.show();
+            bottomSheetDialog.show();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -569,6 +612,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
     }
 
     String order_id = "";
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -614,7 +658,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
                 intent.putExtra("order_id", order_id);
                 startActivity(intent);
                 finish();
-            }else {
+            } else {
                 Toast.makeText(getActivity(), "Transaction Cancelled", Toast.LENGTH_LONG).show();
             }
         }
@@ -714,7 +758,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
     }
 
     @Override
-    public void onClick(String amount1,String name) {
+    public void onClick(String amount1, String name) {
 
         String hdfcstrAmount = amount1;
         if (name.equals("UPI")) {
@@ -722,7 +766,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
                 showError("Please enter amount");
                 return;
             }
-            mDefaultPresenter.hdfcbankDynamicQR(device_id, hdfcstrAmount,"false");
+            mDefaultPresenter.hdfcbankDynamicQR(device_id, hdfcstrAmount, "false");
             bottomSheetDialog.cancel();
         } else if (name.equals("Razorpay")) {
             String strrazorAmount = amount1;
@@ -730,7 +774,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
                 showError("Please enter amount");
                 return;
             }
-            mDefaultPresenter.generateRazorPayOrder(device_id, strrazorAmount,"false");
+            mDefaultPresenter.generateRazorPayOrder(device_id, strrazorAmount, "false");
             bottomSheetDialog.cancel();
         }
 //                else if (name.equals("CashFree Payment")) {
@@ -747,7 +791,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
                 showError("Please enter amount");
                 return;
             }
-            mDefaultPresenter.phonepeDynamicQR(device_id, phonePeAmount,"false");
+            mDefaultPresenter.phonepeDynamicQR(device_id, phonePeAmount, "false");
             bottomSheetDialog.cancel();
         } else if (name.equals("Paytm")) {
             String amount_online_txt = amount1;

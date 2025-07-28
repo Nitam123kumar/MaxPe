@@ -26,13 +26,16 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.MainListHo
     public WalletAdapter() {
     }
 
-    public void addData(List<WalletData> dataList, @NonNull String second_message) {
-        if (second_message.equals("No")) {
-            this.dataList.addAll(dataList);
-        } else {
-            this.dataList = dataList;
-        }
+    public void setData(List<WalletData> newData) {
+        this.dataList.clear();
+        this.dataList.addAll(newData);
         notifyDataSetChanged();
+    }
+
+    public void addData(List<WalletData> newData) {
+        int start = this.dataList.size();
+        this.dataList.addAll(newData);
+        notifyItemRangeInserted(start, newData.size());
     }
 
 

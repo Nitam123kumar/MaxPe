@@ -113,7 +113,6 @@
                     android:layout_marginStart="@dimen/_20sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     android:background="@drawable/shot_name_shape"
-                    android:backgroundTint="@color/white"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent">
                     <TextView

@@ -60,7 +60,7 @@ public class OnlineDepositActivity extends BaseActivity implements DefaultView,V
         title.setText("Deposit History");
         initializeEventsList();
         mDefaultPresenter = new DefaultPresenter(this);
-        mDefaultPresenter.onlineDepositHistory(device_id + "");
+        mDefaultPresenter.onlineDepositHistory(device_id + "","","","");
 
     }
 

@@ -141,6 +141,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:textColor="@color/white"
             android:textSize="@dimen/_8sdp"
+            android:maxLength="20"
             app:layout_constraintEnd_toEndOf="@id/top_referral_no_2"
             app:layout_constraintStart_toStartOf="@id/top_referral_no_2"
             app:layout_constraintTop_toBottomOf="@id/top_referral_no_2" />
@@ -152,6 +153,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:textColor="@color/white"
             android:textSize="@dimen/_8sdp"
+            android:maxLength="20"
             app:layout_constraintEnd_toEndOf="@id/top_referral_no_1"
             app:layout_constraintStart_toStartOf="@id/top_referral_no_1"
             app:layout_constraintTop_toBottomOf="@id/top_referral_no_1" />
@@ -163,6 +165,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:textColor="@color/white"
             android:textSize="@dimen/_8sdp"
+            android:maxLength="20"
             app:layout_constraintEnd_toEndOf="@id/top_referral_no_3"
             app:layout_constraintStart_toStartOf="@id/top_referral_no_3"
             app:layout_constraintTop_toBottomOf="@id/top_referral_no_3" />

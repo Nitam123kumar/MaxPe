@@ -11,9 +11,11 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.provider.Settings;
 import android.util.Log;
@@ -41,6 +43,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -64,14 +67,16 @@ public class RechargeHistoryFragment extends BaseFragment implements DefaultView
     TextView select_from_date;
     @BindView(R.id.txtNoData)
     TextView txtNoData;
-    @BindView(R.id.select_from_date_img)
-    ImageView select_from_date_img;
-    @BindView(R.id.select_to_date_img)
-    ImageView select_to_date_img;
+    @BindView(R.id.layoutFrom)
+    ConstraintLayout select_from_date_img;
+    @BindView(R.id.layoutEnd)
+    ConstraintLayout select_to_date_img;
     @BindView(R.id.ref_no)
     EditText ref_no;
     @BindView(R.id.search)
     TextView search;
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout refresh_layout;
 //    TextView invoice;
     String device_id = "";
 
@@ -117,6 +122,11 @@ public class RechargeHistoryFragment extends BaseFragment implements DefaultView
         initializeEventsList();
 
         onclickListener();
+
+        refresh_layout.setOnRefreshListener(this::refreshData);
+        refresh_layout.setColorSchemeResources(R.color.colorPrimaryB);
+        refresh_layout.setRefreshing(true);
+        refreshData();
         return rootView;
     }
 
@@ -127,7 +137,26 @@ public class RechargeHistoryFragment extends BaseFragment implements DefaultView
     }
 
 
+    void refreshData() {
+        page = 1;
+        remaining_pages = 0;
+        previousTotal = 0;
+        pastVisibleItems = 0;
+        visibleItemCount = 0;
+        totalItemCount = 0;
+        isLoading = true;
 
+        adapter.clearData(); // Clear previous data
+
+        // Fetch fresh data
+        mDefaultPresenter.userRechargeHistory(
+                device_id + "",
+                page + "",
+                "", "", "", "Yes", "Yes"
+        );
+        select_from_date.setText("DD MM YYYY");
+        select_to_date.setText("DD MM YYYY");
+    }
     private void onclickListener() {
 //        invoice.setOnClickListener(v -> {
 //            try {
@@ -224,6 +253,8 @@ public class RechargeHistoryFragment extends BaseFragment implements DefaultView
     @Override
     public void onSuccess(String data, String data_other) {
         try {
+
+            refresh_layout.setRefreshing(false);
             JSONObject jsonObject = new JSONObject(data);
             printLog(jsonObject.toString());
             remaining_pages = Integer.parseInt(jsonObject.getString("remaining_pages"));

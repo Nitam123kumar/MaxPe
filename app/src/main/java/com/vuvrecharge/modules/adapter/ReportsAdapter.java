@@ -46,7 +46,12 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
     public ReportsAdapter(LayoutInflater mLayoutInflater) {
         this.mLayoutInflater = mLayoutInflater;
     }
-
+    public void clearData() {
+        if (dataList != null) {
+            dataList.clear();
+            notifyDataSetChanged();
+        }
+    }
     @NonNull
     @Override
     public Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

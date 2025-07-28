@@ -236,7 +236,8 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             name = getIntent().getStringExtra("name");
             String logo1 = getIntent().getStringExtra("logo");
             if (logo1 != null){
-                Glide.with(this).load(logo1).into(providerImageView);
+                Glide.with(this).load(logo1).error(R.drawable.m_svg).into(providerImageView);
+                providerImageView.setVisibility(VISIBLE);
             }
             else {
                 providerImageView.setVisibility(GONE);
@@ -245,7 +246,6 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             type = getIntent().getStringExtra("type");
             warning_message = getIntent().getStringExtra("warning_message");
             provider_name.setVisibility(VISIBLE);
-            providerImageView.setVisibility(VISIBLE);
             proceedToPay.setVisibility(VISIBLE);
             if (name != "" || name != null) {
                 provider_name.setText(name);
@@ -912,6 +912,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 Consumer_Number.setText(numberField.getString("field_name"));
                 consumerNumberText.setText(numberField.getString("eg"));
                 amount_layout.setText(numberField.getString("field_name"));
+                amount.setHint(numberField.getString("eg"));
 
                 int maxLength = Integer.parseInt(numberField.getString("max_length"));
                 InputFilter[] filters = new InputFilter[1];

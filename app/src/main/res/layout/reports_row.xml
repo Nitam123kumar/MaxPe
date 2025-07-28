@@ -33,6 +33,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/_9sdp"
         android:textStyle="bold"
+        android:layout_marginEnd="@dimen/_15sdp"
         app:layout_constraintBottom_toTopOf="@id/order_id"
         app:layout_constraintStart_toEndOf="@id/operator_img"
         app:layout_constraintEnd_toStartOf="@id/amount"

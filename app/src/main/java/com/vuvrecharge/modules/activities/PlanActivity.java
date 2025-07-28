@@ -198,7 +198,16 @@ public class PlanActivity extends BaseActivity implements DefaultView,View.OnCli
           editSearch.setText("");
         mViewPager.setVisibility(View.VISIBLE);
         txtSearch.setVisibility(View.VISIBLE);
-        mClassesTabLayout.setVisibility(View.VISIBLE);
+        if (mClassesTabLayout.getVisibility() == View.GONE){
+          mViewPager.setVisibility(View.VISIBLE);
+          txtSearch.setVisibility(View.VISIBLE);
+          mClassesTabLayout.setVisibility(View.VISIBLE);
+          editSearch.setVisibility(View.GONE);
+          txtCancel.setVisibility(View.GONE);
+          frameLayout.setVisibility(View.GONE);
+          imgClose.setVisibility(View.GONE);
+          hideKeyBoard(editSearch);
+        }
       }
     });
   }

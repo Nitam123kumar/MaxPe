@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -8,296 +9,302 @@
 
     <include
         android:id="@+id/mToolbar"
-        layout="@layout/add_money_header_layout" />
+        layout="@layout/add_money_header_layout"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/help"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:background="@drawable/plan_drawable_background"
-        android:gravity="center"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingTop="@dimen/_5sdp"
-        android:paddingEnd="@dimen/_10sdp"
-        android:paddingBottom="@dimen/_5sdp"
-        android:text="@string/help"
-        android:textColor="#242424"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/mToolbar"
-        app:layout_constraintEnd_toEndOf="@id/mToolbar"
-        app:layout_constraintTop_toTopOf="@id/mToolbar" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        android:fitsSystemWindows="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mToolbar">
+        android:layout_height="match_parent"
+        android:layout_below="@id/mToolbar"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/wallet_imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:src="@drawable/wallet_img"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txtAvailableBalance1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:layout_marginEnd="20dp"
-                android:fontFamily="@font/roboto"
-                android:gravity="center"
-                android:text="@string/enter_amount_to_add"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                android:textColor="#979797"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="@id/wallet_imageView"
-                app:layout_constraintStart_toStartOf="@id/wallet_imageView"
-                app:layout_constraintTop_toBottomOf="@id/wallet_imageView" />
-
-            <ImageView
-                android:id="@+id/imgAmount"
-                android:layout_width="25dp"
-                android:layout_height="30dp"
-                android:src="@drawable/inr"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="@id/editAmount"
-                app:layout_constraintEnd_toStartOf="@id/editAmount"
-                app:layout_constraintTop_toTopOf="@id/editAmount" />
-
-            <EditText
-                android:id="@+id/editAmount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@android:color/transparent"
-                android:hint="@string/_0"
-                android:inputType="number"
-                android:maxLength="7"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-                android:textColor="#434343"
-                android:textColorHint="#919191"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@id/txtAvailableBalance1"
-                app:layout_constraintStart_toStartOf="@id/txtAvailableBalance1"
-                app:layout_constraintTop_toBottomOf="@id/txtAvailableBalance1">
-
-                <requestFocus />
-            </EditText>
-
-            <TextView
-                android:id="@+id/txtMsg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="@string/you_can_add_a_maximum_of_1_00_000_in_this_month"
-                android:textColor="#979797"
-                app:layout_constraintEnd_toEndOf="@id/editAmount"
-                app:layout_constraintStart_toStartOf="@id/editAmount"
-                app:layout_constraintTop_toBottomOf="@id/editAmount" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/all_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                app:layout_constraintEnd_toEndOf="@id/txtMsg"
-                app:layout_constraintStart_toStartOf="@id/txtMsg"
-                app:layout_constraintTop_toBottomOf="@id/txtMsg">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-
-                <TextView
-                    android:id="@+id/txtFiveHundred"
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:background="@drawable/rupees_drawable"
-                    android:gravity="center"
-                    android:text="@string/_8377_500"
-                    android:textColor="#898989"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                <ImageView
+                    android:id="@+id/wallet_imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:contentDescription="@string/maxpe"
+                    android:src="@drawable/wallet_img"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/txtThousand"
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_marginStart="@dimen/_20sdp"
-                    android:background="@drawable/rupees_drawable"
-                    android:gravity="center"
-                    android:text="@string/_8377_1000"
-                    android:textColor="#898989"
-                    app:layout_constraintEnd_toStartOf="@id/txtFiveThousandFiveHundred"
-                    app:layout_constraintStart_toEndOf="@id/txtFiveHundred"
-                    app:layout_constraintTop_toTopOf="@id/txtFiveHundred" />
-
-
-                <TextView
-                    android:id="@+id/txtFiveThousandFiveHundred"
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_marginStart="@dimen/_20sdp"
-                    android:background="@drawable/rupees_drawable"
-                    android:gravity="center"
-                    android:text="@string/_8377_1500"
-                    android:textColor="#898989"
-                    app:layout_constraintStart_toEndOf="@id/txtThousand"
-                    app:layout_constraintTop_toTopOf="@id/txtThousand" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/discountRecyclerView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:spanCount="2"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:layout_constraintEnd_toEndOf="@id/txtMsg"
-                app:layout_constraintStart_toStartOf="@id/txtMsg"
-                app:layout_constraintTop_toBottomOf="@id/all_amount"
-                android:layout_marginTop="@dimen/_30sdp"
-                />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_30sdp"
-                android:layout_marginTop="@dimen/_40sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/discountRecyclerView">
-
-                <TextView
-                    android:id="@+id/note_TV"
+                    android:id="@+id/txtAvailableBalance1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginEnd="20dp"
                     android:fontFamily="@font/roboto"
-                    android:text="@string/note"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/dot_TextView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_2sdp"
-                    android:layout_marginTop="14dp"
-                    android:text="@string/dout"
-                    android:textColor="#787878"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/note_TV" />
-
-
-                <TextView
-                    android:id="@+id/note_TextView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_3sdp"
-                    android:text="@string/maxpe_money_balance_is_valid_for_4_years_from_the_date_of_money_added"
-                    android:textColor="#787878"
-                    android:textSize="@dimen/_9sdp"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    app:layout_constraintTop_toTopOf="@id/dot_TextView1"
-                    app:layout_constraintStart_toEndOf="@id/dot_TextView1"/>
-
-
-                <TextView
-                    android:id="@+id/dot_TextView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_2sdp"
-                    android:text="@string/dout"
-                    android:textColor="#787878"
-                    android:textSize="@dimen/_12sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/note_TextView2" />
-
-
-                <TextView
-                    android:id="@+id/note_TextView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_3sdp"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:text="@string/maxpe_money_is_useable_only_on_maxpe"
-                    android:textColor="#787878"
-                    android:textSize="@dimen/_9sdp"
-                    app:layout_constraintTop_toTopOf="@id/dot_TextView2"
-                    app:layout_constraintStart_toEndOf="@id/dot_TextView2" />
-
-                <TextView
-                    android:id="@+id/dot_TextView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_2sdp"
-                    android:text="@string/dout"
-                    android:textColor="#787878"
-                    android:textSize="@dimen/_12sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/note_TextView3" />
-
-
-                <TextView
-                    android:id="@+id/note_TextView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_3sdp"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:text="@string/maxpe_money_cannot_be_transferred_to_a_bank_account_as_per_rbi_guidelines"
-                    android:textColor="#787878"
-                    android:textSize="@dimen/_9sdp"
-                    app:layout_constraintTop_toTopOf="@id/dot_TextView3"
-                    app:layout_constraintStart_toEndOf="@id/dot_TextView3" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
-                android:background="@drawable/add_money_bottom_shape"
-                android:elevation="@dimen/_2sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/txtAvailableBalance1"
-                app:layout_constraintStart_toStartOf="@id/txtAvailableBalance1"
-                >
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/selectPaymentMethodBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/proceed_to_add"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
-                    android:background="@color/proceed_to_add"
-                    android:textStyle="bold"
-                    android:textAllCaps="false"
                     android:gravity="center"
-                    />
+                    android:text="@string/enter_amount_to_add"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="#979797"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="@id/wallet_imageView"
+                    app:layout_constraintStart_toStartOf="@id/wallet_imageView"
+                    app:layout_constraintTop_toBottomOf="@id/wallet_imageView" />
+
+                <ImageView
+                    android:id="@+id/imgAmount"
+                    android:layout_width="25dp"
+                    android:layout_height="30dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/inr"
+                    app:layout_constraintBottom_toBottomOf="@id/editAmount"
+                    app:layout_constraintEnd_toStartOf="@id/editAmount"
+                    app:layout_constraintTop_toTopOf="@id/editAmount" />
+
+                <EditText
+                    android:id="@+id/editAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/_0"
+                    android:inputType="number"
+                    android:maxLength="7"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                    android:textColor="#434343"
+                    android:textColorHint="#919191"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/txtAvailableBalance1"
+                    app:layout_constraintStart_toStartOf="@id/txtAvailableBalance1"
+                    app:layout_constraintTop_toBottomOf="@id/txtAvailableBalance1">
+
+                    <requestFocus />
+                </EditText>
+
+                <TextView
+                    android:id="@+id/txtMsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:text="@string/you_can_add_a_maximum_of_1_00_000_in_this_month"
+                    android:textColor="#979797"
+                    app:layout_constraintEnd_toEndOf="@id/editAmount"
+                    app:layout_constraintStart_toStartOf="@id/editAmount"
+                    app:layout_constraintTop_toBottomOf="@id/editAmount" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/all_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    app:layout_constraintEnd_toEndOf="@id/txtMsg"
+                    app:layout_constraintStart_toStartOf="@id/txtMsg"
+                    app:layout_constraintTop_toBottomOf="@id/txtMsg">
+
+
+                    <TextView
+                        android:id="@+id/txtFiveHundred"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@drawable/rupees_drawable"
+                        android:gravity="center"
+                        android:text="@string/_8377_500"
+                        android:textColor="#898989"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txtThousand"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:background="@drawable/rupees_drawable"
+                        android:gravity="center"
+                        android:text="@string/_8377_1000"
+                        android:textColor="#898989"
+                        app:layout_constraintEnd_toStartOf="@id/txtFiveThousandFiveHundred"
+                        app:layout_constraintStart_toEndOf="@id/txtFiveHundred"
+                        app:layout_constraintTop_toTopOf="@id/txtFiveHundred" />
+
+
+                    <TextView
+                        android:id="@+id/txtFiveThousandFiveHundred"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:background="@drawable/rupees_drawable"
+                        android:gravity="center"
+                        android:text="@string/_8377_1500"
+                        android:textColor="#898989"
+                        app:layout_constraintStart_toEndOf="@id/txtThousand"
+                        app:layout_constraintTop_toTopOf="@id/txtThousand" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/discountRecyclerView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fillViewport="true"
+                    android:nestedScrollingEnabled="false"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="@id/txtMsg"
+                    app:layout_constraintStart_toStartOf="@id/txtMsg"
+                    app:layout_constraintTop_toBottomOf="@id/all_amount"
+                    app:spanCount="2" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/note_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_30sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/discountRecyclerView">
+
+                    <TextView
+                        android:id="@+id/note_TV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/note"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_14sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/dot_TextView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@string/dout"
+                        android:textColor="#787878"
+                        android:textSize="@dimen/_12sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/note_TV" />
+
+
+                    <TextView
+                        android:id="@+id/note_TextView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:text="@string/maxpe_money_balance_is_valid_for_4_years_from_the_date_of_money_added"
+                        android:textColor="#787878"
+                        android:textSize="@dimen/_9sdp"
+                        app:layout_constraintStart_toEndOf="@id/dot_TextView1"
+                        app:layout_constraintTop_toTopOf="@id/dot_TextView1" />
+
+
+                    <TextView
+                        android:id="@+id/dot_TextView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:text="@string/dout"
+                        android:textColor="#787878"
+                        android:textSize="@dimen/_12sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/note_TextView2" />
+
+
+                    <TextView
+                        android:id="@+id/note_TextView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:text="@string/maxpe_money_is_useable_only_on_maxpe"
+                        android:textColor="#787878"
+                        android:textSize="@dimen/_9sdp"
+                        app:layout_constraintStart_toEndOf="@id/dot_TextView2"
+                        app:layout_constraintTop_toTopOf="@id/dot_TextView2" />
+
+                    <TextView
+                        android:id="@+id/dot_TextView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:text="@string/dout"
+                        android:textColor="#787878"
+                        android:textSize="@dimen/_12sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/note_TextView3" />
+
+
+                    <TextView
+                        android:id="@+id/note_TextView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:text="@string/maxpe_money_cannot_be_transferred_to_a_bank_account_as_per_rbi_guidelines"
+                        android:textColor="#787878"
+                        android:textSize="@dimen/_9sdp"
+                        app:layout_constraintStart_toEndOf="@id/dot_TextView3"
+                        app:layout_constraintTop_toTopOf="@id/dot_TextView3" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/txtTermsCondition"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:text="@string/t_amp_c_apply"
+                    android:textColor="#BEBEBE"
+                    android:textSize="@dimen/_8sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/note_layout" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/add_money_bottom_shape"
+        android:elevation="@dimen/_2sdp"
+        android:layout_above="@+id/nestedScrollView"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/selectPaymentMethodBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/proceed_to_add"
+            android:gravity="center"
+            android:text="@string/proceed_to_add"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            android:textStyle="bold" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/loading"
@@ -363,4 +370,4 @@
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

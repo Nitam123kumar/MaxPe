@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.animation.Animation;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -1495,11 +1494,14 @@ public class DefaultPresenter {
         }
     }
 
-    public void onlineDepositHistory(String device_id) {
+    public void onlineDepositHistory(String device_id,String from, String to, String ref_no_) {
         try {
             JSONObject post_data = new JSONObject();
             post_data.put("device_id", device_id.trim());
             post_data.put("token", mDatabase.getToken());
+            post_data.put("from", from.trim());
+            post_data.put("to", to.trim());
+            post_data.put("keyword", ref_no_.trim());
 
             JSONObject data = new JSONObject();
             data.put("request_url", ApiServices.onlineDepositHistory);
@@ -3474,8 +3476,6 @@ public class DefaultPresenter {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
     public void getCommissions(String device_id) {

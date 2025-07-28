@@ -106,7 +106,7 @@ public class AddPaymentHistoryAdapter extends RecyclerView.Adapter<AddPaymentHis
             } else if (mDepositData.getPayment_status().toUpperCase().equals("SUCCESS")) {
 //                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_history_1);
                 Glide.with(mContext)
-                        .load(R.drawable.success_img)
+                        .load(R.drawable.phone_pay_svg)
                         .into(imgPayment);
 //                txtStatus.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.success)));
             } else {

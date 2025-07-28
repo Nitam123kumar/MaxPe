@@ -3,34 +3,24 @@ package com.vuvrecharge.modules.activities;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -38,14 +28,8 @@ import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseActivity;
 import com.vuvrecharge.base.BaseMethod;
 import com.vuvrecharge.modules.adapter.MaxPointsAdapter;
-import com.vuvrecharge.modules.adapter.WalletAdapter;
-import com.vuvrecharge.modules.fragments.RechargeHistoryFragment;
-import com.vuvrecharge.modules.fragments.WalletFragment;
 import com.vuvrecharge.modules.model.CashBackPintsModel;
-import com.vuvrecharge.modules.model.DepositData;
 import com.vuvrecharge.modules.model.MaxPePointsData;
-import com.vuvrecharge.modules.model.UserData;
-import com.vuvrecharge.modules.model.WalletData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.presenter.OnFragmentListener;
 import com.vuvrecharge.modules.view.DefaultView;
@@ -75,10 +59,10 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
     TextView balance_maxPoints_TV;
     @BindView(R.id.maxPointRecyclerView)
     RecyclerView maxPointRecyclerView;
-    @BindView(R.id.select_from_date_img)
-    ImageView select_from_date_img;
-    @BindView(R.id.select_to_date_img)
-    ImageView select_to_date_img;
+    @BindView(R.id.layoutFrom)
+    ConstraintLayout select_from_date_img;
+    @BindView(R.id.layoutEnd)
+    ConstraintLayout select_to_date_img;
     @BindView(R.id.select_from_date)
     TextView select_from_date;
     @BindView(R.id.select_to_date)
@@ -94,13 +78,14 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
     @BindView(R.id.loading)
     LinearLayout loading;
 
-
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout refresh_layout;
     @BindView(R.id.view_all_maxPoints)
     TextView view_all_maxPoints;
 
 
     CashBackPintsModel data;
-    private List<MaxPePointsData> mMaxPePointsData = new ArrayList<>();
+    private List<MaxPePointsData> mMaxPePointsData;
     MaxPointsAdapter maxPointsAdapter;
 
     static Date fromDate;
@@ -148,24 +133,37 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
 
         date_picker_layout.setVisibility(GONE);
         filter_View.setOnClickListener(v -> {
-            if (isFrom==false){
+            if (isFrom == false) {
                 date_picker_layout.setVisibility(GONE);
-                isFrom=true;
-            }else {
+                isFrom = true;
+            } else {
                 date_picker_layout.setVisibility(VISIBLE);
-                isFrom=false;
+                isFrom = false;
             }
         });
+        refresh_layout.setOnRefreshListener(this::refreshData);
+        refresh_layout.setRefreshing(true);
 
+        if (mMaxPePointsData.isEmpty()){
+            view_all_maxPoints.setVisibility(GONE);
+        }
+        else {
+            view_all_maxPoints.setVisibility(VISIBLE);
+        }
 
         view_all_maxPoints.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(),StatementsActivity.class);
-            intent.putExtra("maxPointsActivity","maxPointsActivity");
+            Intent intent = new Intent(getActivity(), StatementsActivity.class);
+            intent.putExtra("maxPointsActivity", "maxPointsActivity");
             startActivity(intent);
         });
 
     }
-
+    void refreshData() {
+        defaultPresenter.cashbackPointsHistory(device_id + "",
+                "",  "", "");
+        select_from_date.setText("DD MM YYYY");
+        select_to_date.setText("DD MM YYYY");
+    }
 
     @Override
     public void onError(String error) {
@@ -176,6 +174,7 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
     public void onSuccess(String data) {
 
     }
+
     private void onclickListener() {
         search.setOnClickListener(v -> {
 
@@ -203,7 +202,8 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
     }
 
     private void initializeEventsList() {
-        maxPointsAdapter = new MaxPointsAdapter(this,mMaxPePointsData);
+        mMaxPePointsData = new ArrayList<>();
+        maxPointsAdapter = new MaxPointsAdapter(this, mMaxPePointsData);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         maxPointRecyclerView.setLayoutManager(linearLayoutManager);
         maxPointRecyclerView.setAdapter(maxPointsAdapter);
@@ -214,7 +214,7 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
                 visibleItemCount = linearLayoutManager.getChildCount();
                 totalItemCount = linearLayoutManager.getItemCount();
                 pastVisibleItems = linearLayoutManager.findFirstVisibleItemPosition();
-                if (dy > 0){
+                if (dy > 0) {
                     if (isLoading) {
                         if (totalItemCount > previousTotal) {
                             isLoading = false;
@@ -232,6 +232,7 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
             }
         });
     }
+
     private void loadData(String value) {
         defaultPresenter.cashbackPointsHistory(device_id + "",
                 /*from_date +*/ "", /*to_date +*/ "", "");
@@ -251,14 +252,12 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
     public void onSuccessOther(String data, String data_other) {
 
         try {
+            refresh_layout.setRefreshing(false);
             JSONObject object = new JSONObject(data);
             JSONArray array = object.getJSONArray("cashbackLogs");
 
 
-
-
-
-                    if (array.length() > 0){
+            if (array.length() > 0) {
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject object1 = array.getJSONObject(i);
                     MaxPePointsData maxPePointData = new MaxPePointsData();
@@ -276,30 +275,35 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
                     txtNoData.setVisibility(GONE);
 
                 }
-
+                if (mMaxPePointsData.isEmpty()){
+                    view_all_maxPoints.setVisibility(GONE);
+                }
+                else {
+                    view_all_maxPoints.setVisibility(VISIBLE);
+                }
                 maxPointRecyclerView.setVisibility(VISIBLE);
                 txtNoData.setVisibility(GONE);
-            }else {
+            } else {
                 maxPointRecyclerView.setVisibility(GONE);
                 txtNoData.setVisibility(VISIBLE);
+                view_all_maxPoints.setVisibility(GONE);
             }
             txtNoData.setVisibility(GONE);
 
 
+            if (object.has("cashbackPoints")) {
+                JSONObject pointsObject = object.getJSONObject("cashbackPoints");
 
-                if (object.has("cashbackPoints")) {
-                    JSONObject pointsObject = object.getJSONObject("cashbackPoints");
+                CashBackPintsModel model = new CashBackPintsModel();
+                model.setMax_balance_slab(pointsObject.getString("max_balance_slab"));
+                model.setCashback_points(pointsObject.getString("cashback_points"));
+                model.setTxn_balance_count(pointsObject.getString("txn_balance_count"));
+                Log.d("cashbackLogs", "onSuccessOther: " + pointsObject);
+                balance_maxPoints_TV.setText(model.getCashback_points());
 
-                    CashBackPintsModel model = new CashBackPintsModel();
-                    model.setMax_balance_slab(pointsObject.getString("max_balance_slab"));
-                    model.setCashback_points(pointsObject.getString("cashback_points"));
-                    model.setTxn_balance_count(pointsObject.getString("txn_balance_count"));
-                    Log.d("cashbackLogs", "onSuccessOther: "+pointsObject);
-                    balance_maxPoints_TV.setText(model.getCashback_points());
+            }
 
-                }
-
-            if (array.length() > 0){
+            if (array.length() > 0) {
                 Gson gson = new Gson();
                 Type type_ = new TypeToken<List<MaxPePointsData>>() {
                 }.getType();
@@ -310,16 +314,19 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
                 maxPointsAdapter.addEvents(passbookData, data_other);
                 maxPointRecyclerView.setVisibility(VISIBLE);
                 txtNoData.setVisibility(GONE);
-            }else {
+            } else {
 //                onError("no Data found");
                 txtNoData.setVisibility(VISIBLE);
                 maxPointRecyclerView.setVisibility(GONE);
+                view_all_maxPoints.setVisibility(GONE);
             }
 
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             txtNoData.setVisibility(VISIBLE);
+            view_all_maxPoints.setVisibility(GONE);
+            maxPointRecyclerView.setVisibility(GONE);
         }
     }
 

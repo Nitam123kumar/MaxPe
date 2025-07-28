@@ -84,6 +84,9 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
 //    @BindView(R.id.txtReferMaxSlug)
 //    TextView txtReferMaxSlug;
 
+    @BindView(R.id.txtTermsCondition)
+    TextView txtTermsCondition;
+
     @BindView(R.id.SuccessfulReferralView)
     View viewMyReferral;
 
@@ -132,6 +135,7 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
         setStatusBarGradiant(this);
         viewMyReferral.setOnClickListener(this);
         viewReferralIncome.setOnClickListener(this);
+        txtTermsCondition.setOnClickListener(this);
         if (mDatabase != null) {
             if (mDatabase.getUserData() != null) {
                 if (mDatabase.getUserData().getReferCode() != null) {
@@ -227,8 +231,10 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
             webView.getSettings().setJavaScriptEnabled(true);
             webView.getSettings().setLoadWithOverviewMode(true);
             webView.getSettings().setUseWideViewPort(true);
-            webView.getSettings().setBuiltInZoomControls(true);
+            webView.getSettings().setBuiltInZoomControls(false);
             webView.getSettings().setDisplayZoomControls(false);
+            webView.setHorizontalScrollBarEnabled(false);
+            webView.setHorizontalScrollbarOverlay(false);
             webView.setWebViewClient(new WebViewClient());
 
             Log.d("referal_slides", webViewHtml);
@@ -334,6 +340,9 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
             getActivity().finish();
         } else if (v.getId() == R.id.top_Earner) {
             Intent intent = new Intent(this, TopEarnerActivity.class);
+            startActivity(intent);
+        } else if (v.getId() == R.id.txtTermsCondition) {
+            Intent intent = new Intent(this, ReferandEarnTermsActivity.class);
             startActivity(intent);
         }
     }
