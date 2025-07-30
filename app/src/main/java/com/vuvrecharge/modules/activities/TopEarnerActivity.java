@@ -1,5 +1,8 @@
 package com.vuvrecharge.modules.activities;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -64,6 +67,8 @@ public class TopEarnerActivity extends BaseActivity implements DefaultView , Vie
     TextView top_transaction;
     @BindView(R.id.top_referral)
     TextView top_referral;
+    @BindView(R.id.loading)
+    LinearLayout loading;
     String firstName;
     String secondName;
     String thirdName;
@@ -207,17 +212,26 @@ public class TopEarnerActivity extends BaseActivity implements DefaultView , Vie
 
     @Override
     public void onShowDialog(String message) {
-
+        if (bottomSheet != null) {
+            showLoading(loading_dialog);
+            submit.setVisibility(GONE);
+        } else {
+            showLoading(loading);
+        }
     }
 
     @Override
     public void onHideDialog() {
-
+        if (bottomSheet != null) {
+            hideLoading(loading_dialog);
+            submit.setVisibility(VISIBLE);
+        } else {
+            hideLoading(loading);
+        }
     }
 
     @Override
     public void onShowToast(String message) {
-
     }
 
     @Override

@@ -40,7 +40,7 @@ import butterknife.ButterKnife;
 public class FeedbackActivity extends BaseActivity implements DefaultView, View.OnClickListener {
 
     private DefaultPresenter mDefaultPresenter;
-//    @BindView(R.id.ratingBar)
+    //    @BindView(R.id.ratingBar)
 //    RatingBar ratingBar;
     @BindView(R.id.toolbar_layout)
     LinearLayout mToolBar;
@@ -82,21 +82,6 @@ public class FeedbackActivity extends BaseActivity implements DefaultView, View.
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-//        LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
-//        stars.getDrawable(2).setColorFilter(ContextCompat.getColor(this, R.color.star_orange), PorterDuff.Mode.SRC_ATOP);
-//        stars.getDrawable(0).setColorFilter(ContextCompat.getColor(this, R.color.star_inactive), PorterDuff.Mode.SRC_ATOP);
-//
-//
-//        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-//            @Override
-//            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-////                if (fromUser) {
-////                    Toast.makeText(FeedbackActivity.this, "You selected " + (int) rating + " stars", Toast.LENGTH_SHORT).show();
-////                }
-//            }
-//        });
-
 
         stars1[0] = findViewById(R.id.star1);
         stars1[1] = findViewById(R.id.star2);
@@ -155,6 +140,7 @@ public class FeedbackActivity extends BaseActivity implements DefaultView, View.
             window.setBackgroundDrawable(background);
         }
     }
+
     private void clearRating() {
         currentRating = 0;
         for (int i = 0; i < stars1.length; i++) {
@@ -185,7 +171,7 @@ public class FeedbackActivity extends BaseActivity implements DefaultView, View.
 //                Toast.makeText(FeedbackActivity.this, "Thanks for rating " + currentRating + " stars!", Toast.LENGTH_LONG).show();
 
                 hideKeyBoard(user_feedback);
-                mDefaultPresenter.getFeedback(device_id, user_feedback.getText().toString().trim(),currentRating);
+                mDefaultPresenter.getFeedback(device_id, user_feedback.getText().toString().trim(), currentRating);
                 hideLoading(loading_dialog);
                 openDialog();
                 break;
@@ -214,23 +200,21 @@ public class FeedbackActivity extends BaseActivity implements DefaultView, View.
     }
 
 
+    private void handleStarClick(int index) {
+        currentRating = index + 1; // ratings are 1-indexed for user
+        updateStars(currentRating);
+//    Toast.makeText(this, "You selected " + currentRating + " stars", Toast.LENGTH_SHORT).show();
+    }
 
-
-private void handleStarClick(int index) {
-    currentRating = index + 1; // ratings are 1-indexed for user
-    updateStars(currentRating);
-    Toast.makeText(this, "You selected " + currentRating + " stars", Toast.LENGTH_SHORT).show();
-}
-
-private void updateStars(int rating) {
-    for (int i = 0; i < stars1.length; i++) {
-        if (i < rating) {
-            stars1[i].setImageResource(R.drawable.star_full); // filled star
-        } else {
-            stars1[i].setImageResource(R.drawable.star_empty); // empty star
+    private void updateStars(int rating) {
+        for (int i = 0; i < stars1.length; i++) {
+            if (i < rating) {
+                stars1[i].setImageResource(R.drawable.star_full); // filled star
+            } else {
+                stars1[i].setImageResource(R.drawable.star_empty); // empty star
+            }
         }
     }
-}
 
 
     @Override

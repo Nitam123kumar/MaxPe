@@ -13,20 +13,20 @@
         motion:motionInterpolator="linear">
         <KeyFrameSet>
             <KeyAttribute motion:framePosition="0"
-                motion:motionTarget="@id/refresh_layout" />
+                motion:motionTarget="@id/viewScrollPoint" />
             <KeyAttribute motion:framePosition="1"
-                motion:motionTarget="@id/refresh_layout" />
+                motion:motionTarget="@id/viewScrollPoint" />
         </KeyFrameSet>
         <OnSwipe
             motion:dragDirection="dragUp"
             motion:maxAcceleration="200"
             motion:maxVelocity="300"
-            motion:touchAnchorId="@id/refresh_layout"/>
+            motion:touchAnchorId="@id/viewScrollPoint"/>
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
         <Constraint android:id="@+id/headerImage_layout" />
-        <Constraint android:id="@+id/refresh_layout"
+        <Constraint android:id="@+id/viewScrollPoint"
             motion:layout_constraintTop_toBottomOf="@+id/toolbar_constraintlayout"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
 
     <ConstraintSet android:id="@+id/end">
         <Constraint android:id="@+id/headerImage_layout" />
-        <Constraint android:id="@+id/refresh_layout"
+        <Constraint android:id="@+id/viewScrollPoint"
             android:layout_height="@dimen/_390sdp"
             motion:layout_constraintTop_toBottomOf="@+id/headerImage_layout"
             motion:layout_constraintStart_toStartOf="parent"

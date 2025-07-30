@@ -192,16 +192,16 @@ public class ForgotPasswordActivity extends BaseActivity implements DefaultView,
                 String newPassword = binding_.newPassword.getText().toString();
                 String reNewPassword = binding_.reNewPassword.getText().toString();
                 if (TextUtils.isEmpty(newPassword.trim())) {
-                    showError(bottomSheet, "Please enter new password");
+                    showError1(bottomSheet, "Please enter new password");
                     return;
                 }
                 if (!newPassword.trim().equals(reNewPassword.trim())) {
-                    showError(bottomSheet, "Confirm password doesn't matched");
+                    showError1(bottomSheet, "Confirm password doesn't matched");
                     return;
                 }
 
                 if (TextUtils.isEmpty(otpView.trim())) {
-                    showError(bottomSheet, "Please enter otp");
+                    showError1(bottomSheet, "Please enter otp");
                     return;
                 }
 
@@ -228,10 +228,10 @@ public class ForgotPasswordActivity extends BaseActivity implements DefaultView,
     @Override
     public void onError(String error) {
         if (bottomSheet != null) {
-            showError(bottomSheet, error);
+            showError1(bottomSheet, error);
             submit.setVisibility(View.VISIBLE);
         } else {
-            showError(error);
+            showError1(error);
         }
     }
 

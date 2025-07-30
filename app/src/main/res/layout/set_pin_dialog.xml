@@ -38,58 +38,73 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
                         android:text="@string/set_mpin_for_recharge_amp_send_money"
-                        android:textColor="@color/black_2"
-                        android:textSize="@dimen/_13sdp" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sdp" />
 
 
                     <EditText
                         android:id="@+id/pin"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_38sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:background="@drawable/support_design_background_shape"
                         android:gravity="center_vertical"
                         android:hint="@string/enter_old_mpin"
-                        android:paddingStart="@dimen/_10sdp"
                         android:inputType="number"
-                        android:paddingTop="@dimen/_1sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
                         android:maxLength="4"
-                        android:background="@drawable/corner_white_circle_st"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_1sdp"
                         android:paddingBottom="@dimen/_1sdp"
                         android:textColor="@color/black_2"
-                        android:textColorHint="@color/black_light"
-                        android:textSize="@dimen/_12sdp" />
+                        android:textColorHint="#B6B6B6"
+                        android:textSize="@dimen/_11sdp" />
 
                     <EditText
                         android:id="@+id/pin_con"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_38sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@drawable/support_design_background_shape"
                         android:gravity="center_vertical"
                         android:hint="@string/enter_new_mpin"
-                        android:paddingStart="@dimen/_10sdp"
                         android:inputType="number"
-                        android:paddingTop="@dimen/_1sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
                         android:maxLength="4"
-                        android:background="@drawable/corner_white_circle_st"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_1sdp"
                         android:paddingBottom="@dimen/_1sdp"
                         android:textColor="@color/black_2"
-                        android:textColorHint="@color/black_light"
-                        android:textSize="@dimen/_12sdp" />
+                        android:textColorHint="#B6B6B6"
+                        android:textSize="@dimen/_11sdp" />
+
+                    <EditText
+                        android:id="@+id/pin_conform"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_38sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@drawable/support_design_background_shape"
+                        android:gravity="center_vertical"
+                        android:hint="@string/confirm_new_m_pin"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingTop="@dimen/_1sdp"
+                        android:paddingBottom="@dimen/_1sdp"
+                        android:textColor="@color/black_2"
+                        android:textColorHint="#B6B6B6"
+                        android:textSize="@dimen/_11sdp" />
 
                     <TextView
                         android:id="@+id/proceed"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_38sdp"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:background="@drawable/corner_circle_primary"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:background="@drawable/ad_money_button_shape"
                         android:gravity="center"
-                        android:textStyle="bold"
-                        android:paddingLeft="30dp"
-                        android:paddingRight="30dp"
-                        android:text="@string/proceed"
+                        android:text="@string/submit"
                         android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
 
 
                 </LinearLayout>

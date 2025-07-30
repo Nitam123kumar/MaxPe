@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -18,6 +19,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,6 +29,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
@@ -53,9 +56,11 @@ import com.vuvrecharge.databinding.WhatsappDialogBinding;
 import com.vuvrecharge.modules.activities.newActivities.ComplaintRegistrationActivity;
 import com.vuvrecharge.modules.activities.newActivities.MobileBankingActivity;
 import com.vuvrecharge.modules.adapter.FollowsAdapter;
+import com.vuvrecharge.modules.adapter.LanguageAdapter;
 import com.vuvrecharge.modules.adapter.PaymentSettingAdapter;
 import com.vuvrecharge.modules.model.DefaultResponse;
 import com.vuvrecharge.modules.model.Follows;
+import com.vuvrecharge.modules.model.LanguageModel;
 import com.vuvrecharge.modules.model.PaymentSetting;
 import com.vuvrecharge.modules.model.UserData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
@@ -63,6 +68,7 @@ import com.vuvrecharge.modules.view.DefaultView;
 import com.vuvrecharge.preferences.Fingerprint;
 import com.vuvrecharge.preferences.PasswordLess;
 import com.vuvrecharge.utils.Java_AES_Cipher;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -71,6 +77,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
@@ -129,6 +136,8 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
     View viewComplaint;
     @BindView(R.id.viewFollow)
     View viewFollow;
+    @BindView(R.id.viewLanguage)
+    View viewLanguage;
     @BindView(R.id.logo)
     TextView nameLogo;
 //    @BindView(R.id.available_maxPointsTV)
@@ -154,6 +163,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
     String data = "";
     ArrayList<Follows> followsList = new ArrayList<>();
     FollowsAdapter adapter;
+    private LanguageModel selectedLanguageModel = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,6 +205,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         viewRateUs.setOnClickListener(this);
         viewInvite.setOnClickListener(this);
         onBack.setOnClickListener(this);
+        viewLanguage.setOnClickListener(this);
         viewFingerPrint.setOnClickListener(this);
         viewChangeMPin.setOnClickListener(this);
         viewResetMPin.setOnClickListener(this);
@@ -204,7 +215,12 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
 
 //        statusBarColor();
     }
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     private void setValues() {
         try {
             UserData userData = mDatabase.getUserData();
@@ -238,27 +254,29 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
 
         return initials.toString().toUpperCase(); // optional uppercase
     }
-
     public void fingerprint() {
         BiometricManager biometricManager = BiometricManager.from(this);
-        switch (biometricManager.canAuthenticate()) {
+        switch (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK | BiometricManager.Authenticators.DEVICE_CREDENTIAL)) {
             case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
                 Toast.makeText(getApplicationContext(), "This device does not have a fingerprint sensor", Toast.LENGTH_SHORT).show();
-                break;
+                return;
             case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
                 Toast.makeText(getApplicationContext(), "The biometric sensor is currently unavailable", Toast.LENGTH_SHORT).show();
-                break;
+                return;
             case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
-                Toast.makeText(getApplicationContext(), "Your device doesn't have fingerprint saved,please check your security settings", Toast.LENGTH_SHORT).show();
-                break;
+                Toast.makeText(getApplicationContext(), "Your device doesn't have fingerprint saved, please check your security settings", Toast.LENGTH_SHORT).show();
+                return;
         }
+
         Executor executor = ContextCompat.getMainExecutor(this);
         biometricPrompt = new BiometricPrompt(AccountActivity.this, executor, new BiometricPrompt.AuthenticationCallback() {
             @Override
             public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
                 super.onAuthenticationError(errorCode, errString);
-                System.exit(0);
-                Toast.makeText(AccountActivity.this, "Authenication failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AccountActivity.this, errString, Toast.LENGTH_SHORT).show();
+                fingerprint.setFingerprint("false");
+                btnSwitch.setChecked(false);
+                // Optional: Navigate back or disable feature instead of exit
             }
 
             @Override
@@ -271,12 +289,57 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
             @Override
             public void onAuthenticationFailed() {
                 super.onAuthenticationFailed();
+                Toast.makeText(AccountActivity.this, "Fingerprint not recognized. Try again.", Toast.LENGTH_SHORT).show();
             }
         });
-        promptInfo = new BiometricPrompt.PromptInfo.Builder().setTitle("MAXPe Payment")
-                .setDescription("Use fingerprint to login").setDeviceCredentialAllowed(true).build();
+
+        promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("MAXPe Payment")
+                .setDescription("Use fingerprint to login")
+                .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK | BiometricManager.Authenticators.DEVICE_CREDENTIAL)
+                .build();
+
         biometricPrompt.authenticate(promptInfo);
     }
+
+//    public void fingerprint() {
+//        BiometricManager biometricManager = BiometricManager.from(this);
+//        switch (biometricManager.canAuthenticate()) {
+//            case BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE:
+//                Toast.makeText(getApplicationContext(), "This device does not have a fingerprint sensor", Toast.LENGTH_SHORT).show();
+//                break;
+//            case BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE:
+//                Toast.makeText(getApplicationContext(), "The biometric sensor is currently unavailable", Toast.LENGTH_SHORT).show();
+//                break;
+//            case BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED:
+//                Toast.makeText(getApplicationContext(), "Your device doesn't have fingerprint saved,please check your security settings", Toast.LENGTH_SHORT).show();
+//                break;
+//        }
+//        Executor executor = ContextCompat.getMainExecutor(this);
+//        biometricPrompt = new BiometricPrompt(AccountActivity.this, executor, new BiometricPrompt.AuthenticationCallback() {
+//            @Override
+//            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+//                super.onAuthenticationError(errorCode, errString);
+//                System.exit(0);
+//                Toast.makeText(AccountActivity.this, "Authenication failed", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+//                super.onAuthenticationSucceeded(result);
+//                startActivity(new Intent(AccountActivity.this, MainActivity.class));
+//                finish();
+//            }
+//
+//            @Override
+//            public void onAuthenticationFailed() {
+//                super.onAuthenticationFailed();
+//            }
+//        });
+//        promptInfo = new BiometricPrompt.PromptInfo.Builder().setTitle("MAXPe Payment")
+//                .setDescription("Use fingerprint to login").setDeviceCredentialAllowed(true).build();
+//        biometricPrompt.authenticate(promptInfo);
+//    }
 
     @Override
     public void onClick(@NonNull View view) {
@@ -360,12 +423,82 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                 onBackPressed();
                 finish();
                 break;
+            case R.id.viewLanguage:
+//                showLanguageDialog();
+                break;
             default:
                 Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show();
 
         }
     }
 
+    private void showLanguageDialog() {
+
+        SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
+        String currentLangCode = prefs.getString("lang", "en");
+
+
+        FrameLayout bottomSheet = null;
+      BottomSheetDialog  dialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
+        View layout = LayoutInflater.from(getActivity()).inflate(R.layout.language_selector_bottom_sheet, null, false);
+        RecyclerView recyclerView = layout.findViewById(R.id.language_list_recyclerView);
+        AppCompatButton addButton = layout.findViewById(R.id.change_languageBtn);
+        ImageView img = layout.findViewById(R.id.img_cancel);
+
+        bottomSheet = dialog.findViewById(com.denzcoskun.imageslider.R.id.design_bottom_sheet);
+        if (bottomSheet != null) {
+            BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+            behavior.setSkipCollapsed(false);
+            behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            behavior.setPeekHeight(600);
+        }
+
+        List<LanguageModel> list = new ArrayList<>();
+        list.add(new LanguageModel("English", "English", true));
+        list.add(new LanguageModel("Hindi", "हिन्दी", false));
+        list.add(new LanguageModel("Telugu", "తెలుగు", false));
+        list.add(new LanguageModel("Tamil", "தமிழ்", false));
+
+        for (LanguageModel model : list) {
+            if (model.isSelected()) {
+                selectedLanguageModel = model;
+                break;
+            }
+        }
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
+        LanguageAdapter adapter = new LanguageAdapter(this, list, model -> selectedLanguageModel = model);
+
+        recyclerView.setAdapter(adapter);
+
+        addButton.setOnClickListener(v -> {
+            if (selectedLanguageModel != null) {
+                if (selectedLanguageModel.getLanguageCode().equals(currentLangCode)) {
+                    Toast.makeText(this, "Already using this language", Toast.LENGTH_SHORT).show();
+                } else {
+                    changeLanguage(selectedLanguageModel.getLanguageCode());
+                    dialog.dismiss();
+                }
+            } else {
+                Toast.makeText(this, "Please select a language", Toast.LENGTH_SHORT).show();
+            }
+        });
+        img.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+        dialog.setContentView(layout);
+        dialog.show();
+    }
+
+    private void changeLanguage(String langCode) {
+        SharedPreferences.Editor editor = getSharedPreferences("settings", MODE_PRIVATE).edit();
+        editor.putString("lang", langCode);
+        editor.apply();
+
+        LocaleHelper.setLocale(this, langCode);
+        recreate(); // Restart current activity with new language
+    }
     private void addBalance() {
         try {
             FrameLayout bottomSheet = null;
@@ -624,6 +757,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         binding.proceed.setOnClickListener(v -> {
             String oldmPin = binding.pin.getText().toString();
             String newmPin = binding.pinCon.getText().toString();
+            String pin_conform = binding.pinConform.getText().toString();
 
             if (TextUtils.isEmpty(oldmPin.trim())) {
                 showError(bottomSheet, "Please enter old Mpin");
@@ -641,6 +775,10 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
             }
             if (newmPin.length() < 4) {
                 showError(bottomSheet, "Please enter 4 digits  Mpin");
+                return;
+            }
+            if (!newmPin.trim().equals(pin_conform.trim())) {
+                showError(bottomSheet, "Confirm Mpin doesn't matched");
                 return;
             }
             hideKeyBoard(binding.pin);

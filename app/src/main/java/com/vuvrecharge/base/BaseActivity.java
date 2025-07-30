@@ -939,6 +939,45 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
         }
     }
 
+    protected void showError1(String message) {
+        try {
+            if (message == null) {
+                message = "";
+            }
+
+            handler.removeCallbacks(runnable);
+            changeStatusBarColorError();
+
+            snackbar = TSnackbar.make(findViewById(android.R.id.content), message, TSnackbar.LENGTH_SHORT);
+            snackbar.setActionTextColor(Color.WHITE);
+
+            View snackbarView = snackbar.getView();
+
+            // Set background color
+            snackbarView.setBackgroundColor(ContextCompat.getColor(this, R.color.bgg_e));
+
+            // Access Tsnackbar text view safely
+            TextView textView = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
+            if (textView != null) {
+                textView.setTextColor(Color.WHITE);
+                textView.setMaxLines(5);
+                textView.setPadding(16, 16, 16, 16);
+                textView.setGravity(Gravity.CENTER_VERTICAL);
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            }
+
+            // Show the Tsnackbar
+            snackbar.show();
+
+
+            new Handler(Objects.requireNonNull(Looper.myLooper()))
+                    .postDelayed(this::changeStatusBarColorNormal1, 2150);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     protected void showPending(String message) {
         // Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -1007,6 +1046,40 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
             e.printStackTrace();
         }
     }
+    protected void showError1(FrameLayout view, String message) {
+        // Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        try {
+            if (message == null) {
+                message = "";
+            }
+            handler.removeCallbacks(runnable_dialog);
+            changeStatusBarColorDialogError();
+            snackbar = TSnackbar.make(view, message, TSnackbar.LENGTH_LONG);
+            snackbar.setActionTextColor(Color.WHITE);
+            snackbar.setDuration(TSnackbar.LENGTH_SHORT);
+            View snackbarView = snackbar.getView();
+            final TSnackbar.SnackbarLayout snackBarView = (TSnackbar.SnackbarLayout) snackbar.getView();
+            TSnackbar.SnackbarLayout.LayoutParams params = (TSnackbar.SnackbarLayout.LayoutParams) snackBarView.getChildAt(0).getLayoutParams();
+            params.setMargins(0,
+                    0,
+                    0,
+                    0);
+            snackBarView.getChildAt(0).setLayoutParams(params);
+            snackBarView.setOverScrollMode(1);
+            snackbarView.setBackgroundColor(getResources().getColor(R.color.bgg_e));
+            TextView textView = snackbarView.findViewById(com.denzcoskun.imageslider.R.id.snackbar_text);
+            textView.setTextColor(Color.WHITE);
+            textView.setMaxLines(5);
+            textView.setPadding(3, 8, 3, 3);
+            textView.setGravity(Gravity.CENTER);
+            snackbar.show();
+            new Handler(Objects.requireNonNull(Looper.myLooper())).postDelayed(this::changeStatusBarColorNormal1,2150);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public  void changeStatusBarColor(BottomSheetDialog dialog) {
         try {
@@ -1137,6 +1210,21 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
 
     public void changeStatusBarColorNormal() {
         try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = activity.getWindow();
+                Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+                window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
+                window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
+                window.setBackgroundDrawable(background);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void changeStatusBarColorNormal1() {
+        try {
             Window win = getWindow();
             if (win != null) {
                 win.setStatusBarColor(getResources().getColor(R.color.colorPrimaryB));
@@ -1145,7 +1233,6 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
             e.printStackTrace();
         }
     }
-
     public void changeStatusBarColorSuccess() {
         try {
             Window win = getWindow();

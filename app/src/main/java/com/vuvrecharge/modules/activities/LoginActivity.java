@@ -209,10 +209,10 @@ public class LoginActivity extends BaseActivity implements DefaultView, View.OnC
     @Override
     public void onError(String error) {
         if (bottomSheet != null) {
-            showError(bottomSheet, error);
+            showError1(bottomSheet, error);
             submit.setVisibility(View.VISIBLE);
         }
-        showError(error);
+        showError1(error);
     }
 
     @Override
@@ -264,23 +264,23 @@ public class LoginActivity extends BaseActivity implements DefaultView, View.OnC
             }
         } else if (binding.btnLogin.getText().equals("Send OTP")) {
             if (Objects.requireNonNull(binding.username.getText()).toString().isEmpty()) {
-                showError("Enter mobile number");
+                showError1("Enter mobile number");
             } else {
                 mDefaultPresenter.loginOTPUser(binding.username.getText().toString().trim());
                 hideKeyBoard(binding.username);
             }
         } else if (binding.btnLogin.getText().equals("Resend OTP")) {
             if (Objects.requireNonNull(binding.username.getText()).toString().isEmpty()) {
-                showError("Enter mobile number");
+                showError1("Enter mobile number");
             } else {
                 mDefaultPresenter.loginOTPUser(binding.username.getText().toString().trim());
                 hideKeyBoard(binding.username);
             }
         } else if (binding.btnLogin.getText().equals("Verify OTP")) {
             if (Objects.requireNonNull(binding.username.getText()).toString().isEmpty()) {
-                showError("Enter mobile number");
+                showError1("Enter mobile number");
             } else if (Objects.requireNonNull(binding.password.getText()).toString().isEmpty()) {
-                showError("Enter OTP");
+                showError1("Enter OTP");
             } else {
                 mDefaultPresenter.loginVerifyUser(
                         binding.username.getText().toString().trim(),

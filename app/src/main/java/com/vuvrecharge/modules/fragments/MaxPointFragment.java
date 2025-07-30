@@ -104,8 +104,8 @@ public class MaxPointFragment extends BaseFragment implements DefaultView {
         device_id = Settings.Secure.getString(requireActivity().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
         defaultPresenter = new DefaultPresenter(this);
-        defaultPresenter.cashbackPointsHistory(device_id + "",
-                  "",  "", "");
+//        defaultPresenter.cashbackPointsHistory(device_id + "",
+//                  "",  "", "");
 
         initializeEventsList();
         Calendar cal = Calendar.getInstance();

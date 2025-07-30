@@ -425,39 +425,21 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/c"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_470sdp"
                     android:layout_marginHorizontal="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:elevation="@dimen/_3sdp"
-                    android:paddingBottom="@dimen/_12sdp"
-                    android:paddingTop="@dimen/_12sdp"
                     app:layout_constraintTop_toBottomOf="@+id/referral_link_ConstraintLayout">
 
 
                     <WebView
                         android:id="@+id/webView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        tools:ignore="WebViewLayout"
-                        />
+                        app:layout_constraintEnd_toEndOf="parent" />
 
-                    <TextView
-                        android:id="@+id/txtTermsCondition"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/t_amp_c_applied"
-                        android:textColor="#B1B1B1"
-                        android:textSize="@dimen/_8sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        app:layout_constraintTop_toBottomOf="@id/webView"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        />
 
 
 
@@ -808,12 +790,27 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+                <TextView
+                    android:id="@+id/txtTermsCondition"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/t_amp_c_applied"
+                    android:textColor="#B1B1B1"
+                    android:textSize="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:layout_constraintTop_toBottomOf="@id/c"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_220sdp"
+                    android:layout_height="@dimen/_200sdp"
                     android:layout_marginHorizontal="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_20sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/c">
+                    app:layout_constraintTop_toBottomOf="@+id/txtTermsCondition">
 
 
                     <TextView

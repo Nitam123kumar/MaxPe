@@ -102,7 +102,7 @@ public class DepositFragment extends BaseFragment implements DefaultView {
         device_id = Settings.Secure.getString(requireActivity().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
         initializeDepositList();
-        mDefaultPresenter.onlineDepositHistory(device_id + "","","","");
+//        mDefaultPresenter.onlineDepositHistory(device_id + "","","","");
 
         Calendar cal = Calendar.getInstance();
         toDate = cal.getTime();

@@ -41,18 +41,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.browser.customtabs.CustomTabsIntent;
-import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.core.widget.NestedScrollView;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
@@ -69,6 +65,7 @@ import com.google.android.play.core.install.InstallStateUpdatedListener;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.UpdateAvailability;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
+import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseActivity;
 import com.vuvrecharge.base.BaseMethod;
@@ -80,6 +77,7 @@ import com.vuvrecharge.modules.activities.newActivities.CommissionChartActivity;
 import com.vuvrecharge.modules.activities.newActivities.ElectricityActivity;
 import com.vuvrecharge.modules.activities.newActivities.MobileBankingActivity;
 import com.vuvrecharge.modules.adapter.DashboardAdapter;
+import com.vuvrecharge.modules.adapter.ImageSliderAdapter;
 import com.vuvrecharge.modules.adapter.OTTSubscriptionsAdapter;
 import com.vuvrecharge.modules.adapter.OfferSliderRecyclerViewAdapter;
 import com.vuvrecharge.modules.adapter.PaymentSettingAdapter;
@@ -91,7 +89,6 @@ import com.vuvrecharge.modules.model.DashboardMenu;
 import com.vuvrecharge.modules.model.OTTSubscriptionsData;
 import com.vuvrecharge.modules.model.OfferSlider;
 import com.vuvrecharge.modules.model.PaymentSetting;
-import com.vuvrecharge.modules.model.SlideData;
 import com.vuvrecharge.modules.model.SliderData;
 import com.vuvrecharge.modules.model.SliderItems;
 import com.vuvrecharge.modules.model.SpotlightData;
@@ -106,7 +103,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Timer;
@@ -222,7 +218,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
     @BindView(R.id.imgReferAndEarn)
     ImageView imgReferAndEarn;
 
-    List<String> color;
+    List<String> color = new ArrayList<>();
     List<String> youtubeVideosList;
     List<String> imageList_offer;
     List<String> spotlight;
@@ -251,13 +247,13 @@ public class MainActivity extends BaseActivity implements DefaultView,
     OTTSubscriptionsAdapter oTTAdapter;
     List<String> ott_List;
     List<OTTSubscriptionsData> oTTList = new ArrayList<>();
-    List<OfferSlider> main_hero_banner = new ArrayList<>();
+    List<SliderData> slider_banner = new ArrayList<>();
     String intentName = null;
     String extraData = null;
     String redirection_type = null;
     String redirection_url = null;
-    int position = 0;
-    private Handler sliderHandler = new Handler((Looper.getMainLooper()));
+    int lastSelectedPosition  = 0;
+    private Handler sliderHandler = new Handler();
     private Runnable sliderRunnable;
     SliderAdapterBanner imageSliderAdapter;
     @Override
@@ -306,6 +302,37 @@ public class MainActivity extends BaseActivity implements DefaultView,
         headerImage_layout.setOnClickListener(v -> {
             onClickMainHeroBanner(redirection_type, intentName, extraData, redirection_url);
         });
+
+
+            imageSliderAdapter = new SliderAdapterBanner(getActivity(), color,slider_banner, this);
+        viewPager.setAdapter(imageSliderAdapter);
+        indicator.setViewPager2(viewPager);
+        sliderRunnable = new Runnable() {
+            @Override
+            public void run() {
+                int currentItem = viewPager.getCurrentItem();
+                int totalItem = imageSliderAdapter.getItemCount();
+                if (currentItem < totalItem - 1) {
+                    viewPager.setCurrentItem(currentItem + 1, true);
+                } else {
+                    viewPager.setCurrentItem(0, true);
+                }
+                sliderHandler.postDelayed(this, 3000);
+            }
+        };
+        sliderHandler.postDelayed(sliderRunnable, 3000);
+
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                sliderHandler.removeCallbacks(sliderRunnable);
+                sliderHandler.postDelayed(sliderRunnable, 3000);
+            }
+        });
+
+
+
 
 
 
@@ -391,35 +418,17 @@ public class MainActivity extends BaseActivity implements DefaultView,
             }
 
             color = new ArrayList<>();
+            slider_banner.clear();
             List<SliderData> slide = (mDatabase.getUserData().getSlides());
             for (SliderData image : slide) {
                 color.add(mDatabase.getUserData().getSlide_path() + "/" + image.getSlide());
                 Log.d("Url Data", mDatabase.getUserData().getSlide_path());
+                slider_banner.add(image);
             }
-            imageSliderAdapter = new SliderAdapterBanner(getActivity(), color, userData.getSlides(), this);
+            imageSliderAdapter = new SliderAdapterBanner(this, color, mDatabase.getUserData().getSlides(), this);
             viewPager.setAdapter(imageSliderAdapter);
             indicator.setViewPager2(viewPager);
-            sliderRunnable = () -> {
-                int currentItem = viewPager.getCurrentItem();
-                int totalItem = imageSliderAdapter.getItemCount();
-                if (currentItem < totalItem - 1) {
-                    viewPager.setCurrentItem(currentItem + 1, true);
-                } else {
-                    viewPager.setCurrentItem(0, true);
-                }
-            };
-
-
-            sliderHandler.postDelayed(sliderRunnable, 3000);
-
-            viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-                @Override
-                public void onPageSelected(int position) {
-                    super.onPageSelected(position);
-                    sliderHandler.removeCallbacks(sliderRunnable);
-                    sliderHandler.postDelayed(sliderRunnable, 3000);
-                }
-            });
+            imageSliderAdapter.notifyDataSetChanged();
 
             youtubeVideosList = new ArrayList<>();
             List<YoutubeSlides> youtubeSlidesImages = (mDatabase.getUserData().getYoutubeVideoSliders());
@@ -692,22 +701,25 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 try {
                     clazz = Class.forName(intent_name);
                     intent = new Intent(getActivity(), clazz);
-                    intent.putExtra("activityExtraData", activityExtraData.toString());
-                    startActivity(intent);
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
 
-        } else if (redirection_type.equals("activity")) {
-            if (intent_name != null) {
-                try {
-                    clazz = Class.forName(intent_name);
-                    intent = new Intent(getActivity(), clazz);
-                    intent.putExtra("activityExtraData", activityExtraData.toString());
+                    JSONObject object = new JSONObject(activityExtraData);
+
+                    if (object.length() > 0) {
+
+                        Iterator<String> keys = object.keys();
+                        while (keys.hasNext()) {
+                            String key = keys.next();
+                            String value = object.optString(key, "");
+
+                            intent.putExtra(key, value);
+                        }
+
+                    }
                     startActivity(intent);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
                 }
             }
 
@@ -750,7 +762,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         public void run() {
             try {
                 getActivity().runOnUiThread(() -> {
-                    if (viewPager.getCurrentItem() < color.size() - 1) {
+                    if (viewPager.getCurrentItem() < slider_banner.size() - 1) {
                         viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
                     } else {
                         viewPager.setCurrentItem(0);
@@ -976,11 +988,10 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 allServices = message;
             } else {
                 mDatabase.setUserData(message);
-
+                refresh_layout.setRefreshing(false);
                 JSONObject message1 = new JSONObject(message);
                 JSONObject data = message1.getJSONObject("main_hero_banner");
                 mainHeroBanner(data);
-                refresh_layout.setRefreshing(false);
                 setData("Api");
                 JSONObject object = new JSONObject(message);
                 JSONArray array = object.getJSONArray("recharge_pay_data");
@@ -1015,6 +1026,26 @@ public class MainActivity extends BaseActivity implements DefaultView,
                         }
                     }
                 }
+
+//                JSONObject sliderObject = data.getJSONObject("slides");
+//                Log.d("onSuccess", "onSuccess: " + sliderObject);
+//                slider_banner.clear();
+//                if (sliderObject.length() > 0) {
+//
+//                    for (int i = 0; i < sliderObject.length(); i++) {
+//                        JSONObject object1 = sliderObject.getJSONObject(String.valueOf(i));
+//                        SliderData sliderData = new SliderData();
+//                        sliderData.setSlide(object1.getString("slide"));
+//                        sliderData.setUrl(object1.getString("url"));
+//                        sliderData.setRedirection_type(object1.getString("redirection_type"));
+//                        sliderData.setData(object1.getString("data"));
+//                        slider_banner.add(sliderData);
+//                    }
+//                    imageSliderAdapter.notifyDataSetChanged();
+//
+//
+//                }
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1193,6 +1224,11 @@ public class MainActivity extends BaseActivity implements DefaultView,
     @Override
     protected void onStop() {
         super.onStop();
+        hideAllDialog();
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
         hideAllDialog();
     }
 

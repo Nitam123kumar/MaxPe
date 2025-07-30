@@ -224,7 +224,7 @@ public class RegisterActivity extends BaseActivity implements DefaultView, View.
 
                 String otpView = Objects.requireNonNull(binding_.otpView.getText()).toString();
                 if (TextUtils.isEmpty(otpView.trim())) {
-                    showError(bottomSheet, "Please enter otp");
+                    showError1(bottomSheet, "Please enter otp");
                     return;
                 }
 
@@ -280,10 +280,10 @@ public class RegisterActivity extends BaseActivity implements DefaultView, View.
     @Override
     public void onError(String error) {
         if (bottomSheet != null) {
-            showError(bottomSheet, error);
+            showError1(bottomSheet, error);
             submit.setVisibility(View.VISIBLE);
         } else {
-            showError(error);
+            showError1(error);
         }
     }
 

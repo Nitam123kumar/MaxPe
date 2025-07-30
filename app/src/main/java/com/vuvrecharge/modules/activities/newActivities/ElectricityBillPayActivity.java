@@ -813,6 +813,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
     @Override
     public void onSuccessOther(String data, String data_other) {
         try {
+            Log.d("DATA_DATA",data);
             if (data_other.equals("INSUFFICIENT")){
                 openGatewaysDialog(data);
             } else{
@@ -864,7 +865,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
 
             });
             if (numberField.getBoolean("is_select")) {
-                spinnerText.setText(numberField.getString("eg"));
+                spinnerText.setHint(numberField.getString("eg"));
                 spinnerData.add(new SpinnerData("0", "---Select---"));
                 JSONArray arr = numberField.getJSONArray("select_values");
                 for (int i = 0; i < arr.length(); i++) {

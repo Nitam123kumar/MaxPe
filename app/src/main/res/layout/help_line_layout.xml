@@ -10,17 +10,18 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardImg"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            app:cardCornerRadius="27dp"
+            android:layout_width="@dimen/_32sdp"
+            android:layout_height="@dimen/_32sdp"
+            app:cardCornerRadius="@dimen/_32sdp"
             android:layout_margin="@dimen/_10sdp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="@id/txtNumber"
+            app:layout_constraintBottom_toBottomOf="@id/img">
 
             <ImageView
                 android:id="@+id/imgProvider"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="@dimen/_32sdp"
+                android:layout_height="@dimen/_32sdp"
                 android:src="@drawable/app_logo" />
         </androidx.cardview.widget.CardView>
 
@@ -31,23 +32,25 @@
             android:text="@string/_198_amp_199"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textStyle="bold"
-            android:textColor="#242424"
-            android:layout_marginStart="14dp"
-            android:layout_marginEnd="14dp"
+            android:textColor="#747474"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_11sdp"
+            android:layout_marginEnd="@dimen/_11sdp"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintStart_toEndOf="@id/cardImg"
-            app:layout_constraintTop_toTopOf="@id/cardImg"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/txtProvider"/>
 
         <ImageView
             android:id="@+id/img"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/supprot_pro"
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:src="@drawable/call_me"
+            android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintStart_toStartOf="@id/txtNumber"
             app:layout_constraintTop_toBottomOf="@id/txtNumber"
-            app:layout_constraintBottom_toBottomOf="@id/cardImg"/>
+            />
 
         <TextView
             android:id="@+id/txtProvider"
@@ -68,12 +71,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/balance_check_123_amp_124_1"
-            android:textColor="#3C3F48"
+            android:textColor="@color/black"
             android:textStyle="bold"
+            android:textSize="@dimen/_11sdp"
             android:textIsSelectable="true"
             android:layout_marginTop="@dimen/_10sdp"
-            android:padding="@dimen/_8sdp"
+            android:padding="@dimen/_7sdp"
             android:background="@drawable/toll_free_shape"
             app:layout_constraintStart_toStartOf="@id/cardImg"
             app:layout_constraintEnd_toEndOf="@id/txtNumber"

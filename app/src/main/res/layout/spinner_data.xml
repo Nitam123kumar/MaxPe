@@ -11,13 +11,15 @@
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/_40sdp"
             android:layout_marginStart="@dimen/_3sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:gravity="center_vertical"
             android:text="gf"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_13sdp" />
+            android:paddingStart="@dimen/_5sdp"
+            android:textColorHint="#DEDEDE"
+            android:textColor="@color/black_2"
+            android:textSize="@dimen/_10sdp" />
 
     </RelativeLayout>
 

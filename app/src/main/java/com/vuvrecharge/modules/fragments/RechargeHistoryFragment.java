@@ -133,7 +133,7 @@ public class RechargeHistoryFragment extends BaseFragment implements DefaultView
     @Override
     public void onResume() {
         super.onResume();
-        loadData("Yes");
+//        loadData("Yes");
     }
 
 

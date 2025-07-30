@@ -143,7 +143,13 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
 //            }
 
             order_id.setText("Order Id : " + resultsBean.getOrder_id());
-            amount.setText("\u20b9" + resultsBean.getAmount());
+            try {
+                double amt = Double.parseDouble(resultsBean.getAmount());
+                String formatted = (amt % 1 == 0) ? String.valueOf((long) amt) : String.valueOf(amt);
+                amount.setText("\u20b9" + formatted);
+            } catch (NumberFormatException e) {
+                amount.setText("\u20b9" + resultsBean.getAmount()); // fallback if parsing fails
+            }
 
             if (resultsBean.getLogo() == null) {
                 setImageUser(mContext, operator_img + operator_dunmy_img, operator_img_);

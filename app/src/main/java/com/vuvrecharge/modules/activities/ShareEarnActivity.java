@@ -1,5 +1,7 @@
 package com.vuvrecharge.modules.activities;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static com.vuvrecharge.api.ApiServices.BASE_URL;
 
 import android.annotation.SuppressLint;
@@ -104,9 +106,10 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
     ViewPager2 viewPager;
     @BindView(R.id.webView)
     WebView webView;
+    @BindView(R.id.loading)
+    LinearLayout loading;
     String shareText = "";
     TextView submit;
-    LinearLayout loading;
 //    @BindView(R.id.swipeRefreshLayout)
 //    SwipeRefreshLayout refresh_layout;
 
@@ -286,17 +289,21 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
 
     @Override
     public void onShowDialog(String message) {
-        if (loading != null) {
+        if (bottomSheet != null) {
+            showLoading(loading_dialog);
+            submit.setVisibility(GONE);
+        } else {
             showLoading(loading);
-            submit.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void onHideDialog() {
-        if (loading != null) {
+        if (bottomSheet != null) {
+            hideLoading(loading_dialog);
+            submit.setVisibility(VISIBLE);
+        } else {
             hideLoading(loading);
-            submit.setVisibility(View.VISIBLE);
         }
     }
 

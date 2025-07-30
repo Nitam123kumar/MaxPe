@@ -2,15 +2,14 @@
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motion_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_wallet_shape"
     android:fitsSystemWindows="true"
-    android:id="@+id/motion_layout"
     app:layoutDescription="@xml/motion_scene"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".modules.activities.MainActivity">
-
     <!--    <androidx.constraintlayout.motion.widget.MotionLayout-->
     <!--        android:id="@+id/motionLayout"-->
     <!--        android:layout_width="match_parent"-->
@@ -117,26 +116,34 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_145sdp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_constraintlayout">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/headerImage_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_145sdp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_constraintlayout">
+        >
 
-        <ImageView
-            android:id="@+id/headerImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_5sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/headerImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_5sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
     <View
@@ -151,130 +158,152 @@
         <requestFocus />
     </View>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/refresh_layout"
+    <View
+        android:id="@+id/viewScrollPoint"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/main_shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/viewScroll"
+        android:layout_width="60dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ad_money_button_shape"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/viewScrollPoint"
+        app:layout_constraintStart_toStartOf="@id/viewScrollPoint"
+        app:layout_constraintTop_toTopOf="@id/viewScrollPoint" />
+
+    <!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+    <!--        android:id="@+id/refresh_layout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="@dimen/_5sdp"-->
+    <!--        app:layout_constraintTop_toTopOf="@+id/viewScroll">-->
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/headerImage_layout">
+        android:layout_marginTop="@dimen/_5sdp"
+        android:clipToPadding="true"
+        app:layout_constraintTop_toTopOf="@id/viewScroll">
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestedScrollView"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintTop_toBottomOf="@id/headerImage_layout"
-            android:clipToPadding="false">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/_120sdp">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/main_shape"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/_64sdp">
+                android:layout_height="wrap_content">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:id="@+id/add_balance_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/show_balance_drawable"
+                    android:padding="@dimen/_10sdp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/add_balance_layout"
+                    <TextView
+                        android:id="@+id/txtYourBalance"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_16sdp"
-                        android:layout_marginEnd="@dimen/_10sdp"
-                        android:background="@drawable/show_balance_drawable"
-                        android:padding="@dimen/_10sdp"
-                        android:visibility="gone"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:text="@string/your_balance"
+                        android:textColor="@color/black"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/txtYourBalance"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_8sdp"
-                            android:text="@string/your_balance"
-                            android:textColor="@color/black"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/available_balance"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_23sdp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/txtYourBalance"
+                        app:layout_constraintTop_toBottomOf="@id/txtYourBalance" />
 
-                        <TextView
-                            android:id="@+id/available_balance"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_23sdp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="@id/txtYourBalance"
-                            app:layout_constraintTop_toBottomOf="@id/txtYourBalance" />
+                    <TextView
+                        android:id="@+id/add_balance"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_3sdp"
+                        android:background="@drawable/add_balance_button_drawable"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/_3sdp"
+                        android:paddingBottom="@dimen/_3sdp"
+                        android:text="@string/add_balance"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/add_balance_layout"
+                        app:layout_constraintEnd_toStartOf="@id/statements"
+                        app:layout_constraintStart_toStartOf="@id/available_balance"
+                        app:layout_constraintTop_toBottomOf="@id/available_balance" />
 
-                        <TextView
-                            android:id="@+id/add_balance"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_3sdp"
-                            android:background="@drawable/add_balance_button_drawable"
-                            android:gravity="center"
-                            android:paddingTop="@dimen/_3sdp"
-                            android:paddingBottom="@dimen/_3sdp"
-                            android:text="@string/add_balance"
-                            android:textColor="@color/white"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@id/add_balance_layout"
-                            app:layout_constraintEnd_toStartOf="@id/statements"
-                            app:layout_constraintStart_toStartOf="@id/available_balance"
-                            app:layout_constraintTop_toBottomOf="@id/available_balance" />
+                    <TextView
+                        android:id="@+id/statements"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="@drawable/recharge_history_button_drawable"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/_3sdp"
+                        android:paddingBottom="@dimen/_3sdp"
+                        android:text="@string/commission_chart"
+                        android:textColor="#0549AE"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@id/add_balance"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/add_balance"
+                        app:layout_constraintTop_toTopOf="@id/add_balance" />
 
-                        <TextView
-                            android:id="@+id/statements"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_3sdp"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:background="@drawable/recharge_history_button_drawable"
-                            android:gravity="center"
-                            android:paddingTop="@dimen/_3sdp"
-                            android:paddingBottom="@dimen/_3sdp"
-                            android:text="@string/commission_chart"
-                            android:textColor="#0549AE"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@id/add_balance"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/add_balance"
-                            app:layout_constraintTop_toTopOf="@id/add_balance" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:id="@+id/viewPagerLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_125sdp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:ignore="MissingConstraints,NotSibling">
 
-                    <LinearLayout
-                        android:id="@+id/viewPagerLayout"
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_slider"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_125sdp"
-                        android:background="@drawable/viewpager_bg"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        tools:ignore="MissingConstraints,NotSibling">
+                        android:layout_height="@dimen/_100sdp"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        app:cardCornerRadius="@dimen/_10sdp">
 
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card_slider"
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/viewPager"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_100sdp"
-                            android:layout_marginHorizontal="@dimen/_10sdp"
-                            android:layout_marginTop="@dimen/_12sdp"
-                            app:cardCornerRadius="@dimen/_10sdp">
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            tools:ignore="MissingConstraints" />
 
-                            <androidx.viewpager2.widget.ViewPager2
-                                android:id="@+id/viewPager"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@color/white"
-                                tools:ignore="MissingConstraints" />
-
-                        </androidx.cardview.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
                         <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
                             android:id="@+id/indicator"
@@ -283,7 +312,7 @@
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/_7sdp"
                             android:visibility="visible"
-                            app:dotsColor="@color/gray"
+                            app:dotsColor="@android:color/darker_gray"
                             app:dotsCornerRadius="@dimen/_2sdp"
                             app:dotsSize="@dimen/_3sdp"
                             app:dotsSpacing="@dimen/_2sdp"
@@ -292,1028 +321,1027 @@
                             app:layout_constraintTop_toBottomOf="@id/card_slider"
                             app:selectedDotColor="@color/colorPrimaryB" />
 
-                    </LinearLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:background="@drawable/corner_white_new">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/recharge_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/_10sdp"
-                        app:layout_constraintTop_toBottomOf="@+id/recharge_and_txt">
-
-                        <!--                                <ImageView-->
-                        <!--                                    android:layout_width="match_parent"-->
-                        <!--                                    android:layout_height="wrap_content"-->
-                        <!--                                    android:src="@drawable/pattern"-->
-                        <!--                                    android:scaleType="centerCrop"-->
-                        <!--                                    app:layout_constraintTop_toTopOf="parent"-->
-                        <!--                                    app:layout_constraintBottom_toBottomOf="parent"/>-->
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recyclerviewDashboard"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:paddingBottom="@dimen/_15sdp"
-                            android:visibility="gone"
-                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:spanCount="4" />
-
-                        <LinearLayout
-                            android:id="@+id/prepaid"
-                            android:layout_width="@dimen/_60sdp"
-                            android:layout_height="@dimen/_75sdp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            app:layout_constraintEnd_toStartOf="@id/postpaid"
-                            app:layout_constraintHorizontal_chainStyle="spread_inside"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <ImageView
-                                android:id="@+id/prepaid_img"
-                                android:layout_width="@dimen/_45sdp"
-                                android:layout_height="@dimen/_45sdp"
-                                android:layout_gravity="center"
-                                android:background="@drawable/sony_live_shape"
-                                android:padding="@dimen/_10sdp"
-                                android:src="@drawable/prepaid_mobile"
-
-                                />
-
-
-                            <TextView
-                                android:id="@+id/prepaidTxt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_7sdp"
-                                android:fontFamily="@font/roboto"
-                                android:text="@string/prepaid"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_9sdp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/postpaid"
-                            android:layout_width="@dimen/_60sdp"
-                            android:layout_height="@dimen/_75sdp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            app:layout_constraintEnd_toStartOf="@id/DTH"
-                            app:layout_constraintHorizontal_chainStyle="spread_inside"
-                            app:layout_constraintStart_toEndOf="@+id/prepaid"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <ImageView
-                                android:layout_width="@dimen/_45sdp"
-                                android:layout_height="@dimen/_45sdp"
-                                android:layout_gravity="center"
-                                android:background="@drawable/sony_live_shape"
-                                android:padding="@dimen/_10sdp"
-                                android:src="@drawable/prepaid_mobile"
-
-                                />
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_7sdp"
-                                android:fontFamily="@font/roboto"
-                                android:text="@string/postpaid"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_9sdp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/DTH"
-                            android:layout_width="@dimen/_60sdp"
-                            android:layout_height="@dimen/_75sdp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            app:layout_constraintEnd_toStartOf="@id/Landline"
-                            app:layout_constraintHorizontal_chainStyle="spread_inside"
-                            app:layout_constraintStart_toEndOf="@+id/postpaid"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <ImageView
-                                android:layout_width="@dimen/_45sdp"
-                                android:layout_height="@dimen/_45sdp"
-                                android:layout_gravity="center"
-                                android:background="@drawable/sony_live_shape"
-                                android:padding="@dimen/_10sdp"
-                                android:src="@drawable/layer_1aa"
-
-                                />
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_7sdp"
-                                android:fontFamily="@font/roboto"
-                                android:text="@string/dth_"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_9sdp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/Landline"
-                            android:layout_width="@dimen/_60sdp"
-                            android:layout_height="@dimen/_75sdp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_chainStyle="spread_inside"
-                            app:layout_constraintStart_toEndOf="@+id/DTH"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <ImageView
-                                android:layout_width="@dimen/_45sdp"
-                                android:layout_height="@dimen/_45sdp"
-                                android:layout_gravity="center"
-                                android:background="@drawable/sony_live_shape"
-                                android:padding="@dimen/_10sdp"
-                                android:src="@drawable/layer_1"
-
-                                />
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_7sdp"
-                                android:fontFamily="@font/roboto"
-                                android:text="@string/landline"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_9sdp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/Electricity"
-                            android:layout_width="@dimen/_60sdp"
-                            android:layout_height="@dimen/_75sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            app:layout_constraintEnd_toStartOf="@id/Fastag"
-                            app:layout_constraintHorizontal_chainStyle="spread_inside"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/prepaid">
-
-                            <ImageView
-                                android:layout_width="@dimen/_45sdp"
-                                android:layout_height="@dimen/_45sdp"
-                                android:layout_gravity="center"
-                                android:background="@drawable/sony_live_shape"
-                                android:padding="@dimen/_10sdp"
-                                android:src="@drawable/layer_2"
-
-                                />
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_7sdp"
-                                android:fontFamily="@font/roboto"
-                                android:text="@string/electricity"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_9sdp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/Fastag"
-                            android:layout_width="@dimen/_60sdp"
-                            android:layout_height="@dimen/_75sdp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            app:layout_constraintEnd_toStartOf="@id/Cylinder"
-                            app:layout_constraintHorizontal_chainStyle="spread_inside"
-                            app:layout_constraintStart_toEndOf="@+id/Electricity"
-                            app:layout_constraintTop_toBottomOf="@id/prepaid"
-                            app:layout_constraintTop_toTopOf="@+id/Electricity">
-
-                            <ImageView
-                                android:layout_width="@dimen/_45sdp"
-                                android:layout_height="@dimen/_45sdp"
-                                android:layout_gravity="center"
-                                android:background="@drawable/sony_live_shape"
-                                android:padding="@dimen/_10sdp"
-                                android:src="@drawable/layer_1__1_"
-
-                                />
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_7sdp"
-                                android:fontFamily="@font/roboto"
-                                android:text="@string/fastag"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_9sdp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/Cylinder"
-                            android:layout_width="@dimen/_60sdp"
-                            android:layout_height="@dimen/_75sdp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            app:layout_constraintEnd_toStartOf="@id/ViewAll"
-                            app:layout_constraintHorizontal_chainStyle="spread_inside"
-                            app:layout_constraintStart_toEndOf="@id/Fastag"
-                            app:layout_constraintTop_toBottomOf="@id/prepaid"
-                            app:layout_constraintTop_toTopOf="@+id/Electricity">
-
-                            <ImageView
-                                android:layout_width="@dimen/_45sdp"
-                                android:layout_height="@dimen/_45sdp"
-                                android:layout_gravity="center"
-                                android:background="@drawable/sony_live_shape"
-                                android:padding="@dimen/_10sdp"
-                                android:src="@drawable/layer_1aa__1_"
-
-                                />
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_7sdp"
-                                android:fontFamily="@font/roboto"
-                                android:text="@string/cylinder"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_9sdp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/ViewAll"
-                            android:layout_width="@dimen/_60sdp"
-                            android:layout_height="@dimen/_75sdp"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_chainStyle="spread_inside"
-                            app:layout_constraintStart_toEndOf="@id/Cylinder"
-                            app:layout_constraintTop_toBottomOf="@id/prepaid"
-                            app:layout_constraintTop_toTopOf="@+id/Electricity">
-
-                            <ImageView
-                                android:layout_width="@dimen/_45sdp"
-                                android:layout_height="@dimen/_45sdp"
-                                android:layout_gravity="center"
-                                android:background="@drawable/sony_live_shape"
-                                android:padding="@dimen/_10sdp"
-                                android:src="@drawable/bharat_logo"
-
-                                />
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_7sdp"
-                                android:fontFamily="@font/roboto"
-                                android:text="@string/view_all"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_9sdp" />
-
-                        </LinearLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <!--                            <TextView-->
-                    <!--                                android:id="@+id/txtTitleMain"-->
-                    <!--                                android:layout_width="wrap_content"-->
-                    <!--                                android:layout_height="wrap_content"-->
-                    <!--                                android:layout_marginStart="10dp"-->
-                    <!--                                android:textColor="@color/colorPrimaryB"-->
-                    <!--                                android:background="@drawable/recharge_layout"-->
-                    <!--                                android:textStyle="bold"-->
-                    <!--                                android:elevation="@dimen/_2sdp"-->
-                    <!--                                android:paddingStart="@dimen/_10sdp"-->
-                    <!--                                android:paddingEnd="@dimen/_10sdp"-->
-                    <!--                                android:paddingTop="@dimen/_2sdp"-->
-                    <!--                                android:paddingBottom="@dimen/_2sdp"-->
-                    <!--                                android:visibility="gone"-->
-                    <!--                                app:layout_constraintStart_toStartOf="parent"-->
-                    <!--                                app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--                                app:layout_constraintTop_toTopOf="@id/recharge_layout"-->
-                    <!--                                app:layout_constraintBottom_toTopOf="@id/recharge_layout"/>-->
-
-                    <TextView
-                        android:id="@+id/recharge_and_txt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_marginVertical="@dimen/_20sdp"
-                        android:elevation="@dimen/_2sdp"
-                        android:fontFamily="@font/roboto"
-                        android:gravity="center_vertical"
-                        android:paddingStart="@dimen/_10sdp"
-                        android:paddingTop="@dimen/_5sdp"
-                        android:text="@string/recharge_amp_bill_payment"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_11sdp"
-                        android:visibility="visible"
-                        app:layout_constraintBottom_toTopOf="@id/recharge_layout"
-                        app:layout_constraintTop_toTopOf="@id/recharge_layout"
-                        tools:ignore="MissingConstraints" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_marginHorizontal="@dimen/_15sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:background="@drawable/facing_shape"
-                    android:gravity="center"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="@id/recharge_layout"
-                    app:layout_constraintTop_toTopOf="@id/recharge_layout">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/facing"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/news"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:ellipsize="marquee"
-                            android:fadingEdge="horizontal"
-                            android:fontFamily="@font/roboto"
-                            android:gravity="center"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:paddingLeft="@dimen/_5sdp"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            android:text=""
-                            android:textColor="#003770"
-                            android:textSize="@dimen/_9sdp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
-
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
                 </LinearLayout>
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/corner_white_new">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/recharge_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/_10sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/recharge_and_txt">
 
-                    android:layout_marginHorizontal="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:orientation="horizontal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/facing"
+                    <!--                                <ImageView-->
+                    <!--                                    android:layout_width="match_parent"-->
+                    <!--                                    android:layout_height="wrap_content"-->
+                    <!--                                    android:src="@drawable/pattern"-->
+                    <!--                                    android:scaleType="centerCrop"-->
+                    <!--                                    app:layout_constraintTop_toTopOf="parent"-->
+                    <!--                                    app:layout_constraintBottom_toBottomOf="parent"/>-->
 
-                    >
-
-                    <ImageView
-                        android:id="@+id/insurance"
-                        android:layout_width="@dimen/_15sdp"
-                        android:layout_height="@dimen/_15sdp"
-                        android:src="@drawable/u_car"
-                        app:layout_constraintBottom_toBottomOf="@id/umbrela"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/umbrela" />
-
-                    <TextView
-                        android:id="@+id/umbrela"
-                        android:layout_width="0dp"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerviewDashboard"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="@dimen/_12sdp"
-                        android:fontFamily="@font/roboto"
-                        android:text="@string/bike_car_insurance"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_11sdp"
-                        app:layout_constraintStart_toEndOf="@id/insurance"
-                        app:layout_constraintTop_toTopOf="@id/insurance" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/bike_insurance"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_45sdp"
-                    android:layout_marginHorizontal="@dimen/_7sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@id/insurance">
-
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_15sdp"
+                        android:visibility="gone"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:spanCount="4" />
 
                     <LinearLayout
-                        android:id="@+id/bike_layout"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:id="@+id/prepaid"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_75sdp"
                         android:layout_weight="1"
-                        android:background="@drawable/category_bg_selected"
-                        android:orientation="horizontal"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/carLayout"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toStartOf="@id/postpaid"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                            android:layout_width="@dimen/_30sdp"
-                            android:layout_height="@dimen/_26sdp"
+                            android:id="@+id/prepaid_img"
+                            android:layout_width="@dimen/_45sdp"
+                            android:layout_height="@dimen/_45sdp"
                             android:layout_gravity="center"
-                            android:layout_marginStart="@dimen/_3sdp"
-                            android:src="@drawable/bike_img" />
+                            android:background="@drawable/sony_live_shape"
+                            android:padding="@dimen/_10sdp"
+                            android:src="@drawable/prepaid_mobile"
+
+                            />
+
 
                         <TextView
+                            android:id="@+id/prepaidTxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="@dimen/_10sdp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="@string/bike_insurance"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:fontFamily="@font/roboto"
+                            android:text="@string/prepaid"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_8sdp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="@dimen/_26sdp"
-                            android:layout_height="@dimen/_38sdp"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="@dimen/_15sdp"
-                            android:background="@drawable/insurance"
-                            android:fontFamily="@font/roboto_bold"
-                            android:gravity="center"
-                            android:text="@string/_10_off"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_8sdp"
-                            android:textStyle="bold" />
-
+                            android:textSize="@dimen/_9sdp" />
 
                     </LinearLayout>
-
 
                     <LinearLayout
-                        android:id="@+id/carLayout"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:id="@+id/postpaid"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_75sdp"
                         android:layout_weight="1"
-                        android:background="@drawable/category_bg_selected"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/bike_layout">
-
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toStartOf="@id/DTH"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toEndOf="@+id/prepaid"
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
-                            android:layout_width="@dimen/_32sdp"
-                            android:layout_height="@dimen/_25sdp"
+                            android:layout_width="@dimen/_45sdp"
+                            android:layout_height="@dimen/_45sdp"
                             android:layout_gravity="center"
-                            android:layout_marginStart="@dimen/_3sdp"
-                            android:src="@drawable/car_img" />
+                            android:background="@drawable/sony_live_shape"
+                            android:padding="@dimen/_10sdp"
+                            android:src="@drawable/prepaid_mobile"
+
+                            />
+
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="@dimen/_10sdp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="@string/car_insurance"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:fontFamily="@font/roboto"
+                            android:text="@string/postpaid"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_8sdp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="@dimen/_26sdp"
-                            android:layout_height="@dimen/_38sdp"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="@dimen/_18sdp"
-                            android:background="@drawable/insurance"
-                            android:fontFamily="@font/roboto_bold"
-                            android:gravity="center"
-                            android:text="@string/_15_off"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_8sdp" />
-
+                            android:textSize="@dimen/_9sdp" />
 
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/DTH"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_75sdp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toStartOf="@id/Landline"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toEndOf="@+id/postpaid"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="@dimen/_45sdp"
+                            android:layout_height="@dimen/_45sdp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/sony_live_shape"
+                            android:padding="@dimen/_10sdp"
+                            android:src="@drawable/layer_1aa"
+
+                            />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:fontFamily="@font/roboto"
+                            android:text="@string/dth_"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_9sdp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Landline"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_75sdp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toEndOf="@+id/DTH"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="@dimen/_45sdp"
+                            android:layout_height="@dimen/_45sdp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/sony_live_shape"
+                            android:padding="@dimen/_10sdp"
+                            android:src="@drawable/layer_1"
+
+                            />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:fontFamily="@font/roboto"
+                            android:text="@string/landline"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_9sdp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Electricity"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_75sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toStartOf="@id/Fastag"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/prepaid">
+
+                        <ImageView
+                            android:layout_width="@dimen/_45sdp"
+                            android:layout_height="@dimen/_45sdp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/sony_live_shape"
+                            android:padding="@dimen/_10sdp"
+                            android:src="@drawable/layer_2"
+
+                            />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:fontFamily="@font/roboto"
+                            android:text="@string/electricity"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_9sdp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Fastag"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_75sdp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toStartOf="@id/Cylinder"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toEndOf="@+id/Electricity"
+                        app:layout_constraintTop_toBottomOf="@id/prepaid"
+                        app:layout_constraintTop_toTopOf="@+id/Electricity">
+
+                        <ImageView
+                            android:layout_width="@dimen/_45sdp"
+                            android:layout_height="@dimen/_45sdp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/sony_live_shape"
+                            android:padding="@dimen/_10sdp"
+                            android:src="@drawable/layer_1__1_"
+
+                            />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:fontFamily="@font/roboto"
+                            android:text="@string/fastag"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_9sdp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Cylinder"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_75sdp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toStartOf="@id/ViewAll"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toEndOf="@id/Fastag"
+                        app:layout_constraintTop_toBottomOf="@id/prepaid"
+                        app:layout_constraintTop_toTopOf="@+id/Electricity">
+
+                        <ImageView
+                            android:layout_width="@dimen/_45sdp"
+                            android:layout_height="@dimen/_45sdp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/sony_live_shape"
+                            android:padding="@dimen/_10sdp"
+                            android:src="@drawable/layer_1aa__1_"
+
+                            />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:fontFamily="@font/roboto"
+                            android:text="@string/cylinder"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_9sdp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ViewAll"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_75sdp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toEndOf="@id/Cylinder"
+                        app:layout_constraintTop_toBottomOf="@id/prepaid"
+                        app:layout_constraintTop_toTopOf="@+id/Electricity">
+
+                        <ImageView
+                            android:layout_width="@dimen/_45sdp"
+                            android:layout_height="@dimen/_45sdp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/sony_live_shape"
+                            android:padding="@dimen/_10sdp"
+                            android:src="@drawable/bharat_logo"
+
+                            />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:fontFamily="@font/roboto"
+                            android:text="@string/view_all"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_9sdp" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--                            <TextView-->
+                <!--                                android:id="@+id/txtTitleMain"-->
+                <!--                                android:layout_width="wrap_content"-->
+                <!--                                android:layout_height="wrap_content"-->
+                <!--                                android:layout_marginStart="10dp"-->
+                <!--                                android:textColor="@color/colorPrimaryB"-->
+                <!--                                android:background="@drawable/recharge_layout"-->
+                <!--                                android:textStyle="bold"-->
+                <!--                                android:elevation="@dimen/_2sdp"-->
+                <!--                                android:paddingStart="@dimen/_10sdp"-->
+                <!--                                android:paddingEnd="@dimen/_10sdp"-->
+                <!--                                android:paddingTop="@dimen/_2sdp"-->
+                <!--                                android:paddingBottom="@dimen/_2sdp"-->
+                <!--                                android:visibility="gone"-->
+                <!--                                app:layout_constraintStart_toStartOf="parent"-->
+                <!--                                app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                                app:layout_constraintTop_toTopOf="@id/recharge_layout"-->
+                <!--                                app:layout_constraintBottom_toTopOf="@id/recharge_layout"/>-->
+
+                <TextView
+                    android:id="@+id/recharge_and_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginVertical="@dimen/_20sdp"
+                    android:elevation="@dimen/_2sdp"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:text="@string/recharge_amp_bill_payment"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toTopOf="@id/recharge_layout"
+                    app:layout_constraintTop_toTopOf="@id/recharge_layout"
+                    tools:ignore="MissingConstraints" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:background="@drawable/facing_shape"
+                android:gravity="center"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@id/recharge_layout"
+                app:layout_constraintTop_toTopOf="@id/recharge_layout">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/facing"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/news"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:ellipsize="marquee"
+                        android:fadingEdge="horizontal"
+                        android:fontFamily="@font/roboto"
+                        android:gravity="center"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:paddingLeft="@dimen/_5sdp"
+                        android:scrollHorizontally="true"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="#003770"
+                        android:textSize="@dimen/_9sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/facing"
+
+                >
+
+                <ImageView
+                    android:id="@+id/insurance"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/u_car"
+                    app:layout_constraintBottom_toBottomOf="@id/umbrela"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/umbrela" />
+
+                <TextView
+                    android:id="@+id/umbrela"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/bike_car_insurance"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp"
+                    app:layout_constraintStart_toEndOf="@id/insurance"
+                    app:layout_constraintTop_toTopOf="@id/insurance" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bike_insurance"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_marginHorizontal="@dimen/_7sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/insurance">
+
+
+                <LinearLayout
+                    android:id="@+id/bike_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/category_bg_selected"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/carLayout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_26sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:src="@drawable/bike_img" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/bike_insurance"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_8sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="@dimen/_26sdp"
+                        android:layout_height="@dimen/_38sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_15sdp"
+                        android:background="@drawable/insurance"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="center"
+                        android:text="@string/_10_off"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_8sdp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/carLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/category_bg_selected"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/bike_layout">
+
+
+                    <ImageView
+                        android:layout_width="@dimen/_32sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:src="@drawable/car_img" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/car_insurance"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_8sdp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="@dimen/_26sdp"
+                        android:layout_height="@dimen/_38sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_18sdp"
+                        android:background="@drawable/insurance"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="center"
+                        android:text="@string/_15_off"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_8sdp" />
+
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="@id/bike_layout">
+
+
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/snjLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    app:layout_constraintBottom_toBottomOf="@id/bike_layout">
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:background="@drawable/sony_white_shape"
+                    android:elevation="@dimen/_1sdp"
+                    app:layout_constraintTop_toTopOf="parent"
 
+                    >
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/snjLayout"
+                    <ImageView
+                        android:id="@+id/ott_recharge"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/_8sdp"
-                        android:background="@drawable/sony_white_shape"
-                        android:elevation="@dimen/_1sdp"
+                        android:layout_height="@dimen/_58sdp"
+                        android:background="@drawable/ott_svg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
 
                         >
 
-                        <ImageView
-                            android:id="@+id/ott_recharge"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_58sdp"
-                            android:background="@drawable/ott_svg"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-
-                            >
-
-                        </ImageView>
-
-                        <LinearLayout
-                            android:id="@+id/snj"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:orientation="horizontal"
-                            android:paddingBottom="@dimen/_5sdp"
-                            app:layout_constraintBottom_toBottomOf="@id/snjLayout"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/ott_recharge">
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/ottRecyclerView"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                                app:spanCount="4" />
-
-                        </LinearLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    </ImageView>
 
                     <LinearLayout
-                        android:id="@+id/offer_for_you"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_marginHorizontal="@dimen/_15sdp"
-                        android:orientation="horizontal"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/snjLayout">
-
-
-                        <ImageView
-                            android:id="@+id/disscount"
-                            android:layout_width="@dimen/_11sdp"
-                            android:layout_height="@dimen/_15sdp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/discount_img"
-                            app:layout_constraintBottom_toBottomOf="@id/offer"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/offer" />
-
-                        <TextView
-                            android:id="@+id/offer"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:fontFamily="@font/roboto"
-                            android:text="@string/offers_for_you"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_11sdp"
-                            app:layout_constraintStart_toEndOf="@id/disscount"
-                            app:layout_constraintTop_toTopOf="@id/disscount" />
-
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:id="@+id/spotlight_services"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_marginHorizontal="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_1sdp"
-                        android:orientation="horizontal"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/offer_for_you_recyclerView">
-
-
-                        <ImageView
-                            android:id="@+id/star"
-                            android:layout_width="@dimen/_16sdp"
-                            android:layout_height="@dimen/_16sdp"
-                            android:layout_gravity="center"
-                            android:contentDescription="@string/app_name"
-                            android:src="@drawable/star_svg"
-                            app:layout_constraintBottom_toBottomOf="@id/spotlight_services_TV"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/spotlight_services_TV" />
-
-                        <TextView
-                            android:id="@+id/spotlight_services_TV"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:fontFamily="@font/roboto"
-                            android:text="@string/spotlight_services"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_11sdp"
-                            app:layout_constraintStart_toEndOf="@id/star"
-                            app:layout_constraintTop_toTopOf="@id/star" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/pdec"
+                        android:id="@+id/snj"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_90sdp"
-                        android:layout_marginHorizontal="@dimen/_10sdp"
-                        android:background="@drawable/spotlight_services_shape"
-                        android:elevation="@dimen/_1sdp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/spotlight_services"
-
-                        >
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_70sdp"
-                            android:layout_marginHorizontal="@dimen/_8sdp">
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/spotlight_services_recyclerView"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                                app:spanCount="4"
-                                tools:listitem="@layout/spotlight_services_row"
-
-
-                                />
-
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/offer_for_you_recyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_125sdp"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:layout_marginHorizontal="@dimen/_8sdp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/offer_for_you" />
-
-                    <LinearLayout
-                        android:id="@+id/tutorials"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_marginHorizontal="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:orientation="horizontal"
+                        android:paddingBottom="@dimen/_5sdp"
+                        app:layout_constraintBottom_toBottomOf="@id/snjLayout"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/pdec">
+                        app:layout_constraintTop_toBottomOf="@id/ott_recharge">
 
-
-                        <ImageView
-                            android:id="@+id/youtube_ImageView"
-                            android:layout_width="@dimen/_13sdp"
-                            android:layout_height="@dimen/_13sdp"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="@dimen/_5sdp"
-                            android:src="@drawable/youtube_svg"
-                            app:layout_constraintBottom_toBottomOf="@id/tutorials_TV"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/tutorials_TV" />
-
-                        <TextView
-                            android:id="@+id/tutorials_TV"
-                            android:layout_width="wrap_content"
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/ottRecyclerView"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginStart="@dimen/_12sdp"
-                            android:fontFamily="@font/roboto"
-                            android:text="@string/tutorials"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_11sdp"
-                            app:layout_constraintStart_toEndOf="@id/youtube_ImageView"
-                            app:layout_constraintTop_toTopOf="@id/youtube_ImageView" />
-
+                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                            app:spanCount="4" />
 
                     </LinearLayout>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerSlider"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_90sdp"
-                        android:layout_marginHorizontal="@dimen/_8sdp"
-                        android:clipToPadding="false"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tutorials"
-                        tools:listitem="@layout/slider_layout" />
-
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <RelativeLayout
-                    android:id="@+id/slider_layout"
+                <LinearLayout
+                    android:id="@+id/offer_for_you"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/snjLayout">
+
+
+                    <ImageView
+                        android:id="@+id/disscount"
+                        android:layout_width="@dimen/_11sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/discount_img"
+                        app:layout_constraintBottom_toBottomOf="@id/offer"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/offer" />
+
+                    <TextView
+                        android:id="@+id/offer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/offers_for_you"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_11sdp"
+                        app:layout_constraintStart_toEndOf="@id/disscount"
+                        app:layout_constraintTop_toTopOf="@id/disscount" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/spotlight_services"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/offer_for_you_recyclerView">
+
+
+                    <ImageView
+                        android:id="@+id/star"
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/star_svg"
+                        app:layout_constraintBottom_toBottomOf="@id/spotlight_services_TV"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/spotlight_services_TV" />
+
+                    <TextView
+                        android:id="@+id/spotlight_services_TV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/spotlight_services"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_11sdp"
+                        app:layout_constraintStart_toEndOf="@id/star"
+                        app:layout_constraintTop_toTopOf="@id/star" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pdec"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_90sdp"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:background="@drawable/spotlight_services_shape"
+                    android:elevation="@dimen/_1sdp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/spotlight_services"
+
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_70sdp"
+                        android:layout_marginHorizontal="@dimen/_8sdp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/spotlight_services_recyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                            app:spanCount="4"
+                            tools:listitem="@layout/spotlight_services_row"
+
+
+                            />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/offer_for_you_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_125sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/offer_for_you" />
+
+                <LinearLayout
+                    android:id="@+id/tutorials"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pdec">
+
+
+                    <ImageView
+                        android:id="@+id/youtube_ImageView"
+                        android:layout_width="@dimen/_13sdp"
+                        android:layout_height="@dimen/_13sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:src="@drawable/youtube_svg"
+                        app:layout_constraintBottom_toBottomOf="@id/tutorials_TV"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tutorials_TV" />
+
+                    <TextView
+                        android:id="@+id/tutorials_TV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/tutorials"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_11sdp"
+                        app:layout_constraintStart_toEndOf="@id/youtube_ImageView"
+                        app:layout_constraintTop_toTopOf="@id/youtube_ImageView" />
+
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_90sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:clipToPadding="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tutorials"
+                    tools:listitem="@layout/slider_layout" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <RelativeLayout
+                android:id="@+id/slider_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:visibility="gone">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPagerImageSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_170sdp"
+                    android:clipToPadding="false"
+                    android:paddingEnd="@dimen/_30sdp"
+                    tools:ignore="RtlSymmetry" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/into_tab_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/viewPagerImageSlider"
+                    android:layout_gravity="bottom"
+                    android:background="@color/white"
+                    app:tabBackground="@drawable/indicator_selector"
+                    app:tabGravity="center"
+                    app:tabIndicatorHeight="0dp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/_10sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:id="@+id/support_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_drawable"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_2sdp"
+                        android:text="@string/commission_report"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_11sdp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/main_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/_10sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingRight="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@+id/members_bg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:visibility="gone">
-
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/viewPagerImageSlider"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_170sdp"
-                        android:clipToPadding="false"
-                        android:paddingEnd="@dimen/_30sdp"
-                        tools:ignore="RtlSymmetry" />
-
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/into_tab_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/viewPagerImageSlider"
-                        android:layout_gravity="bottom"
-                        android:background="@color/white"
-                        app:tabBackground="@drawable/indicator_selector"
-                        app:tabGravity="center"
-                        app:tabIndicatorHeight="0dp" />
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingLeft="@dimen/_10sdp"
-                    android:paddingRight="@dimen/_10sdp"
-                    android:visibility="visible">
-
-                    <LinearLayout
-                        android:id="@+id/support_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/btn_drawable"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="@dimen/_8sdp"
-                        android:paddingBottom="@dimen/_8sdp"
-                        android:visibility="gone">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="@dimen/_2sdp"
-                            android:text="@string/commission_report"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_11sdp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/main_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_50sdp"
-                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="@dimen/_3sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/corner_primary_gr"
+                    android:gravity="center"
                     android:orientation="horizontal"
-                    android:paddingLeft="@dimen/_10sdp"
-                    android:paddingTop="@dimen/_10sdp"
-                    android:paddingRight="@dimen/_10sdp"
-                    android:paddingBottom="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_4sdp"
                     android:visibility="gone">
 
-                    <LinearLayout
-                        android:id="@+id/members_bg"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="@dimen/_3sdp"
-                        android:layout_weight="1"
-                        android:background="@drawable/corner_primary_gr"
+                    <ImageView
+                        android:layout_width="@dimen/_17sdp"
+                        android:layout_height="@dimen/_17sdp"
+                        android:src="@drawable/group" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:gravity="center"
-                        android:orientation="horizontal"
                         android:paddingStart="@dimen/_4sdp"
-                        android:visibility="gone">
-
-                        <ImageView
-                            android:layout_width="@dimen/_17sdp"
-                            android:layout_height="@dimen/_17sdp"
-                            android:src="@drawable/group" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:paddingStart="@dimen/_4sdp"
-                            android:text="@string/view_nmember"
-                            android:textColor="@color/white" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/add_member"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_3sdp"
-                        android:layout_weight="1"
-                        android:background="@drawable/corner_primary_gr"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:paddingStart="@dimen/_4sdp"
-                        android:visibility="gone">
-
-                        <ImageView
-                            android:layout_width="@dimen/_12sdp"
-                            android:layout_height="@dimen/_12sdp"
-                            android:src="@drawable/add_member" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:paddingStart="@dimen/_4sdp"
-                            android:text="@string/new_nmember"
-                            android:textColor="@color/white" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/downline_pckage"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="@dimen/_3sdp"
-                        android:layout_weight="1"
-                        android:background="@drawable/corner_primary_gr"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:paddingStart="@dimen/_4sdp"
-                        android:visibility="gone">
-
-                        <ImageView
-                            android:layout_width="@dimen/_12sdp"
-                            android:layout_height="@dimen/_12sdp"
-                            android:src="@drawable/add_member" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingStart="@dimen/_4sdp"
-                            android:text="@string/downline_npackages"
-                            android:textColor="@color/white" />
-
-                    </LinearLayout>
+                        android:text="@string/view_nmember"
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
+                    android:id="@+id/add_member"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20sdp">
-
-                    <!-- MaxPe ❤️ You -->
-                    <TextView
-                        android:id="@+id/txtMaxPe"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/max_pe"
-                        android:textColor="@color/colorPrimaryB"
-                        android:textSize="@dimen/_19sdp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@id/imgHeart"
-                        app:layout_constraintHorizontal_chainStyle="packed"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/corner_primary_gr"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/_4sdp"
+                    android:visibility="gone">
 
                     <ImageView
-                        android:id="@+id/imgHeart"
-                        android:layout_width="@dimen/_19sdp"
-                        android:layout_height="@dimen/_19sdp"
-                        android:layout_marginStart="@dimen/_6sdp"
-                        android:layout_marginEnd="@dimen/_6sdp"
-                        android:src="@drawable/heart"
-                        app:layout_constraintBottom_toBottomOf="@id/txtMaxPe"
-                        app:layout_constraintEnd_toStartOf="@id/txtYou"
-                        app:layout_constraintStart_toEndOf="@id/txtMaxPe"
-                        app:layout_constraintTop_toTopOf="@id/txtMaxPe" />
+                        android:layout_width="@dimen/_12sdp"
+                        android:layout_height="@dimen/_12sdp"
+                        android:src="@drawable/add_member" />
 
                     <TextView
-                        android:id="@+id/txtYou"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/you"
-                        android:textColor="@color/colorPrimaryB"
-                        android:textSize="@dimen/_19sdp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@id/txtMaxPe"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/imgHeart"
-                        app:layout_constraintTop_toTopOf="@id/txtMaxPe" />
-
-
-                    <TextView
-                        android:id="@+id/txtMobileRecharge"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:gravity="center"
-                        android:text="@string/refer_your_friends_amp"
-                        android:textColor="#000000"
-                        android:textSize="@dimen/_9sdp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtMaxPe" />
+                        android:paddingStart="@dimen/_4sdp"
+                        android:text="@string/new_nmember"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/downline_pckage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/corner_primary_gr"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/_4sdp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="@dimen/_12sdp"
+                        android:layout_height="@dimen/_12sdp"
+                        android:src="@drawable/add_member" />
 
                     <TextView
-                        android:id="@+id/txtRefer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto"
-                        android:text="@string/earn_up_to_300"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_9sdp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtMobileRecharge" />
+                        android:layout_gravity="center"
+                        android:paddingStart="@dimen/_4sdp"
+                        android:text="@string/downline_npackages"
+                        android:textColor="@color/white" />
 
-                    <ImageView
-                        android:id="@+id/imgReferAndEarn"
-                        android:layout_width="@dimen/_10sdp"
-                        android:layout_height="@dimen/_10sdp"
-                        android:layout_marginStart="@dimen/_6sdp"
-                        android:layout_marginEnd="@dimen/_6sdp"
-                        android:src="@drawable/arrow_14"
-                        app:layout_constraintBottom_toBottomOf="@id/txtRefer"
-                        app:layout_constraintStart_toEndOf="@id/txtRefer"
-                        app:layout_constraintTop_toTopOf="@id/txtRefer" />
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_9sdp"
-                        android:src="@drawable/reffer_earn_svg"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/imgReferAndEarn" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
+                </LinearLayout>
 
             </LinearLayout>
 
-        </androidx.core.widget.NestedScrollView>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp">
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+                <!-- MaxPe ❤️ You -->
+                <TextView
+                    android:id="@+id/txtMaxPe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/max_pe"
+                    android:textColor="@color/colorPrimaryB"
+                    android:textSize="@dimen/_19sdp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/imgHeart"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgHeart"
+                    android:layout_width="@dimen/_19sdp"
+                    android:layout_height="@dimen/_19sdp"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:src="@drawable/heart"
+                    app:layout_constraintBottom_toBottomOf="@id/txtMaxPe"
+                    app:layout_constraintEnd_toStartOf="@id/txtYou"
+                    app:layout_constraintStart_toEndOf="@id/txtMaxPe"
+                    app:layout_constraintTop_toTopOf="@id/txtMaxPe" />
+
+                <TextView
+                    android:id="@+id/txtYou"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/you"
+                    android:textColor="@color/colorPrimaryB"
+                    android:textSize="@dimen/_19sdp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/txtMaxPe"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imgHeart"
+                    app:layout_constraintTop_toTopOf="@id/txtMaxPe" />
+
+
+                <TextView
+                    android:id="@+id/txtMobileRecharge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/refer_your_friends_amp"
+                    android:textColor="#000000"
+                    android:textSize="@dimen/_9sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txtMaxPe" />
+
+                <TextView
+                    android:id="@+id/txtRefer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/earn_up_to_300"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_9sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txtMobileRecharge" />
+
+                <ImageView
+                    android:id="@+id/imgReferAndEarn"
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:src="@drawable/arrow_14"
+                    app:layout_constraintBottom_toBottomOf="@id/txtRefer"
+                    app:layout_constraintStart_toEndOf="@id/txtRefer"
+                    app:layout_constraintTop_toTopOf="@id/txtRefer" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_9sdp"
+                    android:src="@drawable/reffer_earn_svg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imgReferAndEarn" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+    <!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
 
     <RelativeLayout
         android:id="@+id/bottom_nav_RelativeLayout"
