@@ -82,6 +82,8 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
     SwipeRefreshLayout refresh_layout;
     @BindView(R.id.view_all_maxPoints)
     TextView view_all_maxPoints;
+    @BindView(R.id.maxPointsTV)
+    TextView maxPointsTV;
 
 
     CashBackPintsModel data;
@@ -117,15 +119,15 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
             finish();
         });
 
-        Calendar cal = Calendar.getInstance();
-        toDate = cal.getTime();
-        Date today = new Date();
-        Calendar cal1 = new GregorianCalendar();
-        cal1.setTime(today);
-        cal1.add(Calendar.DAY_OF_MONTH, -0);
-        fromDate = cal1.getTime();
-        from_date = BaseMethod.format1.format(fromDate);
-        to_date = BaseMethod.format1.format(toDate);
+//        Calendar cal = Calendar.getInstance();
+//        toDate = cal.getTime();
+//        Date today = new Date();
+//        Calendar cal1 = new GregorianCalendar();
+//        cal1.setTime(today);
+//        cal1.add(Calendar.DAY_OF_MONTH, -0);
+//        fromDate = cal1.getTime();
+//        from_date = BaseMethod.format1.format(fromDate);
+//        to_date = BaseMethod.format1.format(toDate);
         select_from_date.setText("DD MM YYYY");
         select_to_date.setText("DD MM YYYY");
         loadData("Yes");
@@ -300,6 +302,7 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
                 model.setTxn_balance_count(pointsObject.getString("txn_balance_count"));
                 Log.d("cashbackLogs", "onSuccessOther: " + pointsObject);
                 balance_maxPoints_TV.setText(model.getCashback_points());
+                maxPointsTV.setText("Lifetime Max Points : "+model.getCashback_points());
 
             }
 
@@ -372,60 +375,48 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Calendar calendar = Calendar.getInstance();
-            String tag = getTag();
-            if (tag != null) {
-                switch (tag) {
-                    case "Select From Date":
-                        calendar.setTime(fromDate);
-                        break;
-                    case "Select To Date":
-                        calendar.setTime(toDate);
-                        break;
-                }
-            }
+            Calendar calendar = Calendar.getInstance(); // Defaults to today's date
 
             int year = calendar.get(Calendar.YEAR);
             int month = calendar.get(Calendar.MONTH);
             int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-            DatePickerDialog dpd = new DatePickerDialog(requireContext(), R.style.DialogTheme, (view, year1, month1, day1) -> {
-                Calendar cal = Calendar.getInstance();
-                cal.setTimeInMillis(0);
-                cal.set(year1, month1, day1, 0, 0, 0);
-                String tag1 = getTag();
-                if (tag1 != null) {
-                    switch (tag1) {
-                        case "Select From Date":
-                            fromDate = cal.getTime();
-                            from_date = BaseMethod.format1.format(fromDate);
-                            String from_date_local = BaseMethod.dateFormat.format(fromDate);
-                            if (toDate.before(fromDate)) {
-                                toDate = cal.getTime();
+            DatePickerDialog dialog = new DatePickerDialog(requireContext(), R.style.DialogTheme,
+                    (view, selectedYear, selectedMonth, selectedDay) -> {
+                        Calendar selectedCal = Calendar.getInstance();
+                        selectedCal.set(selectedYear, selectedMonth, selectedDay, 0, 0, 0);
+                        Date selectedDate = selectedCal.getTime();
+
+                        String tag = getTag();
+                        if ("Select From Date".equals(tag)) {
+                            fromDate = selectedDate;
+                            from_date = BaseMethod.format1.format(selectedDate);
+                            String displayDate = BaseMethod.dateFormat.format(selectedDate);
+                            from_.setText(displayDate);
+
+                            // Adjust To Date if before From Date
+                            if (toDate != null && toDate.before(fromDate)) {
+                                toDate = fromDate;
                                 to_date = BaseMethod.format1.format(toDate);
-                                to_.setText(from_date_local);
+                                to_.setText(displayDate);
                             }
-                            from_.setText(from_date_local);
-                            break;
-                        case "Select To Date":
-                            toDate = cal.getTime();
-                            to_date = BaseMethod.format1.format(toDate);
-                            String to_date_local = BaseMethod.dateFormat.format(toDate);
-                            to_.setText(to_date_local);
-                            break;
-                    }
-                }
-            }, year, month, day);
-            if (tag != null) {
-                if ("Select To Date".equals(tag)) {
-                    Calendar calendar1 = Calendar.getInstance();
-                    calendar1.setTime(fromDate);
-                    dpd.getDatePicker().setMinDate(calendar1.getTimeInMillis());
-                }
+                        } else if ("Select To Date".equals(tag)) {
+                            toDate = selectedDate;
+                            to_date = BaseMethod.format1.format(selectedDate);
+                            String displayDate = BaseMethod.dateFormat.format(selectedDate);
+                            to_.setText(displayDate);
+                        }
+                    }, year, month, day);
+
+            // Limit minimum selectable date for "To Date"
+            if ("Select To Date".equals(getTag()) && fromDate != null) {
+                dialog.getDatePicker().setMinDate(fromDate.getTime());
             }
-            dpd.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
-            return dpd;
+
+            // Limit maximum date to today
+            dialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
+
+            return dialog;
         }
     }
-
 }

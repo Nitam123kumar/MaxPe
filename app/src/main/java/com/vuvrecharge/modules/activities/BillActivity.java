@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
@@ -154,6 +155,7 @@ public class BillActivity extends BaseActivity implements DefaultView,
         type = getIntent().getStringExtra("type");
         mDefaultPresenter = new DefaultPresenter(this);
         title.setText(string);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         handler = new Handler();
         setStatusBarGradiant(this);
         txtOperator.setText("Google Play Gift Card");

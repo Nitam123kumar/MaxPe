@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import com.vuvrecharge.R;
@@ -62,6 +63,7 @@ public class CommissionNewActivity extends BaseActivity implements DefaultView,V
         mDefaultPresenter = new DefaultPresenter(this);
         mDefaultPresenter.commissionReport(device_id);
         mToolbar.setOnClickListener(this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 
     @Override

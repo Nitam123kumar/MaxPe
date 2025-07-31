@@ -34,11 +34,10 @@ public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerView
     private List<YoutubeSlides> imageList;
     private List<String> youtube_Sliders;
     private RequestBuilder<PictureDrawable> requestBuilder;
-    public RecyclerViewSliderAdapter(Context context,Activity activity,List<String> youtube_Sliders,  List<YoutubeSlides> imageList) {
+    public RecyclerViewSliderAdapter(Context context,Activity activity,List<YoutubeSlides> imageList) {
         this.context = context;
         this.mActivity = activity;
         this.imageList = imageList;
-        this.youtube_Sliders = youtube_Sliders;
     }
 
     @NonNull

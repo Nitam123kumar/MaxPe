@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.gson.Gson;
@@ -58,7 +59,7 @@ public class PaymentActivity extends BaseActivity implements View.OnClickListene
         ButterKnife.bind(this);
         mToolbar.setOnClickListener(this);
         title.setText("Payment Details");
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Intent intent = getIntent();
         String from = intent.getStringExtra("from");
 

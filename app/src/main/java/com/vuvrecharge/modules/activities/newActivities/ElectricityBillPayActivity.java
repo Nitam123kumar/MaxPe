@@ -226,6 +226,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
         proceedToPay.setOnClickListener(v -> {
 //            Toast.makeText(this,"")
         });
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         mDefaultPresenter = new DefaultPresenter(this);
         manager = new LinearLayoutManager(this);
         recyclerViewBillerInfo.setLayoutManager(manager);

@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -79,7 +80,7 @@ public class AfterDepositActivity extends BaseActivity implements DefaultView, V
         mToolbar.setOnClickListener(this);
         Intent intent = getIntent();
         orderid = intent.getStringExtra("order_id");
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         defaultPresenter = new DefaultPresenter(this);
 
         defaultPresenter.orderDetails(device_id, orderid);

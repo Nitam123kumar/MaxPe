@@ -74,8 +74,8 @@ public class DepositFragment extends BaseFragment implements DefaultView {
     TextView search;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout refresh_layout;
-    static Date fromDate;
-    static Date toDate;
+    static Date fromDate = null;
+    static Date toDate = null;
     static String from_date = "";
     static String to_date = "";
 
@@ -104,15 +104,15 @@ public class DepositFragment extends BaseFragment implements DefaultView {
         initializeDepositList();
 //        mDefaultPresenter.onlineDepositHistory(device_id + "","","","");
 
-        Calendar cal = Calendar.getInstance();
-        toDate = cal.getTime();
-        Date today = new Date();
-        Calendar cal1 = new GregorianCalendar();
-        cal1.setTime(today);
-        cal1.add(Calendar.DAY_OF_MONTH, -0);
-        fromDate = cal1.getTime();
-        from_date = BaseMethod.format1.format(fromDate);
-        to_date = BaseMethod.format1.format(toDate);
+//        Calendar cal = Calendar.getInstance();
+//        toDate = cal.getTime();
+//        Date today = new Date();
+//        Calendar cal1 = new GregorianCalendar();
+//        cal1.setTime(today);
+//        cal1.add(Calendar.DAY_OF_MONTH, -0);
+//        fromDate = cal1.getTime();
+//        from_date = BaseMethod.format1.format(fromDate);
+//        to_date = BaseMethod.format1.format(toDate);
         select_from_date.setText("DD MM YYYY");
         select_to_date.setText("DD MM YYYY");
 
@@ -191,14 +191,21 @@ public class DepositFragment extends BaseFragment implements DefaultView {
             previousTotal = 0;
             String ref_no_ = ref_no.getText().toString().trim();
             mDefaultPresenter.onlineDepositHistory(device_id + "" ,
-                    from_date + "", to_date + "", ref_no_ );
+                    from_date + "", to_date + "", ref_no_+"" );
+            Log.d("from_date", from_date);
+            Log.d("to_date", to_date);
         });
 
         select_from_date_img.setOnClickListener(v -> {
+
+
+
             newFragment = new SelectDate(select_from_date, select_to_date);
             newFragment.show(getChildFragmentManager(), "Select From Date");
         });
         select_to_date_img.setOnClickListener(v -> {
+
+
             newFragment = new SelectDate(select_from_date, select_to_date);
             newFragment.show(getChildFragmentManager(), "Select To Date");
         });
@@ -210,6 +217,7 @@ public class DepositFragment extends BaseFragment implements DefaultView {
             refresh_layout.setRefreshing(false);
             JSONObject object = new JSONObject(data);
             JSONArray array = object.getJSONArray("history_data");
+            Log.d("history_data", String.valueOf(array));
             if (array.length() > 0){
                 depositList.clear();
                 for (int i = 0; i < array.length(); i++) {
@@ -307,59 +315,48 @@ public class DepositFragment extends BaseFragment implements DefaultView {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final Calendar calendar = Calendar.getInstance();
-            String tag = getTag();
-            if (tag != null) {
-                switch (tag) {
-                    case "Select From Date":
-                        calendar.setTime(fromDate);
-                        break;
-                    case "Select To Date":
-                        calendar.setTime(toDate);
-                        break;
-                }
-            }
+            Calendar calendar = Calendar.getInstance(); // Defaults to today's date
 
             int year = calendar.get(Calendar.YEAR);
             int month = calendar.get(Calendar.MONTH);
             int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-            DatePickerDialog dpd = new DatePickerDialog(requireContext(), R.style.DialogTheme, (view, year1, month1, day1) -> {
-                Calendar cal = Calendar.getInstance();
-                cal.setTimeInMillis(0);
-                cal.set(year1, month1, day1, 0, 0, 0);
-                String tag1 = getTag();
-                if (tag1 != null) {
-                    switch (tag1) {
-                        case "Select From Date":
-                            fromDate = cal.getTime();
-                            from_date = BaseMethod.format1.format(fromDate);
-                            String from_date_local = BaseMethod.dateFormat.format(fromDate);
-                            if (toDate.before(fromDate)) {
-                                toDate = cal.getTime();
+            DatePickerDialog dialog = new DatePickerDialog(requireContext(), R.style.DialogTheme,
+                    (view, selectedYear, selectedMonth, selectedDay) -> {
+                        Calendar selectedCal = Calendar.getInstance();
+                        selectedCal.set(selectedYear, selectedMonth, selectedDay, 0, 0, 0);
+                        Date selectedDate = selectedCal.getTime();
+
+                        String tag = getTag();
+                        if ("Select From Date".equals(tag)) {
+                            fromDate = selectedDate;
+                            from_date = BaseMethod.format1.format(selectedDate);
+                            String displayDate = BaseMethod.dateFormat.format(selectedDate);
+                            from_.setText(displayDate);
+
+                            // Adjust To Date if before From Date
+                            if (toDate != null && toDate.before(fromDate)) {
+                                toDate = fromDate;
                                 to_date = BaseMethod.format1.format(toDate);
-                                to_.setText(from_date_local);
+                                to_.setText(displayDate);
                             }
-                            from_.setText(from_date_local);
-                            break;
-                        case "Select To Date":
-                            toDate = cal.getTime();
-                            to_date = BaseMethod.format1.format(toDate);
-                            String to_date_local = BaseMethod.dateFormat.format(toDate);
-                            to_.setText(to_date_local);
-                            break;
-                    }
-                }
-            }, year, month, day);
-            if (tag != null) {
-                if ("Select To Date".equals(tag)) {
-                    Calendar calendar1 = Calendar.getInstance();
-                    calendar1.setTime(fromDate);
-                    dpd.getDatePicker().setMinDate(calendar1.getTimeInMillis());
-                }
+                        } else if ("Select To Date".equals(tag)) {
+                            toDate = selectedDate;
+                            to_date = BaseMethod.format1.format(selectedDate);
+                            String displayDate = BaseMethod.dateFormat.format(selectedDate);
+                            to_.setText(displayDate);
+                        }
+                    }, year, month, day);
+
+            // Limit minimum selectable date for "To Date"
+            if ("Select To Date".equals(getTag()) && fromDate != null) {
+                dialog.getDatePicker().setMinDate(fromDate.getTime());
             }
-            dpd.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
-            return dpd;
+
+            // Limit maximum date to today
+            dialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
+
+            return dialog;
         }
     }
 

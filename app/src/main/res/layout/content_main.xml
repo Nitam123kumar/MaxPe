@@ -866,7 +866,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintBottom_toBottomOf="@id/bike_layout">
+                >
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -1075,17 +1075,33 @@
 
                 </LinearLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
+                <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/recyclerSlider"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_90sdp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_35sdp"
                     android:clipToPadding="false"
+                    android:clipChildren="false"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tutorials"
                     tools:listitem="@layout/slider_layout" />
+
+                <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                    android:id="@+id/youtube_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    app:dotsColor="@android:color/darker_gray"
+                    app:dotsCornerRadius="@dimen/_2sdp"
+                    app:dotsSize="@dimen/_3sdp"
+                    app:dotsSpacing="@dimen/_2sdp"
+                    app:layout_constraintEnd_toEndOf="@id/recyclerSlider"
+                    app:layout_constraintStart_toStartOf="@id/recyclerSlider"
+                    app:layout_constraintTop_toBottomOf="@id/recyclerSlider"
+                    app:selectedDotColor="@color/colorPrimaryB" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -1124,7 +1140,7 @@
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/_10sdp"
                 android:paddingRight="@dimen/_10sdp"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <LinearLayout
                     android:id="@+id/support_layout"

@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -98,7 +99,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
         title.setText(title1);
         setStatusBarGradiant(this);
         mDefaultPresenter = new DefaultPresenter(this);
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         if (title1 != null) {
             search_electricity.setHint("Search Operater");

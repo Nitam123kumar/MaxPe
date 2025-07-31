@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -62,6 +63,7 @@ public class MyCommisionPackageActivity extends BaseActivity implements DefaultV
         mToolbar.setOnClickListener(this);
         initializeEventsList();
         mDefaultPresenter = new DefaultPresenter(this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         try {
             Intent intent = getIntent();
             id = intent.getStringExtra("id");

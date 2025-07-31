@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32"
@@ -164,6 +165,10 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
+        <uses-library
+            android:name="android.webkit.WebView"
+            android:required="false" />
+
 
         <activity
             android:name=".modules.activities.MainActivity"

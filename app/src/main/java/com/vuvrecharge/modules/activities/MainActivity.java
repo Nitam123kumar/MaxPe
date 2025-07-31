@@ -129,7 +129,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
     @BindView(R.id.statements)
     TextView statements;
     @BindView(R.id.recyclerSlider)
-    RecyclerView image_slider;
+    ViewPager2 image_slider;
     @BindView(R.id.available_balance)
     TextView available_balance;
     //    @BindView(R.id.txtTitleMain)
@@ -175,6 +175,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
     ImageView home_menu_imageView;
     @BindView(R.id.indicator)
     DotsIndicator indicator;
+    @BindView(R.id.youtube_indicator)
+    DotsIndicator youtube_indicator;
     @BindView(R.id.commission_report_layout)
     View commission_report_layout;
     @BindView(R.id.slider_layout)
@@ -219,7 +221,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
     ImageView imgReferAndEarn;
 
     List<String> color = new ArrayList<>();
-    List<String> youtubeVideosList;
+    List<YoutubeSlides> youtubeVideosList = new ArrayList<>();
     List<String> imageList_offer;
     List<String> spotlight;
     DashboardAdapter adapter;
@@ -252,10 +254,11 @@ public class MainActivity extends BaseActivity implements DefaultView,
     String extraData = null;
     String redirection_type = null;
     String redirection_url = null;
-    int lastSelectedPosition  = 0;
+    int lastSelectedPosition = 0;
     private Handler sliderHandler = new Handler();
     private Runnable sliderRunnable;
     SliderAdapterBanner imageSliderAdapter;
+
     @Override
     protected void onCreate(
             @Nullable Bundle savedInstanceState
@@ -293,7 +296,54 @@ public class MainActivity extends BaseActivity implements DefaultView,
         appUpdate();
         notifications();
         offer_for_you_recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        image_slider.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+//        image_slider.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        image_slider.setClipChildren(false);
+        image_slider.setClipToPadding(false);
+        image_slider.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
+
+        image_slider.setOffscreenPageLimit(2);
+
+        // Page transformer for spacing
+        int pageMarginPx = getResources().getDimensionPixelOffset(R.dimen.pageMargin);
+        int offsetPx = getResources().getDimensionPixelOffset(R.dimen.offset);
+
+        image_slider.setPageTransformer((page, position) -> {
+            float offset = position * -(2 * offsetPx + pageMarginPx);
+            page.setTranslationX(offset);
+        });
+
+        sliderAdapter = new RecyclerViewSliderAdapter(this, MainActivity.this, youtubeVideosList);
+        image_slider.setAdapter(sliderAdapter);
+        youtube_indicator.setViewPager2(image_slider);
+        sliderRunnable = new Runnable() {
+            @Override
+            public void run() {
+                int currentItem = image_slider.getCurrentItem();
+                int totalItem = sliderAdapter.getItemCount();
+                if (currentItem < totalItem - 1) {
+                    image_slider.setCurrentItem(currentItem + 1, true);
+                } else {
+                    image_slider.setCurrentItem(0, true);
+                }
+                sliderHandler.postDelayed(this, 2000);
+            }
+        };
+        sliderHandler.postDelayed(sliderRunnable, 2000);
+
+        image_slider.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                sliderHandler.removeCallbacks(sliderRunnable);
+                sliderHandler.postDelayed(sliderRunnable, 2000);
+            }
+        });
+        image_slider.post(() -> {
+            image_slider.setCurrentItem(0, false);
+            youtube_indicator.setViewPager2(image_slider);
+        });
+
         spotlight_services_recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         ottRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
 
@@ -304,7 +354,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         });
 
 
-            imageSliderAdapter = new SliderAdapterBanner(getActivity(), color,slider_banner, this);
+        imageSliderAdapter = new SliderAdapterBanner(getActivity(),  slider_banner, this);
         viewPager.setAdapter(imageSliderAdapter);
         indicator.setViewPager2(viewPager);
         sliderRunnable = new Runnable() {
@@ -317,27 +367,26 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 } else {
                     viewPager.setCurrentItem(0, true);
                 }
-                sliderHandler.postDelayed(this, 3000);
+                sliderHandler.postDelayed(this, 2000);
             }
         };
-        sliderHandler.postDelayed(sliderRunnable, 3000);
+        sliderHandler.postDelayed(sliderRunnable, 2000);
 
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 sliderHandler.removeCallbacks(sliderRunnable);
-                sliderHandler.postDelayed(sliderRunnable, 3000);
+                sliderHandler.postDelayed(sliderRunnable, 2000);
             }
         });
 
-
-
-
-
-
-
+        viewPager.post(() -> {
+            viewPager.setCurrentItem(0, false);
+            indicator.setViewPager2(viewPager);
+        });
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -417,28 +466,28 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 main_layout.setVisibility(View.VISIBLE);
             }
 
-            color = new ArrayList<>();
-            slider_banner.clear();
-            List<SliderData> slide = (mDatabase.getUserData().getSlides());
-            for (SliderData image : slide) {
-                color.add(mDatabase.getUserData().getSlide_path() + "/" + image.getSlide());
-                Log.d("Url Data", mDatabase.getUserData().getSlide_path());
-                slider_banner.add(image);
-            }
-            imageSliderAdapter = new SliderAdapterBanner(this, color, mDatabase.getUserData().getSlides(), this);
-            viewPager.setAdapter(imageSliderAdapter);
-            indicator.setViewPager2(viewPager);
-            imageSliderAdapter.notifyDataSetChanged();
+//            color = new ArrayList<>();
+//            slider_banner.clear();
+//            List<SliderData> slide = (mDatabase.getUserData().getSlides());
+//            for (SliderData image : slide) {
+//                color.add(mDatabase.getUserData().getSlide_path() + "/" + image.getSlide());
+//                Log.d("Url Data", mDatabase.getUserData().getSlide_path());
+//                slider_banner.addAll(slide);
+//            }
+//            imageSliderAdapter = new SliderAdapterBanner(this, color,slider_banner, this);
+//            viewPager.setAdapter(imageSliderAdapter);
+//            indicator.setViewPager2(viewPager);
+//            imageSliderAdapter.notifyDataSetChanged();
 
-            youtubeVideosList = new ArrayList<>();
-            List<YoutubeSlides> youtubeSlidesImages = (mDatabase.getUserData().getYoutubeVideoSliders());
-            for (YoutubeSlides youtubeSlidesImage : youtubeSlidesImages) {
-                youtubeVideosList.add(mDatabase.getUserData().getYoutube_path() + "/" + youtubeSlidesImage.getThumbnail() + youtubeSlidesImage.getTitle());
-            }
-
-            sliderAdapter = new RecyclerViewSliderAdapter(this, MainActivity.this, youtubeVideosList, userData.getYoutubeVideoSliders());
-            image_slider.setAdapter(sliderAdapter);
-            Log.d("youtubeVideosList", String.valueOf(youtubeVideosList));
+//            youtubeVideosList = new ArrayList<>();
+//            List<YoutubeSlides> youtubeSlidesImages = (mDatabase.getUserData().getYoutubeVideoSliders());
+//            youtubeVideosList.addAll(youtubeSlidesImages);
+//
+//            sliderAdapter = new RecyclerViewSliderAdapter(this, MainActivity.this, youtubeVideosList);
+//            image_slider.setAdapter(sliderAdapter);
+//            youtube_indicator.setViewPager2(image_slider);
+//            Log.d("youtubeVideosList", String.valueOf(youtubeVideosList));
+//            sliderAdapter.notifyDataSetChanged();
 
             imageList_offer = new ArrayList<>();
             List<OfferSlider> offer_sliders = (mDatabase.getUserData().getOffer_slides());
@@ -991,6 +1040,40 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 refresh_layout.setRefreshing(false);
                 JSONObject message1 = new JSONObject(message);
                 JSONObject data = message1.getJSONObject("main_hero_banner");
+                JSONArray slideArray = message1.getJSONArray("slides");
+                JSONArray youtube_slides = message1.getJSONArray("youtube_slides");
+
+                slider_banner.clear();
+                if (slideArray.length() > 0) {
+
+                    for (int i = 0; i < slideArray.length(); i++) {
+                        JSONObject object1 = slideArray.getJSONObject(i);
+                        SliderData sliderData = new SliderData();
+                        sliderData.setSlide(object1.getString("slide"));
+                        sliderData.setUrl(object1.getString("url"));
+                        sliderData.setRedirection_type(object1.getString("redirection_type"));
+                        sliderData.setData(object1.getString("data"));
+                        slider_banner.add(sliderData);
+                    }
+                    imageSliderAdapter.notifyDataSetChanged();
+
+
+                }
+                youtubeVideosList.clear();
+                if (youtube_slides.length() > 0) {
+
+                    for (int i = 0; i < youtube_slides.length(); i++) {
+                        JSONObject objectYoutube_slides = youtube_slides.getJSONObject(i);
+                        YoutubeSlides youtubeSlides = new YoutubeSlides();
+                       youtubeSlides.setLink(objectYoutube_slides.getString("link"));
+                       youtubeSlides.setTitle(objectYoutube_slides.getString("title"));
+                       youtubeSlides.setThumbnail(objectYoutube_slides.getString("thumbnail"));
+                        youtubeVideosList.add(youtubeSlides);
+                    }
+                    sliderAdapter.notifyDataSetChanged();
+
+
+                }
                 mainHeroBanner(data);
                 setData("Api");
                 JSONObject object = new JSONObject(message);
@@ -1196,11 +1279,29 @@ public class MainActivity extends BaseActivity implements DefaultView,
         setLayout(no_internet, retry, "main");
         preferences = getSharedPreferences("debug", Context.MODE_PRIVATE);
         setStatusBarGradiant(this);
-//        if (!Objects.equals(preferences.getString("state", ""), "cancel")){
-//            if (isDeveloperModeEnabled()) {
-//                openDeveloperDialog();
-//            }
-//        }
+/*
+        if (!Objects.equals(preferences.getString("state", ""), "cancel")){
+            if (isDeveloperModeEnabled()) {
+                openDeveloperDialog();
+            }
+        }
+        sliderAdapter = new RecyclerViewSliderAdapter(this, MainActivity.this, youtubeVideosList);
+        image_slider.setAdapter(sliderAdapter);
+
+        youtube_indicator.setViewPager2(image_slider);
+
+        imageSliderAdapter = new SliderAdapterBanner(this,slider_banner, this);
+        viewPager.setAdapter(imageSliderAdapter);
+        indicator.setViewPager2(viewPager);
+
+*/
+        youtube_indicator.post(() -> {
+            youtube_indicator.requestLayout(); // force refresh
+        });
+        indicator.post(()->{
+            indicator.requestLayout(); // force refresh
+        });
+        sliderHandler.postDelayed(sliderRunnable, 1000);
     }
 
     @Override
@@ -1226,10 +1327,12 @@ public class MainActivity extends BaseActivity implements DefaultView,
         super.onStop();
         hideAllDialog();
     }
+
     @Override
     protected void onPause() {
         super.onPause();
         hideAllDialog();
+        sliderHandler.removeCallbacks(sliderRunnable);
     }
 
     //    TODO Service Click
@@ -1480,6 +1583,14 @@ public class MainActivity extends BaseActivity implements DefaultView,
             mDefaultPresenter.fetchBalance(fcmToken + "", device_id + "", rotation);
             setStatusBarGradiant(this);
         }, 1200);
+
+        youtube_indicator.post(() -> {
+            youtube_indicator.requestLayout(); // force refresh
+        });
+        indicator.post(()->{
+            indicator.requestLayout(); // force refresh
+        });
+
     }
 
     private void refreshDataWithoutLoader() {

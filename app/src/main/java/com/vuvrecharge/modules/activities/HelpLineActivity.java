@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -68,7 +69,7 @@ public class HelpLineActivity extends BaseActivity implements DefaultView,View.O
         ButterKnife.bind(getActivity());
         mToolbar.setOnClickListener(this);
         mDefaultView = this;
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         mDefaultPresenter = new DefaultPresenter(this);
         try {
             Intent intent = getIntent();

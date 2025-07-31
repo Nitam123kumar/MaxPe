@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -80,6 +81,7 @@ public class DthPlanActivity extends BaseActivity implements DefaultView, OnFrag
         ButterKnife.bind(getActivity());
         mToolbar.setOnClickListener(this);
         mDefaultView = this;
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         title.setText("Plans Details");
         Intent intent = getIntent();
         infoLayout.setVisibility(View.GONE);

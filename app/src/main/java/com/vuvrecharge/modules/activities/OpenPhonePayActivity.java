@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import com.vuvrecharge.R;
@@ -59,6 +60,7 @@ public class OpenPhonePayActivity extends BaseActivity implements DefaultView, V
         getInstalledUPIApps();
         Intent intent1 = getIntent();
         amount= intent1.getStringExtra("Amount");
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 
 

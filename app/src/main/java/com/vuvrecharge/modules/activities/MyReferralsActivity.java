@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -63,7 +64,7 @@ public class MyReferralsActivity extends BaseActivity implements DefaultView, Vi
         initializeEventsList();
         mDefaultPresenter = new DefaultPresenter(this);
         mDefaultPresenter.myReferrals(device_id, page + "", "Yes");
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 
     @Override

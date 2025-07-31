@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 
@@ -77,6 +78,7 @@ public class RegisterActivity extends BaseActivity implements DefaultView, View.
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             setTitle("");
         }
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setLayout(no_internet, retry, "register");
         title.setTextColor(Color.WHITE);
         title.setText("New Registration");

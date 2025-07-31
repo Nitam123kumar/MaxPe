@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -85,7 +86,7 @@ public class ManualActivity extends BaseActivity implements DefaultView, View.On
         mDefaultPresenter = new DefaultPresenter(mDefaultView);
         bank_list.add("Select Bank");
         type_list.add("Select Payment Mode");
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         loadSpinner();
         register.setOnClickListener(this);
         mDefaultPresenter.bankDetails(device_id + "");

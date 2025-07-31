@@ -1,5 +1,7 @@
 package com.vuvrecharge.modules.adapter;
 
+import static com.vuvrecharge.api.ApiServices.SLIDE;
+
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -30,12 +32,12 @@ import java.util.List;
 public class SliderAdapterBanner extends RecyclerView.Adapter<SliderAdapterBanner.SliderViewHolder> {
 
     private Context mContext;
-    private List<String> color;
+//    private List<String> color;
     private List<SliderData> banners;
    ItemClickListener listener;
-    public SliderAdapterBanner(Context context, List<String> color, List<SliderData> banners,ItemClickListener listener) {
+    public SliderAdapterBanner(Context context,List<SliderData> banners,ItemClickListener listener) {
         this.mContext = context;
-        this.color = color;
+//        this.color = color;
         this.banners = banners;
         this.listener=listener;
     }
@@ -51,13 +53,13 @@ public class SliderAdapterBanner extends RecyclerView.Adapter<SliderAdapterBanne
     @Override
     public void onBindViewHolder(@NonNull SliderAdapterBanner.SliderViewHolder holder, int position) {
         SliderData sliderData = banners.get(position);
-        Log.d("logo",color.get(position));
-        if (!color.get(position).equals("")) {
+//        Log.d("logo",color.get(position));
+//        if (!color.get(position).equals("")) {
             Glide.with(mContext)
-                    .load(color.get(position))
+                    .load(SLIDE + sliderData.getSlide())
 //                    .apply(options)
                     .into(holder.imageView);
-        }
+//        }
         holder.imageView.setOnClickListener(v -> {
             try {
 //                if (!sliderData.getUrl().isEmpty()) {
@@ -79,7 +81,7 @@ public class SliderAdapterBanner extends RecyclerView.Adapter<SliderAdapterBanne
 
     @Override
     public int getItemCount() {
-        return color.size();
+        return banners.size();
     }
     public class SliderViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;

@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.databinding.DataBindingUtil;
 
 import com.vuvrecharge.R;
@@ -79,6 +80,7 @@ public class LoginActivity extends BaseActivity implements DefaultView, View.OnC
         binding.buttonForgot.setOnClickListener(this);
         binding.buttonLogin.setOnClickListener(this);
         binding.passwordLayout.setHint("Password");
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         binding.password.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

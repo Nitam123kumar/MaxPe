@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.vuvrecharge.R;
 import com.vuvrecharge.api.ApiServices;
@@ -45,7 +46,7 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
         setContentView(R.layout.activity_about);
         ButterKnife.bind(this);
         mToolbar.setOnClickListener(this);
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Intent intent = getIntent();
         from = intent.getStringExtra("from");
         title.setText(from);

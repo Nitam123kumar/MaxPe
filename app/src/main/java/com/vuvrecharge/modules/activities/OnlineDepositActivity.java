@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -61,7 +62,7 @@ public class OnlineDepositActivity extends BaseActivity implements DefaultView,V
         initializeEventsList();
         mDefaultPresenter = new DefaultPresenter(this);
         mDefaultPresenter.onlineDepositHistory(device_id + "","","","");
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 
     @Override

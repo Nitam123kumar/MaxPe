@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -94,7 +95,7 @@ public class ComplaintRegistrationActivity  extends BaseActivity implements Defa
         ButterKnife.bind(this);
         toolbar.setOnClickListener(this);
         title.setText("Complain Registration");
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         mDefaultPresenter = new DefaultPresenter(this);
         setStatusBarGradiant(this);
         btnSubmit.setOnClickListener(v -> {

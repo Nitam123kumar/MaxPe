@@ -66,6 +66,7 @@ public class ForgotPasswordActivity extends BaseActivity implements DefaultView,
 //            mToolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
 //            setTitle("");
 //        }
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         title.setTextColor(Color.WHITE);
         title.setText("Welcome Back");
         mDefaultPresenter = new DefaultPresenter(this);

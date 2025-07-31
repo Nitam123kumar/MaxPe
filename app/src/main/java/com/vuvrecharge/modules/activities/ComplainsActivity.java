@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -107,7 +108,7 @@ public class ComplainsActivity extends BaseActivity implements DefaultView, View
         setStatusBarGradiant(this);
         mDefaultPresenter = new DefaultPresenter(this);
         Calendar cal = Calendar.getInstance();
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         toDate = cal.getTime();
 
         Date today = new Date();

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
@@ -111,7 +112,7 @@ public class ProfileActivity extends BaseActivity implements DefaultView, View.O
         mDefaultPresenter = new DefaultPresenter(this);
         preferences = new OperatorPreferences(this,"profileDetails");
         map = preferences.getData();
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         if (map != null){
             if (Objects.equals(map.get("type"), "profile")){
                 try {

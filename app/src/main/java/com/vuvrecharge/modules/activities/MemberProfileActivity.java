@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
@@ -100,6 +101,7 @@ public class MemberProfileActivity extends BaseActivity implements DefaultView, 
         mobile = intent.getStringExtra("mobile");
         mDefaultPresenter = new DefaultPresenter(this);
         mDefaultPresenter.memberProfileDetail(device_id, mobile);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 
     @Override

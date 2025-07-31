@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -127,7 +128,7 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
         defaultView = this;
         getStartedTV.setOnClickListener(this);
         setStatusBarGradiant(this);
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 //        prepaidCommissionPreferences = new CommissionPreferences(this, "PrepaidCommission");
 //        otherCommissionPreferences = new CommissionPreferences(this, "OtherCommission");
 //        dTHCommissionPreferences = new CommissionPreferences(this, "DTHCommission");

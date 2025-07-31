@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -58,6 +59,7 @@ public class DownlinePackageActivity extends BaseActivity implements DefaultView
         setContentView(R.layout.activity_mycommison_package);
         ButterKnife.bind(this);
         mToolbar.setOnClickListener(this);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         try {
             Intent intent = getIntent();
             data = intent.getStringExtra("data");

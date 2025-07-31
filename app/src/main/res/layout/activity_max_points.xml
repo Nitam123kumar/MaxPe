@@ -107,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_27sdp"
             android:gravity="center"
-            android:text="@string/lifetime_max_points_50050_00"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="@dimen/_9sdp"
             app:layout_constraintBottom_toBottomOf="parent"

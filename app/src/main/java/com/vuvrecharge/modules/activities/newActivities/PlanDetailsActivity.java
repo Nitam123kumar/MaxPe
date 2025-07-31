@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 
@@ -184,7 +185,7 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
         transaction_amount.setText("\u20b9" +amount);
         mDefaultView = this;
         mDefaultPresenter = new DefaultPresenter(this);
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         planValidityTV.setVisibility(VISIBLE);
         planDateTV.setText(validity);
         planDataTV.setVisibility(VISIBLE);

@@ -28,6 +28,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
+import androidx.webkit.WebSettingsCompat;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
@@ -139,6 +140,11 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
         viewMyReferral.setOnClickListener(this);
         viewReferralIncome.setOnClickListener(this);
         txtTermsCondition.setOnClickListener(this);
+        WebSettingsCompat.setForceDark(webView.getSettings(), WebSettingsCompat.FORCE_DARK_ON);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            webView.getSettings().setSafeBrowsingEnabled(true);
+        }
+
         if (mDatabase != null) {
             if (mDatabase.getUserData() != null) {
                 if (mDatabase.getUserData().getReferCode() != null) {
