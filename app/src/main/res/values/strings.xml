@@ -459,5 +459,14 @@
     <string name="select_language">Select Language</string>
     <string name="make_maxpe_speak_your_language">Make MaxPe speak your language.</string>
     <string name="change_language">Change Language</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="enter_your_mobile_number">Enter your mobile number</string>
+    <string name="let_s_login_to_access_your_account">Let’s login to access your account</string>
+    <string name="and">and</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="by_continuing_you_agree_to_our">By Continuing, you agree to our</string>
+    <string name="verify_your_otp">Verify Your OTP</string>
+    <string name="need_help">Need Help?</string>
+    <string name="sent_otp">Sent OTP</string>
 
 </resources>

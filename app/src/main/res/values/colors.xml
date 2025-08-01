@@ -4,6 +4,7 @@
 <!--    <color name="colorPrimaryB">#4B0082</color>-->
 <!--    <color name="colorPrimaryB">#004DEB</color>-->
     <color name="colorPrimaryB">#0549AE</color>
+    <color name="colorLoginPage">#F4F6FC</color>
     <color name="colorPrimaryD">#0075EF</color>
     <color name="colorBlackU">#676767</color>
     <color name="colorPrimaryT">#084AAA</color>

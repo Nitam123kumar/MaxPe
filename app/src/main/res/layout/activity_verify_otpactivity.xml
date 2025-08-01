@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".modules.activities.VerifyOTPActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/main_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/top"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_100sdp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/login_top_bg"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <ImageView
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/logo_bg"
+                        android:padding="@dimen/_6sdp"
+                        android:src="@drawable/app_icon"
+                        app:layout_constraintBottom_toBottomOf="@id/top"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/login_layout" />
+
+
+                    <LinearLayout
+                        android:id="@+id/login_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_20sdp"
+                        app:layout_constraintTop_toBottomOf="@id/top">
+
+                        <TextView
+                            android:id="@+id/login_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_50sdp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:gravity="center"
+                            android:text="@string/verify_your_otp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_15sdp"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_25sdp"
+                            android:text="@string/enter_otp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_9sdp"
+                            android:textStyle="bold" />
+
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/enter_otp"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@drawable/corner_white_recharge_2"
+                            android:gravity="center_vertical"
+                            android:hint="@string/enter_otp"
+                            android:inputType="phone"
+                            android:maxLength="10"
+                            android:paddingLeft="@dimen/_10sdp"
+                            android:textColor="@color/black_2"
+                            android:textColorHint="#8C8C8C"
+                            android:textSize="@dimen/_9sdp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+                        <TextView
+                            android:id="@+id/opt_of_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:text=""
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_9sdp"
+                            android:textStyle="bold" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20sdp">
+
+                            <TextView
+                                android:id="@+id/btnVerifyOtp"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_40sdp"
+                                android:background="@drawable/ad_money_button_shape"
+                                android:gravity="center"
+                                android:text="@string/verify_otp"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_12sdp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/timer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_30sdp"
+                            android:gravity="center"
+                            android:text=""
+                            android:textAllCaps="false"
+                            android:textColor="#8C8C8C"
+                            android:textSize="@dimen/_9sdp" />
+
+
+                        <TextView
+                            android:id="@+id/help_support"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_20sdp"
+                            android:paddingLeft="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_8sdp"
+                            android:paddingRight="@dimen/_10sdp"
+                            android:paddingBottom="@dimen/_10sdp"
+                            android:text="@string/need_help"
+                            android:textAlignment="center"
+                            android:textAllCaps="false"
+                            android:textColor="#0A51A0"
+                            android:textSize="@dimen/_9sdp"
+                            android:textStyle="bold" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20sdp"
+                            android:layout_marginHorizontal="@dimen/_30sdp">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/call_layout"
+                                android:layout_width="@dimen/_90sdp"
+                                android:layout_height="@dimen/_28sdp"
+                                android:background="@drawable/support_design_background_shape"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:id="@+id/call_img"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/group_12488"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toStartOf="@+id/call_txt"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/call_txt"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Call Us"
+                                    android:textColor="#8C8C8C"
+                                    android:textSize="@dimen/_9sdp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/call_img"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/whatsapp_layout"
+                                android:layout_width="@dimen/_90sdp"
+                                android:layout_height="@dimen/_28sdp"
+                                android:background="@drawable/support_design_background_shape"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:id="@+id/whatsapp_img"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/whatsapp_icon_svg1"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toStartOf="@+id/whatsapp_txt"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/whatsapp_txt"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Whatsapp Us"
+                                    android:textColor="#8C8C8C"
+                                    android:textSize="@dimen/_9sdp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/whatsapp_img"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#BA333333"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <ProgressBar
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:indeterminateDrawable="@drawable/layout_process_bar" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/no_internet"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#BA333333"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/wifi" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:text="@string/no_internet_available_ncheck_connection"
+                android:textColor="@color/white_5" />
+
+            <TextView
+                android:id="@+id/retry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/corner_primary"
+                android:gravity="center"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingRight="@dimen/_15sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:text="@string/re_try"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

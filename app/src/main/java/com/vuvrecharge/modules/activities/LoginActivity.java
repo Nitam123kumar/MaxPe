@@ -57,8 +57,6 @@ public class LoginActivity extends BaseActivity implements DefaultView, View.OnC
 
     UserPreferences mDatabase = new UserPreferencesImpl();
 
-    @BindView(R.id.main_bg)
-    LinearLayout main_bg;
     @BindView(R.id.loading)
     LinearLayout loading;
     @BindView(R.id.no_internet)
@@ -77,18 +75,19 @@ public class LoginActivity extends BaseActivity implements DefaultView, View.OnC
         mDefaultPresenter = new DefaultPresenter(this);
         binding.btnLogin.setOnClickListener(this);
         binding.register.setOnClickListener(this);
-        binding.buttonForgot.setOnClickListener(this);
-        binding.buttonLogin.setOnClickListener(this);
-        binding.passwordLayout.setHint("Password");
+//        binding.buttonForgot.setOnClickListener(this);
+//        binding.buttonLogin.setOnClickListener(this);
+        changeStatusBarColorLoginPage();
+//        binding.passwordLayout.setHint("Password");
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        binding.password.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                if (imm != null) {
-                    imm.showSoftInput(binding.password, InputMethodManager.SHOW_FORCED);
-                }
-            }
-        });
+//        binding.password.setOnFocusChangeListener((v, hasFocus) -> {
+//            if (hasFocus) {
+//                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//                if (imm != null) {
+//                    imm.showSoftInput(binding.password, InputMethodManager.SHOW_FORCED);
+//                }
+//            }
+//        });
         mDefaultPresenter.checkLoginWithOtpStatus();
     }
 
@@ -143,52 +142,60 @@ public class LoginActivity extends BaseActivity implements DefaultView, View.OnC
     @Override
     public void onSuccess(String message, @NonNull String second_message) {
         try {
+            Log.d("onSuccess","value");
             if (second_message.equals("status")) {
                 JSONObject object = new JSONObject(message);
                 String value = object.getString("login_with_otp");
-                if (value.equals("On")) {
-                    otpView();
-                }
+//                if (value.equals("On")) {
+//                    otpView();
+//                }
             } else if (second_message.equals("otp")) {
                 JSONObject object = new JSONObject(message);
                 String value = object.getString("status");
                 String otp = object.getString("otp");
+                Log.d("onSuccess",value);
                 if (value.equals("Success")) {
-                    binding.btnLogin.setText("Verify OTP");
-                    binding.passwordLayout.setVisibility(View.VISIBLE);
-                    binding.password.setVisibility(View.VISIBLE);
-                    binding.passwordLayout.setHint("Enter OTP");
-                    timer = new CountDownTimer(120000, 1000) {
-                        @Override
-                        public void onTick(long millisUntilFinished) {
-                            if (Objects.requireNonNull(binding.password.getText().toString()).isEmpty()) {
-                                binding.btnLogin.setEnabled(false);
-                                binding.btnLogin.setClickable(false);
-                            } else {
-                                binding.btnLogin.setEnabled(true);
-                                binding.btnLogin.setClickable(true);
-                            }
-                            if (otp != null) {
-                                binding.password.setText(otp);
-                                mDefaultPresenter.loginVerifyUser(
-                                        binding.username.getText().toString().trim(),
-                                        binding.password.getText().toString().trim(),
-                                        device_id
-                                );
-                                hideKeyBoard(binding.password);
-                            }
-                            binding.buttonForgot.setVisibility(View.VISIBLE);
-                            binding.buttonForgot.setText("Didn't receive OTP? Resend in " + millisUntilFinished / 1000 + " seconds");
-                        }
+                    Log.d("onSuccess","value");
+//                    binding.btnLogin.setText("Verify OTP");
+                    Intent intent = new Intent(getActivity(), VerifyOTPActivity.class);
+                    intent.putExtra("number", binding.username.getText().toString().trim());
+                    startActivity(intent);
+                } else {
+//                    binding.passwordLayout.setVisibility(View.VISIBLE);
+//                    binding.password.setVisibility(View.VISIBLE);
 
-                        @Override
-                        public void onFinish() {
-                            binding.buttonForgot.setVisibility(View.GONE);
-                            binding.btnLogin.setEnabled(true);
-                            binding.btnLogin.setClickable(true);
-                            binding.btnLogin.setText("Resend OTP");
-                        }
-                    }.start();
+//                    binding.passwordLayout.setHint("Enter OTP");
+//                    timer = new CountDownTimer(120000, 1000) {
+//                        @Override
+//                        public void onTick(long millisUntilFinished) {
+//                            if (Objects.requireNonNull(binding.password.getText().toString()).isEmpty()) {
+//                                binding.btnLogin.setEnabled(false);
+//                                binding.btnLogin.setClickable(false);
+//                            } else {
+//                                binding.btnLogin.setEnabled(true);
+//                                binding.btnLogin.setClickable(true);
+//                            }
+////                            if (otp != null) {
+////                                binding.password.setText(otp);
+////                                mDefaultPresenter.loginVerifyUser(
+////                                        binding.username.getText().toString().trim(),
+////                                        binding.password.getText().toString().trim(),
+////                                        device_id
+////                                );
+////                                hideKeyBoard(binding.password);
+////                            }
+//                            binding.buttonForgot.setVisibility(View.VISIBLE);
+//                            binding.buttonForgot.setText("Didn't receive OTP? Resend in " + millisUntilFinished / 1000 + " seconds");
+//                        }
+//
+//                        @Override
+//                        public void onFinish() {
+//                            binding.buttonForgot.setVisibility(View.GONE);
+//                            binding.btnLogin.setEnabled(true);
+//                            binding.btnLogin.setClickable(true);
+//                            binding.btnLogin.setText("Resend OTP");
+//                        }
+//                    }.start();
                 }
             }
         } catch (Exception e) {
@@ -251,47 +258,51 @@ public class LoginActivity extends BaseActivity implements DefaultView, View.OnC
     }
 
     private void validateCredentials() {
-        if (binding.btnLogin.getText().equals("Login?")) {
-            if (tryCount < 5) {
-                mDefaultPresenter.loginUser(Objects.requireNonNull(binding.username.getText()).toString(),
-                        Objects.requireNonNull(binding.password.getText()).toString(), device_id);
-                tryCount++;
-                hideKeyBoard(binding.username);
-                hideKeyBoard(binding.password);
-            } else {
-                Intent intent = new Intent(getActivity(), ForgotPasswordActivity.class);
-                startActivity(intent);
-                hideKeyBoard(binding.username);
-                hideKeyBoard(binding.password);
-            }
-        } else if (binding.btnLogin.getText().equals("Send OTP")) {
+//        if (binding.btnLogin.getText().equals("Login?")) {
+//            if (tryCount < 5) {
+//                mDefaultPresenter.loginUser(Objects.requireNonNull(binding.username.getText()).toString(),
+//                        Objects.requireNonNull(binding.password.getText()).toString(), device_id);
+//                tryCount++;
+//                hideKeyBoard(binding.username);
+//                hideKeyBoard(binding.password);
+//            } else {
+//                Intent intent = new Intent(getActivity(), ForgotPasswordActivity.class);
+//                startActivity(intent);
+//                hideKeyBoard(binding.username);
+//                hideKeyBoard(binding.password);
+//            }
+//        }
+//        else
+            if (binding.btnLogin.getText().equals("Sent OTP")) {
             if (Objects.requireNonNull(binding.username.getText()).toString().isEmpty()) {
                 showError1("Enter mobile number");
             } else {
                 mDefaultPresenter.loginOTPUser(binding.username.getText().toString().trim());
                 hideKeyBoard(binding.username);
-            }
-        } else if (binding.btnLogin.getText().equals("Resend OTP")) {
-            if (Objects.requireNonNull(binding.username.getText()).toString().isEmpty()) {
-                showError1("Enter mobile number");
-            } else {
-                mDefaultPresenter.loginOTPUser(binding.username.getText().toString().trim());
-                hideKeyBoard(binding.username);
-            }
-        } else if (binding.btnLogin.getText().equals("Verify OTP")) {
-            if (Objects.requireNonNull(binding.username.getText()).toString().isEmpty()) {
-                showError1("Enter mobile number");
-            } else if (Objects.requireNonNull(binding.password.getText()).toString().isEmpty()) {
-                showError1("Enter OTP");
-            } else {
-                mDefaultPresenter.loginVerifyUser(
-                        binding.username.getText().toString().trim(),
-                        binding.password.getText().toString().trim(),
-                        device_id
-                );
-                hideKeyBoard(binding.password);
             }
         }
+//            else if (binding.btnLogin.getText().equals("Resend OTP")) {
+//            if (Objects.requireNonNull(binding.username.getText()).toString().isEmpty()) {
+//                showError1("Enter mobile number");
+//            } else {
+//                mDefaultPresenter.loginOTPUser(binding.username.getText().toString().trim());
+//                hideKeyBoard(binding.username);
+//            }
+//        }
+//            else if (binding.btnLogin.getText().equals("Verify OTP")) {
+//            if (Objects.requireNonNull(binding.username.getText()).toString().isEmpty()) {
+//                showError1("Enter mobile number");
+//            } else if (Objects.requireNonNull(binding.password.getText()).toString().isEmpty()) {
+//                showError1("Enter OTP");
+//            } else {
+//                mDefaultPresenter.loginVerifyUser(
+//                        binding.username.getText().toString().trim(),
+//                        binding.password.getText().toString().trim(),
+//                        device_id
+//                );
+//                hideKeyBoard(binding.password);
+//            }
+//        }
     }
 
     @Override
@@ -305,21 +316,21 @@ public class LoginActivity extends BaseActivity implements DefaultView, View.OnC
                 intent = new Intent(getActivity(), RegisterActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.button_forgot:
-                if (binding.buttonForgot.getText().equals("Reset Password")) {
-                    intent = new Intent(getActivity(), ForgotPasswordActivity.class);
-                    startActivity(intent);
-                }
-                break;
+//            case R.id.button_forgot:
+//                if (binding.buttonForgot.getText().equals("Reset Password")) {
+//                    intent = new Intent(getActivity(), ForgotPasswordActivity.class);
+//                    startActivity(intent);
+//                }
+//                break;
         }
     }
 
-    private void otpView() {
-        binding.buttonForgot.setVisibility(View.GONE);
-        binding.passwordLayout.setVisibility(View.GONE);
-        binding.password.setVisibility(View.GONE);
-        binding.btnLogin.setText("Send OTP");
-        binding.buttonLogin.setVisibility(View.GONE);
-    }
+//    private void otpView() {
+//        binding.buttonForgot.setVisibility(View.GONE);
+//        binding.passwordLayout.setVisibility(View.GONE);
+//        binding.password.setVisibility(View.GONE);
+//        binding.btnLogin.setText("Send OTP");
+//        binding.buttonLogin.setVisibility(View.GONE);
+//    }
 
 }
