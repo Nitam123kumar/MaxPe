@@ -302,7 +302,7 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
                 model.setTxn_balance_count(pointsObject.getString("txn_balance_count"));
                 Log.d("cashbackLogs", "onSuccessOther: " + pointsObject);
                 balance_maxPoints_TV.setText(model.getCashback_points());
-                maxPointsTV.setText("Lifetime Max Points : "+model.getCashback_points());
+                maxPointsTV.setText(model.getCashback_points());
 
             }
 
