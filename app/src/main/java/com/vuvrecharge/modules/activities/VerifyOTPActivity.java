@@ -68,6 +68,7 @@ public class VerifyOTPActivity extends BaseActivity implements DefaultView {
         presenter = new DefaultPresenter(this);
         number = getIntent().getStringExtra("number");
         optOfNumber.setText("OTP Sent to Mobile +" + number);
+        changeStatusBarColorLoginPage();
 
         call_layout.setOnClickListener(v -> {
             if (selectCall()) {
@@ -117,9 +118,9 @@ public class VerifyOTPActivity extends BaseActivity implements DefaultView {
 
         btnVerifyOtp.setOnClickListener(v -> {
             if (Objects.requireNonNull(btnVerifyOtp.getText()).toString().isEmpty()) {
-                showError1("Enter mobile number");
+                showErrorLoginPage("Enter mobile number");
             } else if (Objects.requireNonNull(btnVerifyOtp.getText()).toString().isEmpty()) {
-                showError1("Enter OTP");
+                showErrorLoginPage("Enter OTP");
             } else {
                 presenter.loginVerifyUser(
                         number,
@@ -147,6 +148,7 @@ public class VerifyOTPActivity extends BaseActivity implements DefaultView {
             }
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
+            finish();
             timer.onFinish();
             timer.cancel();
             finish();
@@ -173,10 +175,10 @@ public class VerifyOTPActivity extends BaseActivity implements DefaultView {
     @Override
     public void onError(String error) {
         if (bottomSheet != null) {
-            showError1(bottomSheet, error);
+            showErrorLoginPage(bottomSheet, error);
             submit.setVisibility(View.VISIBLE);
         }
-        showError1(error);
+        showErrorLoginPage(error);
     }
 
     @Override

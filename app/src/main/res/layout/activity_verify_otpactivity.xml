@@ -179,7 +179,7 @@
                                     android:id="@+id/call_img"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:src="@drawable/group_12488"
+                                    android:src="@drawable/vector__8_"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toStartOf="@+id/call_txt"
                                     app:layout_constraintStart_toStartOf="parent"

@@ -322,7 +322,7 @@
         <activity
             android:name=".modules.activities.RegisterActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Recharge"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden"
             tools:ignore="LockedOrientationActivity" />
         <activity

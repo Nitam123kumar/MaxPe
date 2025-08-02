@@ -50,8 +50,6 @@ public class RegisterActivity extends BaseActivity implements DefaultView, View.
     TextInputEditText full_name;
     @BindView(R.id.enter_mobile_no)
     TextInputEditText enter_mobile_no;
-    @BindView(R.id.enter_password)
-    TextInputEditText enter_password;
     @BindView(R.id.email)
     TextInputEditText email;
     @BindView(R.id.enter_referral_id)
@@ -78,6 +76,7 @@ public class RegisterActivity extends BaseActivity implements DefaultView, View.
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             setTitle("");
         }
+        changeStatusBarColorLoginPage();
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setLayout(no_internet, retry, "register");
         title.setTextColor(Color.WHITE);
@@ -175,7 +174,7 @@ public class RegisterActivity extends BaseActivity implements DefaultView, View.
                 Objects.requireNonNull(email.getText()).toString() + "",
                 Objects.requireNonNull(full_name.getText()).toString() + "",
                 Objects.requireNonNull(enter_mobile_no.getText()).toString() + "",
-                Objects.requireNonNull(enter_password.getText()).toString() + "",
+                "151617",
                 Objects.requireNonNull(enter_referral_id.getText()).toString() + "");
     }
 
@@ -226,7 +225,7 @@ public class RegisterActivity extends BaseActivity implements DefaultView, View.
 
                 String otpView = Objects.requireNonNull(binding_.otpView.getText()).toString();
                 if (TextUtils.isEmpty(otpView.trim())) {
-                    showError1(bottomSheet, "Please enter otp");
+                    showErrorLoginPage(bottomSheet, "Please enter otp");
                     return;
                 }
 
@@ -235,9 +234,8 @@ public class RegisterActivity extends BaseActivity implements DefaultView, View.
                 mDefaultPresenter.otpValidate(Objects.requireNonNull(email.getText()).toString() + "",
                         Objects.requireNonNull(full_name.getText()).toString() + "",
                         enter_mobile_no.getText().toString() + "",
-                        Objects.requireNonNull(enter_password.getText()).toString() + "",
+                        "",
                         otpView + "", device_id, strSponser);
-
             });
             if (dialog != null) {
                 if (!dialog.isShowing()) {
@@ -282,10 +280,10 @@ public class RegisterActivity extends BaseActivity implements DefaultView, View.
     @Override
     public void onError(String error) {
         if (bottomSheet != null) {
-            showError1(bottomSheet, error);
+            showErrorLoginPage(bottomSheet, error);
             submit.setVisibility(View.VISIBLE);
         } else {
-            showError1(error);
+            showErrorLoginPage(error);
         }
     }
 

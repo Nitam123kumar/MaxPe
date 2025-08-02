@@ -28,7 +28,7 @@
                 android:gravity="center"
                 android:text="@string/verification_code"
                 android:textColor="@color/black_2"
-                android:textSize="15sp" />
+                android:textSize="@dimen/_12sdp" />
 
             <TextView
                 android:id="@+id/mobile_message"
@@ -58,7 +58,7 @@
                 app:itemHeight="@dimen/_32sdp"
                 app:itemSpacing="@dimen/_6sdp"
                 app:itemWidth="@dimen/_32sdp"
-                app:lineColor="@color/black_2"
+                app:lineColor="#8C8C8C"
                 app:lineWidth="@dimen/_1sdp"
                 app:state_filled="true"
                 app:viewType="rectangle" />
@@ -79,13 +79,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_32sdp"
                         android:layout_gravity="center_horizontal"
-                        android:background="@drawable/corner_primary_gr"
+                        android:background="@drawable/ad_money_button_shape"
                         android:gravity="center"
                         android:paddingLeft="30dp"
                         android:paddingRight="30dp"
-                        android:text="Verify Otp"
+                        android:text="@string/verify_otp"
                         android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:textSize="@dimen/_12sdp" />
 
                     <LinearLayout
                         android:id="@+id/loading"

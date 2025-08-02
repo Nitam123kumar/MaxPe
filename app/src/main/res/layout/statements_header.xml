@@ -115,7 +115,7 @@
 
         <EditText
             android:id="@+id/ref_no"
-            android:layout_width="@dimen/_155sdp"
+            android:layout_width="@dimen/_145sdp"
             android:layout_height="@dimen/_28sdp"
             android:background="@drawable/rectangle_18996"
             android:gravity="center_vertical"
@@ -125,14 +125,12 @@
             android:paddingStart="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_4sdp"
             android:elevation="@dimen/_1sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
             android:textColor="@color/black_2"
             android:textColorHint="#BFBFBF"
             android:textSize="@dimen/_8sdp"
             app:layout_constraintTop_toBottomOf="@id/layoutFrom"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/layoutFrom"
-            app:layout_constraintEnd_toStartOf="@id/search"
             tools:ignore="R5tlSymmetry" />
 
         <TextView
@@ -145,11 +143,9 @@
             android:elevation="@dimen/_1sdp"
             android:paddingEnd="@dimen/_5sdp"
             android:text="@string/search"
-            android:layout_marginStart="@dimen/_20sdp"
             android:textColor="@color/white"
             android:textSize="@dimen/_9sdp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/ref_no"
             app:layout_constraintTop_toTopOf="@id/ref_no"
             app:layout_constraintBottom_toBottomOf="@id/ref_no"/>
 

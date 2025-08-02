@@ -425,7 +425,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/c"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_470sdp"
+                    android:layout_height="@dimen/_500sdp"
                     android:layout_marginHorizontal="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:elevation="@dimen/_3sdp"

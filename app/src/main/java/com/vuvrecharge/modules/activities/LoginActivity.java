@@ -160,6 +160,7 @@ public class LoginActivity extends BaseActivity implements DefaultView, View.OnC
                     Intent intent = new Intent(getActivity(), VerifyOTPActivity.class);
                     intent.putExtra("number", binding.username.getText().toString().trim());
                     startActivity(intent);
+                    finish();
                 } else {
 //                    binding.passwordLayout.setVisibility(View.VISIBLE);
 //                    binding.password.setVisibility(View.VISIBLE);
@@ -218,10 +219,10 @@ public class LoginActivity extends BaseActivity implements DefaultView, View.OnC
     @Override
     public void onError(String error) {
         if (bottomSheet != null) {
-            showError1(bottomSheet, error);
+            showErrorLoginPage(bottomSheet, error);
             submit.setVisibility(View.VISIBLE);
         }
-        showError1(error);
+        showErrorLoginPage(error);
     }
 
     @Override
@@ -275,7 +276,7 @@ public class LoginActivity extends BaseActivity implements DefaultView, View.OnC
 //        else
             if (binding.btnLogin.getText().equals("Sent OTP")) {
             if (Objects.requireNonNull(binding.username.getText()).toString().isEmpty()) {
-                showError1("Enter mobile number");
+                showErrorLoginPage("Enter mobile number");
             } else {
                 mDefaultPresenter.loginOTPUser(binding.username.getText().toString().trim());
                 hideKeyBoard(binding.username);
@@ -283,7 +284,7 @@ public class LoginActivity extends BaseActivity implements DefaultView, View.OnC
         }
 //            else if (binding.btnLogin.getText().equals("Resend OTP")) {
 //            if (Objects.requireNonNull(binding.username.getText()).toString().isEmpty()) {
-//                showError1("Enter mobile number");
+//                showErrorLoginPage("Enter mobile number");
 //            } else {
 //                mDefaultPresenter.loginOTPUser(binding.username.getText().toString().trim());
 //                hideKeyBoard(binding.username);
@@ -291,9 +292,9 @@ public class LoginActivity extends BaseActivity implements DefaultView, View.OnC
 //        }
 //            else if (binding.btnLogin.getText().equals("Verify OTP")) {
 //            if (Objects.requireNonNull(binding.username.getText()).toString().isEmpty()) {
-//                showError1("Enter mobile number");
+//                showErrorLoginPage("Enter mobile number");
 //            } else if (Objects.requireNonNull(binding.password.getText()).toString().isEmpty()) {
-//                showError1("Enter OTP");
+//                showErrorLoginPage("Enter OTP");
 //            } else {
 //                mDefaultPresenter.loginVerifyUser(
 //                        binding.username.getText().toString().trim(),

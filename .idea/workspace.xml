@@ -322,6 +322,11 @@
           <theme>@android:style/Theme.Material.Light</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/otp_bg.xml">
+        <config>
+          <theme>@android:style/Theme.Material.Light</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/pattern_logs.xml">
         <config>
           <theme>@android:style/Theme.Material.Light</theme>
@@ -428,6 +433,11 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/share_drawable.xml">
+        <config>
+          <theme>@android:style/Theme.Material.Light</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/share_receipt.xml">
         <config>
           <theme>@android:style/Theme.Material.Light</theme>
         </config>
@@ -1424,18 +1434,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5334b43-0456-4b0b-815c-b3826a2035cf" name="Changes" comment="Some Changes All Activity On 1/08/2025">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/VerifyOTPActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/login_top_bg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/logo_bg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_verify_otpactivity.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/share_receipt.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/vector__8_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/base/BaseActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/base/BaseActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/RechargeReportActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/RechargeReportActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/RegisterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/RegisterActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/ShareEarnActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/ShareEarnActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/VerifyOTPActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/VerifyOTPActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/otp_bg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/otp_bg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/share_receipt.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_shareearn.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_shareearn.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_verify_otpactivity.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_verify_otpactivity.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/otp_verify_dialog.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/otp_verify_dialog.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/statements_header.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/statements_header.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
     </list>
@@ -1767,7 +1784,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754032839598</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Some Changes All Activity On 1/08/2025">
+      <option name="closed" value="true" />
+      <created>1754051208394</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1754051208394</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -1791,7 +1816,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/base/BaseActivity.java</url>
-          <line>1024</line>
+          <line>1063</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -1826,48 +1851,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
-          <line>560</line>
-          <option name="timeStamp" value="119" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
-          <line>575</line>
-          <option name="timeStamp" value="120" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
-          <line>591</line>
-          <option name="timeStamp" value="121" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
-          <line>594</line>
-          <option name="timeStamp" value="122" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
-          <line>608</line>
-          <option name="timeStamp" value="123" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
           <line>719</line>
           <option name="timeStamp" value="124" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
-          <line>772</line>
-          <option name="timeStamp" value="125" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
-          <line>1110</line>
-          <option name="timeStamp" value="137" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
-          <line>1122</line>
-          <option name="timeStamp" value="138" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java</url>
@@ -1906,12 +1891,12 @@
       <map>
         <entry key="com.vuvrecharge">
           <value>
-            <CheckInfo lastCheckTimestamp="1754024775323" />
+            <CheckInfo lastCheckTimestamp="1754111561879" />
           </value>
         </entry>
         <entry key="com.vuvrecharge.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1754024775323" />
+            <CheckInfo lastCheckTimestamp="1754111561869" />
           </value>
         </entry>
       </map>

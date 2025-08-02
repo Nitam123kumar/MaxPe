@@ -10,199 +10,175 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
-            android:orientation="vertical">
-        </RelativeLayout>
+            android:orientation="vertical"></RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <include layout="@layout/app_bar_custom"
-                android:visibility="gone"/>
+            <include
+                layout="@layout/app_bar_custom"
+                android:visibility="gone" />
 
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fillViewport="true">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <LinearLayout
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <ImageView
                             android:id="@+id/top"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_70sdp"
+                            android:layout_height="@dimen/_90sdp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/top1" />
+                            android:src="@drawable/login_top_bg"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/logo_bg"
+                            android:padding="@dimen/_6sdp"
+                            android:src="@drawable/app_icon"
+                            app:layout_constraintBottom_toBottomOf="@id/top"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/register_layout" />
+
+
                         <LinearLayout
+                            android:id="@+id/register_layout"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center_horizontal"
                             android:orientation="vertical"
-                            android:padding="@dimen/_20sdp">
+                            android:padding="@dimen/_20sdp"
+                            app:layout_constraintTop_toBottomOf="@id/top">
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/full_name_layout"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:layout_marginTop="@dimen/_15sdp"
-                                app:hintTextColor="@color/colorPrimaryB"
-                                android:textColorHint="#B3B3B3"
-                                app:boxStrokeColor="@color/colorPrimaryB"
-                                app:cursorColor="@color/colorPrimaryB"
-                                style="@style/TextInputLayoutNew"
-                                app:boxCornerRadiusBottomEnd="@dimen/_30sdp"
-                                app:boxCornerRadiusBottomStart="@dimen/_30sdp"
-                                app:boxCornerRadiusTopEnd="@dimen/_30sdp"
-                                app:boxCornerRadiusTopStart="@dimen/_30sdp"
-                                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/full_name"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="@string/full_name"
-                                    android:textStyle="bold"
-                                    android:textColorHint="#B5B5B5"
-                                    android:textColor="@color/black_4"
-                                    android:gravity="center_vertical"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:inputType="text" />
-                            </com.google.android.material.textfield.TextInputLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_35sdp"
+                                android:text="@string/full_name"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_9sdp"
+                                android:textStyle="bold" />
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/enter_mobile_no_layout"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:layout_marginTop="@dimen/_15sdp"
-                                app:hintTextColor="@color/colorPrimaryB"
-                                android:textColorHint="#B3B3B3"
-                                app:boxStrokeColor="@color/colorPrimaryB"
-                                app:cursorColor="@color/colorPrimaryB"
-                                style="@style/TextInputLayoutNew"
-                                app:boxCornerRadiusBottomEnd="@dimen/_30sdp"
-                                app:boxCornerRadiusBottomStart="@dimen/_30sdp"
-                                app:boxCornerRadiusTopEnd="@dimen/_30sdp"
-                                app:boxCornerRadiusTopStart="@dimen/_30sdp"
-                                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/enter_mobile_no"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="@string/mobile_number"
-                                    android:maxLength="10"
-                                    android:textStyle="bold"
-                                    android:textColorHint="#B5B5B5"
-                                    android:textColor="@color/black_4"
-                                    android:gravity="center_vertical"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:inputType="phone" />
-                            </com.google.android.material.textfield.TextInputLayout>
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/email_layout"
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/full_name"
                                 android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:layout_marginTop="@dimen/_15sdp"
-                                app:hintTextColor="@color/colorPrimaryB"
-                                android:textColorHint="#B3B3B3"
-                                app:boxStrokeColor="@color/colorPrimaryB"
-                                app:cursorColor="@color/colorPrimaryB"
-                                style="@style/TextInputLayoutNew"
-                                app:boxCornerRadiusBottomEnd="@dimen/_30sdp"
-                                app:boxCornerRadiusBottomStart="@dimen/_30sdp"
-                                app:boxCornerRadiusTopEnd="@dimen/_30sdp"
-                                app:boxCornerRadiusTopStart="@dimen/_30sdp"
-                                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:background="@drawable/corner_white_recharge_2"
+                                android:drawablePadding="@dimen/_10sdp"
+                                android:gravity="center_vertical"
+                                android:hint="@string/full_name"
+                                android:inputType="text"
+                                android:paddingLeft="@dimen/_10sdp"
+                                android:textColor="@color/black_2"
+                                android:textColorHint="#8C8C8C"
+                                android:textSize="@dimen/_9sdp"
+                                android:textStyle="bold"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/email"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="@string/email_address"
-                                    android:textStyle="bold"
-                                    android:textColorHint="#B5B5B5"
-                                    android:textColor="@color/black_4"
-                                    android:gravity="center_vertical"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:inputType="textEmailAddress" />
-                            </com.google.android.material.textfield.TextInputLayout>
+                                app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/enter_password_layout"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:layout_marginTop="@dimen/_15sdp"
-                                app:hintTextColor="@color/colorPrimaryB"
-                                android:textColorHint="#B3B3B3"
-                                app:boxCornerRadiusBottomEnd="@dimen/_30sdp"
-                                app:boxCornerRadiusBottomStart="@dimen/_30sdp"
-                                app:boxCornerRadiusTopEnd="@dimen/_30sdp"
-                                app:boxCornerRadiusTopStart="@dimen/_30sdp"
-                                app:boxStrokeColor="@color/colorPrimaryB"
-                                app:cursorColor="@color/colorPrimaryB"
-                                style="@style/TextInputLayoutNew"
-                                app:passwordToggleEnabled="true"
-                                app:passwordToggleTint="@color/colorPrimaryB"
-                                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/enter_password"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="@string/password"
-                                    android:textStyle="bold"
-                                    android:textColorHint="#B5B5B5"
-                                    android:textColor="@color/black_4"
-                                    android:gravity="center_vertical"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:inputType="textPassword" />
-                            </com.google.android.material.textfield.TextInputLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:text="@string/enter_mobile_number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_9sdp"
+                                android:textStyle="bold" />
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:id="@+id/enter_referral_id_layout"
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/enter_mobile_no"
                                 android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:layout_marginTop="@dimen/_15sdp"
-                                app:hintTextColor="@color/colorPrimaryB"
-                                android:textColorHint="#B3B3B3"
-                                app:boxStrokeColor="@color/colorPrimaryB"
-                                app:cursorColor="@color/colorPrimaryB"
-                                style="@style/TextInputLayoutNew"
-                                app:boxCornerRadiusBottomEnd="@dimen/_30sdp"
-                                app:boxCornerRadiusBottomStart="@dimen/_30sdp"
-                                app:boxCornerRadiusTopEnd="@dimen/_30sdp"
-                                app:boxCornerRadiusTopStart="@dimen/_30sdp"
-                                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:background="@drawable/corner_white_recharge_2"
+                                android:drawablePadding="@dimen/_10sdp"
+                                android:gravity="center_vertical"
+                                android:hint="@string/enter_your_mobile_number"
+                                android:inputType="phone"
+                                android:maxLength="10"
+                                android:paddingLeft="@dimen/_10sdp"
+                                android:textColor="@color/black_2"
+                                android:textColorHint="#8C8C8C"
+                                android:textSize="@dimen/_9sdp"
+                                android:textStyle="bold"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/enter_referral_id"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="@string/referral_id_optional"
-                                    android:textStyle="bold"
-                                    android:textColorHint="#B5B5B5"
-                                    android:textColor="@color/black_4"
-                                    android:gravity="center_vertical"
-                                    android:textSize="@dimen/_12sdp"
-                                    android:inputType="text" />
-                            </com.google.android.material.textfield.TextInputLayout>
+                                app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:text="@string/email_address"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_9sdp"
+                                android:textStyle="bold" />
+
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/email"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:background="@drawable/corner_white_recharge_2"
+                                android:drawablePadding="@dimen/_10sdp"
+                                android:gravity="center_vertical"
+                                android:hint="@string/email_address"
+                                android:inputType="text"
+                                android:paddingLeft="@dimen/_10sdp"
+                                android:textColor="@color/black_2"
+                                android:textColorHint="#8C8C8C"
+                                android:textSize="@dimen/_9sdp"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:text="@string/referral_id"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_9sdp"
+                                android:textStyle="bold" />
+
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/enter_referral_id"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:background="@drawable/corner_white_recharge_2"
+                                android:drawablePadding="@dimen/_10sdp"
+                                android:gravity="center_vertical"
+                                android:hint="@string/referral_id_optional"
+                                android:inputType="text"
+                                android:paddingLeft="@dimen/_10sdp"
+                                android:textColor="@color/black_2"
+                                android:textColorHint="#8C8C8C"
+                                android:textSize="@dimen/_9sdp"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -215,30 +191,57 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="@dimen/_40sdp"
                                     android:layout_gravity="center_horizontal"
-                                    android:background="@drawable/corner_circle_primary"
+                                    android:background="@drawable/ad_money_button_shape"
                                     android:gravity="center"
-                                    android:textStyle="bold"
                                     android:onClick="doRegister"
                                     android:paddingLeft="@dimen/_30sdp"
                                     android:paddingRight="@dimen/_30sdp"
                                     android:text="@string/register"
+                                    android:textColor="@color/white"
                                     android:textSize="@dimen/_17sdp"
-                                    android:textColor="@color/white" />
+                                    android:textStyle="bold" />
 
                             </RelativeLayout>
 
-                            <TextView
-                                android:id="@+id/or"
+                            <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@+id/top"
-                                android:layout_gravity="right"
-                                android:layout_marginTop="@dimen/_4sdp"
-                                android:gravity="center"
-                                android:text="@string/or"
-                                android:textAllCaps="false"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_12sdp" />
+                                android:layout_marginTop="@dimen/_15sdp">
+
+                                <View
+                                    android:id="@+id/view"
+                                    android:layout_width="@dimen/_110sdp"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:background="#E4E4E4"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/or"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="@string/or"
+                                    android:textAllCaps="false"
+                                    android:textColor="#8C8C8C"
+                                    android:textSize="@dimen/_12sdp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toStartOf="@+id/view2"
+                                    app:layout_constraintStart_toEndOf="@+id/view"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <View
+                                    android:id="@+id/view2"
+                                    android:layout_width="@dimen/_110sdp"
+                                    android:layout_height="@dimen/_1sdp"
+                                    android:background="#E4E4E4"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -246,6 +249,7 @@
                                 android:layout_below="@+id/or"
                                 android:gravity="center_horizontal"
                                 android:orientation="horizontal"
+                                android:layout_marginTop="@dimen/_15sdp"
                                 android:paddingLeft="@dimen/_20sdp">
 
                                 <TextView
@@ -254,41 +258,98 @@
                                     android:text="@string/have_an_account"
                                     android:textAlignment="center"
                                     android:textAllCaps="false"
-                                    android:textColor="@color/black"
-                                    android:textSize="@dimen/_13sdp" />
+                                    android:textColor="#8C8C8C"
+                                    android:textSize="@dimen/_9sdp" />
 
                                 <TextView
                                     android:id="@+id/goForLogin"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:paddingLeft="@dimen/_5sdp"
-                                    android:paddingBottom="@dimen/_10sdp"
                                     android:text="@string/login"
-                                    android:textStyle="bold"
                                     android:textAlignment="center"
                                     android:textAllCaps="false"
-                                    android:textColor="@color/colorPrimaryB"
-                                    android:textSize="@dimen/_13sdp" />
+                                    android:textColor="#0A51A0"
+                                    android:textSize="@dimen/_9sdp"
+                                    android:textStyle="bold" />
 
                             </LinearLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_20sdp"
+                                android:layout_marginHorizontal="@dimen/_30sdp">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/call_layout"
+                                    android:layout_width="@dimen/_90sdp"
+                                    android:layout_height="@dimen/_28sdp"
+                                    android:background="@drawable/support_design_background_shape"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <ImageView
+                                        android:id="@+id/call_img"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@drawable/vector__8_"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toStartOf="@+id/call_txt"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <TextView
+                                        android:id="@+id/call_txt"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Call Us"
+                                        android:textColor="#8C8C8C"
+                                        android:textSize="@dimen/_9sdp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toEndOf="@id/call_img"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/whatsapp_layout"
+                                    android:layout_width="@dimen/_90sdp"
+                                    android:layout_height="@dimen/_28sdp"
+                                    android:background="@drawable/support_design_background_shape"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <ImageView
+                                        android:id="@+id/whatsapp_img"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@drawable/whatsapp_icon_svg1"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toStartOf="@+id/whatsapp_txt"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                    <TextView
+                                        android:id="@+id/whatsapp_txt"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Whatsapp Us"
+                                        android:textColor="#8C8C8C"
+                                        android:textSize="@dimen/_9sdp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toEndOf="@id/whatsapp_img"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
                         </LinearLayout>
-                    </LinearLayout>
-
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/bottom"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_70sdp"
-                            android:layout_alignParentBottom="true"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/bottom" />
-
-                    </RelativeLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>

@@ -144,7 +144,7 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             webView.getSettings().setSafeBrowsingEnabled(true);
         }
-
+        WebView.setWebContentsDebuggingEnabled(true);
         if (mDatabase != null) {
             if (mDatabase.getUserData() != null) {
                 if (mDatabase.getUserData().getReferCode() != null) {

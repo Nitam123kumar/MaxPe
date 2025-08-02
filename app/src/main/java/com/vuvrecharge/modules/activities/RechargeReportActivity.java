@@ -3,6 +3,7 @@ package com.vuvrecharge.modules.activities;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -82,7 +83,7 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
-
+@SuppressLint({"NonConstantResourceId, SetTextI18n"})
 public class RechargeReportActivity extends BaseActivity implements DefaultView, View.OnClickListener {
 
     @BindView(R.id.toolbar)

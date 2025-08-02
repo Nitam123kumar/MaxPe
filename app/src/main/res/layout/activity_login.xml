@@ -214,7 +214,7 @@
                                 android:gravity="center"
                                 android:text="@string/or"
                                 android:textAllCaps="false"
-                                android:textColor="@color/black"
+                                android:textColor="#8C8C8C"
                                 android:textSize="@dimen/_12sdp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@+id/view2"

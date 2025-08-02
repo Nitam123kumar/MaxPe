@@ -468,5 +468,6 @@
     <string name="verify_your_otp">Verify Your OTP</string>
     <string name="need_help">Need Help?</string>
     <string name="sent_otp">Sent OTP</string>
+    <string name="enter_mobile_number">Enter Mobile Number</string>
 
 </resources>
