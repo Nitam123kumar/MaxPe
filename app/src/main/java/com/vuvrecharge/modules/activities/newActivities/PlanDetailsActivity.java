@@ -7,7 +7,9 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -65,6 +67,7 @@ import com.vuvrecharge.modules.model.Subscriptions;
 import com.vuvrecharge.modules.model.UserData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -158,7 +161,11 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
     Boolean isUsingCashbackPoints = false;
     ArrayList<PaymentModel> list = new ArrayList<>();
     double releaseAmount = 0.000;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

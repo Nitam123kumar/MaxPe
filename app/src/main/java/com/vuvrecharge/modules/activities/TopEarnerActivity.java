@@ -6,6 +6,8 @@ import static android.view.View.VISIBLE;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +29,7 @@ import com.vuvrecharge.modules.adapter.TopEarnerAdapter;
 import com.vuvrecharge.modules.model.TopEarnerData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -74,7 +77,11 @@ public class TopEarnerActivity extends BaseActivity implements DefaultView , Vie
     String thirdName;
     TopEarnerAdapter topEarnerAdapter;
     List<TopEarnerData> topEarnerDataList = new ArrayList<>();
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

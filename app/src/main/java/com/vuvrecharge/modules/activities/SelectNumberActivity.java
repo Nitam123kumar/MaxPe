@@ -1,6 +1,8 @@
 package com.vuvrecharge.modules.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,6 +29,7 @@ import com.vuvrecharge.modules.adapter.ContactAdapter;
 import com.vuvrecharge.modules.model.ContactData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +69,11 @@ public class SelectNumberActivity extends BaseActivity implements DefaultView {
     LinearLayout no_internet;
     @BindView(R.id.retry)
     TextView retry;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

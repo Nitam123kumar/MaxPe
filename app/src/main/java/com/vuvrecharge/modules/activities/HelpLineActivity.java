@@ -2,7 +2,9 @@ package com.vuvrecharge.modules.activities;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -30,6 +32,7 @@ import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONObject;
 
@@ -61,7 +64,11 @@ public class HelpLineActivity extends BaseActivity implements DefaultView,View.O
     TextView no_data;
     String DTH = "";
     String string = "";
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

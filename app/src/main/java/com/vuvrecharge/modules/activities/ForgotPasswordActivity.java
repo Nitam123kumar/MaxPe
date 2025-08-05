@@ -1,6 +1,8 @@
 package com.vuvrecharge.modules.activities;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -26,6 +28,7 @@ import com.vuvrecharge.databinding.OtpVerifyPasswordDialogBinding;
 import com.vuvrecharge.databinding.RegisterBgBinding;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,7 +54,11 @@ public class ForgotPasswordActivity extends BaseActivity implements DefaultView,
     LinearLayout no_internet;
     @BindView(R.id.retry)
     TextView retry;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

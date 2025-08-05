@@ -2,7 +2,9 @@ package com.vuvrecharge.modules.activities;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -37,6 +39,7 @@ import com.vuvrecharge.modules.model.RechargeAndBillPaymentData;
 import com.vuvrecharge.modules.model.YoutubeSlides;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -83,7 +86,11 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
     List<BharatBillPayModel> rechargeAndBillPaymentDataList = new ArrayList<>();
     List<FinancialServicesData> financialServicesList = new ArrayList<>();
     List<FinancialServicesData> utility_billsList = new ArrayList<>();
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

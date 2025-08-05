@@ -7,7 +7,9 @@ import static com.vuvrecharge.api.ApiServices.BASE_URL;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -41,6 +43,7 @@ import com.vuvrecharge.modules.adapter.ImageSliderAdapter;
 import com.vuvrecharge.modules.model.UserData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONObject;
 
@@ -122,6 +125,12 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
 
 
     ArrayList<String> top_earner_list1 = new ArrayList<>();
+
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -246,7 +255,6 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
             webView.setHorizontalScrollbarOverlay(false);
             webView.setWebViewClient(new WebViewClient());
 
-            Log.d("referal_slides", webViewHtml);
             shareText = jsonObject.getString("shareText");
 
             JSONObject sliderObject = jsonObject.getJSONObject("referal_slides");

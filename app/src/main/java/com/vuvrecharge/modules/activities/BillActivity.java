@@ -7,7 +7,9 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -63,6 +65,7 @@ import com.vuvrecharge.modules.model.ReportsData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 import com.vuvrecharge.preferences.OperatorPreferences;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -143,7 +146,11 @@ public class BillActivity extends BaseActivity implements DefaultView,
     String amt = "";
     double releaseAmount = 0.000;
     String name = "";
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

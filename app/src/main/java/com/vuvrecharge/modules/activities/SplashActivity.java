@@ -1,7 +1,9 @@
 package com.vuvrecharge.modules.activities;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,6 +31,7 @@ import com.vuvrecharge.preferences.CommissionPreferences;
 import com.vuvrecharge.preferences.Fingerprint;
 import com.vuvrecharge.preferences.IntroPreferences;
 import com.vuvrecharge.preferences.OperatorPreferences;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -48,7 +51,11 @@ public class SplashActivity extends AppCompatActivity implements SplashView, Def
     HashMap<String, String> mapData, mapData2;
     BiometricPrompt biometricPrompt;
     BiometricPrompt.PromptInfo promptInfo;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

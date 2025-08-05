@@ -2,7 +2,9 @@ package com.vuvrecharge.modules.activities;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -30,6 +32,7 @@ import com.vuvrecharge.modules.fragments.WalletFragment;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.presenter.OnFragmentListener;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -69,7 +72,11 @@ public class StatementsActivity extends BaseActivity implements DefaultView, OnF
     @BindView(R.id.retry)
     TextView retry;
     private DefaultPresenter mDefaultPresenter;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);

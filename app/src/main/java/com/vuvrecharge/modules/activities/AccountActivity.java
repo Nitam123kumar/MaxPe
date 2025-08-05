@@ -54,6 +54,7 @@ import com.vuvrecharge.databinding.SetPinDialogBinding;
 import com.vuvrecharge.databinding.SettingDialogBinding;
 import com.vuvrecharge.databinding.WhatsappDialogBinding;
 import com.vuvrecharge.modules.activities.newActivities.ComplaintRegistrationActivity;
+import com.vuvrecharge.modules.activities.newActivities.IntroActivity;
 import com.vuvrecharge.modules.activities.newActivities.MobileBankingActivity;
 import com.vuvrecharge.modules.adapter.FollowsAdapter;
 import com.vuvrecharge.modules.adapter.LanguageAdapter;
@@ -89,6 +90,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@SuppressLint({"NonConstantResourceId","SetTextI18n", "DefaultLocale"})
 public class AccountActivity extends BaseActivity implements DefaultView, View.OnClickListener, PaymentSettingAdapter.OnClickListener, FollowsAdapter.OnClickListener {
 
     private DefaultPresenter mDefaultPresenter;
@@ -102,7 +104,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
     View viewCondition;
     @BindView(R.id.viewRefund)
     View viewRefund;
-//    @BindView(R.id.viewChangePassword)
+    //    @BindView(R.id.viewChangePassword)
 //    View viewChangePassword;
 //    @BindView(R.id.viewProfile)
 //    View viewProfile;
@@ -140,7 +142,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
     View viewLanguage;
     @BindView(R.id.logo)
     TextView nameLogo;
-//    @BindView(R.id.available_maxPointsTV)
+    //    @BindView(R.id.available_maxPointsTV)
 //    TextView available_maxPointsTV;
 //    @BindView(R.id.available_earnTV)
 //    TextView available_earnTV;
@@ -215,12 +217,14 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
 
 //        statusBarColor();
     }
+
     @Override
     protected void attachBaseContext(Context newBase) {
         SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
         String lang = prefs.getString("lang", "en");
         super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
     }
+
     private void setValues() {
         try {
             UserData userData = mDatabase.getUserData();
@@ -231,7 +235,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
             email_TV.setText(userData.getEmail());
 //            available_maxPointsTV.setText(userData.getCashbackPoints());
 //            available_earnTV.setText("\u20b9"+userData.getEarnings());
-            phoneNumber.setText("+91-"+userData.getMobile());
+            phoneNumber.setText("+91-" + userData.getMobile());
             email_id.setText("Member Since " + userData.getDate());
         } catch (Exception e) {
             e.printStackTrace();
@@ -254,6 +258,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
 
         return initials.toString().toUpperCase(); // optional uppercase
     }
+
     public void fingerprint() {
         BiometricManager biometricManager = BiometricManager.from(this);
         switch (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK | BiometricManager.Authenticators.DEVICE_CREDENTIAL)) {
@@ -413,7 +418,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                 startActivity(intent);
                 break;
             case R.id.viewFeedBack:
-                intent = new Intent(getActivity(),FeedbackActivity.class);
+                intent = new Intent(getActivity(), FeedbackActivity.class);
                 startActivity(intent);
                 break;
 //            case R.id.viewAccountDelete:
@@ -424,7 +429,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                 finish();
                 break;
             case R.id.viewLanguage:
-//                showLanguageDialog();
+                showLanguageDialog();
                 break;
             default:
                 Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show();
@@ -439,7 +444,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
 
 
         FrameLayout bottomSheet = null;
-      BottomSheetDialog  dialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
+        BottomSheetDialog dialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
         View layout = LayoutInflater.from(getActivity()).inflate(R.layout.language_selector_bottom_sheet, null, false);
         RecyclerView recyclerView = layout.findViewById(R.id.language_list_recyclerView);
         AppCompatButton addButton = layout.findViewById(R.id.change_languageBtn);
@@ -454,19 +459,20 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         }
 
         List<LanguageModel> list = new ArrayList<>();
-        list.add(new LanguageModel("English", "English", true));
-        list.add(new LanguageModel("Hindi", "हिन्दी", false));
-        list.add(new LanguageModel("Telugu", "తెలుగు", false));
-        list.add(new LanguageModel("Tamil", "தமிழ்", false));
+        list.add(new LanguageModel("English", "en", false));
+        list.add(new LanguageModel("Bengali", "ben", false));
+        list.add(new LanguageModel("Telugu", "te", false));
+//        list.add(new LanguageModel("Tamil", "தமிழ்", false));
 
         for (LanguageModel model : list) {
-            if (model.isSelected()) {
+            if (model.getLanguageCode().equals(currentLangCode)) {
+                model.setSelected(true);
                 selectedLanguageModel = model;
                 break;
             }
         }
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         LanguageAdapter adapter = new LanguageAdapter(this, list, model -> selectedLanguageModel = model);
 
         recyclerView.setAdapter(adapter);
@@ -477,6 +483,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                     Toast.makeText(this, "Already using this language", Toast.LENGTH_SHORT).show();
                 } else {
                     changeLanguage(selectedLanguageModel.getLanguageCode());
+
                     dialog.dismiss();
                 }
             } else {
@@ -497,8 +504,14 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         editor.apply();
 
         LocaleHelper.setLocale(this, langCode);
-        recreate(); // Restart current activity with new language
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish(); // Kill current activity
+//        recreate();
     }
+
     private void addBalance() {
         try {
             FrameLayout bottomSheet = null;
@@ -1048,7 +1061,6 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
             resend.setVisibility(View.VISIBLE);
             countDownTimer = new CountDownTimer(totalTimeCountInMilliseconds, 1000) {
                 // 500 means, onTick function will be called at every 500 milliseconds
-                @SuppressLint("SetTextI18n")
                 @Override
                 public void onTick(long leftTimeInMilliseconds) {
                     totalTimeCountInMilliseconds = leftTimeInMilliseconds;
@@ -1168,9 +1180,9 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         followsList.clear();
 
         dialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
-        View layout = LayoutInflater.from(getActivity()).inflate(R.layout.follows_layout, null,false);
-        RecyclerView recyclerView=layout.findViewById(R.id.followUsRecyclerView);
-        ImageView cancel=layout.findViewById(R.id.img2);
+        View layout = LayoutInflater.from(getActivity()).inflate(R.layout.follows_layout, null, false);
+        RecyclerView recyclerView = layout.findViewById(R.id.followUsRecyclerView);
+        ImageView cancel = layout.findViewById(R.id.img2);
         dialog.setContentView(layout);
         dialog.setCancelable(true);
         changeStatusBarColor(dialog);
@@ -1199,7 +1211,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                 followsList.add(new Follows(IMAGE_FOLLOWS + "/" + logo, title, redirect_url));
                 adapter.addData(followsList);
             }
-            recyclerView.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
+            recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
             recyclerView.setAdapter(adapter);
 
         } catch (Exception e) {

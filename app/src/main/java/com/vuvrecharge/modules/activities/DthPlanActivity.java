@@ -1,6 +1,8 @@
 package com.vuvrecharge.modules.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +30,7 @@ import com.vuvrecharge.modules.model.DthPlanData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.presenter.OnFragmentListener;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -73,7 +76,11 @@ public class DthPlanActivity extends BaseActivity implements DefaultView, OnFrag
     String selected_circle_str = "";
     String operator_img = "";
     String mobile_number_str = "";
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

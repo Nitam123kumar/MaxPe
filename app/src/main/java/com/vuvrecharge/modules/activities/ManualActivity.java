@@ -1,8 +1,10 @@
 package com.vuvrecharge.modules.activities;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,6 +31,7 @@ import com.vuvrecharge.modules.model.PaymentData;
 import com.vuvrecharge.modules.model.PaymentModeData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 //import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import org.json.JSONObject;
@@ -74,7 +77,11 @@ public class ManualActivity extends BaseActivity implements DefaultView, View.On
     LinearLayout no_internet;
     @BindView(R.id.retry)
     TextView retry;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

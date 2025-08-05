@@ -8,7 +8,9 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -74,6 +76,7 @@ import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 import com.vuvrecharge.preferences.UserPreferences;
 import com.vuvrecharge.preferences.UserPreferencesImpl;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -211,7 +214,11 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
     double releaseAmount = 0.000;
     LinearLayoutManager manager;
     Timer timer;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @SuppressLint({"SetTextI18n", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {

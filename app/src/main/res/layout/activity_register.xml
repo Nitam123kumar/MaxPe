@@ -5,16 +5,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/main_bg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:orientation="vertical"></RelativeLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <include
@@ -247,9 +241,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/or"
+                                android:layout_marginTop="@dimen/_15sdp"
                                 android:gravity="center_horizontal"
                                 android:orientation="horizontal"
-                                android:layout_marginTop="@dimen/_15sdp"
                                 android:paddingLeft="@dimen/_20sdp">
 
                                 <TextView
@@ -278,8 +272,8 @@
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_20sdp"
-                                android:layout_marginHorizontal="@dimen/_30sdp">
+                                android:layout_marginHorizontal="@dimen/_30sdp"
+                                android:layout_marginTop="@dimen/_20sdp">
 
                                 <androidx.constraintlayout.widget.ConstraintLayout
                                     android:id="@+id/call_layout"

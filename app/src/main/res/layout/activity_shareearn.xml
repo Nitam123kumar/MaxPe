@@ -196,11 +196,12 @@
 
                 <TextView
                     android:id="@+id/SuccessfulReferralTxt"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_80sdp"
                     android:layout_height="wrap_content"
                     android:text="@string/successful_n_referral"
                     android:textColor="#6766BD"
                     android:textSize="@dimen/_8sdp"
+                    android:gravity="center"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/SuccessfulReferralView"
                     app:layout_constraintEnd_toEndOf="@id/SuccessfulReferralView"
@@ -246,7 +247,7 @@
 
                 <TextView
                     android:id="@+id/earnTxt"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_90sdp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/remaining_nreferral"
@@ -294,11 +295,12 @@
 
                 <TextView
                     android:id="@+id/referralTxt"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_90sdp"
                     android:layout_height="wrap_content"
                     android:text="@string/total_referral"
                     android:textColor="#0B53A4"
                     android:textSize="@dimen/_8sdp"
+                    android:gravity="center"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/referralView"
                     app:layout_constraintEnd_toEndOf="@id/referralView"

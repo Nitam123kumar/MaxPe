@@ -1,5 +1,7 @@
 package com.vuvrecharge.modules.activities;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -19,6 +21,7 @@ import com.vuvrecharge.modules.adapter.DepositAdapter;
 import com.vuvrecharge.modules.model.DepositData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONObject;
 
@@ -51,7 +54,11 @@ public class OnlineDepositActivity extends BaseActivity implements DefaultView,V
     @BindView(R.id.retry)
     TextView retry;
 
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

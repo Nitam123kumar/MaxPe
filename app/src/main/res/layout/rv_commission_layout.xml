@@ -70,7 +70,7 @@
             android:id="@+id/star_ImgV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/star_img"
+            android:src="@drawable/star_svg_img"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="@dimen/_5sdp"

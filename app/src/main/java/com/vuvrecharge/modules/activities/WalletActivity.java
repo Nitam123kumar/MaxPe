@@ -6,7 +6,9 @@ import static android.view.View.VISIBLE;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -41,6 +43,7 @@ import com.vuvrecharge.modules.model.DepositData;
 import com.vuvrecharge.modules.model.UserData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -81,7 +84,11 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
 
     AddPaymentHistoryAdapter addPaymentHistoryAdapter;
     private List<DepositData> depositList = new ArrayList<>();
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @SuppressLint("HardwareIds")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,7 +202,7 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
             Glide.with(getActivity())
                     .load(R.drawable.success_img)
                     .into(onSuccess);
-            transaction_successful_textView.setText("This transaction was successful");
+            transaction_successful_textView.setText(R.string.this_transaction_was_successful);
         } else {
             Glide.with(getActivity())
                     .load(R.drawable.close_1)

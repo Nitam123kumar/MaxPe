@@ -1,13 +1,17 @@
 package com.vuvrecharge.modules.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -17,6 +21,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 
 import com.android.installreferrer.api.InstallReferrerClient;
@@ -28,8 +33,10 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseActivity;
 import com.vuvrecharge.databinding.OtpVerifyDialogBinding;
+import com.vuvrecharge.modules.model.UserData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONObject;
 
@@ -66,6 +73,19 @@ public class RegisterActivity extends BaseActivity implements DefaultView, View.
     @BindView(R.id.retry)
     TextView retry;
 
+    @BindView(R.id.call_layout)
+    ConstraintLayout call_layout;
+    @BindView(R.id.whatsapp_layout)
+    ConstraintLayout whatsapp_layout;
+    String supportNumber;
+    String whatsappNumber;
+
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +103,7 @@ public class RegisterActivity extends BaseActivity implements DefaultView, View.
         title.setText("New Registration");
         mDefaultView = this;
         mDefaultPresenter = new DefaultPresenter(mDefaultView);
+        mDefaultPresenter.supportContacts(device_id);
 
         InstallReferrerClient mReferrerClient = InstallReferrerClient.newBuilder(this).build();
 
@@ -138,6 +159,22 @@ public class RegisterActivity extends BaseActivity implements DefaultView, View.
         register.setOnClickListener(this);
         goForLogin.setOnClickListener(this);
 
+        call_layout.setOnClickListener(v -> {
+            if (selectCall()) {
+                makeACall(supportNumber);
+            }
+        });
+
+        whatsapp_layout.setOnClickListener(v -> {
+
+            String url = "https://api.whatsapp.com/send/?phone=91" + whatsappNumber + "&text=" + "Hello MaxPe Support";
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            Intent chooser = Intent.createChooser(i, "Chat with...");
+            startActivity(chooser);
+        });
+
+
     }
 
     @Override
@@ -180,8 +217,10 @@ public class RegisterActivity extends BaseActivity implements DefaultView, View.
 
     @Override
     public void onSuccess(String message) {
-        title.setText("Verify OTP");
+        title.setText(R.string.verify_otp);
         otpVerifyDialog();
+
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -274,7 +313,14 @@ public class RegisterActivity extends BaseActivity implements DefaultView, View.
 
     @Override
     public void onSuccessOther(String data, String data_other) {
-
+        try {
+            JSONObject supportContacts = new JSONObject(data);
+            supportNumber = supportContacts.getString("support_number");
+            whatsappNumber = supportContacts.getString("whatsapp_number");
+            Log.d("support_number", supportNumber);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

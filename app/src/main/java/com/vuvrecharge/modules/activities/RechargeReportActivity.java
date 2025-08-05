@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -66,6 +67,7 @@ import com.vuvrecharge.modules.model.BillFetch;
 import com.vuvrecharge.modules.model.ReportsData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 import com.vuvrecharge.utils.ScreenshotUtils;
 
 import org.json.JSONObject;
@@ -162,7 +164,11 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
     String bps = "";
     String report = "0";
     int i = 0;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);

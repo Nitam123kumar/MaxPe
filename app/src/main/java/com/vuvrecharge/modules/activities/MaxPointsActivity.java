@@ -5,7 +5,9 @@ import static android.view.View.VISIBLE;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +35,7 @@ import com.vuvrecharge.modules.model.MaxPePointsData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.presenter.OnFragmentListener;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -104,7 +107,11 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
     DialogFragment newFragment;
     OnFragmentListener listener = null;
     Boolean isFrom = false;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,7 +119,7 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
         ButterKnife.bind(this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         defaultPresenter = new DefaultPresenter(this);
-//        defaultPresenter.cashbackPointsHistory(device_id+"","03 Jul 2025","18 Jul 2025","175281101911308");
+//        defaultPresenter.cashbackPointsHistory(device_id+"","03 Jul 2025","18 Jul 2025","175281101911308");0000000000000000000
         initializeEventsList();
         back_to_home.setOnClickListener(v -> {
             onBackPressed();
@@ -300,7 +307,6 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
                 model.setMax_balance_slab(pointsObject.getString("max_balance_slab"));
                 model.setCashback_points(pointsObject.getString("cashback_points"));
                 model.setTxn_balance_count(pointsObject.getString("txn_balance_count"));
-                Log.d("cashbackLogs", "onSuccessOther: " + pointsObject);
                 balance_maxPoints_TV.setText(model.getCashback_points());
                 maxPointsTV.setText(model.getCashback_points());
 

@@ -3,6 +3,11 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
+        <entry key="imageWizard">
+          <value>
+            <PersistentState />
+          </value>
+        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -14,8 +19,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="share_receipt" />
-                            <entry key="sourceFile" value="C:\Users\Intel\Downloads\share_receipt.svg" />
+                            <entry key="outputName" value="star_svg_img" />
+                            <entry key="sourceFile" value="C:\Users\Intel\Downloads\Vector (9).svg" />
                           </map>
                         </option>
                       </PersistentState>

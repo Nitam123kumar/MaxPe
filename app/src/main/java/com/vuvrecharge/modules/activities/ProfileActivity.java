@@ -1,6 +1,8 @@
 package com.vuvrecharge.modules.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +23,7 @@ import com.vuvrecharge.base.BaseMethod;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 import com.vuvrecharge.preferences.OperatorPreferences;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONObject;
 
@@ -101,7 +104,11 @@ public class ProfileActivity extends BaseActivity implements DefaultView, View.O
     ImageView telegram;
     OperatorPreferences preferences;
     HashMap<String, String> map;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

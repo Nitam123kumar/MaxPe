@@ -4,7 +4,9 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -28,6 +30,7 @@ import com.bumptech.glide.Glide;
 import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseActivity;
 import com.vuvrecharge.modules.model.UserData;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -87,7 +90,11 @@ public class SupportActivity extends BaseActivity implements View.OnClickListene
     ConstraintLayout updatedLayout;
     @BindView(R.id.feedbackLayout)
     ConstraintLayout feedbackLayout;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

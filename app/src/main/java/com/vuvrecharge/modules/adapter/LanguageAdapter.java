@@ -67,7 +67,15 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHo
         else {
             holder.main.setBackgroundResource(R.drawable.support_design_background_shape);
         }
-
+        if (model.getLanguageCode().equals("te")){
+            holder.langSub.setText("తెలుగు");
+        }
+//        else if (model.getLanguageCode().equals("hi")){
+//            holder.langSub.setText("हिंदी");
+//        }
+        else if (model.getLanguageCode().equals("en")){
+            holder.langSub.setText("English");
+        }
 
 
         View.OnClickListener selectLanguage = v -> {

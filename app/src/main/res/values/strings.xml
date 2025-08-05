@@ -342,7 +342,6 @@
     <string name="top_referral">Top Referral</string>
     <string name="top_transaction">Top Transaction</string>
     <string name="ns">NS</string>
-    <string name="nitam">Nitam</string>
     <string name="balance_amp_history"><![CDATA[Balance & History]]></string>
     <string name="add_money">Add Money</string>
     <string name="history">History</string>
@@ -420,7 +419,7 @@
     <string name="please_enter_4_digit_mpin">Please Enter 4 digit Mpin</string>
     <string name="confirm_new_mpin">Confirm New Mpin</string>
     <string name="active">Active</string>
-    <string name="popular">Popular</string>
+    <string name="popular" translatable="false">Popular</string>
     <string name="_1_60">1.60%</string>
     <string name="guaranteed">Guaranteed</string>
     <string name="selected_item">Selected Item</string>
@@ -469,5 +468,6 @@
     <string name="need_help">Need Help?</string>
     <string name="sent_otp">Sent OTP</string>
     <string name="enter_mobile_number">Enter Mobile Number</string>
+    <string name="lifetime_max_points">Lifetime Max Points :</string>
 
 </resources>

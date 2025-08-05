@@ -90,6 +90,7 @@ public interface ApiServices {
     String userRechargeHistory = "rechargeHistory";
     String complainHistory = "complainHistory";
     String rechargeDetails = "rechargeDetails";
+    String supportContacts = "supportContacts";
     String getReferrals = "getReferrals";
     String getPaymentSetting = "getPaymentSetting";
     String generateChecksum = "generateChecksum";

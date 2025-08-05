@@ -1,9 +1,11 @@
 package com.vuvrecharge.modules.fragments;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.vuvrecharge.api.ApiServices.IMAGE_LOGO;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,6 +29,7 @@ import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.presenter.OnFragmentListener;
 import com.vuvrecharge.modules.view.DefaultView;
 import com.vuvrecharge.preferences.CommissionPreferences;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;

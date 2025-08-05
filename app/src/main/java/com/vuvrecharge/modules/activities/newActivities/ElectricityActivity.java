@@ -5,7 +5,9 @@ import static android.view.View.VISIBLE;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -39,6 +41,7 @@ import com.vuvrecharge.modules.model.OperatorData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 import com.vuvrecharge.preferences.OperatorPreferences;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -87,7 +90,11 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
 
     OperatorPreferences operatorPreferences;
     HashMap<String, String> map;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

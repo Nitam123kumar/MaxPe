@@ -1,6 +1,8 @@
 package com.vuvrecharge.modules.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -23,6 +25,7 @@ import com.vuvrecharge.base.BaseMethod;
 import com.vuvrecharge.modules.model.ReportsData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -71,7 +74,11 @@ public class AfterDepositActivity extends BaseActivity implements DefaultView, V
     Runnable runnable;
     String payment_status;
     String screen = "No";
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,6 +1,8 @@
 package com.vuvrecharge.modules.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -20,6 +22,7 @@ import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONArray;
 
@@ -54,7 +57,11 @@ public class MyCommisionPackageActivity extends BaseActivity implements DefaultV
 
     String id = "",data="";
 
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

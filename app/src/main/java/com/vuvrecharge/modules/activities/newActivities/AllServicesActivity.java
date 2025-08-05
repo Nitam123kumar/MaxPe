@@ -1,6 +1,8 @@
 package com.vuvrecharge.modules.activities.newActivities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +21,7 @@ import com.vuvrecharge.modules.adapter.AllServiceAdapter;
 import com.vuvrecharge.modules.model.DashboardMenu;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -44,7 +47,11 @@ public class AllServicesActivity extends BaseActivity implements DefaultView, Al
     RecyclerView recyclerViewAllService;
     ArrayList<DashboardMenu> bbpsList = new ArrayList<>();
     AllServiceAdapter adapter;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,8 +1,10 @@
 package com.vuvrecharge.modules.activities.newActivities;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -36,6 +38,7 @@ import com.vuvrecharge.modules.model.PaymentData;
 import com.vuvrecharge.modules.model.PaymentModeData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONObject;
 
@@ -94,7 +97,11 @@ public class MobileBankingActivity extends BaseActivity implements DefaultView, 
     ArrayList<String> bank_list = new ArrayList<>();
     ArrayList<String> type_list = new ArrayList<>();
     private BankAdapter adapter;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

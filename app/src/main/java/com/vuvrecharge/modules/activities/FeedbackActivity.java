@@ -3,6 +3,8 @@ package com.vuvrecharge.modules.activities;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -33,6 +35,7 @@ import com.vuvrecharge.base.BaseActivity;
 import com.vuvrecharge.modules.model.UserData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,7 +63,11 @@ public class FeedbackActivity extends BaseActivity implements DefaultView, View.
 
     ImageView[] stars1 = new ImageView[5];
     int currentRating = 0;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

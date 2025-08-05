@@ -21,6 +21,7 @@ package com.vuvrecharge.modules.activities;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -41,6 +42,7 @@ import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 import com.vuvrecharge.preferences.UserPreferences;
 import com.vuvrecharge.preferences.UserPreferencesImpl;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONObject;
 
@@ -66,7 +68,11 @@ public class LoginActivity extends BaseActivity implements DefaultView, View.OnC
     TextView retry;
     int tryCount = 0;
 //    SharedPreferences preferences;
-
+protected void attachBaseContext(Context newBase) {
+    SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+    String lang = prefs.getString("lang", "en");
+    super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+}
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -274,14 +280,14 @@ public class LoginActivity extends BaseActivity implements DefaultView, View.OnC
 //            }
 //        }
 //        else
-            if (binding.btnLogin.getText().equals("Sent OTP")) {
+
             if (Objects.requireNonNull(binding.username.getText()).toString().isEmpty()) {
                 showErrorLoginPage("Enter mobile number");
             } else {
                 mDefaultPresenter.loginOTPUser(binding.username.getText().toString().trim());
                 hideKeyBoard(binding.username);
             }
-        }
+
 //            else if (binding.btnLogin.getText().equals("Resend OTP")) {
 //            if (Objects.requireNonNull(binding.username.getText()).toString().isEmpty()) {
 //                showErrorLoginPage("Enter mobile number");

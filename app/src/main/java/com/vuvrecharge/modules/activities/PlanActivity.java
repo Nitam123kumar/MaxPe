@@ -2,7 +2,9 @@ package com.vuvrecharge.modules.activities;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -39,6 +41,7 @@ import com.vuvrecharge.modules.fragments.SpecialOffers;
 import com.vuvrecharge.modules.model.AllPlanItemData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -100,7 +103,11 @@ public class PlanActivity extends BaseActivity implements DefaultView,View.OnCli
   int pageIndex = 0;
   List<AllPlanItemData> planDataList;
   JSONArray jsonPlanArray;
-
+  protected void attachBaseContext(Context newBase) {
+    SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+    String lang = prefs.getString("lang", "en");
+    super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+  }
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

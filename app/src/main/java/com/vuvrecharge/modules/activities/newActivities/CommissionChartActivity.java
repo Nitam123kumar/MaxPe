@@ -4,7 +4,9 @@ import static com.vuvrecharge.api.ApiServices.IMAGE_LOGO;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -43,6 +45,7 @@ import com.vuvrecharge.modules.model.OperatorData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 import com.vuvrecharge.preferences.CommissionPreferences;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -116,7 +119,11 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
     CommissionPreferences dTHCommissionPreferences;
     CommissionPreferences otherCommissionPreferences;
     HashMap<String, String> map, map2, map3;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

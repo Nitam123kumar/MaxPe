@@ -6,7 +6,9 @@ import static android.view.View.VISIBLE;
 import static com.vuvrecharge.api.ApiServices.term;
 import static com.vuvrecharge.preferences.IntroPreferences.TAG_SLIDE;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.FrameLayout;
@@ -21,6 +23,7 @@ import com.vuvrecharge.modules.fragments.intro.FirstFragment;
 import com.vuvrecharge.modules.fragments.intro.SecondFragment;
 import com.vuvrecharge.modules.fragments.intro.ThirdFragment;
 import com.vuvrecharge.preferences.IntroPreferences;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import java.util.Objects;
 
@@ -32,7 +35,11 @@ public class IntroActivity extends AppCompatActivity {
     private TextView txtSkip;
     private IntroPreferences preferences;
     private int fragmentCount = 0;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

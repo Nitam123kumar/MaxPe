@@ -2,7 +2,9 @@ package com.vuvrecharge.modules.activities;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -33,6 +35,7 @@ import com.vuvrecharge.modules.adapter.MemberAdapter;
 import com.vuvrecharge.modules.model.MemberData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -90,7 +93,11 @@ public class MembersActivity extends BaseActivity implements DefaultView, View.O
     int previousTotal = 0;
 
     DefaultView mDefaultView;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);

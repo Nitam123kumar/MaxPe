@@ -1,9 +1,12 @@
 package com.vuvrecharge.modules.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,6 +24,7 @@ import com.vuvrecharge.base.BaseActivity;
 import com.vuvrecharge.modules.model.UserData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONObject;
 
@@ -57,8 +61,14 @@ public class VerifyOTPActivity extends BaseActivity implements DefaultView {
 
     int tryCount = 0;
     CountDownTimer timer;
+    String supportNumber1;
+    String whatsappNumber1;
     String number;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,16 +79,16 @@ public class VerifyOTPActivity extends BaseActivity implements DefaultView {
         number = getIntent().getStringExtra("number");
         optOfNumber.setText("OTP Sent to Mobile +" + number);
         changeStatusBarColorLoginPage();
+        presenter.supportContacts(device_id);
 
         call_layout.setOnClickListener(v -> {
             if (selectCall()) {
-                makeACall(mDatabase.getUserData().getSupport_number());
+                makeACall(supportNumber1);
             }
         });
 
         whatsapp_layout.setOnClickListener(v -> {
-            UserData userData = mDatabase.getUserData();
-            String url = "https://api.whatsapp.com/send/?phone=91" + userData.getWhatsapp_number() + "&text=" + "Hello MaxPe Support, My registered mobile number is " + userData.getMobile();
+            String url = "https://api.whatsapp.com/send/?phone=91" + whatsappNumber1 + "&text=" + "Hello MaxPe Support, My registered mobile number is " + number;
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(url));
             Intent chooser = Intent.createChooser(i, "Chat with...");
@@ -146,12 +156,12 @@ public class VerifyOTPActivity extends BaseActivity implements DefaultView {
                 dialog.dismiss();
                 dialog = null;
             }
+            timer.onFinish();
+            timer.cancel();
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
             finish();
-            timer.onFinish();
-            timer.cancel();
-            finish();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -169,7 +179,14 @@ public class VerifyOTPActivity extends BaseActivity implements DefaultView {
 
     @Override
     public void onSuccessOther(String data, String data_other) {
-
+        try {
+            JSONObject supportContacts = new JSONObject(data);
+            supportNumber1 = supportContacts.getString("support_number");
+            whatsappNumber1 = supportContacts.getString("whatsapp_number");
+            Log.d("support_number", supportNumber1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

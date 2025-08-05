@@ -1,6 +1,8 @@
 package com.vuvrecharge.modules.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -18,6 +20,7 @@ import com.vuvrecharge.base.BaseMethod;
 import com.vuvrecharge.modules.model.AddData;
 import com.vuvrecharge.modules.model.BankData;
 import com.vuvrecharge.modules.model.PayData;
+import com.vuvrecharge.utils.LocaleHelper;
 
 import java.lang.reflect.Type;
 import java.util.Date;
@@ -51,7 +54,11 @@ public class PaymentActivity extends BaseActivity implements View.OnClickListene
     LinearLayout no_internet;
     @BindView(R.id.retry)
     TextView retry;
-
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);

@@ -59,7 +59,6 @@ public class PrepaidFragment extends BaseFragment implements DefaultView {
     LinearLayout loading;
 
 
-
     @Override
     public View provideYourFragmentView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_prepaid, parent, false);
@@ -73,9 +72,9 @@ public class PrepaidFragment extends BaseFragment implements DefaultView {
         map = prepaidCommissionPreferences.getData();
 
 
-            loading.setVisibility(View.VISIBLE);
+        loading.setVisibility(View.VISIBLE);
 
-            initializePrepaidList();
+        initializePrepaidList();
 
 
         if (map.get("type") != null) {
@@ -92,7 +91,6 @@ public class PrepaidFragment extends BaseFragment implements DefaultView {
         }
 
 
-
         return rootView;
     }
 
@@ -100,6 +98,7 @@ public class PrepaidFragment extends BaseFragment implements DefaultView {
     public void onError(String error) {
 //        listener.onError(error);
     }
+
     private void initializePrepaidList() {
         prepaidAdapter = new CommissionAdapter(getLayoutInflater(), IMAGE_LOGO);
         rvPrepaidCommission.setHasFixedSize(true);
@@ -177,12 +176,13 @@ public class PrepaidFragment extends BaseFragment implements DefaultView {
     public void onPrintLog(String message) {
         printLog(message);
     }
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentListener){
+        if (context instanceof OnFragmentListener) {
             listener = (OnFragmentListener) context;
-        }else {
+        } else {
 
         }
     }

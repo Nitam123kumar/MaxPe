@@ -96,6 +96,7 @@ import com.vuvrecharge.modules.model.UserData;
 import com.vuvrecharge.modules.model.YoutubeSlides;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.utils.LocaleHelper;
 import com.vuvrecharge.utils.permission.PermissionUtil;
 
 import org.json.JSONArray;
@@ -105,6 +106,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -219,6 +221,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
     ConstraintLayout headerImage_layout;
     @BindView(R.id.imgReferAndEarn)
     ImageView imgReferAndEarn;
+    @BindView(R.id.prepaidTxt)
+    TextView prepaidTxt;
 
     List<String> color = new ArrayList<>();
     List<YoutubeSlides> youtubeVideosList = new ArrayList<>();
@@ -258,6 +262,14 @@ public class MainActivity extends BaseActivity implements DefaultView,
     private Handler sliderHandler = new Handler();
     private Runnable sliderRunnable;
     SliderAdapterBanner imageSliderAdapter;
+    private boolean recreatedOnce = false;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
+    }
 
     @Override
     protected void onCreate(
@@ -296,8 +308,6 @@ public class MainActivity extends BaseActivity implements DefaultView,
         appUpdate();
         notifications();
         offer_for_you_recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-//        image_slider.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
         image_slider.setClipChildren(false);
         image_slider.setClipToPadding(false);
         image_slider.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
@@ -354,7 +364,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         });
 
 
-        imageSliderAdapter = new SliderAdapterBanner(getActivity(),  slider_banner, this);
+        imageSliderAdapter = new SliderAdapterBanner(getActivity(), slider_banner, this);
         viewPager.setAdapter(imageSliderAdapter);
         indicator.setViewPager2(viewPager);
         sliderRunnable = new Runnable() {
@@ -515,7 +525,6 @@ public class MainActivity extends BaseActivity implements DefaultView,
 
                 }
             }
-
 
             ott_List = new ArrayList<>();
             List<OTTSubscriptionsData> ottItem = (mDatabase.getUserData().getLogoSliders());
@@ -1065,9 +1074,9 @@ public class MainActivity extends BaseActivity implements DefaultView,
                     for (int i = 0; i < youtube_slides.length(); i++) {
                         JSONObject objectYoutube_slides = youtube_slides.getJSONObject(i);
                         YoutubeSlides youtubeSlides = new YoutubeSlides();
-                       youtubeSlides.setLink(objectYoutube_slides.getString("link"));
-                       youtubeSlides.setTitle(objectYoutube_slides.getString("title"));
-                       youtubeSlides.setThumbnail(objectYoutube_slides.getString("thumbnail"));
+                        youtubeSlides.setLink(objectYoutube_slides.getString("link"));
+                        youtubeSlides.setTitle(objectYoutube_slides.getString("title"));
+                        youtubeSlides.setThumbnail(objectYoutube_slides.getString("thumbnail"));
                         youtubeVideosList.add(youtubeSlides);
                     }
                     sliderAdapter.notifyDataSetChanged();
@@ -1298,7 +1307,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         youtube_indicator.post(() -> {
             youtube_indicator.requestLayout(); // force refresh
         });
-        indicator.post(()->{
+        indicator.post(() -> {
             indicator.requestLayout(); // force refresh
         });
         sliderHandler.postDelayed(sliderRunnable, 1000);
@@ -1333,6 +1342,32 @@ public class MainActivity extends BaseActivity implements DefaultView,
         super.onPause();
         hideAllDialog();
         sliderHandler.removeCallbacks(sliderRunnable);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (!recreatedOnce) {
+            String currentLang = Locale.getDefault().getLanguage(); // returns "te" for Telugu
+
+            if (currentLang.equals("te") && !prepaidTxt.getText().toString().equals("ప్రీపెయిడ్")) {
+                recreatedOnce = true;
+                recreate();
+            } else if (currentLang.equals("en") && !prepaidTxt.getText().toString().equals("Prepaid")) {
+                recreatedOnce = true;
+                recreate();
+            }
+            else if (currentLang.equals("ben") && !prepaidTxt.getText().toString().equals("প্রিপেইড")) {
+                recreatedOnce = true;
+                recreate();
+            }
+        }
+        youtube_indicator.post(() -> {
+            youtube_indicator.requestLayout(); // force refresh
+        });
+        indicator.post(() -> {
+            indicator.requestLayout(); // force refresh
+        });
     }
 
     //    TODO Service Click
@@ -1507,6 +1542,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 break;
             case R.id.img:
                 intent = new Intent(getActivity(), AccountActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;
             case R.id.share, R.id.share_earn_layout:
@@ -1587,7 +1623,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         youtube_indicator.post(() -> {
             youtube_indicator.requestLayout(); // force refresh
         });
-        indicator.post(()->{
+        indicator.post(() -> {
             indicator.requestLayout(); // force refresh
         });
 

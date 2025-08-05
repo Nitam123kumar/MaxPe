@@ -2,7 +2,9 @@ package com.vuvrecharge.application;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatDelegate;
@@ -13,6 +15,7 @@ import com.google.gson.GsonBuilder;
 import com.vuvrecharge.api.ApiServices;
 import com.vuvrecharge.api.CustomInterceptor;
 import com.vuvrecharge.preferences.PreferencesProvider;
+import com.vuvrecharge.utils.LocaleHelper;
 import com.vuvrecharge.utils.network.CheckNet;
 
 //import net.one97.paytm.nativesdk.PaytmSDK;
@@ -56,6 +59,9 @@ public class MyApplication extends Application {
             Log.d(TAG, "onCreate: "+e.getMessage());
         }
         super.onCreate();
+        SharedPreferences prefs = getSharedPreferences("settings", MODE_PRIVATE);
+        String lang = prefs.getString("lang", "en");
+        LocaleHelper.setLocale(this, lang);
     }
 
     public <T> T createRetrofitService(final Class<T> clazz, final String endPoint) {
