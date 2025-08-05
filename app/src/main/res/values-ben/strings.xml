@@ -482,5 +482,9 @@
     <string name="sent_otp">ওটিপি পাঠানো হয়েছে</string>
     <string name="enter_mobile_number">মোবাইল নম্বর লিখুন</string>
     <string name="lifetime_max_points">জীবনকালীন ম্যাক্স পয়েন্ট:</string>
+    <string name="instant_discount">তাৎক্ষণিক ছাড়</string>
+    <string name="maxpoints_discount">ম্যাক্সপয়েন্টস ছাড়</string>
+    <string name="payable_amount">প্রদেয় পরিমাণ</string>
+    <string name="aavailable_balance">উপলব্ধ ব্যালেন্স:</string>
 
 </resources>

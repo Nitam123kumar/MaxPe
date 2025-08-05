@@ -7,6 +7,7 @@ public class DefaultResponse {
     private String data;
     private int required_amount = 0;
     private double discount_amount = 0.00;
+    private double usable_points = 0.00;
 
     public int getRequired_amount() {
         return required_amount;
@@ -22,6 +23,14 @@ public class DefaultResponse {
 
     public void setDiscount_amount(double discount_amount) {
         this.discount_amount = discount_amount;
+    }
+
+    public double getUsable_points() {
+        return usable_points;
+    }
+
+    public void setUsable_points(double usable_points) {
+        this.usable_points = usable_points;
     }
 
     public int getSuccess() {

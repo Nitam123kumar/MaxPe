@@ -75,6 +75,10 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHo
 //        }
         else if (model.getLanguageCode().equals("en")){
             holder.langSub.setText("English");
+        } else if (model.getLanguageCode().equals("hin")) {
+            holder.langSub.setText("हिंदी");
+        } else if (model.getLanguageCode().equals("ben")) {
+            holder.langSub.setText("বাংলা");
         }
 
 

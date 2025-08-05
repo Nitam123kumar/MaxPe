@@ -1360,6 +1360,9 @@ public class MainActivity extends BaseActivity implements DefaultView,
             else if (currentLang.equals("ben") && !prepaidTxt.getText().toString().equals("প্রিপেইড")) {
                 recreatedOnce = true;
                 recreate();
+            } else if (currentLang.equals("hin") && !prepaidTxt.getText().toString().equals("प्रीपेड")) {
+                recreatedOnce = true;
+                recreate();
             }
         }
         youtube_indicator.post(() -> {

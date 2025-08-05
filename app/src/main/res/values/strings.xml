@@ -469,5 +469,9 @@
     <string name="sent_otp">Sent OTP</string>
     <string name="enter_mobile_number">Enter Mobile Number</string>
     <string name="lifetime_max_points">Lifetime Max Points :</string>
+    <string name="instant_discount">Instant Discount</string>
+    <string name="maxpoints_discount">MaxPoints Discount</string>
+    <string name="payable_amount">Payable Amount</string>
+    <string name="aavailable_balance">Aavailable balance:</string>
 
 </resources>

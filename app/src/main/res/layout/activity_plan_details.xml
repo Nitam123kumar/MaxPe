@@ -397,31 +397,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/transaction" />
 
-            <TextView
-                android:id="@+id/discount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/transaction"
-                android:text="@string/total_discount"
-                android:visibility="visible"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:textSize="@dimen/_9sdp"
-                android:textColor="@color/black"
-                />
-
-            <TextView
-                android:id="@+id/discount_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/impty"
-                android:visibility="visible"
-                android:textSize="@dimen/_9sdp"
-                android:textColor="@color/black"
-                app:layout_constraintTop_toTopOf="@id/discount"
-                app:layout_constraintBottom_toBottomOf="@id/discount"
-                app:layout_constraintEnd_toEndOf="parent"
-                />
 
             <TextView
                 android:id="@+id/applied"
@@ -429,13 +404,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/maxpoints_applied"
                 android:textColor="#0B54A5"
-                android:textSize="@dimen/_7sdp"
+                android:textSize="@dimen/_9sdp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:drawableStart="@drawable/max_points_applied"
                 android:drawablePadding="@dimen/_5sdp"
                 android:visibility="visible"
-                app:layout_constraintTop_toBottomOf="@id/discount"
+                app:layout_constraintTop_toBottomOf="@id/transaction_amount"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="@dimen/_10sdp"
                 />
@@ -450,7 +425,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/applied"
                 android:textStyle="bold"
                 android:visibility="visible"
-                android:textSize="@dimen/_7sdp"
+                android:textSize="@dimen/_9sdp"
                 android:textColor="#0B54A5"
                 />
 

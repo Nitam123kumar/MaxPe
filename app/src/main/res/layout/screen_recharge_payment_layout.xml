@@ -29,9 +29,9 @@
             android:id="@+id/txtTransactionAmount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Transaction Amount"
-            android:padding="10dp"
-            android:textSize="16sp"
+            android:text="@string/transaction_amount"
+            android:padding="@dimen/_8sdp"
+            android:textSize="@dimen/_11sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:textColor="@color/black_2"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -44,8 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="end"
-            android:padding="10dp"
-            android:textSize="16sp"
+            android:padding="@dimen/_8sdp"
+            android:textSize="@dimen/_11sdp"
             android:textColor="@color/black_2"
             app:layout_constraintStart_toEndOf="@id/txtTransactionAmount"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,9 +55,9 @@
             android:id="@+id/txtTotalDiscount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Total Discount"
-            android:padding="10dp"
-            android:textSize="16sp"
+            android:text="@string/instant_discount"
+            android:padding="@dimen/_8sdp"
+            android:textSize="@dimen/_11sdp"
             android:textColor="@color/colorPrimaryB"
             app:layout_constraintStart_toStartOf="@id/txtTransactionAmount"
             app:layout_constraintEnd_toStartOf="@id/viewSubtract"
@@ -65,7 +65,7 @@
 
         <View
             android:id="@+id/viewSubtract"
-            android:layout_width="10dp"
+            android:layout_width="@dimen/_8sdp"
             android:layout_height="1dp"
             android:background="@color/colorPrimaryB"
             app:layout_constraintEnd_toStartOf="@id/txtTotalDiscountValue"
@@ -76,12 +76,45 @@
             android:id="@+id/txtTotalDiscountValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:textSize="16sp"
+            android:padding="@dimen/_8sdp"
+            android:textSize="@dimen/_11sdp"
             android:textColor="@color/colorPrimaryB"
             android:gravity="end"
             app:layout_constraintEnd_toEndOf="@id/txtTransactionAmountValue"
             app:layout_constraintTop_toBottomOf="@id/txtTransactionAmount"/>
+
+        <TextView
+            android:id="@+id/txtMaxDiscount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_8sdp"
+            android:text="@string/maxpoints_discount"
+            android:textColor="@color/colorPrimaryB"
+            android:textSize="@dimen/_11sdp"
+            app:layout_constraintEnd_toStartOf="@id/viewSubtract"
+            app:layout_constraintStart_toStartOf="@id/txtTotalDiscount"
+            app:layout_constraintTop_toBottomOf="@id/txtTotalDiscount" />
+
+        <View
+            android:id="@+id/viewMaxSubtract"
+            android:layout_width="@dimen/_8sdp"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimaryB"
+            app:layout_constraintBottom_toBottomOf="@id/txtMaxDiscountValue"
+            app:layout_constraintEnd_toStartOf="@id/txtMaxDiscountValue"
+            app:layout_constraintTop_toTopOf="@id/txtMaxDiscountValue" />
+
+        <TextView
+            android:id="@+id/txtMaxDiscountValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:padding="@dimen/_8sdp"
+            android:textColor="@color/colorPrimaryB"
+            android:textSize="@dimen/_11sdp"
+            app:layout_constraintEnd_toEndOf="@id/txtTransactionAmountValue"
+            app:layout_constraintTop_toTopOf="@id/txtMaxDiscount"
+            app:layout_constraintBottom_toBottomOf="@id/txtMaxDiscount"/>
 
         <View
             android:id="@+id/viewPayableAmt"
@@ -90,16 +123,16 @@
             android:background="#80CFCFCF"
             app:layout_constraintStart_toStartOf="@id/txtTransactionAmount"
             app:layout_constraintEnd_toEndOf="@id/txtTransactionAmountValue"
-            app:layout_constraintTop_toBottomOf="@id/txtTotalDiscount"/>
+            app:layout_constraintTop_toBottomOf="@id/txtMaxDiscount"/>
 
         <TextView
             android:id="@+id/txtPayableAmt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Payable Amount"
-            android:textSize="16sp"
+            android:text="@string/payable_amount"
+            android:textSize="@dimen/_11sdp"
             android:layout_marginTop="5dp"
-            android:padding="10dp"
+            android:padding="@dimen/_8sdp"
             android:textStyle="bold"
             android:textColor="@color/black_2"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -111,9 +144,9 @@
             android:id="@+id/txtPayableAmtValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="@dimen/_11sdp"
             android:gravity="end"
-            android:padding="10dp"
+            android:padding="@dimen/_8sdp"
             android:textStyle="bold"
             android:textColor="@color/black_2"
             app:layout_constraintStart_toEndOf="@id/txtPayableAmt"
@@ -133,11 +166,11 @@
             android:id="@+id/txtWalletAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your balance"
-            android:textSize="@dimen/_13sdp"
+            android:text="@string/aavailable_balance"
+            android:textSize="@dimen/_11sdp"
             android:layout_marginTop="8dp"
-            android:padding="10dp"
-            android:visibility="gone"
+            android:paddingStart="@dimen/_8sdp"
+            android:visibility="visible"
             android:textColor="@color/black_2"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
@@ -148,29 +181,19 @@
             android:id="@+id/txtWalletAmountValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_13sdp"
-            android:gravity="end"
-            android:padding="10dp"
-            android:visibility="gone"
+            android:textSize="@dimen/_11sdp"
+            android:visibility="visible"
             android:textColor="@color/black_2"
             app:layout_constraintStart_toEndOf="@id/txtWalletAmount"
-            app:layout_constraintTop_toTopOf="@id/txtWalletAmount"/>
+            app:layout_constraintTop_toTopOf="@id/txtWalletAmount"
+            app:layout_constraintBottom_toBottomOf="@id/txtWalletAmount"/>
 
-        <View
-            android:id="@+id/viewWallet"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="#80CFCFCF"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="@id/txtWalletAmount"
-            app:layout_constraintEnd_toEndOf="@id/txtWalletAmountValue"
-            app:layout_constraintTop_toBottomOf="@id/txtWalletAmount"/>
 
         <TextView
             android:id="@+id/btnPay"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="12dp"
+            android:padding="@dimen/_9sdp"
             android:textStyle="bold"
             android:gravity="center"
             android:textColor="@color/white"
@@ -178,10 +201,10 @@
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginTop="15dp"
-            android:background="@drawable/btn_drawable"
+            android:background="@drawable/ad_money_button_shape"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/viewWallet"
+            app:layout_constraintTop_toBottomOf="@id/txtWalletAmount"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

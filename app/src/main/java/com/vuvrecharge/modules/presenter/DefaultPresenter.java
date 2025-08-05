@@ -2580,6 +2580,7 @@ public class DefaultPresenter {
                                     JSONObject object = new JSONObject();
                                     object.put("discount", body.getDiscount_amount());
                                     object.put("required", body.getRequired_amount());
+                                    object.put("used_points",body.getUsable_points());
                                     mDefaultView.onSuccessOther(object.toString(), "INSUFFICIENT");
                                 } catch (Exception e) {
                                     e.printStackTrace();

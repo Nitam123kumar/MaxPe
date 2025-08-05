@@ -462,7 +462,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         list.add(new LanguageModel("English", "en", false));
         list.add(new LanguageModel("Bengali", "ben", false));
         list.add(new LanguageModel("Telugu", "te", false));
-//        list.add(new LanguageModel("Tamil", "தமிழ்", false));
+        list.add(new LanguageModel("Hindi", "hin", false));
 
         for (LanguageModel model : list) {
             if (model.getLanguageCode().equals(currentLangCode)) {

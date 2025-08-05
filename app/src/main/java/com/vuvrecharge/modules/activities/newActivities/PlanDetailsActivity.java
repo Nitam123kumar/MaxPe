@@ -139,10 +139,7 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
     TextView applied;
     @BindView(R.id.applied_amount)
     TextView applied_amount;
-    @BindView(R.id.discount_amount)
-    TextView discount_amount;
-    @BindView(R.id.discount)
-    TextView discount;
+
     @BindView(R.id.transaction_amount)
     TextView transaction_amount;
     DefaultView mDefaultView;
@@ -215,13 +212,11 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
             if (applyTV.isChecked()) {
                applied.setVisibility(VISIBLE);
                applied_amount.setVisibility(VISIBLE);
-                discount.setVisibility(VISIBLE);
-                discount_amount.setVisibility(VISIBLE);
+
             } else {
                 applied.setVisibility(GONE);
                 applied_amount.setVisibility(GONE);
-                discount.setVisibility(GONE);
-                discount_amount.setVisibility(GONE);
+
             }
 
             applyTV.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -232,8 +227,6 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
                     if (isChecked) {
                         applied.setVisibility(VISIBLE);
                         applied_amount.setVisibility(VISIBLE);
-                        discount.setVisibility(VISIBLE);
-                        discount_amount.setVisibility(VISIBLE);
 
                         double rechargeAmount = Double.parseDouble(amount.trim());
                         double userMaxPoints = Double.parseDouble(userData.getCashbackPoints());
@@ -248,8 +241,8 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
                             pointsToApply = userMaxPoints;
                             isUsingCashbackPoints=true;
                         }
-                        discount_amount.setText("-\u20b9"+String.format("%.2f", pointsToApply));
-                        applied_amount.setText("+\u20b9" + String.format("%.2f", pointsToApply));
+
+                        applied_amount.setText("-\u20b9" + String.format("%.2f", pointsToApply));
 
                         double finalPayable = rechargeAmount - pointsToApply;
 //                        payableAmountTV.setText("Payable Amount: ₹" + String.format("%.2f", finalPayable));
@@ -259,8 +252,6 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
                         applied.setVisibility(GONE);
                         applied_amount.setVisibility(GONE);
                         isUsingCashbackPoints=false;
-                        discount.setVisibility(GONE);
-                        discount_amount.setVisibility(GONE);
                     }
 
                     }else {
@@ -919,7 +910,9 @@ private void successBottomSheet(String data, String message) {
                 }
             }
             binding.txtTotalDiscountValue.setText("₹" + json.getString("discount"));
-            releaseAmount = (Double.parseDouble(txtAmount.getText().toString().trim()) - json.getDouble("discount"));
+            Log.d("txtMaxDiscountValue", "addBalance: " + json);
+            binding.txtMaxDiscountValue.setText("₹" + json.getString("used_points"));
+            releaseAmount = (Double.parseDouble(txtAmount.getText().toString().trim()) - json.getDouble("discount") - json.getDouble("used_points"));
             binding.txtPayableAmtValue.setText("₹" + releaseAmount);
 
             binding.btnPay.setText("Add on ₹" + json.getInt("required"));

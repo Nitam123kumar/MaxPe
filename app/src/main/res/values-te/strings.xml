@@ -469,5 +469,9 @@
     <string name="sent_otp">OTP పంపబడింది</string>
     <string name="enter_mobile_number">మొబైల్ నంబర్ నమోదు చేయండి</string>
     <string name="lifetime_max_points">జీవితకాల గరిష్ట పాయింట్లు:</string>
+    <string name="instant_discount">తక్షణ డిస్కౌంట్</string>
+    <string name="maxpoints_discount">మాక్స్‌పాయింట్స్ డిస్కౌంట్</string>
+    <string name="payable_amount">చెల్లించవలసిన మొత్తం</string>
+    <string name="aavailable_balance">అందుబాటులో ఉన్న బ్యాలెన్స్:</string>
 
 </resources>
