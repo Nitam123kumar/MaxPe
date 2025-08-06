@@ -93,7 +93,7 @@ import java.util.TimerTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
-
+@SuppressLint({"NonConstantResourceId","SetTextI18n"})
 public class ElectricityBillPayActivity extends BaseActivity implements DefaultView, View.OnTouchListener,View.OnClickListener{
 
     private DefaultPresenter mDefaultPresenter;
@@ -694,7 +694,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
 
 // Show Due Date if available
                 for (BillFetch model : infos) {
-                    if (model.getKey().equalsIgnoreCase("Due Date")) {
+                    if (model.getKey().equals("Due Date")) {
                         String dueDateValue = model.getValue();
                         dueToDate.setText("Due Date: " + dueDateValue);
                         break;
@@ -920,8 +920,8 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 consumerNumber.setHint(numberField.getString("field_name"));
                 Consumer_Number.setText(numberField.getString("field_name"));
                 consumerNumberText.setText(numberField.getString("eg"));
-                amount_layout.setText(numberField.getString("field_name"));
-                amount.setHint(numberField.getString("eg"));
+//                amount_layout.setText(numberField.getString("field_name"));
+//                amount.setHint(numberField.getString("eg"));
 
                 int maxLength = Integer.parseInt(numberField.getString("max_length"));
                 InputFilter[] filters = new InputFilter[1];
@@ -1084,7 +1084,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                     amount_layout.setText(field2Data.getString("field_name"));
                     amountText.setText(field2Data.getString("eg"));
                     amount_layout.setVisibility(VISIBLE);
-//                    amountText.setVisibility(VISIBLE);
+                    amountText.setVisibility(VISIBLE);
                     amount.setVisibility(VISIBLE);
                     amount.setHint(field2Data.getString("eg"));
 
@@ -1450,10 +1450,8 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.toolbar_layout:
-                onBackPressed();
-                break;
+        if (v.getId() == R.id.toolbar_layout) {
+            onBackPressed();
         }
     }
 }

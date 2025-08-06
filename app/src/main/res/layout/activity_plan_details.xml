@@ -22,9 +22,10 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/amount_layout"
             android:layout_width="match_parent"
-            android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
             android:paddingBottom="@dimen/_10sdp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@id/phone_layout"
             app:layout_constraintStart_toStartOf="@id/phone_layout"
             app:layout_constraintTop_toBottomOf="@id/phone_layout">
@@ -58,7 +59,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
-                    android:text="@string/impty"
                     android:textColor="#084C96"
                     android:textSize="@dimen/_24sdp"
                     android:textStyle="bold"
@@ -99,7 +99,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_12sdp"
-                android:text="@string/impty"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10sdp"
                 android:textStyle="bold"
@@ -138,7 +137,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_12sdp"
-                android:text="@string/impty"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10sdp"
                 android:textStyle="bold"
@@ -177,10 +175,10 @@
                 android:layout_width="@dimen/_110sdp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_12sdp"
+                android:maxLines="2"
                 android:text=""
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10sdp"
-                android:maxLines="2"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/viewVoice"
                 app:layout_constraintStart_toStartOf="@id/planVoiceTV"
@@ -217,11 +215,10 @@
                 android:layout_width="@dimen/_110sdp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_12sdp"
-                android:text="@string/impty"
+                android:maxLines="2"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10sdp"
                 android:textStyle="bold"
-                android:maxLines="2"
                 app:layout_constraintBottom_toBottomOf="@id/viewSMS"
                 app:layout_constraintStart_toStartOf="@id/planSmsTV"
                 app:layout_constraintTop_toBottomOf="@id/planSmsTV" />
@@ -273,6 +270,46 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/amount_layout1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_180sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@id/phone_layout1"
+            app:layout_constraintStart_toStartOf="@id/phone_layout1"
+            app:layout_constraintTop_toBottomOf="@id/phone_layout1">
+
+            <TextView
+                android:id="@+id/imgINR1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/rupay"
+                android:textColor="#084C96"
+                android:textSize="@dimen/_24sdp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/txtAmount1"
+                app:layout_constraintEnd_toStartOf="@id/txtAmount1"
+                app:layout_constraintTop_toTopOf="@+id/txtAmount1" />
+
+            <TextView
+                android:id="@+id/txtAmount1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="#084C96"
+                android:textSize="@dimen/_24sdp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         <LinearLayout
             android:id="@+id/phone_layout"
             android:layout_width="match_parent"
@@ -282,6 +319,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:background="@drawable/plan_details_shape"
             android:orientation="horizontal"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -351,15 +389,94 @@
                 android:textSize="@dimen/_9sdp" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/phone_layout1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/plan_details_shape"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imgOperator1"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:background="@drawable/recharge_logo_shape"
+                android:contentDescription="@string/app_name"
+                android:padding="@dimen/_6sdp"
+                android:src="@drawable/upi" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtPhoneNumber1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtPhoneProvider1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_3sdp"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/txtPhoneOrigin1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:textColor="@color/black" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtRecharge1"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_22sdp"
+               android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/_3sdp"
+                android:layout_weight="1"
+                android:background="@drawable/change_number_shape"
+                android:gravity="center"
+                android:text="@string/change"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_9sdp" />
+        </LinearLayout>
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/txtShimmerWarning"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_5sdp"
-            android:padding="@dimen/_10sdp"
             android:background="@drawable/support_design_background_shape"
+            android:padding="@dimen/_10sdp"
             app:layout_constraintBottom_toTopOf="@id/btnSubmit"
-            app:layout_constraintTop_toBottomOf="@id/amount_layout"
             app:layout_constraintEnd_toEndOf="@id/amount_layout"
             app:layout_constraintStart_toStartOf="@id/amount_layout">
 
@@ -379,10 +496,10 @@
                 android:id="@+id/transaction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/transaction_amount"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_9sdp"
-                android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/payment_Detail" />
 
@@ -390,7 +507,6 @@
                 android:id="@+id/transaction_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/impty"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_9sdp"
                 app:layout_constraintBottom_toBottomOf="@id/transaction"
@@ -402,43 +518,40 @@
                 android:id="@+id/applied"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:drawableStart="@drawable/max_points_applied"
+                android:drawablePadding="@dimen/_5sdp"
+                android:gravity="center"
                 android:text="@string/maxpoints_applied"
                 android:textColor="#0B54A5"
                 android:textSize="@dimen/_9sdp"
                 android:textStyle="bold"
-                android:gravity="center"
-                android:drawableStart="@drawable/max_points_applied"
-                android:drawablePadding="@dimen/_5sdp"
                 android:visibility="visible"
-                app:layout_constraintTop_toBottomOf="@id/transaction_amount"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="@dimen/_10sdp"
-                />
+                app:layout_constraintTop_toBottomOf="@id/transaction_amount"
+                tools:ignore="UseCompatTextViewDrawableXml" />
 
             <TextView
                 android:id="@+id/applied_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/impty"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/applied"
-                app:layout_constraintBottom_toBottomOf="@id/applied"
+                android:textColor="#0B54A5"
+                android:textSize="@dimen/_9sdp"
                 android:textStyle="bold"
                 android:visibility="visible"
-                android:textSize="@dimen/_9sdp"
-                android:textColor="#0B54A5"
-                />
+                app:layout_constraintBottom_toBottomOf="@id/applied"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/applied" />
 
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:background="#D7D7D7"
                 android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/applied"
-                />
+                android:background="#D7D7D7"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/applied" />
 
             <TextView
                 android:id="@+id/shimmerTextView"
@@ -461,7 +574,6 @@
                 android:id="@+id/available_pointsTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/impty"
                 android:textColor="#5C5C5C"
                 android:textSize="@dimen/_9sdp"
                 android:textStyle="bold"
@@ -474,12 +586,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
+                android:contentDescription="@string/maxpe"
                 android:scaleType="centerCrop"
                 android:src="@drawable/group_12728__1_"
                 app:layout_constraintBottom_toBottomOf="@id/available_pointsTV"
-                app:layout_constraintTop_toTopOf="@id/available_pointsTV"
                 app:layout_constraintStart_toEndOf="@id/available_pointsTV"
-                />
+                app:layout_constraintTop_toTopOf="@id/available_pointsTV" />
 
             <CheckBox
                 android:id="@+id/applyTV"
@@ -502,6 +614,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
+                android:contentDescription="@string/maxpe"
                 android:src="@drawable/points_details_icon"
                 app:layout_constraintBottom_toBottomOf="@+id/shimmerTextView"
                 app:layout_constraintStart_toEndOf="@id/shimmerTextView"
@@ -537,7 +650,8 @@
                 android:layout_height="match_parent"
                 android:background="#BA333333"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UselessParent">
 
                 <ProgressBar
                     android:layout_width="@dimen/_35sdp"

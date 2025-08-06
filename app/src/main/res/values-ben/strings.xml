@@ -153,7 +153,7 @@
         <string name="need_help_nwe_re_here_nfor_you">সাহায্য চান?\nআমরা আছি\nআপনার জন্য!</string>
         <string name="call_support">সহায়তার জন্য কল করুন</string>
         <string name="_7390903230">৭৩৯০৯০৩২৩০</string>
-        <string name="chat_on_whatsapp">হোয়াটসঅ্যাপে চ্যাট করুন</string>
+        <string name="chat_on_whatsapp">হোয়াটসঅ্যাপে চ্যাট \n করুন</string>
         <string name="email_us">ইমেইল পাঠান</string>
         <string name="support_maxpe_in">support@maxpe.in</string>
         <string name="share_your_nfeedback">আপনার\nপ্রতিক্রিয়া শেয়ার করুন!</string>
@@ -261,7 +261,7 @@
     <string name="bill_fatch">বিল আনুন</string>
     <string name="bill_details">বিলের বিবরণ:</string>
     <string name="view_more">আরও দেখুন</string>
-    <string name="rupay">৳</string>
+    <string name="rupay">₹</string>
     <string name="proceed_to_pay">পেমেন্ট করতে এগিয়ে যান</string>
     <string name="your_service_provider_can_take_two_working_days_to_nconsider_bill_paid_in_their_accounts">আপনার পরিষেবা প্রদানকারী তাদের অ্যাকাউন্টে বিল পরিশোধিত হিসেবে বিবেচনা করতে দুই কার্যদিবস নিতে পারে।</string>
     <string name="powered_by">পরিচালিত:</string>

@@ -64,7 +64,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/_130sdp"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -90,9 +90,8 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/contactSupportLayout"
-                        android:layout_width="@dimen/_125sdp"
+                        android:layout_width="@dimen/_130sdp"
                         android:layout_height="@dimen/_48sdp"
-
                         android:layout_marginTop="@dimen/_20sdp"
                         android:background="@drawable/support_design_background_shape"
                         app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +104,7 @@
                             android:layout_height="@dimen/_20sdp"
                             android:contentDescription="@string/contact_us"
                             android:src="@drawable/group_12488"
-                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginStart="@dimen/_7sdp"
                             app:layout_constraintVertical_chainStyle="packed"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -146,7 +145,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/whatsAppSupportLayout"
-                        android:layout_width="@dimen/_125sdp"
+                        android:layout_width="@dimen/_130sdp"
                         android:layout_height="@dimen/_48sdp"
                         android:background="@drawable/support_design_background_shape"
                         app:layout_constraintTop_toTopOf="@id/contactSupportLayout"
@@ -158,7 +157,7 @@
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="@dimen/_20sdp"
                             android:src="@drawable/whatsapp_icon_svg1"
-                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginStart="@dimen/_7sdp"
                             app:layout_constraintVertical_chainStyle="packed"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -174,9 +173,11 @@
                             android:textStyle="bold"
                             android:textSize="@dimen/_9sdp"
                             android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             app:layout_constraintStart_toEndOf="@id/imgWhatsAppSupport"
-                            app:layout_constraintTop_toTopOf="@id/imgWhatsAppSupport"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toTopOf="@id/tv_whatsapp"
                            />
 
                         <TextView
@@ -187,17 +188,18 @@
                             android:textStyle="bold"
                             android:textSize="@dimen/_8sdp"
                             android:textColor="#B5B5B5"
+                            android:layout_marginBottom="@dimen/_8sdp"
                             android:text="@string/_7390903230"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             app:layout_constraintTop_toBottomOf="@id/txtWhatsAppSupport"
                             app:layout_constraintStart_toStartOf="@id/txtWhatsAppSupport"
-                            app:layout_constraintBottom_toBottomOf="@id/imgWhatsAppSupport"/>
+                            app:layout_constraintBottom_toBottomOf="parent"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/emailSupportLayout"
-                        android:layout_width="@dimen/_125sdp"
+                        android:layout_width="@dimen/_130sdp"
                         android:layout_height="@dimen/_48sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:background="@drawable/support_design_background_shape"
@@ -211,7 +213,7 @@
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="@dimen/_14sdp"
                             android:src="@drawable/email_svg"
-                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginStart="@dimen/_7sdp"
                             app:layout_constraintVertical_chainStyle="packed"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -251,7 +253,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/feedbackLayout"
-                        android:layout_width="@dimen/_125sdp"
+                        android:layout_width="@dimen/_130sdp"
                         android:layout_height="@dimen/_48sdp"
                         android:background="@drawable/support_design_background_shape"
                         app:layout_constraintStart_toStartOf="@id/whatsAppSupportLayout"
@@ -264,7 +266,7 @@
                             android:layout_width="@dimen/_19sdp"
                             android:layout_height="@dimen/_19sdp"
                             android:src="@drawable/feedback_svg_1"
-                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_marginStart="@dimen/_7sdp"
                             app:layout_constraintVertical_chainStyle="packed"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -347,7 +349,7 @@
                         android:layout_height="@dimen/_24sdp"
                         android:contentDescription="@string/contact_us"
                         android:src="@drawable/whatsapp_1"
-                        android:layout_marginStart="@dimen/_7sdp"
+                        android:layout_marginStart="@dimen/_6sdp"
                         app:layout_constraintVertical_chainStyle="packed"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -361,7 +363,7 @@
                         android:gravity="center"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_4sdp"
                         android:textSize="@dimen/_9sdp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                         app:layout_constraintStart_toEndOf="@id/imgWhatsApp"
@@ -408,13 +410,12 @@
 
                     <TextView
                         android:id="@+id/txtInstaSupport"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/_90sdp"
                         android:layout_height="wrap_content"
                         android:text="@string/daily_updated"
-                        android:gravity="center"
                         android:textColor="@color/black"
                         android:textStyle="bold"
-                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_4sdp"
                         android:textSize="@dimen/_9sdp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                         app:layout_constraintStart_toEndOf="@id/imgInstaSupport"
@@ -450,7 +451,6 @@
                         android:textColor="@color/black"
                         android:layout_marginStart="@dimen/_20sdp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        app:layout_constraintStart_toEndOf="@id/llPrepaidNumber"
                         app:layout_constraintEnd_toEndOf="@id/whatsAppSupportLayout"
                         app:layout_constraintTop_toTopOf="@id/llPrepaidNumber"/>
 

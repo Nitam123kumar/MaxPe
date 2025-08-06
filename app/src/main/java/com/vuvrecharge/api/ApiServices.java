@@ -65,6 +65,7 @@ public interface ApiServices {
     String forgotPasswordOtp = "forgotPasswordOtp";
     String resetPassword = "forgotPassword";
     String loginUser = "loginUser";
+    String refer_earn = "refer_earn";
     String topRankers = "topRankers";
     String dashboardData = "dashboardData";
     String updatePassword = "updatePassword";

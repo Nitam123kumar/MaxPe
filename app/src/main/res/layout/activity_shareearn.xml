@@ -427,14 +427,14 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/c"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_500sdp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:elevation="@dimen/_3sdp"
                     app:layout_constraintTop_toBottomOf="@+id/referral_link_ConstraintLayout">
 
 
-                    <WebView
+                    <FrameLayout
                         android:id="@+id/webView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

@@ -30,6 +30,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -64,6 +66,7 @@ import com.vuvrecharge.databinding.RechargeDialogBinding;
 import com.vuvrecharge.databinding.ScreenRechargePaymentLayoutBinding;
 import com.vuvrecharge.databinding.TransactionDialogBinding;
 import com.vuvrecharge.databinding.WalletTransactionBottonDialogBinding;
+import com.vuvrecharge.modules.activities.newActivities.PlanDetailsActivity;
 import com.vuvrecharge.modules.adapter.BillerInfoAdapter;
 import com.vuvrecharge.modules.adapter.OpreatorAdapter;
 import com.vuvrecharge.modules.adapter.RecentRechargesAdapter;
@@ -224,6 +227,8 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
         mToolbar.setOnClickListener(this);
         mDefaultPresenter = new DefaultPresenter(this);
         setStatusBarGradiant(this);
+        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.pulse_scale);
+        view_plan.startAnimation(fadeIn);
 
         scrollView.setOnTouchListener((v, event) -> {
             hideKeyBoard(mobile_number);
@@ -619,9 +624,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
             }
         });
 
-//        submit.setTextColor(getResources().getColor(R.color.black_4));
-//        submit.setTypeface(submit.getTypeface(), Typeface.BOLD);
-//        submit.setBackgroundResource(R.drawable.btn_drawable_disable);
+
         amount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -635,15 +638,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 
             @Override
             public void afterTextChanged(Editable s) {
-//                    if (!s.toString().isEmpty()){
-//                        submit.setTextColor(Color.WHITE);
-//                        submit.setBackgroundResource(R.drawable.btn_drawable);
-//                        submit.setTypeface(submit.getTypeface(), Typeface.BOLD);
-//                    }else {
-//                        submit.setTextColor(getResources().getColor(R.color.black_4));
-//                        submit.setTypeface(submit.getTypeface(), Typeface.BOLD);
-//                        submit.setBackgroundResource(R.drawable.btn_drawable_disable);
-//                    }
+
             }
         });
         loadOperatorSpinner();
@@ -856,10 +851,22 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
             return;
         }
         hideKeyBoard(mobile_number);
-        rechargeDialog(mobile_number_str + "", selected_operator + "",
-                amount_str + "", type + "",
-                "0", "0", selected_circle + "",
-                "0", selected_operator_str + "");
+//        rechargeDialog(mobile_number_str + "", selected_operator + "",
+//                amount_str + "", type + "",
+//                "0", "0", selected_circle + "",
+//                "0", selected_operator_str + "");
+
+        Intent intent = new Intent(getActivity(), PlanDetailsActivity.class);
+        intent.putExtra("operator", selected_operator);
+        intent.putExtra("circle", selected_circle);
+        intent.putExtra("number", mobile_number.getText().toString());
+        intent.putExtra("amount", amount.getText().toString());
+        intent.putExtra("provider", selected_operator_str);
+        intent.putExtra("state", selected_circle_str);
+        intent.putExtra("url", selected_operator_img);
+        intent.putExtra("pageType", type);
+        startActivity(intent);
+
     }
 
     public void rechargeDialog(String number, String operator, String amount, String type,

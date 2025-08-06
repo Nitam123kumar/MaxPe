@@ -171,9 +171,6 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-        <uses-library
-            android:name="android.webkit.WebView"
-            android:required="false" />
 
         <activity
             android:name=".modules.activities.MainActivity"

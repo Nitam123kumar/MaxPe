@@ -3,6 +3,8 @@ package com.vuvrecharge.modules.activities;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.vuvrecharge.api.ApiServices.BASE_URL;
+import static com.vuvrecharge.api.ApiServices.SITE_URL;
+import static com.vuvrecharge.api.ApiServices.refer_earn;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -10,6 +12,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,8 +24,10 @@ import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -38,6 +43,7 @@ import com.denzcoskun.imageslider.models.SlideModel;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 import com.vuvrecharge.R;
+import com.vuvrecharge.api.ApiServices;
 import com.vuvrecharge.base.BaseActivity;
 import com.vuvrecharge.modules.adapter.ImageSliderAdapter;
 import com.vuvrecharge.modules.model.UserData;
@@ -109,7 +115,7 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
     @BindView(R.id.viewPager)
     ViewPager2 viewPager;
     @BindView(R.id.webView)
-    WebView webView;
+    FrameLayout webViewContainer;
     @BindView(R.id.loading)
     LinearLayout loading;
     String shareText = "";
@@ -123,7 +129,7 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
     private Handler sliderHandler = new Handler();
     private Runnable sliderRunnable;
 
-
+    private String postUrl = "";
     ArrayList<String> top_earner_list1 = new ArrayList<>();
 
     protected void attachBaseContext(Context newBase) {
@@ -149,11 +155,7 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
         viewMyReferral.setOnClickListener(this);
         viewReferralIncome.setOnClickListener(this);
         txtTermsCondition.setOnClickListener(this);
-        WebSettingsCompat.setForceDark(webView.getSettings(), WebSettingsCompat.FORCE_DARK_ON);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            webView.getSettings().setSafeBrowsingEnabled(true);
-        }
-        WebView.setWebContentsDebuggingEnabled(true);
+
         if (mDatabase != null) {
             if (mDatabase.getUserData() != null) {
                 if (mDatabase.getUserData().getReferCode() != null) {
@@ -162,6 +164,30 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
             }
         }
         mDefaultPresenter.totalReferrals(device_id);
+
+        try {
+            WebView webView = new WebView(this);
+
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.getSettings().setDomStorageEnabled(true);
+            webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                webView.getSettings().setSafeBrowsingEnabled(true);
+            }
+
+            webView.setHorizontalScrollBarEnabled(false);
+            webView.setHorizontalScrollbarOverlay(false);
+            webView.setWebViewClient(new MyBrowser());
+
+            postUrl = SITE_URL + refer_earn;
+            webView.loadUrl(postUrl);
+
+            webViewContainer.addView(webView);
+
+        } catch (Exception e) {
+            Log.e("WebViewError", "WebView failed to load", e);
+            Toast.makeText(this, "This device doesn't support WebView", Toast.LENGTH_LONG).show();
+        }
 
         imageSliderAdapter = new ImageSliderAdapter(top_earner_list1, this);
         viewPager.setAdapter(imageSliderAdapter);
@@ -244,16 +270,8 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
 //            txtReferMessage.setText(object.getString("refer"));
 //            txtReferMaxSlug.setText(object.getString("reward"));
 
-            String webViewHtml = jsonObject.getString("referal_html");
-            webView.loadDataWithBaseURL(BASE_URL, webViewHtml, "text/html", "UTF-8", null);
-            webView.getSettings().setJavaScriptEnabled(true);
-            webView.getSettings().setLoadWithOverviewMode(true);
-            webView.getSettings().setUseWideViewPort(true);
-            webView.getSettings().setBuiltInZoomControls(false);
-            webView.getSettings().setDisplayZoomControls(false);
-            webView.setHorizontalScrollBarEnabled(false);
-            webView.setHorizontalScrollbarOverlay(false);
-            webView.setWebViewClient(new WebViewClient());
+//            String webViewHtml = jsonObject.getString("referal_html");
+//            webView.loadDataWithBaseURL(BASE_URL, webViewHtml, "text/html", "UTF-8", null);
 
             shareText = jsonObject.getString("shareText");
 
@@ -274,6 +292,26 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
         }
 
 
+    }
+    class MyBrowser extends WebViewClient {
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(@NonNull WebView view, String Url) {
+            view.loadUrl(Url);
+            return true;
+
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+        }
     }
 
     @Override

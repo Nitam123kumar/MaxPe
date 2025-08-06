@@ -27,7 +27,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginHorizontal="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/ad_money_button_shape"
+            android:background="@drawable/group_12802__2_"
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent">
 

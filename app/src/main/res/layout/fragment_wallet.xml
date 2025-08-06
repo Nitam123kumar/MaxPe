@@ -10,7 +10,7 @@
         layout="@layout/statements_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="@dimen/_8sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,6 +19,8 @@
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/_6sdp"
+        android:paddingBottom="@dimen/_50sdp"
         app:layout_constraintTop_toBottomOf="@id/statements_header"
         >
 
@@ -27,10 +29,8 @@
         android:id="@+id/rvWalletDetails"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_9sdp"
         android:nestedScrollingEnabled="false"
-        android:paddingBottom="@dimen/_50sdp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
          />

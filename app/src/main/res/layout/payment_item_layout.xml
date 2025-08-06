@@ -30,6 +30,7 @@
             android:id="@+id/radioGroup1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:padding="@dimen/_4sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/payment_icon"
             app:layout_constraintBottom_toBottomOf="@id/payment_icon"
@@ -41,7 +42,7 @@
             android:layout_height="@dimen/_19sdp"
             android:drawableEnd="@drawable/btn_radio"
             android:button="@null"
-            android:textSize="@dimen/_11sdp"
+            android:layout_gravity="center"
             android:checked="false"
             />
 
