@@ -265,7 +265,6 @@
                 app:drawableEndCompat="@drawable/drop_down_img"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/noteDet"
-
                 tools:ignore="RtlSymmetry" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -317,7 +316,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/plan_details_shape"
+            android:background="@drawable/rectangle_189711"
             android:orientation="horizontal"
             android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent">
@@ -377,10 +376,10 @@
 
             <TextView
                 android:id="@+id/txtRecharge"
-                android:layout_width="@dimen/_40sdp"
+                android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_22sdp"
                 android:layout_gravity="center"
-                android:layout_marginEnd="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_weight="1"
                 android:background="@drawable/change_number_shape"
                 android:gravity="center"
@@ -396,7 +395,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/plan_details_shape"
+            android:background="@drawable/rectangle_189711"
             android:orientation="horizontal"
             android:visibility="visible"
             app:layout_constraintTop_toTopOf="parent">
@@ -474,7 +473,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_5sdp"
-            android:background="@drawable/support_design_background_shape"
+            android:background="@drawable/rectangle_189711"
             android:padding="@dimen/_10sdp"
             app:layout_constraintBottom_toTopOf="@id/btnSubmit"
             app:layout_constraintEnd_toEndOf="@id/amount_layout"
@@ -548,7 +547,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_1sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:background="#D7D7D7"
+                android:background="#F8F8F8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/applied" />

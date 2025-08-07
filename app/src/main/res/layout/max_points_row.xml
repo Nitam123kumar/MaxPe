@@ -85,7 +85,7 @@
         android:layout_marginTop="@dimen/_13sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/points_dateTV"
-        android:background="#E2E2E2"
+        android:background="#F4F2F2"
         />
 
 

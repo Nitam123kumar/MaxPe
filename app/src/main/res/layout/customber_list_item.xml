@@ -15,7 +15,7 @@
           android:elevation="@dimen/_10sdp"
         android:outlineAmbientShadowColor="@color/blue_dark"
         android:outlineSpotShadowColor="@color/blue_dark"
-        android:background="@drawable/box_shadow">
+        android:background="@drawable/box_shadow1">
 
 <LinearLayout
     android:layout_width="match_parent"

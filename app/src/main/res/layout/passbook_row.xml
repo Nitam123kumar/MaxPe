@@ -104,7 +104,7 @@
         android:layout_marginTop="@dimen/_13sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/reason"
-        android:background="#E2E2E2"
+        android:background="#F8F8F8"
         />
 
 

@@ -231,7 +231,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
         titleStr =  getIntent().getStringExtra("title");
         handler = new Handler();
         proceedToPay.setOnClickListener(v -> {
-//            Toast.makeText(this,"")
+        showError1("Please Fetch Bill");
         });
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         mDefaultPresenter = new DefaultPresenter(this);

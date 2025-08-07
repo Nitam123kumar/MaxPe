@@ -125,6 +125,10 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.Holder> {
         View viewDescription;
         @BindView(R.id.cardImage)
         CardView cardImage;
+        @BindView(R.id.per_days_cost)
+        TextView per_days_cost;
+        @BindView(R.id.best_seller_tag)
+        TextView best_seller_tag;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
@@ -136,6 +140,13 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.Holder> {
         public void bind(@NonNull PlanItemData resultsBean, @NonNull String title) {
             validity.setText(resultsBean.getValidity());
             amount.setText("\u20b9 " + resultsBean.getRs().trim());
+            per_days_cost.setText("Per Day Cost: "+"\u20b9" + resultsBean.getCost_per_days().trim());
+            if (resultsBean.getPlan_tags()!=null){
+                best_seller_tag.setText(resultsBean.getPlan_tags());
+                best_seller_tag.setBackgroundResource(R.drawable.best_seller_tag);
+            }
+
+
             if (title.equals("Plans Details")){
                 if (resultsBean.getData().equals("N/A")){
                     dataValue.setVisibility(View.GONE);

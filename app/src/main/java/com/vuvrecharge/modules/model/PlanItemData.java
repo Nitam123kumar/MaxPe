@@ -23,6 +23,10 @@ public class PlanItemData implements Serializable {
     private String sms_value;
     @SerializedName("subscription")
     private String subscription;
+    @SerializedName("cost_per_days")
+    private String cost_per_days;
+    @SerializedName("plan_tags")
+    private String plan_tags;
 
     public String getRs() {
         return rs;
@@ -30,6 +34,22 @@ public class PlanItemData implements Serializable {
 
     public void setRs(String rs) {
         this.rs = rs;
+    }
+
+    public String getCost_per_days() {
+        return cost_per_days;
+    }
+
+    public void setCost_per_days(String cost_per_days) {
+        this.cost_per_days = cost_per_days;
+    }
+
+    public String getPlan_tags() {
+        return plan_tags;
+    }
+
+    public void setPlan_tags(String plan_tags) {
+        this.plan_tags = plan_tags;
     }
 
     public String getDesc() {

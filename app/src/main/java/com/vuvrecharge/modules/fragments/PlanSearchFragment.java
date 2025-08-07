@@ -91,6 +91,7 @@ public class PlanSearchFragment extends BaseFragment implements DefaultView {
                         PlanItemData itemData = new PlanItemData();
                         JSONObject o = array.getJSONObject(i);
                         itemData.setRs(o.getString("rs"));
+                        itemData.setCost_per_days(o.getString("cost_per_days"));
                         itemData.setDesc(o.getString("desc"));
                         itemData.setValidity(o.getString("validity"));
                         itemData.setLast_update(o.getString("last_update"));

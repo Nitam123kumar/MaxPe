@@ -608,7 +608,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/viewElectricityBillPay"
                 app:layout_constraintStart_toStartOf="@id/viewElectricityBillPay"
-                android:layout_marginBottom="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
                 >
 
             <TextView

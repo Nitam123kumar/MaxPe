@@ -448,7 +448,7 @@
 <!--                <View-->
 <!--                    android:layout_width="0dp"-->
 <!--                    android:layout_height="@dimen/_1sdp"-->
-<!--                    android:background="#4DD9D9D9"-->
+<!--                    android:background="#F8F8F8"-->
 <!--                    android:layout_marginTop="@dimen/_2sdp"-->
 <!--                    app:layout_constraintStart_toStartOf="@id/viewFingerPrint"-->
 <!--                    app:layout_constraintEnd_toEndOf="@id/viewFingerPrint"-->
@@ -499,7 +499,7 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_1sdp"
-                    android:background="#4DD9D9D9"
+                    android:background="#F8F8F8"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewFingerPrint"
                     app:layout_constraintEnd_toEndOf="@id/viewFingerPrint"
@@ -553,7 +553,7 @@ android:textSize="14sp" -->
 <!--                <View-->
 <!--                    android:layout_width="0dp"-->
 <!--                    android:layout_height="1dp"-->
-<!--                    android:background="#4DD9D9D9"-->
+<!--                    android:background="#F8F8F8"-->
 <!--                    android:layout_marginTop="@dimen/_2sdp"-->
 <!--                    app:layout_constraintStart_toStartOf="@id/viewPasswordLess"-->
 <!--                    app:layout_constraintEnd_toEndOf="@id/viewPasswordLess"-->
@@ -602,7 +602,7 @@ android:textSize="14sp" -->
                 <View
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_1sdp"
-                    android:background="#4DD9D9D9"
+                    android:background="#F8F8F8"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewLanguage"
                     app:layout_constraintEnd_toEndOf="@id/viewLanguage"
@@ -653,7 +653,7 @@ android:textSize="14sp" -->
 <!--                <View-->
 <!--                    android:layout_width="0dp"-->
 <!--                    android:layout_height="@dimen/_1sdp"-->
-<!--                    android:background="#4DD9D9D9"-->
+<!--                    android:background="#F8F8F8"-->
 <!--                    android:layout_marginTop="@dimen/_2sdp"-->
 <!--                    app:layout_constraintStart_toStartOf="@id/viewChangePassword"-->
 <!--                    app:layout_constraintEnd_toEndOf="@id/viewChangePassword"-->
@@ -701,7 +701,7 @@ android:textSize="14sp" -->
                 <View
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_1sdp"
-                    android:background="#4DD9D9D9"
+                    android:background="#F8F8F8"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewChangeMPin"
                     app:layout_constraintEnd_toEndOf="@id/viewChangeMPin"
@@ -749,7 +749,7 @@ android:textSize="14sp" -->
                 <View
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_1sdp"
-                    android:background="#4DD9D9D9"
+                    android:background="#F8F8F8"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewResetMPin"
                     app:layout_constraintEnd_toEndOf="@id/viewResetMPin"
@@ -797,7 +797,7 @@ android:textSize="14sp" -->
                 <View
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_1sdp"
-                    android:background="#4DD9D9D9"
+                    android:background="#F8F8F8"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewPrivacy"
                     app:layout_constraintEnd_toEndOf="@id/viewPrivacy"
@@ -845,7 +845,7 @@ android:textSize="14sp" -->
                 <View
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_1sdp"
-                    android:background="#4DD9D9D9"
+                    android:background="#F8F8F8"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewCondition"
                     app:layout_constraintEnd_toEndOf="@id/viewCondition"
@@ -893,7 +893,7 @@ android:textSize="14sp" -->
                 <View
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_1sdp"
-                    android:background="#4DD9D9D9"
+                    android:background="#F8F8F8"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewRefund"
                     app:layout_constraintEnd_toEndOf="@id/viewRefund"
@@ -942,7 +942,7 @@ android:textSize="14sp" -->
                 <View
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_1sdp"
-                    android:background="#4DD9D9D9"
+                    android:background="#F8F8F8"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewComplaint"
                     app:layout_constraintEnd_toEndOf="@id/viewComplaint"
@@ -990,7 +990,7 @@ android:textSize="14sp" -->
                 <View
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_1sdp"
-                    android:background="#4DD9D9D9"
+                    android:background="#F8F8F8"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewRateUs"
                     app:layout_constraintEnd_toEndOf="@id/viewRateUs"
@@ -1039,7 +1039,7 @@ android:textSize="14sp" -->
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"
-                    android:background="#4DD9D9D9"
+                    android:background="#F8F8F8"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewFeedBack"
                     app:layout_constraintEnd_toEndOf="@id/viewFeedBack"
@@ -1087,7 +1087,7 @@ android:textSize="14sp" -->
                 <View
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_1sdp"
-                    android:background="#4DD9D9D9"
+                    android:background="#F8F8F8"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewInvite"
                     app:layout_constraintEnd_toEndOf="@id/viewInvite"
@@ -1135,7 +1135,7 @@ android:textSize="14sp" -->
                 <View
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_1sdp"
-                    android:background="#4DD9D9D9"
+                    android:background="#F8F8F8"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintStart_toStartOf="@id/viewFollow"
                     app:layout_constraintEnd_toEndOf="@id/viewFollow"
@@ -1183,7 +1183,7 @@ android:textSize="14sp" -->
 <!--                <View-->
 <!--                    android:layout_width="0dp"-->
 <!--                    android:layout_height="@dimen/_1sdp"-->
-<!--                    android:background="#4DD9D9D9"-->
+<!--                    android:background="#F8F8F8"-->
 <!--                    android:layout_marginTop="@dimen/_2sdp"-->
 <!--                    app:layout_constraintStart_toStartOf="@id/viewAccountDelete"-->
 <!--                    app:layout_constraintEnd_toEndOf="@id/viewAccountDelete"-->

@@ -41,7 +41,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="@dimen/_20sdp">
+                android:padding="@dimen/_10sdp"
+                >
 
 
                 <ImageView
@@ -74,7 +75,7 @@
                     android:id="@+id/recycler_view_provider"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:elevation="@dimen/_2sdp"
@@ -91,9 +92,9 @@
                     android:id="@+id/line"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
-                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_20sdp"
-                    android:background="#F3F3F3"
+                    android:background="#F4F2F2"
                     app:layout_constraintTop_toBottomOf="@id/recycler_view_provider" />
 
                 <TextView
@@ -115,7 +116,7 @@
                     android:id="@+id/utility_bills_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:layout_constraintEnd_toEndOf="@+id/recycler_view_provider"
@@ -127,9 +128,9 @@
                     android:id="@+id/line1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
-                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_20sdp"
-                    android:background="#F3F3F3"
+                    android:background="#F4F2F2"
                     app:layout_constraintTop_toBottomOf="@id/utility_bills_recyclerView" />
 
                 <TextView
@@ -151,7 +152,7 @@
                     android:id="@+id/ott_recharge_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:layout_constraintEnd_toEndOf="@+id/recycler_view_provider"
@@ -163,9 +164,9 @@
                     android:id="@+id/line2"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
-                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_20sdp"
-                    android:background="#F3F3F3"
+                    android:background="#F4F2F2"
                     app:layout_constraintTop_toBottomOf="@id/ott_recharge_recyclerView" />
 
                 <TextView
@@ -187,7 +188,7 @@
                     android:id="@+id/financial_services_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:layout_constraintEnd_toEndOf="@+id/recycler_view_provider"
@@ -201,7 +202,7 @@
                     android:layout_height="@dimen/_1sdp"
                     android:layout_marginHorizontal="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_20sdp"
-                    android:background="#F3F3F3"
+                    android:background="#F4F2F2"
                     app:layout_constraintTop_toBottomOf="@id/financial_services_recyclerView" />
 
                 <TextView

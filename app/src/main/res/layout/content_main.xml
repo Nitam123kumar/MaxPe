@@ -327,7 +327,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
-                android:background="@drawable/corner_white_new">
+                android:background="@drawable/rectangle_189711">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/recharge_layout"
@@ -877,7 +877,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_8sdp"
-                    android:background="@drawable/sony_white_shape"
+                    android:background="@drawable/rectangle_189711"
                     android:elevation="@dimen/_1sdp"
                     app:layout_constraintTop_toTopOf="parent"
 
@@ -1000,7 +1000,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_90sdp"
                     android:layout_marginHorizontal="@dimen/_10sdp"
-                    android:background="@drawable/spotlight_services_shape"
+                    android:background="@drawable/rectangle_189711"
                     android:elevation="@dimen/_1sdp"
                     android:gravity="center"
                     android:orientation="horizontal"
