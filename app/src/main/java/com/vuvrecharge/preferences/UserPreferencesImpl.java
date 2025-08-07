@@ -70,6 +70,16 @@ public class UserPreferencesImpl implements UserPreferences {
     }
 
     @Override
+    public void setUpdateLogoStatus(Integer updateLogoStatus) {
+
+    }
+
+    @Override
+    public String getUpdateLogoStatus() {
+        return "";
+    }
+
+    @Override
     public UserData getUserData() {
         Gson gson = new Gson();
         String json = mPreferences.getString("USER_DATA", null);

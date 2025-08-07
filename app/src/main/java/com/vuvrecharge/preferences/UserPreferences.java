@@ -31,6 +31,8 @@ public interface UserPreferences {
     String getUsername();
 
     void setUserData(String userData);
+    void setUpdateLogoStatus(Integer updateLogoStatus);
+    String getUpdateLogoStatus();
 
     UserData getUserData();
 

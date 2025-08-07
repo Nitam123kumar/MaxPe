@@ -195,6 +195,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
     BottomSheetDialog dialog2 = null;
     ArrayList<PaymentModel> list = new ArrayList<>();
     double releaseAmount = 0.000;
+    Animation fadeIn;
 
     protected void attachBaseContext(Context newBase) {
         SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
@@ -227,8 +228,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
         mToolbar.setOnClickListener(this);
         mDefaultPresenter = new DefaultPresenter(this);
         setStatusBarGradiant(this);
-        Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.pulse_scale);
-        view_plan.startAnimation(fadeIn);
+        fadeIn = AnimationUtils.loadAnimation(this, R.anim.pulse_scale);
 
         scrollView.setOnTouchListener((v, event) -> {
             hideKeyBoard(mobile_number);
@@ -591,7 +591,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 //                                btnRoffer.setTextColor(Color.WHITE);
 //                                btnRoffer.setBackgroundResource(R.drawable.btn_drawable);
 
-                                view_cus_info.setBackgroundResource(R.drawable.btn_drawable);
+                                view_cus_info.setBackgroundResource(R.drawable.ad_money_button_shape);
                                 view_cus_info.setTextColor(Color.WHITE);
 
 //                                view_plan.setTextColor(Color.WHITE);
@@ -600,7 +600,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 //                                btnRoffer.setBackgroundResource(R.drawable.btn_drawable_disable);
 //                                btnRoffer.setTextColor(Color.BLACK);
 
-                                view_cus_info.setBackgroundResource(R.drawable.btn_drawable_disable);
+                                view_cus_info.setBackgroundResource(R.drawable.proceed_to_pay);
                                 view_cus_info.setTextColor(Color.BLACK);
 
 //                                view_plan.setTextColor(Color.BLACK);
@@ -703,10 +703,12 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                 if (i == 0) {
                     selected_operator = operator_list.get(i);
                     selected_operator_str = operator_list.get(i);
+                    view_plan.clearAnimation();
                 } else {
                     selected_operator = operatorDataList.get(i - 1).getId();
                     selected_operator_str = operatorDataList.get(i - 1).getName();
                     selected_operator_img = operator_list_img.get(i);
+                    view_plan.startAnimation(fadeIn);
                 }
                 adapter.addData(selected_operator);
             }

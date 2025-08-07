@@ -228,6 +228,7 @@
             android:text="@string/disclaimer_plans_may_change_anytime_please_double_ncheck_with_your_operator_before_recharging"
             android:textColor="#909090"
             android:textSize="@dimen/_9sdp"
+            android:fontFamily="@font/inter"
             android:background="#F9FAFB"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
