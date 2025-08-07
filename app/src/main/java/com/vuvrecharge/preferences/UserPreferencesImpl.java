@@ -1,5 +1,7 @@
 package com.vuvrecharge.preferences;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.SharedPreferences;
 import android.util.Log;
 
@@ -71,12 +73,13 @@ public class UserPreferencesImpl implements UserPreferences {
 
     @Override
     public void setUpdateLogoStatus(Integer updateLogoStatus) {
-
+        mPreferences.edit().putInt("update_logo_status", updateLogoStatus).apply();
     }
 
     @Override
     public String getUpdateLogoStatus() {
-        return "";
+        int status =  mPreferences.getInt("update_logo_status", 0);
+        return String.valueOf(status);
     }
 
     @Override

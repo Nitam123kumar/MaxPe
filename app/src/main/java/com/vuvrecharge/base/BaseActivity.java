@@ -54,8 +54,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.inappmessaging.FirebaseInAppMessaging;
 import com.google.firebase.messaging.FirebaseMessaging;
-//import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-//import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
+import com.vuvrecharge.BuildConfig;
 import com.vuvrecharge.R;
 import com.vuvrecharge.databinding.FeedbackBinding;
 import com.vuvrecharge.modules.activities.LoginActivity;
@@ -90,8 +91,9 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
     private static final int WIFI_ENABLE_REQUEST = 110;
 
     public static String fcmToken="";
-//    public FirebaseRemoteConfig mFirebaseRemoteConfig;
-//    Boolean isdebug;
+    public FirebaseRemoteConfig mFirebaseRemoteConfig;
+    boolean isdebug = BuildConfig.DEBUG;
+
 
     static {
         getFcmToken();
@@ -130,53 +132,53 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
 
     }
 
-//    public void fetchRemoteConfigAndUpdatePreferences() {
-//        long refreshDuration = 0;
-//        if (isdebug) {
-//            refreshDuration = 0;
-//        }
-//        else {
-//            refreshDuration = 24 * 60 * 60;
-//        }
-//        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
-//        FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
-//                .setMinimumFetchIntervalInSeconds(refreshDuration)
-//                .build();
-//        mFirebaseRemoteConfig.setConfigSettingsAsync(configSettings);
-//        mFirebaseRemoteConfig.setDefaultsAsync(R.xml.remote_config_defaults);
-//        mFirebaseRemoteConfig.fetchAndActivate()
-//                .addOnCompleteListener(this, new OnCompleteListener<Boolean>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Boolean> task) {
-//                        if (task.isSuccessful()) {
-//                            boolean updated = task.getResult();
-//                            //Log.d("Config params updated: ", updated + "");
-//                            //Toast.makeText(BaseActivity.this, "Fetch and activate succeeded",
-//                            //      Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            //Toast.makeText(BaseActivity.this, "Fetch failed",
-//                            //       Toast.LENGTH_SHORT).show();
-//                        }
-//                        setConfigData();
-//                    }
-//                });
-//    /*mFirebaseRemoteConfig.fetchAndActivate().addOnCompleteListener(new OnCompleteListener<Boolean>() {
-//        @Override
-//        public void onComplete(@NonNull Task<Boolean> task) {
-//            if (task.isSuccessful()) {
-//
-//            }
-//        }
-//    });*/
+    public void fetchRemoteConfigAndUpdatePreferences() {
+        long refreshDuration = 0;
+        if (isdebug) {
+            refreshDuration = 0;
+        }
+        else {
+            refreshDuration = 24 * 60 * 60;
+        }
+        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
+                .setMinimumFetchIntervalInSeconds(refreshDuration)
+                .build();
+        mFirebaseRemoteConfig.setConfigSettingsAsync(configSettings);
+        mFirebaseRemoteConfig.setDefaultsAsync(R.xml.remote_config_defaults);
+        mFirebaseRemoteConfig.fetchAndActivate()
+                .addOnCompleteListener(this, new OnCompleteListener<Boolean>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Boolean> task) {
+                        if (task.isSuccessful()) {
+                            boolean updated = task.getResult();
+                            //Log.d("Config params updated: ", updated + "");
+                            //Toast.makeText(BaseActivity.this, "Fetch and activate succeeded",
+                            //      Toast.LENGTH_SHORT).show();
+                        } else {
+                            //Toast.makeText(BaseActivity.this, "Fetch failed",
+                            //       Toast.LENGTH_SHORT).show();
+                        }
+                        setConfigData();
+                    }
+                });
+    /*mFirebaseRemoteConfig.fetchAndActivate().addOnCompleteListener(new OnCompleteListener<Boolean>() {
+        @Override
+        public void onComplete(@NonNull Task<Boolean> task) {
+            if (task.isSuccessful()) {
+
+            }
+        }
+    });*/
+    }
+
+//    public boolean isDeveloperModeEnabled() {
+//        return Utils.isDevMode(getApplicationContext());
 //    }
-//
-////    public boolean isDeveloperModeEnabled() {
-////        return Utils.isDevMode(getApplicationContext());
-////    }
-//public void setConfigData() {
-//    String updateLogoStatus = mFirebaseRemoteConfig.getString("updatelogo");
-//    mDatabase.setUpdateLogoStatus(Integer.parseInt(updateLogoStatus));
-//}
+public void setConfigData() {
+    String updateLogoStatus = mFirebaseRemoteConfig.getString("updatelogo");
+    mDatabase.setUpdateLogoStatus(Integer.parseInt(updateLogoStatus));
+}
     @Override
     protected void onResume() {
         super.onResume();
