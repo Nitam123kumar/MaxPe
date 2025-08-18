@@ -49,7 +49,7 @@
                         android:fontFamily="@font/roboto"
                         android:text="@string/mobile_number"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_8sdp"
+                        android:textSize="@dimen/_12sdp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -94,7 +94,7 @@
                     android:fontFamily="@font/roboto"
                     android:text="@string/operator"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_8sdp"
+                    android:textSize="@dimen/_12sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/ConstraintLayout" />
 
@@ -115,7 +115,7 @@
                     android:fontFamily="@font/roboto"
                     android:text="@string/circle"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_8sdp"
+                    android:textSize="@dimen/_12sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/select_operator" />
 
@@ -144,7 +144,7 @@
                     android:fontFamily="@font/roboto"
                     android:text="@string/amount_"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_8sdp"
+                    android:textSize="@dimen/_12sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txtOperator" />
 

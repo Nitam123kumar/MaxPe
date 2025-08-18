@@ -5,15 +5,70 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".modules.fragments.DepositFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/filterConstraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/filterTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/filter_View"
+            app:layout_constraintBottom_toBottomOf="@+id/filter_View"
+            android:text="Deposit History"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/black"
+            />
+        <View
+            android:id="@+id/filter_View"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/filter_ImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:src="@drawable/filter_icon_svg"
+            app:layout_constraintBottom_toTopOf="@id/transitions"
+            app:layout_constraintEnd_toEndOf="@id/filter_View"
+            app:layout_constraintStart_toStartOf="@id/filter_View"
+            app:layout_constraintTop_toTopOf="@id/filter_View" />
+
+        <TextView
+            android:id="@+id/transitions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_1sdp"
+            android:text="@string/filter"
+            android:textColor="#828282"
+            android:textSize="@dimen/_7sdp"
+            app:layout_constraintBottom_toBottomOf="@id/filter_View"
+            app:layout_constraintEnd_toEndOf="@id/filter_ImageView"
+            app:layout_constraintStart_toStartOf="@id/filter_ImageView"
+            app:layout_constraintTop_toBottomOf="@id/filter_ImageView"
+
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include layout="@layout/statements_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/statements_header"
+        android:visibility="gone"
         android:layout_margin="@dimen/_8sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/filterConstraintLayout"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
@@ -21,6 +76,7 @@
         android:layout_height="0dp"
         android:layout_marginHorizontal="@dimen/_6sdp"
         android:paddingBottom="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_9sdp"
         app:layout_constraintTop_toBottomOf="@id/statements_header"
         >
 

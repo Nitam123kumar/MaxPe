@@ -61,19 +61,20 @@
         android:gravity="end"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
-        android:textSize="@dimen/_10sdp"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintEnd_toStartOf="@+id/max_img"
         android:textColor="@color/black"
-        android:layout_marginEnd="@dimen/_15sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/points_orderIdTV"
         />
 
     <ImageView
+        android:id="@+id/max_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_3sdp"
         android:src="@drawable/group_12772"
-        app:layout_constraintStart_toEndOf="@id/pointsAmountTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/_2sdp"
         app:layout_constraintTop_toTopOf="@id/pointsAmountTV"
         app:layout_constraintBottom_toBottomOf="@id/pointsAmountTV"
         />

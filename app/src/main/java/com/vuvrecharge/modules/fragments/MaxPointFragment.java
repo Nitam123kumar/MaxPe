@@ -77,6 +77,10 @@ public class MaxPointFragment extends BaseFragment implements DefaultView {
     LinearLayout loading;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout refresh_layout;
+    @BindView(R.id.filter_View)
+    View filter_View;
+    @BindView(R.id.statements_header)
+    View date_picker_layout;
     MaxPointFragmentAdapter adapter;
 
     static Date fromDate;
@@ -95,7 +99,7 @@ public class MaxPointFragment extends BaseFragment implements DefaultView {
     DialogFragment newFragment;
     OnFragmentListener listener = null;
     private List<MaxPePointsData> mPointsList = new ArrayList<>();
-
+    Boolean isFrom = false;
     @Override
     public View provideYourFragmentView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_max_point, parent, false);
@@ -121,7 +125,15 @@ public class MaxPointFragment extends BaseFragment implements DefaultView {
         select_to_date.setText("DD MM YYYY");
         loadData("Yes");
         onclickListener();
-
+        filter_View.setOnClickListener(v -> {
+            if (isFrom == false) {
+                date_picker_layout.setVisibility(GONE);
+                isFrom = true;
+            } else {
+                date_picker_layout.setVisibility(VISIBLE);
+                isFrom = false;
+            }
+        });
         refresh_layout.setOnRefreshListener(this::refreshData);
         refresh_layout.setRefreshing(true);
 

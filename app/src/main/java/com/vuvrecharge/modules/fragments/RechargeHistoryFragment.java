@@ -77,6 +77,10 @@ public class RechargeHistoryFragment extends BaseFragment implements DefaultView
     TextView search;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout refresh_layout;
+    @BindView(R.id.filter_View)
+    View filter_View;
+    @BindView(R.id.statements_header)
+    View date_picker_layout;
 //    TextView invoice;
     String device_id = "";
 
@@ -94,7 +98,7 @@ public class RechargeHistoryFragment extends BaseFragment implements DefaultView
     boolean isLoading = true;
     DialogFragment newFragment;
     OnFragmentListener listener = null;
-
+    Boolean isFrom = false;
     @SuppressLint("HardwareIds")
     @Override
     public View provideYourFragmentView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -122,7 +126,15 @@ public class RechargeHistoryFragment extends BaseFragment implements DefaultView
         initializeEventsList();
 
         onclickListener();
-
+        filter_View.setOnClickListener(v -> {
+            if (isFrom == false) {
+                date_picker_layout.setVisibility(GONE);
+                isFrom = true;
+            } else {
+                date_picker_layout.setVisibility(VISIBLE);
+                isFrom = false;
+            }
+        });
         refresh_layout.setOnRefreshListener(this::refreshData);
         refresh_layout.setColorSchemeResources(R.color.colorPrimaryB);
         refresh_layout.setRefreshing(true);

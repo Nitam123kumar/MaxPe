@@ -98,21 +98,21 @@ public class DepositAdapter extends RecyclerView.Adapter<DepositAdapter.Holder> 
                         .load(R.drawable.p)
                         .into(imgDone);
                 txtStatus.setBackgroundDrawable(BaseMethod.getGradientDrawableRe1(mContext.getResources().getColor(R.color.pending)));
-                txtAmount.setTextColor(mContext.getResources().getColor(R.color.pending1));
+                txtAmount.setTextColor(mContext.getResources().getColor(R.color.black));
             } else if (mDepositData.getPayment_status().toUpperCase().equals("SUCCESS")) {
 //                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_history_1);
                 Glide.with(mContext)
                         .load(R.drawable.s)
                         .into(imgDone);
                 txtStatus.setBackgroundDrawable(BaseMethod.getGradientDrawableRe1(mContext.getResources().getColor(R.color.success)));
-                txtAmount.setTextColor(mContext.getResources().getColor(R.color.success1));
+                txtAmount.setTextColor(mContext.getResources().getColor(R.color.black));
             } else {
 //                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_report_1);
                 Glide.with(mContext)
                         .load(R.drawable.f)
                         .into(imgDone);
                 txtStatus.setBackgroundDrawable(BaseMethod.getGradientDrawableRe1(mContext.getResources().getColor(R.color.failed)));
-                txtAmount.setTextColor(mContext.getResources().getColor(R.color.failed1));
+                txtAmount.setTextColor(mContext.getResources().getColor(R.color.black));
             }
             txtStatus.setText(mDepositData.getPayment_status().toUpperCase());
 

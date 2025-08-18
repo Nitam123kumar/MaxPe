@@ -252,6 +252,12 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             }
             id = getIntent().getStringExtra("id");
             type = getIntent().getStringExtra("type");
+            if (type.equals("Postpaid")){
+                consumerNumber.setVisibility(VISIBLE);
+                Consumer_Number.setVisibility(VISIBLE);
+                Consumer_Number.setText("Mobile Number");
+                consumerNumber.setHint("Mobile Number");
+            }
             warning_message = getIntent().getStringExtra("warning_message");
             provider_name.setVisibility(VISIBLE);
             proceedToPay.setVisibility(VISIBLE);

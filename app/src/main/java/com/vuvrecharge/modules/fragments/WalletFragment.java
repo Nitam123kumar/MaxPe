@@ -76,6 +76,10 @@ public class WalletFragment extends BaseFragment implements DefaultView {
     LinearLayout loading;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout refresh_layout;
+    @BindView(R.id.filter_View)
+    View filter_View;
+    @BindView(R.id.statements_header)
+    View date_picker_layout;
     WalletAdapter adapter;
 //    TextView invoice;
     String device_id = "";
@@ -95,7 +99,7 @@ public class WalletFragment extends BaseFragment implements DefaultView {
     DialogFragment newFragment;
     OnFragmentListener listener = null;
     List<WalletData> list= new ArrayList<>();
-
+    Boolean isFrom = false;
     @SuppressLint("HardwareIds")
     @Override
     public View provideYourFragmentView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -119,7 +123,15 @@ public class WalletFragment extends BaseFragment implements DefaultView {
 //        to_date = BaseMethod.format1.format(toDate);
         select_from_date.setText("DD MM YYYY");
         select_to_date.setText("DD MM YYYY");
-
+        filter_View.setOnClickListener(v -> {
+            if (isFrom == false) {
+                date_picker_layout.setVisibility(GONE);
+                isFrom = true;
+            } else {
+                date_picker_layout.setVisibility(VISIBLE);
+                isFrom = false;
+            }
+        });
         loadData("Yes");
         initializeEventsList();
 

@@ -130,6 +130,10 @@ public class MainActivity extends BaseActivity implements DefaultView,
     TextView add_balance;
     @BindView(R.id.statements)
     TextView statements;
+    @BindView(R.id.txtMobileRecharge)
+    TextView txtMobileRecharge;
+    @BindView(R.id.txtRefer)
+    TextView txtRefer;
     @BindView(R.id.recyclerSlider)
     ViewPager2 image_slider;
     @BindView(R.id.available_balance)
@@ -140,6 +144,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
     LinearLayout members_bg;
     @BindView(R.id.downline_pckage)
     LinearLayout downline_pckage;
+    @BindView(R.id.ott_recharge)
+    ImageView ott_recharge;
 
     @BindView(R.id.spotlight_services_recyclerView)
     RecyclerView spotlight_services_recyclerView;
@@ -169,6 +175,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
     TextView name_tv;
     @BindView(R.id.total_ban)
     TextView total_ban;
+    @BindView(R.id.recharge_and_txt)
+    TextView recharge_and_txt;
     @BindView(R.id.loading)
     LinearLayout loading;
     @BindView(R.id.viewPager)
@@ -377,17 +385,17 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 } else {
                     viewPager.setCurrentItem(0, true);
                 }
-                sliderHandler.postDelayed(this, 2000);
+                sliderHandler.postDelayed(this, 3000);
             }
         };
-        sliderHandler.postDelayed(sliderRunnable, 2000);
+        sliderHandler.postDelayed(sliderRunnable, 3000);
 
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 sliderHandler.removeCallbacks(sliderRunnable);
-                sliderHandler.postDelayed(sliderRunnable, 2000);
+                sliderHandler.postDelayed(sliderRunnable, 3000);
             }
         });
 
@@ -1051,6 +1059,24 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 JSONObject data = message1.getJSONObject("main_hero_banner");
                 JSONArray slideArray = message1.getJSONArray("slides");
                 JSONArray youtube_slides = message1.getJSONArray("youtube_slides");
+
+                String dashboard_banner=message1.getString("dashboard_banner");
+                Glide.with(getActivity()).load(dashboard_banner).into(ott_recharge);
+                String footer_banner_text=message1.getString("footer_banner_text");
+                String recharge_pay_bill_string=message1.getString("recharge_pay_bill_string");
+                recharge_and_txt.setText(recharge_pay_bill_string);
+
+                String part1 = "";
+                String part2 = "";
+
+                String[] parts = footer_banner_text.split("&");
+                if (parts.length == 2) {
+                    part1 = parts[0].trim() + " &";
+                    part2 = parts[1].trim();
+                }
+
+                txtMobileRecharge.setText(part1);
+                txtRefer.setText(part2);
 
                 slider_banner.clear();
                 if (slideArray.length() > 0) {

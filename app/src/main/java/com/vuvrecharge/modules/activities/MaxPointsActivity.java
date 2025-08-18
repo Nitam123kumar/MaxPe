@@ -46,6 +46,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -153,7 +154,7 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
         refresh_layout.setOnRefreshListener(this::refreshData);
         refresh_layout.setRefreshing(true);
 
-        if (mMaxPePointsData.isEmpty()){
+        if (mMaxPePointsData.isEmpty() || mMaxPePointsData.size() <= 6){
             view_all_maxPoints.setVisibility(GONE);
         }
         else {
@@ -284,7 +285,7 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
                     txtNoData.setVisibility(GONE);
 
                 }
-                if (mMaxPePointsData.isEmpty()){
+                if (mMaxPePointsData.isEmpty()|| mMaxPePointsData.size() <= 6){
                     view_all_maxPoints.setVisibility(GONE);
                 }
                 else {
@@ -387,7 +388,7 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
             int month = calendar.get(Calendar.MONTH);
             int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-            DatePickerDialog dialog = new DatePickerDialog(requireContext(), R.style.DialogTheme,
+            DatePickerDialog dialog = new DatePickerDialog(requireActivity(), R.style.DialogTheme,
                     (view, selectedYear, selectedMonth, selectedDay) -> {
                         Calendar selectedCal = Calendar.getInstance();
                         selectedCal.set(selectedYear, selectedMonth, selectedDay, 0, 0, 0);

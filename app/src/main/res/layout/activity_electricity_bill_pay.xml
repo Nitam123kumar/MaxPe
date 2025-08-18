@@ -50,7 +50,7 @@
                 android:fontFamily="@font/roboto"
                 android:text="@string/electricity_board"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_8sdp"
+                android:textSize="@dimen/_9sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -111,7 +111,7 @@
                 android:text="@string/consumer_number"
                 android:visibility="gone"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_8sdp"
+                android:textSize="@dimen/_9sdp"
                 app:layout_constraintStart_toStartOf="@id/viewElectricityBillPay"
                 app:layout_constraintTop_toBottomOf="@id/first_constraintLayout" />
 
@@ -120,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/star"
-                android:textSize="@dimen/_8sdp"
+                android:textSize="@dimen/_9sdp"
                 android:textColor="@color/red"
                 app:layout_constraintTop_toTopOf="@id/Consumer_Number"
                 app:layout_constraintStart_toEndOf="@id/Consumer_Number"
@@ -169,7 +169,7 @@
                 android:fontFamily="@font/roboto"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:textColor="#FF0000"
-                android:textSize="@dimen/_8sdp"
+                android:textSize="@dimen/_9sdp"
                 android:visibility="gone"
                 android:layout_marginTop="@dimen/_5sdp"
                 app:layout_constraintEnd_toEndOf="@id/consumerNumber"
@@ -216,7 +216,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_8sdp"
+                android:textSize="@dimen/_9sdp"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/spinnerText"/>
@@ -293,7 +293,7 @@
 
                 android:visibility="gone"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_8sdp"
+                android:textSize="@dimen/_9sdp"
                 app:layout_constraintStart_toStartOf="@id/viewElectricityBillPay"
                 app:layout_constraintTop_toBottomOf="@id/spinnerText2"/>
 

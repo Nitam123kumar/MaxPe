@@ -112,6 +112,8 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
     TextView debit;
     @BindView(R.id.commission)
     TextView commission;
+    @BindView(R.id.debit_maxPoints)
+    TextView debit_maxPoints;
     @BindView(R.id.amount_wallet)
     TextView amount_wallet;
     @BindView(R.id.amount_wallet_2)
@@ -150,6 +152,8 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
     ImageView imgAssured;
     @BindView(R.id.amountDebit)
     RelativeLayout amountDebit;
+    @BindView(R.id.maxPointsDiscountLayout)
+    RelativeLayout maxPointsDiscountLayout;
     String operator_img = "";
     String operator_dunmy_img = "";
     String recharge_type;
@@ -235,10 +239,12 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
                             .into(imgResponse);
                     second_layout.setBackgroundResource(R.drawable.pending_transaction_drawable);
                     amountDebit.setVisibility(VISIBLE);
+                    maxPointsDiscountLayout.setVisibility(VISIBLE);
                     commission_bg.setVisibility(GONE);
                 } else if (mReportsData.getStatus().equals("SUCCESS")) {
                     changeStatusBarColorGreen1();
                     amountDebit.setVisibility(VISIBLE);
+                    maxPointsDiscountLayout.setVisibility(VISIBLE);
                     commission_bg.setVisibility(VISIBLE);
                     second_layout.setBackgroundResource(R.drawable.green_transaction_drawable);
                     Glide.with(this)
@@ -266,6 +272,7 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
                     title.setText("Transaction Successful");
                 } else {
                     amountDebit.setVisibility(GONE);
+                    maxPointsDiscountLayout.setVisibility(GONE);
                     changeStatusBarColorRed();
                     second_layout.setBackgroundResource(R.drawable.failed_transaction_drawable);
                     Glide.with(this)
@@ -343,9 +350,10 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
             double final_charge = Double.parseDouble(mReportsData.getFinal_charge());
            double points = Double.parseDouble(mReportsData.getPoints());
             double amount = Double.parseDouble(mReportsData.getAmount());
-            double commission_details = amount - final_charge-points;
+            double commission_details = amount - final_charge;
             commission.setText("\u20b9" + decimalFormat.format(commission_details));
             debit.setText("\u20b9" + mReportsData.getFinal_charge());
+            debit_maxPoints.setText("\u20b9" + mReportsData.getPoints());
 
             if (mReportsData.getStatus().equals("FAILED")) {
                 if (mReportsData.getOperator_ref().equals("")) {
@@ -569,6 +577,7 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
             mReportsData.setDisplay_message(object.getString("display_message"));
             mReportsData.setComplaint_count(object.getString("complaint_count"));
             mReportsData.setIs_bbps(object.getString("is_bbps"));
+            mReportsData.setPoints(object.getString("points"));
             JSONObject object1 = new JSONObject(object.getString("bill_data"));
             mReportsData.setOperator_ref(object.getString("operator_ref"));
 

@@ -157,7 +157,7 @@ public class SupportActivity extends BaseActivity implements View.OnClickListene
                 mobile_tv.setText(userData.getSupport_number());
             }
             if (userData.getSupport_email() != null) {
-                email.setText(userData.getSupport_email());
+//                email.setText(userData.getSupport_email());
             }
             if (userData.getWhatsapp_number() != null) {
                 tv_whatsapp.setText(userData.getWhatsapp_number());

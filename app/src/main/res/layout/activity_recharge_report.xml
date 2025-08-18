@@ -603,6 +603,44 @@
 
                         </RelativeLayout>
 
+                        <RelativeLayout
+                            android:id="@+id/maxPointsDiscountLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/amountDebit"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:paddingTop="@dimen/_5sdp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/maxpoints_discount"
+                                    android:textColor="@color/black_2"
+                                    android:textSize="@dimen/_11sdp" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/debit_maxPoints"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:paddingTop="@dimen/_1sdp"
+                                android:paddingBottom="@dimen/_3sdp"
+                                android:text=""
+                                android:textColor="@color/black_2"
+                                android:textSize="@dimen/_11sdp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
                     </RelativeLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

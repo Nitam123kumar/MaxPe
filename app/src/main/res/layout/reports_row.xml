@@ -4,20 +4,22 @@
     android:id="@+id/layoutDesignPattern"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_3sdp"
     android:elevation="@dimen/_4sdp"
-    android:padding="@dimen/_5sdp">
+    android:layout_margin="@dimen/_3sdp"
+    android:paddingTop="@dimen/_5sdp"
+    android:paddingStart="@dimen/_5sdp"
+    android:paddingEnd="@dimen/_5sdp">
 
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/operator_img"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
-        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_4sdp"
         android:layout_marginBottom="@dimen/_8sdp"
         android:src="@drawable/done_1"
-        app:layout_constraintBottom_toBottomOf="@id/number"
+        app:layout_constraintBottom_toBottomOf="@id/date_time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/name" />
 
@@ -34,11 +36,22 @@
         android:textSize="@dimen/_10sdp"
         android:textStyle="bold"
         android:layout_marginEnd="@dimen/_15sdp"
-        app:layout_constraintBottom_toTopOf="@id/order_id"
+        app:layout_constraintBottom_toTopOf="@id/number"
         app:layout_constraintStart_toEndOf="@id/operator_img"
         app:layout_constraintEnd_toStartOf="@id/amount"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
+    <TextView
+        android:id="@+id/number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="@string/number"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_9sdp"
+        app:layout_constraintBottom_toTopOf="@id/order_id"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/name" />
 
     <TextView
         android:id="@+id/order_id"
@@ -47,21 +60,21 @@
         android:text="@string/order_id_145258"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:textColor="#6E6E6E"
-        android:textSize="@dimen/_10sdp"
+        android:textSize="@dimen/_8sdp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/date_time"
         app:layout_constraintStart_toStartOf="@id/name"
-        app:layout_constraintTop_toBottomOf="@id/name" />
+        app:layout_constraintTop_toBottomOf="@id/number" />
 
     <TextView
         android:id="@+id/amount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingEnd="@dimen/_2sdp"
-        android:text="@string/validity"
+        android:text="10"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black_2"
-        android:textSize="@dimen/_13sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12sdp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/status"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +89,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:textColor="#B2B2B2"
         android:textSize="@dimen/_9sdp"
-        app:layout_constraintBottom_toTopOf="@id/number"
+        app:layout_constraintBottom_toTopOf="@id/view5"
         app:layout_constraintStart_toStartOf="@id/order_id"
         app:layout_constraintTop_toBottomOf="@id/order_id" />
     <!--    <TextView-->
@@ -105,7 +118,7 @@
         android:textColor="#26A652"
         android:textSize="@dimen/_7sdp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/number"
+        app:layout_constraintBottom_toBottomOf="@id/date_time"
         app:layout_constraintEnd_toEndOf="@id/amount"
         app:layout_constraintTop_toBottomOf="@id/amount" />
 
@@ -118,17 +131,7 @@
         app:layout_constraintEnd_toEndOf="@id/status"
         app:layout_constraintStart_toStartOf="@id/status" />
 
-    <TextView
-        android:id="@+id/number"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:text="@string/number"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_8sdp"
-        app:layout_constraintBottom_toTopOf="@id/view5"
-        app:layout_constraintStart_toStartOf="@id/name"
-        app:layout_constraintTop_toBottomOf="@id/date_time" />
+
 
     <!--    <TextView-->
     <!--        android:id="@+id/user_type"-->
@@ -150,7 +153,7 @@
         android:layout_marginTop="@dimen/_13sdp"
         android:background="#F8F8F8"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/number" />
+        app:layout_constraintTop_toBottomOf="@id/date_time" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

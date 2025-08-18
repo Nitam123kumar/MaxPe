@@ -11,18 +11,18 @@
         android:id="@+id/imgDone"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
-        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_5sdp"
         android:src="@drawable/done_1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/order_id"
-        app:layout_constraintBottom_toBottomOf="@id/reason"/>
+        app:layout_constraintBottom_toBottomOf="@id/date_time"/>
 
     <TextView
         android:id="@+id/order_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/order_id_145258"
-        android:textColor="#6E6E6E"
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="@dimen/_10sdp"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
@@ -31,7 +31,7 @@
         app:layout_constraintStart_toEndOf="@id/imgDone"
         app:layout_constraintEnd_toStartOf="@id/amount"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/date_time"/>
+        app:layout_constraintBottom_toTopOf="@id/reason"/>
 
     <TextView
         android:id="@+id/amount"
@@ -42,7 +42,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:layout_marginEnd="@dimen/_2sdp"
         android:textColor="@color/black_2"
-        android:textSize="@dimen/_13sdp"
+        android:textSize="@dimen/_12sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/order_id"
         app:layout_constraintBottom_toTopOf="@id/remaining_amount"/>
@@ -66,11 +66,11 @@
         android:text="@string/_25_may_2019_12_20_pm"
         android:textColor="@color/black_light"
         android:layout_marginEnd="@dimen/_3sdp"
-        android:textSize="@dimen/_9sdp"
+        android:textSize="@dimen/_8sdp"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         app:layout_constraintStart_toStartOf="@id/order_id"
-        app:layout_constraintTop_toBottomOf="@id/order_id"
-        app:layout_constraintBottom_toTopOf="@id/reason"/>
+        app:layout_constraintTop_toBottomOf="@id/reason"
+        />
 
     <TextView
         android:id="@+id/remaining_amount"
@@ -83,19 +83,20 @@
         android:gravity="end"
         android:textSize="@dimen/_8sdp"
         app:layout_constraintTop_toBottomOf="@id/amount"
-        app:layout_constraintBottom_toBottomOf="@id/reason"
+        app:layout_constraintBottom_toBottomOf="@id/date_time"
         app:layout_constraintEnd_toEndOf="@id/amount"/>
 
     <TextView
         android:id="@+id/reason"
-        android:layout_width="@dimen/_75sdp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/pending"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_8sdp"
+        android:textColor="#6E6E6E"
+        android:textSize="@dimen/_9sdp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/order_id"
-        app:layout_constraintTop_toBottomOf="@id/date_time" />
+        app:layout_constraintEnd_toStartOf="@+id/remaining_amount"
+        app:layout_constraintTop_toBottomOf="@id/order_id" />
 
     <View
         android:id="@+id/view5"
@@ -103,7 +104,7 @@
         android:layout_height="@dimen/_1sdp"
         android:layout_marginTop="@dimen/_13sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/reason"
+        app:layout_constraintTop_toBottomOf="@id/date_time"
         android:background="#F8F8F8"
         />
 

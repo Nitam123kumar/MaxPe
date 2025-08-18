@@ -55,6 +55,7 @@ import com.vuvrecharge.base.BaseActivity;
 import com.vuvrecharge.base.BaseMethod;
 import com.vuvrecharge.databinding.PlanLayoutBinding;
 import com.vuvrecharge.databinding.PlanMpinLayoutBinding;
+import com.vuvrecharge.databinding.ResetmpinDialogBinding;
 import com.vuvrecharge.databinding.ScreenRechargePaymentLayoutBinding;
 import com.vuvrecharge.databinding.TransactionDialogBinding;
 import com.vuvrecharge.databinding.WalletTransactionBottonDialogBinding;

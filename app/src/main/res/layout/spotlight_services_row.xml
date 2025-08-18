@@ -33,9 +33,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_7sdp"
-            android:fontFamily="@font/roboto"
+            android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="@dimen/_8sdp" />
+            android:textSize="@dimen/_9sdp" />
 
     </LinearLayout>
 

@@ -12,9 +12,9 @@
         android:id="@+id/imgDone"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
-        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_5sdp"
         android:src="@drawable/done_1"
-        app:layout_constraintBottom_toBottomOf="@id/txtCharge"
+        app:layout_constraintBottom_toBottomOf="@id/txtDateTime"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/txtOrderId" />
 
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
         android:text="@string/order_id_12316545"
-        android:textColor="#6E6E6E"
+        android:textColor="@color/black"
         android:textSize="@dimen/_10sdp"
         app:layout_constraintStart_toEndOf="@id/imgDone"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,9 +35,10 @@
         android:layout_height="wrap_content"
         android:text="@string/date"
         android:textColor="#B2B2B2"
-        android:textSize="@dimen/_9sdp"
+        android:textSize="@dimen/_8sdp"
         app:layout_constraintStart_toStartOf="@id/txtOrderId"
-        app:layout_constraintTop_toBottomOf="@id/txtOrderId" />
+        app:layout_constraintTop_toBottomOf="@id/txtCharge"
+        app:layout_constraintBottom_toTopOf="@id/view5"/>
 
 
     <TextView
@@ -45,11 +46,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/charge_0"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_8sdp"
-        app:layout_constraintBottom_toTopOf="@id/view5"
+        android:textColor="#6E6E6E"
+        android:textSize="@dimen/_9sdp"
         app:layout_constraintStart_toStartOf="@id/txtOrderId"
-        app:layout_constraintTop_toBottomOf="@id/txtDateTime" />
+        app:layout_constraintTop_toBottomOf="@id/txtOrderId" />
 
     <TextView
         android:id="@+id/txtAmount"
@@ -58,7 +58,7 @@
         android:layout_marginEnd="@dimen/_8sdp"
         android:gravity="end"
         android:text="@string/_10"
-        android:textSize="@dimen/_13sdp"
+        android:textSize="@dimen/_12sdp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/black"
         android:textStyle="bold"
@@ -85,7 +85,7 @@
         android:text="@string/final_amount_0"
         android:textColor="#B2B2B2"
         android:textSize="@dimen/_9sdp"
-        app:layout_constraintBottom_toBottomOf="@id/txtCharge"
+        app:layout_constraintBottom_toBottomOf="@id/txtDateTime"
         app:layout_constraintEnd_toEndOf="@id/txtAmount"
         app:layout_constraintTop_toBottomOf="@id/txtAmount" />
 
@@ -96,6 +96,6 @@
         android:layout_marginTop="@dimen/_13sdp"
         android:background="#F8F8F8"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtCharge" />
+        app:layout_constraintTop_toBottomOf="@id/txtDateTime" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
