@@ -51,12 +51,7 @@ public class RecyclerViewSliderAdapter extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(@NonNull SliderViewHolder holder, int position) {
         YoutubeSlides data = imageList.get(position);
 
-        String thumbnailUrl = data.getThumbnail();
-        if (!thumbnailUrl.startsWith("http")) {
-            thumbnailUrl = YOUTUBE_IMAGE_PATH + thumbnailUrl;
-        }
-
-        Log.d("youtube_Sliders",thumbnailUrl);
+        String thumbnailUrl = data.getThumbnail()+YOUTUBE_IMAGE_PATH;
 
         Glide.with(context).load(thumbnailUrl).placeholder(R.drawable.youtube_v_img).into(holder.imgSlide);
         holder.title.setText(data.getTitle());

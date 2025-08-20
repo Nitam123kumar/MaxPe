@@ -54,7 +54,7 @@
                         app:dotsColor="@color/gray"
                         app:dotsCornerRadius="@dimen/_2sdp"
                         app:selectedDotColor="@color/colorPrimaryB"
-                        app:dotsSize="@dimen/_3sdp"
+                        app:dotsSize="@dimen/_4sdp"
                         app:dotsSpacing="@dimen/_2sdp"
                         android:layout_marginBottom="@dimen/_10sdp"
                         android:visibility="visible"

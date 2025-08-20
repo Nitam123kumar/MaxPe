@@ -222,10 +222,10 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
 
         ArrayList<SlideModel> top_earner_list = new ArrayList<>();
 
-        top_earner_list.add(new SlideModel(R.drawable.image_dummy, ScaleTypes.FIT));
-        top_earner_list.add(new SlideModel(R.drawable.image_dummy, ScaleTypes.FIT));
-        top_earner_list.add(new SlideModel(R.drawable.image_dummy, ScaleTypes.FIT));
-        top_earner_list.add(new SlideModel(R.drawable.image_dummy, ScaleTypes.FIT));
+        top_earner_list.add(new SlideModel(R.drawable.top_earner_ban, ScaleTypes.FIT));
+        top_earner_list.add(new SlideModel(R.drawable.top_earner_ban, ScaleTypes.FIT));
+        top_earner_list.add(new SlideModel(R.drawable.top_earner_ban, ScaleTypes.FIT));
+        top_earner_list.add(new SlideModel(R.drawable.top_earner_ban, ScaleTypes.FIT));
 
         top_earner_ImageSlider.setImageList(top_earner_list, ScaleTypes.FIT);
 //        top_earner_ImageSlider.setIndicatorSelectedColor(Color.RED);

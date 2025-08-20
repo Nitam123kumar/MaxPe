@@ -4,6 +4,7 @@ import static com.vuvrecharge.api.ApiServices.OFFER_ZONE;
 import static com.vuvrecharge.api.ApiServices.YOUTUBE_IMAGE_PATH;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,13 +28,12 @@ public class OfferSliderRecyclerViewAdapter extends RecyclerView.Adapter<OfferSl
 
     private Context context;
     private List<OfferSlider> imageList;
-    private List<String> offer_Sliders;
+
     ItemClickListener listener;
 
-    public OfferSliderRecyclerViewAdapter(Context context, List<String> offer_Sliders,  List<OfferSlider> imageList,ItemClickListener listener) {
+    public OfferSliderRecyclerViewAdapter(Context context,   List<OfferSlider> imageList,ItemClickListener listener) {
         this.context = context;
         this.imageList = imageList;
-        this.offer_Sliders=offer_Sliders;
         this.listener=listener;
     }
 
@@ -51,6 +51,7 @@ public class OfferSliderRecyclerViewAdapter extends RecyclerView.Adapter<OfferSl
         String logoUrl = offerSlider.getLogo();
 
             logoUrl = OFFER_ZONE + logoUrl;
+            Log.d("logoUrl",logoUrl);
 
 
         Glide.with(context).load(logoUrl).into(holder.imgSlide);

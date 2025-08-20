@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/_150sdp"
     android:layout_height="@dimen/_110sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="@dimen/_8sdp"
-    android:layout_margin="@dimen/_6sdp"
+    android:layout_marginEnd="@dimen/_4sdp"
 
    >
 
@@ -17,4 +16,4 @@
         android:layout_gravity="center"
          />
 
-</androidx.cardview.widget.CardView>
+</LinearLayout>

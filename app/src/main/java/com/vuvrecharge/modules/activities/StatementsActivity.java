@@ -84,7 +84,7 @@ public class StatementsActivity extends BaseActivity implements DefaultView, OnF
         ButterKnife.bind(this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         mToolbar.setOnClickListener(this);
-        title.setText("History");
+        title.setText("Reports");
         mDefaultPresenter = new DefaultPresenter(this);
         setStatusBarGradiant(this);
         initializeEventsList();

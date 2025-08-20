@@ -70,8 +70,6 @@ public class CommissionAdapter extends RecyclerView.Adapter<CommissionAdapter.Ho
         @BindView(R.id.imgLogo)
         CircleImageView imgLogo;
 
-        @BindView(R.id.hightLight)
-        ConstraintLayout hightLight;
         @BindView(R.id.txtOperator)
         TextView txtOperator;
         @BindView(R.id.txtOperatorValue)
@@ -89,17 +87,6 @@ public class CommissionAdapter extends RecyclerView.Adapter<CommissionAdapter.Ho
             Glide.with(mContext)
                     .load(url+"/"+mCommissionData.getLogo())
                     .into(imgLogo);
-
-            if (mCommissionData.getName().equals("Vi ( Voda & Idea )")
-                    || mCommissionData.getName().equals("VIDEOCON DTH TV")
-                    || mCommissionData.getName().equals("AIRTEL DIGITAL DTH TV")
-                    || mCommissionData.getName().equals("TATASKY DTH TV")
-                    ){
-                hightLight.setVisibility(GONE);
-            }
-            else {
-                hightLight.setVisibility(VISIBLE);
-            }
 
 
         }

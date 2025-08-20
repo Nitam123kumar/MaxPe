@@ -154,6 +154,8 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
     RelativeLayout amountDebit;
     @BindView(R.id.maxPointsDiscountLayout)
     RelativeLayout maxPointsDiscountLayout;
+    @BindView(R.id.back_home)
+    ImageView back_to_home;
     String operator_img = "";
     String operator_dunmy_img = "";
     String recharge_type;
@@ -220,6 +222,10 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
             Objects.requireNonNull(mToolbar.getNavigationIcon()).setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
             setTitle("");
         }
+        back_to_home.setOnClickListener(v -> {
+            onBackPressed();
+            finish();
+        });
     }
 
     private void setData(ReportsData mReportsData) {

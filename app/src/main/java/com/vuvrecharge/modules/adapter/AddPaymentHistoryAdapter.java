@@ -76,6 +76,8 @@ public class AddPaymentHistoryAdapter extends RecyclerView.Adapter<AddPaymentHis
         TextView paymentTimeTV;
         @BindView(R.id.payment_price)
         TextView paymentPriceTV;
+        @BindView(R.id.order_Id_TV)
+        TextView order_Id_TV;
         AddPaymentHistoryViewHolder(@NonNull View itemView) {
             super(itemView);
             mContext = itemView.getContext();
@@ -91,7 +93,7 @@ public class AddPaymentHistoryAdapter extends RecyclerView.Adapter<AddPaymentHis
 
         public void bind(@NonNull DepositData mDepositData) {
 
-//        txtOrderId.setText("Order Id : " + mDepositData.getOrder_id());
+            order_Id_TV.setText("Order Id : " + mDepositData.getOrder_id());
             paymentPriceTV.setText("\u20b9" + mDepositData.getTotal_amount());
 //        txtCharge.setText("Charge : \u20b9" + mDepositData.getCharge());
 //        txtTotalAmount.setText("Final Amount : \u20b9" + mDepositData.getFinal_amount());
@@ -106,7 +108,7 @@ public class AddPaymentHistoryAdapter extends RecyclerView.Adapter<AddPaymentHis
             } else if (mDepositData.getPayment_status().toUpperCase().equals("SUCCESS")) {
 //                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_history_1);
                 Glide.with(mContext)
-                        .load(R.drawable.phone_pay_svg)
+                        .load(R.drawable.s)
                         .into(imgPayment);
 //                txtStatus.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.success)));
             } else {

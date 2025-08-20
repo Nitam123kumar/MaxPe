@@ -93,7 +93,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/contactSupportLayout"
-                        android:layout_width="@dimen/_135sdp"
+                        android:layout_width="@dimen/_140sdp"
                         android:layout_height="@dimen/_48sdp"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:background="@drawable/img1"
@@ -107,7 +107,7 @@
                             android:layout_height="@dimen/_20sdp"
                             android:contentDescription="@string/contact_us"
                             android:src="@drawable/group_12488"
-                            android:layout_marginStart="@dimen/_7sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
                             app:layout_constraintVertical_chainStyle="packed"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -119,10 +119,10 @@
                             android:layout_height="wrap_content"
                             android:text="@string/call_support"
                             android:gravity="center"
-                            android:textColor="@color/black"
                             android:textStyle="bold"
                             android:layout_marginStart="@dimen/_5sdp"
-                            android:textSize="@dimen/_10sdp"
+                            android:textSize="@dimen/_9sdp"
+                            android:textColor="#B5B5B5"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             app:layout_constraintStart_toEndOf="@id/imgContactSupport"
                             app:layout_constraintTop_toTopOf="@id/imgContactSupport"
@@ -135,8 +135,8 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textStyle="bold"
-                            android:textSize="@dimen/_8sdp"
-                            android:textColor="#B5B5B5"
+                            android:textSize="@dimen/_11sdp"
+                            android:textColor="@color/black"
                             android:text="@string/_7390903230"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             app:layout_constraintTop_toBottomOf="@id/txtContactSupport"
@@ -148,7 +148,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/whatsAppSupportLayout"
-                        android:layout_width="@dimen/_135sdp"
+                        android:layout_width="@dimen/_140sdp"
                         android:layout_height="@dimen/_48sdp"
                         android:background="@drawable/img1"
                         android:elevation="@dimen/_25sdp"
@@ -161,7 +161,7 @@
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="@dimen/_20sdp"
                             android:src="@drawable/whatsapp_icon_svg1"
-                            android:layout_marginStart="@dimen/_7sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
                             app:layout_constraintVertical_chainStyle="packed"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -172,10 +172,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/chat_on_whatsapp"
-                            android:textColor="@color/black"
                             android:gravity="center"
                             android:textStyle="bold"
-                            android:textSize="@dimen/_10sdp"
+                            android:textSize="@dimen/_9sdp"
+                            android:textColor="#B5B5B5"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:layout_marginTop="@dimen/_8sdp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
@@ -190,8 +190,8 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textStyle="bold"
-                            android:textSize="@dimen/_8sdp"
-                            android:textColor="#B5B5B5"
+                            android:textSize="@dimen/_11sdp"
+                            android:textColor="@color/black"
                             android:layout_marginBottom="@dimen/_8sdp"
                             android:text="@string/_7390903230"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -203,7 +203,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/emailSupportLayout"
-                        android:layout_width="@dimen/_135sdp"
+                        android:layout_width="@dimen/_140sdp"
                         android:layout_height="@dimen/_48sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:background="@drawable/img1"
@@ -218,7 +218,7 @@
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="@dimen/_14sdp"
                             android:src="@drawable/email_svg"
-                            android:layout_marginStart="@dimen/_7sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
                             app:layout_constraintVertical_chainStyle="packed"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -230,8 +230,8 @@
                             android:layout_height="wrap_content"
                             android:text="@string/email_us"
                             android:gravity="center"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10sdp"
+                            android:textColor="#B5B5B5"
+                            android:textSize="@dimen/_9sdp"
                             android:textStyle="bold"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
@@ -246,9 +246,9 @@
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
                             android:textStyle="bold"
-                            android:textColor="#B5B5B5"
+                            android:textColor="@color/black"
                             android:text="@string/support_maxpe_in"
-                            android:textSize="@dimen/_8sdp"
+                            android:textSize="@dimen/_11sdp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             app:layout_constraintStart_toStartOf="@id/txtEmailSupport"
                             app:layout_constraintTop_toBottomOf="@id/txtEmailSupport"
@@ -258,7 +258,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/feedbackLayout"
-                        android:layout_width="@dimen/_135sdp"
+                        android:layout_width="@dimen/_140sdp"
                         android:layout_height="@dimen/_48sdp"
                         android:background="@drawable/img1"
                         android:elevation="@dimen/_25sdp"
@@ -272,7 +272,7 @@
                             android:layout_width="@dimen/_19sdp"
                             android:layout_height="@dimen/_19sdp"
                             android:src="@drawable/feedback_svg_1"
-                            android:layout_marginStart="@dimen/_7sdp"
+                            android:layout_marginStart="@dimen/_8sdp"
                             app:layout_constraintVertical_chainStyle="packed"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -286,7 +286,7 @@
                             android:textColor="@color/black"
                             android:gravity="center"
                             android:textStyle="bold"
-                            android:textSize="@dimen/_10sdp"
+                            android:textSize="@dimen/_9sdp"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             app:layout_constraintTop_toTopOf="@id/imgAddressSupport"
@@ -325,7 +325,7 @@
 
                     <TextView
                         android:id="@+id/llPrepaidNumber"
-                        android:layout_width="@dimen/_135sdp"
+                        android:layout_width="@dimen/_140sdp"
                         android:layout_height="@dimen/_32sdp"
                         android:background="@drawable/img1"
                         android:elevation="@dimen/_25sdp"
@@ -342,13 +342,12 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/updatedLayout"
-                    android:layout_width="@dimen/_138sdp"
+                    android:layout_width="@dimen/_140sdp"
                     android:layout_height="@dimen/_40sdp"
-                    android:layout_marginStart="@dimen/_13sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/img1"
                     android:elevation="@dimen/_25sdp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/contactSupportLayout"
                     app:layout_constraintTop_toBottomOf="@id/llPrepaidNumber"
                     app:layout_constraintEnd_toStartOf="@id/updateLayout2">
 
@@ -396,7 +395,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/updateLayout2"
-                    android:layout_width="@dimen/_138sdp"
+                    android:layout_width="@dimen/_140sdp"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:background="@drawable/img1"
@@ -450,7 +449,7 @@
 
                     <TextView
                         android:id="@+id/llDTHNumber"
-                        android:layout_width="@dimen/_135sdp"
+                        android:layout_width="@dimen/_140sdp"
                         android:layout_height="@dimen/_32sdp"
                         android:background="@drawable/img1"
                         android:elevation="@dimen/_25sdp"
@@ -465,12 +464,35 @@
                         app:layout_constraintEnd_toEndOf="@id/whatsAppSupportLayout"
                         app:layout_constraintTop_toTopOf="@id/llPrepaidNumber"/>
 
-                        <TextView
+                <!--<com.mukesh.OtpView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:inputType="number"
+                    android:itemBackground="@drawable/otp_bg"
+                    android:text=""
+                    android:textColor="@color/black_2"
+                    android:textSize="@dimen/_10sdp"
+                    app:hideLineWhenFilled="true"
+                    app:itemCount="4"
+                    app:itemHeight="@dimen/_32sdp"
+                    app:itemSpacing="@dimen/_6sdp"
+                    app:itemWidth="@dimen/_32sdp"
+                    app:lineColor="#8C8C8C"
+                    app:lineWidth="@dimen/_1sdp"
+                    app:state_filled="true"
+                    app:viewType="rectangle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/updatedLayout"/>
+-->
+                <TextView
                             android:id="@+id/follow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/follow_us"
-                            android:textSize="@dimen/_9sdp"
+                            android:textSize="@dimen/_11sdp"
                             android:fontFamily="@font/roboto"
                             android:textStyle="bold"
                             android:gravity="center_vertical"
@@ -496,8 +518,8 @@
 
                             <ImageView
                                 android:id="@+id/youtube"
-                                android:layout_width="@dimen/_17sdp"
-                                android:layout_height="@dimen/_17sdp"
+                                android:layout_width="@dimen/_19sdp"
+                                android:layout_height="@dimen/_19sdp"
                                 android:layout_marginEnd="@dimen/_10sdp"
                                 android:src="@drawable/youtube_svg"
                                 android:contentDescription="@string/app_name"
@@ -506,8 +528,8 @@
 
                             <ImageView
                                 android:id="@+id/facebook"
-                                android:layout_width="@dimen/_17sdp"
-                                android:layout_height="@dimen/_17sdp"
+                                android:layout_width="@dimen/_19sdp"
+                                android:layout_height="@dimen/_19sdp"
                                 android:src="@drawable/facebook_svg"
                                 android:layout_marginStart="@dimen/_5sdp"
                                 android:contentDescription="@string/app_name"
@@ -516,8 +538,8 @@
 
                             <ImageView
                                 android:id="@+id/linkedln"
-                                android:layout_width="@dimen/_17sdp"
-                                android:layout_height="@dimen/_17sdp"
+                                android:layout_width="@dimen/_19sdp"
+                                android:layout_height="@dimen/_19sdp"
                                 android:src="@drawable/in_link"
                                 android:contentDescription="@string/app_name"
                                 android:layout_marginStart="@dimen/_5sdp"
@@ -526,8 +548,8 @@
 
                             <ImageView
                                 android:id="@+id/xcode"
-                                android:layout_width="@dimen/_17sdp"
-                                android:layout_height="@dimen/_17sdp"
+                                android:layout_width="@dimen/_19sdp"
+                                android:layout_height="@dimen/_19sdp"
                                 android:layout_marginStart="@dimen/_5sdp"
                                 android:contentDescription="@string/app_name"
                                 android:src="@drawable/group__10_"

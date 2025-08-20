@@ -60,6 +60,7 @@ import com.vuvrecharge.databinding.ScreenRechargePaymentLayoutBinding;
 import com.vuvrecharge.databinding.TransactionDialogBinding;
 import com.vuvrecharge.databinding.WalletTransactionBottonDialogBinding;
 import com.vuvrecharge.modules.activities.AboutActivity;
+import com.vuvrecharge.modules.activities.AccountActivity;
 import com.vuvrecharge.modules.activities.AfterDepositActivity;
 import com.vuvrecharge.modules.activities.RechargeActivity;
 import com.vuvrecharge.modules.activities.RechargeReportActivity;
@@ -524,9 +525,17 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
                     false
             );
 
-            Dialog dialog = new Dialog(getActivity(), R.style.CustomAlertDialog);
+            dialog = new BottomSheetDialog(getActivity(), R.style.AppBottomSheetDialogTheme);
             dialog.setContentView(binding.getRoot());
-            dialog.setCancelable(true);
+            changeStatusBarColor(dialog);
+
+            bottomSheet = dialog.findViewById(com.denzcoskun.imageslider.R.id.design_bottom_sheet);
+            if (bottomSheet != null) {
+                BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+                behavior.setSkipCollapsed(false);
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                behavior.setPeekHeight(600);
+            }
 
             if (warning_message.isEmpty()) {
                 binding.warningMessage.setVisibility(View.GONE);
@@ -546,6 +555,12 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
             binding.confirm.setEnabled(false);
             binding.confirm.setBackgroundResource(R.drawable.proceed_to_pay);
             binding.confirm.setTextColor(getResources().getColor(R.color.black));
+
+            binding.forgotMPin.setOnClickListener(v -> {
+                Intent intent = new Intent(getActivity(), AccountActivity.class);
+                intent.putExtra("title", "Forgot MPin");
+                startActivity(intent);
+            });
 
             TextWatcher pinWatcher = new TextWatcher() {
                 @Override
@@ -596,9 +611,10 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
                 et.addTextChangedListener(pinWatcher);
             }
 
-            Objects.requireNonNull(dialog.getWindow())
-                    .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
+
+//            Objects.requireNonNull(dialog.getWindow())
+//                    .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
             binding.close.setOnClickListener(v -> {
                 dialog.dismiss();
                 hideKeyBoard(mpinDigits[0]);

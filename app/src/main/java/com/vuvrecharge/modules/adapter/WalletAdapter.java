@@ -101,12 +101,12 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.MainListHo
 //            total_amount.setText("Amount : \u20b9" + resultsBean.getTxn_amount());
 
             if (resultsBean.getType().equals("Cr")) {
-                amount.setText(resultsBean.getAmount());
+                amount.setText("+"+resultsBean.getAmount());
                 amount.setTextColor(mContext.getResources().getColor(R.color.black));
 //                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_history_1);
                 imgDone.setImageResource(R.drawable.wallet_receved_svg);
             } else {
-                amount.setText(resultsBean.getAmount());
+                amount.setText("-"+resultsBean.getAmount());
                 amount.setTextColor(mContext.getResources().getColor(R.color.black));
                 imgDone.setImageResource(R.drawable.walled_svg_img);
 //                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_report_1);

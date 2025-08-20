@@ -83,9 +83,9 @@
             <!-- Four EditTexts as PIN boxes -->
             <EditText
                 android:id="@+id/pin_digit_1"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_margin="8dp"
+                android:layout_width="@dimen/_42sdp"
+                android:layout_height="@dimen/_42sdp"
+                android:layout_margin="@dimen/_6sdp"
                 android:background="@drawable/mpin_box_bg"
                 android:gravity="center"
                 android:inputType="number"
@@ -94,9 +94,9 @@
 
             <EditText
                 android:id="@+id/pin_digit_2"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_margin="8dp"
+                android:layout_width="@dimen/_42sdp"
+                android:layout_height="@dimen/_42sdp"
+                android:layout_margin="@dimen/_6sdp"
                 android:background="@drawable/mpin_box_bg"
                 android:gravity="center"
                 android:inputType="number"
@@ -105,9 +105,9 @@
 
             <EditText
                 android:id="@+id/pin_digit_3"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_margin="8dp"
+                android:layout_width="@dimen/_42sdp"
+                android:layout_height="@dimen/_42sdp"
+                android:layout_margin="@dimen/_6sdp"
                 android:background="@drawable/mpin_box_bg"
                 android:gravity="center"
                 android:inputType="number"
@@ -116,9 +116,9 @@
 
             <EditText
                 android:id="@+id/pin_digit_4"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_margin="8dp"
+                android:layout_width="@dimen/_42sdp"
+                android:layout_height="@dimen/_42sdp"
+                android:layout_margin="@dimen/_6sdp"
                 android:background="@drawable/mpin_box_bg"
                 android:gravity="center"
                 android:inputType="number"

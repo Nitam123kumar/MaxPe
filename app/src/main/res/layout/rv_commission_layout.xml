@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_55sdp"
-    android:background="@drawable/commission_item_bg"
+    android:background="@drawable/img1"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     
     
@@ -53,49 +53,6 @@
         app:layout_constraintTop_toBottomOf="@id/txtOperator"
         app:layout_constraintStart_toStartOf="@id/txtOperator"
         app:layout_constraintBottom_toBottomOf="@id/viewItem"/>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/hightLight"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_15sdp"
-        android:background="@drawable/highlight_bg"
-        app:layout_constraintTop_toTopOf="@id/txtOperator"
-        app:layout_constraintStart_toEndOf="@id/txtOperator"
-        app:layout_constraintBottom_toBottomOf="@id/txtOperator"
-        android:paddingEnd="@dimen/_5sdp"
-        android:layout_marginStart="@dimen/_7sdp"
-        >
-
-        <ImageView
-            android:id="@+id/star_ImgV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/star_svg_img"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="@dimen/_5sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:text="@string/popular"
-            android:textSize="11sp"
-            android:gravity="center_vertical"
-            android:fontFamily="@font/roboto"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toEndOf="@id/star_ImgV"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-
-            />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
     <TextView
         android:id="@+id/txtOperatorValue"

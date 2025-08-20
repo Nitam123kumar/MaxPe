@@ -210,6 +210,19 @@
 
                     </RelativeLayout>
 
+                    <ImageView
+                        android:id="@+id/back_home"
+                        android:layout_width="@dimen/_27sdp"
+                        android:layout_height="@dimen/_27sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:background="@drawable/wallet_back_shape"
+                        android:contentDescription="@string/max_pe"
+                        android:padding="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:src="@drawable/back_arrow1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <LinearLayout
                         android:id="@+id/second_layout"
                         android:layout_width="match_parent"
@@ -768,7 +781,7 @@
                 android:gravity="center_horizontal"
                 android:text="@string/your_service_provider_may_take_two_working_days_to_consider_bill_paid"
                 android:textColor="@color/black_2"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_11sdp"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/complain_details"
                 app:layout_constraintStart_toStartOf="parent"

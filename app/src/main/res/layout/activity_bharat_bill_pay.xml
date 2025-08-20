@@ -93,7 +93,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_marginHorizontal="@dimen/_8sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="#F4F2F2"
                     app:layout_constraintTop_toBottomOf="@id/recycler_view_provider" />
 
@@ -101,7 +101,7 @@
                     android:id="@+id/utility_billsTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:drawableStart="@drawable/utility_bills_icon"
                     android:drawablePadding="@dimen/_10sdp"
                     android:gravity="center"
@@ -129,7 +129,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_marginHorizontal="@dimen/_8sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="#F4F2F2"
                     app:layout_constraintTop_toBottomOf="@id/utility_bills_recyclerView" />
 
@@ -137,7 +137,7 @@
                     android:id="@+id/ott_rechargeTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:drawableStart="@drawable/ott_section_svg"
                     android:drawablePadding="@dimen/_10sdp"
                     android:gravity="center"
@@ -165,7 +165,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_marginHorizontal="@dimen/_8sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="#F4F2F2"
                     app:layout_constraintTop_toBottomOf="@id/ott_recharge_recyclerView" />
 
@@ -173,7 +173,7 @@
                     android:id="@+id/FinancialServices"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:drawablePadding="@dimen/_10sdp"
                     android:gravity="center"
                     android:text="@string/financial_services"
@@ -201,7 +201,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_marginHorizontal="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="#F4F2F2"
                     app:layout_constraintTop_toBottomOf="@id/financial_services_recyclerView" />
 
@@ -220,7 +220,7 @@
                     android:id="@+id/MAXPE"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="@dimen/_28sdp"
                     android:fontFamily="@font/roboto_bold"
                     android:text="@string/maxpe"
                     android:textColor="#F2F2F2"

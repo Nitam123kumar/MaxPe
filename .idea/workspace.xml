@@ -237,6 +237,11 @@
           <theme>@android:style/Theme.Material.Light</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_close.xml">
+        <config>
+          <theme>@android:style/Theme.Material.Light</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/drawable/in_link.xml">
         <config>
           <theme>@android:style/Theme.Material.Light</theme>
@@ -613,6 +618,11 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/font/inter_semibold.xml">
+        <config>
+          <theme>@android:style/Theme.Material.Light</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/font/montserrat.xml">
         <config>
           <theme>@android:style/Theme.Material.Light</theme>
         </config>
@@ -1488,48 +1498,52 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5334b43-0456-4b0b-815c-b3826a2035cf" name="Changes" comment="include  Firebase Remote Config  On 7/08/2025">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/blur_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/blur_img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/boy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/flash_rec.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/img_hand.png" afterDir="false" />
+    <list default="true" id="b5334b43-0456-4b0b-815c-b3826a2035cf" name="Changes" comment="Some Changes All Activity  On 18/08/2025">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/top_earner_ban.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/youtube_icon.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/font/montserrat.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/AccountActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/AccountActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/MaxPointsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/MaxPointsActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/RechargeReportActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/RechargeReportActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/SupportActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/SupportActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/ElectricityBillPayActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/ShareEarnActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/ShareEarnActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/StatementsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/StatementsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/CommissionChartActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/CommissionChartActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/PlanDetailsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/activities/newActivities/PlanDetailsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/DepositAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/DepositAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/AddPaymentHistoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/AddPaymentHistoryAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/CommissionAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/CommissionAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/OfferSliderRecyclerViewAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/OfferSliderRecyclerViewAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/RecyclerViewSliderAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/RecyclerViewSliderAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/WalletAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/adapter/WalletAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/fragments/DepositFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/fragments/DepositFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/fragments/MaxPointFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/fragments/MaxPointFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/fragments/RechargeHistoryFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/fragments/RechargeHistoryFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/fragments/WalletFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vuvrecharge/modules/fragments/WalletFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/arrow_14.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/arrow_14.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/mpin_box_bg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/mpin_box_bg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/image_dummy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/youtube_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/youtube_v_img.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/youtube_v_img.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/font/inter.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/font/inter.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_account.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_account.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_bharat_bill_pay.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_bharat_bill_pay.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_commission_chart.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_commission_chart.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_electricity_bill_pay.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_electricity_bill_pay.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_plan.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_plan.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_recharge.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_recharge.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_recharge_report.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_recharge_report.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_shareearn.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_shareearn.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_statements.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_statements.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_support.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_support.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/content_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/content_main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/deposit_row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/deposit_row.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_deposit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_deposit.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_max_point.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_max_point.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_recharge_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_recharge_history.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_wallet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_wallet.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/latest_transitions_history_item_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/latest_transitions_history_item_layout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/max_point_row_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/max_point_row_layout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/max_points_row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/max_points_row.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/offer_slider_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/offer_slider_layout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/passbook_row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/passbook_row.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/plan_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/plan_layout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/plan_mpin_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/plan_mpin_layout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/plan_row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/plan_row.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/reports_row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/reports_row.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/spotlight_services_row.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/spotlight_services_row.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/rv_commission_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/rv_commission_layout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/preloaded_fonts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/preloaded_fonts.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -1959,7 +1973,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754569032234</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Some Changes All Activity  On 18/08/2025">
+      <option name="closed" value="true" />
+      <created>1755520536314</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1755520536314</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -1993,7 +2015,8 @@
     <MESSAGE value="implement WedView On 6/08/2025" />
     <MESSAGE value="Some Changes UI On 6/08/2025" />
     <MESSAGE value="include  Firebase Remote Config  On 7/08/2025" />
-    <option name="LAST_COMMIT_MESSAGE" value="include  Firebase Remote Config  On 7/08/2025" />
+    <MESSAGE value="Some Changes All Activity  On 18/08/2025" />
+    <option name="LAST_COMMIT_MESSAGE" value="Some Changes All Activity  On 18/08/2025" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2030,12 +2053,12 @@
       <map>
         <entry key="com.vuvrecharge">
           <value>
-            <CheckInfo lastCheckTimestamp="1755489647791" />
+            <CheckInfo lastCheckTimestamp="1755662548409" />
           </value>
         </entry>
         <entry key="com.vuvrecharge.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1755489647791" />
+            <CheckInfo lastCheckTimestamp="1755662548409" />
           </value>
         </entry>
       </map>

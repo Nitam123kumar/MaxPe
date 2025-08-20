@@ -227,8 +227,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
     LinearLayout viewAll;
     @BindView(R.id.headerImage_layout)
     ConstraintLayout headerImage_layout;
-    @BindView(R.id.imgReferAndEarn)
-    ImageView imgReferAndEarn;
+    @BindView(R.id.onClickToShare)
+    ConstraintLayout onClickToShare;
     @BindView(R.id.prepaidTxt)
     TextView prepaidTxt;
 
@@ -304,7 +304,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         postpaid.setOnClickListener(this);
         dTH.setOnClickListener(this);
         landline.setOnClickListener(this);
-        imgReferAndEarn.setOnClickListener(this);
+        onClickToShare.setOnClickListener(this);
         electricity.setOnClickListener(this);
         fasTag.setOnClickListener(this);
         cylinder.setOnClickListener(this);
@@ -330,6 +330,10 @@ public class MainActivity extends BaseActivity implements DefaultView,
             float offset = position * -(2 * offsetPx + pageMarginPx);
             page.setTranslationX(offset);
         });
+
+        offerSliderAdapter = new OfferSliderRecyclerViewAdapter(this, offerSliderList, this);
+        offer_for_you_recyclerView.setAdapter(offerSliderAdapter);
+
 
         sliderAdapter = new RecyclerViewSliderAdapter(this, MainActivity.this, youtubeVideosList);
         image_slider.setAdapter(sliderAdapter);
@@ -507,32 +511,32 @@ public class MainActivity extends BaseActivity implements DefaultView,
 //            Log.d("youtubeVideosList", String.valueOf(youtubeVideosList));
 //            sliderAdapter.notifyDataSetChanged();
 
-            imageList_offer = new ArrayList<>();
-            List<OfferSlider> offer_sliders = (mDatabase.getUserData().getOffer_slides());
-            for (OfferSlider offerSlides : offer_sliders) {
-                imageList_offer.add(mDatabase.getUserData().getOffer_slides_path() + "/" + offerSlides.getLogo() + getTitle());
-
-                if (offerSlides.getData() != null) {
-                    String intentData = offerSlides.getData();
-                    Log.d("djfhsdjfgbsdj", intentData);
-                    JSONObject activityData = new JSONObject(offerSlides.getData());
-                    JSONObject activityExtraData = new JSONObject(activityData.getString("extra_data"));
-
-                    if (activityExtraData.length() > 0) {
-
-                        Iterator<String> keys = activityExtraData.keys();
-                        while (keys.hasNext()) {
-                            String key = keys.next();
-                            String value = activityExtraData.optString(key, "");
-
-                        }
-
-                    }
-                    Log.d("activityExtraData", "Data Title: " + activityExtraData);
-//                    Log.d("OfferSlider", "Data Intent: " + object.getString("intent_name"));
-
-                }
-            }
+//            imageList_offer = new ArrayList<>();
+//            List<OfferSlider> offer_sliders = (mDatabase.getUserData().getOffer_slides());
+//            for (OfferSlider offerSlides : offer_sliders) {
+//                imageList_offer.add(mDatabase.getUserData().getOffer_slides_path() + "/" + offerSlides.getLogo() + getTitle());
+//                Log.d("imageList_offer", String.valueOf(imageList_offer));
+//                if (offerSlides.getData() != null) {
+//                    String intentData = offerSlides.getData();
+//
+//                    JSONObject activityData = new JSONObject(offerSlides.getData());
+//                    JSONObject activityExtraData = new JSONObject(activityData.getString("extra_data"));
+//
+//                    if (activityExtraData.length() > 0) {
+//
+//                        Iterator<String> keys = activityExtraData.keys();
+//                        while (keys.hasNext()) {
+//                            String key = keys.next();
+//                            String value = activityExtraData.optString(key, "");
+//
+//                        }
+//
+//                    }
+//                    Log.d("activityExtraData", "Data Title: " + activityExtraData);
+////                    Log.d("OfferSlider", "Data Intent: " + object.getString("intent_name"));
+//
+//                }
+//            }
 
             ott_List = new ArrayList<>();
             List<OTTSubscriptionsData> ottItem = (mDatabase.getUserData().getLogoSliders());
@@ -550,6 +554,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
             List<SpotlightData> spotlightData = (mDatabase.getUserData().getSpotlight_services());
             for (SpotlightData spotlightData1 : spotlightData) {
                 spotlight.add(spotlightData1.getLogo() + getTitle());
+                Log.d("spotlight", String.valueOf(spotlight));
 
                 if (spotlightData1.getData() != null) {
                     String intentData = spotlightData1.getData();
@@ -563,9 +568,6 @@ public class MainActivity extends BaseActivity implements DefaultView,
             spotlightServicesAdapter = new SpotlightServicesAdapter(this, spotlight, mDatabase.getUserData().getSpotlight_services(), this);
             spotlight_services_recyclerView.setAdapter(spotlightServicesAdapter);
 
-            offerSliderAdapter = new OfferSliderRecyclerViewAdapter(this, imageList_offer, userData.getOffer_slides(), this);
-            offer_for_you_recyclerView.setAdapter(offerSliderAdapter);
-            Log.d("imageList_offer", String.valueOf(mDatabase.getUserData().getOffer_slides()));
 
 
             if (from.equals("Api")) {
@@ -1059,6 +1061,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 JSONObject data = message1.getJSONObject("main_hero_banner");
                 JSONArray slideArray = message1.getJSONArray("slides");
                 JSONArray youtube_slides = message1.getJSONArray("youtube_slides");
+                JSONArray offer_slides = message1.getJSONArray("offer_slides");
+                Log.d("offer_slides", String.valueOf(offer_slides));
 
                 String dashboard_banner=message1.getString("dashboard_banner");
                 Glide.with(getActivity()).load(dashboard_banner).into(ott_recharge);
@@ -1094,7 +1098,26 @@ public class MainActivity extends BaseActivity implements DefaultView,
 
 
                 }
-                youtubeVideosList.clear();
+                offerSliderList.clear();
+                if (offer_slides.length() > 0) {
+
+                    for (int i = 0; i < offer_slides.length(); i++) {
+                        JSONObject objectOffer_slides = offer_slides.getJSONObject(i);
+                        OfferSlider offerSlides = new OfferSlider();
+                        offerSlides.setOfferTitle(objectOffer_slides.getString("title"));
+                        offerSlides.setLogo(objectOffer_slides.getString("logo"));
+                        offerSlides.setUrl(objectOffer_slides.getString("url"));
+                        offerSlides.setRedirection_type(objectOffer_slides.getString("redirection_type"));
+                        offerSlides.setData(objectOffer_slides.getString("data"));
+                        Log.d("logoUrl", offerSlides.getLogo());
+
+                        offerSliderList.add(offerSlides);
+                    }
+                    offerSliderAdapter.notifyDataSetChanged();
+
+
+                }
+                    youtubeVideosList.clear();
                 if (youtube_slides.length() > 0) {
 
                     for (int i = 0; i < youtube_slides.length(); i++) {
@@ -1612,7 +1635,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 intent = new Intent(getActivity(), WalletActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.imgReferAndEarn:
+            case R.id.onClickToShare:
                 intent = new Intent(getActivity(), ShareEarnActivity.class);
                 startActivity(intent);
                 break;

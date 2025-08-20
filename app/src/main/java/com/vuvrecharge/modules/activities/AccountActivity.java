@@ -215,6 +215,11 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         mDefaultPresenter.getPaymentSetting2(device_id + "", "timepass");
         mDefaultPresenter.totalReferrals(device_id);
 
+
+        if (getIntent().getStringExtra("title") != null) {
+            ResetMpinPin(mDatabase.getUserData().getMobile());
+        }
+
 //        statusBarColor();
     }
 

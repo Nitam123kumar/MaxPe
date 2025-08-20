@@ -118,6 +118,9 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
     CommissionPreferences prepaidCommissionPreferences;
     CommissionPreferences dTHCommissionPreferences;
     CommissionPreferences otherCommissionPreferences;
+    int itemCountPrepaid = 0;
+    int itemCountDth = 0;
+    int itemCountOther = 0;
     HashMap<String, String> map, map2, map3;
     protected void attachBaseContext(Context newBase) {
         SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
@@ -136,42 +139,51 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
         getStartedTV.setOnClickListener(this);
         setStatusBarGradiant(this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//        prepaidCommissionPreferences = new CommissionPreferences(this, "PrepaidCommission");
-//        otherCommissionPreferences = new CommissionPreferences(this, "OtherCommission");
-//        dTHCommissionPreferences = new CommissionPreferences(this, "DTHCommission");
-//        map = prepaidCommissionPreferences.getData();
-//        map2 = dTHCommissionPreferences.getData();
-//        map3 = otherCommissionPreferences.getData();
+
+
+
+
+        prepaidCommissionPreferences = new CommissionPreferences(this, "PrepaidCommission");
+        otherCommissionPreferences = new CommissionPreferences(this, "OtherCommission");
+        dTHCommissionPreferences = new CommissionPreferences(this, "DTHCommission");
+        map = prepaidCommissionPreferences.getData();
+        map2 = dTHCommissionPreferences.getData();
+        map3 = otherCommissionPreferences.getData();
 
 //        initializePrepaidList();
 //        initializeDTHList();
 //        initializeOtherList();
-        initializeEventsList();
-//        if (map.get("type") != null) {
-//            prepaidCommissionList.clear();
-//            dthCommissionList.clear();
-//            otherCommissionList.clear();
-//            Gson gson = new Gson();
-//            Type type_ = new TypeToken<List<DTHCommission>>() {
-//            }.getType();
-//            ArrayList<DTHCommission> prepaidDataList = gson.fromJson(map.get("list"), type_);
-//            this.prepaidCommissionList = prepaidDataList;
+
+        if (map.get("type") != null) {
+            prepaidCommissionList.clear();
+            dthCommissionList.clear();
+            otherCommissionList.clear();
+            Gson gson = new Gson();
+            Type type_ = new TypeToken<List<DTHCommission>>() {
+            }.getType();
+            ArrayList<DTHCommission> prepaidDataList = gson.fromJson(map.get("list"), type_);
+            this.prepaidCommissionList = prepaidDataList;
 //            prepaidAdapter.addEvents(prepaidCommissionList);
-//            Gson gson2 = new Gson();
-//            Type type_2 = new TypeToken<List<DTHCommission>>() {
-//            }.getType();
-//            ArrayList<DTHCommission> dthDataList = gson2.fromJson(map2.get("list"), type_2);
-//            this.dthCommissionList = dthDataList;
+            Gson gson2 = new Gson();
+            Type type_2 = new TypeToken<List<DTHCommission>>() {
+            }.getType();
+            ArrayList<DTHCommission> dthDataList = gson2.fromJson(map2.get("list"), type_2);
+            this.dthCommissionList = dthDataList;
 //            dthAdapter.addEvents(dthCommissionList);
-//            Gson gson3 = new Gson();
-//            Type type_3 = new TypeToken<List<DTHCommission>>() {
-//            }.getType();
-//            ArrayList<DTHCommission> otherDataList = gson3.fromJson(map3.get("list"), type_3);
-//            this.otherCommissionList = otherDataList;
+            Gson gson3 = new Gson();
+            Type type_3 = new TypeToken<List<DTHCommission>>() {
+            }.getType();
+            ArrayList<DTHCommission> otherDataList = gson3.fromJson(map3.get("list"), type_3);
+            this.otherCommissionList = otherDataList;
 //            othersAdapter.addEvents(otherCommissionList);
-//        } else {
-//            mDefaultPresenter.getCommissions(device_id + "");
-//        }
+        } else {
+            mDefaultPresenter.getCommissions(device_id + "");
+        }
+        initializeEventsList();
+
+        itemCountPrepaid=prepaidCommissionList.size();
+        itemCountDth=dthCommissionList.size();
+        itemCountOther=otherCommissionList.size();
     }
 
     @Override
@@ -182,21 +194,26 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
 
     private void initializeEventsList() {
 
-        setFragment(new PrepaidFragment());
-        viewPrepaid.setBackgroundResource(R.drawable.commission_tab_shape);
-        prepaidTextView.setTextColor(Color.WHITE);
-        viewDTH.setBackgroundResource(R.drawable.null_shape);
-        DTHTextView.setTextColor(getResources().getColor(R.color.colorBlackU));
-        viewBillPayments.setBackgroundResource(R.drawable.null_shape);
-        billPaymentsTextView.setTextColor(getResources().getColor(R.color.colorBlackU));
-        prepaidTextView.setText(Html.fromHtml("<b>Prepaid</b>"));
-        DTHTextView.setText(Html.fromHtml("DTH"));
-        billPaymentsTextView.setText(Html.fromHtml("Bill Payments"));
-        Operators.setText("5");
-        operatorTV.setText("Operators");
-        bill_ImgV.setImageResource(R.drawable.biller_svg);
-        mobile_ImgV.setImageResource(R.drawable.mobile_white_svg);
-        dth_ImgV.setImageResource(R.drawable.dth_svg);
+            if (prepaidCommissionList.size()>0){
+                itemCountPrepaid=prepaidCommissionList.size();
+                setFragment(new PrepaidFragment());
+                viewPrepaid.setBackgroundResource(R.drawable.commission_tab_shape);
+                prepaidTextView.setTextColor(Color.WHITE);
+                viewDTH.setBackgroundResource(R.drawable.null_shape);
+                DTHTextView.setTextColor(getResources().getColor(R.color.colorBlackU));
+                viewBillPayments.setBackgroundResource(R.drawable.null_shape);
+                billPaymentsTextView.setTextColor(getResources().getColor(R.color.colorBlackU));
+                prepaidTextView.setText(Html.fromHtml("<b>Prepaid</b>"));
+                DTHTextView.setText(Html.fromHtml("DTH"));
+                billPaymentsTextView.setText(Html.fromHtml("Bill Payments"));
+                Operators.setText("" + itemCountPrepaid);
+                operatorTV.setText("Operators");
+                bill_ImgV.setImageResource(R.drawable.biller_svg);
+                mobile_ImgV.setImageResource(R.drawable.mobile_white_svg);
+                dth_ImgV.setImageResource(R.drawable.dth_svg);
+
+            }
+
 
         viewPrepaid.setOnClickListener(v -> {
             setFragment(new PrepaidFragment());
@@ -209,7 +226,8 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
             prepaidTextView.setText(Html.fromHtml("<b>Prepaid</b>"));
             DTHTextView.setText(Html.fromHtml("DTH"));
             billPaymentsTextView.setText(Html.fromHtml("Bill Payments"));
-            Operators.setText("5");
+//            Operators.setText(itemCountPrepaid);
+            Operators.setText("" + itemCountPrepaid);
             operatorTV.setText("Operators");
             bill_ImgV.setImageResource(R.drawable.biller_svg);
             dth_ImgV.setImageResource(R.drawable.dth_svg);
@@ -227,7 +245,7 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
             prepaidTextView.setText(Html.fromHtml("<b>Prepaid</b>"));
             DTHTextView.setText(Html.fromHtml("DTH"));
             billPaymentsTextView.setText(Html.fromHtml("Bill Payments"));
-            Operators.setText("5");
+            Operators.setText("" + itemCountDth);
             operatorTV.setText("Operators");
             bill_ImgV.setImageResource(R.drawable.biller_svg);
             dth_ImgV.setImageResource(R.drawable.dth_white_svg);
@@ -245,7 +263,7 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
             prepaidTextView.setText(Html.fromHtml("<b>Prepaid</b>"));
             DTHTextView.setText(Html.fromHtml("DTH"));
             billPaymentsTextView.setText(Html.fromHtml("Bill Payments"));
-            Operators.setText("5");
+            Operators.setText(""+itemCountOther);
             operatorTV.setText("Services");
             bill_ImgV.setImageResource(R.drawable.biller_white_svg);
             dth_ImgV.setImageResource(R.drawable.dth_svg);
@@ -313,48 +331,67 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
 
     @Override
     public void onSuccess(String data, String data_other) {
-//        try {
-//            JSONObject object = new JSONObject(data);
-//            JSONArray prepaidArray = new JSONArray(object.getString("prepaid_commission"));
-//            JSONArray dthArray = new JSONArray(object.getString("dth_commission"));
-//            JSONArray othersArray = new JSONArray(object.getString("others"));
+        try {
+            JSONObject object = new JSONObject(data);
+            JSONArray prepaidArray = new JSONArray(object.getString("prepaid_commission"));
+            JSONArray dthArray = new JSONArray(object.getString("dth_commission"));
+            JSONArray othersArray = new JSONArray(object.getString("others"));
 //
-//            prepaidCommissionPreferences.setCommission("PrepaidCommission", object.getString("prepaid_commission"));
-//            dTHCommissionPreferences.setCommission("DTHCommission", object.getString("dth_commission"));
-//            otherCommissionPreferences.setCommission("OtherCommission", object.getString("others"));
-//
-//            for (int i = 0; i < prepaidArray.length(); i++) {
-//                prepaidCommission = new DTHCommission();
-//                JSONObject jsonObject = prepaidArray.getJSONObject(i);
-//                prepaidCommission.setCommission(jsonObject.getString("commission"));
-//                prepaidCommission.setName(jsonObject.getString("name"));
-//                prepaidCommission.setLogo(jsonObject.getString("logo"));
-//                prepaidCommissionList.add(prepaidCommission);
-//            }
+            prepaidCommissionPreferences.setCommission("PrepaidCommission", object.getString("prepaid_commission"));
+            dTHCommissionPreferences.setCommission("DTHCommission", object.getString("dth_commission"));
+            otherCommissionPreferences.setCommission("OtherCommission", object.getString("others"));
+
+            for (int i = 0; i < prepaidArray.length(); i++) {
+                prepaidCommission = new DTHCommission();
+                JSONObject jsonObject = prepaidArray.getJSONObject(i);
+                prepaidCommission.setCommission(jsonObject.getString("commission"));
+                prepaidCommission.setName(jsonObject.getString("name"));
+                prepaidCommission.setLogo(jsonObject.getString("logo"));
+                prepaidCommissionList.add(prepaidCommission);
+            }
+            itemCountPrepaid=prepaidCommissionList.size();
+            setFragment(new PrepaidFragment());
+            viewPrepaid.setBackgroundResource(R.drawable.commission_tab_shape);
+            prepaidTextView.setTextColor(Color.WHITE);
+            viewDTH.setBackgroundResource(R.drawable.null_shape);
+            DTHTextView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            viewBillPayments.setBackgroundResource(R.drawable.null_shape);
+            billPaymentsTextView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            prepaidTextView.setText(Html.fromHtml("<b>Prepaid</b>"));
+            DTHTextView.setText(Html.fromHtml("DTH"));
+            billPaymentsTextView.setText(Html.fromHtml("Bill Payments"));
+            Operators.setText("" + itemCountPrepaid);
+            operatorTV.setText("Operators");
+            bill_ImgV.setImageResource(R.drawable.biller_svg);
+            mobile_ImgV.setImageResource(R.drawable.mobile_white_svg);
+            dth_ImgV.setImageResource(R.drawable.dth_svg);
+
 //            prepaidAdapter.addEvents(prepaidCommissionList);
 //
-//            for (int i = 0; i < dthArray.length(); i++) {
-//                dthCommission = new DTHCommission();
-//                JSONObject jsonObject = dthArray.getJSONObject(i);
-//                dthCommission.setCommission(jsonObject.getString("commission"));
-//                dthCommission.setName(jsonObject.getString("name"));
-//                dthCommission.setLogo(jsonObject.getString("logo"));
-//                dthCommissionList.add(dthCommission);
-//            }
+            for (int i = 0; i < dthArray.length(); i++) {
+                dthCommission = new DTHCommission();
+                JSONObject jsonObject = dthArray.getJSONObject(i);
+                dthCommission.setCommission(jsonObject.getString("commission"));
+                dthCommission.setName(jsonObject.getString("name"));
+                dthCommission.setLogo(jsonObject.getString("logo"));
+                dthCommissionList.add(dthCommission);
+            }
+            itemCountDth=dthCommissionList.size();
 //            dthAdapter.addEvents(dthCommissionList);
 //
-//            for (int i = 0; i < othersArray.length(); i++) {
-//                otherCommission = new DTHCommission();
-//                JSONObject jsonObject = othersArray.getJSONObject(i);
-//                otherCommission.setCommission(jsonObject.getString("commission"));
-//                otherCommission.setName(jsonObject.getString("name"));
-//                otherCommission.setLogo(jsonObject.getString("logo"));
-//                otherCommissionList.add(otherCommission);
-//            }
+            for (int i = 0; i < othersArray.length(); i++) {
+                otherCommission = new DTHCommission();
+                JSONObject jsonObject = othersArray.getJSONObject(i);
+                otherCommission.setCommission(jsonObject.getString("commission"));
+                otherCommission.setName(jsonObject.getString("name"));
+                otherCommission.setLogo(jsonObject.getString("logo"));
+                otherCommissionList.add(otherCommission);
+            }
+            itemCountOther=otherCommissionList.size();
 //            othersAdapter.addEvents(otherCommissionList);
-//        } catch (JSONException | RuntimeException e) {
-//            e.printStackTrace();
-//        }
+        } catch (JSONException | RuntimeException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
