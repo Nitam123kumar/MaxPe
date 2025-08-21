@@ -113,7 +113,7 @@ public class SupportActivity extends BaseActivity implements View.OnClickListene
         feedbackLayout.setOnClickListener(this);
         updatedLayout.setOnClickListener(this);
         youtube.setOnClickListener(this);
-        setStatusBarGradiant(this);
+//        setStatusBarGradiant(this);
         llPrepaidNumber.setOnClickListener(v -> {
             Intent intent1 = new Intent(getActivity(), HelpLineActivity.class);
             intent1.putExtra("title", "Prepaid Toll Free Number");

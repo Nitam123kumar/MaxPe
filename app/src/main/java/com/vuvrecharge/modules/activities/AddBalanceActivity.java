@@ -66,7 +66,7 @@ import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 
 public class AddBalanceActivity extends BaseActivity implements DefaultView, View.OnClickListener,
-        PaytmPaymentTransactionCallback, PaymentResultListener, PaymentMethodSelectAdapter.OnClickListener {
+        PaytmPaymentTransactionCallback, PaymentResultListener, PaymentMethodSelectAdapter.OnClickListener,ExtraCashBackAdapter.OnClickListener {
     DefaultPresenter mDefaultPresenter;
 
     @BindView(R.id.toolbar_layout)
@@ -178,7 +178,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
 //            payment_using_imageView.setImageResource(R.drawable.razorpay_logo_2);
 //        }
         discountRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        extraCashBackAdapter = new ExtraCashBackAdapter(this, extraCashBackPointsList);
+        extraCashBackAdapter = new ExtraCashBackAdapter(this, extraCashBackPointsList,this);
         discountRecyclerView.setAdapter(extraCashBackAdapter);
 
 
@@ -846,5 +846,10 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
 //                startActivity(intent);
 //                break;
 //        }
+    }
+
+    @Override
+    public void onClick(String amount) {
+        addAmount(Integer.parseInt(amount));
     }
 }

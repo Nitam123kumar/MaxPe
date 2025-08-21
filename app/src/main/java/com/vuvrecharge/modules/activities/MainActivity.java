@@ -2,6 +2,7 @@ package com.vuvrecharge.modules.activities;
 
 import static com.vuvrecharge.api.ApiServices.OFFER_ZONE;
 
+import android.animation.ArgbEvaluator;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -14,17 +15,22 @@ import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -41,9 +47,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -82,9 +91,11 @@ import com.vuvrecharge.modules.adapter.OTTSubscriptionsAdapter;
 import com.vuvrecharge.modules.adapter.OfferSliderRecyclerViewAdapter;
 import com.vuvrecharge.modules.adapter.PaymentSettingAdapter;
 import com.vuvrecharge.modules.adapter.RecyclerViewSliderAdapter;
+import com.vuvrecharge.modules.adapter.SearchableSpinnerCircleAdapter;
 import com.vuvrecharge.modules.adapter.SliderAdapter;
 import com.vuvrecharge.modules.adapter.SliderAdapterBanner;
 import com.vuvrecharge.modules.adapter.SpotlightServicesAdapter;
+import com.vuvrecharge.modules.model.CircleData;
 import com.vuvrecharge.modules.model.DashboardMenu;
 import com.vuvrecharge.modules.model.OTTSubscriptionsData;
 import com.vuvrecharge.modules.model.OfferSlider;
@@ -107,6 +118,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -144,8 +156,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
     LinearLayout members_bg;
     @BindView(R.id.downline_pckage)
     LinearLayout downline_pckage;
-    @BindView(R.id.ott_recharge)
-    ImageView ott_recharge;
+//    @BindView(R.id.ott_recharge)
+//    ImageView ott_recharge;
 
     @BindView(R.id.spotlight_services_recyclerView)
     RecyclerView spotlight_services_recyclerView;
@@ -159,8 +171,10 @@ public class MainActivity extends BaseActivity implements DefaultView,
     ImageView refresh;
     @BindView(R.id.share)
     ImageView share;
-    @BindView(R.id.whatsup_alert)
-    ImageView whatsup_alert;
+    @BindView(R.id.next_arrow)
+    ImageView next_arrow;
+    @BindView(R.id.add_balance_constraintLayout)
+    ConstraintLayout add_balance_constraintLayout;
     @BindView(R.id.headerImage)
     ImageView headerImage;
     @BindView(R.id.news)
@@ -173,6 +187,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
     TextView retry;
     @BindView(R.id.name_tv)
     TextView name_tv;
+    @BindView(R.id.motion_layout)
+    MotionLayout motion_layout;
     @BindView(R.id.total_ban)
     TextView total_ban;
     @BindView(R.id.recharge_and_txt)
@@ -191,6 +207,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
     View commission_report_layout;
     @BindView(R.id.slider_layout)
     RelativeLayout slider_layout;
+    @BindView(R.id.toolbar_constraintlayout)
+    ConstraintLayout toolbar_constraintlayout;
     @BindView(R.id.support_layout)
     View support_layout;
     @BindView(R.id.history)
@@ -231,6 +249,10 @@ public class MainActivity extends BaseActivity implements DefaultView,
     ConstraintLayout onClickToShare;
     @BindView(R.id.prepaidTxt)
     TextView prepaidTxt;
+    @BindView(R.id.nestedScrollView1)
+    NestedScrollView nestedScrollView1;
+    @BindView(R.id.whatsup_alert)
+    ImageView whatsup_alert;
 
     List<String> color = new ArrayList<>();
     List<YoutubeSlides> youtubeVideosList = new ArrayList<>();
@@ -287,7 +309,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         setContentView(R.layout.activity_main);
         ButterKnife.bind(getActivity());
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        setStatusBarGradiant(this);
+//        setStatusBarGradiant(this);
         add_balance.setOnClickListener(this);
         statements.setOnClickListener(this);
         open_account.setOnClickListener(this);
@@ -295,7 +317,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         share.setOnClickListener(this);
         members_bg.setOnClickListener(this);
         add_member.setOnClickListener(this);
-        whatsup_alert.setOnClickListener(this);
+        add_balance_constraintLayout.setOnClickListener(this);
         commission_report_layout.setOnClickListener(this);
         share_earn_layout.setOnClickListener(this);
         support_layout.setOnClickListener(this);
@@ -311,6 +333,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         viewAll.setOnClickListener(this);
         history.setOnClickListener(this);
 //        all_services.setOnClickListener(this);
+//        popupDialog();
         downline_pckage.setOnClickListener(this);
         mDefaultPresenter = new DefaultPresenter(this);
         appUpdate();
@@ -407,6 +430,81 @@ public class MainActivity extends BaseActivity implements DefaultView,
             viewPager.setCurrentItem(0, false);
             indicator.setViewPager2(viewPager);
         });
+
+//        motion_layout.setTransitionListener(new MotionLayout.TransitionListener() {
+//            @Override
+//            public void onTransitionStarted(MotionLayout motionLayout, int startId, int endId) {}
+//
+//            @Override
+//            public void onTransitionChange(MotionLayout motionLayout, int startId, int endId, float progress) {
+//                int blendedColor = (Integer) new ArgbEvaluator().evaluate(
+//                        progress,
+//                        ContextCompat.getColor(MainActivity.this, R.color.colorPrimaryB),
+//                        ContextCompat.getColor(MainActivity.this, R.color.black)
+//                );
+//                int blendedColor1 = (Integer) new ArgbEvaluator().evaluate(
+//                        progress,
+//                        ContextCompat.getColor(MainActivity.this, R.color.colorPrimaryB),
+//                        ContextCompat.getColor(MainActivity.this, R.color.black)
+//                );
+////                getWindow().setStatusBarColor(blendedColor);
+//                toolbar_constraintlayout.setBackgroundColor(blendedColor1);
+//
+//            }
+//
+//            @Override
+//            public void onTransitionCompleted(MotionLayout motionLayout, int currentId) {}
+//
+//            @Override
+//            public void onTransitionTrigger(MotionLayout motionLayout, int triggerId, boolean positive, float progress) {}
+//        });
+        nestedScrollView1.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY,
+                                       int oldScrollX, int oldScrollY) {
+
+                int threshold = 50;
+
+                if (scrollY > threshold) {
+                    if (motion_layout.getProgress() != 1f) {
+                        motion_layout.transitionToEnd();
+                    }
+                    Window win = getWindow();
+                    win.setStatusBarColor(getResources().getColor(R.color.white));
+                    View decor = win.getDecorView();
+                    decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+//                    getWindow().setStatusBarColor(
+//                            ContextCompat.getColor(MainActivity.this, R.color.black)
+//                    );
+                    toolbar_constraintlayout.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.white));
+                    refresh.setImageResource(R.drawable.maxpoint_black);
+                    total_ban.setTextColor(MainActivity.this.getResources().getColor(R.color.black));
+                    next_arrow.setImageResource(R.drawable.next_arrow_black);
+                    home_menu_imageView.setImageResource(R.drawable.menu_icon_black);
+                    name_tv.setTextColor(MainActivity.this.getResources().getColor(R.color.black));
+                    add_balance_constraintLayout.setBackgroundDrawable(getResources().getDrawable(R.drawable.wallet_home_shape));
+                    whatsup_alert.setImageResource(R.drawable.wallet_icon_3);
+                } else {
+                    if (motion_layout.getProgress() != 0f) {
+                        motion_layout.transitionToStart();
+                    }
+                    Window win = getWindow();
+                    win.setStatusBarColor(getResources().getColor(R.color.colorPrimaryB));
+                    View decor = win.getDecorView();
+                    decor.setSystemUiVisibility(0);
+                    toolbar_constraintlayout.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.colorPrimaryB));
+                    refresh.setImageResource(R.drawable.max_points_white_icon);
+                    total_ban.setTextColor(MainActivity.this.getResources().getColor(R.color.white));
+                    next_arrow.setImageResource(R.drawable.next_arrow);
+                    home_menu_imageView.setImageResource(R.drawable.menu_icon);
+                    name_tv.setTextColor(MainActivity.this.getResources().getColor(R.color.white));
+                    add_balance_constraintLayout.setBackgroundDrawable(getResources().getDrawable(R.drawable.next_ban_shape));
+                    whatsup_alert.setImageResource(R.drawable.wallet_icon2);
+                }
+            }
+        });
+
     }
 
     @Override
@@ -471,7 +569,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
             refresh_layout.setRefreshing(false);
             UserData userData = mDatabase.getUserData();
             available_balance.setText("\u20b9" + userData.getEarnings());
-            total_ban.setText("\u20b9" + userData.getEarnings());
+            double ban = Double.parseDouble(userData.getEarnings());
+            total_ban.setText("₹" + String.format(Locale.ENGLISH, "%.2f", ban));
             name_tv.setText("Welcome, " + userData.getName());
 //            txtTitleMain.setText(userData.getRecharge_pay_bill_string());
 
@@ -567,7 +666,6 @@ public class MainActivity extends BaseActivity implements DefaultView,
 
             spotlightServicesAdapter = new SpotlightServicesAdapter(this, spotlight, mDatabase.getUserData().getSpotlight_services(), this);
             spotlight_services_recyclerView.setAdapter(spotlightServicesAdapter);
-
 
 
             if (from.equals("Api")) {
@@ -1064,10 +1162,10 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 JSONArray offer_slides = message1.getJSONArray("offer_slides");
                 Log.d("offer_slides", String.valueOf(offer_slides));
 
-                String dashboard_banner=message1.getString("dashboard_banner");
-                Glide.with(getActivity()).load(dashboard_banner).into(ott_recharge);
-                String footer_banner_text=message1.getString("footer_banner_text");
-                String recharge_pay_bill_string=message1.getString("recharge_pay_bill_string");
+                String dashboard_banner = message1.getString("dashboard_banner");
+//                Glide.with(getActivity()).load(dashboard_banner).into(ott_recharge);
+                String footer_banner_text = message1.getString("footer_banner_text");
+                String recharge_pay_bill_string = message1.getString("recharge_pay_bill_string");
                 recharge_and_txt.setText(recharge_pay_bill_string);
 
                 String part1 = "";
@@ -1117,7 +1215,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
 
 
                 }
-                    youtubeVideosList.clear();
+                youtubeVideosList.clear();
                 if (youtube_slides.length() > 0) {
 
                     for (int i = 0; i < youtube_slides.length(); i++) {
@@ -1233,9 +1331,10 @@ public class MainActivity extends BaseActivity implements DefaultView,
             Log.d("message", data);
             if (data_other.equals("fetchBalance")) {
                 JSONObject jsonObject = new JSONObject(data);
-                available_balance.setText("\u20b9" + jsonObject.getString("earnings"));
+                String balance = jsonObject.getString("earnings");
+                available_balance.setText("\u20b9" + String.format(Locale.ENGLISH, "%.2f", balance));
                 mDatabase.setEarnings(jsonObject.getString("earnings"));
-                if (!jsonObject.getString("news").isEmpty()) {
+                /*if (!jsonObject.getString("news").isEmpty()) {
                     news.setText("                                                            " + jsonObject.getString("news") + "                                           "
                             + "   " + "                                           "
                             + jsonObject.getString("news") + "                                                "
@@ -1247,7 +1346,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
                     news.setSingleLine(true);
                 } else {
                     news.setVisibility(View.GONE);
-                }
+                }*/
             } else if (data_other.equals("UPI Payment")) {
                 dataPayment = data;
                 Intent intent = new Intent(getActivity(), AddBalanceActivity.class);
@@ -1304,7 +1403,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
             submit.setVisibility(View.GONE);
         } else {
             showLoading(loading);
-            setStatusBarGradiant(this);
+//            setStatusBarGradiant(this);
         }
     }
 
@@ -1326,7 +1425,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
             showToast(bottomSheet, message);
         } else {
             showToast(message);
-            setStatusBarGradiant(this);
+//            setStatusBarGradiant(this);
         }
     }
 
@@ -1336,7 +1435,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         hideKeyBoard(hide_keyboard);
         setLayout(no_internet, retry, "main");
         preferences = getSharedPreferences("debug", Context.MODE_PRIVATE);
-        setStatusBarGradiant(this);
+//        setStatusBarGradiant(this);
 /*
         if (!Objects.equals(preferences.getString("state", ""), "cancel")){
             if (isDeveloperModeEnabled()) {
@@ -1405,8 +1504,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
             } else if (currentLang.equals("en") && !prepaidTxt.getText().toString().equals("Prepaid")) {
                 recreatedOnce = true;
                 recreate();
-            }
-            else if (currentLang.equals("ben") && !prepaidTxt.getText().toString().equals("প্রিপেইড")) {
+            } else if (currentLang.equals("ben") && !prepaidTxt.getText().toString().equals("প্রিপেইড")) {
                 recreatedOnce = true;
                 recreate();
             } else if (currentLang.equals("hin") && !prepaidTxt.getText().toString().equals("प्रीपेड")) {
@@ -1615,7 +1713,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 startActivity(intent);
 //                refreshDataWithoutLoader();
                 break;
-//            case R.id.whatsup_alert:
+//            case R.id.add_balance_constraintLayout:
 //                try{
 //                    if (mDatabase.getUserData() != null){
 //                        if (mDatabase.getUserData().getWhatsapp_number() != null){
@@ -1631,7 +1729,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
 //                }
 //            break;
 
-            case R.id.whatsup_alert:
+            case R.id.add_balance_constraintLayout:
                 intent = new Intent(getActivity(), WalletActivity.class);
                 startActivity(intent);
                 break;
@@ -1656,6 +1754,32 @@ public class MainActivity extends BaseActivity implements DefaultView,
         }
     }
 
+    private void popupDialog() {
+        View view = getLayoutInflater().inflate(R.layout.popup_dailog_home_page, null, false);
+
+        // Full screen transparent dialog
+        Dialog dialog = new Dialog(this, R.style.DialogTheme);
+        dialog.setContentView(view);
+
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().setLayout(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+            );
+        }
+//        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawableResource(android.R.color.transparent);
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
+
+        ImageView popupBanner = view.findViewById(R.id.popup_banner);
+        ImageView cancel = view.findViewById(R.id.popup_cancel);
+
+        cancel.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+    }
+
+
     private void refreshData() {
         rotation = AnimationUtils.loadAnimation(getActivity(), R.anim.rotation);
         rotation.setRepeatCount(100);
@@ -1669,7 +1793,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
             mDefaultPresenter.getBbpsPayBills(device_id + "");
             mDefaultPresenter.getAllRechargeServices(device_id + "");
             mDefaultPresenter.fetchBalance(fcmToken + "", device_id + "", rotation);
-            setStatusBarGradiant(this);
+//            setStatusBarGradiant(this);
         }, 1200);
 
         youtube_indicator.post(() -> {

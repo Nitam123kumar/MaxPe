@@ -103,7 +103,7 @@ public class ComplaintRegistrationActivity  extends BaseActivity implements Defa
         title.setText("Complain Registration");
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         mDefaultPresenter = new DefaultPresenter(this);
-        setStatusBarGradiant(this);
+//        setStatusBarGradiant(this);
         btnSubmit.setOnClickListener(v -> {
             if (editTransactionRefId.getText().toString().isEmpty()){
                 showError("Please enter transaction reference id / Order Id");

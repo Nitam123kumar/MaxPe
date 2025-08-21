@@ -237,7 +237,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
         mDefaultPresenter = new DefaultPresenter(this);
         manager = new LinearLayoutManager(this);
         recyclerViewBillerInfo.setLayoutManager(manager);
-        setStatusBarGradiant(this);
+//        setStatusBarGradiant(this);
 
         if(titleStr != null){
             title.setText(titleStr);

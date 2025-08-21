@@ -86,7 +86,7 @@ public class StatementsActivity extends BaseActivity implements DefaultView, OnF
         mToolbar.setOnClickListener(this);
         title.setText("Reports");
         mDefaultPresenter = new DefaultPresenter(this);
-        setStatusBarGradiant(this);
+//        setStatusBarGradiant(this);
         initializeEventsList();
     }
 
@@ -115,6 +115,7 @@ public class StatementsActivity extends BaseActivity implements DefaultView, OnF
 
         String showFragment = getIntent().getStringExtra("statementsActivity");
         String maxPointsData = getIntent().getStringExtra("maxPointsActivity");
+        String wallet = getIntent().getStringExtra("wallet");
         if (showFragment != null && !showFragment.isEmpty()) {
 
             setFragment(new RechargeHistoryFragment());
@@ -145,6 +146,21 @@ public class StatementsActivity extends BaseActivity implements DefaultView, OnF
             reportsView.setText(Html.fromHtml("Wallet"));
             depositView.setText(Html.fromHtml("Deposit"));
             maxPointsTxt.setText(Html.fromHtml("<b>Max Point</b>"));
+
+        }else if (wallet !=null && !wallet.isEmpty()) {
+            setFragment(new WalletFragment());
+            viewReports.setBackgroundResource(R.drawable.statements_select_bg_shape);
+            reportsView.setTextColor(Color.WHITE);
+            viewStatements.setBackgroundResource(R.drawable.null_shape);
+            statementsView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            viewDeposit.setBackgroundResource(R.drawable.null_shape);
+            depositView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            viewMaxPoints.setBackgroundResource(R.drawable.null_shape);
+            maxPointsTxt.setTextColor(getResources().getColor(R.color.colorBlackU));
+            statementsView.setText(Html.fromHtml("Recharge"));
+            depositView.setText(Html.fromHtml("Deposit"));
+            reportsView.setText(Html.fromHtml("<b>Wallet</b>"));
+            maxPointsTxt.setText(Html.fromHtml("Max Point"));
 
         } else {
 

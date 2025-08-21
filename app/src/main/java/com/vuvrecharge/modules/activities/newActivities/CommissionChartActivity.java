@@ -137,7 +137,7 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
         mDefaultPresenter = new DefaultPresenter(this);
         defaultView = this;
         getStartedTV.setOnClickListener(this);
-        setStatusBarGradiant(this);
+//        setStatusBarGradiant(this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
 

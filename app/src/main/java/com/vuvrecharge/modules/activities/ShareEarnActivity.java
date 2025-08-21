@@ -151,7 +151,7 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
         btnInvite.setOnClickListener(this);
         btnReferCopy.setOnClickListener(this);
         top_EarnerTV.setOnClickListener(this);
-        setStatusBarGradiant(this);
+//        setStatusBarGradiant(this);
         viewMyReferral.setOnClickListener(this);
         viewReferralIncome.setOnClickListener(this);
         txtTermsCondition.setOnClickListener(this);

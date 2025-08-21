@@ -105,7 +105,7 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
         adapter = new BharatBillPayAdapter(this, rechargeAndBillPaymentDataList, this);
         recyclerView.setAdapter(adapter);
         mToolbar.setOnClickListener(this);
-        setStatusBarGradiant(this);
+//        setStatusBarGradiant(this);
 //        swipeRefreshLayout.setRefreshing(false);
         financial_services_recyclerView.setLayoutManager(new GridLayoutManager(this,4));
         adapter1 = new FinancialServicesAdapter(this,financialServicesList,this);

@@ -26,10 +26,12 @@ public class ExtraCashBackAdapter extends RecyclerView.Adapter<ExtraCashBackAdap
     List<ExtraCashBackPoints> list;
 
     private String currentAmount = "";
+    private OnClickListener onClickListener;
 
-    public ExtraCashBackAdapter(Context context, List<ExtraCashBackPoints> list) {
+    public ExtraCashBackAdapter(Context context, List<ExtraCashBackPoints> list, OnClickListener onClickListener) {
         this.context = context;
         this.list = list;
+        this.onClickListener = onClickListener;
     }
 
     public void filterByAmount(String amount) {
@@ -61,14 +63,23 @@ public class ExtraCashBackAdapter extends RecyclerView.Adapter<ExtraCashBackAdap
                 if (enteredAmount >= itemMin && enteredAmount <= itemMax || (isLastItem && enteredAmount > itemMax)) {
                     holder.applied_amount.setVisibility(View.VISIBLE);
                     holder.select.setBackgroundResource(R.drawable.discount_applied_shape);
+                    holder.itemView.setOnClickListener(v -> {
+                        onClickListener.onClick(String.valueOf(0));
+                    });
                 }
            else {
                 holder.applied_amount.setVisibility(View.GONE);
                 holder.select.setBackgroundResource(R.drawable.apply_discount_shape);
+                    holder.itemView.setOnClickListener(v -> {
+                        onClickListener.onClick(extraCashBackPoints.getMin());
+                    });
             }
             } else {
                 holder.applied_amount.setVisibility(View.GONE);
                 holder.select.setBackgroundResource(R.drawable.apply_discount_shape);
+                holder.itemView.setOnClickListener(v -> {
+                    onClickListener.onClick(extraCashBackPoints.getMin());
+                });
             }
         } catch (Exception e) {
             holder.applied_amount.setVisibility(View.GONE);
@@ -95,5 +106,8 @@ public class ExtraCashBackAdapter extends RecyclerView.Adapter<ExtraCashBackAdap
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+    public interface OnClickListener {
+        void onClick(String amount);
     }
 }

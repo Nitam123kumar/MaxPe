@@ -92,7 +92,7 @@ public class HelpLineActivity extends BaseActivity implements DefaultView,View.O
         }
         mDefaultPresenter.getCustomerCareNumber(DTH);
         initializeEventsList();
-        setStatusBarGradiant(this);
+//        setStatusBarGradiant(this);
 
 
     }

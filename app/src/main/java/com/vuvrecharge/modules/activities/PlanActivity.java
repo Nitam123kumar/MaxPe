@@ -116,7 +116,7 @@ public class PlanActivity extends BaseActivity implements DefaultView,View.OnCli
     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     mToolbar.setOnClickListener(this);
-    setStatusBarGradiant(this);
+//    setStatusBarGradiant(this);
     mDefaultView = this;
     title.setText("Plans Details");
     intent = getIntent();

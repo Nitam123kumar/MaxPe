@@ -90,7 +90,7 @@ public class TopEarnerActivity extends BaseActivity implements DefaultView , Vie
         defaultPresenter = new DefaultPresenter(this);
         defaultPresenter.topRankers(device_id, "referrals");
         ButterKnife.bind(this);
-        setStatusBarGradiant(this);
+//        setStatusBarGradiant(this);
         back_home.setOnClickListener(this);
         top_earner_RecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         topEarnerAdapter = new TopEarnerAdapter(this, topEarnerDataList);

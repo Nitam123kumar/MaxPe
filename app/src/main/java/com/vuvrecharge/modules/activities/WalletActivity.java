@@ -70,6 +70,8 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
     AppCompatButton add_amount_Btn;
     @BindView(R.id.balance_TV)
     TextView balance_TV;
+    @BindView(R.id.latest_transitions)
+    TextView latest_transitions;
     @BindView(R.id.no_data_layout)
     ConstraintLayout no_data_layout;
     @BindView(R.id.add_Money_Layout)
@@ -105,6 +107,7 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
         history_layout.setOnClickListener(this);
         add_amount_Btn.setOnClickListener(this);
         add_Money_Layout.setOnClickListener(this);
+        latest_transitions.setOnClickListener(this);
         recyclerView_latest_transitions.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         addPaymentHistoryAdapter = new AddPaymentHistoryAdapter(getLayoutInflater());
         recyclerView_latest_transitions.setAdapter(addPaymentHistoryAdapter);
@@ -234,6 +237,11 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
             case R.id.add_Money_Layout:
                 Intent addMoneyIntent = new Intent(getActivity(), AddBalanceActivity.class);
                 startActivity(addMoneyIntent);
+                break;
+            case R.id.latest_transitions:
+                Intent latest_transitionsIntent = new Intent(getActivity(), StatementsActivity.class);
+                latest_transitionsIntent.putExtra("wallet", "latest_transitions");
+                startActivity(latest_transitionsIntent);
                 break;
         }
     }

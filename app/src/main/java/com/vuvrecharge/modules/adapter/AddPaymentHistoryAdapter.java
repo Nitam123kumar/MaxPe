@@ -102,13 +102,13 @@ public class AddPaymentHistoryAdapter extends RecyclerView.Adapter<AddPaymentHis
             if (mDepositData.getPayment_status().toUpperCase().equals("PENDING")) {
 //                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_pending);
                 Glide.with(mContext)
-                        .load(R.drawable.pending_2)
+                        .load(R.drawable.pending_new_icon)
                         .into(imgPayment);
 //                txtStatus.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.pending)));
             } else if (mDepositData.getPayment_status().toUpperCase().equals("SUCCESS")) {
 //                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_history_1);
                 Glide.with(mContext)
-                        .load(R.drawable.s)
+                        .load(R.drawable.done_new_icon)
                         .into(imgPayment);
 //                txtStatus.setBackgroundDrawable(BaseMethod.getGradientDrawableRe(mContext.getResources().getColor(R.color.success)));
             } else {

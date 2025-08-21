@@ -74,7 +74,7 @@ public class FeedbackActivity extends BaseActivity implements DefaultView, View.
         setContentView(R.layout.activity_feedback);
         ButterKnife.bind(this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        setStatusBarGradiant(this);
+//        setStatusBarGradiant(this);
         mToolBar.setOnClickListener(this);
         submit_feedback_Btn.setOnClickListener(this);
         mDefaultPresenter = new DefaultPresenter(this);

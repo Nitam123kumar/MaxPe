@@ -104,7 +104,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
         title1 = getIntent().getStringExtra("title");
         type = getIntent().getStringExtra("type");
         title.setText(title1);
-        setStatusBarGradiant(this);
+//        setStatusBarGradiant(this);
         mDefaultPresenter = new DefaultPresenter(this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 

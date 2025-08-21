@@ -164,7 +164,7 @@ public class BillActivity extends BaseActivity implements DefaultView,
         title.setText(string);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         handler = new Handler();
-        setStatusBarGradiant(this);
+//        setStatusBarGradiant(this);
         txtOperator.setText("Google Play Gift Card");
         BaseMethod.amount = "";
         BaseMethod.mobile = "";

@@ -265,7 +265,8 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
             refresh_layout.setRefreshing(false);
             JSONObject object = new JSONObject(data);
             JSONArray array = object.getJSONArray("cashbackLogs");
-
+            String lifeTimeMaxPoints = object.getString("lifetimePointsEarn");
+            maxPointsTV.setText(lifeTimeMaxPoints);
 
             if (array.length() > 0) {
                 for (int i = 0; i < array.length(); i++) {
@@ -309,7 +310,7 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
                 model.setCashback_points(pointsObject.getString("cashback_points"));
                 model.setTxn_balance_count(pointsObject.getString("txn_balance_count"));
                 balance_maxPoints_TV.setText(model.getCashback_points());
-                maxPointsTV.setText(model.getCashback_points());
+
 
             }
 

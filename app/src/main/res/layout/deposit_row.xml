@@ -8,6 +8,7 @@
     android:orientation="vertical"
     android:padding="@dimen/_5sdp">
 
+
     <ImageView
         android:id="@+id/imgDone"
         android:layout_width="@dimen/_30sdp"
@@ -25,7 +26,7 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:text="@string/order_id_12316545"
         android:textColor="@color/black"
-        android:textSize="@dimen/_11sdp"
+        android:textSize="@dimen/_10sdp"
         app:layout_constraintStart_toEndOf="@id/imgDone"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,8 +35,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/date"
+        android:layout_marginTop="@dimen/_3sdp"
         android:textColor="#B2B2B2"
-        android:textSize="@dimen/_9sdp"
+        android:textSize="@dimen/_8sdp"
         app:layout_constraintStart_toStartOf="@id/txtOrderId"
         app:layout_constraintTop_toBottomOf="@id/txtCharge"
         app:layout_constraintBottom_toTopOf="@id/view5"/>
@@ -47,7 +49,7 @@
         android:layout_height="wrap_content"
         android:text="@string/charge_0"
         android:textColor="#6E6E6E"
-        android:textSize="@dimen/_10sdp"
+        android:textSize="@dimen/_9sdp"
         app:layout_constraintStart_toStartOf="@id/txtOrderId"
         app:layout_constraintTop_toBottomOf="@id/txtOrderId" />
 

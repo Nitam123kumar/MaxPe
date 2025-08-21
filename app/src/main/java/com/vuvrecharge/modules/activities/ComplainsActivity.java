@@ -112,7 +112,7 @@ public class ComplainsActivity extends BaseActivity implements DefaultView, View
         select_from_date_img.setOnClickListener(this);
         select_to_date_img.setOnClickListener(this);
         invoice.setOnClickListener(this);
-        setStatusBarGradiant(this);
+//        setStatusBarGradiant(this);
         mDefaultPresenter = new DefaultPresenter(this);
         Calendar cal = Calendar.getInstance();
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);

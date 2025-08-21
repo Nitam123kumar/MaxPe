@@ -16,8 +16,8 @@
 
     <ImageView
         android:id="@+id/payment_ImageView"
-        android:layout_width="@dimen/_35sdp"
-        android:layout_height="@dimen/_35sdp"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
         android:src="@drawable/s"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,8 +40,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="Upi"
-            android:textSize="@dimen/_12sdp"
+            android:text="UPI"
+            android:textSize="@dimen/_10sdp"
             android:textColor="@color/black"
             />
 
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:text="order_Id"
             android:textColor="#6E6E6E"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="@dimen/_9sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/payment_tittle_TV" />
 
@@ -63,7 +63,8 @@
             app:layout_constraintStart_toStartOf="parent"
             android:text="@string/today_11_22_am"
             android:textColor="#B2B2B2"
-            android:textSize="@dimen/_9sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:textSize="@dimen/_8sdp"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

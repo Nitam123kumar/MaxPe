@@ -29,13 +29,14 @@
         android:text="@string/order_id_145258"
         android:textColor="@color/black"
         android:textStyle="bold"
-        android:textSize="@dimen/_8sdp"
+        android:textSize="@dimen/_9sdp"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_2sdp"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@id/imgDone"
         app:layout_constraintEnd_toStartOf="@id/amount"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imgDone"
         app:layout_constraintBottom_toTopOf="@id/date_time"/>
 
     <TextView
@@ -71,12 +72,12 @@
         android:text="@string/_25_may_2019_12_20_pm"
         android:textColor="@color/black_light"
         android:layout_marginEnd="@dimen/_3sdp"
-        android:textSize="@dimen/_7sdp"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:textSize="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_2sdp"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         app:layout_constraintStart_toStartOf="@id/order_id"
         app:layout_constraintTop_toBottomOf="@id/order_id"
-        app:layout_constraintBottom_toTopOf="@id/reason"
+        app:layout_constraintBottom_toBottomOf="@id/imgDone"
         />
 
     <TextView

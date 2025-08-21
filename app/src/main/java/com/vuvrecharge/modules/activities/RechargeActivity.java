@@ -227,7 +227,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
         BaseMethod.mobile = "";
         mToolbar.setOnClickListener(this);
         mDefaultPresenter = new DefaultPresenter(this);
-        setStatusBarGradiant(this);
+//        setStatusBarGradiant(this);
         fadeIn = AnimationUtils.loadAnimation(this, R.anim.pulse_scale);
 
         scrollView.setOnTouchListener((v, event) -> {

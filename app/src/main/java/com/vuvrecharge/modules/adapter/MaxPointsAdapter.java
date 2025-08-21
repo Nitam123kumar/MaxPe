@@ -59,13 +59,13 @@ public class MaxPointsAdapter extends RecyclerView.Adapter<MaxPointsAdapter.View
         if (data.getCredit().equals("0.000")){
             holder.pointsAmountTV.setText("- \u20b9" + data.getDebit());
             Glide.with(mContext)
-                    .load(R.drawable.walled_svg_img)
+                    .load(R.drawable.arrow_light_red)
                     .into(holder.imgMaxLogo);
         }
         else {
             holder.pointsAmountTV.setText("+ \u20b9" + data.getCredit());
             Glide.with(mContext)
-                    .load(R.drawable.wallet_receved_svg)
+                    .load(R.drawable.arrow_light_green)
                     .into(holder.imgMaxLogo);
         }
 

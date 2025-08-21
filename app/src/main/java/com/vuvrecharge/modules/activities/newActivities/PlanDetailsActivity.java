@@ -195,7 +195,7 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
         ButterKnife.bind(this);
         mToolbar.setOnClickListener(this);
         handler = new Handler();
-        setStatusBarGradiant(this);
+//        setStatusBarGradiant(this);
         amount = getIntent().getStringExtra("amount");
         number = getIntent().getStringExtra("number");
         urlProvider = getIntent().getStringExtra("url");

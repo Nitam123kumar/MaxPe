@@ -165,7 +165,7 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
             double charge = Double.parseDouble(resultsBean.getAmount()) - Double.parseDouble(resultsBean.getFinal_charge());
 //            - Double.parseDouble(resultsBean.getPoints())
 //            commission.setText("Com : \u20b9" + decimalFormat.format(charge));
-            number.setText("Number: "+resultsBean.getNumber());
+            number.setText(resultsBean.getNumber());
             name.setText(resultsBean.getOperator_name().trim());
             status.setText(resultsBean.getStatus());
             if (resultsBean.getStatus().toUpperCase().equals("PENDING")) {

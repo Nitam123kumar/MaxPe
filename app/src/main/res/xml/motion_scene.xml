@@ -11,37 +11,37 @@
         motion:duration="100"
         motion:pathMotionArc="startVertical"
         motion:motionInterpolator="linear">
-        <KeyFrameSet>
-            <KeyAttribute motion:framePosition="0"
-                motion:motionTarget="@id/viewScrollPoint" />
-            <KeyAttribute motion:framePosition="1"
-                motion:motionTarget="@id/viewScrollPoint" />
-        </KeyFrameSet>
-        <OnSwipe
-            motion:dragDirection="dragUp"
-            motion:maxAcceleration="200"
-            motion:maxVelocity="300"
-            motion:touchAnchorId="@id/viewScrollPoint"/>
+<!--        <KeyFrameSet>-->
+<!--            <KeyAttribute motion:framePosition="0"-->
+<!--                motion:motionTarget="@id/viewScrollPoint" />-->
+<!--            <KeyAttribute motion:framePosition="1"-->
+<!--                motion:motionTarget="@id/viewScrollPoint" />-->
+<!--        </KeyFrameSet>-->
+<!--        <OnSwipe-->
+<!--            motion:dragDirection="dragUp"-->
+<!--            motion:maxAcceleration="200"-->
+<!--            motion:maxVelocity="300"-->
+<!--            motion:touchAnchorId="@id/viewScrollPoint"/>-->
     </Transition>
 
-    <ConstraintSet android:id="@+id/start">
-        <Constraint android:id="@+id/headerImage_layout" />
-        <Constraint android:id="@+id/viewScrollPoint"
-            motion:layout_constraintTop_toBottomOf="@+id/toolbar_constraintlayout"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintBottom_toTopOf="@+id/bottom_nav_RelativeLayout" />
+<!--    <ConstraintSet android:id="@+id/start">-->
+<!--        <Constraint android:id="@+id/headerImage_layout" />-->
+<!--        <Constraint android:id="@+id/viewScrollPoint"-->
+<!--            motion:layout_constraintTop_toBottomOf="@+id/toolbar_constraintlayout"-->
+<!--            motion:layout_constraintStart_toStartOf="parent"-->
+<!--            motion:layout_constraintEnd_toEndOf="parent"-->
+<!--            motion:layout_constraintBottom_toTopOf="@+id/bottom_nav_RelativeLayout" />-->
 
-    </ConstraintSet>
+<!--    </ConstraintSet>-->
 
-    <ConstraintSet android:id="@+id/end">
-        <Constraint android:id="@+id/headerImage_layout" />
-        <Constraint android:id="@+id/viewScrollPoint"
-            android:layout_height="@dimen/_390sdp"
-            motion:layout_constraintTop_toBottomOf="@+id/headerImage_layout"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintBottom_toTopOf="@+id/bottom_nav_RelativeLayout" />
-    </ConstraintSet>
+<!--    <ConstraintSet android:id="@+id/end">-->
+<!--        <Constraint android:id="@+id/headerImage_layout" />-->
+<!--        <Constraint android:id="@+id/viewScrollPoint"-->
+<!--            android:layout_height="@dimen/_390sdp"-->
+<!--            motion:layout_constraintTop_toBottomOf="@+id/headerImage_layout"-->
+<!--            motion:layout_constraintStart_toStartOf="parent"-->
+<!--            motion:layout_constraintEnd_toEndOf="parent"-->
+<!--            motion:layout_constraintBottom_toTopOf="@+id/bottom_nav_RelativeLayout" />-->
+<!--    </ConstraintSet>-->
 
 </MotionScene>

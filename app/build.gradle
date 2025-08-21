@@ -111,6 +111,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:24.1.1'
     implementation 'com.google.firebase:firebase-inappmessaging-display:22.0.0'
     implementation 'com.google.firebase:firebase-inappmessaging:22.0.0'
+    implementation 'com.google.firebase:firebase-storage:22.0.0'
     implementation 'com.google.firebase:firebase-crashlytics:19.4.4'
     implementation 'com.google.firebase:firebase-crashlytics-ndk:19.4.4'
     implementation(platform("com.google.firebase:firebase-bom:34.0.0"))
