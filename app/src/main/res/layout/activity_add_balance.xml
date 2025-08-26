@@ -32,11 +32,11 @@
 
                 <ImageView
                     android:id="@+id/wallet_imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:contentDescription="@string/maxpe"
-                    android:src="@drawable/wallet_img"
+                    android:src="@drawable/wallet_icon_3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

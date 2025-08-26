@@ -58,7 +58,7 @@
                     android:id="@+id/help_description"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_150sdp"
-                    android:background="@drawable/help_section_shape"
+                    android:background="@drawable/main_wallet_shape"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">

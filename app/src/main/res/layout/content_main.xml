@@ -95,7 +95,7 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_9sdp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/inter"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/next_arrow"
                     app:layout_constraintStart_toEndOf="@id/whatsup_alert"
@@ -133,7 +133,7 @@
                 android:layout_height="@dimen/_28sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:padding="@dimen/_3sdp"
-                android:src="@drawable/max_points_white_icon"
+                android:src="@drawable/icon_fill_white"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="@id/name_tv"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -178,10 +178,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_5sdp"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/home_banner_gif"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:visibility="gone"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -240,7 +252,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/main_shape"
+                    android:background="@color/white"
                     android:orientation="vertical"
                     android:paddingBottom="@dimen/_120sdp">
 
@@ -742,7 +754,7 @@
                             android:paddingTop="@dimen/_6sdp"
                             android:text="@string/recharge_amp_bill_payment"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_12sdp"
+                            android:textSize="@dimen/_14sdp"
                             android:textStyle="bold"
                             android:visibility="visible"
                             app:layout_constraintBottom_toTopOf="@id/recharge_layout"
@@ -750,6 +762,7 @@
                             app:layout_constraintTop_toTopOf="@id/recharge_layout" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                    android:background="@drawable/rectangle_19039"-->
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -836,7 +849,7 @@
                             android:fontFamily="@font/roboto"
                             android:text="@string/bike_car_insurance"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_12sdp"
+                            android:textSize="@dimen/_14sdp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toEndOf="@id/insurance"
                             app:layout_constraintTop_toTopOf="@id/insurance" />
@@ -887,6 +900,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/bike_percent"
                                 android:layout_width="@dimen/_26sdp"
                                 android:layout_height="@dimen/_38sdp"
                                 android:layout_gravity="center"
@@ -894,9 +908,8 @@
                                 android:background="@drawable/insurance"
                                 android:fontFamily="@font/roboto_bold"
                                 android:gravity="center"
-                                android:text="@string/_10_off"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_8sdp"
+                                android:textSize="@dimen/_10sdp"
                                 android:textStyle="bold" />
 
 
@@ -933,6 +946,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/car_percent"
                                 android:layout_width="@dimen/_26sdp"
                                 android:layout_height="@dimen/_38sdp"
                                 android:layout_gravity="center"
@@ -940,9 +954,8 @@
                                 android:background="@drawable/insurance"
                                 android:fontFamily="@font/roboto_bold"
                                 android:gravity="center"
-                                android:text="@string/_15_off"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_8sdp" />
+                                android:textSize="@dimen/_10sdp" />
 
 
                         </LinearLayout>
@@ -969,7 +982,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_100sdp"
                                 android:layout_marginHorizontal="@dimen/_10sdp"
-                                android:layout_marginTop="@dimen/_5sdp"
                                 app:cardCornerRadius="@dimen/_10sdp">
 
                                 <androidx.viewpager2.widget.ViewPager2
@@ -1029,9 +1041,9 @@
                                 android:layout_gravity="center"
                                 android:layout_marginStart="@dimen/_8sdp"
                                 android:fontFamily="@font/roboto"
-                                android:text="Ott Servece"
+                                android:text="@string/ott_subscriptions"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/_12sdp"
+                                android:textSize="@dimen/_14sdp"
                                 android:textStyle="bold"
                                 app:layout_constraintStart_toEndOf="@id/disscount"
                                 app:layout_constraintTop_toTopOf="@id/disscount" />
@@ -1117,7 +1129,7 @@
                                 android:fontFamily="@font/roboto"
                                 android:text="@string/offers_for_you"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/_12sdp"
+                                android:textSize="@dimen/_14sdp"
                                 android:textStyle="bold"
                                 app:layout_constraintStart_toEndOf="@id/disscount"
                                 app:layout_constraintTop_toTopOf="@id/disscount" />
@@ -1157,7 +1169,7 @@
                                 android:fontFamily="@font/roboto"
                                 android:text="@string/spotlight_services"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/_12sdp"
+                                android:textSize="@dimen/_14sdp"
                                 android:textStyle="bold"
                                 app:layout_constraintStart_toEndOf="@id/star"
                                 app:layout_constraintTop_toTopOf="@id/star" />
@@ -1240,7 +1252,7 @@
                                 android:fontFamily="@font/roboto"
                                 android:text="@string/tutorials"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/_12sdp"
+                                android:textSize="@dimen/_14sdp"
                                 android:textStyle="bold"
                                 app:layout_constraintStart_toEndOf="@id/youtube_ImageView"
                                 app:layout_constraintTop_toTopOf="@id/youtube_ImageView" />
@@ -1502,21 +1514,27 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/montserrat"
                             android:text="@string/earn_up_to_300"
-                            android:textColor="@color/colorPrimaryB"
+                            android:paddingStart="@dimen/_5sdp"
+                            android:paddingEnd="@dimen/_5sdp"
+                            android:textColor="@color/white"
+                            android:gravity="center"
                             android:textSize="@dimen/_16sdp"
+                            android:background="@drawable/rectangle_19042"
+                            android:drawableEnd="@drawable/arrow_14"
+                            android:drawablePadding="@dimen/_5sdp"
                             app:layout_constraintStart_toStartOf="@+id/txtMobileRecharge"
                             app:layout_constraintTop_toBottomOf="@id/txtMobileRecharge" />
 
-                        <ImageView
-                            android:id="@+id/imgReferAndEarn"
-                            android:layout_width="@dimen/_14sdp"
-                            android:layout_height="@dimen/_14sdp"
-                            android:layout_marginStart="@dimen/_6sdp"
-                            android:layout_marginEnd="@dimen/_6sdp"
-                            android:src="@drawable/arrow_14"
-                            app:layout_constraintBottom_toBottomOf="@id/txtRefer"
-                            app:layout_constraintStart_toEndOf="@id/txtRefer"
-                            app:layout_constraintTop_toTopOf="@id/txtRefer" />
+<!--                        <ImageView-->
+<!--                            android:id="@+id/imgReferAndEarn"-->
+<!--                            android:layout_width="@dimen/_14sdp"-->
+<!--                            android:layout_height="@dimen/_14sdp"-->
+<!--                            android:layout_marginStart="@dimen/_6sdp"-->
+<!--                            android:layout_marginEnd="@dimen/_6sdp"-->
+<!--                            android:src="@drawable/arrow_14"-->
+<!--                            app:layout_constraintBottom_toBottomOf="@id/txtRefer"-->
+<!--                            app:layout_constraintStart_toEndOf="@id/txtRefer"-->
+<!--                            app:layout_constraintTop_toTopOf="@id/txtRefer" />-->
 
                         <ImageView
                             android:id="@+id/footer"
@@ -1527,7 +1545,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/imgReferAndEarn" />
+                            app:layout_constraintTop_toBottomOf="@id/txtRefer" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -1660,11 +1678,11 @@
                         app:layout_constraintStart_toEndOf="@id/open_account" />
 
 
-                    <ImageView
+                    <pl.droidsonroids.gif.GifImageView
                         android:id="@+id/refer_earn_imageView"
-                        android:layout_width="@dimen/_18sdp"
-                        android:layout_height="@dimen/_18sdp"
-                        android:src="@drawable/reffer_earn_2_"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/reffer_icon"
                         app:layout_constraintBottom_toTopOf="@id/refer_earn_TV"
                         app:layout_constraintEnd_toEndOf="@id/share_earn_layout"
                         app:layout_constraintStart_toStartOf="@id/share_earn_layout"
@@ -1675,7 +1693,6 @@
                         android:id="@+id/refer_earn_TV"
                         android:layout_width="@dimen/_75sdp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_2sdp"
                         android:gravity="center"
                         android:text="@string/refer_amp_earn"
                         android:textColor="#89929B"

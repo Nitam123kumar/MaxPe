@@ -81,7 +81,7 @@
                             android:layout_marginTop="@dimen/_25sdp"
                             android:text="@string/enter_otp"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_9sdp"
+                            android:textSize="@dimen/_12sdp"
                             android:textStyle="bold" />
 
 
@@ -98,7 +98,7 @@
                             android:paddingLeft="@dimen/_10sdp"
                             android:textColor="@color/black_2"
                             android:textColorHint="#8C8C8C"
-                            android:textSize="@dimen/_9sdp"
+                             android:textSize="@dimen/_12sdp"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
@@ -110,7 +110,7 @@
                             android:layout_marginTop="@dimen/_15sdp"
                             android:text=""
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_9sdp"
+                             android:textSize="@dimen/_11sdp"
                             android:textStyle="bold" />
 
                         <RelativeLayout
@@ -127,7 +127,7 @@
                                 android:text="@string/verify_otp"
                                 android:textAllCaps="false"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_12sdp"
+                                android:textSize="@dimen/_13sdp"
                                 android:textStyle="bold" />
 
                         </RelativeLayout>
@@ -141,7 +141,7 @@
                             android:text=""
                             android:textAllCaps="false"
                             android:textColor="#8C8C8C"
-                            android:textSize="@dimen/_9sdp" />
+                             android:textSize="@dimen/_12sdp" />
 
 
                         <TextView
@@ -158,18 +158,18 @@
                             android:textAlignment="center"
                             android:textAllCaps="false"
                             android:textColor="#0A51A0"
-                            android:textSize="@dimen/_9sdp"
+                             android:textSize="@dimen/_12sdp"
                             android:textStyle="bold" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_20sdp"
-                            android:layout_marginHorizontal="@dimen/_30sdp">
+                            android:layout_marginHorizontal="@dimen/_15sdp">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/call_layout"
-                                android:layout_width="@dimen/_90sdp"
+                                android:layout_width="@dimen/_110sdp"
                                 android:layout_height="@dimen/_28sdp"
                                 android:background="@drawable/support_design_background_shape"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -191,7 +191,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Call Us"
                                     android:textColor="#8C8C8C"
-                                    android:textSize="@dimen/_9sdp"
+                                     android:textSize="@dimen/_12sdp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toEndOf="@id/call_img"
@@ -201,7 +201,7 @@
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/whatsapp_layout"
-                                android:layout_width="@dimen/_90sdp"
+                                android:layout_width="@dimen/_110sdp"
                                 android:layout_height="@dimen/_28sdp"
                                 android:background="@drawable/support_design_background_shape"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -223,7 +223,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="Whatsapp Us"
                                     android:textColor="#8C8C8C"
-                                    android:textSize="@dimen/_9sdp"
+                                     android:textSize="@dimen/_12sdp"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toEndOf="@id/whatsapp_img"

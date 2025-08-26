@@ -181,13 +181,15 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
 //    @BindView(R.id.txtAmount)
 //    TextView txtAmount;
     @BindView(R.id.txtAmountValue)
-    TextView txtAmountValue;
+    EditText txtAmountValue;
     @BindView(R.id.txtRupe)
     TextView txtRupees;
     @BindView(R.id.provider_img)
     ImageView providerImageView;
     @BindView(R.id.scrollView)
     ScrollView scrollView;
+    @BindView(R.id.service_powered)
+    ConstraintLayout service_powered;
     private String type = null;
     private String name = null;
     private String errorMsg = null;
@@ -213,6 +215,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
     String amtPay = "";
     double releaseAmount = 0.000;
     LinearLayoutManager manager;
+    String isEdittext = "";
     Timer timer;
     protected void attachBaseContext(Context newBase) {
         SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
@@ -267,6 +270,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 UserData userData = mDatabase.getUserData();
                 wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
             }
+
 
 //            if (titleStr.contains("Electricity Bill")) {
 //                name = getIntent().getStringExtra("name");
@@ -602,7 +606,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
         String subDivision = sub_division_code.getText().toString().trim();
 
         if (titleStr.equals("Fastag")){
-            amt = amount.getText().toString().trim();
+            amt = billAmount;
         }else {
             if (billAmount.isEmpty() || billAmount == null){
                 amt = amount.getText().toString().trim();
@@ -654,6 +658,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
     public void onSuccess(String data) {
         infos.clear();
         try {
+            Log.d("TAG_DATA", "onSuccess: "+data);
             JSONObject object = new JSONObject(data);
             if ((object.getJSONObject("additionalInfo") != null)){
                 JSONObject object1 = new JSONObject(object.getString("additionalInfo"));
@@ -667,7 +672,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 }
 
                 if (infos.size() < 3){
-                    txtViewMore.setVisibility(GONE);
+                    txtViewMore.setVisibility(VISIBLE);
                     adapter = new BillerAdapter(infos, titleStr, type,2);
                 }else if (infos.size() < 4){
                     txtViewMore.setVisibility(GONE);
@@ -711,9 +716,11 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                     if (adapter.getItemCount() == 3) {
                         adapter = new BillerAdapter(infos, titleStr, type, infos.size());
                         txtViewMore.setText("Less More");
+                        service_powered.setVisibility(GONE);
                     } else {
                         adapter = new BillerAdapter(infos, titleStr, type, 3);
                         txtViewMore.setText("View More");
+                        service_powered.setVisibility(VISIBLE);
                     }
 
                     recyclerViewBillerInfo.setAdapter(adapter);
@@ -724,18 +731,24 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             }
 
             billAmount = object.getString("billAmount");
+            isEdittext = object.getString("is_amount_editable");
+            if (isEdittext.equals("true")){
+                txtAmountValue.setFocusableInTouchMode(true);
+            }else {
+                txtAmountValue.setFocusable(false);
+            }
 //            txtAmount.setText("Bill Amount");
             txtAmountValue.setText(billAmount);
             txtRupees.setVisibility(VISIBLE);
 
             if (titleStr.equals("Fastag")){
-                amount_layout.setVisibility(VISIBLE);
-                amount.setVisibility(VISIBLE);
+                amount_layout.setVisibility(GONE);
+                amount.setVisibility(GONE);
 //                txtAmount.setVisibility(GONE);
-                txtAmountValue.setVisibility(GONE);
-                txtRupees.setVisibility(GONE);
-                viewLine.setVisibility(GONE);
-                viewBill.setVisibility(GONE);
+                txtAmountValue.setVisibility(VISIBLE);
+                txtRupees.setVisibility(VISIBLE);
+                viewLine.setVisibility(VISIBLE);
+                viewBill.setVisibility(VISIBLE);
             }
 
             recyclerViewBillerInfo.setAdapter(adapter);
@@ -923,11 +936,24 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                     consumerNumberText.setVisibility(GONE);
                     star_img.setVisibility(GONE);
                 }
+
+                if (type.contains("GiftCards")) {
+                    provider_name.setVisibility(VISIBLE);
+                    consumerNumber.setVisibility(VISIBLE);
+                    Consumer_Number.setVisibility(VISIBLE);
+                    consumerNumberText.setVisibility(VISIBLE);
+                    amount_layout.setVisibility(VISIBLE);
+                    amount.setVisibility(VISIBLE);
+                    amountText.setVisibility(VISIBLE);
+                }
+                Log.d("TAG_ELECTRICITY", "onSuccessOther1: "+numberField);
+                Log.d("TAG_ELECTRICITY", "onSuccessOther: "+numberField.getString("field_name"));
+//                amount_layout.setText(numberField.getString("field_name"));
+//                amount.setHint(numberField.getString("eg"));
                 consumerNumber.setHint(numberField.getString("field_name"));
                 Consumer_Number.setText(numberField.getString("field_name"));
                 consumerNumberText.setText(numberField.getString("eg"));
-//                amount_layout.setText(numberField.getString("field_name"));
-//                amount.setHint(numberField.getString("eg"));
+
 
                 int maxLength = Integer.parseInt(numberField.getString("max_length"));
                 InputFilter[] filters = new InputFilter[1];
@@ -956,12 +982,14 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                                 txtBillFetch.setVisibility(GONE);
                                 amount_layout.setVisibility(VISIBLE);
                                 amount.setVisibility(VISIBLE);
+                                amountText.setVisibility(VISIBLE);
                                 btnProcess.setVisibility(VISIBLE);
                                 proceedToPay.setVisibility(GONE);
                             }
                             if (type.equals("Fastag")){
                                 amount_layout.setVisibility(GONE);
                                 amount.setVisibility(GONE);
+                                amountText.setVisibility(GONE);
                                 amount.setText("");
                             }
                             constBillInfo.setVisibility(GONE);
@@ -1018,6 +1046,8 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 } else {
                     sub_division_code_layout.setText(field1Data.getString("field_name"));
                     sub_division_code.setHint(field1Data.getString("eg"));
+                    sub_division_codeText.setText(field1Data.getString("eg"));
+                    sub_division_codeText.setVisibility(VISIBLE);
                     sub_division_code_layout.setVisibility(VISIBLE);
                     sub_division_code.setVisibility(VISIBLE);
 
@@ -1049,6 +1079,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                                     txtBillFetch.setVisibility(GONE);
                                     amount_layout.setVisibility(VISIBLE);
                                     amount.setVisibility(VISIBLE);
+                                    amountText.setVisibility(VISIBLE);
                                     btnProcess.setVisibility(VISIBLE);
                                     proceedToPay.setVisibility(GONE);
                                 }
@@ -1092,7 +1123,9 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                     amount_layout.setVisibility(VISIBLE);
                     amountText.setVisibility(VISIBLE);
                     amount.setVisibility(VISIBLE);
+                    amountText.setVisibility(VISIBLE);
                     amount.setHint(field2Data.getString("eg"));
+                    amountText.setHint(field2Data.getString("eg"));
 
                     int field2DataMaxLength = Integer.parseInt(field2Data.getString("max_length"));
                     InputFilter[] filters3 = new InputFilter[1];
@@ -1122,6 +1155,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                                     txtBillFetch.setVisibility(GONE);
                                     amount_layout.setVisibility(VISIBLE);
                                     amount.setVisibility(VISIBLE);
+                                    amountText.setVisibility(VISIBLE);
                                     btnProcess.setVisibility(VISIBLE);
                                     proceedToPay.setVisibility(GONE);
                                 }

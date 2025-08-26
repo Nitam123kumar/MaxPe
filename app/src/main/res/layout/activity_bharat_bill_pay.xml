@@ -112,6 +112,16 @@
                     app:layout_constraintStart_toStartOf="@id/recharge_section"
                     app:layout_constraintTop_toBottomOf="@id/line" />
 
+                <ImageView
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/utility_billsTV"
+                    app:layout_constraintBottom_toBottomOf="@id/utility_billsTV"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:src="@drawable/bharat_connect"
+                    />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/utility_bills_recyclerView"
                     android:layout_width="match_parent"

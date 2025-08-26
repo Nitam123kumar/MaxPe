@@ -849,7 +849,8 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
     }
 
     @Override
-    public void onClick(String amount) {
-        addAmount(Integer.parseInt(amount));
+    public void onClick(String amount1) {
+        addAmount(Integer.parseInt(amount1));
+        amount.setText(amount1);
     }
 }

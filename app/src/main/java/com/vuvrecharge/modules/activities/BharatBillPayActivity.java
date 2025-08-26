@@ -39,6 +39,7 @@ import com.vuvrecharge.modules.model.RechargeAndBillPaymentData;
 import com.vuvrecharge.modules.model.YoutubeSlides;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.preferences.APIStorePreferences;
 import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONArray;
@@ -56,6 +57,7 @@ import butterknife.ButterKnife;
 public class BharatBillPayActivity extends BaseActivity implements DefaultView, BharatBillPayAdapter.ItemClickListener,FinancialServicesAdapter.ItemClickListener, View.OnClickListener,OTTSubscriptionsAdapter.ItemClickListener {
 
     private DefaultPresenter mDefaultPresenter;
+
 
     @BindView(R.id.toolbar_layout)
     LinearLayout mToolbar;
@@ -81,6 +83,7 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
     FinancialServicesAdapter utility_bills_adapter;
     OTTSubscriptionsAdapter ottAdapter;
     List<String> ott_List;
+    APIStorePreferences prefs ;
     List<BharatBillPayModel> bbpsList = new ArrayList<>();
     List<OTTSubscriptionsData> oTTList = new ArrayList<>();
     List<BharatBillPayModel> rechargeAndBillPaymentDataList = new ArrayList<>();
@@ -98,7 +101,6 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
         ButterKnife.bind(this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         mDefaultPresenter = new DefaultPresenter(this);
-        mDefaultPresenter.getAllRechargeServices(device_id);
         stringTitle = getIntent().getStringExtra("title");
         title.setText(stringTitle);
         String data = getIntent().getStringExtra("data");
@@ -152,6 +154,17 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
             }
 
 //        }
+        prefs = new APIStorePreferences(this);
+        var operatorData =  prefs.getOperatorString();
+        if (operatorData.isEmpty())
+        {
+            Log.d("TAG_BBPS", "First Time Call: "+operatorData);
+            mDefaultPresenter.getAllRechargeServices(device_id);
+        }
+        else {
+            onSuccess(operatorData,"");
+            Log.d("TAG_BBPS", "Preference Data: "+operatorData);
+        }
     }
 
     @Override
@@ -160,7 +173,8 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
         setLayout(no_internet, retry, "Bill Pay");
     }
 
-   private void setStatusBarGradiant(Activity activity) {
+
+    private void setStatusBarGradiant(Activity activity) {
        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
            Window window = activity.getWindow();
            Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
@@ -360,12 +374,16 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
     public void onSuccess(String data, String data_other) {
         try {
             JSONObject object = new JSONObject(data);
-
+//            var sharedPreferences = getSharedPreferences("bbps_data", MODE_PRIVATE);
+           prefs.putOperatorString(data);
+//            mDatabase.putBbpsString("bbps_data",data);
             if (object.has("services_by_categ")) {
                 JSONObject servicesObject = object.getJSONObject("services_by_categ");
 
+                rechargeAndBillPaymentDataList.clear();
                 if (servicesObject.has("Recharge_&_Bill_Payments")) {
                     JSONArray rechargeArray = servicesObject.getJSONArray("Recharge_&_Bill_Payments");
+                    Log.d("Recharge_&_Bill_Payments", String.valueOf(rechargeArray));
                     for (int i = 0; i < rechargeArray.length(); i++) {
                         JSONObject obj = rechargeArray.getJSONObject(i);
                         BharatBillPayModel model = new BharatBillPayModel();
@@ -383,6 +401,7 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
 
                 if (servicesObject.has("Utilities_Bill")) {
                     JSONArray utilitiesArray = servicesObject.getJSONArray("Utilities_Bill");
+                    utility_billsList.clear();
                     for (int i = 0; i < utilitiesArray.length(); i++) {
                         JSONObject obj = utilitiesArray.getJSONObject(i);
                         FinancialServicesData model = new FinancialServicesData();
@@ -399,6 +418,7 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
 
                 if (servicesObject.has("Financial_Services")) {
                     JSONArray financialArray = servicesObject.getJSONArray("Financial_Services");
+                    financialServicesList.clear();
                     for (int i = 0; i < financialArray.length(); i++) {
                         JSONObject obj = financialArray.getJSONObject(i);
                         FinancialServicesData model = new FinancialServicesData();
@@ -430,6 +450,7 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
                     }
                 }
             }
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -465,6 +486,11 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
     @Override
     public void onPrintLog(String message) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     @Override

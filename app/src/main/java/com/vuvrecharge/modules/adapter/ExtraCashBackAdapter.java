@@ -4,18 +4,17 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 import com.vuvrecharge.R;
 import com.vuvrecharge.modules.model.ExtraCashBackPoints;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,10 +48,17 @@ public class ExtraCashBackAdapter extends RecyclerView.Adapter<ExtraCashBackAdap
     @Override
     public void onBindViewHolder(@NonNull ExtraCashBackAdapter.ViewHolder holder, int position) {
         ExtraCashBackPoints extraCashBackPoints = list.get(position);
-        holder.extraPointsTxt.setText("Extra "+extraCashBackPoints.getBonus()+" points");
-        holder.addTargetAmount.setText("Add ₹"+extraCashBackPoints.getMin()+" or More");
+        holder.extraPointsTxt.setText("Extra " + extraCashBackPoints.getBonus() + " points");
+        holder.addTargetAmount.setText("Add ₹" + extraCashBackPoints.getMin() + " or More");
 
         try {
+            AtomicBoolean isSelected= new AtomicBoolean(false);
+
+            holder.itemView.setOnClickListener(v -> {
+                isSelected.set(true);
+                onClickListener.onClick(extraCashBackPoints.getMin());
+                notifyDataSetChanged();
+            });
             if (!currentAmount.isEmpty()) {
                 int enteredAmount = Integer.parseInt(currentAmount);
                 int itemMin = Integer.parseInt(extraCashBackPoints.getMin());
@@ -63,23 +69,18 @@ public class ExtraCashBackAdapter extends RecyclerView.Adapter<ExtraCashBackAdap
                 if (enteredAmount >= itemMin && enteredAmount <= itemMax || (isLastItem && enteredAmount > itemMax)) {
                     holder.applied_amount.setVisibility(View.VISIBLE);
                     holder.select.setBackgroundResource(R.drawable.discount_applied_shape);
-                    holder.itemView.setOnClickListener(v -> {
-                        onClickListener.onClick(String.valueOf(0));
-                    });
+
+                } else {
+                    holder.applied_amount.setVisibility(View.GONE);
+                    holder.select.setBackgroundResource(R.drawable.apply_discount_shape);
+
                 }
-           else {
-                holder.applied_amount.setVisibility(View.GONE);
-                holder.select.setBackgroundResource(R.drawable.apply_discount_shape);
-                    holder.itemView.setOnClickListener(v -> {
-                        onClickListener.onClick(extraCashBackPoints.getMin());
-                    });
-            }
+
+
             } else {
                 holder.applied_amount.setVisibility(View.GONE);
                 holder.select.setBackgroundResource(R.drawable.apply_discount_shape);
-                holder.itemView.setOnClickListener(v -> {
-                    onClickListener.onClick(extraCashBackPoints.getMin());
-                });
+
             }
         } catch (Exception e) {
             holder.applied_amount.setVisibility(View.GONE);
@@ -92,6 +93,7 @@ public class ExtraCashBackAdapter extends RecyclerView.Adapter<ExtraCashBackAdap
     public int getItemCount() {
         return list.size();
     }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.extraPointsTxt)
         TextView extraPointsTxt;
@@ -107,6 +109,7 @@ public class ExtraCashBackAdapter extends RecyclerView.Adapter<ExtraCashBackAdap
             ButterKnife.bind(this, itemView);
         }
     }
+
     public interface OnClickListener {
         void onClick(String amount);
     }

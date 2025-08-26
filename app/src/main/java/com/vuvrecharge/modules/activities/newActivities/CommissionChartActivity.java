@@ -45,6 +45,8 @@ import com.vuvrecharge.modules.model.OperatorData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 import com.vuvrecharge.preferences.CommissionPreferences;
+import com.vuvrecharge.preferences.UserPreferences;
+import com.vuvrecharge.preferences.UserPreferencesImpl;
 import com.vuvrecharge.utils.LocaleHelper;
 
 import org.json.JSONArray;
@@ -98,6 +100,8 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
 
     @BindView(R.id.title)
     TextView title;
+    @BindView(R.id.upto1)
+    TextView upto1;
     @BindView(R.id.no_internet)
     LinearLayout no_internet;
     @BindView(R.id.retry)
@@ -121,6 +125,7 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
     int itemCountPrepaid = 0;
     int itemCountDth = 0;
     int itemCountOther = 0;
+    UserPreferences mDatabase;
     HashMap<String, String> map, map2, map3;
     protected void attachBaseContext(Context newBase) {
         SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
@@ -139,6 +144,8 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
         getStartedTV.setOnClickListener(this);
 //        setStatusBarGradiant(this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        mDatabase= new UserPreferencesImpl();
+        upto1.setText(mDatabase.getUpto());
 
 
 
@@ -193,7 +200,6 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
     }
 
     private void initializeEventsList() {
-
             if (prepaidCommissionList.size()>0){
                 itemCountPrepaid=prepaidCommissionList.size();
                 setFragment(new PrepaidFragment());
@@ -336,6 +342,8 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
             JSONArray prepaidArray = new JSONArray(object.getString("prepaid_commission"));
             JSONArray dthArray = new JSONArray(object.getString("dth_commission"));
             JSONArray othersArray = new JSONArray(object.getString("others"));
+            String maxCommission=object.getString("maxCommission");
+            mDatabase.setUpto(maxCommission);
 //
             prepaidCommissionPreferences.setCommission("PrepaidCommission", object.getString("prepaid_commission"));
             dTHCommissionPreferences.setCommission("DTHCommission", object.getString("dth_commission"));

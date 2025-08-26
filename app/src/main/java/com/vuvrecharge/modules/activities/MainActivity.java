@@ -2,7 +2,6 @@ package com.vuvrecharge.modules.activities;
 
 import static com.vuvrecharge.api.ApiServices.OFFER_ZONE;
 
-import android.animation.ArgbEvaluator;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -23,10 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.Editable;
 import android.text.Html;
-import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,7 +47,6 @@ import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -73,8 +68,9 @@ import com.google.android.play.core.install.InstallState;
 import com.google.android.play.core.install.InstallStateUpdatedListener;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
-import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseActivity;
 import com.vuvrecharge.base.BaseMethod;
@@ -86,16 +82,13 @@ import com.vuvrecharge.modules.activities.newActivities.CommissionChartActivity;
 import com.vuvrecharge.modules.activities.newActivities.ElectricityActivity;
 import com.vuvrecharge.modules.activities.newActivities.MobileBankingActivity;
 import com.vuvrecharge.modules.adapter.DashboardAdapter;
-import com.vuvrecharge.modules.adapter.ImageSliderAdapter;
 import com.vuvrecharge.modules.adapter.OTTSubscriptionsAdapter;
 import com.vuvrecharge.modules.adapter.OfferSliderRecyclerViewAdapter;
 import com.vuvrecharge.modules.adapter.PaymentSettingAdapter;
 import com.vuvrecharge.modules.adapter.RecyclerViewSliderAdapter;
-import com.vuvrecharge.modules.adapter.SearchableSpinnerCircleAdapter;
 import com.vuvrecharge.modules.adapter.SliderAdapter;
 import com.vuvrecharge.modules.adapter.SliderAdapterBanner;
 import com.vuvrecharge.modules.adapter.SpotlightServicesAdapter;
-import com.vuvrecharge.modules.model.CircleData;
 import com.vuvrecharge.modules.model.DashboardMenu;
 import com.vuvrecharge.modules.model.OTTSubscriptionsData;
 import com.vuvrecharge.modules.model.OfferSlider;
@@ -107,6 +100,7 @@ import com.vuvrecharge.modules.model.UserData;
 import com.vuvrecharge.modules.model.YoutubeSlides;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.preferences.APIStorePreferences;
 import com.vuvrecharge.utils.LocaleHelper;
 import com.vuvrecharge.utils.permission.PermissionUtil;
 
@@ -118,12 +112,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pl.droidsonroids.gif.GifImageView;
 
 @SuppressLint({"SetTextI18n", "NonConstantResourceId"})
 public class MainActivity extends BaseActivity implements DefaultView,
@@ -179,6 +173,10 @@ public class MainActivity extends BaseActivity implements DefaultView,
     ImageView headerImage;
     @BindView(R.id.news)
     TextView news;
+    @BindView(R.id.bike_percent)
+    TextView bike_percent;
+    @BindView(R.id.car_percent)
+    TextView car_percent;
     @BindView(R.id.ottRecyclerView)
     RecyclerView ottRecyclerView;
     @BindView(R.id.no_internet)
@@ -239,6 +237,10 @@ public class MainActivity extends BaseActivity implements DefaultView,
     LinearLayout electricity;
     @BindView(R.id.Fastag)
     LinearLayout fasTag;
+    @BindView(R.id.bike_layout)
+    LinearLayout bike_layout;
+    @BindView(R.id.carLayout)
+    LinearLayout carLayout;
     @BindView(R.id.Cylinder)
     LinearLayout cylinder;
     @BindView(R.id.ViewAll)
@@ -247,17 +249,21 @@ public class MainActivity extends BaseActivity implements DefaultView,
     ConstraintLayout headerImage_layout;
     @BindView(R.id.onClickToShare)
     ConstraintLayout onClickToShare;
+    @BindView(R.id.facing)
+    ConstraintLayout facing;
     @BindView(R.id.prepaidTxt)
     TextView prepaidTxt;
     @BindView(R.id.nestedScrollView1)
     NestedScrollView nestedScrollView1;
     @BindView(R.id.whatsup_alert)
     ImageView whatsup_alert;
+    @BindView(R.id.home_banner_gif)
+    GifImageView home_banner_gif;
 
     List<String> color = new ArrayList<>();
     List<YoutubeSlides> youtubeVideosList = new ArrayList<>();
     List<String> imageList_offer;
-    List<String> spotlight;
+    List<String> spotlight = new ArrayList<>();
     DashboardAdapter adapter;
     List<DashboardMenu> menus = new ArrayList<>();
     List<OfferSlider> offerSliderList = new ArrayList<>();
@@ -281,18 +287,30 @@ public class MainActivity extends BaseActivity implements DefaultView,
     OfferSliderRecyclerViewAdapter offerSliderAdapter;
     SpotlightServicesAdapter spotlightServicesAdapter;
     OTTSubscriptionsAdapter oTTAdapter;
-    List<String> ott_List;
+    List<String> ott_List = new ArrayList<>();
     List<OTTSubscriptionsData> oTTList = new ArrayList<>();
+    List<SpotlightData> SpotlightDataList = new ArrayList<>();
     List<SliderData> slider_banner = new ArrayList<>();
     String intentName = null;
     String extraData = null;
     String redirection_type = null;
     String redirection_url = null;
     int lastSelectedPosition = 0;
-    private Handler sliderHandler = new Handler();
+    private Handler sliderHandler = new Handler(Looper.getMainLooper());
     private Runnable sliderRunnable;
     SliderAdapterBanner imageSliderAdapter;
     private boolean recreatedOnce = false;
+    private boolean isShowing = false;
+    String bikePercent = null;
+    String carPercent = null;
+    String bikeRedirectUrl = null;
+    String carRedirectUrl = null;
+    String bikeRedirectType = null;
+    String carRedirectType = null;
+
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
+    APIStorePreferences pref;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -332,20 +350,35 @@ public class MainActivity extends BaseActivity implements DefaultView,
         cylinder.setOnClickListener(this);
         viewAll.setOnClickListener(this);
         history.setOnClickListener(this);
-//        all_services.setOnClickListener(this);
-//        popupDialog();
+        facing.setOnClickListener(this);
+        bike_layout.setOnClickListener(this);
+        isShowing = true;
         downline_pckage.setOnClickListener(this);
         mDefaultPresenter = new DefaultPresenter(this);
         appUpdate();
         notifications();
+        pref= new APIStorePreferences(this);
         offer_for_you_recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         image_slider.setClipChildren(false);
         image_slider.setClipToPadding(false);
         image_slider.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
+        pref = new APIStorePreferences(this);
+        pref.putDashBoardData("");
+        var operatorData =  pref.getDashBoardData();
+        Log.d("DashBoardData", "onCreate: "+operatorData);
+        if (operatorData.isEmpty())
+        {
+            mDefaultPresenter.dashboardDataWithoutRefresh(fcmToken + "", device_id + "", null);
+            Log.d("DashBoardData", "DashBoardData: ");
+        }
+        else {
+            onSuccess(operatorData,"");
+            Log.d("DashBoardData", "onSuccess: "+operatorData);
+        }
+
         image_slider.setOffscreenPageLimit(2);
 
-        // Page transformer for spacing
         int pageMarginPx = getResources().getDimensionPixelOffset(R.dimen.pageMargin);
         int offsetPx = getResources().getDimensionPixelOffset(R.dimen.offset);
 
@@ -356,6 +389,11 @@ public class MainActivity extends BaseActivity implements DefaultView,
 
         offerSliderAdapter = new OfferSliderRecyclerViewAdapter(this, offerSliderList, this);
         offer_for_you_recyclerView.setAdapter(offerSliderAdapter);
+        oTTAdapter = new OTTSubscriptionsAdapter(this, oTTList, ott_List, this);
+        ottRecyclerView.setAdapter(oTTAdapter);
+
+        spotlightServicesAdapter = new SpotlightServicesAdapter(this, spotlight, SpotlightDataList, this);
+        spotlight_services_recyclerView.setAdapter(spotlightServicesAdapter);
 
 
         sliderAdapter = new RecyclerViewSliderAdapter(this, MainActivity.this, youtubeVideosList);
@@ -371,23 +409,23 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 } else {
                     image_slider.setCurrentItem(0, true);
                 }
-                sliderHandler.postDelayed(this, 2000);
+                sliderHandler.postDelayed(this, 4000);
             }
         };
-        sliderHandler.postDelayed(sliderRunnable, 2000);
+        sliderHandler.postDelayed(sliderRunnable, 4000);
 
         image_slider.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 sliderHandler.removeCallbacks(sliderRunnable);
-                sliderHandler.postDelayed(sliderRunnable, 2000);
+                sliderHandler.postDelayed(sliderRunnable, 4000);
             }
         });
-        image_slider.post(() -> {
-            image_slider.setCurrentItem(0, false);
-            youtube_indicator.setViewPager2(image_slider);
-        });
+//        image_slider.post(() -> {
+//            image_slider.setCurrentItem(0, false);
+//            youtube_indicator.setViewPager2(image_slider);
+//        });
 
         spotlight_services_recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         ottRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
@@ -397,6 +435,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         headerImage_layout.setOnClickListener(v -> {
             onClickMainHeroBanner(redirection_type, intentName, extraData, redirection_url);
         });
+
 
 
         imageSliderAdapter = new SliderAdapterBanner(getActivity(), slider_banner, this);
@@ -409,13 +448,15 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 int totalItem = imageSliderAdapter.getItemCount();
                 if (currentItem < totalItem - 1) {
                     viewPager.setCurrentItem(currentItem + 1, true);
+                    indicator.requestLayout();
                 } else {
                     viewPager.setCurrentItem(0, true);
+                    indicator.requestLayout();
                 }
-                sliderHandler.postDelayed(this, 3000);
+                sliderHandler.postDelayed(this, 5000);
             }
         };
-        sliderHandler.postDelayed(sliderRunnable, 3000);
+        sliderHandler.postDelayed(sliderRunnable, 5000);
 
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -425,6 +466,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 sliderHandler.postDelayed(sliderRunnable, 3000);
             }
         });
+
 
         viewPager.post(() -> {
             viewPager.setCurrentItem(0, false);
@@ -478,7 +520,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
 //                            ContextCompat.getColor(MainActivity.this, R.color.black)
 //                    );
                     toolbar_constraintlayout.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.white));
-                    refresh.setImageResource(R.drawable.maxpoint_black);
+                    refresh.setImageResource(R.drawable.icon_fill_black);
                     total_ban.setTextColor(MainActivity.this.getResources().getColor(R.color.black));
                     next_arrow.setImageResource(R.drawable.next_arrow_black);
                     home_menu_imageView.setImageResource(R.drawable.menu_icon_black);
@@ -494,7 +536,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
                     View decor = win.getDecorView();
                     decor.setSystemUiVisibility(0);
                     toolbar_constraintlayout.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.colorPrimaryB));
-                    refresh.setImageResource(R.drawable.max_points_white_icon);
+                    refresh.setImageResource(R.drawable.icon_fill_white);
                     total_ban.setTextColor(MainActivity.this.getResources().getColor(R.color.white));
                     next_arrow.setImageResource(R.drawable.next_arrow);
                     home_menu_imageView.setImageResource(R.drawable.menu_icon);
@@ -571,7 +613,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
             available_balance.setText("\u20b9" + userData.getEarnings());
             double ban = Double.parseDouble(userData.getEarnings());
             total_ban.setText("₹" + String.format(Locale.ENGLISH, "%.2f", ban));
-            name_tv.setText("Welcome, " + userData.getName());
+            name_tv.setText("Hi, " + userData.getName());
 //            txtTitleMain.setText(userData.getRecharge_pay_bill_string());
 
             if (mDatabase.getUserData().getUser_type().equals("Distributor") ||
@@ -586,86 +628,6 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 downline_pckage.setVisibility(View.VISIBLE);
                 main_layout.setVisibility(View.VISIBLE);
             }
-
-//            color = new ArrayList<>();
-//            slider_banner.clear();
-//            List<SliderData> slide = (mDatabase.getUserData().getSlides());
-//            for (SliderData image : slide) {
-//                color.add(mDatabase.getUserData().getSlide_path() + "/" + image.getSlide());
-//                Log.d("Url Data", mDatabase.getUserData().getSlide_path());
-//                slider_banner.addAll(slide);
-//            }
-//            imageSliderAdapter = new SliderAdapterBanner(this, color,slider_banner, this);
-//            viewPager.setAdapter(imageSliderAdapter);
-//            indicator.setViewPager2(viewPager);
-//            imageSliderAdapter.notifyDataSetChanged();
-
-//            youtubeVideosList = new ArrayList<>();
-//            List<YoutubeSlides> youtubeSlidesImages = (mDatabase.getUserData().getYoutubeVideoSliders());
-//            youtubeVideosList.addAll(youtubeSlidesImages);
-//
-//            sliderAdapter = new RecyclerViewSliderAdapter(this, MainActivity.this, youtubeVideosList);
-//            image_slider.setAdapter(sliderAdapter);
-//            youtube_indicator.setViewPager2(image_slider);
-//            Log.d("youtubeVideosList", String.valueOf(youtubeVideosList));
-//            sliderAdapter.notifyDataSetChanged();
-
-//            imageList_offer = new ArrayList<>();
-//            List<OfferSlider> offer_sliders = (mDatabase.getUserData().getOffer_slides());
-//            for (OfferSlider offerSlides : offer_sliders) {
-//                imageList_offer.add(mDatabase.getUserData().getOffer_slides_path() + "/" + offerSlides.getLogo() + getTitle());
-//                Log.d("imageList_offer", String.valueOf(imageList_offer));
-//                if (offerSlides.getData() != null) {
-//                    String intentData = offerSlides.getData();
-//
-//                    JSONObject activityData = new JSONObject(offerSlides.getData());
-//                    JSONObject activityExtraData = new JSONObject(activityData.getString("extra_data"));
-//
-//                    if (activityExtraData.length() > 0) {
-//
-//                        Iterator<String> keys = activityExtraData.keys();
-//                        while (keys.hasNext()) {
-//                            String key = keys.next();
-//                            String value = activityExtraData.optString(key, "");
-//
-//                        }
-//
-//                    }
-//                    Log.d("activityExtraData", "Data Title: " + activityExtraData);
-////                    Log.d("OfferSlider", "Data Intent: " + object.getString("intent_name"));
-//
-//                }
-//            }
-
-            ott_List = new ArrayList<>();
-            List<OTTSubscriptionsData> ottItem = (mDatabase.getUserData().getLogoSliders());
-            for (OTTSubscriptionsData ottData : ottItem) {
-                ott_List.add(mDatabase.getUserData().getOtt_slides_path() + "/" + ottData.getLogo());
-
-                Log.d("OTTData", ottData.getLogo() + " " + ottData.getTitle());
-            }
-            oTTList.clear();
-            oTTList.addAll(ottItem);
-            oTTAdapter = new OTTSubscriptionsAdapter(this, oTTList, ott_List, this);
-            ottRecyclerView.setAdapter(oTTAdapter);
-
-            spotlight = new ArrayList<>();
-            List<SpotlightData> spotlightData = (mDatabase.getUserData().getSpotlight_services());
-            for (SpotlightData spotlightData1 : spotlightData) {
-                spotlight.add(spotlightData1.getLogo() + getTitle());
-                Log.d("spotlight", String.valueOf(spotlight));
-
-                if (spotlightData1.getData() != null) {
-                    String intentData = spotlightData1.getData();
-                    JSONObject object = new JSONObject(spotlightData1.getData());
-
-                    Log.d("Spotlight", "Data Title: " + object.getString("extra_data"));
-                    Log.d("Spotlight", "Data Intent: " + object.getString("intent_name"));
-                }
-            }
-
-            spotlightServicesAdapter = new SpotlightServicesAdapter(this, spotlight, mDatabase.getUserData().getSpotlight_services(), this);
-            spotlight_services_recyclerView.setAdapter(spotlightServicesAdapter);
 
 
             if (from.equals("Api")) {
@@ -1023,6 +985,33 @@ public class MainActivity extends BaseActivity implements DefaultView,
         }
     }
 
+    private void setPinDetails() {
+        FrameLayout bottomSheet = null;
+
+        dialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
+        View view = LayoutInflater.from(this).inflate(R.layout.set_mpin_alert_layout, null, false);
+
+        dialog.setContentView(view);
+        dialog.setCancelable(false);
+        TextView setMPinBtn = view.findViewById(R.id.set_pin_btn);
+        changeStatusBarColor(dialog);
+        bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+        if (bottomSheet != null) {
+            BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+            behavior.setSkipCollapsed(false);
+            behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            behavior.setPeekHeight(600);
+            behavior.setDraggable(false);
+        }
+
+        setMPinBtn.setOnClickListener(v -> {
+            dialog.dismiss();
+            setMPinDialog();
+        });
+        dialog.show();
+
+    }
+
     public void addBalance() {
         try {
             FrameLayout bottomSheet = null;
@@ -1145,126 +1134,190 @@ public class MainActivity extends BaseActivity implements DefaultView,
         }
     }
 
-    @Override
-    public void onSuccess(String message, String data_other) {
+    private void apiData(JSONObject data1) {
+
+        Log.d("TAG_DATA", "apiData: " + data1);
         try {
-            if (data_other.equals("bbps")) {
-                data = message;
-            } else if (data_other.equals("allServices")) {
-                allServices = message;
-            } else {
-                mDatabase.setUserData(message);
-                refresh_layout.setRefreshing(false);
-                JSONObject message1 = new JSONObject(message);
-                JSONObject data = message1.getJSONObject("main_hero_banner");
-                JSONArray slideArray = message1.getJSONArray("slides");
-                JSONArray youtube_slides = message1.getJSONArray("youtube_slides");
-                JSONArray offer_slides = message1.getJSONArray("offer_slides");
-                Log.d("offer_slides", String.valueOf(offer_slides));
+            refresh_layout.setRefreshing(false);
+            JSONObject data = data1.getJSONObject("main_hero_banner");
+            JSONArray slideArray = data1.getJSONArray("slides");
 
-                String dashboard_banner = message1.getString("dashboard_banner");
+
+
+            JSONArray youtube_slides = data1.getJSONArray("youtube_slides");
+            Log.d("main_hero_banner", "main_hero_banner1: " + data);
+            JSONArray offer_slides = data1.getJSONArray("offer_slides");
+            JSONArray oTTList_slides = data1.getJSONArray("ott_slides");
+            Log.d("TAG_DATA", "apiData1: " + data1);
+            JSONArray spotlight_services = data1.getJSONArray("spotlight_services");
+            JSONObject customInsuranceDetails = data1.getJSONObject("CustomInsuranceDetails");
+            JSONObject bike_insurance = customInsuranceDetails.getJSONObject("bike_insurance");
+            JSONObject car_insurance = customInsuranceDetails.getJSONObject("car_insurance");
+            Log.d("customInsuranceDetails", String.valueOf(bike_insurance));
+
+            String dashboard_banner = data1.getString("dashboard_banner");
 //                Glide.with(getActivity()).load(dashboard_banner).into(ott_recharge);
-                String footer_banner_text = message1.getString("footer_banner_text");
-                String recharge_pay_bill_string = message1.getString("recharge_pay_bill_string");
-                recharge_and_txt.setText(recharge_pay_bill_string);
+            String footer_banner_text = data1.getString("footer_banner_text");
+            String recharge_pay_bill_string = data1.getString("recharge_pay_bill_string");
+            recharge_and_txt.setText(recharge_pay_bill_string);
+            UserData userData = mDatabase.getUserData();
+            available_balance.setText("\u20b9" + userData.getEarnings());
+            Log.d("getIs_mpin_set", "onSuccess1: " + mDatabase.getUserData().getIs_mpin_set());
+            if (mDatabase.getUserData() != null) {
+                if (mDatabase.getUserData().getIs_mpin_set().equals("false")) {
+                    setPinDetails();
 
-                String part1 = "";
-                String part2 = "";
-
-                String[] parts = footer_banner_text.split("&");
-                if (parts.length == 2) {
-                    part1 = parts[0].trim() + " &";
-                    part2 = parts[1].trim();
-                }
-
-                txtMobileRecharge.setText(part1);
-                txtRefer.setText(part2);
-
-                slider_banner.clear();
-                if (slideArray.length() > 0) {
-
-                    for (int i = 0; i < slideArray.length(); i++) {
-                        JSONObject object1 = slideArray.getJSONObject(i);
-                        SliderData sliderData = new SliderData();
-                        sliderData.setSlide(object1.getString("slide"));
-                        sliderData.setUrl(object1.getString("url"));
-                        sliderData.setRedirection_type(object1.getString("redirection_type"));
-                        sliderData.setData(object1.getString("data"));
-                        slider_banner.add(sliderData);
+                } else {
+                    if (isShowing == true) {
+                        isShowing = false;
+                        popupDialog();
                     }
-                    imageSliderAdapter.notifyDataSetChanged();
-
 
                 }
-                offerSliderList.clear();
-                if (offer_slides.length() > 0) {
+            }
+            double ban = Double.parseDouble(userData.getEarnings());
+            total_ban.setText("₹" + String.format(Locale.ENGLISH, "%.2f", ban));
+            String onlyMember = userData.getName().split(" ")[0];
+            name_tv.setText("Hi, " + onlyMember);
 
-                    for (int i = 0; i < offer_slides.length(); i++) {
-                        JSONObject objectOffer_slides = offer_slides.getJSONObject(i);
-                        OfferSlider offerSlides = new OfferSlider();
-                        offerSlides.setOfferTitle(objectOffer_slides.getString("title"));
-                        offerSlides.setLogo(objectOffer_slides.getString("logo"));
-                        offerSlides.setUrl(objectOffer_slides.getString("url"));
-                        offerSlides.setRedirection_type(objectOffer_slides.getString("redirection_type"));
-                        offerSlides.setData(objectOffer_slides.getString("data"));
-                        Log.d("logoUrl", offerSlides.getLogo());
+            String part1 = "";
+            String part2 = "";
 
-                        offerSliderList.add(offerSlides);
-                    }
-                    offerSliderAdapter.notifyDataSetChanged();
+            String[] parts = footer_banner_text.split("&");
+            if (parts.length == 2) {
+                part1 = parts[0].trim() + " &";
+                part2 = parts[1].trim();
+            }
 
+            txtMobileRecharge.setText(part1);
+            txtRefer.setText(part2);
 
+            slider_banner.clear();
+            if (slideArray.length() > 0) {
+
+                for (int i = 0; i < slideArray.length(); i++) {
+                    JSONObject object1 = slideArray.getJSONObject(i);
+                    SliderData sliderData = new SliderData();
+                    sliderData.setSlide(object1.getString("slide"));
+                    sliderData.setUrl(object1.getString("url"));
+                    sliderData.setRedirection_type(object1.getString("redirection_type"));
+                    sliderData.setData(object1.getString("data"));
+                    slider_banner.add(sliderData);
                 }
-                youtubeVideosList.clear();
-                if (youtube_slides.length() > 0) {
-
-                    for (int i = 0; i < youtube_slides.length(); i++) {
-                        JSONObject objectYoutube_slides = youtube_slides.getJSONObject(i);
-                        YoutubeSlides youtubeSlides = new YoutubeSlides();
-                        youtubeSlides.setLink(objectYoutube_slides.getString("link"));
-                        youtubeSlides.setTitle(objectYoutube_slides.getString("title"));
-                        youtubeSlides.setThumbnail(objectYoutube_slides.getString("thumbnail"));
-                        youtubeVideosList.add(youtubeSlides);
-                    }
-                    sliderAdapter.notifyDataSetChanged();
+                imageSliderAdapter.notifyDataSetChanged();
 
 
+            }
+//
+            bikePercent = bike_insurance.getString("percent");
+            bikeRedirectUrl = bike_insurance.getString("redirect_url");
+            bikeRedirectType = bike_insurance.getString("redirect_type");
+            carPercent = car_insurance.getString("percent");
+            carRedirectUrl = car_insurance.getString("redirect_url");
+            carRedirectType = car_insurance.getString("redirect_type");
+            bike_percent.setText(bikePercent + "OF");
+            car_percent.setText(carPercent + "OF");
+
+            offerSliderList.clear();
+            if (offer_slides.length() > 0) {
+
+                for (int i = 0; i < offer_slides.length(); i++) {
+                    JSONObject objectOffer_slides = offer_slides.getJSONObject(i);
+                    OfferSlider offerSlides = new OfferSlider();
+                    offerSlides.setOfferTitle(objectOffer_slides.getString("title"));
+                    offerSlides.setLogo(objectOffer_slides.getString("logo"));
+                    offerSlides.setUrl(objectOffer_slides.getString("url"));
+                    offerSlides.setRedirection_type(objectOffer_slides.getString("redirection_type"));
+                    offerSlides.setData(objectOffer_slides.getString("data"));
+                    Log.d("logoUrl", offerSlides.getLogo());
+
+                    offerSliderList.add(offerSlides);
                 }
-                mainHeroBanner(data);
-                setData("Api");
-                JSONObject object = new JSONObject(message);
-                JSONArray array = object.getJSONArray("recharge_pay_data");
-                adapter = new DashboardAdapter(this, this);
-                menus.clear();
-                for (int i = 0; i < array.length(); i++) {
-                    JSONObject object1 = array.getJSONObject(i);
-                    DashboardMenu menu = new DashboardMenu();
-                    String logo = object1.getString("logo");
-                    String title = object1.getString("title");
-                    String redirect_link = object1.getString("redirect_link");
-                    String service_type = object1.getString("service_type");
-                    String highlight_text = object1.getString("highlight_text");
-                    String up_down_msg = object1.getString("up_down_msg");
-                    menu.setLogo(logo);
-                    menu.setTitle(title);
-                    menu.setRedirect_link(redirect_link);
-                    menu.setService_type(service_type);
-                    menu.setHighlight_text(highlight_text);
-                    menu.setUp_down_msg(up_down_msg);
-                    menus.add(menu);
-                }
+                offerSliderAdapter.notifyDataSetChanged();
 
-                menus.add(new DashboardMenu("Bharat Bill Pay", "View All", "BBPS", "bbps", "", ""));
-                adapter.addData(menus);
-                recyclerviewDashboard.setAdapter(adapter);
-                Log.d("TAG_DATA", "onSuccess: " + mDatabase.getUserData().getIs_mpin_set());
-                if (mDatabase.getUserData() != null) {
-                    if (mDatabase.getUserData().getIs_mpin_set().equals("false")) {
-                        if (dialog1 == null) {
-                            setMPinDialog();
-                        }
-                    }
+
+            }
+            oTTList.clear();
+            if (oTTList_slides.length() > 0) {
+
+                for (int i = 0; i < oTTList_slides.length(); i++) {
+                    JSONObject objectOTTList_slides = oTTList_slides.getJSONObject(i);
+                    OTTSubscriptionsData offerSlides = new OTTSubscriptionsData();
+                    offerSlides.setTitle(objectOTTList_slides.getString("title"));
+                    offerSlides.setLogo(objectOTTList_slides.getString("logo"));
+                    offerSlides.setUrl(objectOTTList_slides.getString("url"));
+                    offerSlides.setRedirection_type(objectOTTList_slides.getString("redirection_type"));
+                    offerSlides.setData(objectOTTList_slides.getString("data"));
+                    Log.d("logoUrl", offerSlides.getLogo());
+
+                    oTTList.add(offerSlides);
                 }
+                oTTAdapter.notifyDataSetChanged();
+
+
+            }
+            SpotlightDataList.clear();
+            if (spotlight_services.length() > 0) {
+
+                for (int i = 0; i < spotlight_services.length(); i++) {
+                    JSONObject objectSpotlight_services = spotlight_services.getJSONObject(i);
+                    SpotlightData offerSlides = new SpotlightData();
+                    offerSlides.setTitle(objectSpotlight_services.getString("title"));
+                    offerSlides.setLogo(objectSpotlight_services.getString("logo"));
+                    offerSlides.setType(objectSpotlight_services.getString("type"));
+                    offerSlides.setRedirectLink(objectSpotlight_services.getString("redirect_link"));
+                    offerSlides.setData(objectSpotlight_services.getString("data"));
+                    Log.d("logoUrl", offerSlides.getLogo());
+
+                    SpotlightDataList.add(offerSlides);
+                }
+                spotlightServicesAdapter.notifyDataSetChanged();
+
+
+            }
+            youtubeVideosList.clear();
+            if (youtube_slides.length() > 0) {
+
+                for (int i = 0; i < youtube_slides.length(); i++) {
+                    JSONObject objectYoutube_slides = youtube_slides.getJSONObject(i);
+                    YoutubeSlides youtubeSlides = new YoutubeSlides();
+                    youtubeSlides.setLink(objectYoutube_slides.getString("link"));
+                    youtubeSlides.setTitle(objectYoutube_slides.getString("title"));
+                    youtubeSlides.setThumbnail(objectYoutube_slides.getString("thumbnail"));
+                    youtubeVideosList.add(youtubeSlides);
+                }
+                sliderAdapter.notifyDataSetChanged();
+
+
+            }
+            mainHeroBanner(data);
+//            setData("Api");
+//        JSONObject object = new JSONObject(data1);
+//        JSONArray array = object.getJSONArray("recharge_pay_data");
+//        adapter = new DashboardAdapter(this, this);
+//        menus.clear();
+//        for (int i = 0; i < array.length(); i++) {
+//            JSONObject object1 = array.getJSONObject(i);
+//            DashboardMenu menu = new DashboardMenu();
+//            String logo = object1.getString("logo");
+//            String title = object1.getString("title");
+//            String redirect_link = object1.getString("redirect_link");
+//            String service_type = object1.getString("service_type");
+//            String highlight_text = object1.getString("highlight_text");
+//            String up_down_msg = object1.getString("up_down_msg");
+//            menu.setLogo(logo);
+//            menu.setTitle(title);
+//            menu.setRedirect_link(redirect_link);
+//            menu.setService_type(service_type);
+//            menu.setHighlight_text(highlight_text);
+//            menu.setUp_down_msg(up_down_msg);
+//            menus.add(menu);
+//        }
+//
+//        menus.add(new DashboardMenu("Bharat Bill Pay", "View All", "BBPS", "bbps", "", ""));
+//        adapter.addData(menus);
+//        recyclerviewDashboard.setAdapter(adapter);
+//
 
 //                JSONObject sliderObject = data.getJSONObject("slides");
 //                Log.d("onSuccess", "onSuccess: " + sliderObject);
@@ -1285,7 +1338,221 @@ public class MainActivity extends BaseActivity implements DefaultView,
 //
 //                }
 
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void onSuccess(String message, String data_other) {
+        try {
+//            if (data_other.equals("bbps")) {
+//                data = message;
+//            }
+//            if (data_other.equals("allServices")) {
+//                allServices = message;
+//            }
+            pref.putDashBoardData(message);
+            Log.d("GET_TEST", "Loaded Value: " + message);
+
+            mDatabase.setUserData(message);
+            refresh_layout.setRefreshing(false);
+            JSONObject message1 = new JSONObject(message);
+            JSONObject data = message1.getJSONObject("main_hero_banner");
+            JSONArray slideArray = message1.getJSONArray("slides");
+            JSONArray youtube_slides = message1.getJSONArray("youtube_slides");
+            JSONArray offer_slides = message1.getJSONArray("offer_slides");
+            JSONArray oTTList_slides = message1.getJSONArray("ott_slides");
+            JSONArray spotlight_services = message1.getJSONArray("spotlight_services");
+            JSONObject customInsuranceDetails = message1.getJSONObject("CustomInsuranceDetails");
+            JSONObject bike_insurance = customInsuranceDetails.getJSONObject("bike_insurance");
+            JSONObject car_insurance = customInsuranceDetails.getJSONObject("car_insurance");
+            String saved = mDatabase.getString("home_api_response");
+            Log.d("GET_TEST", "Loaded Value1: " + saved);
+
+            String dashboard_banner = message1.getString("dashboard_banner");
+//                Glide.with(getActivity()).load(dashboard_banner).into(ott_recharge);
+            String footer_banner_text = message1.getString("footer_banner_text");
+            String recharge_pay_bill_string = message1.getString("recharge_pay_bill_string");
+            recharge_and_txt.setText(recharge_pay_bill_string);
+            UserData userData = mDatabase.getUserData();
+            available_balance.setText("\u20b9" + userData.getEarnings());
+            Log.d("getIs_mpin_set", "onSuccess1: " + mDatabase.getUserData().getIs_mpin_set());
+            if (mDatabase.getUserData() != null) {
+                if (mDatabase.getUserData().getIs_mpin_set().equals("false")) {
+                    setPinDetails();
+
+                } else {
+                    if (isShowing == true) {
+                        isShowing = false;
+                        popupDialog();
+                    }
+
+                }
             }
+            double ban = Double.parseDouble(userData.getEarnings());
+            total_ban.setText("₹" + String.format(Locale.ENGLISH, "%.2f", ban));
+            String onlyMember = userData.getName().split(" ")[0];
+            name_tv.setText("Hi, " + onlyMember);
+
+            String part1 = "";
+            String part2 = "";
+
+            String[] parts = footer_banner_text.split("&");
+            if (parts.length == 2) {
+                part1 = parts[0].trim() + " &";
+                part2 = parts[1].trim();
+            }
+
+            txtMobileRecharge.setText(part1);
+            txtRefer.setText(part2);
+
+            slider_banner.clear();
+            if (slideArray.length() > 0) {
+
+                for (int i = 0; i < slideArray.length(); i++) {
+                    JSONObject object1 = slideArray.getJSONObject(i);
+                    SliderData sliderData = new SliderData();
+                    sliderData.setSlide(object1.getString("slide"));
+                    sliderData.setUrl(object1.getString("url"));
+                    sliderData.setRedirection_type(object1.getString("redirection_type"));
+                    sliderData.setData(object1.getString("data"));
+                    slider_banner.add(sliderData);
+                }
+                imageSliderAdapter.notifyDataSetChanged();
+
+
+            }
+
+            bikePercent = bike_insurance.getString("percent");
+            bikeRedirectUrl = bike_insurance.getString("redirect_url");
+            bikeRedirectType = bike_insurance.getString("redirect_type");
+            carPercent = car_insurance.getString("percent");
+            carRedirectUrl = car_insurance.getString("redirect_url");
+            carRedirectType = car_insurance.getString("redirect_type");
+            bike_percent.setText(bikePercent + "OF");
+            car_percent.setText(carPercent + "OF");
+
+            offerSliderList.clear();
+            if (offer_slides.length() > 0) {
+
+                for (int i = 0; i < offer_slides.length(); i++) {
+                    JSONObject objectOffer_slides = offer_slides.getJSONObject(i);
+                    OfferSlider offerSlides = new OfferSlider();
+                    offerSlides.setOfferTitle(objectOffer_slides.getString("title"));
+                    offerSlides.setLogo(objectOffer_slides.getString("logo"));
+                    offerSlides.setUrl(objectOffer_slides.getString("url"));
+                    offerSlides.setRedirection_type(objectOffer_slides.getString("redirection_type"));
+                    offerSlides.setData(objectOffer_slides.getString("data"));
+                    Log.d("logoUrl", offerSlides.getLogo());
+
+                    offerSliderList.add(offerSlides);
+                }
+                offerSliderAdapter.notifyDataSetChanged();
+
+
+            }
+            oTTList.clear();
+            if (oTTList_slides.length() > 0) {
+
+                for (int i = 0; i < oTTList_slides.length(); i++) {
+                    JSONObject objectOTTList_slides = oTTList_slides.getJSONObject(i);
+                    OTTSubscriptionsData offerSlides = new OTTSubscriptionsData();
+                    offerSlides.setTitle(objectOTTList_slides.getString("title"));
+                    offerSlides.setLogo(objectOTTList_slides.getString("logo"));
+                    offerSlides.setUrl(objectOTTList_slides.getString("url"));
+                    offerSlides.setRedirection_type(objectOTTList_slides.getString("redirection_type"));
+                    offerSlides.setData(objectOTTList_slides.getString("data"));
+                    Log.d("logoUrl", offerSlides.getLogo());
+
+                    oTTList.add(offerSlides);
+                }
+                oTTAdapter.notifyDataSetChanged();
+
+
+            }
+            SpotlightDataList.clear();
+            if (spotlight_services.length() > 0) {
+
+                for (int i = 0; i < spotlight_services.length(); i++) {
+                    JSONObject objectSpotlight_services = spotlight_services.getJSONObject(i);
+                    SpotlightData offerSlides = new SpotlightData();
+                    offerSlides.setTitle(objectSpotlight_services.getString("title"));
+                    offerSlides.setLogo(objectSpotlight_services.getString("logo"));
+                    offerSlides.setType(objectSpotlight_services.getString("type"));
+                    offerSlides.setRedirectLink(objectSpotlight_services.getString("redirect_link"));
+                    offerSlides.setData(objectSpotlight_services.getString("data"));
+                    Log.d("logoUrl", offerSlides.getLogo());
+
+                    SpotlightDataList.add(offerSlides);
+                }
+                spotlightServicesAdapter.notifyDataSetChanged();
+
+
+            }
+            youtubeVideosList.clear();
+            if (youtube_slides.length() > 0) {
+
+                for (int i = 0; i < youtube_slides.length(); i++) {
+                    JSONObject objectYoutube_slides = youtube_slides.getJSONObject(i);
+                    YoutubeSlides youtubeSlides = new YoutubeSlides();
+                    youtubeSlides.setLink(objectYoutube_slides.getString("link"));
+                    youtubeSlides.setTitle(objectYoutube_slides.getString("title"));
+                    youtubeSlides.setThumbnail(objectYoutube_slides.getString("thumbnail"));
+                    youtubeVideosList.add(youtubeSlides);
+                }
+                sliderAdapter.notifyDataSetChanged();
+
+
+            }
+            mainHeroBanner(data);
+            setData("Api");
+            JSONObject object = new JSONObject(message);
+            JSONArray array = object.getJSONArray("recharge_pay_data");
+            adapter = new DashboardAdapter(this, this);
+            menus.clear();
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject object1 = array.getJSONObject(i);
+                DashboardMenu menu = new DashboardMenu();
+                String logo = object1.getString("logo");
+                String title = object1.getString("title");
+                String redirect_link = object1.getString("redirect_link");
+                String service_type = object1.getString("service_type");
+                String highlight_text = object1.getString("highlight_text");
+                String up_down_msg = object1.getString("up_down_msg");
+                menu.setLogo(logo);
+                menu.setTitle(title);
+                menu.setRedirect_link(redirect_link);
+                menu.setService_type(service_type);
+                menu.setHighlight_text(highlight_text);
+                menu.setUp_down_msg(up_down_msg);
+                menus.add(menu);
+            }
+
+            menus.add(new DashboardMenu("Bharat Bill Pay", "View All", "BBPS", "bbps", "", ""));
+            adapter.addData(menus);
+            recyclerviewDashboard.setAdapter(adapter);
+
+
+                JSONObject sliderObject = data.getJSONObject("slides");
+                Log.d("onSuccess", "onSuccess: " + sliderObject);
+                slider_banner.clear();
+                if (sliderObject.length() > 0) {
+
+                    for (int i = 0; i < sliderObject.length(); i++) {
+                        JSONObject object1 = sliderObject.getJSONObject(String.valueOf(i));
+                        SliderData sliderData = new SliderData();
+                        sliderData.setSlide(object1.getString("slide"));
+                        sliderData.setUrl(object1.getString("url"));
+                        sliderData.setRedirection_type(object1.getString("redirection_type"));
+                        sliderData.setData(object1.getString("data"));
+                        slider_banner.add(sliderData);
+                    }
+                    imageSliderAdapter.notifyDataSetChanged();
+
+
+                }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1293,21 +1560,33 @@ public class MainActivity extends BaseActivity implements DefaultView,
 
     void mainHeroBanner(JSONObject data) throws JSONException {
 
-        String title = data.getString("title");
+//        String title = data.getString("title");
         String logo = data.getString("logo");
-        String data1 = data.getString("data");
-        redirection_type = data.getString("redirection_type");
-        redirection_url = data.getString("url");
-        Glide.with(getActivity()).load(OFFER_ZONE + logo).into(headerImage);
+//        String data1 = data.getString("data");
+//        redirection_type = data.getString("redirection_type");
+//        redirection_url = data.getString("url");
+        if (logo != null && logo.contains(".png")) {
+            Glide.with(getActivity())
+                    .load(OFFER_ZONE + logo)
+                    .into(headerImage);
+            headerImage.setVisibility(View.VISIBLE);
+            home_banner_gif.setVisibility(View.GONE);
+        } else {
+            Glide.with(getActivity()).asGif().load(OFFER_ZONE + logo).into(home_banner_gif);
+            headerImage.setVisibility(View.GONE);
+            home_banner_gif.setVisibility(View.VISIBLE);
 
-        if (data1 != null) {
-            JSONObject activityData = new JSONObject(data1);
-            extraData = activityData.getString("extra_data");
-            intentName = activityData.getString("intent_name");
-
-            Log.d("activityExtraData", "Data Title: " + extraData);
-            Log.d("intent_Name", "Data Intent: " + intentName);
         }
+
+
+//        if (data1 != null) {
+//            JSONObject activityData = new JSONObject(data1);
+//            extraData = activityData.getString("extra_data");
+//            intentName = activityData.getString("intent_name");
+//
+//            Log.d("activityExtraData", "Data Title: " + extraData);
+//            Log.d("intent_Name", "Data Intent: " + intentName);
+//        }
     }
 
     @Override
@@ -1382,10 +1661,12 @@ public class MainActivity extends BaseActivity implements DefaultView,
                     onError(data);
                     setMPinDialog();
                 }
-            } else if (data_other.equals("timepass")) {
-                dataPayment = data;
-                json = new JSONObject(data);
-            } else {
+            }
+//            else if (data_other.equals("timepass")) {
+//                dataPayment = data;
+//                json = new JSONObject(data);
+//            }
+            else {
                 whatsAppDialog(data);
             }
         } catch (Exception e) {
@@ -1452,13 +1733,13 @@ public class MainActivity extends BaseActivity implements DefaultView,
         indicator.setViewPager2(viewPager);
 
 */
+        sliderHandler.postDelayed(sliderRunnable, 3000);
         youtube_indicator.post(() -> {
-            youtube_indicator.requestLayout(); // force refresh
+            youtube_indicator.requestLayout();
         });
         indicator.post(() -> {
-            indicator.requestLayout(); // force refresh
+            indicator.requestLayout();
         });
-        sliderHandler.postDelayed(sliderRunnable, 1000);
     }
 
     @Override
@@ -1477,6 +1758,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
     protected void onDestroy() {
         super.onDestroy();
         hideAllDialog();
+       Log.d("onDestroy", "onDestroy: ");
     }
 
     @Override
@@ -1513,10 +1795,10 @@ public class MainActivity extends BaseActivity implements DefaultView,
             }
         }
         youtube_indicator.post(() -> {
-            youtube_indicator.requestLayout(); // force refresh
+            youtube_indicator.requestLayout();
         });
         indicator.post(() -> {
-            indicator.requestLayout(); // force refresh
+            indicator.requestLayout();
         });
     }
 
@@ -1631,7 +1913,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
 //                startActivity(intent);
 //                break;
             case R.id.add_balance:
-                addBalance();
+//                addBalance();
                 break;
             case R.id.open_account:
                 intent = new Intent(getActivity(), SupportActivity.class);
@@ -1713,21 +1995,20 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 startActivity(intent);
 //                refreshDataWithoutLoader();
                 break;
-//            case R.id.add_balance_constraintLayout:
-//                try{
-//                    if (mDatabase.getUserData() != null){
-//                        if (mDatabase.getUserData().getWhatsapp_number() != null){
-//                            String url = "https://api.whatsapp.com/send/?phone=91" + mDatabase.getUserData().getWhatsapp_number() + "&text=" + "Hello MaxPe Support, My registered mobile number is " + mDatabase.getUserData().getMobile();
-//                            Intent i = new Intent(Intent.ACTION_VIEW);
-//                            i.setData(Uri.parse(url));
-//                            startActivity(i);
-//                        }
-//                    }
-//                }
-//                catch (ActivityNotFoundException e){
-//                    Log.d("TAG_DATA", "onClick: "+e.getMessage());
-//                }
-//            break;
+            case R.id.facing:
+                try {
+                    if (mDatabase.getUserData() != null) {
+                        if (mDatabase.getUserData().getWhatsapp_number() != null) {
+                            String url = "https://api.whatsapp.com/send/?phone=91" + mDatabase.getUserData().getWhatsapp_number() + "&text=" + "Hello MaxPe Support, My registered mobile number is " + mDatabase.getUserData().getMobile();
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse(url));
+                            startActivity(i);
+                        }
+                    }
+                } catch (ActivityNotFoundException e) {
+                    Log.d("TAG_DATA", "onClick: " + e.getMessage());
+                }
+                break;
 
             case R.id.add_balance_constraintLayout:
                 intent = new Intent(getActivity(), WalletActivity.class);
@@ -1737,7 +2018,41 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 intent = new Intent(getActivity(), ShareEarnActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.bike_layout:
+                if (bikeRedirectType != null) {
+                    if (bikeRedirectType.equals("in_app")) {
+                        if (bikeRedirectType != null && !bikeRedirectType.isEmpty()) {
+                            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                            CustomTabsIntent customTabsIntent = builder.build();
 
+                            String chromePackage = "com.android.chrome";
+                            PackageManager pm = getActivity().getPackageManager();
+                            try {
+                                pm.getPackageInfo(chromePackage, 0);
+                                customTabsIntent.intent.setPackage(chromePackage);
+                            } catch (PackageManager.NameNotFoundException e) {
+
+                            }
+
+                            customTabsIntent.launchUrl(getActivity(), Uri.parse(bikeRedirectUrl));
+                        }
+
+
+                    } else if (bikeRedirectType.equals("external")) {
+                        if (bikeRedirectType != null && !bikeRedirectType.isEmpty()) {
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(bikeRedirectUrl));
+                            try {
+                                startActivity(browserIntent);
+                            } catch (ActivityNotFoundException e) {
+
+                            }
+                        } else {
+
+                        }
+                    }
+
+                }
+                break;
         }
     }
 
@@ -1773,6 +2088,19 @@ public class MainActivity extends BaseActivity implements DefaultView,
 
         ImageView popupBanner = view.findViewById(R.id.popup_banner);
         ImageView cancel = view.findViewById(R.id.popup_cancel);
+//        StorageReference imageRef = storageRef.child("uploads/m.jpg");
+//
+//        imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+//            String imageUrl = uri.toString();
+//
+//            Glide.with(this)
+//                    .load(imageUrl)
+//                    .placeholder(R.drawable.img)
+//                    .into(popupBanner);
+//
+//        }).addOnFailureListener(e -> {
+//            Log.e("FIREBASE", "Failed to fetch image URL", e);
+//        });
 
         cancel.setOnClickListener(v -> dialog.dismiss());
 
@@ -1784,14 +2112,25 @@ public class MainActivity extends BaseActivity implements DefaultView,
         rotation = AnimationUtils.loadAnimation(getActivity(), R.anim.rotation);
         rotation.setRepeatCount(100);
 //        refresh.startAnimation(rotation);
-        new Handler().postDelayed(() -> mDefaultPresenter.dashboardDataWithoutRefresh(fcmToken + "", device_id + "", null), 500);
+
+        pref = new APIStorePreferences(this);
+        var operatorData =  pref.getDashBoardData();
+        if (operatorData.isEmpty())
+        {
+//            mDefaultPresenter.dashboardDataWithoutRefresh(fcmToken + "", device_id + "", null);
+//            Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            onSuccess(operatorData,"");
+        }
+
         new Handler().postDelayed(() -> {
-            mDefaultPresenter.getPaymentSetting2(device_id + "", "timepass");
+//            mDefaultPresenter.getPaymentSetting2(device_id + "", "timepass");
             if (fcmToken == null) {
                 fcmToken = "";
             }
-            mDefaultPresenter.getBbpsPayBills(device_id + "");
-            mDefaultPresenter.getAllRechargeServices(device_id + "");
+//            mDefaultPresenter.getBbpsPayBills(device_id + "");
+//            mDefaultPresenter.getAllRechargeServices(device_id + "");
             mDefaultPresenter.fetchBalance(fcmToken + "", device_id + "", rotation);
 //            setStatusBarGradiant(this);
         }, 1200);
@@ -1803,20 +2142,22 @@ public class MainActivity extends BaseActivity implements DefaultView,
             indicator.requestLayout(); // force refresh
         });
 
+
     }
+
 
     private void refreshDataWithoutLoader() {
         rotation = AnimationUtils.loadAnimation(getActivity(), R.anim.rotation);
         rotation.setRepeatCount(100);
         refresh.startAnimation(rotation);
-        mDefaultPresenter.getPaymentSetting2(device_id + "", "timepass");
+//        mDefaultPresenter.getPaymentSetting2(device_id + "", "timepass");
         new Handler().postDelayed(() -> {
             if (fcmToken == null) {
                 fcmToken = "";
             }
-            mDefaultPresenter.getBbpsPayBills(device_id + "");
-            mDefaultPresenter.getAllRechargeServices(device_id + "");
-            mDefaultPresenter.fetchBalance(fcmToken + "", device_id + "", rotation);
+//            mDefaultPresenter.getBbpsPayBills(device_id + "");
+//            mDefaultPresenter.getAllRechargeServices(device_id + "");
+//            mDefaultPresenter.fetchBalance(fcmToken + "", device_id + "", rotation);
         }, 1200);
     }
 

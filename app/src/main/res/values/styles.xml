@@ -11,6 +11,18 @@
 
     </style>
 
+    <style name="OtpEditText">
+        <item name="android:layout_width">@dimen/_32sdp</item>
+        <item name="android:layout_height">@dimen/_32sdp</item>
+        <item name="android:layout_margin">@dimen/_3sdp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:inputType">number</item>
+        <item name="android:maxLength">1</item>
+        <item name="android:textSize">@dimen/_13sdp</item>
+        <item name="android:background">@drawable/mpin_box_bg</item>
+        <item name="android:imeOptions">actionNext</item>
+    </style>
+
     <style name="AppTheme.Recharge" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimaryB</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

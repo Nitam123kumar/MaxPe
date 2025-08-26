@@ -242,7 +242,7 @@
     <string name="data_not_available">Data not available</string>
     <string name="qws">qws</string>
     <string name="no_operator_found">No operator found.</string>
-    <string name="electricity_board">Electricity Board</string>
+    <string name="electricity_board">Operator</string>
     <string name="consumer_number">Consumer Number</string>
     <string name="star">*</string>
     <string name="bill_fatch">Bill Fatch</string>

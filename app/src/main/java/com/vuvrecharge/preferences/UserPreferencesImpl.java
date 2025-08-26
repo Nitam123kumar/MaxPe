@@ -106,8 +106,38 @@ public class UserPreferencesImpl implements UserPreferences {
     }
 
     @Override
+    public void setUpto(String data) {
+        mPreferences.edit().putString("upto", data).apply();
+    }
+
+    @Override
     public long getGoal() {
         return mPreferences.getLong("GOAL", 5000);
+    }
+
+    @Override
+    public void putString(String key, String value) {
+        mPreferences.edit().putString(key, value).apply();
+    }
+
+    @Override
+    public String getString(String key) {
+        return mPreferences.getString(key, null);
+    }
+
+    @Override
+    public void putBbpsString(String key, String value) {
+        mPreferences.edit().putString(key, value).apply();
+    }
+
+    @Override
+    public String getBbpsString(String key) {
+        return mPreferences.getString(key, null);
+    }
+
+    @Override
+    public boolean contains(String key) {
+        return mPreferences.contains(key);
     }
 
     @Override
@@ -118,6 +148,11 @@ public class UserPreferencesImpl implements UserPreferences {
     @Override
     public String getAppLanguage() {
         return mPreferences.getString("app_language", "en");
+    }
+
+    @Override
+    public String getUpto() {
+        return mPreferences.getString("upto","4%");
     }
 
     @Override

@@ -146,7 +146,7 @@
                     android:layout_width="@dimen/_18sdp"
                     android:layout_height="@dimen/_18sdp"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:src="@drawable/max_point_img"
+                    android:src="@drawable/max_point_img1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

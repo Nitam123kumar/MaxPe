@@ -41,8 +41,8 @@
                     app:layout_constraintTop_toTopOf="@id/name_tv1">
 
                     <ImageView
-                        android:layout_width="@dimen/_10sdp"
-                        android:layout_height="@dimen/_6sdp"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_10sdp"
                         android:src="@drawable/black_arrow_svg" />
                 </LinearLayout>
 

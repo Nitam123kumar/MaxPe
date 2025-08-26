@@ -120,7 +120,6 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
         ButterKnife.bind(this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         defaultPresenter = new DefaultPresenter(this);
-//        defaultPresenter.cashbackPointsHistory(device_id+"","03 Jul 2025","18 Jul 2025","175281101911308");0000000000000000000
         initializeEventsList();
         back_to_home.setOnClickListener(v -> {
             onBackPressed();
@@ -264,9 +263,11 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
         try {
             refresh_layout.setRefreshing(false);
             JSONObject object = new JSONObject(data);
+//            mDatabase.putString("max_points_history",data);
             JSONArray array = object.getJSONArray("cashbackLogs");
             String lifeTimeMaxPoints = object.getString("lifetimePointsEarn");
             maxPointsTV.setText(lifeTimeMaxPoints);
+            Log.d("data",data);
 
             if (array.length() > 0) {
                 for (int i = 0; i < array.length(); i++) {
@@ -331,6 +332,86 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
                 maxPointRecyclerView.setVisibility(GONE);
                 view_all_maxPoints.setVisibility(GONE);
             }
+
+
+        } catch (Exception e) {
+
+            txtNoData.setVisibility(VISIBLE);
+            view_all_maxPoints.setVisibility(GONE);
+            maxPointRecyclerView.setVisibility(GONE);
+        }
+    }
+    private void apiStoreData(JSONObject object){
+        try {
+            refresh_layout.setRefreshing(false);
+//            mDatabase.putString("max_points_history");
+            JSONArray array = object.getJSONArray("cashbackLogs");
+            String lifeTimeMaxPoints = object.getString("lifetimePointsEarn");
+            maxPointsTV.setText(lifeTimeMaxPoints);
+
+            if (array.length() > 0) {
+                for (int i = 0; i < array.length(); i++) {
+                    JSONObject object1 = array.getJSONObject(i);
+                    MaxPePointsData maxPePointData = new MaxPePointsData();
+                    maxPePointData.setOrder_id(object1.getString("order_id"));
+                    maxPePointData.setAmount(object1.getString("amount"));
+                    maxPePointData.setRemark(object1.getString("remark"));
+                    maxPePointData.setCredit(object1.getString("credit"));
+                    maxPePointData.setDate_time(object1.getString("date_time"));
+                    maxPePointData.setClosing_points(object1.getString("closing_points"));
+                    maxPePointData.setDebit(object1.getString("debit"));
+                    maxPePointData.setType(object1.getString("type"));
+                    maxPePointData.setOpening_points(object1.getString("opening_points"));
+                    mMaxPePointsData.add(maxPePointData);
+                    maxPointsAdapter.notifyDataSetChanged();
+                    txtNoData.setVisibility(GONE);
+
+                }
+                if (mMaxPePointsData.isEmpty()|| mMaxPePointsData.size() <= 6){
+                    view_all_maxPoints.setVisibility(GONE);
+                }
+                else {
+                    view_all_maxPoints.setVisibility(VISIBLE);
+                }
+                maxPointRecyclerView.setVisibility(VISIBLE);
+                txtNoData.setVisibility(GONE);
+            } else {
+                maxPointRecyclerView.setVisibility(GONE);
+                txtNoData.setVisibility(VISIBLE);
+                view_all_maxPoints.setVisibility(GONE);
+            }
+            txtNoData.setVisibility(GONE);
+
+
+            if (object.has("cashbackPoints")) {
+                JSONObject pointsObject = object.getJSONObject("cashbackPoints");
+
+                CashBackPintsModel model = new CashBackPintsModel();
+                model.setMax_balance_slab(pointsObject.getString("max_balance_slab"));
+                model.setCashback_points(pointsObject.getString("cashback_points"));
+                model.setTxn_balance_count(pointsObject.getString("txn_balance_count"));
+                balance_maxPoints_TV.setText(model.getCashback_points());
+
+
+            }
+
+//            if (array.length() > 0) {
+//                Gson gson = new Gson();
+//                Type type_ = new TypeToken<List<MaxPePointsData>>() {
+//                }.getType();
+//                List<MaxPePointsData> passbookData = gson.fromJson(array.toString(), type_);
+//                if (data_other.equals("Yes")) {
+//                    initializeEventsList();
+//                }
+//                maxPointsAdapter.addEvents(passbookData, data_other);
+//                maxPointRecyclerView.setVisibility(VISIBLE);
+//                txtNoData.setVisibility(GONE);
+//            } else {
+//                onError("no Data found");
+//                txtNoData.setVisibility(VISIBLE);
+//                maxPointRecyclerView.setVisibility(GONE);
+//                view_all_maxPoints.setVisibility(GONE);
+//            }
 
 
         } catch (Exception e) {

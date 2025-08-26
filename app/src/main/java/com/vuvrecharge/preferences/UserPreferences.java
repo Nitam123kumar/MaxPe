@@ -31,7 +31,9 @@ public interface UserPreferences {
     String getUsername();
 
     void setUserData(String userData);
+
     void setUpdateLogoStatus(Integer updateLogoStatus);
+
     String getUpdateLogoStatus();
 
     UserData getUserData();
@@ -40,11 +42,25 @@ public interface UserPreferences {
 
     void setAppLanguage(String data);
 
+    void setUpto(String data);
+
     long getGoal();
+
+    void putString(String key, String value);
+
+    String getString(String key);
+
+    void putBbpsString(String key, String value);
+
+    String getBbpsString(String key);
+
+    boolean contains(String key);
 
     void setGoal(long data);
 
     String getAppLanguage();
+
+    String getUpto();
 
     void clearUser();
 
@@ -83,10 +99,11 @@ public interface UserPreferences {
     void setContact(String contact);
 
     List<ContactData> getContact();
+
     void setFcmToken(String fcmToken);
 
     String getFcmToken();
-    
+
     void setBlockAmount(String blockAmt);
 
     String getBlockAmount();

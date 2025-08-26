@@ -1,12 +1,15 @@
 package com.vuvrecharge.application;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
-import android.preference.PreferenceManager;
+import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.multidex.MultiDex;
 
@@ -14,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.vuvrecharge.api.ApiServices;
 import com.vuvrecharge.api.CustomInterceptor;
+import com.vuvrecharge.preferences.APIStorePreferences;
 import com.vuvrecharge.preferences.PreferencesProvider;
 import com.vuvrecharge.utils.LocaleHelper;
 import com.vuvrecharge.utils.network.CheckNet;
@@ -31,10 +35,13 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MyApplication extends Application {
+public class MyApplication extends Application implements Application.ActivityLifecycleCallbacks {
 
     public static final String TAG = MyApplication.class.getSimpleName();
     private static MyApplication mInstance;
+    private int activityReferences = 0;
+    private boolean isActivityChangingConfigurations = false;
+
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -107,5 +114,45 @@ public class MyApplication extends Application {
     @Override
     public void onLowMemory() {
         super.onLowMemory();
+    }
+
+
+    @Override
+    public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    public void onActivityStarted(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityResumed(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityPaused(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivityStopped(@NonNull Activity activity) {
+
+    }
+
+    @Override
+    public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle outState) {
+
+    }
+
+    @Override
+    public void onActivityDestroyed(@NonNull Activity activity) {
+            Log.d("DashBoardData", "App closed, clearing prefs");
+            APIStorePreferences preferences = new APIStorePreferences(activity);
+            preferences.putDashBoardData("");
+            preferences.putString("home_api_response", "");
+
     }
 }

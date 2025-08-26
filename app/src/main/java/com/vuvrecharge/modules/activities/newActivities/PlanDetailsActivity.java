@@ -308,14 +308,14 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
         if (pageType.equals("Prepaid")) {
             type = "Prepaid";
             subscription = getIntent().getStringExtra("subscription");
-            mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             txtPhoneOrigin.setText(state);
             txtPhoneOrigin1.setText(state);
         } else {
             type = "DTH";
             txtPhoneOrigin.setText("");
             txtPhoneOrigin.setVisibility(GONE);
-            mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
+//            mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
         }
         if (urlProvider != null) {
             Glide.with(this)
