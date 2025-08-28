@@ -75,8 +75,8 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
     RecyclerView utility_bills_recyclerView;
     @BindView(R.id.ott_recharge_recyclerView)
     RecyclerView ott_recharge_recyclerView;
-//    @BindView(R.id.swipeRefreshLayout)
-//    SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.refresh_layout)
+    SwipeRefreshLayout refresh_layout;
     String stringTitle = null;
     BharatBillPayAdapter adapter;
     FinancialServicesAdapter adapter1;
@@ -116,23 +116,8 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
         utility_bills_recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         utility_bills_adapter = new FinancialServicesAdapter(this, utility_billsList, this);
         utility_bills_recyclerView.setAdapter(utility_bills_adapter);
-
-//        if (data != null){
-//            Log.d("AllSe",data);
+        ;
             try {
-//                JSONObject object = new JSONObject(data);
-//                JSONArray array = object.getJSONArray("bbps_pay_data");
-//                for (int i = 0; i < yarra.length(); i++){
-//                    BharatBillPayModel payModel = new BharatBillPayModel();
-//                    payModel.setLogo(array.getJSONObject(i).getString("logo"));
-//                    payModel.setTitle(array.getJSONObject(i).getString("title"));
-//                    payModel.setRedirect_link(array.getJSONObject(i).getString("redirect_link"));
-//                    payModel.setUp_down_msg(array.getJSONObject(i).getString("up_down_msg"));
-//                    payModel.setHighlight_text(array.getJSONObject(i).getString("highlight_text"));
-//                    bbpsList.add(payModel);
-//                    adapter.notifyDataSetChanged();
-//                }
-
                 ott_List = new ArrayList<>();
                 List<OTTSubscriptionsData> ottItem = (mDatabase.getUserData().getLogoSliders());
                 for (OTTSubscriptionsData ottData : ottItem) {
@@ -154,16 +139,114 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
             }
 
 //        }
-        prefs = new APIStorePreferences(this);
-        var operatorData =  prefs.getOperatorString();
-        if (operatorData.isEmpty())
-        {
-            Log.d("TAG_BBPS", "First Time Call: "+operatorData);
+        prefs=new APIStorePreferences(this);
+        var lastFetch = prefs.getTime();
+        var now = System.currentTimeMillis();
+
+
+        if (now - lastFetch > 24 * 60 * 60) {
             mDefaultPresenter.getAllRechargeServices(device_id);
+        } else {
+
+            String operatorData = prefs.getOperatorString();
+            if (!operatorData.isEmpty()) {
+                try {
+                    JSONObject object = new JSONObject(operatorData);
+                    apiStoreData(object);
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                mDefaultPresenter.getAllRechargeServices(device_id);
+            }
         }
-        else {
-            onSuccess(operatorData,"");
-            Log.d("TAG_BBPS", "Preference Data: "+operatorData);
+        refresh_layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshData();
+            }
+        });
+    }
+    private void apiStoreData(JSONObject object){
+        try {
+
+            if (object.has("services_by_categ")) {
+                JSONObject servicesObject = object.getJSONObject("services_by_categ");
+
+                rechargeAndBillPaymentDataList.clear();
+                if (servicesObject.has("Recharge_&_Bill_Payments")) {
+                    JSONArray rechargeArray = servicesObject.getJSONArray("Recharge_&_Bill_Payments");
+                    Log.d("Recharge_&_Bill_Payments", String.valueOf(rechargeArray));
+                    for (int i = 0; i < rechargeArray.length(); i++) {
+                        JSONObject obj = rechargeArray.getJSONObject(i);
+                        BharatBillPayModel model = new BharatBillPayModel();
+                        model.setLogo(obj.getString("logo"));
+                        model.setTitle(obj.getString("title"));
+                        model.setRedirect_link(obj.getString("redirect_link"));
+                        model.setUp_down_msg(obj.getString("up_down_msg"));
+                        model.setHighlight_text(obj.getString("highlight_text"));
+                        model.setData(obj.getString("activity_data"));
+                        rechargeAndBillPaymentDataList.add(model);
+                        adapter.searchData(rechargeAndBillPaymentDataList);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+
+                if (servicesObject.has("Utilities_Bill")) {
+                    JSONArray utilitiesArray = servicesObject.getJSONArray("Utilities_Bill");
+                    utility_billsList.clear();
+                    for (int i = 0; i < utilitiesArray.length(); i++) {
+                        JSONObject obj = utilitiesArray.getJSONObject(i);
+                        FinancialServicesData model = new FinancialServicesData();
+                        model.setLogo(obj.getString("logo"));
+                        model.setTitle(obj.getString("title"));
+                        model.setRedirect_link(obj.getString("redirect_link"));
+                        model.setUp_down_msg(obj.getString("up_down_msg"));
+                        model.setHighlight_text(obj.getString("highlight_text"));
+                        model.setData(obj.getString("activity_data"));
+                        utility_billsList.add(model);
+                        utility_bills_adapter.searchData(utility_billsList);
+                    }
+                }
+
+                if (servicesObject.has("Financial_Services")) {
+                    JSONArray financialArray = servicesObject.getJSONArray("Financial_Services");
+                    financialServicesList.clear();
+                    for (int i = 0; i < financialArray.length(); i++) {
+                        JSONObject obj = financialArray.getJSONObject(i);
+                        FinancialServicesData model = new FinancialServicesData();
+                        model.setLogo(obj.getString("logo"));
+                        model.setTitle(obj.getString("title"));
+                        model.setRedirect_link(obj.getString("redirect_link"));
+                        model.setUp_down_msg(obj.getString("up_down_msg"));
+                        model.setHighlight_text(obj.getString("highlight_text"));
+                        model.setData(obj.getString("activity_data"));
+                        financialServicesList.add(model);
+                        Log.d("financialServicesList", String.valueOf(obj));
+                        adapter1.notifyDataSetChanged();
+                        adapter1.searchData(financialServicesList);
+                    }
+                }
+
+                if (servicesObject.has("Insurance")) {
+                    JSONArray insuranceArray = servicesObject.getJSONArray("Insurance");
+                    for (int i = 0; i < insuranceArray.length(); i++) {
+                        JSONObject obj = insuranceArray.getJSONObject(i);
+                        BharatBillPayModel model = new BharatBillPayModel();
+                        model.setLogo(obj.getString("logo"));
+                        model.setTitle(obj.getString("title"));
+                        model.setRedirect_link(obj.getString("redirect_link"));
+                        model.setUp_down_msg(obj.getString("up_down_msg"));
+                        model.setHighlight_text(obj.getString("highlight_text"));
+                        model.setData(obj.getString("activity_data"));
+//                        insuranceDataList.add(model);
+                    }
+                }
+            }
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -174,16 +257,8 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
     }
 
 
-    private void setStatusBarGradiant(Activity activity) {
-       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-           Window window = activity.getWindow();
-           Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
-           window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-           window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
-           window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
-           window.setBackgroundDrawable(background);
-       }
+    private void refreshData() {
+        mDefaultPresenter.getAllRechargeServices(device_id);
    }
    @Override
     public void onClickListener(@NonNull String redirection_type,String intent_name,String activityExtraData,String link) {
@@ -374,9 +449,11 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
     public void onSuccess(String data, String data_other) {
         try {
             JSONObject object = new JSONObject(data);
-//            var sharedPreferences = getSharedPreferences("bbps_data", MODE_PRIVATE);
+            refresh_layout.setRefreshing(false);
+
            prefs.putOperatorString(data);
-//            mDatabase.putBbpsString("bbps_data",data);
+           prefs.putTime(System.currentTimeMillis());
+
             if (object.has("services_by_categ")) {
                 JSONObject servicesObject = object.getJSONObject("services_by_categ");
 

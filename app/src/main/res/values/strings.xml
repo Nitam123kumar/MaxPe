@@ -297,7 +297,7 @@
     <string name="disclaimer_plans_may_change_anytime_please_double_ncheck_with_your_operator_before_recharging">Disclaimer: Plans may change anytime. Please double-\ncheck with your operator before recharging.</string>
     <string name="plan_validity">Plan Validity</string>
     <string name="data">Data</string>
-    <string name="voice">Voice</string>
+    <string name="voice">TalkTime</string>
     <string name="unlimited">Unlimited</string>
     <string name="sms">SMS</string>
     <string name="note_">Note:</string>

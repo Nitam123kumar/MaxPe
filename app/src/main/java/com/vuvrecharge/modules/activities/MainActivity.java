@@ -352,6 +352,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         history.setOnClickListener(this);
         facing.setOnClickListener(this);
         bike_layout.setOnClickListener(this);
+        carLayout.setOnClickListener(this);
         isShowing = true;
         downline_pckage.setOnClickListener(this);
         mDefaultPresenter = new DefaultPresenter(this);
@@ -364,18 +365,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         image_slider.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
         pref = new APIStorePreferences(this);
-        pref.putDashBoardData("");
-        var operatorData =  pref.getDashBoardData();
-        Log.d("DashBoardData", "onCreate: "+operatorData);
-        if (operatorData.isEmpty())
-        {
-            mDefaultPresenter.dashboardDataWithoutRefresh(fcmToken + "", device_id + "", null);
-            Log.d("DashBoardData", "DashBoardData: ");
-        }
-        else {
-            onSuccess(operatorData,"");
-            Log.d("DashBoardData", "onSuccess: "+operatorData);
-        }
+
 
         image_slider.setOffscreenPageLimit(2);
 
@@ -430,10 +420,19 @@ public class MainActivity extends BaseActivity implements DefaultView,
         spotlight_services_recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         ottRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
 
-        refresh_layout.setOnRefreshListener(this::refreshData);
-        refresh_layout.setRefreshing(true);
+        refresh_layout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshData();
+            }
+        });
+
+
         headerImage_layout.setOnClickListener(v -> {
-            onClickMainHeroBanner(redirection_type, intentName, extraData, redirection_url);
+            if (redirection_type != null || intentName != null || extraData != null || redirection_url != null){
+                onClickMainHeroBanner(redirection_type, intentName, extraData, redirection_url);
+            }
+
         });
 
 
@@ -473,33 +472,6 @@ public class MainActivity extends BaseActivity implements DefaultView,
             indicator.setViewPager2(viewPager);
         });
 
-//        motion_layout.setTransitionListener(new MotionLayout.TransitionListener() {
-//            @Override
-//            public void onTransitionStarted(MotionLayout motionLayout, int startId, int endId) {}
-//
-//            @Override
-//            public void onTransitionChange(MotionLayout motionLayout, int startId, int endId, float progress) {
-//                int blendedColor = (Integer) new ArgbEvaluator().evaluate(
-//                        progress,
-//                        ContextCompat.getColor(MainActivity.this, R.color.colorPrimaryB),
-//                        ContextCompat.getColor(MainActivity.this, R.color.black)
-//                );
-//                int blendedColor1 = (Integer) new ArgbEvaluator().evaluate(
-//                        progress,
-//                        ContextCompat.getColor(MainActivity.this, R.color.colorPrimaryB),
-//                        ContextCompat.getColor(MainActivity.this, R.color.black)
-//                );
-////                getWindow().setStatusBarColor(blendedColor);
-//                toolbar_constraintlayout.setBackgroundColor(blendedColor1);
-//
-//            }
-//
-//            @Override
-//            public void onTransitionCompleted(MotionLayout motionLayout, int currentId) {}
-//
-//            @Override
-//            public void onTransitionTrigger(MotionLayout motionLayout, int triggerId, boolean positive, float progress) {}
-//        });
         nestedScrollView1.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @SuppressLint("ResourceAsColor")
             @Override
@@ -516,9 +488,6 @@ public class MainActivity extends BaseActivity implements DefaultView,
                     win.setStatusBarColor(getResources().getColor(R.color.white));
                     View decor = win.getDecorView();
                     decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-//                    getWindow().setStatusBarColor(
-//                            ContextCompat.getColor(MainActivity.this, R.color.black)
-//                    );
                     toolbar_constraintlayout.setBackgroundColor(MainActivity.this.getResources().getColor(R.color.white));
                     refresh.setImageResource(R.drawable.icon_fill_black);
                     total_ban.setTextColor(MainActivity.this.getResources().getColor(R.color.black));
@@ -546,7 +515,28 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 }
             }
         });
+        var operatorData =  pref.getDashBoardData();
+        Log.d("DashBoardData1", "onCreate: "+operatorData);
+        if (operatorData.isEmpty())
+        {
+            mDefaultPresenter.dashboardDataWithoutRefresh(fcmToken + "", device_id + "", null);
+            Log.d("DashBoardData", "DashBoardData: ");
+        }
+        else {
+            try {
+                JSONObject object = new JSONObject(operatorData);
+                apiData(object);
 
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+
+            Log.d("DashBoardData", "onSuccess: "+operatorData);
+            loading.setVisibility(View.GONE);
+            refresh_layout.setRefreshing(false);
+        }
+        mDefaultPresenter.dashboardDataWithoutRefresh(fcmToken + "", device_id + "", null);
+        mDefaultPresenter.fetchBalance(fcmToken + "", device_id + "", rotation);
     }
 
     @Override
@@ -613,7 +603,11 @@ public class MainActivity extends BaseActivity implements DefaultView,
             available_balance.setText("\u20b9" + userData.getEarnings());
             double ban = Double.parseDouble(userData.getEarnings());
             total_ban.setText("₹" + String.format(Locale.ENGLISH, "%.2f", ban));
-            name_tv.setText("Hi, " + userData.getName());
+            String[] words = userData.getName().trim().split(" "); // split by space
+
+            String firstName = words.length > 0 ? words[0] : "";
+            String lastName  = words.length > 1 ? words[1] : "";
+            name_tv.setText("Hi, " + firstName);
 //            txtTitleMain.setText(userData.getRecharge_pay_bill_string());
 
             if (mDatabase.getUserData().getUser_type().equals("Distributor") ||
@@ -1136,24 +1130,20 @@ public class MainActivity extends BaseActivity implements DefaultView,
 
     private void apiData(JSONObject data1) {
 
-        Log.d("TAG_DATA", "apiData: " + data1);
         try {
+            hideLoading(loading);
+            hideLoading(loading_dialog);
             refresh_layout.setRefreshing(false);
             JSONObject data = data1.getJSONObject("main_hero_banner");
             JSONArray slideArray = data1.getJSONArray("slides");
 
-
-
             JSONArray youtube_slides = data1.getJSONArray("youtube_slides");
-            Log.d("main_hero_banner", "main_hero_banner1: " + data);
             JSONArray offer_slides = data1.getJSONArray("offer_slides");
             JSONArray oTTList_slides = data1.getJSONArray("ott_slides");
-            Log.d("TAG_DATA", "apiData1: " + data1);
             JSONArray spotlight_services = data1.getJSONArray("spotlight_services");
             JSONObject customInsuranceDetails = data1.getJSONObject("CustomInsuranceDetails");
             JSONObject bike_insurance = customInsuranceDetails.getJSONObject("bike_insurance");
             JSONObject car_insurance = customInsuranceDetails.getJSONObject("car_insurance");
-            Log.d("customInsuranceDetails", String.valueOf(bike_insurance));
 
             String dashboard_banner = data1.getString("dashboard_banner");
 //                Glide.with(getActivity()).load(dashboard_banner).into(ott_recharge);
@@ -1161,19 +1151,12 @@ public class MainActivity extends BaseActivity implements DefaultView,
             String recharge_pay_bill_string = data1.getString("recharge_pay_bill_string");
             recharge_and_txt.setText(recharge_pay_bill_string);
             UserData userData = mDatabase.getUserData();
-            available_balance.setText("\u20b9" + userData.getEarnings());
-            Log.d("getIs_mpin_set", "onSuccess1: " + mDatabase.getUserData().getIs_mpin_set());
-            if (mDatabase.getUserData() != null) {
-                if (mDatabase.getUserData().getIs_mpin_set().equals("false")) {
-                    setPinDetails();
-
-                } else {
+            available_balance.setText("\u20b9" + mDatabase.getEarnings());
+            if (userData != null) {
                     if (isShowing == true) {
                         isShowing = false;
-                        popupDialog();
+//                        popupDialog();
                     }
-
-                }
             }
             double ban = Double.parseDouble(userData.getEarnings());
             total_ban.setText("₹" + String.format(Locale.ENGLISH, "%.2f", ban));
@@ -1291,6 +1274,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
 
             }
             mainHeroBanner(data);
+
 //            setData("Api");
 //        JSONObject object = new JSONObject(data1);
 //        JSONArray array = object.getJSONArray("recharge_pay_data");
@@ -1351,12 +1335,17 @@ public class MainActivity extends BaseActivity implements DefaultView,
 //            }
 //            if (data_other.equals("allServices")) {
 //                allServices = message;
+//
 //            }
+            hideLoading(loading);
+            hideLoading(loading_dialog);
+            loading.setVisibility(View.GONE);
+            refresh_layout.setRefreshing(false);
             pref.putDashBoardData(message);
             Log.d("GET_TEST", "Loaded Value: " + message);
 
             mDatabase.setUserData(message);
-            refresh_layout.setRefreshing(false);
+
             JSONObject message1 = new JSONObject(message);
             JSONObject data = message1.getJSONObject("main_hero_banner");
             JSONArray slideArray = message1.getJSONArray("slides");
@@ -1385,7 +1374,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 } else {
                     if (isShowing == true) {
                         isShowing = false;
-                        popupDialog();
+//                        popupDialog();
                     }
 
                 }
@@ -1607,12 +1596,20 @@ public class MainActivity extends BaseActivity implements DefaultView,
             String data_other
     ) {
         try {
-            Log.d("message", data);
+
             if (data_other.equals("fetchBalance")) {
                 JSONObject jsonObject = new JSONObject(data);
+
                 String balance = jsonObject.getString("earnings");
-                available_balance.setText("\u20b9" + String.format(Locale.ENGLISH, "%.2f", balance));
+                Log.d("balance", "onSuccess: " + jsonObject.getString("earnings"));
+                Log.d("balance", "mDatabase: " + mDatabase.getEarnings());
+//                available_balance.setText("\u20b9" + String.format(Locale.ENGLISH, "%.2f", balance));
                 mDatabase.setEarnings(jsonObject.getString("earnings"));
+                Log.d("balance", "ban "+String.valueOf(mDatabase.getEarnings()));
+                var ban = Double.parseDouble(jsonObject.getString("earnings"));
+                total_ban.setText("₹" + String.format(Locale.ENGLISH, "%.2f", ban));
+                Log.d("balance", "onSuccess: ban" + ban);
+//                Log.d("balance", "mDatabase: " + mDatabase.getEarnings());
                 /*if (!jsonObject.getString("news").isEmpty()) {
                     news.setText("                                                            " + jsonObject.getString("news") + "                                           "
                             + "   " + "                                           "
@@ -1680,10 +1677,10 @@ public class MainActivity extends BaseActivity implements DefaultView,
             String message
     ) {
         if (bottomSheet != null) {
-            showLoading(loading_dialog);
+//            showLoading(loading_dialog);
             submit.setVisibility(View.GONE);
         } else {
-            showLoading(loading);
+//            showLoading(loading);
 //            setStatusBarGradiant(this);
         }
     }
@@ -1758,7 +1755,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
     protected void onDestroy() {
         super.onDestroy();
         hideAllDialog();
-       Log.d("onDestroy", "onDestroy: ");
+        Log.d("DashBoardData1","onDestroy ");
     }
 
     @Override
@@ -1772,6 +1769,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         super.onPause();
         hideAllDialog();
         sliderHandler.removeCallbacks(sliderRunnable);
+        Log.d("DashBoardData1","onPause ");
     }
 
     @Override
@@ -2053,7 +2051,44 @@ public class MainActivity extends BaseActivity implements DefaultView,
 
                 }
                 break;
+
+            case R.id.carLayout:
+        if (carRedirectType != null) {
+            if (carRedirectType.equals("in_app")) {
+                if (carRedirectType != null && !carRedirectType.isEmpty()) {
+                    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                    CustomTabsIntent customTabsIntent = builder.build();
+
+                    String chromePackage = "com.android.chrome";
+                    PackageManager pm = getActivity().getPackageManager();
+                    try {
+                        pm.getPackageInfo(chromePackage, 0);
+                        customTabsIntent.intent.setPackage(chromePackage);
+                    } catch (PackageManager.NameNotFoundException e) {
+
+                    }
+
+                    customTabsIntent.launchUrl(getActivity(), Uri.parse(carRedirectUrl));
+                }
+
+
+            } else if (carRedirectType.equals("external")) {
+                if (carRedirectType != null && !carRedirectType.isEmpty()) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(carRedirectUrl));
+                    try {
+                        startActivity(browserIntent);
+                    } catch (ActivityNotFoundException e) {
+
+                    }
+                } else {
+
+                }
+            }
+
         }
+        break;
+
+    }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -2112,16 +2147,17 @@ public class MainActivity extends BaseActivity implements DefaultView,
         rotation = AnimationUtils.loadAnimation(getActivity(), R.anim.rotation);
         rotation.setRepeatCount(100);
 //        refresh.startAnimation(rotation);
-
-        pref = new APIStorePreferences(this);
         var operatorData =  pref.getDashBoardData();
-        if (operatorData.isEmpty())
+        if (!operatorData.isEmpty())
         {
-//            mDefaultPresenter.dashboardDataWithoutRefresh(fcmToken + "", device_id + "", null);
-//            Toast.makeText(this, "No Data", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            onSuccess(operatorData,"");
+            try {
+                JSONObject object = new JSONObject(operatorData);
+                apiData(object);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+
+            refresh_layout.setRefreshing(false);
         }
 
         new Handler().postDelayed(() -> {
@@ -2132,14 +2168,13 @@ public class MainActivity extends BaseActivity implements DefaultView,
 //            mDefaultPresenter.getBbpsPayBills(device_id + "");
 //            mDefaultPresenter.getAllRechargeServices(device_id + "");
             mDefaultPresenter.fetchBalance(fcmToken + "", device_id + "", rotation);
-//            setStatusBarGradiant(this);
         }, 1200);
 
         youtube_indicator.post(() -> {
-            youtube_indicator.requestLayout(); // force refresh
+            youtube_indicator.requestLayout();
         });
         indicator.post(() -> {
-            indicator.requestLayout(); // force refresh
+            indicator.requestLayout();
         });
 
 

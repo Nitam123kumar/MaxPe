@@ -77,6 +77,7 @@ import com.vuvrecharge.modules.model.CircleData;
 import com.vuvrecharge.modules.model.OperatorData;
 import com.vuvrecharge.modules.model.PaymentModel;
 import com.vuvrecharge.modules.model.ReportsData;
+import com.vuvrecharge.modules.model.UserData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 import com.vuvrecharge.preferences.OperatorPreferences;
@@ -196,7 +197,6 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
     ArrayList<PaymentModel> list = new ArrayList<>();
     double releaseAmount = 0.000;
     Animation fadeIn;
-
     protected void attachBaseContext(Context newBase) {
         SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
         String lang = prefs.getString("lang", "en");
@@ -235,6 +235,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
             hideKeyBoard(amount);
             return false;
         });
+
         wallet_amount.setText("Your balance : \u20b9" + mDatabase.getEarnings());
         switch (string) {
             case "Prepaid Recharge":
@@ -682,7 +683,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public static void setStatusBarGradiant(Activity activity) {
+    private static void setStatusBarGradiant(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = activity.getWindow();
             Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
@@ -862,11 +863,12 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
         intent.putExtra("operator", selected_operator);
         intent.putExtra("circle", selected_circle);
         intent.putExtra("number", mobile_number.getText().toString());
-        intent.putExtra("amount", amount.getText().toString());
+        intent.putExtra("amount1", amount.getText().toString());
         intent.putExtra("provider", selected_operator_str);
         intent.putExtra("state", selected_circle_str);
         intent.putExtra("url", selected_operator_img);
         intent.putExtra("pageType", type);
+        intent.putExtra("isCustomRechargeAmount", "rechargeActivity");
         startActivity(intent);
 
     }
@@ -1023,9 +1025,10 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
     @Override
     public void onSuccess(String message) {
         try {
+            Log.d("TAG_DATA", "onSuccess: " + message);
             JSONObject jsonObject = new JSONObject(message);
             mDatabase.setUserData(jsonObject.getString("userdata"));
-            wallet_amount.setText("Your balance : \u20b9" + mDatabase.getUserData().getEarnings());
+            wallet_amount.setText("Your balance : \u20b9" + mDatabase.getEarnings());
             amount.setText(BaseMethod.amount);
             mobile_number.setText(BaseMethod.mobile);
 //            String mobile_number_str = mobile_number.getText().toString();
@@ -1269,6 +1272,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                                 txtOperator.setText(circleData.getState_name());
                                 selected_circle = circleData.getId();
                                 selected_circle_str = circleData.getState_name();
+                                amount.setText("");
                                 break;
                             }
                         }

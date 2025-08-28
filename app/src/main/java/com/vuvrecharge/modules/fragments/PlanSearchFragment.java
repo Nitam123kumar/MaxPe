@@ -127,7 +127,7 @@ public class PlanSearchFragment extends BaseFragment implements DefaultView {
                         if (s.toString().isEmpty()){
                             imgClose.setVisibility(View.GONE);
                         }else {
-                            imgClose.setVisibility(View.VISIBLE);
+                            imgClose.setVisibility(View.GONE);
                             searchPlan(s.toString());
                         }
                     }

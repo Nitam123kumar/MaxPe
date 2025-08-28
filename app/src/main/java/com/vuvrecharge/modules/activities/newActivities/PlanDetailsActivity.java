@@ -154,6 +154,8 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
     TextView applied;
     @BindView(R.id.applied_amount)
     TextView applied_amount;
+    @BindView(R.id.noteDet)
+    TextView noteDet;
 
     @BindView(R.id.transaction_amount)
     TextView transaction_amount;
@@ -181,7 +183,7 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
     Boolean isUsingCashbackPoints = false;
     ArrayList<PaymentModel> list = new ArrayList<>();
     double releaseAmount = 0.000;
-
+    UserData userData = mDatabase.getUserData();
     protected void attachBaseContext(Context newBase) {
         SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
         String lang = prefs.getString("lang", "en");
@@ -214,6 +216,10 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
         pageType = getIntent().getStringExtra("pageType");
         txtRecharge.setText("Change");
         title.setText("Plan Summary");
+        if (getIntent().getStringExtra("amount1")!=null) {
+            amount = getIntent().getStringExtra("amount1");
+        }
+
         transaction_amount.setText("\u20b9" + amount);
         mDefaultView = this;
         mDefaultPresenter = new DefaultPresenter(this);
@@ -226,17 +232,34 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
         planUnlimitedTV.setText(talktime);
         planSmsTV.setVisibility(VISIBLE);
         smsDetailsTV.setText(desc);
+        noteDet.setText(des);
+        String form = getIntent().getStringExtra("isCustomRechargeAmount");
 
         if (validity != null) {
             amount_layout.setVisibility(VISIBLE);
             amount_layout1.setVisibility(GONE);
             phone_layout1.setVisibility(GONE);
             phone_layout.setVisibility(VISIBLE);
+            Log.d("fetchPrepaidPlanDetailsLocal", "validity: "+validity);
         } else {
             amount_layout.setVisibility(GONE);
             amount_layout1.setVisibility(VISIBLE);
             phone_layout1.setVisibility(VISIBLE);
             phone_layout.setVisibility(GONE);
+            Log.d("fetchPrepaidPlanDetailsLocal", "validity is null: "+validity);
+        }
+
+        if (desc ==null && talktime ==null){
+            amount_layout.setVisibility(GONE);
+            amount_layout1.setVisibility(VISIBLE);
+            phone_layout1.setVisibility(VISIBLE);
+            phone_layout.setVisibility(GONE);
+            Log.d("fetchPrepaidPlanDetailsLocal", "validity1: "+validity);
+        }else {
+            amount_layout.setVisibility(VISIBLE);
+            amount_layout1.setVisibility(GONE);
+            phone_layout1.setVisibility(GONE);
+            phone_layout.setVisibility(VISIBLE);
         }
 
         try {
@@ -311,6 +334,13 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
 //            mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             txtPhoneOrigin.setText(state);
             txtPhoneOrigin1.setText(state);
+            if (form != null && !form.isEmpty()){
+                if (getIntent().getStringExtra("amount1")!=null){
+                    amount=getIntent().getStringExtra("amount1");
+                    mDefaultPresenter.fetchPrepaidPlanDetailsLocal(device_id,operator,amount);
+                }
+            }
+
         } else {
             type = "DTH";
             txtPhoneOrigin.setText("");
@@ -676,6 +706,42 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
 
     @Override
     public void onSuccess(String data) {
+        Log.d("fetchPrepaidPlanDetailsLocal",data);
+        try {
+
+            JSONObject object = new JSONObject(data);
+            if (object.length() >0){
+                amount_layout.setVisibility(VISIBLE);
+                amount_layout1.setVisibility(GONE);
+                phone_layout1.setVisibility(GONE);
+                phone_layout.setVisibility(VISIBLE);
+            var planData = object.getString("data");
+            var planValidity = object.getString("validity");
+            var planRs = object.getString("rs");
+            var planDesc = object.getString("desc");
+            var planTalkTime = object.getString("talktime");
+            var planSms_value = object.getString("sms_value");
+            subscription = object.getString("subscription");
+            Log.d("fetchPrepaidPlanDetailsLocal",data);
+            planDateTV.setText(planValidity);
+            dataDetailsTV.setText(planData);
+            planUnlimitedTV.setText(planTalkTime);
+            smsDetailsTV.setText(planSms_value);
+            txtAmount.setText(planRs);
+            des="DATA: "+planData+"\nSMS: "+planSms_value+"\nTalktime: "+planTalkTime;
+            noteDet.setText(des);
+            validity=planValidity;
+            this.data=planData;
+
+            }else {
+                amount_layout.setVisibility(GONE);
+                amount_layout1.setVisibility(VISIBLE);
+                phone_layout1.setVisibility(VISIBLE);
+                phone_layout.setVisibility(GONE);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -962,10 +1028,8 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
             }
             JSONObject json = new JSONObject(data);
             binding.txtTransactionAmountValue.setText("\u20b9" + txtAmount.getText().toString().trim());
-            if (mDatabase != null) {
-                if (mDatabase.getEarnings() != null) {
+            if (userData != null) {
                     binding.txtWalletAmountValue.setText("₹" + mDatabase.getEarnings());
-                }
             }
             binding.txtTotalDiscountValue.setText("₹" + json.getString("discount"));
             Log.d("txtMaxDiscountValue", "addBalance: " + json);

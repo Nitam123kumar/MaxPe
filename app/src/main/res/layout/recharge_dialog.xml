@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:text="Operator"
                 android:textColor="@color/black_2"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -58,7 +58,7 @@
                 android:gravity="center_horizontal"
                 android:text=":"
                 android:textColor="@color/black_2"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/black_2"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:text="Number"
                 android:textColor="@color/black_2"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -93,7 +93,7 @@
                 android:gravity="center_horizontal"
                 android:text=":"
                 android:textColor="@color/black_2"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/black_2"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -119,7 +119,7 @@
                 android:layout_height="wrap_content"
                 android:text="Amount"
                 android:textColor="@color/black_2"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -128,7 +128,7 @@
                 android:gravity="center_horizontal"
                 android:text=":"
                 android:textColor="@color/black_2"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
 
             <TextView
@@ -137,45 +137,34 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/black_2"
-                android:textSize="@dimen/_16sdp"
+                android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/mpin_txt_layout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginLeft="@dimen/_15sdp"
-            android:layout_marginRight="@dimen/_15sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_16sdp"
-            app:hintTextColor="@color/colorPrimaryB"
-            android:textColorHint="#B3B3B3"
-            app:boxCornerRadiusBottomEnd="@dimen/_30sdp"
-            app:boxCornerRadiusBottomStart="@dimen/_30sdp"
-            app:boxCornerRadiusTopEnd="@dimen/_30sdp"
-            app:boxCornerRadiusTopStart="@dimen/_30sdp"
-            app:boxStrokeColor="@color/colorPrimaryB"
-            app:cursorColor="@color/colorPrimaryB"
-            style="@style/TextInputLayoutNew"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/colorPrimaryB"
-            app:hintTextAppearance="@style/TextAppearance.AppCompat.Small">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/mpin_txt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter 4 digit M Pin"
-                android:maxLength="4"
-                android:textStyle="bold"
-                android:textColorHint="#B5B5B5"
-                android:textColor="@color/black_4"
-                android:gravity="center_vertical"
-                android:textSize="@dimen/_12sdp"
-                android:inputType="numberPassword" />
-        </com.google.android.material.textfield.TextInputLayout>
+        <com.mukesh.OtpView
+            android:id="@+id/mpin_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:inputType="number"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:clickable="true"
+            android:cursorVisible="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12sdp"
+            app:hideLineWhenFilled="true"
+            android:itemBackground="@drawable/otp_bg"
+            app:itemCount="4"
+            app:itemHeight="@dimen/_32sdp"
+            app:itemSpacing="@dimen/_6sdp"
+            app:itemWidth="@dimen/_32sdp"
+            app:lineColor="@color/white"
+            app:lineWidth="0dp"
+            app:viewType="rectangle" />
+
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -191,7 +180,7 @@
                 android:id="@+id/confirm"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_36sdp"
-                android:background="@drawable/corner_circle_primary"
+                android:background="@drawable/ad_money_button_shape"
                 android:text="CONFIRM"
                 android:gravity="center"
                 android:textAllCaps="false"

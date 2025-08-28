@@ -254,6 +254,7 @@
                         android:textColor="@color/black_2"
                         android:textSize="@dimen/_11sdp"
                         android:textStyle="bold"
+                        android:fontFamily="@font/inter"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 

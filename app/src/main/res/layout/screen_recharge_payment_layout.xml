@@ -110,6 +110,7 @@
             android:layout_height="wrap_content"
             android:gravity="end"
             android:padding="@dimen/_8sdp"
+            android:text="₹0"
             android:textColor="@color/colorPrimaryB"
             android:textSize="@dimen/_11sdp"
             app:layout_constraintEnd_toEndOf="@id/txtTransactionAmountValue"

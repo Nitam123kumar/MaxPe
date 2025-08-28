@@ -82,6 +82,7 @@ public interface ApiServices {
     String updateProfile = "profileUpdate";
     String doComplaint = "doComplaint";
     String fetchPrepaidPlans = "fetchPrepaidPlans";
+    String fetchPrepaidPlanDetailsLocal = "fetchPrepaidPlanDetailsLocal";
     String fetchDthPlans = "fetchDTHPlans";
     String dthCustomerInfo = "dthCustomerInfo";
     String whatsappAlerts = "whatsappAlerts";

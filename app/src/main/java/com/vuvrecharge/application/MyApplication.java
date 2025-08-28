@@ -149,10 +149,6 @@ public class MyApplication extends Application implements Application.ActivityLi
 
     @Override
     public void onActivityDestroyed(@NonNull Activity activity) {
-            Log.d("DashBoardData", "App closed, clearing prefs");
-            APIStorePreferences preferences = new APIStorePreferences(activity);
-            preferences.putDashBoardData("");
-            preferences.putString("home_api_response", "");
 
     }
 }

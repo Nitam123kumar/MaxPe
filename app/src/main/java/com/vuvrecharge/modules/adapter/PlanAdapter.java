@@ -139,8 +139,11 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.Holder> {
         @SuppressLint("ClickableViewAccessibility")
         public void bind(@NonNull PlanItemData resultsBean, @NonNull String title) {
             validity.setText(resultsBean.getValidity());
-            amount.setText("\u20b9 " + resultsBean.getRs().trim());
-            per_days_cost.setText("Per Day Cost: "+"\u20b9" + resultsBean.getCost_per_days().trim());
+            amount.setText("\u20b9" + resultsBean.getRs().trim());
+            if (resultsBean.getCost_per_days()!=null){
+                per_days_cost.setText("Per Day Cost: "+"\u20b9" + resultsBean.getCost_per_days().trim());
+            }
+//            per_days_cost.setText("Per Day Cost: "+"\u20b9" + resultsBean.getCost_per_days().trim());
             if (resultsBean.getPlan_tags()!=null){
                 best_seller_tag.setText(resultsBean.getPlan_tags());
                 best_seller_tag.setBackgroundResource(R.drawable.best_seller_tag);

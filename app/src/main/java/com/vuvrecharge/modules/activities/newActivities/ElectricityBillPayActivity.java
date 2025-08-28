@@ -31,6 +31,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -268,7 +269,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 provider_name.setText(name);
                 mDefaultPresenter.operatorsDetails(device_id, id);
                 UserData userData = mDatabase.getUserData();
-                wallet_amount.setText("Your balance: \u20b9" + userData.getEarnings() + "");
+                wallet_amount.setText("Your balance: ₹" + userData.getEarnings() + "");
             }
 
 
@@ -582,6 +583,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
         scrollView.setOnTouchListener(this);
         constBillInfo.setOnTouchListener(this);
         recyclerViewBillerInfo.setOnTouchListener(this);
+
     }
 
     @Override
@@ -606,12 +608,12 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
         String subDivision = sub_division_code.getText().toString().trim();
 
         if (titleStr.equals("Fastag")){
-            amt = billAmount;
+            amt = txtAmountValue.getText().toString().trim();
         }else {
             if (billAmount.isEmpty() || billAmount == null){
-                amt = amount.getText().toString().trim();
+                amt = txtAmountValue.getText().toString().trim();
             }else {
-                amt = billAmount.trim();
+                amt = txtAmountValue.getText().toString().trim();
             }
         }
 
@@ -628,9 +630,13 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
         }
 
         hideKeyBoard(consumerNumber);
+        if (amt.trim().equals("0")){
+            showError("InValid amount");
+            return;
+        }
         rechargeDialog(
                 consumerNumber.getText().toString()
-                ,id,amt,type,amount.getText().toString().trim(),
+                ,id,amt,type,txtAmountValue.getText().toString().trim(),
                 subDivision,"","",provider_name.getText().toString());
     }
 
@@ -734,6 +740,11 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             isEdittext = object.getString("is_amount_editable");
             if (isEdittext.equals("true")){
                 txtAmountValue.setFocusableInTouchMode(true);
+                viewBill.setOnClickListener(v -> {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.showSoftInput(txtAmountValue, InputMethodManager.SHOW_IMPLICIT);
+                    txtAmountValue.requestFocus();
+                });
             }else {
                 txtAmountValue.setFocusable(false);
             }
@@ -844,6 +855,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             if (data_other.equals("INSUFFICIENT")){
                 openGatewaysDialog(data);
             } else{
+                Log.d("createLayout", "onSuccessOther: "+data);
                 createLayout(data);
             }
         }catch (Exception e){
@@ -869,12 +881,21 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 btnProcess.setVisibility(VISIBLE);
                 proceedToPay.setVisibility(GONE);
             }
+            JSONObject numberField;
+            if (!jsonNumberData.equals("null")) {
+                numberField = new JSONObject(jsonNumberData);
+            } else {
+                numberField = null;
+            }
 
-            JSONObject numberField = new JSONObject(jsonNumberData);
             txtBillFetch.setOnClickListener(v -> {
                 hideKeyBoard(consumerNumber);
                 hideKeyBoard(sub_division_code);
                 hideKeyBoard(amount);
+                if (consumerNumber.getText().toString().isEmpty()){
+                    showError("Please enter number");
+                    return;
+                }
                 if (consumerNumber.getText().toString().isEmpty()) {
                     try {
                         if (!numberField.getString("eg").isEmpty() || numberField.getString("eg").isBlank()){
@@ -891,6 +912,30 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 }
 
             });
+            if (type.equals("Postpaid")){
+                consumerNumber.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        if (s.toString().length() < 10){
+                            showSoftKeyboard(consumerNumber);
+                            constBillInfo.setVisibility(GONE);
+                            txtBillFetch.setVisibility(VISIBLE);
+                            btnProcess.setVisibility(GONE);
+                            proceedToPay.setVisibility(VISIBLE);
+                        }
+                    }
+                });
+            }
             if (numberField.getBoolean("is_select")) {
                 spinnerText.setHint(numberField.getString("eg"));
                 spinnerData.add(new SpinnerData("0", "---Select---"));
@@ -1257,7 +1302,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             dialog.setCancelable(true);
             binding.operator.setText(selected_operator_str.trim());
             binding.number.setText(number.trim());
-            binding.amount.setText("\u20b9" + amount);
+            binding.amount.setText("\u20b9" + amt);
             amtPay = amount;
             if (warning_message.isEmpty()) {
                 binding.warningMessage.setVisibility(GONE);

@@ -60,6 +60,7 @@ import com.vuvrecharge.BuildConfig;
 import com.vuvrecharge.R;
 import com.vuvrecharge.databinding.FeedbackBinding;
 import com.vuvrecharge.modules.activities.LoginActivity;
+import com.vuvrecharge.preferences.APIStorePreferences;
 import com.vuvrecharge.preferences.UserPreferences;
 import com.vuvrecharge.preferences.UserPreferencesImpl;
 import com.vuvrecharge.utils.ScreenshotUtils;
@@ -345,7 +346,9 @@ public void setConfigData() {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 getActivity().finish();
-
+                new APIStorePreferences(getActivity()).putOperatorString("");
+                new APIStorePreferences(getActivity()).putDashBoardData("");
+                new APIStorePreferences(getActivity()).putTime(0L);
 
             });
             logoutNo.setOnClickListener(v -> {
