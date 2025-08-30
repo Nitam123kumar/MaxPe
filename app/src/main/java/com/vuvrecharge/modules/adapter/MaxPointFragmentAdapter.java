@@ -64,7 +64,7 @@ public class MaxPointFragmentAdapter extends RecyclerView.Adapter<MaxPointFragme
                     .into(holder.imgMaxLogo);
         }
 
-        holder.pointsUsedTV.setText(data.getType());
+        holder.pointsUsedTV.setText(data.getType().replace("_", " "));
         holder.points_orderIdTV.setText("Order Id : " + data.getOrder_id());
     }
 

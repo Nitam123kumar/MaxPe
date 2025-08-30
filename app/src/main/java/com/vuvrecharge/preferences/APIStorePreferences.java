@@ -34,7 +34,7 @@ public class APIStorePreferences {
         return sharedPreferences.getLong("last_fetch_time", 0);
     }
 
-    public boolean contains(String key) {
-        return sharedPreferences.contains(key);
+    public void clear(){
+        sharedPreferences.edit().clear().apply();
     }
 }

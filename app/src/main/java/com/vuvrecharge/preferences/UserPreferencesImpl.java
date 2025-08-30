@@ -1,7 +1,5 @@
 package com.vuvrecharge.preferences;
 
-import static android.content.Context.MODE_PRIVATE;
-
 import android.content.SharedPreferences;
 import android.util.Log;
 
@@ -126,13 +124,40 @@ public class UserPreferencesImpl implements UserPreferences {
     }
 
     @Override
-    public void putBbpsString(String key, String value) {
-        mPreferences.edit().putString(key, value).apply();
+    public void putDashBoardData(String value) {
+        mPreferences.edit().putString("home_api_response", value).apply();
     }
 
     @Override
-    public String getBbpsString(String key) {
-        return mPreferences.getString(key, null);
+    public String getDashBoardData() {
+        return mPreferences.getString("home_api_response", "");
+    }
+
+    @Override
+    public void putOperatorString(String value) {
+        mPreferences.edit().putString("operators_data", value).apply();
+    }
+
+    @Override
+    public String getOperatorString() {
+        return mPreferences.getString("operators_data", "");
+    }
+    public void setCashbackPoints(String cashback_points) {
+        mPreferences.edit().putString("cashback_points", cashback_points).apply();
+    }
+    public String getCashbackPoints() {
+        return mPreferences.getString("cashback_points", "");
+    }
+
+
+    @Override
+    public void putTime(Long value) {
+        mPreferences.edit().putLong("last_fetch_time", value).apply();
+    }
+
+    @Override
+    public long getTime() {
+        return mPreferences.getLong("last_fetch_time", 0);
     }
 
     @Override

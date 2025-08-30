@@ -1016,7 +1016,7 @@
                             android:id="@+id/ottTxt"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/_30sdp"
-                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginStart="@dimen/_14sdp"
                             android:orientation="horizontal"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/viewPagerLayout"
@@ -1026,13 +1026,15 @@
 
                             <ImageView
                                 android:id="@+id/ottImg"
-                                android:layout_width="@dimen/_18sdp"
-                                android:layout_height="@dimen/_18sdp"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_24sdp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/discount_img"
-                                app:layout_constraintBottom_toBottomOf="@id/offer"
+                                android:src="@drawable/ott_img"
+                                android:padding="@dimen/_1sdp"
+                                android:scaleType="centerCrop"
+                                app:layout_constraintBottom_toBottomOf="@id/ottTxt"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="@id/offer" />
+                                app:layout_constraintTop_toTopOf="@id/ottTxt" />
 
                             <TextView
                                 android:id="@+id/ottTV"

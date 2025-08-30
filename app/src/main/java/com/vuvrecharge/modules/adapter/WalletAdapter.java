@@ -104,11 +104,11 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.MainListHo
                 amount.setText("+"+resultsBean.getAmount());
                 amount.setTextColor(mContext.getResources().getColor(R.color.black));
 //                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_history_1);
-                imgDone.setImageResource(R.drawable.arrow_light_red);
+                imgDone.setImageResource(R.drawable.arrow_light_green);
             } else {
                 amount.setText("-"+resultsBean.getAmount());
                 amount.setTextColor(mContext.getResources().getColor(R.color.black));
-                imgDone.setImageResource(R.drawable.arrow_light_green);
+                imgDone.setImageResource(R.drawable.arrow_light_red);
 //                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_report_1);
             }
             remaining_amount.setText("Closing Balance \u20b9" + resultsBean.getRemaining());

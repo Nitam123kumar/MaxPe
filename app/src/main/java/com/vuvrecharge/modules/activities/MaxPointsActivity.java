@@ -281,6 +281,7 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
                     maxPePointData.setClosing_points(object1.getString("closing_points"));
                     maxPePointData.setDebit(object1.getString("debit"));
                     maxPePointData.setType(object1.getString("type"));
+                    Log.d("dataTitle","MaixPoints"+object1);
                     maxPePointData.setOpening_points(object1.getString("opening_points"));
                     mMaxPePointsData.add(maxPePointData);
                     maxPointsAdapter.notifyDataSetChanged();

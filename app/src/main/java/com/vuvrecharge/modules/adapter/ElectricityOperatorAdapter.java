@@ -76,21 +76,23 @@ public class ElectricityOperatorAdapter extends RecyclerView.Adapter<Electricity
         public void bindView(@NonNull OperatorData data) {
             txtTitle.setText(data.getName());
             String url = IMAGE_LOGO;
-            if (data.getLogo() != null){
-                Glide.with(activity)
-                        .load(url+"/"+data.getLogo())
-                        .into(operator_img);
-            }else {
-                if (type.equals("Landline")){
-                    Glide.with(activity)
-                            .load(R.drawable.landline_1)
-                            .into(operator_img);
+            String logo;
+
+            if (data.getLogo() != null) {
+                logo = url + "/" + data.getLogo();
+                Log.e("Operator_Image","logo1 "+logo);
+            } else {
+                if (type.equals("Landline")) {
+                    operator_img.setImageResource(R.drawable.landline_1);
                 }
+                logo = data.getOperator_img() + data.getOperator_dunmy_img();
+                Log.e("Operator_Image","logo2 "+logo);
             }
+            Glide.with(activity).load(logo).into(operator_img);
 
             itemView.setOnClickListener(v -> activity.startActivity(new Intent(activity, ElectricityBillPayActivity.class)
                     .putExtra("name", data.getName())
-                    .putExtra("logo", url+"/"+data.getLogo())
+                    .putExtra("logo",logo )
                     .putExtra("id", data.getId())
                     .putExtra("type", type)
                     .putExtra("warning_message",warning_message)

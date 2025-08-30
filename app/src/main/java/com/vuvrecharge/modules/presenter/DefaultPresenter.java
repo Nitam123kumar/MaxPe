@@ -3231,6 +3231,56 @@ public class DefaultPresenter {
 
     }
 
+    public void getUserUsableCashbackPoints(String device_id, String operator, String rs) {
+        try {
+            JSONObject post_data = new JSONObject();
+            post_data.put("operator", operator);
+            post_data.put("rs", rs);
+            post_data.put("device_id", device_id);
+            post_data.put("token", mDatabase.getToken());
+            JSONObject data = new JSONObject();
+            data.put("request_url", ApiServices.getUserUsableCashbackPoints);
+            data.put("post_data", post_data);
+            mDefaultView.onShowDialog("Loading...");
+            String data_final = data.toString();
+//            Log.d("TAG_DATA", "fetchPrepaidPlans: "+data_final);
+            String encrypted = Java_AES_Cipher.encrypt(BaseMethod.key, BaseMethod.iv, data_final);
+            Log.d("getUserUsableCashbackPoints", encrypted);
+            Call<DefaultResponse> responseCall = MyApplication.getInstance()
+                    .getApiInterface()
+                    .defaultRequest(encrypted);
+            responseCall.enqueue(new Callback<>() {
+                @Override
+                public void onResponse(@NotNull Call<DefaultResponse> call, @NotNull Response<DefaultResponse> response) {
+                    mDefaultView.onHideDialog();
+                    if (response.isSuccessful() && response.code() == 200) {
+                        DefaultResponse body = response.body();
+                        if (body != null) {
+                            if (body.getSuccess() == 1) {
+                                mDefaultView.onSuccessOther(body.getData());
+                            } else {
+                                mDefaultView.onError(body.getMessage());
+                            }
+                        }
+                    } else {
+                        mDefaultView.onError("Error Bad Url");
+                    }
+                }
+
+                @Override
+                public void onFailure(@NotNull Call<DefaultResponse> call, @NotNull Throwable t) {
+                    mDefaultView.onHideDialog();
+                    mDefaultView.onError("Error during " + t.getMessage());
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     public void fetchRofferPlans(String device_id, String opid, String cirid, String mobile) {
         try {
             JSONObject post_data = new JSONObject();
@@ -3826,6 +3876,7 @@ public class DefaultPresenter {
             Call<DefaultResponse> responseCall = MyApplication.getInstance()
                     .getApiInterface()
                     .defaultRequest(encrypted);
+            Log.d("encrypted", encrypted);
 
             responseCall.enqueue(new Callback<>() {
                 @Override

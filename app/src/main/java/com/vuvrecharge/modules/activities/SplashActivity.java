@@ -27,6 +27,7 @@ import com.vuvrecharge.modules.activities.newActivities.IntroActivity;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.presenter.SplashView;
 import com.vuvrecharge.modules.view.DefaultView;
+import com.vuvrecharge.preferences.APIStorePreferences;
 import com.vuvrecharge.preferences.CommissionPreferences;
 import com.vuvrecharge.preferences.Fingerprint;
 import com.vuvrecharge.preferences.IntroPreferences;
@@ -232,7 +233,11 @@ public class SplashActivity extends AppCompatActivity implements SplashView, Def
     public CommissionPreferences prepaidCommissionPreferences;
     public CommissionPreferences dTHCommissionPreferences;
     public CommissionPreferences otherCommissionPreferences;
+    public APIStorePreferences aPIStorePreferences;
+
     private void clearAllOperatorData() {
+//        aPIStorePreferences = new APIStorePreferences(getApplicationContext());
+//        aPIStorePreferences.clear();
         prefElectricity = new OperatorPreferences(getApplicationContext(), "Electricity");
         prefElectricity.clear();
         prefFastag = new OperatorPreferences(getApplicationContext(), "Fastag");

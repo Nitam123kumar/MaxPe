@@ -94,7 +94,7 @@ public class BaseActivity extends AppCompatActivity implements NetListener {
     public static String fcmToken="";
     public FirebaseRemoteConfig mFirebaseRemoteConfig;
     boolean isdebug = BuildConfig.DEBUG;
-
+    public APIStorePreferences aPIStorePreferences;
 
     static {
         getFcmToken();
@@ -302,6 +302,8 @@ public void setConfigData() {
         builder.setNegativeButton("Login", (dialogInterface, i) -> new Handler().postDelayed(() -> {
             // TODO Auto-generated method stub
             mDatabase.clearUser();
+            aPIStorePreferences = new APIStorePreferences(getApplicationContext());
+            aPIStorePreferences.clear();
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -346,10 +348,8 @@ public void setConfigData() {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 getActivity().finish();
-                new APIStorePreferences(getActivity()).putOperatorString("");
-                new APIStorePreferences(getActivity()).putDashBoardData("");
-                new APIStorePreferences(getActivity()).putTime(0L);
-
+                aPIStorePreferences = new APIStorePreferences(getApplicationContext());
+                aPIStorePreferences.clear();
             });
             logoutNo.setOnClickListener(v -> {
                 dialogLogout.cancel();

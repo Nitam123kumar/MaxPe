@@ -18,6 +18,63 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mToolBar">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rOfferLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            app:layout_constraintBottom_toTopOf="@+id/txtShimmerWarning"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phone_layout">
+
+            <TextView
+                android:id="@+id/imgINR2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/rupay"
+                android:textColor="#084C96"
+                android:textSize="@dimen/_24sdp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/noteTView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_40sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:text="@string/note_"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_9sdp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/noteDet1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text=""
+                android:textColor="#918F8F"
+                android:textSize="@dimen/_8sdp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/noteTView1"
+                app:layout_constraintTop_toBottomOf="@id/noteTView1" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/amount_layout"
@@ -25,11 +82,12 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:paddingBottom="@dimen/_10sdp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@id/phone_layout"
             app:layout_constraintStart_toStartOf="@id/phone_layout"
             app:layout_constraintTop_toBottomOf="@id/phone_layout">
             <!--        #7D7C7C-->
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/viewAmount"
@@ -239,9 +297,10 @@
             <TextView
                 android:id="@+id/noteDet"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/_32sdp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:text="@string/benefits_include_6gb_of_4g_data_and_unlimited_5g_data_for_users_nwith_an_active_1gb_day_plan_valid_up_to_28_days_or_a_1_5gb_day_nplan_valid_for_28_to_56_days"
+                android:paddingEnd="@dimen/_5sdp"
+                android:text=""
                 android:textColor="#918F8F"
                 android:textSize="@dimen/_8sdp"
                 android:textStyle="bold"
@@ -457,7 +516,7 @@
                 android:id="@+id/txtRecharge1"
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_22sdp"
-               android:layout_gravity="center_vertical"
+                android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/_3sdp"
                 android:layout_weight="1"
                 android:background="@drawable/change_number_shape"
@@ -496,10 +555,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/inter"
                 android:text="@string/transaction_amount"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10sdp"
-                android:fontFamily="@font/inter"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/payment_Detail" />
 
@@ -507,9 +566,9 @@
                 android:id="@+id/transaction_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10sdp"
-                android:fontFamily="@font/inter"
                 app:layout_constraintBottom_toBottomOf="@id/transaction"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/transaction" />
@@ -522,11 +581,11 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:drawableStart="@drawable/max_points_applied"
                 android:drawablePadding="@dimen/_5sdp"
+                android:fontFamily="@font/inter"
                 android:gravity="center"
                 android:text="@string/maxpoints_applied"
                 android:textColor="#0B54A5"
                 android:textSize="@dimen/_10sdp"
-                android:fontFamily="@font/inter"
                 android:textStyle="bold"
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
@@ -537,9 +596,9 @@
                 android:id="@+id/applied_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
                 android:textColor="#0B54A5"
                 android:textSize="@dimen/_10sdp"
-                android:fontFamily="@font/inter"
                 android:textStyle="bold"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="@id/applied"
@@ -577,10 +636,10 @@
                 android:id="@+id/available_pointsTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/inter"
                 android:textColor="#5C5C5C"
                 android:textSize="@dimen/_10sdp"
                 android:textStyle="bold"
-                android:fontFamily="@font/inter"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/shimmerTextView"
                 app:layout_constraintTop_toBottomOf="@id/shimmerTextView" />
@@ -610,7 +669,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/shimmerTextView"
-
                 />
 
             <ImageView

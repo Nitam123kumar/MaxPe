@@ -50,9 +50,22 @@ public interface UserPreferences {
 
     String getString(String key);
 
-    void putBbpsString(String key, String value);
+    void putDashBoardData(String value);
 
-    String getBbpsString(String key);
+    String getDashBoardData();
+
+    void putOperatorString(String value);
+
+    String getOperatorString();
+
+    void setCashbackPoints(String cashback_points);
+
+    public String getCashbackPoints();
+
+
+    void putTime(Long value);
+
+    long getTime();
 
     boolean contains(String key);
 

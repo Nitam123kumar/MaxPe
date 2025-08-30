@@ -6,19 +6,15 @@ import static android.view.View.VISIBLE;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,7 +33,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
 
@@ -46,24 +41,19 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.paytm.pgsdk.PaytmOrder;
-import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
-import com.paytm.pgsdk.TransactionManager;
-import com.romainpiel.shimmer.Shimmer;
 import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseActivity;
 import com.vuvrecharge.base.BaseMethod;
+import com.vuvrecharge.databinding.MaixPointsMoreSetailsLayoutBinding;
 import com.vuvrecharge.databinding.PlanLayoutBinding;
 import com.vuvrecharge.databinding.PlanMpinLayoutBinding;
-import com.vuvrecharge.databinding.ResetmpinDialogBinding;
 import com.vuvrecharge.databinding.ScreenRechargePaymentLayoutBinding;
 import com.vuvrecharge.databinding.TransactionDialogBinding;
 import com.vuvrecharge.databinding.WalletTransactionBottonDialogBinding;
-import com.vuvrecharge.modules.activities.AboutActivity;
 import com.vuvrecharge.modules.activities.AccountActivity;
-import com.vuvrecharge.modules.activities.AfterDepositActivity;
 import com.vuvrecharge.modules.activities.RechargeActivity;
 import com.vuvrecharge.modules.activities.RechargeReportActivity;
+import com.vuvrecharge.modules.activities.SupportActivity;
 import com.vuvrecharge.modules.adapter.SubscriptionAdapter;
 import com.vuvrecharge.modules.model.PaymentModel;
 import com.vuvrecharge.modules.model.ReportsData;
@@ -80,14 +70,14 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
-@SuppressLint({"NonConstantResourceId","SetTextI18n"})
+
+@SuppressLint({"NonConstantResourceId", "SetTextI18n"})
 public class PlanDetailsActivity extends BaseActivity implements DefaultView, View.OnClickListener {
 
     private DefaultPresenter mDefaultPresenter;
@@ -126,6 +116,8 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
     TextView txtPlanDetails;
     @BindView(R.id.txtRecharge)
     TextView txtRecharge;
+    @BindView(R.id.txtRecharge1)
+    TextView txtRecharge1;
     @BindView(R.id.btnSubmit)
     TextView btnSubmit;
     @BindView(R.id.shimmerTextView)
@@ -156,17 +148,37 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
     TextView applied_amount;
     @BindView(R.id.noteDet)
     TextView noteDet;
+    @BindView(R.id.imgINR2)
+    TextView imgINR2;
+    @BindView(R.id.viewValidity)
+    View viewValidity;
+    @BindView(R.id.viewData)
+    View viewData;
+    @BindView(R.id.viewVoice)
+    View viewVoice;
+    @BindView(R.id.viewSMS)
+    View viewSMS;
+    @BindView(R.id.noteTView1)
+    TextView noteTView1;
+    @BindView(R.id.noteDet1)
+    TextView noteDet1;
+    @BindView(R.id.apply_ImageView)
+    ImageView apply_ImageView;
 
     @BindView(R.id.transaction_amount)
     TextView transaction_amount;
     @BindView(R.id.amount_layout)
     ConstraintLayout amount_layout;
+    @BindView(R.id.viewAmount)
+    ConstraintLayout viewAmount;
     @BindView(R.id.amount_layout1)
     ConstraintLayout amount_layout1;
     @BindView(R.id.phone_layout1)
     LinearLayout phone_layout1;
     @BindView(R.id.phone_layout)
     LinearLayout phone_layout;
+    @BindView(R.id.rOfferLayout)
+    ConstraintLayout rOfferLayout;
     DefaultView mDefaultView;
 
     String warning_message = "";
@@ -183,7 +195,12 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
     Boolean isUsingCashbackPoints = false;
     ArrayList<PaymentModel> list = new ArrayList<>();
     double releaseAmount = 0.000;
+
+    String maxPointsAvailable = "";
+    String usablePoints = "";
+    String usable_percentage = "";
     UserData userData = mDatabase.getUserData();
+
     protected void attachBaseContext(Context newBase) {
         SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
         String lang = prefs.getString("lang", "en");
@@ -215,8 +232,9 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
         circle = getIntent().getStringExtra("circle");
         pageType = getIntent().getStringExtra("pageType");
         txtRecharge.setText("Change");
+        txtRecharge1.setText("Change");
         title.setText("Plan Summary");
-        if (getIntent().getStringExtra("amount1")!=null) {
+        if (getIntent().getStringExtra("amount1") != null) {
             amount = getIntent().getStringExtra("amount1");
         }
 
@@ -233,6 +251,8 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
         planSmsTV.setVisibility(VISIBLE);
         smsDetailsTV.setText(desc);
         noteDet.setText(des);
+        noteDet1.setText(des);
+        imgINR2.setText("₹" + amount);
         String form = getIntent().getStringExtra("isCustomRechargeAmount");
 
         if (validity != null) {
@@ -240,93 +260,45 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
             amount_layout1.setVisibility(GONE);
             phone_layout1.setVisibility(GONE);
             phone_layout.setVisibility(VISIBLE);
-            Log.d("fetchPrepaidPlanDetailsLocal", "validity: "+validity);
+            Log.d("fetchPrepaidPlanDetailsLocal", "validity: " + validity);
         } else {
             amount_layout.setVisibility(GONE);
             amount_layout1.setVisibility(VISIBLE);
             phone_layout1.setVisibility(VISIBLE);
             phone_layout.setVisibility(GONE);
-            Log.d("fetchPrepaidPlanDetailsLocal", "validity is null: "+validity);
+            Log.d("fetchPrepaidPlanDetailsLocal", "validity is null: " + validity);
         }
 
-        if (desc ==null && talktime ==null){
+        if (desc == null && talktime == null) {
             amount_layout.setVisibility(GONE);
-            amount_layout1.setVisibility(VISIBLE);
-            phone_layout1.setVisibility(VISIBLE);
-            phone_layout.setVisibility(GONE);
-            Log.d("fetchPrepaidPlanDetailsLocal", "validity1: "+validity);
-        }else {
+            amount_layout1.setVisibility(GONE);
+            phone_layout1.setVisibility(GONE);
+            phone_layout.setVisibility(VISIBLE);
+            imgINR2.setVisibility(VISIBLE);
+            noteDet1.setVisibility(VISIBLE);
+            noteTView1.setVisibility(VISIBLE);
+            rOfferLayout.setVisibility(VISIBLE);
+
+
+            Log.d("fetchPrepaidPlanDetailsLocal", "validity1: " + validity);
+        } else {
             amount_layout.setVisibility(VISIBLE);
             amount_layout1.setVisibility(GONE);
             phone_layout1.setVisibility(GONE);
             phone_layout.setVisibility(VISIBLE);
+            imgINR2.setVisibility(GONE);
+            noteDet1.setVisibility(GONE);
+            noteTView1.setVisibility(GONE);
+            rOfferLayout.setVisibility(GONE);
         }
 
-        try {
-            UserData userData = mDatabase.getUserData();
-            double cashbackPoints = Double.parseDouble(userData.getCashbackPoints());
-            if (cashbackPoints > 0) {
-                available_pointsTV.setText("Available " + cashbackPoints);
-            } else {
-                available_pointsTV.setText("available " + 0);
-            }
+        apply_ImageView.setOnClickListener(v -> {
+            pointsMoreDetails("" + usable_percentage + "%");
+        });
+        shimmerTextView.setOnClickListener(v -> {
+            pointsMoreDetails("" + usable_percentage + "%");
+        });
 
-            if (applyTV.isChecked()) {
-                applied.setVisibility(VISIBLE);
-                applied_amount.setVisibility(VISIBLE);
-
-            } else {
-                applied.setVisibility(GONE);
-                applied_amount.setVisibility(GONE);
-
-            }
-
-            applyTV.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (cashbackPoints > 0) {
-
-                        if (isChecked) {
-                            applied.setVisibility(VISIBLE);
-                            applied_amount.setVisibility(VISIBLE);
-
-                            double rechargeAmount = Double.parseDouble(amount.trim());
-                            double userMaxPoints = Double.parseDouble(userData.getCashbackPoints());
-
-                            double fivePercent = rechargeAmount * 0.05;
-                            double pointsToApply;
-
-                            if (userMaxPoints >= fivePercent) {
-                                pointsToApply = fivePercent;
-                                isUsingCashbackPoints = true;
-                            } else {
-                                pointsToApply = userMaxPoints;
-                                isUsingCashbackPoints = true;
-                            }
-
-                            applied_amount.setText("-\u20b9" + String.format(Locale.ENGLISH, "%.2f", pointsToApply));
-
-                            double finalPayable = rechargeAmount - pointsToApply;
-//                        payableAmountTV.setText("Payable Amount: ₹" + String.format("%.2f", finalPayable));
-
-
-                        } else {
-                            applied.setVisibility(GONE);
-                            applied_amount.setVisibility(GONE);
-                            isUsingCashbackPoints = false;
-                        }
-
-                    } else {
-                        Toast.makeText(getActivity(), "Not Available MaxPoints", Toast.LENGTH_SHORT).show();
-                        isUsingCashbackPoints = false;
-                    }
-                }
-            });
-
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
 
         if (pageType.equals("Prepaid")) {
             type = "Prepaid";
@@ -334,17 +306,27 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
 //            mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             txtPhoneOrigin.setText(state);
             txtPhoneOrigin1.setText(state);
-            if (form != null && !form.isEmpty()){
-                if (getIntent().getStringExtra("amount1")!=null){
-                    amount=getIntent().getStringExtra("amount1");
-                    mDefaultPresenter.fetchPrepaidPlanDetailsLocal(device_id,operator,amount);
+            if (form != null && !form.isEmpty()) {
+                if (getIntent().getStringExtra("amount1") != null) {
+                    amount = getIntent().getStringExtra("amount1");
+                    mDefaultPresenter.fetchPrepaidPlanDetailsLocal(device_id, operator, amount);
                 }
+            } else {
+                mDefaultPresenter.getUserUsableCashbackPoints(device_id, operator, amount);
             }
 
         } else {
             type = "DTH";
-            txtPhoneOrigin.setText("");
-            txtPhoneOrigin.setVisibility(GONE);
+            txtPhoneOrigin1.setText("");
+            txtPhoneOrigin1.setVisibility(GONE);
+            noteDet1.setVisibility(GONE);
+            noteTView1.setVisibility(GONE);
+            phone_layout1.setVisibility(VISIBLE);
+            amount_layout1.setVisibility(VISIBLE);
+            amount_layout.setVisibility(GONE);
+            phone_layout.setVisibility(GONE);
+            rOfferLayout.setVisibility(GONE);
+            mDefaultPresenter.getUserUsableCashbackPoints(device_id, operator, amount);
 //            mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
         }
         if (urlProvider != null) {
@@ -376,6 +358,88 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
                 startActivity(intent);
             }
         });
+        txtRecharge1.setOnClickListener(v -> {
+            if (type.equals("Prepaid")) {
+                Intent intent = new Intent(getActivity(), RechargeActivity.class);
+                intent.putExtra("title", "Prepaid Recharge");
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(getActivity(), RechargeActivity.class);
+                intent.putExtra("title", "DTH Recharge");
+                startActivity(intent);
+            }
+        });
+
+        try {
+
+//            double cashbackPoints = Double.parseDouble(maxPointsAvailable);
+//            if (cashbackPoints > 0) {
+//                available_pointsTV.setText("Available " + cashbackPoints);
+//            } else {
+//                available_pointsTV.setText("Available " + 0);
+//            }
+
+            if (applyTV.isChecked()) {
+                applied.setVisibility(VISIBLE);
+                applied_amount.setVisibility(VISIBLE);
+
+            } else {
+                applied.setVisibility(GONE);
+                applied_amount.setVisibility(GONE);
+
+            }
+
+            applyTV.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    double cashbackPoints = Double.parseDouble(maxPointsAvailable);
+                    if (cashbackPoints > 0) {
+
+                        if (isChecked) {
+                            applied.setVisibility(VISIBLE);
+                            applied_amount.setVisibility(VISIBLE);
+
+//                            double rechargeAmount = Double.parseDouble(amount.trim());
+//                            double userMaxPoints = Double.parseDouble(mDatabase.getCashbackPoints());
+                            double useMaxPoints = Double.parseDouble(usablePoints);
+
+
+//                            double fivePercent = rechargeAmount * 0.05;
+//                            double pointsToApply;
+//
+//                            if (useMaxPoints >= fivePercent) {
+//                                pointsToApply = fivePercent;
+//                                isUsingCashbackPoints = true;
+//                            } else {
+//                                pointsToApply = userMaxPoints;
+//                                isUsingCashbackPoints = true;
+//                            }
+
+                            applied_amount.setText("-\u20b9" + String.format(Locale.ENGLISH, "%.2f", useMaxPoints));
+
+//                            double finalPayable = rechargeAmount - pointsToApply;
+////                        payableAmountTV.setText("Payable Amount: ₹" + String.format("%.2f", finalPayable));
+
+
+                        } else {
+                            applied.setVisibility(GONE);
+                            applied_amount.setVisibility(GONE);
+                            isUsingCashbackPoints = false;
+                        }
+
+                    } else {
+                        if (isChecked) {
+                            showError("Not Available MaxPoints");
+                        }
+                        isUsingCashbackPoints = false;
+                    }
+                }
+            });
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -546,6 +610,35 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
 //        }
 //    }
 
+    private void pointsMoreDetails(String discount) {
+        try {
+            MaixPointsMoreSetailsLayoutBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), R.layout.maix_points_more_setails_layout, null, false);
+            dialog = new BottomSheetDialog(getActivity(), R.style.AppBottomSheetDialogTheme);
+            dialog.setContentView(binding.getRoot());
+            changeStatusBarColor(dialog);
+
+            bottomSheet = dialog.findViewById(com.denzcoskun.imageslider.R.id.design_bottom_sheet);
+            if (bottomSheet != null) {
+                BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+                behavior.setSkipCollapsed(false);
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                behavior.setPeekHeight(600);
+            }
+            binding.txtSecond.setText(discount);
+            binding.closeTextView.setOnClickListener(v -> dialog.dismiss());
+            binding.detailsCancel.setOnClickListener(v -> dialog.dismiss());
+            binding.needSupport.setOnClickListener(v ->
+            {
+                Intent intent = new Intent(getActivity(), SupportActivity.class);
+                startActivity(intent);
+            });
+            dialog.show();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void rechargeDialog(String phone, String circle, String operator) {
         try {
             PlanMpinLayoutBinding binding = DataBindingUtil.inflate(
@@ -642,7 +735,6 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
             }
 
 
-
 //            Objects.requireNonNull(dialog.getWindow())
 //                    .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
             binding.close.setOnClickListener(v -> {
@@ -706,40 +798,97 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
 
     @Override
     public void onSuccess(String data) {
-        Log.d("fetchPrepaidPlanDetailsLocal",data);
+        Log.d("fetchPrepaidPlanDetailsLocal", data);
         try {
 
             JSONObject object = new JSONObject(data);
-            if (object.length() >0){
-                amount_layout.setVisibility(VISIBLE);
-                amount_layout1.setVisibility(GONE);
-                phone_layout1.setVisibility(GONE);
-                phone_layout.setVisibility(VISIBLE);
-            var planData = object.getString("data");
-            var planValidity = object.getString("validity");
-            var planRs = object.getString("rs");
-            var planDesc = object.getString("desc");
-            var planTalkTime = object.getString("talktime");
-            var planSms_value = object.getString("sms_value");
-            subscription = object.getString("subscription");
-            Log.d("fetchPrepaidPlanDetailsLocal",data);
-            planDateTV.setText(planValidity);
-            dataDetailsTV.setText(planData);
-            planUnlimitedTV.setText(planTalkTime);
-            smsDetailsTV.setText(planSms_value);
-            txtAmount.setText(planRs);
-            des="DATA: "+planData+"\nSMS: "+planSms_value+"\nTalktime: "+planTalkTime;
-            noteDet.setText(des);
-            validity=planValidity;
-            this.data=planData;
+            if (object.length() > 0) {
+                if (object.has("validity") && object.has("data")) {
+                    amount_layout.setVisibility(VISIBLE);
+                    amount_layout1.setVisibility(GONE);
+                    phone_layout1.setVisibility(GONE);
+                    phone_layout.setVisibility(VISIBLE);
+                    rOfferLayout.setVisibility(GONE);
+                    var planData = object.getString("data");
+                    var planValidity = object.getString("validity");
+                    var planRs = object.getString("rs");
+                    var planDesc = object.getString("desc");
+                    var planTalkTime = object.getString("talktime");
+                    var planSms_value = object.getString("sms_value");
 
-            }else {
-                amount_layout.setVisibility(GONE);
-                amount_layout1.setVisibility(VISIBLE);
-                phone_layout1.setVisibility(VISIBLE);
-                phone_layout.setVisibility(GONE);
+                    subscription = object.getString("subscription");
+                    Log.d("fetchPrepaidPlanDetailsLocal", data);
+                    planDateTV.setText(planValidity);
+                    dataDetailsTV.setText(planData);
+                    planUnlimitedTV.setText(planTalkTime);
+                    smsDetailsTV.setText(planSms_value);
+                    txtAmount.setText(planRs);
+
+                    String finalDesc;
+                    String[] temp = planDesc.split("\\|");
+
+                    if (temp[0].trim().equals("N/A")) {
+
+                        String base = temp.length > 1 ? temp[1].trim() : "";
+                        if (planSms_value.trim().equals("N/A") && planTalkTime.trim().equals("N/A")) {
+                            finalDesc = base;
+                        } else if (planTalkTime.trim().equals("N/A")) {
+                            finalDesc = base + "\nSMS: " + planSms_value;
+                        } else if (planSms_value.trim().equals("N/A")) {
+                            finalDesc = base + "\ntalktime: " + planTalkTime;
+                        } else {
+                            finalDesc = base + "\nSMS: " + planSms_value + "\ntalktime: " + planTalkTime;
+                        }
+                    } else {
+
+                        String base = planDesc.replaceAll("&amp;", "&").trim();
+                        if (planSms_value.trim().equals("N/A") && planTalkTime.trim().equals("N/A")) {
+                            finalDesc = base;
+                        } else if (planTalkTime.trim().equals("N/A")) {
+                            finalDesc = base + "\nSMS: " + planSms_value;
+                        } else if (planSms_value.trim().equals("N/A")) {
+                            finalDesc = base + "\ntalktime: " + planTalkTime;
+                        } else {
+                            finalDesc = base + "\nSMS: " + planSms_value + "\ntalktime: " + planTalkTime;
+                        }
+                    }
+
+                    des = finalDesc;
+                    noteDet.setText(finalDesc);
+                    validity = planValidity;
+                    this.data = planData;
+                } else {
+                    amount_layout.setVisibility(GONE);
+                    amount_layout1.setVisibility(VISIBLE);
+                    phone_layout1.setVisibility(VISIBLE);
+                    phone_layout.setVisibility(GONE);
+                    rOfferLayout.setVisibility(GONE);
+                }
+
+                var usable_percentage = object.getString("usable_percentage");
+                var cashback_points = object.getString("cashback_points");
+                var usable_points = object.getString("usable_points");
+
+                maxPointsAvailable = cashback_points;
+                usablePoints = usable_points;
+                this.usable_percentage = usable_percentage;
+
+                var point = 0.0;
+                if (object.getString("cashback_points") != null) {
+                    point = Double.parseDouble(cashback_points);
+
+
+                }
+
+                if (point > 0) {
+                    available_pointsTV.setText("Available " + cashback_points);
+                } else {
+                    available_pointsTV.setText("Available " + 0);
+                }
+
+
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -800,6 +949,32 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
 
     @Override
     public void onSuccessOther(String data) {
+
+        try {
+            if (!data.isEmpty()) {
+                JSONObject object = new JSONObject(data);
+                var usable_percentage = object.getString("usable_percentage");
+                var cashback_points = object.getString("cashback_points");
+                var usable_points = object.getString("usable_points");
+                Log.d("onSuccessOther", "onSuccessOther" + data);
+                maxPointsAvailable = cashback_points;
+                usablePoints = usable_points;
+                this.usable_percentage = usable_percentage;
+
+                var point = 0.0;
+                if (object.getString("cashback_points") != null) {
+                    point = Double.parseDouble(cashback_points);
+                }
+
+                if (point > 0) {
+                    available_pointsTV.setText("Available " + cashback_points);
+                } else {
+                    available_pointsTV.setText("Available " + 0);
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -1029,7 +1204,7 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
             JSONObject json = new JSONObject(data);
             binding.txtTransactionAmountValue.setText("\u20b9" + txtAmount.getText().toString().trim());
             if (userData != null) {
-                    binding.txtWalletAmountValue.setText("₹" + mDatabase.getEarnings());
+                binding.txtWalletAmountValue.setText("₹" + mDatabase.getEarnings());
             }
             binding.txtTotalDiscountValue.setText("₹" + json.getString("discount"));
             Log.d("txtMaxDiscountValue", "addBalance: " + json);

@@ -167,6 +167,7 @@ public class PlanActivity extends BaseActivity implements DefaultView,View.OnCli
         Fragment fragment = PlanSearchFragment.getInstance(mDefaultView, editSearch, imgClose);
         Bundle bundle = new Bundle();
         bundle.putString("listData",jsonPlanArray.toString());
+        Log.d("TAG_DATA", "onCreate: jsonPlanArray: "+jsonPlanArray.toString());
         bundle.putString("title",titles);
         bundle.putString("phone",mobile_number_str);
         bundle.putString("url",operator_img);
@@ -183,7 +184,7 @@ public class PlanActivity extends BaseActivity implements DefaultView,View.OnCli
         mViewPager.setVisibility(View.GONE);
         txtSearch.setVisibility(View.GONE);
       }else {
-        Log.d("TAG_DATA", "onCreate: jsonPlanArray: "+jsonPlanArray.toString());
+        Log.d("TAG_DATA", "onCreate1: jsonPlanArray: "+jsonPlanArray.toString());
       }
     });
 

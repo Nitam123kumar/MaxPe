@@ -258,7 +258,7 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
             txtReferralIncomeValue.setText("\u20b9 " + jsonObject.getString("totalReferralPaid"));
             String referText = jsonObject.getString("referPageText");
             JSONObject object = new JSONObject(referText);
-            maxPoints_availableTxt.setText(mDatabase.getUserData().getCashbackPoints());
+            maxPoints_availableTxt.setText(mDatabase.getCashbackPoints());
 
             txtSuccessfulReferralCount.setText(object.getString("successfull_referals"));
 

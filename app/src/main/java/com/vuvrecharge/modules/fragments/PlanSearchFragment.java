@@ -73,7 +73,7 @@ public class PlanSearchFragment extends BaseFragment implements DefaultView {
         mContext = this.getActivity();
         rootViewMain = container;
         ButterKnife.bind(this, rootView);
-        Log.d("TAG_DATA", "provideYourFragmentView: "+getArguments().getString("listData"));
+        Log.d("TAG_DATA", "getArguments: "+getArguments().getString("listData"));
         if (getArguments() != null){
             String listData = getArguments().getString("listData");
             title = getArguments().getString("title");
@@ -86,12 +86,22 @@ public class PlanSearchFragment extends BaseFragment implements DefaultView {
             adapter = new PlanAdapter(getLayoutInflater(),title, phone, url, provider, state,selected_operator,selected_circle);
             try {
                 JSONArray array = new JSONArray(listData);
+                Log.d("TAG_DATA", "provideYourFragmentView1: "+array);
                 if (array.length() > 0){
                     for (int i=0; i < array.length(); i++) {
+
                         PlanItemData itemData = new PlanItemData();
                         JSONObject o = array.getJSONObject(i);
                         itemData.setRs(o.getString("rs"));
-                        itemData.setCost_per_days(o.getString("cost_per_days"));
+                        if (o.has("cost_per_days")){
+                            if (o.getString("cost_per_days") != null){
+                                itemData.setCost_per_days(o.getString("cost_per_days"));
+                            }
+                            else {
+                                itemData.setCost_per_days("NA");
+                            }
+                        }
+
                         itemData.setDesc(o.getString("desc"));
                         itemData.setValidity(o.getString("validity"));
                         itemData.setLast_update(o.getString("last_update"));
@@ -101,12 +111,15 @@ public class PlanSearchFragment extends BaseFragment implements DefaultView {
                             itemData.setSms_value(o.getString("sms_value"));
                             itemData.setSubscription(o.getString("subscription"));
                         }
+                        Log.d("TAG_DATA", "array: "+array);
                         mPlanItemData.add(itemData);
                     }
+                    Log.d("TAG_DATA", "mPlanItemData: "+mPlanItemData);
+
                     setAdapterData(mPlanItemData);
                 }
             }catch (JSONException e){
-                Log.d("TAG_DATA", "provideYourFragmentView: "+e.getMessage());
+                Log.d("TAG_DATA", "provideYourFragmentView2: "+e.getMessage());
             }
 
             if (editText != null){
@@ -162,6 +175,7 @@ public class PlanSearchFragment extends BaseFragment implements DefaultView {
         adapter.addData(mPlanItemData, mDefaultView);
         rvPlanSearch.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        Log.d("TAG_DATA", "setAdapterData: "+mPlanItemData);
     }
 
     @Override

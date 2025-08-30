@@ -83,7 +83,6 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
     FinancialServicesAdapter utility_bills_adapter;
     OTTSubscriptionsAdapter ottAdapter;
     List<String> ott_List;
-    APIStorePreferences prefs ;
     List<BharatBillPayModel> bbpsList = new ArrayList<>();
     List<OTTSubscriptionsData> oTTList = new ArrayList<>();
     List<BharatBillPayModel> rechargeAndBillPaymentDataList = new ArrayList<>();
@@ -139,8 +138,8 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
             }
 
 //        }
-        prefs=new APIStorePreferences(this);
-        var lastFetch = prefs.getTime();
+
+        var lastFetch = mDatabase.getTime();
         var now = System.currentTimeMillis();
 
 
@@ -148,7 +147,7 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
             mDefaultPresenter.getAllRechargeServices(device_id);
         } else {
 
-            String operatorData = prefs.getOperatorString();
+            String operatorData = mDatabase.getOperatorString();
             if (!operatorData.isEmpty()) {
                 try {
                     JSONObject object = new JSONObject(operatorData);
@@ -451,8 +450,8 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
             JSONObject object = new JSONObject(data);
             refresh_layout.setRefreshing(false);
 
-           prefs.putOperatorString(data);
-           prefs.putTime(System.currentTimeMillis());
+           mDatabase.putOperatorString(data);
+           mDatabase.putTime(System.currentTimeMillis());
 
             if (object.has("services_by_categ")) {
                 JSONObject servicesObject = object.getJSONObject("services_by_categ");

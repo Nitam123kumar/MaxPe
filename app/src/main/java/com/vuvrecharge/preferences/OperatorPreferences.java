@@ -23,6 +23,11 @@ public class OperatorPreferences {
         editor.putString("list", list);
         editor.commit();
     }
+    public void setDummyImage(String operatorImg, String operatorDummyImg){
+        editor.putString("operator_img", operatorImg);
+        editor.putString("operator_dunmy_img", operatorDummyImg);
+        editor.commit();
+    }
 
     public void warringMessage(String message){
         editor.putString("message", message);
@@ -34,6 +39,8 @@ public class OperatorPreferences {
         data.put("type",preferences.getString("type",null));
         data.put("list",preferences.getString("list",null));
         data.put("message",preferences.getString("message",null));
+        data.put("operator_img", preferences.getString("operator_img", null));
+        data.put("operator_dunmy_img", preferences.getString("operator_dunmy_img", null));
         return data;
     }
 

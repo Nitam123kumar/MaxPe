@@ -342,9 +342,7 @@
                 android:id="@+id/spinner_layout3"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_45sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/corner_white_recharge_2"
                 android:orientation="horizontal"
                 android:padding="@dimen/_3sdp"
@@ -666,6 +664,42 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/service_powered1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/textView1"
+                app:layout_constraintEnd_toEndOf="@id/viewElectricityBillPay"
+                app:layout_constraintStart_toStartOf="@id/viewElectricityBillPay"
+                android:layout_marginTop="@dimen/_20sdp"
+                >
+
+                <TextView
+                    android:id="@+id/service_text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/powered_by"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_9sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/_38sdp"
+                    android:layout_height="@dimen/_13sdp"
+                    app:layout_constraintStart_toEndOf="@id/service_text1"
+                    app:layout_constraintTop_toTopOf="@id/service_text1"
+                    app:layout_constraintBottom_toBottomOf="@id/service_text1"
+                    android:src="@drawable/bharat_connect"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

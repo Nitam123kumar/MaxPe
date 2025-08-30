@@ -61,8 +61,8 @@
                 app:itemHeight="@dimen/_32sdp"
                 app:itemSpacing="@dimen/_6sdp"
                 app:itemWidth="@dimen/_32sdp"
-                app:lineColor="#8C8C8C"
-                app:lineWidth="@dimen/_1sdp"
+                app:lineColor="@color/white"
+                app:lineWidth="0dp"
                 app:viewType="rectangle" />
 
             <LinearLayout

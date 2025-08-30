@@ -56,14 +56,14 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ElectricityActivity extends BaseActivity implements DefaultView,View.OnClickListener {
+public class ElectricityActivity extends BaseActivity implements DefaultView, View.OnClickListener {
 
     private DefaultPresenter mDefaultPresenter;
     @BindView(R.id.toolbar_layout)
     LinearLayout toolbar;
     @BindView(R.id.title)
     TextView title;
-//    @BindView(R.id.help)
+    //    @BindView(R.id.help)
 //    TextView help;
     @BindView(R.id.no_internet)
     LinearLayout no_internet;
@@ -76,7 +76,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
     @BindView(R.id.search_electricity)
     TextInputEditText search_electricity;
 
-//    @BindView(R.id.search_electricity_layout)
+    //    @BindView(R.id.search_electricity_layout)
 //    TextInputLayout search_electricity_layout;
     @BindView(R.id.loading)
     LinearLayout loading;
@@ -90,11 +90,13 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
 
     OperatorPreferences operatorPreferences;
     HashMap<String, String> map;
+
     protected void attachBaseContext(Context newBase) {
         SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
         String lang = prefs.getString("lang", "en");
         super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,17 +112,24 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
 
         if (title1 != null) {
             search_electricity.setHint("Search Operater");
-            operatorPreferences = new OperatorPreferences(this,type);
+            operatorPreferences = new OperatorPreferences(this, type);
             map = operatorPreferences.getData();
-            if (map.get("type") != null){
+            if (map.get("type") != null) {
                 operatorDataList.clear();
                 Gson gson = new Gson();
                 warning_message = map.get("message");
+                String operatorImg = map.get("operator_img");
+                String operatorDummy = map.get("operator_dunmy_img");
+                Log.d("Operator_Image", operatorImg + operatorDummy);
                 Type type_ = new TypeToken<List<OperatorData>>() {
                 }.getType();
                 List<OperatorData> operatorDataList = gson.fromJson(map.get("list"), type_);
+                for (OperatorData data : operatorDataList) {
+                    data.setOperator_img(operatorImg);
+                    data.setOperator_dunmy_img(operatorDummy);
+                }
                 this.operatorDataList = operatorDataList;
-            }else {
+            } else {
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         }
@@ -483,10 +492,10 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (!s.toString().isEmpty()){
+                if (!s.toString().isEmpty()) {
                     swipeRefreshLayout.setRefreshing(false);
                     searchData(s.toString());
-                }else {
+                } else {
                     txtNoData.setVisibility(GONE);
                     loadOperatorData();
                     swipeRefreshLayout.setRefreshing(false);
@@ -500,6 +509,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
         super.onResume();
         setLayout(no_internet, retry, "Electricity");
     }
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static void setStatusBarGradiant(Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -515,26 +525,26 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
 
     private void searchData(@NonNull String searchableData) {
         ArrayList<OperatorData> data = new ArrayList<>();
-        for (OperatorData operatorData: operator_list){
-            if (operatorData.getName().toUpperCase().toLowerCase().contains(searchableData.toUpperCase().toLowerCase())){
+        for (OperatorData operatorData : operator_list) {
+            if (operatorData.getName().toUpperCase().toLowerCase().contains(searchableData.toUpperCase().toLowerCase())) {
                 data.add(operatorData);
                 txtNoData.setVisibility(GONE);
             }
         }
         adapter.searchList(data);
-        if (data == null || data.isEmpty()){
+        if (data == null || data.isEmpty()) {
             txtNoData.setVisibility(VISIBLE);
         }
     }
 
-    private void loadOperatorData(){
+    private void loadOperatorData() {
         operator_list = new ArrayList<>();
         for (OperatorData operatorData : operatorDataList) {
             operator_list.add(operatorData);
             swipeRefreshLayout.setRefreshing(false);
         }
         electricityListView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ElectricityOperatorAdapter(getActivity(), operator_list,warning_message, title1,type);
+        adapter = new ElectricityOperatorAdapter(getActivity(), operator_list, warning_message, title1, type);
         electricityListView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -548,27 +558,39 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
     public void onSuccess(String message) {
 
     }
+
     String warning_message = "";
 
     @Override
     public void onSuccess(String message, String second_message) {
         try {
             swipeRefreshLayout.setRefreshing(true);
+            Log.d("Operator_Image1", message);
             JSONObject jsonObject = new JSONObject(message);
-            Log.d("warning_message",message);
+            Log.d("warning_message", message);
+            OperatorData operatorData1 = new OperatorData();
+            String operator_path = jsonObject.getString("operator_img");
+            String operator_dunmy_img = jsonObject.getString("operator_dunmy_img");
+            Log.d("Operator_Image", operator_path + "  " + operatorData1.getOperator_img());
+            Log.d("Operator_Image", operator_dunmy_img + "  " + operatorData1.getOperator_dunmy_img());
             Gson gson = new Gson();
             Type type_ = new TypeToken<List<OperatorData>>() {
             }.getType();
             List<OperatorData> operatorDataList = gson.fromJson(jsonObject.getString("operators"), type_);
-            if (operatorDataList.size() > 0){
+            for (OperatorData op : operatorDataList) {
+                op.setOperator_img(operator_path != null ? operator_path : "");
+                op.setOperator_dunmy_img(operator_dunmy_img != null ? operator_dunmy_img : "");
+            }
+            if (operatorDataList.size() > 0) {
                 warning_message = jsonObject.getString("message");
                 this.operatorDataList = operatorDataList;
                 operatorPreferences.setOperator(type, jsonObject.getString("operators"));
+                operatorPreferences.setDummyImage(operator_path, operator_dunmy_img);
                 operatorPreferences.warringMessage(jsonObject.getString("message"));
                 adapter.notifyDataSetChanged();
                 txtNoData.setVisibility(GONE);
                 electricityListView.setVisibility(VISIBLE);
-            }else {
+            } else {
                 electricityListView.setVisibility(GONE);
                 txtNoData.setVisibility(VISIBLE);
             }
@@ -616,7 +638,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView,Vie
 
     @Override
     public void onClick(@NonNull View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.toolbar_layout:
                 onBackPressed();
                 getActivity().finish();
