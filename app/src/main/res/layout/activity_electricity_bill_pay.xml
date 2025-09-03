@@ -37,11 +37,11 @@
                 android:id="@+id/view3"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_40sdp"
                 app:layout_constraintBottom_toTopOf="@+id/service_powered"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/constBillInfo"
-                android:layout_marginTop="@dimen/_40sdp"/>
+                app:layout_constraintTop_toBottomOf="@id/constBillInfo" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/first_constraintLayout"
@@ -59,11 +59,11 @@
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:layout_marginStart="@dimen/_8sdp"
+                    android:background="@drawable/electric_logo_img"
                     android:padding="@dimen/_4sdp"
                     android:visibility="gone"
-                    app:layout_constraintEnd_toStartOf="@id/provider_name"
-                    android:background="@drawable/electric_logo_img"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/provider_name"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,11 +71,10 @@
                     android:id="@+id/provider_name"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_45sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
                     android:autofillHints="text"
                     android:elevation="@dimen/_1sdp"
                     android:enabled="false"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:visibility="visible"
                     android:gravity="center_vertical"
                     android:minHeight="@dimen/_34sdp"
                     android:paddingStart="@dimen/_5sdp"
@@ -83,6 +82,7 @@
                     android:textColorHint="@color/black_2"
                     android:textSize="@dimen/_11sdp"
                     android:textStyle="bold"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@+id/first_constraintLayout"
                     app:layout_constraintStart_toEndOf="@+id/provider_img"
                     app:layout_constraintTop_toTopOf="@+id/first_constraintLayout" />
@@ -98,9 +98,9 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/roboto"
                 android:text="@string/consumer_number"
-                android:visibility="gone"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_11sdp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@id/viewElectricityBillPay"
                 app:layout_constraintTop_toBottomOf="@id/first_constraintLayout" />
 
@@ -109,22 +109,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/star"
-                android:textSize="@dimen/_11sdp"
                 android:textColor="@color/red"
-                app:layout_constraintTop_toTopOf="@id/Consumer_Number"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintStart_toEndOf="@id/Consumer_Number"
-                />
+                app:layout_constraintTop_toTopOf="@id/Consumer_Number" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/editLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/corner_white_recharge_2"
+                android:padding="@dimen/_3sdp"
                 app:layout_constraintEnd_toEndOf="@id/viewElectricityBillPay"
                 app:layout_constraintStart_toStartOf="@id/viewElectricityBillPay"
-                app:layout_constraintTop_toBottomOf="@id/Consumer_Number"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:padding="@dimen/_3sdp"
-                android:background="@drawable/corner_white_recharge_2">
+                app:layout_constraintTop_toBottomOf="@id/Consumer_Number">
 
                 <EditText
                     android:id="@+id/consumerNumber"
@@ -135,36 +134,33 @@
                     android:gravity="center_vertical"
                     android:inputType="phone"
                     android:maxLength="30"
-                    android:visibility="visible"
                     android:paddingStart="@dimen/_10sdp"
                     android:textColor="@color/black_2"
                     android:textColorHint="#DEDEDE"
                     android:textSize="@dimen/_11sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/txtBillFetch"
-                    />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/txtBillFetch"
                     android:layout_width="@dimen/_55sdp"
                     android:layout_height="@dimen/_40sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:textSize="@dimen/_11sdp"
-                    android:gravity="center"
-                    android:visibility="visible"
-                    android:textColor="#4970B0"
-                    android:text="@string/bill_fatch"
                     android:fontFamily="@font/roboto_bold"
-                    />
+                    android:gravity="center"
+                    android:text="@string/bill_fatch"
+                    android:textColor="#4970B0"
+                    android:textSize="@dimen/_11sdp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
             <TextView
@@ -172,12 +168,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:fontFamily="@font/roboto"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:textColor="#B3B3B3"
                 android:textSize="@dimen/_11sdp"
                 android:visibility="gone"
-                android:layout_marginTop="@dimen/_5sdp"
                 app:layout_constraintEnd_toEndOf="@id/editLayout"
                 app:layout_constraintStart_toStartOf="@id/editLayout"
                 app:layout_constraintTop_toBottomOf="@id/editLayout" />
@@ -206,11 +202,11 @@
                 android:id="@+id/spinnerText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:textColor="@color/black_2"
-                android:visibility="gone"
                 android:textSize="@dimen/_11sdp"
-                android:layout_marginTop="@dimen/_3sdp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/spinner_layout"
                 app:layout_constraintStart_toStartOf="@id/spinner_layout"
                 app:layout_constraintTop_toBottomOf="@id/spinner_layout" />
@@ -226,7 +222,8 @@
                 android:textSize="@dimen/_11sdp"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/spinnerText"/>
+                app:layout_constraintTop_toBottomOf="@id/spinnerText" />
+
             <EditText
                 android:id="@+id/sub_division_code"
                 android:layout_width="match_parent"
@@ -237,11 +234,11 @@
                 android:gravity="center_vertical"
                 android:inputType="phone"
                 android:maxLength="30"
-                android:visibility="gone"
                 android:paddingStart="@dimen/_10sdp"
                 android:textColor="@color/black_2"
                 android:textColorHint="#DEDEDE"
                 android:textSize="@dimen/_11sdp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/sub_division_code_layout" />
@@ -252,11 +249,10 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:textColor="#B3B3B3"
-                android:visibility="gone"
                 android:textSize="@dimen/_11sdp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@id/sub_division_code_layout"
-                app:layout_constraintTop_toBottomOf="@id/sub_division_code"
-                />
+                app:layout_constraintTop_toBottomOf="@id/sub_division_code" />
 
             <LinearLayout
                 android:id="@+id/spinner_layout2"
@@ -282,10 +278,10 @@
                 android:id="@+id/spinnerText2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:textColor="#B3B3B3"
                 android:visibility="gone"
-                android:layout_marginTop="@dimen/_3sdp"
                 app:layout_constraintEnd_toEndOf="@id/spinner_layout2"
                 app:layout_constraintStart_toStartOf="@id/spinner_layout2"
                 app:layout_constraintTop_toBottomOf="@id/spinner_layout2" />
@@ -297,12 +293,12 @@
                 android:layout_marginStart="@dimen/_6sdp"
                 android:layout_marginTop="@dimen/_7sdp"
                 android:fontFamily="@font/roboto"
-                android:visibility="gone"
                 android:text="@string/amount_"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_11sdp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@id/viewElectricityBillPay"
-                app:layout_constraintTop_toBottomOf="@id/spinnerText2"/>
+                app:layout_constraintTop_toBottomOf="@id/spinnerText2" />
 
             <EditText
                 android:id="@+id/amount"
@@ -312,13 +308,13 @@
                 android:background="@drawable/corner_white_recharge_2"
                 android:fontFamily="@font/roboto"
                 android:gravity="center_vertical"
+                android:hint="@string/amount_"
                 android:inputType="phone"
                 android:maxLength="30"
-                android:hint="@string/amount_"
-                android:visibility="gone"
                 android:paddingStart="@dimen/_10sdp"
                 android:textColor="@color/black_2"
                 android:textColorHint="#DEDEDE"
+                android:visibility="gone"
                 android:textSize="@dimen/_11sdp"
                 app:layout_constraintEnd_toEndOf="@id/viewElectricityBillPay"
                 app:layout_constraintStart_toStartOf="@id/viewElectricityBillPay"
@@ -329,12 +325,12 @@
                 android:id="@+id/amountText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                android:textColor="#B3B3B3"
-                android:visibility="gone"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:text="@string/amount_"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="#B3B3B3"
                 android:textSize="@dimen/_11sdp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@id/amount"
                 app:layout_constraintTop_toBottomOf="@id/amount" />
 
@@ -362,11 +358,11 @@
                 android:id="@+id/spinnerText3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:textColor="#B3B3B3"
-                android:visibility="gone"
                 android:textSize="@dimen/_11sdp"
-                android:layout_marginTop="@dimen/_3sdp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/spinner_layout3"
                 app:layout_constraintStart_toStartOf="@id/spinner_layout3"
                 app:layout_constraintTop_toBottomOf="@id/spinner_layout3" />
@@ -395,11 +391,11 @@
                 android:id="@+id/field4Text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:textColor="#B3B3B3"
-                android:visibility="gone"
                 android:textSize="@dimen/_11sdp"
-                android:layout_marginStart="@dimen/_5sdp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/amount_layout"
                 app:layout_constraintStart_toStartOf="@id/amount_layout"
                 app:layout_constraintTop_toBottomOf="@id/field4" />
@@ -415,7 +411,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/field4Text">
 
-<!--                android:background="@drawable/commission_chart_drawable"-->
+                <!--                android:background="@drawable/commission_chart_drawable"-->
 
                 <TextView
                     android:id="@+id/txt"
@@ -428,8 +424,8 @@
                     android:text="@string/bill_details"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
                     android:textSize="@dimen/_11sdp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -437,9 +433,9 @@
                     android:id="@+id/recyclerViewBillerInfo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
+                    android:background="@color/white"
                     android:nestedScrollingEnabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -453,9 +449,9 @@
                     android:text="@string/view_more"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/colorPrimaryB"
+                    android:textSize="@dimen/_11sdp"
                     android:textStyle="bold"
                     android:visibility="visible"
-                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/recyclerViewBillerInfo" />
 
@@ -475,26 +471,24 @@
                     android:id="@+id/viewBill"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_80sdp"
-                    app:layout_constraintBottom_toBottomOf="@id/dueToDate"
-                    android:background="@drawable/due_date_shape"
                     android:layout_marginTop="@dimen/_30sdp"
+                    android:background="@drawable/due_date_shape"
+                    app:layout_constraintBottom_toBottomOf="@id/dueToDate"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/viewLine"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/viewLine" />
 
                 <TextView
                     android:id="@+id/txtAccountTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/amount_"
-                    android:textSize="@dimen/_10sdp"
-                    android:textColor="@color/black"
                     android:layout_marginStart="@dimen/_5sdp"
-                    app:layout_constraintTop_toBottomOf="@id/viewBill"
+                    android:text="@string/amount_"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
                     app:layout_constraintStart_toStartOf="@id/viewBill"
-                    app:layout_constraintTop_toTopOf="@id/viewBill"
-                    />
+                    app:layout_constraintTop_toBottomOf="@id/viewBill"
+                    app:layout_constraintTop_toTopOf="@id/viewBill" />
 
 
                 <TextView
@@ -514,15 +508,15 @@
                     android:id="@+id/txtAmountValue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:background="@drawable/edit_shape_bg"
-                    android:layout_marginTop="@dimen/_16sdp"
                     android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:background="@drawable/edit_shape_bg"
+                    android:ellipsize="end"
+                    android:inputType="number"
+                    android:maxLines="1"
                     android:textColor="@color/black_2"
                     android:textSize="@dimen/_17sdp"
                     android:textStyle="bold"
-                    android:inputType="number"
                     android:visibility="visible"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/txtAccountTitle" />
@@ -530,28 +524,26 @@
                 <View
                     android:id="@+id/txtAmountView"
                     android:layout_width="match_parent"
-                    android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_height="@dimen/_1sdp"
-                    android:background="#EFEFEF"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_14sdp"
-                    app:layout_constraintTop_toBottomOf="@id/txtAmountValue"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="#EFEFEF"
                     app:layout_constraintEnd_toEndOf="parent"
-                    />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txtAmountValue" />
 
 
-                
                 <TextView
                     android:id="@+id/dueToDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/txtRupe"
-                    app:layout_constraintTop_toBottomOf="@id/txtAmountView"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:textSize="@dimen/_11sdp"
-                    app:layout_constraintTop_toTopOf="@+id/txtAmountView"
                     android:layout_marginBottom="@dimen/_3sdp"
                     android:textColor="#F10000"
+                    android:textSize="@dimen/_11sdp"
+                    app:layout_constraintStart_toStartOf="@id/txtRupe"
+                    app:layout_constraintTop_toBottomOf="@id/txtAmountView"
+                    app:layout_constraintTop_toTopOf="@+id/txtAmountView"
 
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -564,9 +556,9 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 android:textColor="@color/black_2"
+                android:textSize="@dimen/_11sdp"
                 android:textStyle="bold"
                 android:visibility="gone"
-                android:textSize="@dimen/_11sdp"
                 app:layout_constraintStart_toStartOf="@id/viewElectricityBillPay"
                 app:layout_constraintTop_toBottomOf="@id/constBillInfo" />
 
@@ -587,10 +579,10 @@
                 android:textStyle="bold"
                 android:theme="@style/PrimaryButton"
                 android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@id/view3"
                 app:layout_constraintEnd_toEndOf="@id/viewElectricityBillPay"
                 app:layout_constraintStart_toStartOf="@id/viewElectricityBillPay"
                 app:layout_constraintTop_toTopOf="@id/view3"
-                app:layout_constraintBottom_toTopOf="@id/view3"
 
                 />
 
@@ -598,14 +590,14 @@
                 android:id="@+id/textView1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_30sdp"
+                android:fontFamily="@font/roboto"
                 android:text="@string/your_service_provider_can_take_two_working_days_to_nconsider_bill_paid_in_their_accounts"
                 android:textColor="#A3A0A0"
-                android:layout_marginStart="@dimen/_5sdp"
                 android:textSize="@dimen/_9sdp"
-                android:fontFamily="@font/roboto"
-                app:layout_constraintTop_toBottomOf="@id/ProceedToPay"
                 app:layout_constraintStart_toStartOf="@id/view3"
+                app:layout_constraintTop_toBottomOf="@id/ProceedToPay"
                 app:layout_constraintTop_toTopOf="@id/view3"
 
                 />
@@ -633,47 +625,44 @@
                 android:id="@+id/service_powered"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_15sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view3"
                 app:layout_constraintEnd_toEndOf="@id/viewElectricityBillPay"
                 app:layout_constraintStart_toStartOf="@id/viewElectricityBillPay"
-                android:layout_marginBottom="@dimen/_15sdp"
-                >
+                app:layout_constraintTop_toBottomOf="@+id/view3">
 
-            <TextView
-                android:id="@+id/service_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/powered_by"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_9sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                 />
+                <TextView
+                    android:id="@+id/service_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/powered_by"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_9sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:layout_width="@dimen/_38sdp"
-                android:layout_height="@dimen/_13sdp"
-                app:layout_constraintStart_toEndOf="@id/service_text"
-                app:layout_constraintTop_toTopOf="@id/service_text"
-                app:layout_constraintBottom_toBottomOf="@id/service_text"
-                android:src="@drawable/bharat_connect"
-                android:layout_marginStart="@dimen/_15sdp"
-                />
+                <ImageView
+                    android:layout_width="@dimen/_38sdp"
+                    android:layout_height="@dimen/_13sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:src="@drawable/bharat_connect"
+                    app:layout_constraintBottom_toBottomOf="@id/service_text"
+                    app:layout_constraintStart_toEndOf="@id/service_text"
+                    app:layout_constraintTop_toTopOf="@id/service_text" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/service_powered1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/textView1"
                 app:layout_constraintEnd_toEndOf="@id/viewElectricityBillPay"
                 app:layout_constraintStart_toStartOf="@id/viewElectricityBillPay"
-                android:layout_marginTop="@dimen/_20sdp"
-                >
+                app:layout_constraintTop_toBottomOf="@+id/textView1">
 
                 <TextView
                     android:id="@+id/service_text1"
@@ -682,24 +671,21 @@
                     android:text="@string/powered_by"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_9sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:layout_width="@dimen/_38sdp"
                     android:layout_height="@dimen/_13sdp"
-                    app:layout_constraintStart_toEndOf="@id/service_text1"
-                    app:layout_constraintTop_toTopOf="@id/service_text1"
-                    app:layout_constraintBottom_toBottomOf="@id/service_text1"
-                    android:src="@drawable/bharat_connect"
                     android:layout_marginStart="@dimen/_15sdp"
-                    />
+                    android:src="@drawable/bharat_connect"
+                    app:layout_constraintBottom_toBottomOf="@id/service_text1"
+                    app:layout_constraintStart_toEndOf="@id/service_text1"
+                    app:layout_constraintTop_toTopOf="@id/service_text1" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

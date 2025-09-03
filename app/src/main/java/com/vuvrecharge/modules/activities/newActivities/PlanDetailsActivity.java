@@ -23,7 +23,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -200,6 +199,11 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
     String usablePoints = "";
     String usable_percentage = "";
     UserData userData = mDatabase.getUserData();
+
+    private BottomSheetDialog bottomSheetDialog;
+    private boolean isGetingAPIResponse = false;
+    private Timer timer;
+
 
     protected void attachBaseContext(Context newBase) {
         SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
@@ -416,7 +420,7 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
 //                            }
 
                             applied_amount.setText("-\u20b9" + String.format(Locale.ENGLISH, "%.2f", useMaxPoints));
-
+                            isUsingCashbackPoints = true;
 //                            double finalPayable = rechargeAmount - pointsToApply;
 ////                        payableAmountTV.setText("Payable Amount: ₹" + String.format("%.2f", finalPayable));
 
@@ -667,12 +671,6 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
                 binding.warningMessage.setText(warning_message);
             }
 
-            EditText[] mpinDigits = new EditText[]{
-                    binding.pinDigit1,
-                    binding.pinDigit2,
-                    binding.pinDigit3,
-                    binding.pinDigit4
-            };
 
             // Initially disable confirm button
             binding.confirm.setEnabled(false);
@@ -685,83 +683,65 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
                 startActivity(intent);
             });
 
-            TextWatcher pinWatcher = new TextWatcher() {
+            binding.otpView.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 }
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    // Auto-focus jump
-                    for (int i = 0; i < mpinDigits.length; i++) {
-                        if (mpinDigits[i].getText().hashCode() == s.hashCode()) {
-                            if (s.length() == 1 && i < mpinDigits.length - 1) {
-                                mpinDigits[i + 1].requestFocus();
-                            } else if (s.length() == 0 && i > 0) {
-                                mpinDigits[i - 1].requestFocus();
-                            }
-                            break;
-                        }
-                    }
-
-                    // Check if all are filled
-                    boolean allFilled = true;
-                    for (EditText et : mpinDigits) {
-                        if (et.getText().toString().trim().isEmpty()) {
-                            allFilled = false;
-                            break;
-                        }
-                    }
-                    if (allFilled) {
+                    if (s.length() == 4) {  // 6 digit OTP
                         binding.confirm.setEnabled(true);
                         binding.confirm.setBackgroundResource(R.drawable.ad_money_button_shape);
                         binding.confirm.setTextColor(getResources().getColor(R.color.white));
-
                     } else {
                         binding.confirm.setEnabled(false);
                         binding.confirm.setBackgroundResource(R.drawable.proceed_to_pay);
                         binding.confirm.setTextColor(getResources().getColor(R.color.black));
-
                     }
                 }
-            };
 
-            for (EditText et : mpinDigits) {
-                et.addTextChangedListener(pinWatcher);
-            }
-
-
+                @Override
+                public void afterTextChanged(Editable s) {
+                }
+            });
 //            Objects.requireNonNull(dialog.getWindow())
 //                    .setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
             binding.close.setOnClickListener(v -> {
                 dialog.dismiss();
-                hideKeyBoard(mpinDigits[0]);
+                hideKeyBoard(binding.otpView);
+            });
+
+            binding.otpView.setOtpCompletionListener(otp -> {
+                if (otp != null && otp.length() == 4) {
+                    binding.confirm.setEnabled(true);
+                    binding.confirm.setBackgroundResource(R.drawable.ad_money_button_shape);
+                    binding.confirm.setTextColor(getResources().getColor(R.color.white));
+                } else {
+                    binding.confirm.setEnabled(false);
+                    binding.confirm.setBackgroundResource(R.drawable.proceed_to_pay);
+                    binding.confirm.setTextColor(getResources().getColor(R.color.black));
+                }
             });
 
             binding.confirm.setOnClickListener(v -> {
-                StringBuilder pinBuilder = new StringBuilder();
-                for (EditText et : mpinDigits) {
-                    String digit = et.getText().toString().trim();
-                    if (digit.isEmpty()) {
-                        Toasty.error(getActivity(), "Please enter your M Pin completely", Toasty.LENGTH_LONG, false).show();
-                        return;
-                    }
-                    pinBuilder.append(digit);
+
+                String digit = binding.otpView.getText().toString().trim();
+                if (digit.isEmpty()) {
+                    Toasty.error(getActivity(), "Please enter your M Pin completely", Toasty.LENGTH_LONG, false).show();
+                    return;
                 }
 
-                mPin = pinBuilder.toString();
 
-                if (mPin.length() != 4) {
+                mPin = binding.otpView.getText().toString().trim();
+
+                if (mPin.length() == 3 || mPin.length() == 2 || mPin.length() == 1) {
                     Toasty.error(getActivity(), "MPin length should be 4 digits", Toasty.LENGTH_LONG, false).show();
                     return;
                 }
 
                 dialog.dismiss();
-                hideKeyBoard(mpinDigits[0]);
+                hideKeyBoard(binding.otpView);
 
                 mDefaultPresenter.doMobileRecharge(
                         phone,
@@ -904,6 +884,7 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
                 String uri = jsonObject.getString("upi_uri");
                 Intent upiIntent = new Intent(Intent.ACTION_VIEW);
                 upiIntent.setData(Uri.parse(uri.trim()));
+                Log.d("doMobileRecharge", "recharge: " + message);
                 Intent chooser = Intent.createChooser(upiIntent, "Pay with...");
                 startActivityForResult(chooser, 104, null);
             } else if (second_message.equals("orderDetails")) {
@@ -925,24 +906,44 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
 //                };
 
                 if (payment_status.toLowerCase().equals("pending")) {
+                    isGetingAPIResponse =false;
                     openPendingDialog();
+                    Log.d("doMobileRecharge", "pending: " + message);
                 } else if (payment_status.toLowerCase().equals("success")) {
+                    isGetingAPIResponse =false;
+                    Log.d("doMobileRecharge", "success: " + message);
+                    if (bottomSheetDialog != null && bottomSheetDialog.isShowing()) {
+                        bottomSheetDialog.dismiss();
+                    }
+                    cancelTimer();
                     mDefaultPresenter.doMobileRecharge(
                             number.trim(), operator, amount.trim(), type,
                             "0", "0",
                             circle, "0", device_id, mPin, isUsingCashbackPoints);
                 } else if (payment_status.toLowerCase().equals("failed")) {
-                    Toast.makeText(getActivity(), "Transaction Cancelled", Toast.LENGTH_LONG).show();
+                    isGetingAPIResponse =false;
+                    Toast.makeText(getActivity(), "Transaction Failed", Toast.LENGTH_LONG).show();
+                    if (bottomSheetDialog != null && bottomSheetDialog.isShowing()) {
+                        bottomSheetDialog.dismiss();
+                    }
+                    cancelTimer();
+//                    openFailedDialog();
                 } else {
+                    isGetingAPIResponse =false;
                     openPendingDialog();
                 }
             } else if (second_message.equals("orderDetailsPending")) {
+                isGetingAPIResponse =false;
                 openPendingDialog();
+                Log.d("doMobileRecharge", "orderDetailsPending: " + message);
             } else {
                 JSONObject jsonObject = new JSONObject(message);
+                isGetingAPIResponse =false;
                 warning_message = jsonObject.getString("message");
             }
         } catch (Exception e) {
+            Log.e("doMobileRecharge", "onError:"+e);
+            isGetingAPIResponse =false;
             e.printStackTrace();
         }
     }
@@ -1206,11 +1207,21 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
             if (userData != null) {
                 binding.txtWalletAmountValue.setText("₹" + mDatabase.getEarnings());
             }
-            binding.txtTotalDiscountValue.setText("₹" + json.getString("discount"));
-            Log.d("txtMaxDiscountValue", "addBalance: " + json);
-            binding.txtMaxDiscountValue.setText("₹" + json.getString("used_points"));
-            releaseAmount = (Double.parseDouble(txtAmount.getText().toString().trim()) - json.getDouble("discount") - json.getDouble("used_points"));
-            binding.txtPayableAmtValue.setText("₹" + releaseAmount);
+//            binding.txtTotalDiscountValue.setText("₹" + json.getString("discount"));
+//            Log.d("txtMaxDiscountValue", "addBalance: " + json);
+//            binding.txtMaxDiscountValue.setText("₹" + json.getString("used_points"));
+//            releaseAmount = (Double.parseDouble(txtAmount.getText().toString().trim()) - json.getDouble("discount") - json.getDouble("used_points"));
+//            binding.txtPayableAmtValue.setText("₹" + releaseAmount);
+
+            double discount = json.getDouble("discount");
+            double usedPoints = json.getDouble("used_points");
+            double amount = Double.parseDouble(txtAmount.getText().toString().trim());
+
+            releaseAmount = amount - discount - usedPoints;
+
+            binding.txtTotalDiscountValue.setText("₹" + String.format("%.2f", discount));
+            binding.txtMaxDiscountValue.setText("₹" + String.format("%.2f", usedPoints));
+            binding.txtPayableAmtValue.setText("₹" + String.format("%.2f", releaseAmount));
 
             binding.btnPay.setText("Add on ₹" + json.getInt("required"));
             binding.btnPay.setOnClickListener(v -> {
@@ -1228,17 +1239,34 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
         }
     }
 
-    Timer timer;
 
+    @SuppressLint("DiscouragedApi")
     private void openPendingDialog() {
         try {
+
+            if (bottomSheetDialog != null && bottomSheetDialog.isShowing()) {
+                Log.d("doMobileRecharge1", "Dialog already open, skipping...");
+                return;
+            }
+
+
+            if (timer != null) {
+                timer.cancel();
+                timer = null;
+            }
+
             timer = new Timer();
-            WalletTransactionBottonDialogBinding _binding = DataBindingUtil.inflate(LayoutInflater.from(this),
-                    R.layout.wallet_transaction_botton_dialog, null, false);
-            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
+            WalletTransactionBottonDialogBinding _binding =
+                    DataBindingUtil.inflate(LayoutInflater.from(this),
+                            R.layout.wallet_transaction_botton_dialog,
+                            null,
+                            false);
+
+            bottomSheetDialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
             bottomSheetDialog.setContentView(_binding.getRoot());
             bottomSheetDialog.setCancelable(false);
             changeStatusBarColor(bottomSheetDialog);
+
             bottomSheet = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
             if (bottomSheet != null) {
                 BottomSheetBehavior<FrameLayout> behavior = BottomSheetBehavior.from(bottomSheet);
@@ -1250,27 +1278,92 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
             _binding.btnComplete.setBackgroundResource(R.drawable.pending_button);
             _binding.txtTitle.setText("Waiting for payment");
             _binding.txtMessage.setText("Your transaction is under processing.\nPlease do not press the back button.");
-            timer.schedule(
-                    new TimerTask() {
-                        @Override
-                        public void run() {
+
+            // API har 10 sec call
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    runOnUiThread(() -> {
+                        if (!isGetingAPIResponse) {
+                            isGetingAPIResponse = true;
+                            Log.d("doMobileRecharge", "orderDetails API call");
                             mDefaultPresenter.orderDetails(device_id, order_id);
+                        } else {
+                            Log.d("doMobileRecharge", "Previous call still pending, skipping...");
                         }
-                    }, 10000
-            );
+                    });
+                }
+            }, 0, 10000);
 
             _binding.btnComplete.setOnClickListener(v -> {
                 bottomSheetDialog.dismiss();
-                bottomSheetDialog.cancel();
-                timer.cancel();
+                cancelTimer();
                 showPending("You can recharge after sometime.");
+                hideLoading(loading);
+                isGetingAPIResponse =false;
+            });
+
+            bottomSheetDialog.setOnDismissListener(v ->{
+                cancelTimer();
+                isGetingAPIResponse =false;
             });
 
             bottomSheetDialog.show();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    private void cancelTimer() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+    }
+
+    private void openFailedDialog() {
+        try {
+
+            WalletTransactionBottonDialogBinding _binding =
+                    DataBindingUtil.inflate(LayoutInflater.from(this),
+                            R.layout.wallet_transaction_botton_dialog,
+                            null,
+                            false);
+
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
+            bottomSheetDialog.setContentView(_binding.getRoot());
+            bottomSheetDialog.setCancelable(false);
+            changeStatusBarColor(bottomSheetDialog);
+
+            bottomSheet = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+            if (bottomSheet != null) {
+                BottomSheetBehavior<FrameLayout> behavior = BottomSheetBehavior.from(bottomSheet);
+                behavior.setSkipCollapsed(false);
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                behavior.setPeekHeight(600);
+            }
+
+            _binding.btnComplete.setBackgroundResource(R.drawable.pending_button);
+            _binding.txtTitle.setText("Failed");
+            _binding.txtMessage.setText("");
+
+            _binding.btnComplete.setOnClickListener(v -> {
+                bottomSheetDialog.dismiss();
+                cancelTimer();
+                showPending("Payment Failed");
+                hideLoading(loading);
+            });
+
+            bottomSheetDialog.setOnDismissListener(dialog -> cancelTimer());
+
+            bottomSheetDialog.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -1278,8 +1371,9 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
         if (requestCode == 104) {
             if (resultCode == RESULT_OK) {
                 mDefaultPresenter.orderDetails(device_id, order_id);
+                Log.d("doMobileRecharge", "onActivityResult");
             } else {
-                Toast.makeText(getActivity(), "Transaction Cancelled", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Transaction Failed", Toast.LENGTH_LONG).show();
             }
         }
     }

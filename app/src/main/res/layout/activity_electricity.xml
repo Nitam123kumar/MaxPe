@@ -21,22 +21,21 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/search_electricity"
         android:layout_width="0dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_4sdp"
-        android:background="@drawable/search_for_biller_shape"
-        android:drawableStart="@drawable/search_img"
+        android:background="@drawable/img1"
+        android:drawableStart="@drawable/ic_search"
         android:gravity="center_vertical"
-        android:hint="@string/qws"
-        android:paddingStart="@dimen/_5sdp"
+        android:hint="@string/search"
+        android:paddingStart="@dimen/_10sdp"
         android:imeOptions="actionSearch"
         android:inputType="text"
-        android:maxLength="30"
-        android:textColor="@color/black_4"
+        android:textColor="@color/black"
         android:textColorHint="#B5B5B5"
-        android:textSize="14sp"
+        android:textSize="@dimen/_13sdp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/imgBharatBillPay"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,12 +59,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:paddingBottom="@dimen/_60sdp"
         app:layout_constraintTop_toBottomOf="@id/search_electricity">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/electricityListView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <TextView

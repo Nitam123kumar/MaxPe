@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_25sdp"
                 android:background="@drawable/next_ban_shape"
-               android:paddingStart="@dimen/_5sdp"
+                android:paddingStart="@dimen/_5sdp"
                 android:paddingEnd="@dimen/_5sdp"
                 app:layout_constraintBottom_toBottomOf="@id/name_tv"
                 app:layout_constraintEnd_toStartOf="@id/refresh"
@@ -84,18 +84,18 @@
                     android:src="@drawable/wallet_icon2"
                     android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/total_ban"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/total_ban"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/total_ban"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
+                    android:fontFamily="@font/inter"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_9sdp"
-                    android:fontFamily="@font/inter"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/next_arrow"
                     app:layout_constraintStart_toEndOf="@id/whatsup_alert"
@@ -188,12 +188,11 @@
                         android:id="@+id/home_banner_gif"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:visibility="gone"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        />
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -762,7 +761,7 @@
                             app:layout_constraintTop_toTopOf="@id/recharge_layout" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-<!--                    android:background="@drawable/rectangle_19039"-->
+                    <!--                    android:background="@drawable/rectangle_19039"-->
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -785,19 +784,19 @@
                                 android:id="@+id/need_support_img"
                                 android:layout_width="@dimen/_17sdp"
                                 android:layout_height="@dimen/_17sdp"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                android:src="@drawable/whatsapp_need_support"
-                                app:layout_constraintEnd_toStartOf="@id/news"
                                 android:layout_marginEnd="@dimen/_2sdp"
-                                />
+                                android:src="@drawable/whatsapp_need_support"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@id/news"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
 
                             <TextView
                                 android:id="@+id/news"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_5sdp"
                                 android:ellipsize="marquee"
                                 android:fadingEdge="horizontal"
                                 android:fontFamily="@font/inter"
@@ -808,11 +807,10 @@
                                 android:text="Need help? Let's connect with support"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_11sdp"
-                                android:layout_marginStart="@dimen/_5sdp"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@id/need_support_img"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"/>
+                                app:layout_constraintTop_toTopOf="parent" />
 
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -1029,9 +1027,9 @@
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="@dimen/_24sdp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/ott_img"
                                 android:padding="@dimen/_1sdp"
                                 android:scaleType="centerCrop"
+                                android:src="@drawable/ott_img"
                                 app:layout_constraintBottom_toBottomOf="@id/ottTxt"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="@id/ottTxt" />
@@ -1505,7 +1503,7 @@
                             android:gravity="center"
                             android:text="@string/refer_your_friends_amp"
                             android:textColor="#000000"
-                            android:textSize="@dimen/_12sdp"
+                            android:textSize="@dimen/_16sdp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/txtMaxPe" />
@@ -1514,29 +1512,30 @@
                             android:id="@+id/txtRefer"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat"
-                            android:text="@string/earn_up_to_300"
-                            android:paddingStart="@dimen/_5sdp"
-                            android:paddingEnd="@dimen/_5sdp"
-                            android:textColor="@color/white"
-                            android:gravity="center"
-                            android:textSize="@dimen/_16sdp"
                             android:background="@drawable/rectangle_19042"
                             android:drawableEnd="@drawable/arrow_14"
                             android:drawablePadding="@dimen/_5sdp"
+                            android:fontFamily="@font/montserrat"
+                            android:gravity="center"
+                            android:paddingStart="@dimen/_5sdp"
+                            android:paddingEnd="@dimen/_5sdp"
+                            android:text="@string/earn_up_to_300"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_15sdp"
+                            app:layout_constraintEnd_toEndOf="@+id/txtMobileRecharge"
                             app:layout_constraintStart_toStartOf="@+id/txtMobileRecharge"
                             app:layout_constraintTop_toBottomOf="@id/txtMobileRecharge" />
 
-<!--                        <ImageView-->
-<!--                            android:id="@+id/imgReferAndEarn"-->
-<!--                            android:layout_width="@dimen/_14sdp"-->
-<!--                            android:layout_height="@dimen/_14sdp"-->
-<!--                            android:layout_marginStart="@dimen/_6sdp"-->
-<!--                            android:layout_marginEnd="@dimen/_6sdp"-->
-<!--                            android:src="@drawable/arrow_14"-->
-<!--                            app:layout_constraintBottom_toBottomOf="@id/txtRefer"-->
-<!--                            app:layout_constraintStart_toEndOf="@id/txtRefer"-->
-<!--                            app:layout_constraintTop_toTopOf="@id/txtRefer" />-->
+                        <!--                        <ImageView-->
+                        <!--                            android:id="@+id/imgReferAndEarn"-->
+                        <!--                            android:layout_width="@dimen/_14sdp"-->
+                        <!--                            android:layout_height="@dimen/_14sdp"-->
+                        <!--                            android:layout_marginStart="@dimen/_6sdp"-->
+                        <!--                            android:layout_marginEnd="@dimen/_6sdp"-->
+                        <!--                            android:src="@drawable/arrow_14"-->
+                        <!--                            app:layout_constraintBottom_toBottomOf="@id/txtRefer"-->
+                        <!--                            app:layout_constraintStart_toEndOf="@id/txtRefer"-->
+                        <!--                            app:layout_constraintTop_toTopOf="@id/txtRefer" />-->
 
                         <ImageView
                             android:id="@+id/footer"
@@ -1545,18 +1544,18 @@
                             android:layout_marginTop="16dp"
                             android:src="@drawable/reffer_earn_svg"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/txtRefer" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
                             android:layout_marginBottom="@dimen/_10sdp"
                             android:gravity="center"
                             android:text="The more you share, the more you earn!"
-                            android:textSize="@dimen/_9sdp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10sdp"
                             app:layout_constraintEnd_toEndOf="@id/footer"
                             app:layout_constraintStart_toStartOf="@id/footer"
                             app:layout_constraintTop_toBottomOf="@id/footer" />

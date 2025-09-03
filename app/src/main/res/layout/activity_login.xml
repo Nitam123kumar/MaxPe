@@ -81,7 +81,6 @@
                             android:textSize="@dimen/_11sdp"
                             android:textStyle="bold" />
 
-
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/username"
                             android:layout_width="match_parent"
@@ -92,7 +91,7 @@
                             android:drawablePadding="@dimen/_10sdp"
                             android:gravity="center_vertical"
                             android:hint="@string/enter_your_mobile_number"
-                            android:inputType="phone"
+                            android:inputType="number"
                             android:maxLength="10"
                             android:paddingLeft="@dimen/_10sdp"
                             android:textColor="@color/black_2"

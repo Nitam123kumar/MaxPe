@@ -60,15 +60,15 @@
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:background="@drawable/corner_white_recharge_2"
+                        android:fontFamily="@font/roboto"
                         android:gravity="center_vertical"
                         android:hint="@string/mobile_number"
                         android:inputType="phone"
                         android:maxLength="30"
                         android:paddingLeft="@dimen/_10sdp"
-                        android:textColor="@color/black_4"
-                        android:textColorHint="#B5B5B5"
+                        android:textColor="@color/black_2"
+                        android:textColorHint="#DEDEDE"
                         android:textSize="@dimen/_11sdp"
-                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
 
@@ -107,6 +107,17 @@
                     android:theme="@style/MatchSpinnerTheme"
                     app:layout_constraintTop_toBottomOf="@id/txtTitleOperator" />
 
+                <ImageView
+                    android:layout_width="@dimen/_17sdp"
+                    android:layout_height="@dimen/_17sdp"
+                    android:layout_marginEnd="@dimen/_13sdp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_drop_down"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@id/select_operator"
+                    app:layout_constraintEnd_toEndOf="@id/select_operator"
+                    app:layout_constraintTop_toTopOf="@id/select_operator" />
+
                 <TextView
                     android:id="@+id/txtCircleOperator"
                     android:layout_width="wrap_content"
@@ -127,13 +138,13 @@
                     android:layout_centerVertical="true"
                     android:layout_marginTop="@dimen/_2sdp"
                     android:background="@drawable/corner_white_recharge_2"
+                    android:fontFamily="@font/roboto"
                     android:gravity="center_vertical"
+                    android:hint="@string/select_circle"
                     android:paddingLeft="@dimen/_10sdp"
-                    android:text="@string/select_circle"
                     android:textColor="@color/black_2"
+                    android:textColorHint="#DEDEDE"
                     android:textSize="@dimen/_11sdp"
-                    android:textStyle="bold"
-                    app:drawableEndCompat="@drawable/ic_drop_down"
                     app:layout_constraintTop_toBottomOf="@id/txtCircleOperator" />
 
                 <TextView
@@ -153,14 +164,14 @@
                     android:id="@+id/amount"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_42sdp"
-                    android:hint="@string/amount_"
-                    android:inputType="numberDecimal"
-                    android:textColor="@color/black_4"
-                    android:textColorHint="#B5B5B5"
-                    android:paddingLeft="@dimen/_10sdp"
                     android:background="@drawable/corner_white_recharge_2"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/roboto"
+                    android:hint="@string/amount_"
+                    android:inputType="number"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:textColor="@color/black_2"
+                    android:textColorHint="#DEDEDE"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintTop_toBottomOf="@id/txtAmountOperator"
 
                     />
@@ -171,15 +182,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
+                    android:fontFamily="@font/roboto_bold"
                     android:gravity="center"
                     android:paddingLeft="@dimen/_10sdp"
                     android:paddingRight="@dimen/_10sdp"
                     android:text="@string/view_plans"
-                    android:textStyle="bold"
                     android:textAllCaps="false"
                     android:textColor="#4970B0"
                     android:textSize="@dimen/_11sdp"
-                    android:fontFamily="@font/roboto_bold"
+                    android:textStyle="bold"
                     android:theme="@style/PrimaryButton"
                     app:layout_constraintBottom_toBottomOf="@id/amount"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -215,10 +226,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_marginEnd="@dimen/_20sdp"
+                        android:fontFamily="@font/roboto_bold"
                         android:gravity="center"
                         android:text="@string/r_offers"
                         android:textAllCaps="false"
-                        android:fontFamily="@font/roboto_bold"
                         android:textColor="#4970B0"
                         android:textSize="@dimen/_10sdp"
                         android:theme="@style/PrimaryButton"
@@ -250,11 +261,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginBottom="@dimen/_5sdp"
+                        android:fontFamily="@font/roboto"
                         android:text=""
                         android:textColor="@color/black_2"
                         android:textSize="@dimen/_11sdp"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/inter"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -267,6 +277,7 @@
                     android:layout_height="@dimen/_36sdp"
                     android:layout_marginTop="@dimen/_18sdp"
                     android:background="@drawable/ad_money_button_shape"
+                    android:fontFamily="@font/roboto_bold"
                     android:gravity="center"
                     android:onClick="doRecharge"
                     android:text="@string/recharge_now"
@@ -274,14 +285,12 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/_11sdp"
                     android:textStyle="bold"
-                    android:fontFamily="@font/roboto_bold"
                     android:theme="@style/PrimaryButton"
                     android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/bbcR" />
-
 
 
                 <androidx.recyclerview.widget.RecyclerView

@@ -30,7 +30,7 @@
                     android:layout_marginTop="@dimen/_30sdp"
                     android:gravity="center_horizontal"
                     android:text="@string/data_not_available"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_15sdp"
                     android:visibility="gone" />
                 <LinearLayout

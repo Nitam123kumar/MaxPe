@@ -159,7 +159,7 @@ protected void attachBaseContext(Context newBase) {
                 JSONObject object = new JSONObject(message);
                 String value = object.getString("status");
                 String otp = object.getString("otp");
-                Log.d("onSuccess",value);
+                Log.d("onSuccess", String.valueOf(object));
                 if (value.equals("Success")) {
                     Log.d("onSuccess","value");
 //                    binding.btnLogin.setText("Verify OTP");

@@ -27,7 +27,7 @@
                 android:layout_width="@dimen/_27sdp"
                 android:layout_height="@dimen/_27sdp"
                 android:layout_marginStart="@dimen/_12sdp"
-                android:background="@drawable/wallet_back_shape"
+                android:background="@drawable/on_back_shape1"
                 android:contentDescription="@string/max_pe"
                 android:padding="@dimen/_8sdp"
                 android:src="@drawable/black_arrow_svg"
@@ -174,7 +174,7 @@
                 android:gravity="center"
                 android:text="@string/lifetime_max_points"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -195,15 +195,15 @@
                 android:layout_height="wrap_content"
                 android:text="@string/transactions"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
                 android:id="@+id/filter_View"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_25sdp"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_30sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -211,7 +211,7 @@
                 android:id="@+id/filter_ImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_2sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
                 android:src="@drawable/filter_icon_svg"
                 app:layout_constraintBottom_toTopOf="@id/transitions"
                 app:layout_constraintEnd_toEndOf="@id/filter_View"
@@ -223,8 +223,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_1sdp"
                 android:text="@string/filter"
-                android:textColor="#828282"
-                android:textSize="@dimen/_7sdp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toBottomOf="@id/filter_View"
                 app:layout_constraintEnd_toEndOf="@id/filter_ImageView"
                 app:layout_constraintStart_toStartOf="@id/filter_ImageView"
@@ -243,7 +243,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/box_shadow1"
             android:padding="@dimen/_10sdp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintTop_toBottomOf="@id/filter_layout">
 
             <TextView
@@ -253,7 +253,7 @@
                 android:fontFamily="@font/roboto"
                 android:text="@string/to"
                 android:textColor="@color/black_2"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/layoutEnd"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -266,7 +266,7 @@
                 android:fontFamily="@font/roboto"
                 android:text="@string/from"
                 android:textColor="@color/black_2"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -274,7 +274,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layoutFrom"
                 android:layout_width="@dimen/_110sdp"
-                android:layout_height="@dimen/_28sdp"
+                android:layout_height="@dimen/_32sdp"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:background="@drawable/img1"
                 android:elevation="@dimen/_1sdp"
@@ -290,7 +290,7 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:text="@string/dd_mm_yyyy"
                     android:textColor="@color/black_2"
-                    android:textSize="@dimen/_9sdp"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="@id/layoutFrom"
                     app:layout_constraintStart_toStartOf="@id/layoutFrom"
                     app:layout_constraintTop_toTopOf="@id/layoutFrom" />
@@ -312,7 +312,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layoutEnd"
                 android:layout_width="@dimen/_110sdp"
-                android:layout_height="@dimen/_28sdp"
+                android:layout_height="@dimen/_32sdp"
                 android:background="@drawable/img1"
                 android:elevation="@dimen/_1sdp"
                 android:gravity="center_vertical|end"
@@ -327,7 +327,7 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:text="@string/dd_mm_yyyy"
                     android:textColor="@color/black_2"
-                    android:textSize="@dimen/_9sdp"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="@id/layoutEnd"
                     app:layout_constraintStart_toStartOf="@id/layoutEnd"
                     app:layout_constraintTop_toTopOf="@id/layoutEnd" />
@@ -348,8 +348,8 @@
 
             <EditText
                 android:id="@+id/ref_no"
-                android:layout_width="@dimen/_155sdp"
-                android:layout_height="@dimen/_28sdp"
+                android:layout_width="@dimen/_160sdp"
+                android:layout_height="@dimen/_32sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_4sdp"
                 android:background="@drawable/img1"
@@ -357,10 +357,11 @@
                 android:gravity="center_vertical"
                 android:hint="@string/mobile_no_ref_no_order_id"
                 android:inputType="text"
-                android:paddingStart="@dimen/_10sdp"
+                android:paddingStart="@dimen/_11sdp"
+                android:paddingEnd="@dimen/_7sdp"
                 android:textColor="@color/black_2"
                 android:textColorHint="@color/black_light"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/layoutFrom"
                 app:layout_constraintTop_toBottomOf="@id/layoutFrom"
@@ -369,7 +370,7 @@
             <TextView
                 android:id="@+id/search"
                 android:layout_width="@dimen/_70sdp"
-                android:layout_height="@dimen/_28sdp"
+                android:layout_height="@dimen/_32sdp"
                 android:background="@drawable/search_img_shadow"
                 android:elevation="@dimen/_1sdp"
                 android:gravity="center"
@@ -377,7 +378,7 @@
                 android:paddingEnd="@dimen/_13sdp"
                 android:text="@string/search"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_12sdp"
                 app:layout_constraintBottom_toBottomOf="@id/ref_no"
                 app:layout_constraintEnd_toEndOf="@id/layoutEnd"
                 app:layout_constraintTop_toTopOf="@id/ref_no" />

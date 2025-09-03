@@ -194,7 +194,7 @@
                             android:layout_marginBottom="@dimen/_5sdp"
                             android:layout_marginLeft="@dimen/_10sdp"
                             android:layout_marginRight="@dimen/_10sdp"
-                            android:background="@drawable/corner_circle_primary"
+                            android:background="@drawable/ad_money_button_shape"
                             android:paddingBottom="@dimen/_3sdp">
 
                             <TextView
@@ -202,7 +202,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_35sdp"
                                 android:layout_gravity="center_horizontal"
-                                android:background="@drawable/corner_circle_primary"
+                                android:background="@drawable/ad_money_button_shape"
                                 android:gravity="center"
                                 android:paddingLeft="@dimen/_30sdp"
                                 android:paddingRight="@dimen/_30sdp"

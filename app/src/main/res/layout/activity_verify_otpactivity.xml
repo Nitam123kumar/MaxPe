@@ -93,7 +93,7 @@
                             android:background="@drawable/corner_white_recharge_2"
                             android:gravity="center_vertical"
                             android:hint="@string/enter_otp"
-                            android:inputType="phone"
+                            android:inputType="textPassword"
                             android:maxLength="10"
                             android:paddingLeft="@dimen/_10sdp"
                             android:textColor="@color/black_2"

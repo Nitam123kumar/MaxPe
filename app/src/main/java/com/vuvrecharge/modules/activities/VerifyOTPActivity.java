@@ -26,6 +26,7 @@ import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
 import com.vuvrecharge.utils.LocaleHelper;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Objects;
@@ -64,11 +65,13 @@ public class VerifyOTPActivity extends BaseActivity implements DefaultView {
     String supportNumber1;
     String whatsappNumber1;
     String number;
+
     protected void attachBaseContext(Context newBase) {
         SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
         String lang = prefs.getString("lang", "en");
         super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,22 +125,31 @@ public class VerifyOTPActivity extends BaseActivity implements DefaultView {
             public void onFinish() {
                 btnVerifyOtp.setEnabled(true);
                 btnVerifyOtp.setClickable(true);
-//                btnVerifyOtp.setText("Resend OTP");
+                btnVerifyOtp.setText("Resend OTP");
             }
         }.start();
 
+
         btnVerifyOtp.setOnClickListener(v -> {
-            if (Objects.requireNonNull(btnVerifyOtp.getText()).toString().isEmpty()) {
-                showErrorLoginPage("Enter mobile number");
-            } else if (Objects.requireNonNull(btnVerifyOtp.getText()).toString().isEmpty()) {
-                showErrorLoginPage("Enter OTP");
+            String btnText = btnVerifyOtp.getText().toString();
+            if (btnText.equals("Resend OTP")) {
+                presenter.loginOTPUser(number);
+
             } else {
-                presenter.loginVerifyUser(
-                        number,
-                        enterOtp.getText().toString().trim(),
-                        device_id
-                );
-                hideKeyBoard(enterOtp);
+
+                if (Objects.requireNonNull(btnVerifyOtp.getText()).toString().isEmpty()) {
+                    showErrorLoginPage("Enter mobile number");
+                } else if (Objects.requireNonNull(btnVerifyOtp.getText()).toString().isEmpty()) {
+                    showErrorLoginPage("Enter OTP");
+                } else {
+                    presenter.loginVerifyUser(
+                            number,
+                            enterOtp.getText().toString().trim(),
+                            device_id
+                    );
+                    hideKeyBoard(enterOtp);
+                }
+
             }
         });
 
@@ -158,6 +170,7 @@ public class VerifyOTPActivity extends BaseActivity implements DefaultView {
             }
             timer.onFinish();
             timer.cancel();
+            btnVerifyOtp.setText("Verified");
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
             finish();
@@ -169,7 +182,18 @@ public class VerifyOTPActivity extends BaseActivity implements DefaultView {
 
     @Override
     public void onSuccess(String data, String data_other) {
-
+        try {
+            JSONObject object = new JSONObject(data);
+            if (data_other.equals("otp")) {
+                String value = object.getString("status");
+                if (value.equals("Success")) {
+                    timer.start();
+                    btnVerifyOtp.setText("Verify OTP");
+                }
+            }
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

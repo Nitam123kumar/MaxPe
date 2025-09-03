@@ -38,6 +38,7 @@
                             android:background="@color/transparent"
                             android:gravity="center_vertical"
                             android:hint="@string/enter_otp"
+                            android:maxLength="6"
                             android:inputType="textPassword"
                             android:paddingLeft="@dimen/_10sdp"
                             android:paddingTop="@dimen/_1sdp"
@@ -55,9 +56,11 @@
                             android:layout_marginTop="@dimen/_10sdp"
                             android:layout_marginRight="@dimen/_10sdp"
                             android:text="@string/get_otp"
-                            android:textColor="#1D8CFF"
-                            android:textSize="@dimen/_8sdp"
                             android:textStyle="bold"
+                            android:textAllCaps="false"
+                            android:textColor="#4970B0"
+                            android:textSize="@dimen/_11sdp"
+                            android:fontFamily="@font/roboto_bold"
                             android:visibility="visible" />
 
                     </RelativeLayout>

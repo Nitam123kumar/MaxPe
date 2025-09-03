@@ -3,8 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/_10sdp"
+    android:layout_marginHorizontal="@dimen/_10sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    
+
 
         <ImageView
             android:id="@+id/payment_icon"
@@ -12,7 +13,7 @@
             android:layout_height="@dimen/_30sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_10sdp"
             />
         <TextView
             android:id="@+id/payment_title"
@@ -26,27 +27,29 @@
             android:textStyle="bold"
             android:textColor="@color/black"
             />
-        <RadioGroup
-            android:id="@+id/radioGroup1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_4sdp"
+
+<!--        <RadioButton-->
+<!--            android:id="@+id/radioBtn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:button="@null"-->
+<!--            android:drawableEnd="@drawable/btn_radio"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@id/payment_icon"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/payment_icon"-->
+<!--            android:layout_marginEnd="@dimen/_15sdp"-->
+<!--            />-->
+        <RadioButton
+            android:id="@+id/radioBtn"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:button="@null"
+            android:background="@drawable/btn_radio"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/payment_icon"
             app:layout_constraintBottom_toBottomOf="@id/payment_icon"
-            android:layout_marginEnd="@dimen/_15sdp">
-
-        <RadioButton
-            android:id="@+id/radioBtn"
-            android:layout_width="@dimen/_19sdp"
-            android:layout_height="@dimen/_19sdp"
-            android:drawableEnd="@drawable/btn_radio"
-            android:button="@null"
-            android:layout_gravity="center"
-            android:checked="false"
             />
 
-        </RadioGroup>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/add_money_btn"

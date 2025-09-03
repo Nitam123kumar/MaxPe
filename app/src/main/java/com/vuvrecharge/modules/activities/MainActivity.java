@@ -362,7 +362,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         image_slider.setClipChildren(false);
         image_slider.setClipToPadding(false);
         image_slider.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
-        apiStorePreferences=new APIStorePreferences(this);
+        apiStorePreferences = new APIStorePreferences(this);
 
 
         image_slider.setOffscreenPageLimit(3);
@@ -428,12 +428,11 @@ public class MainActivity extends BaseActivity implements DefaultView,
 
 
         headerImage_layout.setOnClickListener(v -> {
-            if (redirection_type != null || intentName != null || extraData != null || redirection_url != null){
+            if (redirection_type != null || intentName != null || extraData != null || redirection_url != null) {
                 onClickMainHeroBanner(redirection_type, intentName, extraData, redirection_url);
             }
 
         });
-
 
 
         imageSliderAdapter = new SliderAdapterBanner(getActivity(), slider_banner, this);
@@ -522,14 +521,12 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 }
             }
         });
-        var operatorData =  apiStorePreferences.getDashBoardData();
-        Log.d("DashBoardData1", "apiStorePreferences: "+operatorData);
-        if (operatorData.isEmpty())
-        {
+        var operatorData = apiStorePreferences.getDashBoardData();
+        Log.d("DashBoardData1", "apiStorePreferences: " + operatorData);
+        if (operatorData.isEmpty()) {
             mDefaultPresenter.dashboardDataWithoutRefresh(fcmToken + "", device_id + "", null);
             Log.d("DashBoardData1", "DashBoardData: ");
-        }
-        else {
+        } else {
             try {
                 JSONObject object = new JSONObject(operatorData);
                 apiData(object);
@@ -538,7 +535,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 throw new RuntimeException(e);
             }
 
-            Log.d("DashBoardData1", "onSuccess: "+operatorData);
+            Log.d("DashBoardData1", "onSuccess: " + operatorData);
             loading.setVisibility(View.GONE);
             refresh_layout.setRefreshing(false);
         }
@@ -619,7 +616,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
             String[] words = userData.getName().trim().split(" "); // split by space
 
             String firstName = words.length > 0 ? words[0] : "";
-            String lastName  = words.length > 1 ? words[1] : "";
+            String lastName = words.length > 1 ? words[1] : "";
             name_tv.setText("Hi, " + firstName);
 //            txtTitleMain.setText(userData.getRecharge_pay_bill_string());
 
@@ -995,6 +992,11 @@ public class MainActivity extends BaseActivity implements DefaultView,
     private void setPinDetails() {
         FrameLayout bottomSheet = null;
 
+        if (dialog != null && dialog.isShowing()) {
+            Log.d("getIs_mpin_set", "setPinDetails");
+            return;
+        }
+
         dialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
         View view = LayoutInflater.from(this).inflate(R.layout.set_mpin_alert_layout, null, false);
 
@@ -1013,7 +1015,6 @@ public class MainActivity extends BaseActivity implements DefaultView,
 
         setMPinBtn.setOnClickListener(v -> {
             dialog.dismiss();
-            dialog.cancel();
             setMPinDialog();
         });
         dialog.show();
@@ -1167,10 +1168,10 @@ public class MainActivity extends BaseActivity implements DefaultView,
             UserData userData = mDatabase.getUserData();
 //            available_balance.setText("\u20b9" + mDatabase.getEarnings());
             if (userData != null) {
-                    if (isShowing == true) {
-                        isShowing = false;
+                if (isShowing == true) {
+                    isShowing = false;
 //                        popupDialog();
-                    }
+                }
             }
             double ban = Double.parseDouble(data1.getString("earnings"));
             total_ban.setText("₹" + String.format(Locale.ENGLISH, "%.2f", ban));
@@ -1212,8 +1213,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
             carPercent = car_insurance.getString("percent");
             carRedirectUrl = car_insurance.getString("redirect_url");
             carRedirectType = car_insurance.getString("redirect_type");
-            bike_percent.setText(bikePercent + "OF");
-            car_percent.setText(carPercent + "OF");
+            bike_percent.setText(bikePercent + "\nOF");
+            car_percent.setText(carPercent + "\nOF");
 
             offerSliderList.clear();
             if (offer_slides.length() > 0) {
@@ -1384,6 +1385,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
             if (mDatabase.getUserData() != null) {
                 if (mDatabase.getUserData().getIs_mpin_set().equals("false")) {
                     setPinDetails();
+                    Log.d("getIs_mpin_set", "setPinDetails: " + mDatabase.getUserData().getIs_mpin_set());
 
                 } else {
                     if (isShowing == true) {
@@ -1537,24 +1539,24 @@ public class MainActivity extends BaseActivity implements DefaultView,
             recyclerviewDashboard.setAdapter(adapter);
 
 
-                JSONObject sliderObject = data.getJSONObject("slides");
-                Log.d("onSuccess", "onSuccess: " + sliderObject);
-                slider_banner.clear();
-                if (sliderObject.length() > 0) {
+            JSONObject sliderObject = data.getJSONObject("slides");
+            Log.d("onSuccess", "onSuccess: " + sliderObject);
+            slider_banner.clear();
+            if (sliderObject.length() > 0) {
 
-                    for (int i = 0; i < sliderObject.length(); i++) {
-                        JSONObject object1 = sliderObject.getJSONObject(String.valueOf(i));
-                        SliderData sliderData = new SliderData();
-                        sliderData.setSlide(object1.getString("slide"));
-                        sliderData.setUrl(object1.getString("url"));
-                        sliderData.setRedirection_type(object1.getString("redirection_type"));
-                        sliderData.setData(object1.getString("data"));
-                        slider_banner.add(sliderData);
-                    }
-                    imageSliderAdapter.notifyDataSetChanged();
-
-
+                for (int i = 0; i < sliderObject.length(); i++) {
+                    JSONObject object1 = sliderObject.getJSONObject(String.valueOf(i));
+                    SliderData sliderData = new SliderData();
+                    sliderData.setSlide(object1.getString("slide"));
+                    sliderData.setUrl(object1.getString("url"));
+                    sliderData.setRedirection_type(object1.getString("redirection_type"));
+                    sliderData.setData(object1.getString("data"));
+                    slider_banner.add(sliderData);
                 }
+                imageSliderAdapter.notifyDataSetChanged();
+
+
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1622,7 +1624,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
 //                available_balance.setText("\u20b9" + String.format(Locale.ENGLISH, "%.2f", balance));
                 mDatabase.setEarnings(jsonObject.getString("earnings"));
                 mDatabase.setCashbackPoints(cashbackPoints);
-                Log.d("balance", "ban "+String.valueOf(mDatabase.getEarnings()));
+                Log.d("balance", "ban " + String.valueOf(mDatabase.getEarnings()));
                 var ban = Double.parseDouble(jsonObject.getString("earnings"));
                 total_ban.setText("₹" + String.format(Locale.ENGLISH, "%.2f", ban));
                 Log.d("balance", "onSuccess: ban" + cashbackPoints);
@@ -1779,7 +1781,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
     protected void onDestroy() {
         super.onDestroy();
         hideAllDialog();
-        Log.d("DashBoardData1","onDestroy ");
+        Log.d("DashBoardData1", "onDestroy ");
     }
 
     @Override
@@ -1793,7 +1795,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         super.onPause();
         hideAllDialog();
         sliderHandler.removeCallbacks(sliderRunnable);
-        Log.d("DashBoardData1","onPause ");
+        Log.d("DashBoardData1", "onPause ");
     }
 
     @Override
@@ -1848,6 +1850,72 @@ public class MainActivity extends BaseActivity implements DefaultView,
                         }
 
                     }
+                    startActivity(intent);
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+        } else if (redirection_type.equals("in_app")) {
+            if (redirection_type != null && !redirection_type.isEmpty()) {
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                CustomTabsIntent customTabsIntent = builder.build();
+
+                String chromePackage = "com.android.chrome";
+                PackageManager pm = getActivity().getPackageManager();
+                try {
+                    pm.getPackageInfo(chromePackage, 0);
+                    customTabsIntent.intent.setPackage(chromePackage);
+                } catch (PackageManager.NameNotFoundException e) {
+
+                }
+
+                customTabsIntent.launchUrl(getActivity(), Uri.parse(link));
+            } else {
+
+            }
+
+        } else if (redirection_type.equals("external")) {
+            if (redirection_type != null && !redirection_type.isEmpty()) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+                try {
+                    startActivity(browserIntent);
+                } catch (ActivityNotFoundException e) {
+
+                }
+            } else {
+
+            }
+        }
+
+    }
+
+    @Override
+    public void onClickListener(String redirection_type, String intent_name, String activityExtraData, String link, String logo) throws ClassNotFoundException {
+        Intent intent;
+        Class<?> clazz = null;
+        if (redirection_type.equals("activity")) {
+            if (intent_name != null) {
+                try {
+                    clazz = Class.forName(intent_name);
+                    intent = new Intent(getActivity(), clazz);
+
+                    JSONObject object = new JSONObject(activityExtraData);
+
+                    if (object.length() > 0) {
+
+                        Iterator<String> keys = object.keys();
+                        while (keys.hasNext()) {
+                            String key = keys.next();
+                            String value = object.optString(key, "");
+
+                            intent.putExtra(key, value);
+                        }
+
+                    }
+                    intent.putExtra("logo", logo);
                     startActivity(intent);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
@@ -2077,42 +2145,42 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 break;
 
             case R.id.carLayout:
-        if (carRedirectType != null) {
-            if (carRedirectType.equals("in_app")) {
-                if (carRedirectType != null && !carRedirectType.isEmpty()) {
-                    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-                    CustomTabsIntent customTabsIntent = builder.build();
+                if (carRedirectType != null) {
+                    if (carRedirectType.equals("in_app")) {
+                        if (carRedirectType != null && !carRedirectType.isEmpty()) {
+                            CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                            CustomTabsIntent customTabsIntent = builder.build();
 
-                    String chromePackage = "com.android.chrome";
-                    PackageManager pm = getActivity().getPackageManager();
-                    try {
-                        pm.getPackageInfo(chromePackage, 0);
-                        customTabsIntent.intent.setPackage(chromePackage);
-                    } catch (PackageManager.NameNotFoundException e) {
+                            String chromePackage = "com.android.chrome";
+                            PackageManager pm = getActivity().getPackageManager();
+                            try {
+                                pm.getPackageInfo(chromePackage, 0);
+                                customTabsIntent.intent.setPackage(chromePackage);
+                            } catch (PackageManager.NameNotFoundException e) {
 
+                            }
+
+                            customTabsIntent.launchUrl(getActivity(), Uri.parse(carRedirectUrl));
+                        }
+
+
+                    } else if (carRedirectType.equals("external")) {
+                        if (carRedirectType != null && !carRedirectType.isEmpty()) {
+                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(carRedirectUrl));
+                            try {
+                                startActivity(browserIntent);
+                            } catch (ActivityNotFoundException e) {
+
+                            }
+                        } else {
+
+                        }
                     }
 
-                    customTabsIntent.launchUrl(getActivity(), Uri.parse(carRedirectUrl));
                 }
-
-
-            } else if (carRedirectType.equals("external")) {
-                if (carRedirectType != null && !carRedirectType.isEmpty()) {
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(carRedirectUrl));
-                    try {
-                        startActivity(browserIntent);
-                    } catch (ActivityNotFoundException e) {
-
-                    }
-                } else {
-
-                }
-            }
+                break;
 
         }
-        break;
-
-    }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

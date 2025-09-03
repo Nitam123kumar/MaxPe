@@ -59,10 +59,11 @@ public class OTTSubscriptionsAdapter extends RecyclerView.Adapter<OTTSubscriptio
         Log.d("imageLogo",ottLogo);
         holder.ottTitle.setText(ottData.getTitle());
 
+        String finalOttLogo = ottLogo;
         holder.itemView.setOnClickListener(v -> {
             try {
                 JSONObject object = new JSONObject(ottData.getData());
-                listener.onClickListener(ottData.getRedirection_type(),object.getString("intent_name"),object.getString("extra_data"),ottData.getUrl());
+                listener.onClickListener(ottData.getRedirection_type(),object.getString("intent_name"),object.getString("extra_data"),ottData.getUrl(), finalOttLogo);
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {
@@ -88,6 +89,6 @@ public class OTTSubscriptionsAdapter extends RecyclerView.Adapter<OTTSubscriptio
 
     }
     public interface ItemClickListener{
-        void onClickListener(String redirection_type,String intent_name,String extra_data,String link) throws ClassNotFoundException;
+        void onClickListener(String redirection_type,String intent_name,String extra_data,String link,String logo) throws ClassNotFoundException;
     }
 }

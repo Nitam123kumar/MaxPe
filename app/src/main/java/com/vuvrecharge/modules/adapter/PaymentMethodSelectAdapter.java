@@ -63,38 +63,30 @@ public class PaymentMethodSelectAdapter extends RecyclerView.Adapter<PaymentMeth
                 .into(holder.imgUpi);
         holder.add_money_btn.setOnClickListener(v -> listener.onClick(amount,setting.getStr()));
 
-        holder.radioButton.setChecked(position == lastSelectedPosition);
+        boolean isSelected = (position == lastSelectedPosition);
 
-        if (position == lastSelectedPosition) {
+
+        holder.radioButton.setChecked(isSelected);
+        if (isSelected) {
             holder.add_money_btn.setVisibility(View.VISIBLE);
-            holder.radioButton.setSelected(true);
-            holder.add_money_btn.setText("Add ₹"+amount);
+            holder.add_money_btn.setText("Add ₹" + amount);
         } else {
             holder.add_money_btn.setVisibility(View.GONE);
-            holder.radioButton.setSelected(false);
         }
 
-        holder.radioButton.setOnClickListener(v -> {
-            int previousSelected = lastSelectedPosition;
-            lastSelectedPosition = holder.getAdapterPosition();
 
+        holder.radioButton.setOnClickListener(v -> selectItem(holder.getAdapterPosition()));
+        holder.itemView.setOnClickListener(v -> selectItem(holder.getAdapterPosition()));
+    }
 
-            notifyItemChanged(previousSelected); // Unselect previous
-            notifyItemChanged(lastSelectedPosition);
-            // Select current
+    private void selectItem(int position) {
+        int previousSelected = lastSelectedPosition;
+        lastSelectedPosition = position;
 
-        });
-
-        holder.itemView.setOnClickListener(v -> {
-            int previousSelected = lastSelectedPosition;
-            lastSelectedPosition = holder.getAdapterPosition();
-
-            notifyItemChanged(previousSelected);
-            notifyItemChanged(lastSelectedPosition);
-
-        });
-
-
+        if (previousSelected != -1) {
+            notifyItemChanged(previousSelected); // unselect old
+        }
+        notifyItemChanged(lastSelectedPosition); // select new
     }
 
     @Override
@@ -107,7 +99,6 @@ public class PaymentMethodSelectAdapter extends RecyclerView.Adapter<PaymentMeth
         ImageView imgUpi;
         TextView txtUpiTitle;
 //        TextView txtUpiTitle2;
-        RadioGroup radioGroup1;
         RadioButton radioButton;
         AppCompatButton add_money_btn;
         public Holder(@NonNull View itemView) {
@@ -115,7 +106,6 @@ public class PaymentMethodSelectAdapter extends RecyclerView.Adapter<PaymentMeth
             imgUpi = itemView.findViewById(R.id.payment_icon);
             txtUpiTitle = itemView.findViewById(R.id.payment_title);
             add_money_btn = itemView.findViewById(R.id.add_money_btn);
-            radioGroup1 = itemView.findViewById(R.id.radioGroup1);
             radioButton = itemView.findViewById(R.id.radioBtn);
 
 

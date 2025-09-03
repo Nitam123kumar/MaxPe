@@ -18,7 +18,7 @@
             android:textColor="@color/black_2"
             android:fontFamily="@font/roboto"
             android:textStyle="bold"
-            android:textSize="@dimen/_9sdp"
+            android:textSize="@dimen/_12sdp"
             app:layout_constraintStart_toStartOf="@id/layoutEnd"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -33,7 +33,7 @@
             android:fontFamily="@font/roboto"
             android:textStyle="bold"
             android:layout_marginStart="@dimen/_10sdp"
-            android:textSize="@dimen/_9sdp"
+            android:textSize="@dimen/_12sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -41,7 +41,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutFrom"
             android:layout_width="@dimen/_110sdp"
-            android:layout_height="@dimen/_28sdp"
+            android:layout_height="@dimen/_32sdp"
             android:elevation="@dimen/_2sdp"
             android:layout_marginTop="@dimen/_8sdp"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/dd_mm_yyyy"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintStart_toStartOf="@id/layoutFrom"
                 app:layout_constraintTop_toTopOf="@id/layoutFrom"
                 app:layout_constraintBottom_toBottomOf="@id/layoutFrom"
@@ -79,7 +79,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutEnd"
             android:layout_width="@dimen/_110sdp"
-            android:layout_height="@dimen/_28sdp"
+            android:layout_height="@dimen/_32sdp"
             android:elevation="@dimen/_2sdp"
             android:gravity="center_vertical|end"
             android:background="@drawable/img1"
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/dd_mm_yyyy"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintStart_toStartOf="@id/layoutEnd"
                 app:layout_constraintTop_toTopOf="@id/layoutEnd"
                 app:layout_constraintBottom_toBottomOf="@id/layoutEnd"
@@ -115,19 +115,20 @@
 
         <EditText
             android:id="@+id/ref_no"
-            android:layout_width="@dimen/_145sdp"
-            android:layout_height="@dimen/_28sdp"
+            android:layout_width="@dimen/_160sdp"
+            android:layout_height="@dimen/_32sdp"
             android:background="@drawable/img1"
             android:gravity="center_vertical"
             android:hint="@string/mobile_no_ref_no_order_id"
             android:inputType="text"
             android:layout_marginTop="@dimen/_10sdp"
             android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_7sdp"
             android:layout_marginBottom="@dimen/_4sdp"
             android:elevation="@dimen/_2sdp"
             android:textColor="@color/black_2"
             android:textColorHint="#BFBFBF"
-            android:textSize="@dimen/_8sdp"
+            android:textSize="@dimen/_11sdp"
             app:layout_constraintTop_toBottomOf="@id/layoutFrom"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/layoutFrom"
@@ -136,7 +137,7 @@
         <TextView
             android:id="@+id/search"
             android:layout_width="@dimen/_70sdp"
-            android:layout_height="@dimen/_28sdp"
+            android:layout_height="@dimen/_32sdp"
             android:background="@drawable/search_img_shadow"
             android:gravity="center"
             android:paddingStart="@dimen/_13sdp"

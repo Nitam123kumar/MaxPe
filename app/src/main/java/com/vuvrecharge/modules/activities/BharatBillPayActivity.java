@@ -54,7 +54,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 @SuppressLint("NotifyDataSetChanged,NonConstantResourceId")
-public class BharatBillPayActivity extends BaseActivity implements DefaultView, BharatBillPayAdapter.ItemClickListener,FinancialServicesAdapter.ItemClickListener, View.OnClickListener,OTTSubscriptionsAdapter.ItemClickListener {
+public class BharatBillPayActivity extends BaseActivity implements DefaultView, BharatBillPayAdapter.ItemClickListener, FinancialServicesAdapter.ItemClickListener, View.OnClickListener, OTTSubscriptionsAdapter.ItemClickListener {
 
     private DefaultPresenter mDefaultPresenter;
 
@@ -88,11 +88,13 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
     List<BharatBillPayModel> rechargeAndBillPaymentDataList = new ArrayList<>();
     List<FinancialServicesData> financialServicesList = new ArrayList<>();
     List<FinancialServicesData> utility_billsList = new ArrayList<>();
+
     protected void attachBaseContext(Context newBase) {
         SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
         String lang = prefs.getString("lang", "en");
         super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,34 +110,31 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
         mToolbar.setOnClickListener(this);
 //        setStatusBarGradiant(this);
 //        swipeRefreshLayout.setRefreshing(false);
-        financial_services_recyclerView.setLayoutManager(new GridLayoutManager(this,4));
-        adapter1 = new FinancialServicesAdapter(this,financialServicesList,this);
+        financial_services_recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        adapter1 = new FinancialServicesAdapter(this, financialServicesList, this);
         financial_services_recyclerView.setAdapter(adapter1);
 
         utility_bills_recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
         utility_bills_adapter = new FinancialServicesAdapter(this, utility_billsList, this);
         utility_bills_recyclerView.setAdapter(utility_bills_adapter);
         ;
-            try {
-                ott_List = new ArrayList<>();
-                List<OTTSubscriptionsData> ottItem = (mDatabase.getUserData().getLogoSliders());
-                for (OTTSubscriptionsData ottData : ottItem) {
-                    ott_List.add(mDatabase.getUserData().getOtt_slides_path() + "/" + ottData.getLogo());
+        try {
+            ott_List = new ArrayList<>();
+            List<OTTSubscriptionsData> ottItem = (mDatabase.getUserData().getLogoSliders());
+            for (OTTSubscriptionsData ottData : ottItem) {
+                ott_List.add(mDatabase.getUserData().getOtt_slides_path() + "/" + ottData.getLogo());
 
-                    Log.d("OTTData", ottData.getLogo()+" "+ottData.getTitle());
-                }
-                oTTList.addAll(ottItem);
-                ottAdapter = new OTTSubscriptionsAdapter(this, oTTList, ott_List,this);
-                ott_recharge_recyclerView.setLayoutManager(new GridLayoutManager(this,3));
-                ott_recharge_recyclerView.setAdapter(ottAdapter);
-
-
-
-
-
-            }catch (Exception e){
-                Log.d("TAG_BBPS", "onSuccess: "+e.getMessage());
+                Log.d("OTTData", ottData.getLogo() + " " + ottData.getTitle());
             }
+            oTTList.addAll(ottItem);
+            ottAdapter = new OTTSubscriptionsAdapter(this, oTTList, ott_List, this);
+            ott_recharge_recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+            ott_recharge_recyclerView.setAdapter(ottAdapter);
+
+
+        } catch (Exception e) {
+            Log.d("TAG_BBPS", "onSuccess: " + e.getMessage());
+        }
 
 //        }
 
@@ -166,7 +165,8 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
             }
         });
     }
-    private void apiStoreData(JSONObject object){
+
+    private void apiStoreData(JSONObject object) {
         try {
 
             if (object.has("services_by_categ")) {
@@ -258,34 +258,36 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
 
     private void refreshData() {
         mDefaultPresenter.getAllRechargeServices(device_id);
-   }
-   @Override
-    public void onClickListener(@NonNull String redirection_type,String intent_name,String activityExtraData,String link) {
+    }
+
+    @Override
+    public void onClickListener(@NonNull String redirection_type, String intent_name, String activityExtraData, String link, String logo) {
         Intent intent;
 
-       Class<?> clazz = null;
-       try {
-           clazz = Class.forName(intent_name);
-           intent = new Intent(getActivity(), clazz);
-           JSONObject object = new JSONObject(activityExtraData);
+        Class<?> clazz = null;
+        try {
+            clazz = Class.forName(intent_name);
+            intent = new Intent(getActivity(), clazz);
+            JSONObject object = new JSONObject(activityExtraData);
 
-           if (object.length() > 0) {
+            if (object.length() > 0) {
 
-               Iterator<String> keys = object.keys();
-               while (keys.hasNext()) {
-                   String key = keys.next();
-                   String value = object.optString(key, "");
+                Iterator<String> keys = object.keys();
+                while (keys.hasNext()) {
+                    String key = keys.next();
+                    String value = object.optString(key, "");
 
-                   intent.putExtra(key,value);
-               }
+                    intent.putExtra(key, value);
+                }
 
-           }
-           startActivity(intent);
-       } catch (ClassNotFoundException e) {
-           throw new RuntimeException(e);
-       } catch (JSONException e) {
-           throw new RuntimeException(e);
-       }
+            }
+            intent.putExtra("logo", logo);
+            startActivity(intent);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
 
 
 //        switch (name){
@@ -426,7 +428,7 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
 
     @Override
     public void onClick(@NonNull View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.toolbar_layout:
                 onBackPressed();
                 getActivity().finish();
@@ -450,8 +452,8 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
             JSONObject object = new JSONObject(data);
             refresh_layout.setRefreshing(false);
 
-           mDatabase.putOperatorString(data);
-           mDatabase.putTime(System.currentTimeMillis());
+            mDatabase.putOperatorString(data);
+            mDatabase.putTime(System.currentTimeMillis());
 
             if (object.has("services_by_categ")) {
                 JSONObject servicesObject = object.getJSONObject("services_by_categ");
@@ -585,7 +587,7 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
                     String key = keys.next();
                     String value = object.optString(key, "");
 
-                    intent.putExtra(key,value);
+                    intent.putExtra(key, value);
                 }
 
             }

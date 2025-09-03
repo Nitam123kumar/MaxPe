@@ -811,6 +811,10 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
             bottomSheetDialog.cancel();
 
         }
+//        else if (name.equals("Mobile")){
+//                Intent  intent = new Intent(getActivity(), MobileBankingActivity.class);
+//                startActivity(intent);
+//        }
 
 //        switch (name){
 //            case "Paytm":

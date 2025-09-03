@@ -2173,11 +2173,14 @@ public class DefaultPresenter {
                 @Override
                 public void onResponse(@NotNull Call<DefaultResponse> call, @NotNull Response<DefaultResponse> response) {
                     mDefaultView.onHideDialog();
+                    Log.d("doMobileRecharge", "orderDetails "+response.body().getData());
                     if (response.isSuccessful() && response.code() == 200) {
                         DefaultResponse body = response.body();
                         if (body != null) {
+
                             if (body.getSuccess() == 1) {
                                 mDefaultView.onSuccess(body.getData(), "orderDetails");
+
                             } else {
                                 mDefaultView.onError(body.getMessage());
                             }

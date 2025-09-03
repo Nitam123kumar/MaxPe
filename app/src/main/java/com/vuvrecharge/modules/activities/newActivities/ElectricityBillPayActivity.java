@@ -223,6 +223,8 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
     Timer timer;
     String minAmount;
     String maxAmount;
+    private boolean isGetingAPIResponse = false;
+    private BottomSheetDialog bottomSheetDialog;
 
     protected void attachBaseContext(Context newBase) {
         SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
@@ -254,8 +256,9 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             title.setText(titleStr);
             name = getIntent().getStringExtra("name");
             String logo1 = getIntent().getStringExtra("logo");
+            Log.d("providerImageViewLogo1", "onCreate: " + getIntent().getStringExtra("logo"));
             if (logo1 != null) {
-                Glide.with(this).load(logo1).error(R.drawable.m_svg).into(providerImageView);
+                Glide.with(this).load(logo1).into(providerImageView);
                 providerImageView.setVisibility(VISIBLE);
             } else {
                 providerImageView.setVisibility(GONE);
@@ -649,7 +652,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             return;
         }
 
-        if (minAmount != null && maxAmount != null){
+        if (minAmount != null && maxAmount != null) {
             int amtInt = Integer.parseInt(amt);
             int minInt = Integer.parseInt(minAmount);
             int maxInt = Integer.parseInt(maxAmount);
@@ -835,20 +838,35 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 mReportsData = gson.fromJson(data, type_);
                 mReportsData.setStatus(payment_status);
                 if (payment_status.toLowerCase().equals("pending")) {
+                    isGetingAPIResponse =false;
                     openPendingDialog();
                 } else if (payment_status.toLowerCase().equals("success")) {
+                    isGetingAPIResponse =false;
+                    Log.d("doMobileRecharge", "success: " + data);
+                    if (bottomSheetDialog != null && bottomSheetDialog.isShowing()) {
+                        bottomSheetDialog.dismiss();
+                    }
+                    cancelTimer();
                     mDefaultPresenter.doElectricityRecharge(
                             consumerNumber.getText().toString().trim(), id, amt, type,
                             amount.getText().toString().trim(), sub_division_code.getText().toString().trim(),
                             "", "", device_id, mPin);
                 } else if (payment_status.toLowerCase().equals("failed")) {
-                    Toast.makeText(getActivity(), "Transaction Cancelled", Toast.LENGTH_LONG).show();
+                    isGetingAPIResponse =false;
+                    Toast.makeText(getActivity(), "Transaction Failed", Toast.LENGTH_LONG).show();
+                    if (bottomSheetDialog != null && bottomSheetDialog.isShowing()) {
+                        bottomSheetDialog.dismiss();
+                    }
+                    cancelTimer();
                 } else {
+                    isGetingAPIResponse =false;
                     openPendingDialog();
                 }
             } else if (data_other.equals("orderDetailsPending")) {
+                isGetingAPIResponse =false;
                 openPendingDialog();
             } else {
+                isGetingAPIResponse =false;
                 successDialog(data, data_other);
             }
         } catch (Exception e) {
@@ -1512,15 +1530,33 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
 
     }
 
+    @SuppressLint("DiscouragedApi")
     private void openPendingDialog() {
         try {
+
+            if (bottomSheetDialog != null && bottomSheetDialog.isShowing()) {
+                Log.d("doMobileRecharge1", "Dialog already open, skipping...");
+                return;
+            }
+
+
+            if (timer != null) {
+                timer.cancel();
+                timer = null;
+            }
+
             timer = new Timer();
-            WalletTransactionBottonDialogBinding _binding = DataBindingUtil.inflate(LayoutInflater.from(this),
-                    R.layout.wallet_transaction_botton_dialog, null, false);
-            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
+            WalletTransactionBottonDialogBinding _binding =
+                    DataBindingUtil.inflate(LayoutInflater.from(this),
+                            R.layout.wallet_transaction_botton_dialog,
+                            null,
+                            false);
+
+            bottomSheetDialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
             bottomSheetDialog.setContentView(_binding.getRoot());
             bottomSheetDialog.setCancelable(false);
             changeStatusBarColor(bottomSheetDialog);
+
             bottomSheet = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
             if (bottomSheet != null) {
                 BottomSheetBehavior<FrameLayout> behavior = BottomSheetBehavior.from(bottomSheet);
@@ -1532,28 +1568,48 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             _binding.btnComplete.setBackgroundResource(R.drawable.pending_button);
             _binding.txtTitle.setText("Waiting for payment");
             _binding.txtMessage.setText("Your transaction is under processing.\nPlease do not press the back button.");
-            timer.schedule(
-                    new TimerTask() {
-                        @Override
-                        public void run() {
+
+            // API har 10 sec call
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    runOnUiThread(() -> {
+                        if (!isGetingAPIResponse) {
+                            isGetingAPIResponse = true;
+                            Log.d("doMobileRecharge", "orderDetails API call");
                             mDefaultPresenter.orderDetails(device_id, order_id);
+                        } else {
+                            Log.d("doMobileRecharge", "Previous call still pending, skipping...");
                         }
-                    }, 10000
-            );
+                    });
+                }
+            }, 0, 10000);
 
             _binding.btnComplete.setOnClickListener(v -> {
                 bottomSheetDialog.dismiss();
-                bottomSheetDialog.cancel();
-                timer.cancel();
+                cancelTimer();
                 showPending("You can recharge after sometime.");
+                hideLoading(loading);
+                isGetingAPIResponse =false;
+            });
+
+            bottomSheetDialog.setOnDismissListener(v ->{
+                cancelTimer();
+                isGetingAPIResponse =false;
             });
 
             bottomSheetDialog.show();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    private void cancelTimer() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

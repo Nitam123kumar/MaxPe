@@ -73,58 +73,35 @@
             android:id="@+id/mpin_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title_layout">
 
-            <!-- Four EditTexts as PIN boxes -->
-            <EditText
-                android:id="@+id/pin_digit_1"
-                android:layout_width="@dimen/_42sdp"
-                android:layout_height="@dimen/_42sdp"
-                android:layout_margin="@dimen/_6sdp"
-                android:background="@drawable/mpin_box_bg"
-                android:gravity="center"
+            <com.mukesh.OtpView
+                android:id="@+id/otp_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:inputType="number"
-                android:maxLength="1"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/pin_digit_2"
-                android:layout_width="@dimen/_42sdp"
-                android:layout_height="@dimen/_42sdp"
-                android:layout_margin="@dimen/_6sdp"
-                android:background="@drawable/mpin_box_bg"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/pin_digit_3"
-                android:layout_width="@dimen/_42sdp"
-                android:layout_height="@dimen/_42sdp"
-                android:layout_margin="@dimen/_6sdp"
-                android:background="@drawable/mpin_box_bg"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/pin_digit_4"
-                android:layout_width="@dimen/_42sdp"
-                android:layout_height="@dimen/_42sdp"
-                android:layout_margin="@dimen/_6sdp"
-                android:background="@drawable/mpin_box_bg"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textSize="18sp" />
-
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:clickable="true"
+                android:cursorVisible="true"
+                android:textColor="@color/black_2"
+                android:textSize="@dimen/_12sdp"
+                app:hideLineWhenFilled="true"
+                android:itemBackground="@drawable/otp_bg"
+                app:itemCount="4"
+                app:itemHeight="@dimen/_35sdp"
+                app:itemSpacing="@dimen/_6sdp"
+                app:itemWidth="@dimen/_35sdp"
+                app:lineColor="@color/white"
+                app:lineWidth="0dp"
+                app:viewType="rectangle" />
         </LinearLayout>
 
         <TextView

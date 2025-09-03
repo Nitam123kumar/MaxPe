@@ -409,7 +409,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 //                                    btnRoffer.setTextColor(Color.BLACK);
 //                                btnRoffer.setBackgroundResource(R.drawable.btn_drawable_disable);
 
-                                    view_cus_info.setBackgroundResource(R.drawable.btn_drawable_disable);
+                                    view_cus_info.setBackgroundResource(R.drawable.proceed_to_pay);
                                     view_cus_info.setTextColor(Color.BLACK);
 
 //                                    view_plan.setTextColor(Color.BLACK);
@@ -490,7 +490,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 //                                btnRoffer.setBackgroundResource(R.drawable.btn_drawable_disable);
 //                                btnRoffer.setTextColor(Color.BLACK);
 
-                                view_cus_info.setBackgroundResource(R.drawable.btn_drawable_disable);
+                                view_cus_info.setBackgroundResource(R.drawable.proceed_to_pay);
                                 view_cus_info.setTextColor(Color.BLACK);
 
 //                                view_plan.setTextColor(Color.BLACK);
@@ -513,7 +513,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                 view_plan.setVisibility(VISIBLE);
                 view_cus_info.setVisibility(VISIBLE);
 //                imgBBPS.setVisibility(GONE);
-                view_cus_info.setBackgroundResource(R.drawable.btn_drawable_disable);
+                view_cus_info.setBackgroundResource(R.drawable.proceed_to_pay);
                 view_cus_info.setTextColor(Color.BLACK);
 //                view_plan.setBackgroundResource(R.drawable.btn_drawable_disable);
 //                view_plan.setTextColor(Color.BLACK);

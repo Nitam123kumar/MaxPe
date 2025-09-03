@@ -27,6 +27,7 @@ import com.vuvrecharge.modules.model.SliderData;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SliderAdapterBanner extends RecyclerView.Adapter<SliderAdapterBanner.SliderViewHolder> {
@@ -35,11 +36,16 @@ public class SliderAdapterBanner extends RecyclerView.Adapter<SliderAdapterBanne
 //    private List<String> color;
     private List<SliderData> banners;
    ItemClickListener listener;
-    public SliderAdapterBanner(Context context,List<SliderData> banners,ItemClickListener listener) {
+    public SliderAdapterBanner(Context context,List<SliderData> banners1,ItemClickListener listener) {
         this.mContext = context;
 //        this.color = color;
-        this.banners = banners;
+        this.banners = banners1;
         this.listener=listener;
+//        if (!banners1.isEmpty()) {
+//            banners.add(banners1.get(banners1.size() - 1)); // last
+//            banners.addAll(banners1);                           // all
+//            banners.add(banners1.get(0));                       // first
+//        }
     }
 
 

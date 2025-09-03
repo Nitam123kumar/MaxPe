@@ -33,7 +33,7 @@
                     android:id="@+id/onBack"
                     android:layout_width="@dimen/_27sdp"
                     android:layout_height="@dimen/_27sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
                     android:background="@drawable/wallet_back_shape"
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="@id/name_tv1"
@@ -247,7 +247,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/latest_transitions"
                         android:textColor="@color/black"
-                        android:textSize="25sp"
+                        android:textSize="@dimen/_18sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

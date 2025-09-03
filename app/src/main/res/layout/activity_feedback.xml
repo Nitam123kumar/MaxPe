@@ -75,7 +75,7 @@
             android:paddingTop="@dimen/_5sdp"
             android:textColorHint="#D1D0D0"
             android:textColor="#6E6E6E"
-            android:textSize="@dimen/_9sdp"
+            android:textSize="@dimen/_10sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_mobile_number" />
 

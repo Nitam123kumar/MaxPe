@@ -137,12 +137,12 @@ public class MobileBankingActivity extends BaseActivity implements DefaultView, 
             public void afterTextChanged(Editable s) {
                 if (!s.toString().isEmpty()){
                     register.setTextColor(Color.WHITE);
-                    register.setBackgroundResource(R.drawable.btn_drawable);
+                    register.setBackgroundResource(R.drawable.ad_money_button_shape);
                     register.setTypeface(register.getTypeface(), Typeface.BOLD);
                 }else {
-                    register.setTextColor(getResources().getColor(R.color.black_4));
+                    register.setTextColor(getResources().getColor(R.color.black));
                     register.setTypeface(register.getTypeface(), Typeface.BOLD);
-                    register.setBackgroundResource(R.drawable.btn_drawable_disable);
+                    register.setBackgroundResource(R.drawable.proceed_to_pay);
                 }
             }
         });
