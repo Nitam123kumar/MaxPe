@@ -252,6 +252,10 @@ public class MainActivity extends BaseActivity implements DefaultView,
     ConstraintLayout onClickToShare;
     @BindView(R.id.facing)
     ConstraintLayout facing;
+    @BindView(R.id.top_Earner)
+    ConstraintLayout top_Earner;
+    @BindView(R.id.follow_us)
+    ConstraintLayout follow_us;
     @BindView(R.id.prepaidTxt)
     TextView prepaidTxt;
     @BindView(R.id.nestedScrollView1)
@@ -354,6 +358,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
         facing.setOnClickListener(this);
         bike_layout.setOnClickListener(this);
         carLayout.setOnClickListener(this);
+        top_Earner.setOnClickListener(this);
+        follow_us.setOnClickListener(this);
         isShowing = true;
         downline_pckage.setOnClickListener(this);
         mDefaultPresenter = new DefaultPresenter(this);
@@ -2099,9 +2105,17 @@ public class MainActivity extends BaseActivity implements DefaultView,
                     Log.d("TAG_DATA", "onClick: " + e.getMessage());
                 }
                 break;
+            case R.id.follow_us:
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/maxpe_payments/"));
+                startActivity(intent);
+                break;
 
             case R.id.add_balance_constraintLayout:
                 intent = new Intent(getActivity(), WalletActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.top_Earner:
+                intent = new Intent(getActivity(), TopEarnerActivity.class);
                 startActivity(intent);
                 break;
             case R.id.onClickToShare:

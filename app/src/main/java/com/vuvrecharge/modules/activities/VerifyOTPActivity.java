@@ -34,6 +34,7 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 
 public class VerifyOTPActivity extends BaseActivity implements DefaultView {
 
@@ -106,7 +107,7 @@ public class VerifyOTPActivity extends BaseActivity implements DefaultView {
         });
         resendOtpTV.setOnClickListener(v -> {
             presenter.loginOTPUser(number);
-            showToast("Resend OTP");
+            Toasty.success(this, "Resend OTP", Toasty.LENGTH_SHORT).show();
         });
 
         back_home.setOnClickListener(v -> {

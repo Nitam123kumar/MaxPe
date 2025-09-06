@@ -908,13 +908,13 @@
                                 android:layout_width="@dimen/_26sdp"
                                 android:layout_height="@dimen/_38sdp"
                                 android:layout_gravity="center"
+                                android:layout_marginEnd="@dimen/_2sdp"
                                 android:background="@drawable/insurance"
                                 android:fontFamily="@font/roboto_bold"
                                 android:gravity="center"
                                 android:maxLines="2"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_10sdp"
-                                android:layout_marginEnd="@dimen/_2sdp"
                                 android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -951,12 +951,12 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_3sdp"
                                 android:fontFamily="@font/inter"
                                 android:text="@string/car_insurance"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_10sdp"
                                 android:textStyle="bold"
-                                android:layout_marginStart="@dimen/_3sdp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -967,10 +967,10 @@
                                 android:layout_width="@dimen/_26sdp"
                                 android:layout_height="@dimen/_38sdp"
                                 android:layout_gravity="center"
+                                android:layout_marginEnd="@dimen/_2sdp"
                                 android:background="@drawable/insurance"
                                 android:fontFamily="@font/roboto_bold"
                                 android:gravity="center"
-                                android:layout_marginEnd="@dimen/_2sdp"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_10sdp"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -1122,14 +1122,101 @@
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/top_Earners_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_64sdp"
+                            android:layout_marginHorizontal="@dimen/_8sdp"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            app:layout_constraintTop_toBottomOf="@+id/snjLayout">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/top_Earner"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="@dimen/_2sdp"
+                                android:background="@drawable/imj"
+                                app:layout_constraintEnd_toStartOf="@id/follow_us"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:id="@+id/earn_imageView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/earn_img_svg"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintEnd_toStartOf="@+id/txtTopEarner"/>
+
+                                <TextView
+                                    android:id="@+id/txtTopEarner"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Top Earners\non MaxPe"
+                                    android:textSize="@dimen/_11sdp"
+                                    android:textStyle="bold"
+                                    android:gravity="center"
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/inter"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/earn_imageView"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/follow_us"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_2sdp"
+                                android:background="@drawable/imj"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/top_Earner"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:id="@+id/socialM_imageView"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_40sdp"
+                                    android:src="@drawable/instagram_svg"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintEnd_toStartOf="@+id/follow_us_Title"/>
+
+                                <TextView
+                                    android:id="@+id/follow_us_Title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Follow Us"
+                                    android:textSize="@dimen/_11sdp"
+                                    android:textStyle="bold"
+                                    android:gravity="center"
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/inter"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/socialM_imageView"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
                         <LinearLayout
                             android:id="@+id/offer_for_you"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/_30sdp"
                             android:layout_marginHorizontal="@dimen/_15sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
                             android:orientation="horizontal"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/snjLayout">
+                            app:layout_constraintTop_toBottomOf="@id/top_Earners_layout">
 
 
                             <ImageView
@@ -1648,9 +1735,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_2sdp"
                         android:layout_marginTop="@dimen/_2sdp"
+                        android:fontFamily="@font/inter"
                         android:gravity="center"
                         android:text="@string/support"
-                        android:fontFamily="@font/inter"
                         android:textColor="#89929B"
                         android:textSize="@dimen/_9sdp"
                         android:textStyle="bold"
@@ -1717,13 +1804,13 @@
                         android:id="@+id/refer_earn_TV"
                         android:layout_width="@dimen/_75sdp"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_6sdp"
+                        android:fontFamily="@font/inter"
                         android:gravity="center"
                         android:text="@string/refer_amp_earn"
                         android:textColor="#89929B"
                         android:textSize="@dimen/_9sdp"
                         android:textStyle="bold"
-                        android:layout_marginBottom="@dimen/_6sdp"
-                        android:fontFamily="@font/inter"
                         app:layout_constraintBottom_toBottomOf="@id/share_earn_layout"
                         app:layout_constraintEnd_toEndOf="@id/share_earn_layout"
                         app:layout_constraintStart_toStartOf="@id/share_earn_layout"
@@ -1755,12 +1842,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_2sdp"
+                        android:fontFamily=""
                         android:gravity="center"
                         android:text="@string/report"
                         android:textColor="#89929B"
                         android:textSize="@dimen/_9sdp"
                         android:textStyle="bold"
-                        android:fontFamily=""
                         app:layout_constraintBottom_toBottomOf="@id/history"
                         app:layout_constraintEnd_toEndOf="@id/history"
                         app:layout_constraintStart_toStartOf="@id/history"
@@ -1780,12 +1867,12 @@
                         android:id="@+id/imgSupport"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_12sdp"
+                        android:fontFamily="@font/inter"
                         android:gravity="center"
                         android:text="@string/commission"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_9sdp"
                         android:textStyle="bold"
-                        android:fontFamily="@font/inter"
                         app:layout_constraintBottom_toTopOf="@id/txtSupport"
                         app:layout_constraintEnd_toEndOf="@id/commission_report_layout"
                         app:layout_constraintStart_toStartOf="@id/commission_report_layout"
@@ -1796,12 +1883,12 @@
                         android:id="@+id/txtSupport"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter"
                         android:gravity="center"
                         android:text="@string/chart"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_9sdp"
                         android:textStyle="bold"
-                        android:fontFamily="@font/inter"
                         app:layout_constraintBottom_toBottomOf="@id/commission_report_layout"
                         app:layout_constraintEnd_toEndOf="@id/commission_report_layout"
                         app:layout_constraintStart_toStartOf="@id/commission_report_layout"

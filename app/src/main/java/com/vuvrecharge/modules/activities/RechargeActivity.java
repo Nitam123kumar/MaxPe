@@ -565,6 +565,15 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                     mDefaultPresenter.dthCustomerInfo(device_id + "", mobile_number_str + "", selected_operator + "");
                 });
                 view_plan.setOnClickListener(v -> {
+                    if (mobile_number_str.trim().isEmpty()) {
+                        showError("Please enter DTH Number");
+                        mobile_number.setText("");
+                        return;
+                    }
+//                    if (mobile_number_str.trim().length() < 10) {
+//                        showError("please enter 10 digit mobile number");
+//                        return;
+//                    }
                     if (selected_operator.equals("Select Operator")) {
                         showError("Please select operator");
                         return;
