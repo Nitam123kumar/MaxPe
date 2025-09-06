@@ -55,8 +55,8 @@ public class DepositFragment extends BaseFragment implements DefaultView {
     ViewGroup rootViewMain;
     @BindView(R.id.list_item)
     RecyclerView list_item;
-    @BindView(R.id.loading)
-    LinearLayout loading;
+//    @BindView(R.id.loading)
+//    LinearLayout loading;
     @BindView(R.id.txtNoData)
     TextView txtNoData;
 
@@ -280,7 +280,7 @@ public class DepositFragment extends BaseFragment implements DefaultView {
             showLoading(loading_dialog);
             submit.setVisibility(GONE);
         } else {
-            showLoading(loading);
+//            showLoading(loading);
         }
     }
 
@@ -290,7 +290,7 @@ public class DepositFragment extends BaseFragment implements DefaultView {
             hideLoading(loading_dialog);
             submit.setVisibility(VISIBLE);
         } else {
-            hideLoading(loading);
+//            hideLoading(loading);
         }
     }
 

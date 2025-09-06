@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.vuvrecharge.R;
 
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Glide.with(context).load(images.get(position)).into(holder.imageView);
+        Glide.with(context).load(images.get(position)).error(R.drawable.reffer_and_earn_image).into(holder.imageView);
     }
 
     @Override

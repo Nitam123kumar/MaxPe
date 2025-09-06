@@ -145,6 +145,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.Holder> {
             }
 //            per_days_cost.setText("Per Day Cost: "+"\u20b9" + resultsBean.getCost_per_days().trim());
             if (resultsBean.getPlan_tags()!=null){
+                best_seller_tag.setVisibility(View.VISIBLE);
                 best_seller_tag.setText(resultsBean.getPlan_tags());
                 best_seller_tag.setBackgroundResource(R.drawable.best_seller_tag);
             }
@@ -387,6 +388,8 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.Holder> {
                     intent.putExtra("provider",provider);
                     intent.putExtra("state",state);
                     intent.putExtra("des",desc);
+                    intent.putExtra("talktime",resultsBean.getTalktime());
+                    intent.putExtra("desc",resultsBean.getSms_value());
                     intent.putExtra("subscription",resultsBean.getSubscription());
                     intent.putExtra("validity",validity);
                     intent.putExtra("data",dataValue.getText().toString());

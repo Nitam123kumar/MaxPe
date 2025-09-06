@@ -26,7 +26,7 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:text="@string/order_id_12316545"
         android:textColor="@color/black"
-        android:textSize="@dimen/_10sdp"
+        android:textSize="@dimen/_11sdp"
         app:layout_constraintStart_toEndOf="@id/imgDone"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,8 +62,9 @@
         android:text="@string/_10"
         android:textSize="@dimen/_12sdp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black"
+        android:textColor="@color/black_2"
         android:textStyle="bold"
+        android:fontFamily="@font/inter"
         app:layout_constraintBottom_toTopOf="@id/txtTotalAmount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/txtOrderId" />
@@ -82,13 +83,14 @@
 
     <TextView
         android:id="@+id/txtTotalAmount"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/final_amount_0"
         android:textColor="#B2B2B2"
         android:textSize="@dimen/_9sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
         app:layout_constraintBottom_toBottomOf="@id/txtDateTime"
-        app:layout_constraintEnd_toEndOf="@id/txtAmount"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtAmount" />
 
     <View
@@ -96,7 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
         android:layout_marginTop="@dimen/_13sdp"
-        android:background="#F8F8F8"
+        android:background="@color/gray_lite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtDateTime" />
 

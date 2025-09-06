@@ -41,7 +41,6 @@
                         android:src="@drawable/black_arrow_svg" />
                 </LinearLayout>
 
-
                 <TextView
                     android:id="@+id/title"
                     android:layout_width="wrap_content"
@@ -51,9 +50,11 @@
                     android:gravity="center_horizontal|center_vertical"
                     android:maxLines="1"
                     android:text="@string/add_money"
+                    android:layout_marginEnd="@dimen/_30sdp"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_16sdp"
                     app:layout_constraintStart_toEndOf="@id/toolbar_layout"
+                    app:layout_constraintEnd_toEndOf="parent"
                     tools:layout_editor_absoluteY="0dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -77,7 +77,7 @@
                     android:layout_marginTop="@dimen/_13sdp"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textSize="@dimen/_10sdp"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintStart_toStartOf="@id/imgINR"
                     app:layout_constraintEnd_toEndOf="@id/imgProvider"
                     app:layout_constraintTop_toBottomOf="@id/txtAmount"/>
@@ -98,26 +98,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Validity"
-                    android:textSize="@dimen/_11sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:textColor="@color/black"
                     android:layout_marginEnd="@dimen/_10sdp"
                     app:layout_constraintVertical_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="@id/viewPlan"
                     app:layout_constraintEnd_toStartOf="@id/txtData"
-                    app:layout_constraintBottom_toTopOf="@id/txtValidityValue"
-                    app:layout_constraintTop_toTopOf="@id/viewPlan"/>
+                    app:layout_constraintTop_toBottomOf="@id/txtValidityValue"
+                    app:layout_constraintBottom_toBottomOf="@id/viewPlan"/>
 
                 <TextView
                     android:id="@+id/txtData"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Data"
-                    android:textSize="@dimen/_11sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:textColor="@color/black"
                     android:layout_marginStart="@dimen/_10sdp"
                     app:layout_constraintStart_toEndOf="@id/txtValidity"
                     app:layout_constraintEnd_toEndOf="@id/viewPlan"
-                    app:layout_constraintTop_toTopOf="@id/txtValidity"/>
+                    app:layout_constraintTop_toTopOf="@id/txtValidity"
+                    app:layout_constraintTop_toBottomOf="@id/txtDataValue"/>
 
                 <TextView
                     android:id="@+id/txtValidityValue"
@@ -126,11 +127,12 @@
                     android:layout_marginTop="@dimen/_4sdp"
                     android:textColor="#242424"
                     android:textStyle="bold"
-                    android:textSize="@dimen/_9sdp"
+                    android:textSize="@dimen/_12sdp"
                     app:layout_constraintStart_toStartOf="@id/txtValidity"
                     app:layout_constraintEnd_toEndOf="@id/txtValidity"
-                    app:layout_constraintTop_toBottomOf="@id/txtValidity"
-                    app:layout_constraintBottom_toBottomOf="@id/viewPlan"/>
+                    app:layout_constraintBottom_toTopOf="@id/txtValidity"
+                    app:layout_constraintTop_toTopOf="@id/viewPlan"
+                    />
 
                 <TextView
                     android:id="@+id/txtDataValue"
@@ -138,12 +140,11 @@
                     android:textColor="#242424"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
-                    android:textSize="@dimen/_9sdp"
-                    android:layout_marginTop="@dimen/_4sdp"
+                    android:textSize="@dimen/_12sdp"
                     app:layout_constraintStart_toStartOf="@id/txtData"
                     app:layout_constraintEnd_toEndOf="@id/txtData"
-                    app:layout_constraintTop_toBottomOf="@id/txtData"
-                    app:layout_constraintBottom_toBottomOf="@id/txtValidityValue"/>
+                    app:layout_constraintTop_toTopOf="@id/txtValidityValue"
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -155,6 +156,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:visibility="visible"
+                android:textSize="@dimen/_12sdp"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_25sdp"
                 app:layout_constraintTop_toBottomOf="@id/plan_layout"

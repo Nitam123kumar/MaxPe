@@ -112,21 +112,21 @@ public class ManualAdapter extends RecyclerView.Adapter<ManualAdapter.Holder> {
 
             if (mFundRequestData.getStatus().toUpperCase().equals("PENDING")) {
                 remaining_amount.setText(mFundRequestData.getStatus().toUpperCase());
-                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_pending_1);
+//                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_pending_1);
                 Glide.with(mContext)
-                        .load(R.drawable.pending_2)
+                        .load(R.drawable.pending_new_icon)
                         .into(imgDone);
             } else if (mFundRequestData.getStatus().toUpperCase().equals("ACCEPTED")) {
                 Glide.with(mContext)
-                        .load(R.drawable.success_2)
+                        .load(R.drawable.done_new_icon)
                         .into(imgDone);
-                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_history_1);
+//                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_history_1);
                 remaining_amount.setText(mFundRequestData.getStatus().toUpperCase());
             } else {
                 Glide.with(mContext)
-                        .load(R.drawable.close_1)
+                        .load(R.drawable.cancle_new_icon)
                         .into(imgDone);
-                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_report_1);
+//                layoutDesignPattern.setBackgroundResource(R.drawable.pattern_report_1);
                 remaining_amount.setText(mFundRequestData.getStatus().toUpperCase());
             }
 //            status.setText(mFundRequestData.getStatus().toUpperCase());

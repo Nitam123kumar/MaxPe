@@ -73,8 +73,8 @@ public class MaxPointFragment extends BaseFragment implements DefaultView {
     @BindView(R.id.txtNoData)
     TextView txtNoData;
 
-    @BindView(R.id.loading)
-    LinearLayout loading;
+//    @BindView(R.id.loading)
+//    LinearLayout loading;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout refresh_layout;
     @BindView(R.id.filter_View)
@@ -310,7 +310,7 @@ public class MaxPointFragment extends BaseFragment implements DefaultView {
             showLoading(loading_dialog);
             submit.setVisibility(GONE);
         } else {
-            showLoading(loading);
+//            showLoading(loading);
         }
     }
 
@@ -320,7 +320,7 @@ public class MaxPointFragment extends BaseFragment implements DefaultView {
             hideLoading(loading_dialog);
             submit.setVisibility(VISIBLE);
         } else {
-            hideLoading(loading);
+//            hideLoading(loading);
         }
     }
 

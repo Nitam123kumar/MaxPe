@@ -105,7 +105,7 @@ public class ComplainsActivity extends BaseActivity implements DefaultView, View
         setContentView(R.layout.activity_complaint);
         ButterKnife.bind(this);
        mToolbar.setOnClickListener(this);
-        title.setText("Complains");
+        title.setText(R.string.complains);
         search.setOnClickListener(this);
         select_from_date.setOnClickListener(this);
         select_to_date.setOnClickListener(this);

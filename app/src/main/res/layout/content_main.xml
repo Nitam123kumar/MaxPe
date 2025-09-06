@@ -39,12 +39,12 @@
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:adjustViewBounds="true"
-                android:fontFamily="@font/roboto"
+                android:fontFamily="@font/inter"
                 android:gravity="center"
                 android:text=""
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_11sdp"
+                android:textSize="@dimen/_12sdp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/img"
@@ -251,7 +251,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    android:background="#F9FAFB"
                     android:orientation="vertical"
                     android:paddingBottom="@dimen/_120sdp">
 
@@ -480,7 +480,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:layout_marginTop="@dimen/_7sdp"
-                                    android:fontFamily="@font/roboto"
+                                    android:fontFamily="@font/inter"
                                     android:text="@string/postpaid"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/_10sdp"
@@ -516,7 +516,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:layout_marginTop="@dimen/_7sdp"
-                                    android:fontFamily="@font/roboto"
+                                    android:fontFamily="@font/inter"
                                     android:text="@string/dth_"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/_10sdp"
@@ -552,7 +552,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:layout_marginTop="@dimen/_7sdp"
-                                    android:fontFamily="@font/roboto"
+                                    android:fontFamily="@font/inter"
                                     android:text="@string/landline"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/_10sdp"
@@ -589,7 +589,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:layout_marginTop="@dimen/_7sdp"
-                                    android:fontFamily="@font/roboto"
+                                    android:fontFamily="@font/inter"
                                     android:text="@string/electricity"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/_10sdp"
@@ -626,7 +626,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:layout_marginTop="@dimen/_7sdp"
-                                    android:fontFamily="@font/roboto"
+                                    android:fontFamily="@font/inter"
                                     android:text="@string/fastag"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/_10sdp"
@@ -663,7 +663,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:layout_marginTop="@dimen/_7sdp"
-                                    android:fontFamily="@font/roboto"
+                                    android:fontFamily="@font/inter"
                                     android:text="@string/cylinder"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/_10sdp"
@@ -700,7 +700,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
                                     android:layout_marginTop="@dimen/_7sdp"
-                                    android:fontFamily="@font/roboto"
+                                    android:fontFamily="@font/inter"
                                     android:paddingHorizontal="@dimen/_10sdp"
                                     android:text="@string/view_all"
                                     android:textColor="@color/black"
@@ -733,9 +733,9 @@
                             android:id="@+id/recharge_tag"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_2sdp"
-                            android:layout_marginTop="@dimen/_7sdp"
-                            android:src="@drawable/flash_rec"
+                            android:layout_marginStart="@dimen/_7sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:src="@drawable/path2221"
                             app:layout_constraintBottom_toBottomOf="@id/recharge_and_txt"
                             app:layout_constraintEnd_toStartOf="@id/recharge_and_txt"
                             app:layout_constraintStart_toStartOf="parent"
@@ -748,7 +748,7 @@
                             android:layout_marginVertical="@dimen/_20sdp"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:elevation="@dimen/_2sdp"
-                            android:fontFamily="@font/roboto"
+                            android:fontFamily="@font/inter"
                             android:gravity="center_vertical"
                             android:paddingTop="@dimen/_6sdp"
                             android:text="@string/recharge_amp_bill_payment"
@@ -844,7 +844,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginStart="@dimen/_8sdp"
-                            android:fontFamily="@font/roboto"
+                            android:fontFamily="@font/inter"
                             android:text="@string/bike_car_insurance"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_14sdp"
@@ -866,7 +866,7 @@
                         app:layout_constraintTop_toBottomOf="@id/insurance">
 
 
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/bike_layout"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -884,43 +884,55 @@
                                 android:layout_height="@dimen/_26sdp"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="@dimen/_4sdp"
-                                android:src="@drawable/bike_img" />
+                                android:src="@drawable/bike_img"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:fontFamily="@font/roboto"
+                                android:fontFamily="@font/inter"
                                 android:text="@string/bike_insurance"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/_9sdp"
-                                android:textStyle="bold" />
+                                android:textSize="@dimen/_10sdp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:id="@+id/bike_percent"
                                 android:layout_width="@dimen/_26sdp"
                                 android:layout_height="@dimen/_38sdp"
                                 android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_10sdp"
                                 android:background="@drawable/insurance"
                                 android:fontFamily="@font/roboto_bold"
                                 android:gravity="center"
+                                android:maxLines="2"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_10sdp"
-                                android:textStyle="bold" />
+                                android:layout_marginEnd="@dimen/_2sdp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
 
-                        </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/carLayout"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginStart="@dimen/_2sdp"
                             android:layout_weight="1"
                             android:background="@drawable/category_bg_selected"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/bike_layout">
 
@@ -930,33 +942,43 @@
                                 android:layout_height="@dimen/_25sdp"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="@dimen/_6sdp"
-                                android:src="@drawable/car_img" />
+                                android:src="@drawable/car_img"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_marginLeft="@dimen/_8sdp"
-                                android:fontFamily="@font/roboto"
+                                android:fontFamily="@font/inter"
                                 android:text="@string/car_insurance"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/_9sdp"
-                                android:textStyle="bold" />
+                                android:textSize="@dimen/_10sdp"
+                                android:textStyle="bold"
+                                android:layout_marginStart="@dimen/_3sdp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:id="@+id/car_percent"
                                 android:layout_width="@dimen/_26sdp"
                                 android:layout_height="@dimen/_38sdp"
                                 android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_10sdp"
                                 android:background="@drawable/insurance"
                                 android:fontFamily="@font/roboto_bold"
                                 android:gravity="center"
+                                android:layout_marginEnd="@dimen/_2sdp"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_10sdp" />
+                                android:textSize="@dimen/_10sdp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
 
-                        </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -1040,7 +1062,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="@dimen/_8sdp"
-                                android:fontFamily="@font/roboto"
+                                android:fontFamily="@font/inter"
                                 android:text="@string/ott_subscriptions"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_14sdp"
@@ -1126,7 +1148,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="@dimen/_8sdp"
-                                android:fontFamily="@font/roboto"
+                                android:fontFamily="@font/inter"
                                 android:text="@string/offers_for_you"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_14sdp"
@@ -1166,7 +1188,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="@dimen/_8sdp"
-                                android:fontFamily="@font/roboto"
+                                android:fontFamily="@font/inter"
                                 android:text="@string/spotlight_services"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_14sdp"
@@ -1249,7 +1271,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_marginStart="@dimen/_8sdp"
-                                android:fontFamily="@font/roboto"
+                                android:fontFamily="@font/inter"
                                 android:text="@string/tutorials"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_14sdp"
@@ -1553,7 +1575,7 @@
                             android:layout_marginTop="@dimen/_8sdp"
                             android:layout_marginBottom="@dimen/_10sdp"
                             android:gravity="center"
-                            android:text="The more you share, the more you earn!"
+                            android:text="@string/the_more_you_share_the_more_you_earn"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_10sdp"
                             app:layout_constraintEnd_toEndOf="@id/footer"
@@ -1628,6 +1650,7 @@
                         android:layout_marginTop="@dimen/_2sdp"
                         android:gravity="center"
                         android:text="@string/support"
+                        android:fontFamily="@font/inter"
                         android:textColor="#89929B"
                         android:textSize="@dimen/_9sdp"
                         android:textStyle="bold"
@@ -1681,8 +1704,8 @@
 
                     <pl.droidsonroids.gif.GifImageView
                         android:id="@+id/refer_earn_imageView"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
                         android:src="@drawable/reffer_icon"
                         app:layout_constraintBottom_toTopOf="@id/refer_earn_TV"
                         app:layout_constraintEnd_toEndOf="@id/share_earn_layout"
@@ -1699,6 +1722,8 @@
                         android:textColor="#89929B"
                         android:textSize="@dimen/_9sdp"
                         android:textStyle="bold"
+                        android:layout_marginBottom="@dimen/_6sdp"
+                        android:fontFamily="@font/inter"
                         app:layout_constraintBottom_toBottomOf="@id/share_earn_layout"
                         app:layout_constraintEnd_toEndOf="@id/share_earn_layout"
                         app:layout_constraintStart_toStartOf="@id/share_earn_layout"
@@ -1735,6 +1760,7 @@
                         android:textColor="#89929B"
                         android:textSize="@dimen/_9sdp"
                         android:textStyle="bold"
+                        android:fontFamily=""
                         app:layout_constraintBottom_toBottomOf="@id/history"
                         app:layout_constraintEnd_toEndOf="@id/history"
                         app:layout_constraintStart_toStartOf="@id/history"
@@ -1759,6 +1785,7 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/_9sdp"
                         android:textStyle="bold"
+                        android:fontFamily="@font/inter"
                         app:layout_constraintBottom_toTopOf="@id/txtSupport"
                         app:layout_constraintEnd_toEndOf="@id/commission_report_layout"
                         app:layout_constraintStart_toStartOf="@id/commission_report_layout"
@@ -1774,6 +1801,7 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/_9sdp"
                         android:textStyle="bold"
+                        android:fontFamily="@font/inter"
                         app:layout_constraintBottom_toBottomOf="@id/commission_report_layout"
                         app:layout_constraintEnd_toEndOf="@id/commission_report_layout"
                         app:layout_constraintStart_toStartOf="@id/commission_report_layout"

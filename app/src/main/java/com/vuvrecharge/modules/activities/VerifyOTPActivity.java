@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -55,6 +56,12 @@ public class VerifyOTPActivity extends BaseActivity implements DefaultView {
     TextView timerTV;
     @BindView(R.id.help_support)
     TextView help_support;
+    @BindView(R.id.resendOtpTV)
+    TextView resendOtpTV;
+    @BindView(R.id.timer1)
+    TextView timer1;
+    @BindView(R.id.back_home)
+    ImageView back_home;
     @BindView(R.id.call_layout)
     ConstraintLayout call_layout;
     @BindView(R.id.whatsapp_layout)
@@ -80,7 +87,7 @@ public class VerifyOTPActivity extends BaseActivity implements DefaultView {
         ButterKnife.bind(this);
         presenter = new DefaultPresenter(this);
         number = getIntent().getStringExtra("number");
-        optOfNumber.setText("OTP Sent to Mobile +" + number);
+        optOfNumber.setText("OTP Sent to Mobile +91 " + number);
         changeStatusBarColorLoginPage();
         presenter.supportContacts(device_id);
 
@@ -96,6 +103,14 @@ public class VerifyOTPActivity extends BaseActivity implements DefaultView {
             i.setData(Uri.parse(url));
             Intent chooser = Intent.createChooser(i, "Chat with...");
             startActivity(chooser);
+        });
+        resendOtpTV.setOnClickListener(v -> {
+            presenter.loginOTPUser(number);
+            showToast("Resend OTP");
+        });
+
+        back_home.setOnClickListener(v -> {
+            onBackPressed();
         });
 
 
@@ -118,28 +133,27 @@ public class VerifyOTPActivity extends BaseActivity implements DefaultView {
 //                                );
 //                                hideKeyBoard(binding.password);
 //                            }
-                timerTV.setText("Didn't receive OTP? Resend in " + millisUntilFinished / 1000 + " seconds");
+                timer1.setVisibility(View.VISIBLE);
+                timer1.setText("Didn't receive OTP? Resend in " + millisUntilFinished / 1000 + " seconds");
+                resendOtpTV.setVisibility(View.GONE);
+                timerTV.setVisibility(View.GONE);
+
             }
 
             @Override
             public void onFinish() {
                 btnVerifyOtp.setEnabled(true);
                 btnVerifyOtp.setClickable(true);
-                btnVerifyOtp.setText("Resend OTP");
+                resendOtpTV.setVisibility(View.VISIBLE);
+                timerTV.setVisibility(View.VISIBLE);
+                timer1.setVisibility(View.GONE);
             }
         }.start();
 
 
         btnVerifyOtp.setOnClickListener(v -> {
             String btnText = btnVerifyOtp.getText().toString();
-            if (btnText.equals("Resend OTP")) {
-                presenter.loginOTPUser(number);
-
-            } else {
-
                 if (Objects.requireNonNull(btnVerifyOtp.getText()).toString().isEmpty()) {
-                    showErrorLoginPage("Enter mobile number");
-                } else if (Objects.requireNonNull(btnVerifyOtp.getText()).toString().isEmpty()) {
                     showErrorLoginPage("Enter OTP");
                 } else {
                     presenter.loginVerifyUser(
@@ -148,7 +162,7 @@ public class VerifyOTPActivity extends BaseActivity implements DefaultView {
                             device_id
                     );
                     hideKeyBoard(enterOtp);
-                }
+                    timer.cancel();
 
             }
         });

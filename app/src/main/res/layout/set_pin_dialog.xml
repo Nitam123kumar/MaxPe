@@ -16,8 +16,8 @@
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_gravity="right"
-                android:padding="17dp"
-                android:src="@drawable/cross" />
+                android:padding="@dimen/_10sdp"
+                android:src="@drawable/cancel_icon_svg" />
 
             <ScrollView
                 android:layout_width="match_parent"

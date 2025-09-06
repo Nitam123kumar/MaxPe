@@ -98,6 +98,8 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
 //    TextView help;
     @BindView(R.id.txtMsg)
     TextView txtMsg;
+    @BindView(R.id.note_TextView2)
+    TextView note_TextView2;
     @BindView(R.id.discountRecyclerView)
     RecyclerView discountRecyclerView;
     @BindView(R.id.loading)
@@ -144,7 +146,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
         setContentView(R.layout.activity_add_balance);
         ButterKnife.bind(this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        title.setText("Add Money");
+        title.setText(R.string.add_money);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         mDefaultPresenter = new DefaultPresenter(this);
         mDefaultPresenter.getPaymentSetting2(device_id + "", "timepass");
@@ -400,6 +402,14 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
 
 
             }
+
+            if (object.has("note")){
+                note_TextView2.setText(object.getString("note"));
+            }
+            if (object.has("info")) {
+                txtMsg.setText(object.getString("info"));
+            }
+
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         } catch (JSONException e) {
@@ -585,9 +595,9 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
             if (json.getString("manual_getway").equals("Yes")) {
                 list.add(new PaymentSetting(R.drawable.mobile_banking_logo_2, "Mobile", "Banking (IMPS)"));
             }
-            if (json.getString("manual_getway").equals("Yes")) {
-                list.add(new PaymentSetting(R.drawable.mobile_banking_logo_2, "Mobile", "Banking (IMPS)"));
-            }
+//            if (json.getString("manual_getway").equals("Yes")) {
+//                list.add(new PaymentSetting(R.drawable.mobile_banking_logo_2, "Mobile", "Banking (IMPS)"));
+//            }
 
             if (!list.isEmpty()) {
                 LinearLayoutManager manager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
@@ -811,10 +821,10 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
             bottomSheetDialog.cancel();
 
         }
-//        else if (name.equals("Mobile")){
-//                Intent  intent = new Intent(getActivity(), MobileBankingActivity.class);
-//                startActivity(intent);
-//        }
+        else if (name.equals("Mobile")){
+                Intent  intent = new Intent(getActivity(), MobileBankingActivity.class);
+                startActivity(intent);
+        }
 
 //        switch (name){
 //            case "Paytm":

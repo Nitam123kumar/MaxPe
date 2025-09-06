@@ -45,6 +45,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
@@ -88,8 +89,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 @SuppressLint({"NonConstantResourceId, SetTextI18n"})
 public class RechargeReportActivity extends BaseActivity implements DefaultView, View.OnClickListener {
 
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+    @BindView(R.id.top)
+    AppBarLayout mToolbar;
     @BindView(R.id.title)
     TextView title;
     @BindView(R.id.title_sub)
@@ -130,8 +131,8 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
     LinearLayout share_view;
     @BindView(R.id.second_layout)
     LinearLayout second_layout;
-    @BindView(R.id.load)
-    ImageView load;
+//    @BindView(R.id.load)
+//    ImageView load;
     @BindView(R.id.operator_img)
     CircleImageView operator_img_;
     @BindView(R.id.loading)
@@ -180,7 +181,6 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
         super.onCreate(state);
         setContentView(R.layout.activity_recharge_report);
         ButterKnife.bind(this);
-        mToolbar.setOnClickListener(this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         addMore.setOnClickListener(this);
         done.setOnClickListener(this);
@@ -210,18 +210,18 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
             }
         };
         BaseMethod.refresh = "Refresh";
-        try {
-            Glide.with(getActivity()).asGif().load(R.drawable.load).into(load);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Glide.with(getActivity()).asGif().load(R.drawable.load).into(load);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            mToolbar.setNavigationOnClickListener(v -> onBackPressed());
-            Objects.requireNonNull(mToolbar.getNavigationIcon()).setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
-            setTitle("");
-        }
+//        if (getSupportActionBar() != null) {
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//            mToolbar.setNavigationOnClickListener(v -> onBackPressed());
+//            Objects.requireNonNull(mToolbar.getNavigationIcon()).setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
+//            setTitle("");
+//        }
         back_to_home.setOnClickListener(v -> {
             onBackPressed();
             finish();
@@ -236,12 +236,12 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
             if (mReportsData.getStatus() != null){
                 if (mReportsData.getStatus().equals("PENDING")) {
                     changeStatusBarColorProcess();
-                    load.setVisibility(VISIBLE);
+//                    load.setVisibility(VISIBLE);
                     mToolbar.setBackgroundColor(getResources().getColor(R.color.pending1));
                     title.setText("Transaction Processing");
                     Glide.with(this)
                             .asGif()
-                            .load(R.drawable.animated_pending)
+                            .load(R.drawable.pending)
                             .into(imgResponse);
                     second_layout.setBackgroundResource(R.drawable.pending_transaction_drawable);
                     amountDebit.setVisibility(VISIBLE);
@@ -255,7 +255,7 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
                     second_layout.setBackgroundResource(R.drawable.green_transaction_drawable);
                     Glide.with(this)
                             .asGif()
-                            .load(R.drawable.animated_right)
+                            .load(R.drawable.right)
                             .into(imgResponse);
                     if (mReportsData.getRecharge_type() != null){
                         recharge_type = mReportsData.getRecharge_type();
@@ -274,7 +274,7 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
 
                     remark.setVisibility(GONE);
                     mToolbar.setBackgroundColor(getResources().getColor(R.color.success1));
-                    load.setVisibility(GONE);
+//                    load.setVisibility(GONE);
                     title.setText("Transaction Successful");
                 } else {
                     amountDebit.setVisibility(GONE);
@@ -283,11 +283,11 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
                     second_layout.setBackgroundResource(R.drawable.failed_transaction_drawable);
                     Glide.with(this)
                             .asGif()
-                            .load(R.drawable.animated_wrong)
+                            .load(R.drawable.wrong_gif)
                             .into(imgResponse);
                     mToolbar.setBackgroundColor(getResources().getColor(R.color.failed1));
                     title.setText("Transaction Failed");
-                    load.setVisibility(GONE);
+//                    load.setVisibility(GONE);
                     commission_bg.setVisibility(GONE);
                 }
             }
@@ -350,16 +350,21 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
             operator.setText(mReportsData.getOperator_name());
             number.setText(mReportsData.getNumber());
             order_id.setText("Order Id : " + mReportsData.getOrder_id());
-            amount_wallet.setText("\u20b9" + mReportsData.getAmount());
-            amount_wallet_2.setText("\u20b9" + mReportsData.getAmount());
-            DecimalFormat decimalFormat = new DecimalFormat("0.000");
+            DecimalFormat decimalFormat = new DecimalFormat("0.00");
+
+            double amountValue = Double.parseDouble(mReportsData.getAmount());
+
+            amount_wallet.setText("\u20b9" + decimalFormat.format(amountValue));
+            amount_wallet_2.setText("\u20b9" + decimalFormat.format(amountValue));
             double final_charge = Double.parseDouble(mReportsData.getFinal_charge());
-           double points = Double.parseDouble(mReportsData.getPoints());
+            double points = Double.parseDouble(mReportsData.getPoints());
             double amount = Double.parseDouble(mReportsData.getAmount());
+
             double commission_details = amount - final_charge;
+
             commission.setText("\u20b9" + decimalFormat.format(commission_details));
-            debit.setText("\u20b9" + mReportsData.getFinal_charge());
-            debit_maxPoints.setText("\u20b9" + mReportsData.getPoints());
+            debit.setText("\u20b9" + decimalFormat.format(final_charge));
+            debit_maxPoints.setText("\u20b9" + decimalFormat.format(points));
 
             if (mReportsData.getStatus().equals("FAILED")) {
                 if (mReportsData.getOperator_ref().equals("")) {
@@ -428,9 +433,9 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
             case R.id.addMore:
                 screen = "No";
                 if (!selectFile()) {
-                    setToolbarFalse(mToolbar);
+//                    setToolbarFalse(mToolbar);
                     takeScreenshot(share_view);
-                    new Handler().postDelayed(() -> setToolbar(mToolbar), 1000);
+//                    new Handler().postDelayed(() -> setToolbar(mToolbar), 1000);
                 }
                 break;
             case R.id.toolbar_layout:
@@ -446,9 +451,9 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
                 break;
             case R.id.imgPDF:
                 if (!selectFile()){
-                    setToolbarFalse(mToolbar);
+//                    setToolbarFalse(mToolbar);
                     pdf(share_view);
-                    new Handler().postDelayed(() -> setToolbar(mToolbar), 1000);
+//                    new Handler().postDelayed(() -> setToolbar(mToolbar), 1000);
                 }
                 break;
         }

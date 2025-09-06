@@ -12,6 +12,10 @@
     <string name="log_out">লগ আউট</string>
     <string name="share">শেয়ার করুন</string>
     <string name="school_info">সম্পর্কে</string>
+    <string name="complains">অভিযোগ করে</string>
+    <string name="help_and_support"><![CDATA[সাহায্য ও সহায়তা]]></string>
+    <string name="submit_your_feedback">আপনার মতামত জমা দিন</string>
+    <string name="the_more_you_share_the_more_you_earn">আপনি যত বেশি শেয়ার করবেন, তত বেশি আয় করবেন!</string>
     <string name="rate_us">আমাদের রেট দিন</string>
     <string name="contact_us">যোগাযোগ করুন</string>
     <string name="change_password">পাসওয়ার্ড পরিবর্তন করুন</string>
@@ -486,5 +490,7 @@
     <string name="maxpoints_discount">ম্যাক্সপয়েন্টস ছাড়</string>
     <string name="payable_amount">প্রদেয় পরিমাণ</string>
     <string name="aavailable_balance">উপলব্ধ ব্যালেন্স:</string>
+    <string name="deposit">জমা</string>
+    <string name="recharge">রিচার্জ</string>
 
 </resources>

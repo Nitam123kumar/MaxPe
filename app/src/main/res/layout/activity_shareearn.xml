@@ -38,7 +38,6 @@
                     android:id="@+id/mToolbar_constraint"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_160sdp"
-                    android:background="@drawable/help_section_shape"
                     app:layout_constraintTop_toTopOf="parent">
 
 

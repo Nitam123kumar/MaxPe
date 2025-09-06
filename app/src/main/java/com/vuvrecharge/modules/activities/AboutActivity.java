@@ -56,7 +56,12 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Intent intent = getIntent();
         from = intent.getStringExtra("from");
-        title.setText(from);
+        if (from.equals("Return, Refund and Cancellation policy")){
+            title.setText("Return and Refund Policy");
+        }else {
+            title.setText(from);
+        }
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             webView.getSettings().setSafeBrowsingEnabled(true);

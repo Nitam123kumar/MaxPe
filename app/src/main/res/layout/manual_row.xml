@@ -7,7 +7,7 @@
     android:layout_marginEnd="@dimen/_5sdp"
     android:layout_marginTop="@dimen/_6sdp"
     android:id="@+id/layoutDesignPattern"
-    android:background="@drawable/pattern_history_1">
+    >
 
     <ImageView
         android:id="@+id/imgDone"
@@ -23,8 +23,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/order_id_145258"
-        android:textColor="@color/black_2"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_11sdp"
         android:textStyle="bold"
+        android:fontFamily="@font/inter"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:layout_marginStart="@dimen/_10sdp"
         app:layout_constraintVertical_chainStyle="packed"
@@ -35,10 +37,12 @@
 
     <TextView
         android:id="@+id/amount"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/u20b910"
         android:textStyle="bold"
+        android:textSize="@dimen/_12sdp"
+        android:fontFamily="@font/inter"
         android:layout_marginEnd="@dimen/_18sdp"
         android:textColor="@color/black_2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +54,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:text="@string/amount_u20b9720"
+        android:textSize="@dimen/_10sdp"
         android:textColor="@color/black_2"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         app:layout_constraintStart_toStartOf="@id/order_id"
@@ -61,10 +66,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/black_light"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_3sdp"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:gravity="start"
+        android:fontFamily="@font/inter"
+        android:textSize="@dimen/_9sdp"
         app:layout_constraintStart_toStartOf="@id/imgDone"
         app:layout_constraintTop_toBottomOf="@id/imgDone"
         app:layout_constraintEnd_toStartOf="@id/remaining_amount"/>
@@ -74,9 +81,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/black_light"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="@dimen/_3sdp"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:gravity="end"
+        android:fontFamily="@font/inter"
+        android:textSize="@dimen/_9sdp"
         app:layout_constraintTop_toTopOf="@id/date_time"
         app:layout_constraintBottom_toBottomOf="@id/date_time"
         app:layout_constraintStart_toEndOf="@id/date_time"
@@ -88,6 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
         android:textColor="@color/black_2"
+        android:fontFamily="@font/inter"
         android:textSize="@dimen/_9sdp"
         android:layout_marginBottom="@dimen/_18sdp"
         app:layout_constraintStart_toStartOf="@id/imgDone"
@@ -102,10 +112,20 @@
         android:textColor="@color/black_2"
         android:textSize="@dimen/_9sdp"
         android:textStyle="bold"
+        android:fontFamily="@font/inter"
         android:layout_marginBottom="@dimen/_18sdp"
         app:layout_constraintStart_toStartOf="@id/imgDone"
         app:layout_constraintEnd_toEndOf="@id/amount"
         app:layout_constraintTop_toBottomOf="@id/remark"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@color/gray_lite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reason" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

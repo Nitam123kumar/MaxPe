@@ -22,7 +22,7 @@
             android:layout_width="@dimen/_27sdp"
             android:layout_height="@dimen/_27sdp"
             android:layout_marginStart="@dimen/_12sdp"
-            android:background="@drawable/wallet_back_shape"
+            android:background="@drawable/on_back_shape"
             android:contentDescription="@string/max_pe"
             android:padding="@dimen/_8sdp"
             android:src="@drawable/back_arrow1"

@@ -78,7 +78,7 @@ public class FeedbackActivity extends BaseActivity implements DefaultView, View.
         mToolBar.setOnClickListener(this);
         submit_feedback_Btn.setOnClickListener(this);
         mDefaultPresenter = new DefaultPresenter(this);
-        title.setText("Submit Your Feedback");
+        title.setText(R.string.submit_your_feedback);
 
 
         try {

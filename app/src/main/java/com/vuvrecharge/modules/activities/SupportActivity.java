@@ -100,7 +100,7 @@ public class SupportActivity extends BaseActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_support);
         ButterKnife.bind(this);
-        title.setText("Help & Support");
+        title.setText(R.string.help_and_support);
         mToolbar.setOnClickListener(this);
         contactSupportLayout.setOnClickListener(this);
         whatsAppSupportLayout.setOnClickListener(this);

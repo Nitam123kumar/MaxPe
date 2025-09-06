@@ -580,6 +580,7 @@ public class BharatBillPayActivity extends BaseActivity implements DefaultView, 
             clazz = Class.forName(intent_name);
             intent = new Intent(getActivity(), clazz);
             JSONObject object = new JSONObject(extra_data);
+            Log.e("extra_data",extra_data);
 
             if (object.length() > 0) {
                 Iterator<String> keys = object.keys();

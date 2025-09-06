@@ -18,6 +18,7 @@
         android:layout_height="@dimen/_30sdp"
         android:layout_marginStart="@dimen/_5sdp"
         android:src="@drawable/done_1"
+        android:layout_marginTop="@dimen/_5sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
        />
@@ -28,8 +29,8 @@
         android:layout_height="wrap_content"
         android:text="@string/order_id_145258"
         android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="@dimen/_9sdp"
+        android:fontFamily="@font/inter"
+        android:textSize="@dimen/_11sdp"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_2sdp"
@@ -49,6 +50,7 @@
         android:layout_marginEnd="@dimen/_2sdp"
         android:textColor="@color/black_2"
         android:textSize="@dimen/_12sdp"
+        android:fontFamily="@font/inter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/order_id"
         app:layout_constraintBottom_toBottomOf="@id/order_id"/>
@@ -82,18 +84,17 @@
 
     <TextView
         android:id="@+id/remaining_amount"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/remaining_balance_u20b9251"
         android:textColor="@color/black_light"
         android:layout_marginStart="@dimen/_3sdp"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        android:gravity="end"
         android:textSize="@dimen/_7sdp"
-
+        android:layout_marginEnd="@dimen/_2sdp"
         app:layout_constraintBottom_toBottomOf="@id/date_time"
         app:layout_constraintTop_toTopOf="@id/date_time"
-        app:layout_constraintEnd_toEndOf="@id/amount"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
         android:id="@+id/reason"
@@ -103,6 +104,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/_9sdp"
         android:textStyle="bold"
+        android:fontFamily="@font/inter"
         android:layout_marginTop="@dimen/_8sdp"
         app:layout_constraintStart_toStartOf="@id/imgDone"
         app:layout_constraintEnd_toEndOf="@id/remaining_amount"
@@ -112,7 +114,7 @@
         android:id="@+id/view5"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
-        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/reason"
         android:background="#F8F8F8"

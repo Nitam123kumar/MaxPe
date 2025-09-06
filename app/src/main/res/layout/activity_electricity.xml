@@ -18,29 +18,73 @@
         android:background="@drawable/biller_main_shape"
         app:layout_constraintTop_toBottomOf="@id/mToolbar">
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/search_electricity"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:layout_marginTop="@dimen/_12sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_4sdp"
-        android:background="@drawable/img1"
-        android:drawableStart="@drawable/ic_search"
-        android:gravity="center_vertical"
-        android:hint="@string/search"
-        android:paddingStart="@dimen/_10sdp"
-        android:imeOptions="actionSearch"
-        android:inputType="text"
-        android:textColor="@color/black"
-        android:textColorHint="#B5B5B5"
-        android:textSize="@dimen/_13sdp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/imgBharatBillPay"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <ImageView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/searchLayout"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_35sdp"
+            app:layout_constraintEnd_toStartOf="@id/imgBharatBillPay"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgBharatBillPay"
+            app:layout_constraintBottom_toBottomOf="@+id/imgBharatBillPay">
+
+            <TextView
+                android:id="@+id/txtSearch"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/img1"
+                android:drawableEnd="@drawable/ic_search"
+                android:drawablePadding="@dimen/_8sdp"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingEnd="@dimen/_15sdp"
+                android:text="@string/search"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UseCompatTextViewDrawableXml" />
+
+            <EditText
+                android:id="@+id/search_electricity"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginHorizontal="@dimen/_8sdp"
+                android:background="@drawable/img1"
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="@dimen/_8sdp"
+                android:hint="@string/search"
+                android:paddingEnd="@dimen/_52sdp"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:paddingStart="@dimen/_10sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/txtSearch"
+                app:layout_constraintEnd_toStartOf="@id/txtCancel"
+                app:layout_constraintStart_toStartOf="@+id/txtSearch"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <requestFocus />
+            </EditText>
+
+            <ImageView
+                android:id="@+id/txtCancel"
+                android:layout_width="@dimen/_17sdp"
+                android:layout_height="@dimen/_17sdp"
+                android:gravity="center"
+                android:src="@drawable/details_cancel_icon"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorPrimaryB"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/search_electricity"
+                app:layout_constraintEnd_toEndOf="@id/search_electricity"
+                app:layout_constraintTop_toTopOf="@id/search_electricity" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <ImageView
         android:id="@+id/imgBharatBillPay"
         android:layout_width="@dimen/_60sdp"
         android:layout_height="@dimen/_40sdp"
@@ -48,7 +92,7 @@
         android:layout_marginEnd="@dimen/_10sdp"
         android:src="@drawable/bharat_connect"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/search_electricity"
+        app:layout_constraintStart_toEndOf="@id/searchLayout"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -60,7 +104,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:paddingBottom="@dimen/_60sdp"
-        app:layout_constraintTop_toBottomOf="@id/search_electricity">
+        app:layout_constraintTop_toBottomOf="@id/searchLayout">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/electricityListView"

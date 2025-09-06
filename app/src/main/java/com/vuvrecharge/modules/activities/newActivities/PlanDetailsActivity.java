@@ -241,6 +241,7 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
         if (getIntent().getStringExtra("amount1") != null) {
             amount = getIntent().getStringExtra("amount1");
         }
+        Log.d("fetchPrepaidPlanDetailsLocal", "desc: " + getIntent().getStringExtra("desc"));
 
         transaction_amount.setText("\u20b9" + amount);
         mDefaultView = this;
@@ -284,7 +285,7 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
             rOfferLayout.setVisibility(VISIBLE);
 
 
-            Log.d("fetchPrepaidPlanDetailsLocal", "validity1: " + validity);
+            Log.d("fetchPrepaidPlanDetailsLocal", "validity2: " + validity);
         } else {
             amount_layout.setVisibility(VISIBLE);
             amount_layout1.setVisibility(GONE);
@@ -294,7 +295,9 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
             noteDet1.setVisibility(GONE);
             noteTView1.setVisibility(GONE);
             rOfferLayout.setVisibility(GONE);
+            Log.d("fetchPrepaidPlanDetailsLocal", "validity1: " + validity);
         }
+
 
         apply_ImageView.setOnClickListener(v -> {
             pointsMoreDetails("" + usable_percentage + "%");
@@ -670,6 +673,8 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
                 binding.warningMessage.setVisibility(View.VISIBLE);
                 binding.warningMessage.setText(warning_message);
             }
+
+            binding.otpView.requestFocus();
 
 
             // Initially disable confirm button
@@ -1096,19 +1101,19 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
                 _binding.txtMessage.setText(message);
                 _binding.txtSlug.setText("Oops!");
                 _binding.txtSlug.setVisibility(View.GONE);
-                Glide.with(this).asGif().load(R.drawable.animated_wrong).into(_binding.imgGif);
+                Glide.with(this).asGif().load(R.drawable.wrong_gif).into(_binding.imgGif);
                 _binding.btnComplete.setBackgroundResource(R.drawable.ad_money_button_shape);
             } else if (status.equalsIgnoreCase("PENDING")) {
-                _binding.txtTitle.setText("Pending");
+                _binding.txtTitle.setText("Transaction Processing");
                 _binding.txtMessage.setText(message);
                 _binding.txtSlug.setText("CHILL!");
-                Glide.with(this).asGif().load(R.drawable.animated_pending).into(_binding.imgGif);
+                Glide.with(this).asGif().load(R.drawable.pending).into(_binding.imgGif);
                 _binding.btnComplete.setBackgroundResource(R.drawable.ad_money_button_shape);
             } else {
                 _binding.txtTitle.setText("Success");
                 _binding.txtMessage.setText(message);
                 _binding.txtSlug.setText("Thank You!");
-                Glide.with(this).asGif().load(R.drawable.animated_right).into(_binding.imgGif);
+                Glide.with(this).asGif().load(R.drawable.right).into(_binding.imgGif);
                 _binding.btnComplete.setBackgroundResource(R.drawable.ad_money_button_shape);
             }
 

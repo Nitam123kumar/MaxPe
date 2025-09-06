@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:layout_marginTop="20dp"
+    android:layout_height="@dimen/_45sdp"
+    android:layout_marginTop="@dimen/_15sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <ImageView
-        android:id="@+id/operator_img"
-        android:layout_width="@dimen/_32sdp"
-        android:layout_height="@dimen/_30sdp"
-        android:layout_marginStart="@dimen/_15sdp"
-        android:contentDescription="@string/app_name"
-        android:background="@drawable/electric_logo_img"
-        android:padding="@dimen/_4sdp"
-        android:elevation="@dimen/_2sdp"
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        android:gravity="center"
+        android:background="@drawable/view_item_commission"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="@dimen/_15sdp">
+
+
+        <ImageView
+            android:id="@+id/operator_img"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/_5sdp"
+            android:layout_gravity="center"
+            android:elevation="@dimen/_2sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+    </LinearLayout>
+
+
 
     <TextView
         android:id="@+id/title"
@@ -26,9 +40,10 @@
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:textColor="@color/black"
-        android:textSize="@dimen/_12sdp"
+        android:textSize="@dimen/_11sdp"
         android:fontFamily="@font/inter"
-        app:layout_constraintStart_toEndOf="@id/operator_img"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/view"

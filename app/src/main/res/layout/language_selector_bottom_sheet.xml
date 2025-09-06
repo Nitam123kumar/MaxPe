@@ -18,10 +18,10 @@
 
     <ImageView
         android:id="@+id/img_cancel"
-        android:layout_width="@dimen/_28sdp"
-        android:layout_height="@dimen/_28sdp"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
         android:layout_marginStart="@dimen/_20sdp"
-        android:src="@drawable/cancel2"
+        android:src="@drawable/cancel_icon_svg"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintTop_toTopOf="@id/img" />

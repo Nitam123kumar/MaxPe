@@ -68,11 +68,11 @@ public class MobileBankingActivity extends BaseActivity implements DefaultView, 
     @BindView(R.id.retry)
     TextView retry;
     @BindView(R.id.amount)
-    TextInputEditText amount;
+    EditText amount;
     @BindView(R.id.note)
-    TextInputEditText note;
+    EditText note;
     @BindView(R.id.reference_number)
-    TextInputEditText reference_number;
+    EditText reference_number;
 //    @BindView(R.id.select_payment_method)
 //    SearchableSpinner select_payment_method;
 //    @BindView(R.id.select_bank)

@@ -95,7 +95,6 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="@string/you_can_add_a_maximum_of_1_00_000_in_this_month"
                     android:textColor="#979797"
                     app:layout_constraintEnd_toEndOf="@id/editAmount"
                     app:layout_constraintStart_toStartOf="@id/editAmount"
@@ -169,7 +168,7 @@
                     android:id="@+id/note_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_30sdp"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -186,18 +185,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/dot_TextView1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_2sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:text="@string/dout"
-                        android:textColor="#787878"
-                        android:textSize="@dimen/_12sdp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/note_TV" />
-
 
                     <TextView
                         android:id="@+id/note_TextView2"
@@ -205,14 +192,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_3sdp"
                         android:layout_marginTop="@dimen/_2sdp"
-                        android:text="@string/maxpe_money_balance_is_valid_for_4_years_from_the_date_of_money_added"
                         android:textColor="#787878"
                         android:textSize="@dimen/_9sdp"
-                        app:layout_constraintStart_toEndOf="@id/dot_TextView1"
-                        app:layout_constraintTop_toTopOf="@id/dot_TextView1" />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/note_TV"/>
 
 
-                    <TextView
+                   <!-- <TextView
                         android:id="@+id/dot_TextView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -259,7 +245,7 @@
                         android:textSize="@dimen/_9sdp"
                         app:layout_constraintStart_toEndOf="@id/dot_TextView3"
                         app:layout_constraintTop_toTopOf="@id/dot_TextView3" />
-
+-->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

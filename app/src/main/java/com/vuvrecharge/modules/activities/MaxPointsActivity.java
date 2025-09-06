@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,16 +20,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseActivity;
 import com.vuvrecharge.base.BaseMethod;
+import com.vuvrecharge.databinding.MaixPointsMoreSetailsLayoutBinding;
 import com.vuvrecharge.modules.adapter.MaxPointsAdapter;
 import com.vuvrecharge.modules.model.CashBackPintsModel;
 import com.vuvrecharge.modules.model.MaxPePointsData;
@@ -61,6 +66,8 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
     TextView txtNoData;
     @BindView(R.id.balance_maxPoints_TV)
     TextView balance_maxPoints_TV;
+    @BindView(R.id.share1)
+    ImageView share1;
     @BindView(R.id.maxPointRecyclerView)
     RecyclerView maxPointRecyclerView;
     @BindView(R.id.layoutFrom)
@@ -107,6 +114,7 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
     boolean isLoading = true;
     DialogFragment newFragment;
     OnFragmentListener listener = null;
+    String usable_percentage="";
     Boolean isFrom = false;
     protected void attachBaseContext(Context newBase) {
         SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
@@ -159,7 +167,9 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
         else {
             view_all_maxPoints.setVisibility(VISIBLE);
         }
-
+        share1.setOnClickListener(v -> {
+            pointsMoreDetails(usable_percentage+"%");
+        });
         view_all_maxPoints.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), StatementsActivity.class);
             intent.putExtra("maxPointsActivity", "maxPointsActivity");
@@ -247,6 +257,36 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
                 /*from_date +*/ "", /*to_date +*/ "", "");
     }
 
+    private void pointsMoreDetails(String discount) {
+        try {
+            MaixPointsMoreSetailsLayoutBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), R.layout.maix_points_more_setails_layout, null, false);
+          BottomSheetDialog  dialog = new BottomSheetDialog(getActivity(), R.style.AppBottomSheetDialogTheme);
+            dialog.setContentView(binding.getRoot());
+            changeStatusBarColor(dialog);
+
+            bottomSheet = dialog.findViewById(com.denzcoskun.imageslider.R.id.design_bottom_sheet);
+            if (bottomSheet != null) {
+                BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+                behavior.setSkipCollapsed(false);
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                behavior.setPeekHeight(600);
+            }
+            binding.txtSecond.setText(discount);
+            binding.closeTextView.setOnClickListener(v -> dialog.dismiss());
+            binding.detailsCancel.setOnClickListener(v -> dialog.dismiss());
+            binding.needSupport.setOnClickListener(v ->
+            {
+                Intent intent = new Intent(getActivity(), SupportActivity.class);
+                startActivity(intent);
+            });
+            dialog.show();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     @Override
     public void onSuccess(String data, String data_other) {
 
@@ -332,6 +372,10 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
                 txtNoData.setVisibility(VISIBLE);
                 maxPointRecyclerView.setVisibility(GONE);
                 view_all_maxPoints.setVisibility(GONE);
+            }
+
+            if (object.has("usable_percentage")){
+                usable_percentage = object.getString("usable_percentage");
             }
 
 

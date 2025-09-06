@@ -14,6 +14,7 @@ import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -238,9 +239,9 @@ public class MainActivity extends BaseActivity implements DefaultView,
     @BindView(R.id.Fastag)
     LinearLayout fasTag;
     @BindView(R.id.bike_layout)
-    LinearLayout bike_layout;
+    ConstraintLayout bike_layout;
     @BindView(R.id.carLayout)
-    LinearLayout carLayout;
+    ConstraintLayout carLayout;
     @BindView(R.id.Cylinder)
     LinearLayout cylinder;
     @BindView(R.id.ViewAll)
@@ -1435,8 +1436,8 @@ public class MainActivity extends BaseActivity implements DefaultView,
             carPercent = car_insurance.getString("percent");
             carRedirectUrl = car_insurance.getString("redirect_url");
             carRedirectType = car_insurance.getString("redirect_type");
-            bike_percent.setText(bikePercent + "OF");
-            car_percent.setText(carPercent + "OF");
+            bike_percent.setText(bikePercent + "\nOF");
+            car_percent.setText(carPercent + "\nOF");
 
             offerSliderList.clear();
             if (offer_slides.length() > 0) {
@@ -1802,7 +1803,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
     protected void onRestart() {
         super.onRestart();
         if (!recreatedOnce) {
-            String currentLang = Locale.getDefault().getLanguage(); // returns "te" for Telugu
+            String currentLang = Locale.getDefault().getLanguage();
 
             if (currentLang.equals("te") && !prepaidTxt.getText().toString().equals("ప్రీపెయిడ్")) {
                 recreatedOnce = true;
@@ -1825,7 +1826,6 @@ public class MainActivity extends BaseActivity implements DefaultView,
             indicator.requestLayout();
         });
     }
-
     //    TODO Service Click
     @Override
     public void onClickListener(String redirection_type, String intent_name, String activityExtraData, String link) throws ClassNotFoundException {

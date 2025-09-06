@@ -38,6 +38,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseActivity;
 import com.vuvrecharge.base.BaseMethod;
+import com.vuvrecharge.modules.activities.newActivities.MobileBankingActivity;
 import com.vuvrecharge.modules.adapter.AddPaymentHistoryAdapter;
 import com.vuvrecharge.modules.model.DepositData;
 import com.vuvrecharge.modules.model.UserData;
@@ -48,6 +49,7 @@ import com.vuvrecharge.utils.LocaleHelper;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -65,6 +67,8 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
     LinearLayout onBack;
     @BindView(R.id.history_layout)
     LinearLayout history_layout;
+    @BindView(R.id.manual_getway_layout)
+    LinearLayout manual_getway_layout;
 
     @BindView(R.id.add_amount_Btn)
     AppCompatButton add_amount_Btn;
@@ -105,6 +109,7 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
 
 
         history_layout.setOnClickListener(this);
+        manual_getway_layout.setOnClickListener(this);
         add_amount_Btn.setOnClickListener(this);
         add_Money_Layout.setOnClickListener(this);
         latest_transitions.setOnClickListener(this);
@@ -112,15 +117,9 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
         addPaymentHistoryAdapter = new AddPaymentHistoryAdapter(getLayoutInflater());
         recyclerView_latest_transitions.setAdapter(addPaymentHistoryAdapter);
         mDefaultPresenter.recentSuccessDepositHistory(device_id + "");
+        mDefaultPresenter.getPaymentSetting2(device_id + "", "timepass");
 
-        try {
-            UserData userData = mDatabase.getUserData();
-//            name_TV.setText("Hello, \n" + userData.getName());
-            balance_TV.setText("₹" + userData.getEarnings());
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
 
         onBack.setOnClickListener(this);
         addPaymentHistoryAdapter.setOnItemClickListener(new AddPaymentHistoryAdapter.OnItemClickListener() {
@@ -230,6 +229,10 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
                 Intent intent = new Intent(getActivity(), StatementsActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.manual_getway_layout:
+                Intent intentManual = new Intent(getActivity(), MobileBankingActivity.class);
+                startActivity(intentManual);
+                break;
             case R.id.add_amount_Btn:
                 Intent addAmountIntent = new Intent(getActivity(), AddBalanceActivity.class);
                 startActivity(addAmountIntent);
@@ -256,8 +259,13 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
     public void onSuccess(String data) {
         try {
             JSONObject object = new JSONObject(data);
+            String earnings = object.getString("earnings");
             JSONArray array = object.getJSONArray("history_data");
 
+            double earningsValue = Double.parseDouble(earnings);
+            DecimalFormat decimalFormat = new DecimalFormat("0.00");
+
+            balance_TV.setText("\u20b9" + decimalFormat.format(earningsValue));
             if (array.length() > 0) {
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject object1 = array.getJSONObject(i);
@@ -294,6 +302,24 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
 
     @Override
     public void onSuccessOther(String data, String data_other) {
+
+        try {
+
+            if (data_other.equals("timepass")){
+                JSONObject object = new JSONObject(data);
+                String manual_getway = object.getString("manual_getway");
+                if (manual_getway.equals("Yes")){
+                    manual_getway_layout.setVisibility(VISIBLE);
+                    history_layout.setVisibility(GONE);
+                }else {
+                    manual_getway_layout.setVisibility(GONE);
+                    history_layout.setVisibility(VISIBLE);
+                }
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 

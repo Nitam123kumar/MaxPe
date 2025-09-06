@@ -47,7 +47,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:orientation="vertical"
-                        android:padding="@dimen/_20sdp"
+                        android:padding="@dimen/_16sdp"
                         app:layout_constraintTop_toBottomOf="@id/top">
 
                         <TextView
@@ -55,11 +55,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_50sdp"
-                            android:fontFamily="@font/roboto_bold"
+                            android:fontFamily="@font/inter"
                             android:gravity="center"
                             android:text="@string/welcome_back"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_15sdp"
+                            android:textSize="@dimen/_16sdp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -70,15 +70,17 @@
                             android:text="@string/let_s_login_to_access_your_account"
                             android:textColor="#8C8C8C"
                             android:textSize="@dimen/_10sdp"
+                            android:fontFamily="@font/inter"
                             android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_25sdp"
-                            android:text="@string/mobile_number"
+                            android:text="Enter Your 10 Digit Mobile Number"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_11sdp"
+                            android:textSize="@dimen/_13sdp"
+                            android:fontFamily="@font/inter"
                             android:textStyle="bold" />
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -96,7 +98,8 @@
                             android:paddingLeft="@dimen/_10sdp"
                             android:textColor="@color/black_2"
                             android:textColorHint="#8C8C8C"
-                            android:textSize="@dimen/_11sdp"
+                            android:textSize="@dimen/_12sdp"
+                            android:fontFamily="@font/inter"
                             android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
@@ -188,6 +191,7 @@
                                 android:textAllCaps="false"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_12sdp"
+                                android:fontFamily="@font/inter"
                                 android:textStyle="bold" />
 
                         </RelativeLayout>
@@ -214,6 +218,7 @@
                                 android:text="@string/or"
                                 android:textAllCaps="false"
                                 android:textColor="#8C8C8C"
+                                android:fontFamily="@font/inter"
                                 android:textSize="@dimen/_12sdp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@+id/view2"
@@ -262,6 +267,7 @@
                                 android:textAllCaps="false"
                                 android:textColor="#0A51A0"
                                 android:textSize="@dimen/_12sdp"
+                                android:fontFamily="@font/inter"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
@@ -275,7 +281,8 @@
                             <CheckBox
                                 android:id="@+id/isCheck"
                                 android:layout_width="@dimen/_15sdp"
-                                android:layout_height="@dimen/_15sdp" />
+                                android:layout_height="@dimen/_15sdp"
+                                android:checked="true"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -284,6 +291,7 @@
                                 android:text="@string/by_continuing_you_agree_to_our"
                                 android:textColor="#8C8C8C"
                                 android:textSize="@dimen/_7sdp"
+                                android:fontFamily="@font/inter"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -292,7 +300,8 @@
                                 android:layout_marginStart="@dimen/_3sdp"
                                 android:text="@string/terms_of_service"
                                 android:textColor="#0A51A0"
-                                android:textSize="@dimen/_7sdp"
+                                android:fontFamily="@font/inter"
+                                android:textSize="@dimen/_8sdp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -301,6 +310,7 @@
                                 android:layout_marginStart="@dimen/_3sdp"
                                 android:text="@string/and"
                                 android:textColor="#8C8C8C"
+                                android:fontFamily="@font/inter"
                                 android:textSize="@dimen/_7sdp"
                                 android:textStyle="bold" />
 
@@ -310,7 +320,8 @@
                                 android:layout_marginStart="@dimen/_3sdp"
                                 android:text="@string/privacy_policy"
                                 android:textColor="#0A51A0"
-                                android:textSize="@dimen/_7sdp"
+                                android:textSize="@dimen/_8sdp"
+                                android:fontFamily="@font/inter"
                                 android:textStyle="bold" />
 
 

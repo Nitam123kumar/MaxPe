@@ -6,7 +6,6 @@ import static android.view.View.VISIBLE;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -18,24 +17,20 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.airbnb.lottie.L;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseActivity;
-import com.vuvrecharge.modules.activities.SupportActivity;
 import com.vuvrecharge.modules.adapter.ElectricityOperatorAdapter;
 import com.vuvrecharge.modules.model.OperatorData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
@@ -43,15 +38,12 @@ import com.vuvrecharge.modules.view.DefaultView;
 import com.vuvrecharge.preferences.OperatorPreferences;
 import com.vuvrecharge.utils.LocaleHelper;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -71,10 +63,14 @@ public class ElectricityActivity extends BaseActivity implements DefaultView, Vi
     TextView retry;
     @BindView(R.id.txtNoData)
     TextView txtNoData;
+    @BindView(R.id.txtSearch)
+    TextView txtSearch;
+    @BindView(R.id.txtCancel)
+    ImageView txtCancel;
     @BindView(R.id.electricityListView)
     RecyclerView electricityListView;
     @BindView(R.id.search_electricity)
-    TextInputEditText search_electricity;
+    EditText search_electricity;
 
     //    @BindView(R.id.search_electricity_layout)
 //    TextInputLayout search_electricity_layout;
@@ -133,6 +129,25 @@ public class ElectricityActivity extends BaseActivity implements DefaultView, Vi
                 mDefaultPresenter.historyCircleOperators(device_id + "", type + "");
             }
         }
+
+        txtSearch.setOnClickListener(v -> {
+            search_electricity.setVisibility(VISIBLE);
+            txtSearch.setVisibility(GONE);
+            txtCancel.setVisibility(VISIBLE);
+            showSoftKeyboard(search_electricity);
+            search_electricity.setFocusable(true);
+            search_electricity.requestFocus();
+        });
+        txtCancel.setOnClickListener(v -> {
+            search_electricity.setVisibility(GONE);
+            txtSearch.setVisibility(VISIBLE);
+            txtCancel.setVisibility(GONE);
+            search_electricity.setText("");
+            search_electricity.clearFocus();
+            hideKeyBoard(search_electricity);
+
+        });
+
 //        else if (title1.equals("Postpaid Recharge")) {
 //            search_electricity.setHint("Search by postpaid name");
 //            type = "Postpaid";

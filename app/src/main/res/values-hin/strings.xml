@@ -17,10 +17,13 @@
     <string name="change_password">पासवर्ड बदलें</string>
     <string name="btn_ok">ठीक है</string>
     <string name="no_network_message">कृपया अपनी इंटरनेट कनेक्शन की जाँच करें।</string>
+    <string name="submit_your_feedback">अपनी प्रतिक्रिया सबमिट करें</string>
+    <string name="the_more_you_share_the_more_you_earn">जितना अधिक आप साझा करेंगे, उतना अधिक आप कमाएंगे!</string>
     <string name="no_internet">कोई इंटरनेट नहीं</string>
     <string name="enable">सक्षम करें</string>
     <string name="permission">हमें आवश्यक कार्यों के लिए अनुमतियों की आवश्यकता है। कृपया सेटिंग्स स्क्रीन के माध्यम से अनुमति दें।\n\nअनुमतियाँ चुनें -> अनुमति सक्षम करें</string>
-
+    <string name="complains">शिकायत</string>
+    <string name="help_and_support"><![CDATA[सहायता और समर्थन]]></string>
     <string name="logout">लॉग आउट!</string>
     <string name="logout_text">क्या आप लॉग आउट करने के लिए निश्चित हैं?</string>
     <string name="sponsor_id">प्रायोजक आईडी</string>
@@ -471,4 +474,6 @@
     <string name="maxpoints_discount">मैक्सपॉइंट्स छूट</string>
     <string name="payable_amount">देय राशि</string>
     <string name="aavailable_balance">उपलब्ध शेष राशि:</string>
+    <string name="deposit">जमा</string>
+    <string name="recharge">रिचार्ज</string>
 </resources>

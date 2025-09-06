@@ -1365,6 +1365,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             binding.number.setText(number.trim());
             binding.amount.setText("\u20b9" + amt);
             amtPay = amount;
+            binding.mpinTxt.requestFocus();
             if (warning_message.isEmpty()) {
                 binding.warningMessage.setVisibility(GONE);
             } else {
@@ -1440,20 +1441,20 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 _binding.txtMessage.setText(message);
                 _binding.txtSlug.setText("Oops!");
                 _binding.txtSlug.setVisibility(GONE);
-                Glide.with(this).asGif().load(R.drawable.animated_wrong).into(_binding.imgGif);
+                Glide.with(this).asGif().load(R.drawable.wrong_gif).into(_binding.imgGif);
                 _binding.btnComplete.setBackgroundResource(R.drawable.failed_button);
             } else if (status.toUpperCase().equals("PENDING")) {
                 _binding.btnComplete.setBackgroundResource(R.drawable.pending_button);
                 _binding.txtTitle.setText("Pending");
                 _binding.txtMessage.setText(message);
                 _binding.txtSlug.setText("CHILL!");
-                Glide.with(this).asGif().load(R.drawable.animated_pending).into(_binding.imgGif);
+                Glide.with(this).asGif().load(R.drawable.pending).into(_binding.imgGif);
             } else {
                 _binding.btnComplete.setBackgroundResource(R.drawable.green_button);
                 _binding.txtTitle.setText("Success");
                 _binding.txtMessage.setText(message);
                 _binding.txtSlug.setText("Thank You!");
-                Glide.with(this).asGif().load(R.drawable.animated_right).into(_binding.imgGif);
+                Glide.with(this).asGif().load(R.drawable.right).into(_binding.imgGif);
             }
             String finalStatus = status;
             _binding.btnComplete.setOnClickListener(v -> {

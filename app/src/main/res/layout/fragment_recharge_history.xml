@@ -64,7 +64,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/statements_header"
-        android:layout_margin="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,27 +110,27 @@
         app:layout_constraintTop_toBottomOf="@id/statements_header"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <LinearLayout
-        android:id="@+id/loading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="gone">
+<!--    <LinearLayout-->
+<!--        android:id="@+id/loading"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="vertical"-->
+<!--        android:visibility="gone">-->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/transparent"
-            android:gravity="center"
-            android:orientation="vertical" >
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@color/transparent"-->
+<!--            android:gravity="center"-->
+<!--            android:orientation="vertical" >-->
 
-            <ProgressBar
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
-                android:indeterminateDrawable="@drawable/layout_process_bar" />
+<!--            <ProgressBar-->
+<!--                android:layout_width="@dimen/_35sdp"-->
+<!--                android:layout_height="@dimen/_35sdp"-->
+<!--                android:indeterminateDrawable="@drawable/layout_process_bar" />-->
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

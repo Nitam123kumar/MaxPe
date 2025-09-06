@@ -14,7 +14,7 @@
         android:layout_marginStart="@dimen/_5sdp"
         android:src="@drawable/points_history"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/points_usedTV"
+        app:layout_constraintTop_toTopOf="@id/points_orderIdTV"
         app:layout_constraintBottom_toBottomOf="@id/points_dateTV"/>
 
     <TextView
@@ -22,22 +22,23 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/bonus_on_balance_add"
-        android:textColor="@color/black"
+        android:textColor="#6E6E6E"
         android:textSize="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_15sdp"
         app:layout_constraintStart_toEndOf="@id/imgMaxLogo"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/points_orderIdTV"
+        app:layout_constraintBottom_toTopOf="@id/points_dateTV"
         />
 
     <TextView
         android:id="@+id/points_orderIdTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#6E6E6E"
+        android:textColor="@color/black"
         android:text="@string/oder_id_52422222"
-        android:textSize="@dimen/_9sdp"
-        app:layout_constraintTop_toBottomOf="@id/points_usedTV"
+        android:textSize="@dimen/_11sdp"
         app:layout_constraintStart_toStartOf="@id/points_usedTV"
+        app:layout_constraintTop_toTopOf="parent"
         />
 
 
@@ -50,7 +51,7 @@
         android:textColor="#B2B2B2"
         android:layout_marginTop="@dimen/_3sdp"
         app:layout_constraintStart_toStartOf="@id/points_usedTV"
-        app:layout_constraintTop_toBottomOf="@id/points_orderIdTV"
+        app:layout_constraintTop_toBottomOf="@id/points_usedTV"
         app:layout_constraintBottom_toTopOf="@id/viewPoints"
         />
 
@@ -64,9 +65,10 @@
         android:textStyle="bold"
         android:layout_marginEnd="@dimen/_3sdp"
         android:textSize="@dimen/_12sdp"
-        android:textColor="@color/black"
+        android:fontFamily="@font/inter"
+        android:textColor="@color/black_2"
         app:layout_constraintEnd_toStartOf="@+id/mLogo"
-        app:layout_constraintTop_toTopOf="@id/points_orderIdTV"
+        app:layout_constraintTop_toTopOf="@id/points_usedTV"
         />
 
     <ImageView
@@ -87,7 +89,7 @@
         android:layout_marginTop="@dimen/_13sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/points_dateTV"
-        android:background="#F8F8F8"
+        android:background="@color/gray_lite"
         />
 
 

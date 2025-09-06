@@ -90,7 +90,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-@SuppressLint({"NonConstantResourceId","SetTextI18n", "DefaultLocale"})
+@SuppressLint({"NonConstantResourceId", "SetTextI18n", "DefaultLocale"})
 public class AccountActivity extends BaseActivity implements DefaultView, View.OnClickListener, PaymentSettingAdapter.OnClickListener, FollowsAdapter.OnClickListener {
 
     private DefaultPresenter mDefaultPresenter;
@@ -513,8 +513,9 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-        finish(); // Kill current activity
+//        finish(); // Kill current activity
 //        recreate();
+//        onBackPressed();
     }
 
     private void addBalance() {
@@ -650,7 +651,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                                         try {
                                             JSONObject jsonObject = new JSONObject(body.getData());
                                             totalTimeCountInMilliseconds = 1 * 180 * 1000;
-                                            setTimer(textView);
+                                            setTimer(textView, binding_.resendOtp);
                                             Toasty.success(getActivity(), body.getMessage(), Toast.LENGTH_LONG, false).show();
                                         } catch (Exception e) {
                                             e.printStackTrace();
@@ -1061,7 +1062,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         }
     }
 
-    private void setTimer(TextView resend) {
+    private void setTimer(TextView resend, TextView textView) {
         try {
             resend.setVisibility(View.VISIBLE);
             countDownTimer = new CountDownTimer(totalTimeCountInMilliseconds, 1000) {
@@ -1075,6 +1076,8 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                             TimeUnit.MILLISECONDS.toSeconds(leftTimeInMilliseconds) -
                                     TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(leftTimeInMilliseconds))));
 
+                    textView.setEnabled(false);
+
                     //  resend.setText("Re-Generate After " + String.format("%02d", (seconds % 3600) / 60) + ":" + String.format("%02d", (seconds % 3600) % 60));
                 }
 
@@ -1087,6 +1090,8 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
                     if (resend != null) {
                         resend.setVisibility(View.GONE);
                     }
+                    textView.setEnabled(true);
+                    textView.setText("Resend OTP");
                 }
             }.start();
         } catch (Exception e) {

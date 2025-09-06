@@ -18,9 +18,12 @@
     <string name="btn_ok">సరే</string>
     <string name="no_network_message">మీ ఇంటర్నెట్ కనెక్షన్‌ను తనిఖీ చేసినందుకు ధన్యవాదాలు</string>
     <string name="no_internet">ఇంటర్నెట్ అందుబాటులో లేదు </string>
+    <string name="submit_your_feedback">మీ అభిప్రాయాన్ని సమర్పించండి</string>
+    <string name="the_more_you_share_the_more_you_earn">మీరు ఎంత ఎక్కువ షేర్ చేసుకుంటే అంత ఎక్కువ సంపాదిస్తారు!</string>
     <string name="enable">ప్రారంభించండి</string>
     <string name="permission">అవసరమైన పనిని చేయడానికి అనుమతులు అవసరం. దయచేసి సెట్టింగ్స్ స్క్రీన్ ద్వారా అనుమతిని ఇవ్వండి</string>
-
+    <string name="complains">ఫిర్యాదులు</string>
+    <string name="help_and_support"><![CDATA[సహాయం & మద్దతు]]></string>
     <string name="logout">లాగ్ అవుట్ అవ్వండి!</string>
     <string name="logout_text">మీరు ఖచ్చితంగా లాగ్ అవుట్ కావాలని కోరుకుంటున్నారా?</string>
     <string name="sponsor_id">స్పాన్సర్ ID</string>
@@ -473,5 +476,7 @@
     <string name="maxpoints_discount">మాక్స్‌పాయింట్స్ డిస్కౌంట్</string>
     <string name="payable_amount">చెల్లించవలసిన మొత్తం</string>
     <string name="aavailable_balance">అందుబాటులో ఉన్న బ్యాలెన్స్:</string>
+    <string name="deposit">డిపాజిట్</string>
+    <string name="recharge">రీఛార్జ్</string>
 
 </resources>

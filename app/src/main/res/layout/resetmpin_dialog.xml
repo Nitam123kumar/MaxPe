@@ -25,9 +25,18 @@
                     android:paddingRight="@dimen/_10sdp"
                     android:paddingBottom="@dimen/_10sdp">
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="Reset M-Pin"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sdp" />
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:background="@drawable/support_design_background_shape">
 
 
@@ -59,8 +68,8 @@
                             android:textStyle="bold"
                             android:textAllCaps="false"
                             android:textColor="#4970B0"
-                            android:textSize="@dimen/_11sdp"
-                            android:fontFamily="@font/roboto_bold"
+                            android:textSize="@dimen/_12sdp"
+                            android:fontFamily="@font/inter"
                             android:visibility="visible" />
 
                     </RelativeLayout>
@@ -192,8 +201,8 @@
             android:layout_height="45dp"
             android:layout_alignParentRight="true"
             android:layout_gravity="right"
-            android:padding="17dp"
-            android:src="@drawable/cross" />
+            android:padding="@dimen/_10sdp"
+            android:src="@drawable/cancel_icon_svg" />
     </RelativeLayout>
 
 </layout>

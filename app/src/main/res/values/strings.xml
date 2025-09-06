@@ -112,6 +112,7 @@
     <string name="your_balance">Your balance</string>
     <string name="bike_car_insurance">Bike/Car Insurance</string>
     <string name="bike_insurance">Bike Insurance</string>
+    <string name="submit_your_feedback">Submit Your Feedback</string>
     <string name="_10_off">10% OFF</string>
     <string name="car_insurance">Car Insurance</string>
     <string name="_15_off">15% OFF</string>
@@ -303,7 +304,7 @@
     <string name="note_">Note:</string>
     <string name="benefits_include_6gb_of_4g_data_and_unlimited_5g_data_for_users_nwith_an_active_1gb_day_plan_valid_up_to_28_days_or_a_1_5gb_day_nplan_valid_for_28_to_56_days">Benefits include 6GB of 4G data and unlimited 5G data for users\nwith an active 1GB/day plan (valid up to 28 days) or a 1.5GB/day\nplan (valid for 28 to 56 days).</string>
     <string name="additional_information">Additional Information</string>
-    <string name="payment_detail">Payment Detail</string>
+    <string name="payment_detail">Payment Details</string>
     <string name="transaction_amount">Transaction Amount</string>
     <string name="total_discount">Total Discount</string>
     <string name="maxpoints_applied">MaxPoints Applied</string>
@@ -342,8 +343,10 @@
     <string name="top_referral">Top Referral</string>
     <string name="top_transaction">Top Transaction</string>
     <string name="ns">NS</string>
+    <string name="complains">Complains</string>
     <string name="balance_amp_history"><![CDATA[Balance & History]]></string>
     <string name="add_money">Add Money</string>
+    <string name="help_and_support"><![CDATA[Help & Support]]></string>
     <string name="history">History</string>
     <string name="latest_transitions">Latest Transitions</string>
     <string name="view_all">View all</string>
@@ -402,7 +405,7 @@
     <string name="verify_account">Verify account</string>
     <string name="new_password">New Password</string>
     <string name="confirm_new_password">Confirm New Password</string>
-    <string name="verify_otp">Verify Otp</string>
+    <string name="verify_otp">Verify OTP</string>
     <string name="_25_may_2019_12_20_pm">25 May 2019, 12:20 PM</string>
     <string name="remaining_balance_u20b9251">Remaining Balance ₹251</string>
     <string name="option_1">Option 1</string>
@@ -414,7 +417,7 @@
     <string name="date_time">date_time</string>
     <string name="success">success</string>
     <string name="number">Number</string>
-    <string name="enter_otp">Enter otp</string>
+    <string name="enter_otp">Enter Your 6 Digit OTP</string>
     <string name="get_otp">Get otp</string>
     <string name="please_enter_4_digit_mpin">Please Enter 4 digit Mpin</string>
     <string name="confirm_new_mpin">Confirm New Mpin</string>
@@ -464,7 +467,7 @@
     <string name="and">and</string>
     <string name="terms_of_service">Terms of Service</string>
     <string name="by_continuing_you_agree_to_our">By Continuing, you agree to our</string>
-    <string name="verify_your_otp">Verify Your OTP</string>
+    <string name="verify_your_otp">OTP Verification</string>
     <string name="need_help">Need Help?</string>
     <string name="sent_otp">Sent OTP</string>
     <string name="enter_mobile_number">Enter Mobile Number</string>
@@ -472,6 +475,10 @@
     <string name="instant_discount">Instant Discount</string>
     <string name="maxpoints_discount">MaxPoints Discount</string>
     <string name="payable_amount">Payable Amount</string>
-    <string name="aavailable_balance">Aavailable balance:</string>
+    <string name="aavailable_balance">Available balance:</string>
+    <string name="the_more_you_share_the_more_you_earn">The more you share, the more you earn!</string>
+    <string name="deposit">Deposit</string>
+    <string name="recharge">Recharge</string>
+
 
 </resources>

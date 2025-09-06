@@ -62,6 +62,13 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         holder.bind(dataList.get(position));
+
+//        int num = ++position ;
+//        if (num % 2 == 0) {
+//            holder.layoutDesignPattern.setBackgroundResource(R.drawable.transaction_details);
+//        } else {
+//            holder.layoutDesignPattern.setBackgroundResource(R.drawable.transaction_details);
+//        }
     }
 
     @Override
@@ -113,8 +120,8 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
         TextView status;
         @BindView(R.id.operator_img)
         CircleImageView operator_img_;
-        @BindView(R.id.loading)
-        ImageView loading;
+//        @BindView(R.id.loading)
+//        ImageView loading;
         @BindView(R.id.layoutDesignPattern)
         ConstraintLayout layoutDesignPattern;
 //        @BindView(R.id.status_cons)
@@ -176,8 +183,8 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
                 status.setBackgroundResource(R.drawable.pending_recharge_bg);
                 status.setTextColor(mContext.getResources().getColor(R.color.pending1));
                 amount.setTextColor(mContext.getResources().getColor(R.color.black));
-                loading.setVisibility(View.VISIBLE);
-                Glide.with(mContext).asGif().load(R.drawable.load).into(loading);
+//                loading.setVisibility(View.VISIBLE);
+//                Glide.with(mContext).asGif().load(R.drawable.load).into(loading);
             } else if (resultsBean.getStatus().toUpperCase().equals("SUCCESS")) {
                 if (mDatabase.getUserData() != null) {
                     if (mDatabase.getUserData().getUser_type() != null) {
@@ -191,7 +198,7 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
                         status.setBackgroundResource(R.drawable.recharge_success_bg);
                         status.setTextColor(mContext.getResources().getColor(R.color.success1));
                         amount.setTextColor(mContext.getResources().getColor(R.color.black));
-                        loading.setVisibility(View.GONE);
+//                        loading.setVisibility(View.GONE);
                     }
                 }
             } else {
@@ -201,7 +208,7 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsAdapter.Holder> 
                 status.setTextColor(mContext.getResources().getColor(R.color.failed1));
                 amount.setTextColor(mContext.getResources().getColor(R.color.black));
                 status.setBackgroundResource(R.drawable.failed_recharge_bg);
-                loading.setVisibility(View.GONE);
+//                loading.setVisibility(View.GONE);
 //                commission.setText("Com : \u20b90.00");
             }
 

@@ -102,4 +102,5 @@
     <color name="slider_dot_active">#FF5722</color>
     <color name="star_orange">#FFA500</color>
     <color name="star_inactive">#CCCCCC</color>
+    <color name="gray_lite">#F0F0F0</color>
 </resources>

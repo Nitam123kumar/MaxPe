@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/payment_ImageView"
-        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_10sdp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         >
@@ -39,10 +39,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/order_Id_TV"
             android:text="UPI"
-            android:textSize="@dimen/_10sdp"
-            android:textColor="@color/black"
+            android:fontFamily="@font/inter"
+            android:textColor="#6E6E6E"
+            android:textSize="@dimen/_9sdp"
             />
 
         <TextView
@@ -50,20 +51,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="order_Id"
-            android:textColor="#6E6E6E"
-            android:textSize="@dimen/_9sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11sdp"
+            android:fontFamily="@font/inter"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/payment_tittle_TV" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/payment_time_TV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/order_Id_TV"
+            app:layout_constraintTop_toBottomOf="@id/payment_tittle_TV"
             app:layout_constraintStart_toStartOf="parent"
             android:text="@string/today_11_22_am"
             android:textColor="#B2B2B2"
             android:layout_marginTop="@dimen/_3sdp"
+            android:fontFamily="@font/inter"
             android:textSize="@dimen/_8sdp"
             />
 
@@ -81,7 +84,7 @@
         android:layout_marginEnd="@dimen/_3sdp"
         android:textColor="#18B200"
         android:textSize="@dimen/_12sdp"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/inter"
         />
 
 

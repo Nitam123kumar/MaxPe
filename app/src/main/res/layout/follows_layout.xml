@@ -12,16 +12,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:src="@drawable/follow_us_icon"
         />
 
     <ImageView
         android:id="@+id/img2"
-        android:layout_width="@dimen/_28sdp"
-        android:layout_height="@dimen/_28sdp"
+        android:layout_width="@dimen/_20sdp"
+        android:layout_height="@dimen/_20sdp"
         android:layout_marginStart="@dimen/_20sdp"
-        android:src="@drawable/cancel_3_svg"
+        android:src="@drawable/cancel_icon_svg"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="@dimen/_20sdp"
         app:layout_constraintTop_toTopOf="@id/img" />
@@ -61,15 +61,23 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/updatedLayout"
-        android:layout_width="@dimen/_140sdp"
-        android:layout_height="@dimen/_42sdp"
-        android:layout_marginStart="@dimen/_13sdp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="@dimen/_25sdp"
+        android:layout_height="@dimen/_50sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/stay_update_shape"
+        android:background="@drawable/need_support_svg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/followUsRecyclerView"
         >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
             android:id="@+id/imgWhatsApp"
@@ -77,11 +85,11 @@
             android:layout_height="@dimen/_24sdp"
             android:contentDescription="@string/contact_us"
             android:src="@drawable/whatsapp_1"
-            android:layout_marginStart="@dimen/_7sdp"
-            app:layout_constraintVertical_chainStyle="packed"
+            android:layout_marginEnd="@dimen/_20sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
 
         <TextView
             android:id="@+id/txtStayUpdate"
@@ -91,8 +99,9 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:textStyle="bold"
+            android:fontFamily="@font/inter"
             android:layout_marginStart="@dimen/_5sdp"
-            android:textSize="@dimen/_9sdp"
+            android:textSize="@dimen/_13sdp"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             app:layout_constraintStart_toEndOf="@id/imgWhatsApp"
             app:layout_constraintTop_toTopOf="@id/imgWhatsApp"
@@ -103,14 +112,18 @@
             android:id="@+id/stay_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_6sdp"
-            android:textColor="#B5B5B5"
+            android:textSize="@dimen/_11sdp"
+            android:fontFamily="@font/inter"
+            android:textColor="@color/black_4"
             android:text="@string/follow_our_whatapp_channel"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintTop_toBottomOf="@id/txtStayUpdate"
             app:layout_constraintStart_toStartOf="@+id/txtStayUpdate"
             app:layout_constraintBottom_toBottomOf="@id/imgWhatsApp"
             />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

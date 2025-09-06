@@ -14,6 +14,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -145,7 +147,7 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
         setContentView(R.layout.activity_shareearn);
         ButterKnife.bind(this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        title.setText("Refer & Earn");
+        title.setText(R.string.refer_amp_earn);
         mDefaultPresenter = new DefaultPresenter(this);
         mToolbar.setOnClickListener(this);
         btnInvite.setOnClickListener(this);
@@ -180,9 +182,15 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
             webView.setWebViewClient(new MyBrowser());
 
             postUrl = SITE_URL + refer_earn;
-            webView.loadUrl(postUrl);
-
             webViewContainer.addView(webView);
+            if (isNetworkAvailable(this)) {
+                webView.setVisibility(View.VISIBLE);
+                webView.loadUrl(postUrl);
+
+            } else {
+                webView.setVisibility(View.GONE);
+                Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+            }
 
         } catch (Exception e) {
             Log.e("WebViewError", "WebView failed to load", e);
@@ -232,6 +240,18 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
 
 
     }
+
+
+    public boolean isNetworkAvailable(Context context) {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+        }
+        return false;
+    }
+
 
     @Override
     protected void onResume() {

@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vuvrecharge.R;
@@ -48,8 +49,14 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.MainListHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MainListHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull MainListHolder holder, int position) {
         holder.bind(dataList.get(position));
+//        int num = ++position ;
+//        if (num % 2 == 0) {
+//            holder.layoutDesignPattern.setBackgroundResource(R.drawable.transaction_details);
+//        } else {
+//            holder.layoutDesignPattern.setBackgroundResource(R.drawable.transaction_details);
+//        }
     }
 
     @Override
@@ -80,8 +87,8 @@ public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.MainListHo
         TextView reason;
         @BindView(R.id.imgDone)
         ImageView imgDone;
-//        @BindView(R.id.layoutDesignPattern)
-//        ConstraintLayout layoutDesignPattern;
+        @BindView(R.id.layoutDesignPattern)
+        ConstraintLayout layoutDesignPattern;
 
         public MainListHolder(View itemView) {
             super(itemView);

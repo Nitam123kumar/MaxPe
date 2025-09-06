@@ -140,12 +140,10 @@
             android:layout_height="@dimen/_32sdp"
             android:background="@drawable/search_img_shadow"
             android:gravity="center"
-            android:paddingStart="@dimen/_13sdp"
             android:elevation="@dimen/_1sdp"
-            android:paddingEnd="@dimen/_5sdp"
             android:text="@string/search"
             android:textColor="@color/white"
-            android:textSize="@dimen/_9sdp"
+            android:textSize="@dimen/_11sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/ref_no"
             app:layout_constraintBottom_toBottomOf="@id/ref_no"/>

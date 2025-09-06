@@ -59,8 +59,8 @@ public class RechargeHistoryFragment extends BaseFragment implements DefaultView
     DefaultView mDefaultView;
     @BindView(R.id.rvRechargeDetails)
     RecyclerView rvRechargeDetails;
-    @BindView(R.id.loading)
-    LinearLayout loading;
+//    @BindView(R.id.loading)
+//    LinearLayout loading;
     @BindView(R.id.select_to_date)
     TextView select_to_date;
     @BindView(R.id.select_from_date)
@@ -308,7 +308,7 @@ public class RechargeHistoryFragment extends BaseFragment implements DefaultView
             showLoading(loading_dialog);
             submit.setVisibility(GONE);
         } else {
-            showLoading(loading);
+//            showLoading(loading);
         }
     }
 
@@ -318,7 +318,7 @@ public class RechargeHistoryFragment extends BaseFragment implements DefaultView
             hideLoading(loading_dialog);
             submit.setVisibility(VISIBLE);
         } else {
-            hideLoading(loading);
+//            hideLoading(loading);
         }
     }
 

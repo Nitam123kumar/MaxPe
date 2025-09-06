@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layoutDesignPattern"
     android:layout_width="match_parent"
-    android:background="@color/white"
     android:layout_height="wrap_content"
-
     android:layout_margin="@dimen/_3sdp"
     android:paddingTop="@dimen/_8sdp"
     android:paddingStart="@dimen/_5sdp"
@@ -48,7 +46,7 @@
         android:gravity="center_vertical"
         android:text="@string/number"
         android:textColor="@color/black"
-        android:textSize="@dimen/_10sdp"
+        android:textSize="@dimen/_11sdp"
         app:layout_constraintStart_toStartOf="@id/name"
         app:layout_constraintTop_toBottomOf="@id/name" />
 
@@ -59,22 +57,23 @@
         android:text="@string/order_id_145258"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:textColor="@color/black"
-        android:textSize="@dimen/_9sdp"
-        android:textStyle="bold"
+        android:textSize="@dimen/_11sdp"
+     android:fontFamily="@font/inter"
         app:layout_constraintBottom_toTopOf="@id/name"
         app:layout_constraintStart_toStartOf="@id/name"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/amount"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingEnd="@dimen/_2sdp"
         android:text="10"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black"
+        android:textColor="@color/black_2"
         android:textSize="@dimen/_12sdp"
         android:textStyle="bold"
+        android:fontFamily="@font/inter"
         app:layout_constraintBottom_toTopOf="@id/status"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/name" />
@@ -114,6 +113,7 @@
         android:fontFamily="@font/roboto_bold"
         android:gravity="center"
         android:text="@string/success"
+        android:layout_marginTop="@dimen/_5sdp"
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"
         android:textColor="#26A652"
         android:textSize="@dimen/_7sdp"
@@ -151,7 +151,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
         android:layout_marginTop="@dimen/_13sdp"
-        android:background="#F8F8F8"
+        android:background="@color/gray_lite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/date_time" />
 

@@ -138,7 +138,7 @@ public class CommissionChartActivity extends BaseActivity implements DefaultView
         setContentView(R.layout.activity_commission_chart);
         ButterKnife.bind(this);
         mToolbar.setOnClickListener(this);
-        title.setText("Commission Chart");
+        title.setText(R.string.commission_chart);
         mDefaultPresenter = new DefaultPresenter(this);
         defaultView = this;
         getStartedTV.setOnClickListener(this);

@@ -25,6 +25,7 @@
             android:layout_marginHorizontal="@dimen/_10sdp"
             app:layout_constraintBottom_toTopOf="@+id/txtShimmerWarning"
             app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/phone_layout">
 
@@ -82,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:paddingBottom="@dimen/_10sdp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="@id/phone_layout"
             app:layout_constraintStart_toStartOf="@id/phone_layout"
             app:layout_constraintTop_toBottomOf="@id/phone_layout">
@@ -375,7 +376,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/rectangle_189711"
+            android:background="@drawable/group_12802__2_"
             android:orientation="horizontal"
             android:visibility="visible"
             app:layout_constraintTop_toTopOf="parent">
@@ -406,7 +407,8 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -418,7 +420,8 @@
                     android:layout_marginTop="@dimen/_3sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_marginBottom="@dimen/_3sdp"
-                    android:textColor="@color/black" />
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/txtPhoneOrigin"
@@ -428,7 +431,8 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
-                    android:textColor="@color/black" />
+                    android:textSize="@dimen/_8sdp"
+                    android:textColor="@color/color_c" />
 
 
             </LinearLayout>
@@ -438,9 +442,9 @@
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_22sdp"
                 android:layout_gravity="center"
-                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
                 android:layout_weight="1"
-                android:background="@drawable/change_number_shape"
+                android:background="@drawable/edit_txt_bg"
                 android:gravity="center"
                 android:text="@string/change"
                 android:textColor="@color/black"
@@ -454,7 +458,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/rectangle_189711"
+            android:background="@drawable/group_12802__2_"
             android:orientation="horizontal"
             android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent">
@@ -485,7 +489,8 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -497,7 +502,8 @@
                     android:layout_marginTop="@dimen/_3sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_marginBottom="@dimen/_3sdp"
-                    android:textColor="@color/black" />
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/txtPhoneOrigin1"
@@ -507,7 +513,8 @@
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
-                    android:textColor="@color/black" />
+                    android:textSize="@dimen/_8sdp"
+                    android:textColor="@color/color_c" />
 
 
             </LinearLayout>
@@ -517,9 +524,9 @@
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_22sdp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginEnd="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
                 android:layout_weight="1"
-                android:background="@drawable/change_number_shape"
+                android:background="@drawable/edit_txt_bg"
                 android:gravity="center"
                 android:text="@string/change"
                 android:textColor="@color/black"
@@ -544,7 +551,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/payment_detail"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_11sdp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -558,7 +565,7 @@
                 android:fontFamily="@font/inter"
                 android:text="@string/transaction_amount"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/payment_Detail" />
 
@@ -568,7 +575,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toBottomOf="@id/transaction"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/transaction" />
@@ -585,7 +592,7 @@
                 android:gravity="center"
                 android:text="@string/maxpoints_applied"
                 android:textColor="#0B54A5"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_11sdp"
                 android:textStyle="bold"
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
@@ -598,7 +605,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter"
                 android:textColor="#0B54A5"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_11sdp"
                 android:textStyle="bold"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="@id/applied"
@@ -625,7 +632,7 @@
                 android:text="@string/use_maxpoints"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 android:textColor="#003770"
-                android:textSize="@dimen/_11sdp"
+                android:textSize="@dimen/_12sdp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/available_pointsTV"
                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -638,7 +645,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter"
                 android:textColor="#5C5C5C"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_11sdp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/shimmerTextView"
@@ -665,7 +672,7 @@
                 android:fontFamily="@font/roboto"
                 android:text="@string/apply"
                 android:textColor="#003770"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/shimmerTextView"

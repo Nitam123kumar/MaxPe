@@ -52,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_30sdp"
                     android:adjustViewBounds="true"
-                    android:fontFamily="@font/roboto"
+                    android:fontFamily="@font/inter"
                     android:text="@string/balance_amp_history"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/black"
@@ -114,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/roboto"
+                    android:fontFamily="@font/inter"
                     android:text="@string/your_balance"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_10sdp"
@@ -127,7 +127,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/roboto"
+                    android:fontFamily="@font/inter"
                     android:text="@string/_00_00"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_38sdp"
@@ -165,7 +165,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginStart="@dimen/_8sdp"
-                            android:fontFamily="@font/roboto"
+                            android:fontFamily="@font/inter"
                             android:text="@string/add_money"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_9sdp" />
@@ -205,8 +205,40 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginStart="@dimen/_8sdp"
-                            android:fontFamily="@font/roboto"
+                            android:fontFamily="@font/inter"
                             android:text="@string/history"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_9sdp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/manual_getway_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/view_money_line"
+                        app:layout_constraintTop_toTopOf="@id/view_money_line">
+
+
+                        <ImageView
+                            android:layout_width="@dimen/_14sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/history_img_svg" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:fontFamily="@font/inter"
+                            android:text="Manual Add Money"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_9sdp" />
 
@@ -248,6 +280,7 @@
                         android:text="@string/latest_transitions"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_18sdp"
+                        android:fontFamily="@font/inter"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -257,8 +290,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/view_all"
+                        android:fontFamily="@font/inter"
                         android:textColor="#828282"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/_10sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"

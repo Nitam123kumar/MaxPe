@@ -39,6 +39,20 @@
                         android:src="@drawable/login_top_bg"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <ImageView
+                        android:id="@+id/back_home"
+                        android:layout_width="@dimen/_27sdp"
+                        android:layout_height="@dimen/_27sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:background="@drawable/wallet_back_shape"
+                        android:contentDescription="@string/max_pe"
+                        android:padding="@dimen/_8sdp"
+                        android:src="@drawable/black_arrow_svg"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
 
                     <ImageView
                         android:layout_width="@dimen/_100sdp"
@@ -67,7 +81,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_50sdp"
-                            android:fontFamily="@font/roboto_bold"
+                            android:fontFamily="@font/inter"
                             android:gravity="center"
                             android:text="@string/verify_your_otp"
                             android:textColor="@color/black"
@@ -81,6 +95,7 @@
                             android:layout_marginTop="@dimen/_25sdp"
                             android:text="@string/enter_otp"
                             android:textColor="@color/black"
+                            android:fontFamily="@font/inter"
                             android:textSize="@dimen/_12sdp"
                             android:textStyle="bold" />
 
@@ -93,8 +108,9 @@
                             android:background="@drawable/corner_white_recharge_2"
                             android:gravity="center_vertical"
                             android:hint="@string/enter_otp"
+                            android:fontFamily="@font/inter"
                             android:inputType="textPassword"
-                            android:maxLength="10"
+                            android:maxLength="6"
                             android:paddingLeft="@dimen/_10sdp"
                             android:textColor="@color/black_2"
                             android:textColorHint="#8C8C8C"
@@ -109,6 +125,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_15sdp"
                             android:text=""
+                            android:fontFamily="@font/inter"
                             android:textColor="@color/black"
                              android:textSize="@dimen/_11sdp"
                             android:textStyle="bold" />
@@ -126,23 +143,56 @@
                                 android:gravity="center"
                                 android:text="@string/verify_otp"
                                 android:textAllCaps="false"
+                                android:fontFamily="@font/inter"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_13sdp"
                                 android:textStyle="bold" />
 
                         </RelativeLayout>
 
-                        <TextView
-                            android:id="@+id/timer"
-                            android:layout_width="match_parent"
+                        <LinearLayout
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_30sdp"
-                            android:gravity="center"
-                            android:text=""
+                            android:layout_gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:id="@+id/timer1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:visibility="gone"
+                                android:fontFamily="@font/inter"
+                                android:textAllCaps="false"
+                                android:textColor="#8C8C8C"
+                                android:textSize="@dimen/_12sdp" />
+
+                        <TextView
+                            android:id="@+id/timer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Didn't receive OTP? Resend in "
+                            android:fontFamily="@font/inter"
                             android:textAllCaps="false"
+                            android:visibility="gone"
                             android:textColor="#8C8C8C"
                              android:textSize="@dimen/_12sdp" />
 
+                            <TextView
+                                android:id="@+id/resendOtpTV"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter"
+                                android:text="Resend OTP"
+                                android:textAllCaps="false"
+                                android:textColor="#0A51A0"
+                                android:visibility="gone"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/_13sdp" />
+
+                        </LinearLayout>
 
                         <TextView
                             android:id="@+id/help_support"
@@ -153,6 +203,7 @@
                             android:paddingLeft="@dimen/_5sdp"
                             android:paddingTop="@dimen/_8sdp"
                             android:paddingRight="@dimen/_10sdp"
+                            android:fontFamily="@font/inter"
                             android:paddingBottom="@dimen/_10sdp"
                             android:text="@string/need_help"
                             android:textAlignment="center"
@@ -192,6 +243,7 @@
                                     android:text="Call Us"
                                     android:textColor="#8C8C8C"
                                      android:textSize="@dimen/_12sdp"
+                                    android:fontFamily="@font/inter"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toEndOf="@id/call_img"
@@ -224,6 +276,7 @@
                                     android:text="Whatsapp Us"
                                     android:textColor="#8C8C8C"
                                      android:textSize="@dimen/_12sdp"
+                                    android:fontFamily="@font/inter"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toEndOf="@id/whatsapp_img"

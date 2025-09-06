@@ -934,7 +934,7 @@ public void setConfigData() {
                 toastCountDown.cancel();
             }
             custom = Toasty.custom(getActivity(), message + " ",
-                    R.drawable.cross_new, es.dmoral.toasty.R.color.errorColor, 5000, false,
+                    R.drawable.cross_new, es.dmoral.toasty.R.color.errorColor, 8000, false,
                     true);
             custom.setGravity(Gravity.TOP, 0, 10);
             toastCountDown = new CountDownTimer(5000, 1000 /*Tick duration*/) {
@@ -963,7 +963,7 @@ public void setConfigData() {
             handler.removeCallbacks(runnable);
             changeStatusBarColorError();
 
-            snackbar = TSnackbar.make(findViewById(android.R.id.content), message, TSnackbar.LENGTH_SHORT);
+            snackbar = TSnackbar.make(findViewById(android.R.id.content), message, TSnackbar.LENGTH_LONG);
             snackbar.setActionTextColor(Color.WHITE);
 
             View snackbarView = snackbar.getView();
@@ -986,7 +986,7 @@ public void setConfigData() {
 
 
             new Handler(Objects.requireNonNull(Looper.myLooper()))
-                    .postDelayed(this::changeStatusBarColorNormal, 2150);
+                    .postDelayed(this::changeStatusBarColorNormal, 3150);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1002,7 +1002,7 @@ public void setConfigData() {
             handler.removeCallbacks(runnable);
             changeStatusBarColorError();
 
-            snackbar = TSnackbar.make(findViewById(android.R.id.content), message, TSnackbar.LENGTH_SHORT);
+            snackbar = TSnackbar.make(findViewById(android.R.id.content), message, TSnackbar.LENGTH_LONG);
             snackbar.setActionTextColor(Color.WHITE);
 
             View snackbarView = snackbar.getView();
@@ -1025,7 +1025,7 @@ public void setConfigData() {
 
 
             new Handler(Objects.requireNonNull(Looper.myLooper()))
-                    .postDelayed(this::changeStatusBarColorNormal1, 2150);
+                    .postDelayed(this::changeStatusBarColorNormal1, 3150);
 
         } catch (Exception e) {
             e.printStackTrace();
