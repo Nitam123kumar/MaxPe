@@ -36,12 +36,14 @@ public class BillerAdapter extends RecyclerView.Adapter<BillerAdapter.BillerVH> 
 
     @Override
     public void onBindViewHolder(@NonNull BillerAdapter.BillerVH holder, int position) {
-        holder.bindView(infos.get(position));
+        BillFetch item = infos.get(position); // ✅ safe now
+        holder.txtCustomerInfo.setText(item.getKey());
+        holder.txtCustomerInfoValue.setText(item.getValue());
     }
 
     @Override
     public int getItemCount() {
-        return size;
+        return infos != null ? infos.size() : 0;
     }
 
     public class BillerVH extends RecyclerView.ViewHolder {

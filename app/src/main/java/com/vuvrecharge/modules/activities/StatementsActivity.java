@@ -148,15 +148,15 @@ public class StatementsActivity extends BaseActivity implements DefaultView, OnF
 //            maxPointsTxt.setText(Html.fromHtml("<b>Max Point</b>"));
 
         }else if (wallet !=null && !wallet.isEmpty()) {
-            setFragment(new WalletFragment());
-            viewReports.setBackgroundResource(R.drawable.statements_select_bg_shape);
-            reportsView.setTextColor(Color.WHITE);
-            viewStatements.setBackgroundResource(R.drawable.null_shape);
+            setFragment(new DepositFragment());
+            viewDeposit.setBackgroundResource(R.drawable.statements_select_bg_shape);
             statementsView.setTextColor(getResources().getColor(R.color.colorBlackU));
-            viewDeposit.setBackgroundResource(R.drawable.null_shape);
-            depositView.setTextColor(getResources().getColor(R.color.colorBlackU));
+            viewReports.setBackgroundResource(R.drawable.null_shape);
+            reportsView.setTextColor(getResources().getColor(R.color.colorBlackU));
             viewMaxPoints.setBackgroundResource(R.drawable.null_shape);
+            viewStatements.setBackgroundResource(R.drawable.null_shape);
             maxPointsTxt.setTextColor(getResources().getColor(R.color.colorBlackU));
+            depositView.setTextColor(Color.WHITE);
 //            statementsView.setText(Html.fromHtml("Recharge"));
 //            depositView.setText(Html.fromHtml("Deposit"));
 //            reportsView.setText(Html.fromHtml("<b>Wallet</b>"));

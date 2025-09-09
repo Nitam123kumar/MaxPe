@@ -416,7 +416,7 @@
 
                             <LinearLayout
                                 android:id="@+id/prepaid"
-                                android:layout_width="@dimen/_60sdp"
+                                android:layout_width="@dimen/_62sdp"
                                 android:layout_height="@dimen/_75sdp"
                                 android:layout_weight="1"
                                 android:gravity="center"
@@ -443,7 +443,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/_7sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
                                     android:fontFamily="@font/inter"
                                     android:text="@string/prepaid"
                                     android:textColor="@color/black"
@@ -454,7 +454,7 @@
 
                             <LinearLayout
                                 android:id="@+id/postpaid"
-                                android:layout_width="@dimen/_60sdp"
+                               android:layout_width="@dimen/_62sdp"
                                 android:layout_height="@dimen/_75sdp"
                                 android:layout_weight="1"
                                 android:gravity="center"
@@ -479,7 +479,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/_7sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
                                     android:fontFamily="@font/inter"
                                     android:text="@string/postpaid"
                                     android:textColor="@color/black"
@@ -490,7 +490,7 @@
 
                             <LinearLayout
                                 android:id="@+id/DTH"
-                                android:layout_width="@dimen/_60sdp"
+                               android:layout_width="@dimen/_62sdp"
                                 android:layout_height="@dimen/_75sdp"
                                 android:layout_weight="1"
                                 android:gravity="center"
@@ -515,7 +515,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/_7sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
                                     android:fontFamily="@font/inter"
                                     android:text="@string/dth_"
                                     android:textColor="@color/black"
@@ -526,7 +526,7 @@
 
                             <LinearLayout
                                 android:id="@+id/Landline"
-                                android:layout_width="@dimen/_60sdp"
+                               android:layout_width="@dimen/_62sdp"
                                 android:layout_height="@dimen/_75sdp"
                                 android:layout_weight="1"
                                 android:gravity="center"
@@ -551,7 +551,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/_7sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
                                     android:fontFamily="@font/inter"
                                     android:text="@string/landline"
                                     android:textColor="@color/black"
@@ -562,8 +562,8 @@
 
                             <LinearLayout
                                 android:id="@+id/Electricity"
-                                android:layout_width="@dimen/_60sdp"
-                                android:layout_height="@dimen/_75sdp"
+                               android:layout_width="@dimen/_62sdp"
+                                android:layout_height="@dimen/_80sdp"
                                 android:layout_marginTop="@dimen/_10sdp"
                                 android:layout_weight="1"
                                 android:gravity="center"
@@ -588,7 +588,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/_7sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
                                     android:fontFamily="@font/inter"
                                     android:text="@string/electricity"
                                     android:textColor="@color/black"
@@ -599,8 +599,8 @@
 
                             <LinearLayout
                                 android:id="@+id/Fastag"
-                                android:layout_width="@dimen/_60sdp"
-                                android:layout_height="@dimen/_75sdp"
+                               android:layout_width="@dimen/_62sdp"
+                                android:layout_height="@dimen/_80sdp"
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:orientation="vertical"
@@ -625,7 +625,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/_7sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
                                     android:fontFamily="@font/inter"
                                     android:text="@string/fastag"
                                     android:textColor="@color/black"
@@ -636,8 +636,8 @@
 
                             <LinearLayout
                                 android:id="@+id/Cylinder"
-                                android:layout_width="@dimen/_60sdp"
-                                android:layout_height="@dimen/_75sdp"
+                               android:layout_width="@dimen/_62sdp"
+                                android:layout_height="@dimen/_80sdp"
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:orientation="vertical"
@@ -662,7 +662,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/_7sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
                                     android:fontFamily="@font/inter"
                                     android:text="@string/cylinder"
                                     android:textColor="@color/black"
@@ -673,8 +673,8 @@
 
                             <LinearLayout
                                 android:id="@+id/ViewAll"
-                                android:layout_width="@dimen/_60sdp"
-                                android:layout_height="@dimen/_75sdp"
+                               android:layout_width="@dimen/_65sdp"
+                                android:layout_height="@dimen/_80sdp"
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:orientation="vertical"
@@ -696,10 +696,10 @@
 
 
                                 <TextView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:layout_marginTop="@dimen/_7sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
                                     android:fontFamily="@font/inter"
                                     android:paddingHorizontal="@dimen/_10sdp"
                                     android:text="@string/view_all"
@@ -906,7 +906,7 @@
                             <TextView
                                 android:id="@+id/bike_percent"
                                 android:layout_width="@dimen/_26sdp"
-                                android:layout_height="@dimen/_38sdp"
+                                android:layout_height="@dimen/_40sdp"
                                 android:layout_gravity="center"
                                 android:layout_marginEnd="@dimen/_2sdp"
                                 android:background="@drawable/insurance"
@@ -965,7 +965,7 @@
                             <TextView
                                 android:id="@+id/car_percent"
                                 android:layout_width="@dimen/_26sdp"
-                                android:layout_height="@dimen/_38sdp"
+                                android:layout_height="@dimen/_40sdp"
                                 android:layout_gravity="center"
                                 android:layout_marginEnd="@dimen/_2sdp"
                                 android:background="@drawable/insurance"
@@ -1181,7 +1181,6 @@
                                     android:id="@+id/socialM_imageView"
                                     android:layout_width="@dimen/_40sdp"
                                     android:layout_height="@dimen/_40sdp"
-                                    android:src="@drawable/instagram_svg"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
@@ -1191,7 +1190,7 @@
                                     android:id="@+id/follow_us_Title"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Follow Us"
+                                    android:text=""
                                     android:textSize="@dimen/_11sdp"
                                     android:textStyle="bold"
                                     android:gravity="center"
@@ -1835,7 +1834,7 @@
                         app:layout_constraintStart_toStartOf="@id/history"
                         app:layout_constraintTop_toTopOf="@id/history"
                         app:layout_constraintVertical_chainStyle="packed"
-                        app:tint="#89929B" />
+                        />
 
                     <TextView
                         android:id="@+id/txtHistory"

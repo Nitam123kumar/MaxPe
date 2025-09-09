@@ -453,7 +453,7 @@
                     android:textColor="@color/colorPrimaryB"
                     android:textSize="@dimen/_11sdp"
                     android:textStyle="bold"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/recyclerViewBillerInfo" />
 

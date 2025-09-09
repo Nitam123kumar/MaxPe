@@ -657,7 +657,11 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             int minInt = Integer.parseInt(minAmount);
             int maxInt = Integer.parseInt(maxAmount);
 
-            if (amtInt < minInt || amtInt > maxInt) {
+            if (amtInt < minInt ) {
+                showError("Enter amount min " + minInt + " and max " + maxInt);
+                return;
+            }
+            if (maxInt>0 && amtInt > maxInt) {
                 showError("Enter amount min " + minInt + " and max " + maxInt);
                 return;
             }
@@ -696,16 +700,18 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
         try {
             Log.d("TAG_DATA", "onSuccess: " + data);
             JSONObject object = new JSONObject(data);
-            if ((object.getJSONObject("additionalInfo") != null)) {
-                JSONObject object1 = new JSONObject(object.getString("additionalInfo"));
+            JSONObject object1 = object.optJSONObject("additionalInfo");
+
+            if (object1 != null) {
                 Iterator<String> keys = object1.keys();
                 while (keys.hasNext()) {
                     String key = keys.next();
-                    String value = object1.getString(key);
+                    String value = object1.optString(key, "");
                     if (!value.isEmpty()) {
                         infos.add(new BillFetch(key, value));
                     }
                 }
+
 
                 if (infos.size() < 3) {
                     txtViewMore.setVisibility(VISIBLE);

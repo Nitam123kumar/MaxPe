@@ -56,7 +56,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
+@SuppressLint("NonConstantResourceId")
 public class WalletActivity extends BaseActivity implements View.OnClickListener, DefaultView {
 
     @BindView(R.id.recyclerView_latest_transitions)
@@ -130,18 +130,11 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
         });
 
     }
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void setStatusBarGradiant() {
-        try {
-            Window win = getWindow();
-            if (win != null) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    win.setStatusBarColor(getResources().getColor(R.color.white));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mDefaultPresenter.recentSuccessDepositHistory(device_id + "");
     }
     private void showBottomSheet(DepositData data) {
 
@@ -197,17 +190,17 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
 
         if (data.getPayment_status().toUpperCase().equals("PENDING")) {
             Glide.with(getActivity())
-                    .load(R.drawable.pending_2)
+                    .load(R.drawable.pending_new_icon)
                     .into(onSuccess);
             transaction_successful_textView.setText("This transaction was pennding");
         } else if (data.getPayment_status().toUpperCase().equals("SUCCESS")) {
             Glide.with(getActivity())
-                    .load(R.drawable.success_img)
+                    .load(R.drawable.done_new_icon)
                     .into(onSuccess);
             transaction_successful_textView.setText(R.string.this_transaction_was_successful);
         } else {
             Glide.with(getActivity())
-                    .load(R.drawable.close_1)
+                    .load(R.drawable.cancle_new_icon)
                     .into(onSuccess);
             transaction_successful_textView.setText("This transaction was failed");
         }

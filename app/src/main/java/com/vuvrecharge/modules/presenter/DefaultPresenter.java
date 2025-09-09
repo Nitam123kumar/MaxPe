@@ -1149,6 +1149,7 @@ public class DefaultPresenter {
             String encrypted = Java_AES_Cipher.encrypt(BaseMethod.key, BaseMethod.iv, data_final);
             mDefaultView.onPrintLog(data_final);
 //            mDefaultView.onShowDialog("Loading...");
+            Log.d("TAG_DATA", "getPaymentSetting2: " + encrypted);
             Call<DefaultResponse> responseCall = MyApplication.getInstance()
                     .getApiInterface()
                     .defaultRequest(encrypted);
@@ -2261,8 +2262,8 @@ public class DefaultPresenter {
 
             data.put("post_data", post_data);
             String data_final = data.toString();
-//            Log.d("TAG_DATA", "hdfcbankDynamicQR: "+data_final);
             String encrypted = Java_AES_Cipher.encrypt(BaseMethod.key, BaseMethod.iv, data_final);
+            Log.d("TAG_DATA", "hdfcbankDynamicQR: "+encrypted);
             mDefaultView.onShowDialog("Adding...");
             Call<DefaultResponse> responseCall = MyApplication.getInstance()
                     .getApiInterface()

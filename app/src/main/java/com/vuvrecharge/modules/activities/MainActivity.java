@@ -1,5 +1,6 @@
 package com.vuvrecharge.modules.activities;
 
+import static com.vuvrecharge.api.ApiServices.IMAGE_FOLLOWS;
 import static com.vuvrecharge.api.ApiServices.OFFER_ZONE;
 
 import android.annotation.SuppressLint;
@@ -262,6 +263,10 @@ public class MainActivity extends BaseActivity implements DefaultView,
     NestedScrollView nestedScrollView1;
     @BindView(R.id.whatsup_alert)
     ImageView whatsup_alert;
+    @BindView(R.id.socialM_imageView)
+    ImageView socialM_imageView;
+    @BindView(R.id.follow_us_Title)
+    TextView follow_us_Title;
     @BindView(R.id.home_banner_gif)
     GifImageView home_banner_gif;
 
@@ -316,6 +321,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
     APIStorePreferences apiStorePreferences;
+    private String follow_link="";
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -546,6 +552,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
             loading.setVisibility(View.GONE);
             refresh_layout.setRefreshing(false);
         }
+        Log.d("DashBoardData1", "onSuccess: " + "operatorData");
         mDefaultPresenter.dashboardDataWithoutRefresh(fcmToken + "", device_id + "", null);
         mDefaultPresenter.fetchBalance(fcmToken + "", device_id + "", rotation);
     }
@@ -1167,6 +1174,28 @@ public class MainActivity extends BaseActivity implements DefaultView,
             JSONObject bike_insurance = customInsuranceDetails.getJSONObject("bike_insurance");
             JSONObject car_insurance = customInsuranceDetails.getJSONObject("car_insurance");
 
+            JSONObject follower_details = data1.optJSONObject("follower_details");
+
+            if (follower_details != null && follower_details.length() > 0) {
+                Log.d("follower_details", "follower_details: " + follower_details.toString());
+
+                String follow_us_logo = follower_details.optString("logo", "");
+                String follow_us_title = follower_details.optString("title", "");
+                follow_link = follower_details.optString("redirect_url", "");
+
+                Glide.with(getActivity())
+                        .load(IMAGE_FOLLOWS + "/" + follow_us_logo)
+                        .into(socialM_imageView);
+
+                follow_us_Title.setText(follow_us_title);
+
+            } else {
+                socialM_imageView.setImageResource(R.drawable.instagram_svg);
+                follow_us_Title.setText("Instagram");
+                follow_link = "https://www.instagram.com/maxpe_payments/";
+            }
+
+
             String dashboard_banner = data1.getString("dashboard_banner");
 //                Glide.with(getActivity()).load(dashboard_banner).into(ott_recharge);
             String footer_banner_text = data1.getString("footer_banner_text");
@@ -1380,6 +1409,28 @@ public class MainActivity extends BaseActivity implements DefaultView,
             JSONObject car_insurance = customInsuranceDetails.getJSONObject("car_insurance");
             String saved = mDatabase.getString("home_api_response");
             Log.d("GET_TEST", "Loaded Value1: " + saved);
+
+            JSONObject follower_details = message1.optJSONObject("follower_details");
+
+            if (follower_details != null && follower_details.length() > 0) {
+                Log.d("follower_details", "follower_details: " + follower_details.toString());
+
+                String follow_us_logo = follower_details.optString("logo", "");
+                String follow_us_title = follower_details.optString("title", "");
+                follow_link = follower_details.optString("redirect_url", "");
+
+                Glide.with(getActivity())
+                        .load(IMAGE_FOLLOWS + "/" + follow_us_logo)
+                        .into(socialM_imageView);
+
+                follow_us_Title.setText(follow_us_title);
+
+            } else {
+                socialM_imageView.setImageResource(R.drawable.instagram_svg);
+                follow_us_Title.setText("Instagram");
+                follow_link = "https://www.instagram.com/maxpe_payments/";
+            }
+
 
             String dashboard_banner = message1.getString("dashboard_banner");
 //                Glide.with(getActivity()).load(dashboard_banner).into(ott_recharge);
@@ -1832,6 +1883,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
             indicator.requestLayout();
         });
     }
+
     //    TODO Service Click
     @Override
     public void onClickListener(String redirection_type, String intent_name, String activityExtraData, String link) throws ClassNotFoundException {
@@ -2106,7 +2158,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
                 }
                 break;
             case R.id.follow_us:
-                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/maxpe_payments/"));
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(follow_link));
                 startActivity(intent);
                 break;
 
