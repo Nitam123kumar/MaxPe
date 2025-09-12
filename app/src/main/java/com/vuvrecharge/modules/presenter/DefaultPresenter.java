@@ -170,6 +170,7 @@ public class DefaultPresenter {
             Call<DefaultResponse> responseCall = MyApplication.getInstance()
                     .getApiInterface()
                     .defaultRequest(encrypted);
+            Log.d("encrypted",encrypted);
             responseCall.enqueue(new Callback<DefaultResponse>() {
                 @Override
                 public void onResponse(@NotNull Call<DefaultResponse> call, @NotNull Response<DefaultResponse> response) {
@@ -781,11 +782,12 @@ public class DefaultPresenter {
         }
     }
 
-    public void myReferralIncome(String device_id, String page, String clear) {
+    public void myReferralIncome(String device_id, String page, String clear,String earning_type) {
         try {
             JSONObject post_data = new JSONObject();
             post_data.put("page", page.trim());
             post_data.put("device_id", device_id.trim());
+            post_data.put("earning_type", earning_type.trim());
             post_data.put("token", mDatabase.getToken().trim());
             JSONObject data = new JSONObject();
             data.put("request_url", ApiServices.myReferralIncome);
@@ -4176,6 +4178,7 @@ public class DefaultPresenter {
             data.put("post_data", post_data);
             String data_final = data.toString();
             String encrypted = Java_AES_Cipher.encrypt(BaseMethod.key, BaseMethod.iv, data_final);
+            Log.d("encrypted",encrypted);
             MyApplication.getInstance()
                     .getApiInterface()
                     .defaultRequest(encrypted)

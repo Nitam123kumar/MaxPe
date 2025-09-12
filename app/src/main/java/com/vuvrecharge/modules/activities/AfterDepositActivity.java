@@ -192,7 +192,7 @@ public class AfterDepositActivity extends BaseActivity implements DefaultView, V
                 }
             };
             if (payment_status.toLowerCase().equals("pending")) {
-                Glide.with(getBaseContext()).load(R.drawable.animated_pending).into(operator_img);
+                Glide.with(getBaseContext()).load(R.drawable.pending).into(operator_img);
                 title.setText("Payment Processing...");
                 changeStatusBarColorProcess();
                 mReportsData.setStatus(payment_status);
@@ -203,16 +203,16 @@ public class AfterDepositActivity extends BaseActivity implements DefaultView, V
                 title.setText("Payment Success");
                 changeStatusBarColorGreen();
                 btnLogin.setBackgroundResource(R.drawable.green_button);
-                Glide.with(getBaseContext()).load(R.drawable.animated_right).into(operator_img);
+                Glide.with(getBaseContext()).load(R.drawable.right).into(operator_img);
             } else if (payment_status.toLowerCase().equals("failed")) {
                 title.setText("Payment Failed");
-                Glide.with(getBaseContext()).load(R.drawable.animated_wrong).into(operator_img);
+                Glide.with(getBaseContext()).load(R.drawable.wrong_gif).into(operator_img);
                 btnLogin.setBackgroundResource(R.drawable.failed_button);
                 changeStatusBarColorError();
             } else {
                 title.setText("Payment Refunded");
                 btnLogin.setBackgroundResource(R.drawable.failed_button);
-                Glide.with(getBaseContext()).load(R.drawable.animated_wrong).into(operator_img);
+                Glide.with(getBaseContext()).load(R.drawable.wrong_gif).into(operator_img);
                 changeStatusBarColorError();
             }
         } catch (JSONException e) {

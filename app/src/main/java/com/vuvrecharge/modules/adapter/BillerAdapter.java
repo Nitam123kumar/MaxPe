@@ -17,7 +17,7 @@ public class BillerAdapter extends RecyclerView.Adapter<BillerAdapter.BillerVH> 
     private List<BillFetch> infos;
     final private String title;
     final private String type;
-    private int size;
+     int size;
     public BillerAdapter(List<BillFetch> infos, String title, String type, int size) {
         this.infos = infos;
         this.title = title;
@@ -43,7 +43,7 @@ public class BillerAdapter extends RecyclerView.Adapter<BillerAdapter.BillerVH> 
 
     @Override
     public int getItemCount() {
-        return infos != null ? infos.size() : 0;
+        return size;
     }
 
     public class BillerVH extends RecyclerView.ViewHolder {

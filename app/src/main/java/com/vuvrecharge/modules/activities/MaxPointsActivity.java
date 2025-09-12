@@ -63,7 +63,7 @@ public class MaxPointsActivity extends BaseActivity implements DefaultView {
     ImageView back_to_home;
 
     @BindView(R.id.txtNoData)
-    TextView txtNoData;
+    ImageView txtNoData;
     @BindView(R.id.balance_maxPoints_TV)
     TextView balance_maxPoints_TV;
     @BindView(R.id.share1)

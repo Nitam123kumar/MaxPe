@@ -89,7 +89,7 @@
                 android:layout_width="@dimen/_45sdp"
                 android:layout_height="@dimen/_45sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                android:src="@drawable/max_point_img"
+                android:src="@drawable/max_pe_points_new"
                 app:layout_constraintBottom_toBottomOf="@id/balance_maxPoints_TV"
                 app:layout_constraintEnd_toStartOf="@id/maxTitle"
                 app:layout_constraintTop_toTopOf="@id/maxTitle" />
@@ -390,6 +390,19 @@
             android:layout_height="match_parent"
             android:paddingBottom="@dimen/_20sdp">
 
+            <ImageView
+                android:id="@+id/txtNoData"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_120sdp"
+                android:gravity="center"
+                android:src="@drawable/no_data_found"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipeRefreshLayout"
                 android:layout_width="match_parent"
@@ -415,22 +428,8 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="1.0"
                             tools:layout_editor_absoluteX="0dp"
-                            tools:listitem="@layout/max_points_row" />
-
-                        <TextView
-                            android:id="@+id/txtNoData"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="@string/no_data_found"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_14sdp"
                             android:visibility="gone"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
+                            tools:listitem="@layout/max_points_row" />
                         <TextView
                             android:id="@+id/view_all_maxPoints"
                             android:layout_width="wrap_content"

@@ -9,6 +9,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -34,6 +36,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -53,8 +57,10 @@ import com.vuvrecharge.modules.activities.AccountActivity;
 import com.vuvrecharge.modules.activities.RechargeActivity;
 import com.vuvrecharge.modules.activities.RechargeReportActivity;
 import com.vuvrecharge.modules.activities.SupportActivity;
+import com.vuvrecharge.modules.adapter.PaymentMethodSelectAdapter;
 import com.vuvrecharge.modules.adapter.SubscriptionAdapter;
 import com.vuvrecharge.modules.model.PaymentModel;
+import com.vuvrecharge.modules.model.PaymentSettingModel;
 import com.vuvrecharge.modules.model.ReportsData;
 import com.vuvrecharge.modules.model.Subscriptions;
 import com.vuvrecharge.modules.model.UserData;
@@ -68,6 +74,9 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -203,6 +212,7 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
     private BottomSheetDialog bottomSheetDialog;
     private boolean isGetingAPIResponse = false;
     private Timer timer;
+    String requiredAmount;
 
 
     protected void attachBaseContext(Context newBase) {
@@ -887,11 +897,12 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
                 String orderid = jsonObject.getString("orderid");
                 this.order_id = orderid;
                 String uri = jsonObject.getString("upi_uri");
-                Intent upiIntent = new Intent(Intent.ACTION_VIEW);
-                upiIntent.setData(Uri.parse(uri.trim()));
-                Log.d("doMobileRecharge", "recharge: " + message);
-                Intent chooser = Intent.createChooser(upiIntent, "Pay with...");
-                startActivityForResult(chooser, 104, null);
+//                Intent upiIntent = new Intent(Intent.ACTION_VIEW);
+//                upiIntent.setData(Uri.parse(uri.trim()));
+//                Log.d("doMobileRecharge", "recharge: " + message);
+//                Intent chooser = Intent.createChooser(upiIntent, "Pay with...");
+//                startActivityForResult(chooser, 104, null);
+                usingPaymentBottomSheet(uri, orderid);
             } else if (second_message.equals("orderDetails")) {
                 Gson gson = new Gson();
                 Type type_ = new TypeToken<ReportsData>() {
@@ -952,6 +963,88 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
             e.printStackTrace();
         }
     }
+
+    private void usingPaymentBottomSheet(String upiUri, String orderId) {
+        try {
+            ArrayList<PaymentSettingModel> allUpiApps = new ArrayList<>();
+            this.order_id = orderId;
+
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
+            View layout = LayoutInflater.from(this).inflate(R.layout.using_payment_layout, null, false);
+            RecyclerView recyclerView = layout.findViewById(R.id.using_payment_recyclerView);
+            ImageView img2 = layout.findViewById(R.id.img2);
+
+
+            bottomSheetDialog.setContentView(layout);
+
+            FrameLayout bottomSheet = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+            if (bottomSheet != null) {
+                BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                behavior.setPeekHeight(600);
+            }
+
+            img2.setOnClickListener(v -> bottomSheetDialog.cancel());
+
+            Intent upiIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("upi://pay"));
+            PackageManager pm = getPackageManager();
+            List<ResolveInfo> upiApps = pm.queryIntentActivities(upiIntent, 0);
+
+            for (ResolveInfo info : upiApps) {
+                String packageName = info.activityInfo.packageName;
+                String appName = info.loadLabel(pm).toString();
+                Log.d("appName",appName);
+                Drawable icon = info.loadIcon(pm);
+                Log.d("appName", String.valueOf(info));
+                allUpiApps.add(new PaymentSettingModel(icon, appName, "UPI App", packageName));
+            }
+            List<String> upiPriorityList = Arrays.asList("PhonePe", "GPay", "Paytm", "BHIM");
+
+            Collections.sort(allUpiApps, (a, b) -> {
+                int indexA = upiPriorityList.indexOf(a.getStr());
+                int indexB = upiPriorityList.indexOf(b.getStr());
+
+                if (indexA == -1) indexA = Integer.MAX_VALUE;
+                if (indexB == -1) indexB = Integer.MAX_VALUE;
+
+                return Integer.compare(indexA, indexB);
+            });
+
+
+
+
+
+            if (!allUpiApps.isEmpty()) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+                PaymentMethodSelectAdapter adapter = new PaymentMethodSelectAdapter(
+                        this,
+                        (amount, packageName) -> {
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setData(Uri.parse(upiUri));
+                            intent.setPackage(packageName);
+
+                            try {
+                                startActivityForResult(intent, 104);
+                                bottomSheetDialog.dismiss();
+                            } catch (Exception e) {
+                                Toast.makeText(this, "Unable to open UPI app", Toast.LENGTH_SHORT).show();
+                            }
+                        },allUpiApps
+
+                );
+
+                adapter.addData(allUpiApps, requiredAmount.toString());
+                recyclerView.setAdapter(adapter);
+
+            }
+
+            bottomSheetDialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public void onSuccessOther(String data) {
@@ -1149,7 +1242,7 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
 
     @Override
     public void onShowDialog(String message) {
-        showLoading(loading);
+//        showLoading(loading);
     }
 
     @Override
@@ -1231,6 +1324,7 @@ public class PlanDetailsActivity extends BaseActivity implements DefaultView, Vi
             binding.btnPay.setText("Add on ₹" + json.getInt("required"));
             binding.btnPay.setOnClickListener(v -> {
                 try {
+                    requiredAmount = json.getString("required");
                     mDefaultPresenter.addInsufficientBalance(device_id, json.getString("required"));
                     dialog2.dismiss();
                 } catch (Exception e) {

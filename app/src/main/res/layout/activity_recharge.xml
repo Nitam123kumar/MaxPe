@@ -152,6 +152,18 @@
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintTop_toBottomOf="@id/txtCircleOperator" />
 
+                <ImageView
+                    android:id="@+id/txtOperatorDrapDown"
+                    android:layout_width="@dimen/_17sdp"
+                    android:layout_height="@dimen/_17sdp"
+                    android:layout_marginEnd="@dimen/_13sdp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_drop_down"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@id/txtOperator"
+                    app:layout_constraintEnd_toEndOf="@id/txtOperator"
+                    app:layout_constraintTop_toTopOf="@id/txtOperator" />
+
                 <TextView
                     android:id="@+id/txtAmountOperator"
                     android:layout_width="wrap_content"

@@ -137,7 +137,6 @@ protected void attachBaseContext(Context newBase) {
             startActivity(intent);
             timer.onFinish();
             timer.cancel();
-            finish();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -166,7 +165,6 @@ protected void attachBaseContext(Context newBase) {
                     Intent intent = new Intent(getActivity(), VerifyOTPActivity.class);
                     intent.putExtra("number", binding.username.getText().toString().trim());
                     startActivity(intent);
-                    finish();
                 } else {
 //                    binding.passwordLayout.setVisibility(View.VISIBLE);
 //                    binding.password.setVisibility(View.VISIBLE);

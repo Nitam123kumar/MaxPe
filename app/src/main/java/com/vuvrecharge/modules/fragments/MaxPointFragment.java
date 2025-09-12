@@ -71,7 +71,7 @@ public class MaxPointFragment extends BaseFragment implements DefaultView {
     @BindView(R.id.search)
     TextView search;
     @BindView(R.id.txtNoData)
-    TextView txtNoData;
+    ImageView txtNoData;
 
 //    @BindView(R.id.loading)
 //    LinearLayout loading;

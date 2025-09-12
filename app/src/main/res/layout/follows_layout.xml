@@ -65,7 +65,7 @@
         android:layout_marginHorizontal="@dimen/_25sdp"
         android:layout_height="@dimen/_50sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:background="@drawable/need_support_svg"
+        android:background="@drawable/need_support_svg1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/followUsRecyclerView"

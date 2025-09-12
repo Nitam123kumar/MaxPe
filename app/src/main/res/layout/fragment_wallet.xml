@@ -94,15 +94,13 @@
          />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <TextView
+    <ImageView
         android:id="@+id/txtNoData"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_120sdp"
         android:gravity="center"
-        android:text="@string/no_data_found"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_14sdp"
-        android:visibility="gone"
+        android:src="@drawable/no_data_found"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

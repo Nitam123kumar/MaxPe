@@ -4,13 +4,15 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/main_wallet_shape"
         android:orientation="vertical">
 
-        <include layout="@layout/add_money_header_layout" />
+        <include layout="@layout/bill_payment_layout" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/biller_main_shape"
             android:orientation="vertical">
 
             <RelativeLayout

@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -17,12 +18,15 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,6 +76,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import es.dmoral.toasty.Toasty;
 
+@SuppressLint("NonConstantResourceId")
 public class AddBalanceActivity extends BaseActivity implements DefaultView, View.OnClickListener,
         PaytmPaymentTransactionCallback, PaymentResultListener, PaymentMethodSelectAdapter.OnClickListener, ExtraCashBackAdapter.OnClickListener {
     DefaultPresenter mDefaultPresenter;
@@ -122,6 +127,8 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
 //    ConstraintLayout pay_using_ConstraintLayout;
     @BindView(R.id.txtTermsCondition)
     TextView txtTermsCondition;
+    @BindView(R.id.mainLayout)
+    RelativeLayout mainLayout;
     ArrayList<PaymentSetting> list = new ArrayList<>();
     JSONObject json;
     String data = "";
@@ -199,53 +206,46 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
         txtFiveHundred.setOnClickListener(this);
         mToolbar.setOnClickListener(this);
 //        help.setOnClickListener(this);
-            amount.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        amount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                add_balance.setBackgroundResource(R.color.proceed_to_add);
+                add_balance.setTextColor(getActivity().getResources().getColor(R.color.black));
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().isEmpty()) {
                     add_balance.setBackgroundResource(R.color.proceed_to_add);
                     add_balance.setTextColor(getActivity().getResources().getColor(R.color.black));
 
-                }
 
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    if (s.toString().isEmpty()) {
-                        add_balance.setBackgroundResource(R.color.proceed_to_add);
-                        add_balance.setTextColor(getActivity().getResources().getColor(R.color.black));
-
-
-                    } else {
+                } else {
 //                        add_amount_show.setText("\u20b9"+s.toString());
 //                        add_amount_show.setTextColor(Color.WHITE);
 //                        add_amount_show.setTypeface(add_amount_show.getTypeface(), Typeface.BOLD);
-                        amount.setSelection(s.length());
-                        int entered = Integer.parseInt(s.toString());
-                        int min = Integer.parseInt(hdfcminamount);
-                        int max = Integer.parseInt(hdfcmaxamount);
-//
-                        if (entered < min || entered > max) {
-                            add_balance.setBackgroundResource(R.color.proceed_to_add);
-                            add_balance.setTextColor(getActivity().getResources().getColor(R.color.black));
-                            showError("Amount should be " + min + " to " + max + "");
 
-                        } else {
-                            add_balance.setBackgroundResource(R.drawable.add_money_shape);
-                            add_balance.setTextColor(getActivity().getResources().getColor(R.color.white));
-                        }
-                    }
-                    extraCashBackAdapter.filterByAmount(amount.getText().toString());
+                    add_balance.setBackgroundResource(R.drawable.add_money_shape);
+                    add_balance.setTextColor(getActivity().getResources().getColor(R.color.white));
+
                 }
-            });
+                extraCashBackAdapter.filterByAmount(amount.getText().toString());
+            }
+        });
 
+        mainLayout.setOnClickListener(v -> {
+            hideKeyBoard(amount);
+        });
 
-        showSoftKeyboard(amount);
-        amount.setFocusable(true);
-        amount.requestFocus();
+//        showSoftKeyboard(amount);
+//        amount.setFocusable(true);
+//        amount.requestFocus();
 
     }
 
@@ -278,6 +278,25 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
             e.printStackTrace();
         }
     }
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (v instanceof EditText) {
+                Rect outRect = new Rect();
+                v.getGlobalVisibleRect(outRect);
+                if (!outRect.contains((int) ev.getRawX(), (int) ev.getRawY())) {
+                    v.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (imm != null) {
+                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    }
+                }
+            }
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
 
     @Override
     public void onSuccess(String data, @NonNull String data_other) {
@@ -512,8 +531,15 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
             case R.id.selectPaymentMethodBtn:
 
 //                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+                int entered = Integer.parseInt(amount.getText().toString());
+                int min = Integer.parseInt(hdfcminamount);
+                int max = Integer.parseInt(hdfcmaxamount);
+//
                 if (amount.getText().isEmpty()) {
                     showError("Please Enter Amount");
+                } else if (entered < min || entered > max) {
+                    showError("Amount should be " + min + " to " + max + "");
+
                 } else {
 //                    usingPaymentBottomSheet();
                     mDefaultPresenter.hdfcbankDynamicQR(device_id, amount.getText().toString(), "false");
@@ -597,7 +623,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
             for (ResolveInfo info : upiApps) {
                 String packageName = info.activityInfo.packageName;
                 String appName = info.loadLabel(pm).toString();
-                Log.d("appName",appName);
+                Log.d("appName", appName);
                 Drawable icon = info.loadIcon(pm);
                 Log.d("appName", String.valueOf(info));
                 allUpiApps.add(new PaymentSettingModel(icon, appName, "UPI App", packageName));
@@ -608,14 +634,11 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
                 int indexA = upiPriorityList.indexOf(a.getStr());
                 int indexB = upiPriorityList.indexOf(b.getStr());
 
-                if (indexA == -1) indexA = Integer.MAX_VALUE; // not in priority → last
+                if (indexA == -1) indexA = Integer.MAX_VALUE;
                 if (indexB == -1) indexB = Integer.MAX_VALUE;
 
                 return Integer.compare(indexA, indexB);
             });
-
-
-
 
 
             if (!allUpiApps.isEmpty()) {
@@ -634,7 +657,7 @@ public class AddBalanceActivity extends BaseActivity implements DefaultView, Vie
                             } catch (Exception e) {
                                 Toast.makeText(this, "Unable to open UPI app", Toast.LENGTH_SHORT).show();
                             }
-                        },allUpiApps
+                        }, allUpiApps
 
                 );
 

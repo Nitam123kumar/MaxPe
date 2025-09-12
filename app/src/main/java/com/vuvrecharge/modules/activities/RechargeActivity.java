@@ -152,6 +152,8 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
     TextView btnRoffer;
     @BindView(R.id.txtOperator)
     TextView txtOperator;
+    @BindView(R.id.txtOperatorDrapDown)
+    ImageView txtOperatorDrapDown;
     //    @BindView(R.id.imgBBPS)
 //    ImageView imgBBPS;
     @BindView(R.id.submit)
@@ -509,6 +511,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                 type = "DTH";
                 btnBillFetch.setVisibility(GONE);
                 txtOperator.setVisibility(GONE);
+                txtOperatorDrapDown.setVisibility(GONE);
                 txtCircleOperator.setVisibility(GONE);
                 view_plan.setVisibility(VISIBLE);
                 view_cus_info.setVisibility(VISIBLE);
@@ -565,6 +568,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
                     mDefaultPresenter.dthCustomerInfo(device_id + "", mobile_number_str + "", selected_operator + "");
                 });
                 view_plan.setOnClickListener(v -> {
+                    mobile_number_str = mobile_number.getText().toString();
                     if (mobile_number_str.trim().isEmpty()) {
                         showError("Please enter DTH Number");
                         mobile_number.setText("");
@@ -728,7 +732,7 @@ public class RechargeActivity extends BaseActivity implements DefaultView,
 
             }
         });
-//        select_circle_bg.setOnClickListener(this::openDialog);
+        txtOperator.setOnClickListener(this::openDialog);
     }
 
     private void openDialog(View vi) {

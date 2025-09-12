@@ -1,5 +1,7 @@
 package com.vuvrecharge.modules.activities;
 
+import static com.vuvrecharge.api.ApiServices.IMAGE_FOLLOWS;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -12,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -25,18 +28,30 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseActivity;
+import com.vuvrecharge.modules.adapter.FollowsAdapter;
+import com.vuvrecharge.modules.model.Follows;
 import com.vuvrecharge.modules.model.UserData;
+import com.vuvrecharge.modules.presenter.DefaultPresenter;
+import com.vuvrecharge.modules.view.DefaultView;
 import com.vuvrecharge.utils.LocaleHelper;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SupportActivity extends BaseActivity implements View.OnClickListener {
+public class SupportActivity extends BaseActivity implements DefaultView, View.OnClickListener, FollowsAdapter.OnClickListener {
 
+    DefaultPresenter mDefaultPresenter;
     @BindView(R.id.toolbar_layout)
     LinearLayout mToolbar;
     @BindView(R.id.title)
@@ -88,13 +103,21 @@ public class SupportActivity extends BaseActivity implements View.OnClickListene
     ConstraintLayout updateLayout2;
     @BindView(R.id.updatedLayout)
     ConstraintLayout updatedLayout;
+    @BindView(R.id.follow_us_List)
+    RecyclerView follow_us_List;
     @BindView(R.id.feedbackLayout)
     ConstraintLayout feedbackLayout;
+
+    ArrayList<Follows> followsList = new ArrayList<>();
+    FollowsAdapter adapter;
+    String device_id = "";
+
     protected void attachBaseContext(Context newBase) {
         SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
         String lang = prefs.getString("lang", "en");
         super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
     }
+    @SuppressLint("HardwareIds")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,6 +136,11 @@ public class SupportActivity extends BaseActivity implements View.OnClickListene
         feedbackLayout.setOnClickListener(this);
         updatedLayout.setOnClickListener(this);
         youtube.setOnClickListener(this);
+        mDefaultPresenter=new  DefaultPresenter(this);
+        device_id = Settings.Secure.getString(getActivity().getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+        mDefaultPresenter.getFollow(device_id);
+        follow_us_List.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
 //        setStatusBarGradiant(this);
         llPrepaidNumber.setOnClickListener(v -> {
             Intent intent1 = new Intent(getActivity(), HelpLineActivity.class);
@@ -269,4 +297,84 @@ public class SupportActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
+    @Override
+    public void onError(String error) {
+
+    }
+
+    @Override
+    public void onSuccess(String data) {
+
+    }
+
+    @Override
+    public void onSuccess(String data, String data_other) {
+
+    }
+
+    @Override
+    public void onSuccessOther(String data) {
+
+    }
+
+    @Override
+    public void onSuccessOther(String data, String data_other) {
+
+        try {
+
+            Log.d("TAG_DATA", "followUs: " + data + "");
+
+         if (data_other.equals("follows")) {
+             try {
+                 adapter = new FollowsAdapter(this, this);
+                 JSONObject object = new JSONObject(data);
+                 JSONArray array = object.getJSONArray("followers_data");
+                 Log.d("TAG_DATA", "followUsList: " + array);
+                 for (int i = 0; i < array.length(); i++) {
+                     String logo = array.getJSONObject(i).getString("logo");
+                     String title = array.getJSONObject(i).getString("title");
+                     String redirect_url = array.getJSONObject(i).getString("redirect_url");
+
+                     followsList.add(new Follows(IMAGE_FOLLOWS + "/" + logo, title, redirect_url));
+                     adapter.addData(followsList);
+                 }
+
+                 follow_us_List.setAdapter(adapter);
+
+             } catch (Exception e) {
+                 Log.d("TAG_DATA", "followUs: " + e.getMessage());
+             }
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @Override
+    public void onShowDialog(String message) {
+
+    }
+
+    @Override
+    public void onHideDialog() {
+
+    }
+
+    @Override
+    public void onShowToast(String message) {
+
+    }
+
+    @Override
+    public void onPrintLog(String message) {
+
+    }
+
+    @Override
+    public void onFollowLinkClick(String link) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+        startActivity(intent);
+    }
 }

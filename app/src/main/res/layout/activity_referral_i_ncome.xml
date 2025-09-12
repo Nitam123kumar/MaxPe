@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/main_wallet_shape"
         android:orientation="vertical">
 
-        <include layout="@layout/app_bar_custom" />
+        <include layout="@layout/bill_payment_layout" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/biller_main_shape"
             android:orientation="vertical">
 
             <LinearLayout
@@ -49,11 +52,52 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/navLayout"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/img1"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_height="@dimen/_50sdp">
+
+                    <TextView
+                        android:id="@+id/top_referral"
+                        android:layout_width="@dimen/_110sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@drawable/statements_select_bg_shape"
+                        android:gravity="center"
+                        android:text="My Earnings"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_9sdp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@id/top_transaction"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/top_transaction"
+                        android:layout_width="@dimen/_110sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@drawable/null_shape"
+                        android:gravity="center"
+                        android:text="My Points"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_9sdp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/top_referral"
+                        app:layout_constraintTop_toTopOf="@id/top_referral" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/coins_list"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_below="@id/navLayout"/>
 
                 <TextView
                     android:id="@+id/no_data"
@@ -66,6 +110,12 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/_15sdp"
                     android:visibility="gone" />
+
+                <FrameLayout
+                    android:id="@+id/frameLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/navLayout" />
 
 
 

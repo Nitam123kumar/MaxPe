@@ -1,21 +1,27 @@
 package com.vuvrecharge.modules.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vuvrecharge.R;
 import com.vuvrecharge.base.BaseActivity;
 import com.vuvrecharge.modules.adapter.ReferralsIncomeAdapter;
+import com.vuvrecharge.modules.fragments.MyEarningsFragment;
+import com.vuvrecharge.modules.fragments.MyPointsFragment;
+import com.vuvrecharge.modules.fragments.RechargeHistoryFragment;
 import com.vuvrecharge.modules.model.ReferralsIncomeData;
 import com.vuvrecharge.modules.presenter.DefaultPresenter;
 import com.vuvrecharge.modules.view.DefaultView;
@@ -50,28 +56,37 @@ public class ReferralsIncomeActivity extends BaseActivity implements DefaultView
     LinearLayout no_internet;
     @BindView(R.id.retry)
     TextView retry;
+    @BindView(R.id.top_transaction)
+    TextView top_transaction;
+    @BindView(R.id.top_referral)
+    TextView top_referral;
+    @BindView(R.id.frameLayout)
+    FrameLayout frameLayout;
     int page = 1;
     int remaining_pages = 3;
     int pastVisibleItems;
     int visibleItemCount;
     int totalItemCount;
     int previousTotal = 0;
+
     protected void attachBaseContext(Context newBase) {
         SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
         String lang = prefs.getString("lang", "en");
         super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_referrals);
+        setContentView(R.layout.activity_referral_i_ncome);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         ButterKnife.bind(this);
         mToolbar.setOnClickListener(this);
         title.setText("Referral Income");
-        initializeEventsList();
+//        initializeEventsList();
         mDefaultPresenter = new DefaultPresenter(this);
-        mDefaultPresenter.myReferralIncome(device_id, page + "", "Yes");
+//        mDefaultPresenter.myReferralIncome(device_id, page + "", "Yes");
+        onClickData();
 
     }
 
@@ -80,6 +95,44 @@ public class ReferralsIncomeActivity extends BaseActivity implements DefaultView
         super.onResume();
         setLayout(no_internet, retry, "referralIncome");
     }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    void onClickData() {
+
+        String points = getIntent().getStringExtra("points");
+
+        if (points != null && !points.isEmpty()) {
+            setFragment(new MyPointsFragment());
+            top_referral.setTextColor(getResources().getColor(R.color.black));
+            top_transaction.setTextColor(getResources().getColor(R.color.white));
+            top_referral.setBackground(getResources().getDrawable(R.drawable.null_shape));
+            top_transaction.setBackground(getResources().getDrawable(R.drawable.statements_select_bg_shape));
+        } else {
+
+            setFragment(new MyEarningsFragment());
+            top_referral.setTextColor(getResources().getColor(R.color.white));
+            top_transaction.setTextColor(getResources().getColor(R.color.black));
+            top_referral.setBackground(getResources().getDrawable(R.drawable.statements_select_bg_shape));
+            top_transaction.setBackground(getResources().getDrawable(R.drawable.null_shape));
+
+        }
+
+        top_referral.setOnClickListener(v -> {
+            setFragment(new MyEarningsFragment());
+            top_referral.setTextColor(getResources().getColor(R.color.white));
+            top_transaction.setTextColor(getResources().getColor(R.color.black));
+            top_referral.setBackground(getResources().getDrawable(R.drawable.statements_select_bg_shape));
+            top_transaction.setBackground(getResources().getDrawable(R.drawable.null_shape));
+        });
+        top_transaction.setOnClickListener(v -> {
+            setFragment(new MyPointsFragment());
+            top_referral.setTextColor(getResources().getColor(R.color.black));
+            top_transaction.setTextColor(getResources().getColor(R.color.white));
+            top_referral.setBackground(getResources().getDrawable(R.drawable.null_shape));
+            top_transaction.setBackground(getResources().getDrawable(R.drawable.statements_select_bg_shape));
+        });
+    }
+
 
     boolean isLoading = true;
 
@@ -192,9 +245,16 @@ public class ReferralsIncomeActivity extends BaseActivity implements DefaultView
         hideAllDialog();
     }
 
+    private void setFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(frameLayout.getId(), fragment)
+                .commit();
+    }
+
     @Override
     public void onClick(@NonNull View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.toolbar_layout:
                 onBackPressed();
                 getActivity().finish();

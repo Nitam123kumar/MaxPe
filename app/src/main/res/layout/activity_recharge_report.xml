@@ -292,10 +292,24 @@
                         android:layout_height="@dimen/_105sdp"
                         android:elevation="@dimen/_2sdp"
                         android:scaleType="centerCrop"
+                        android:visibility="visible"
                         app:layout_constraintStart_toStartOf="@id/viewCircle"
                         app:layout_constraintEnd_toEndOf="@id/viewCircle"
                         app:layout_constraintTop_toTopOf="@id/viewCircle"
                         app:layout_constraintBottom_toBottomOf="@id/viewCircle"/>
+
+                    <ImageView
+                        android:id="@+id/imgResponse1"
+                        android:layout_width="@dimen/_78sdp"
+                        android:layout_height="@dimen/_78sdp"
+                        android:elevation="@dimen/_2sdp"
+                        android:scaleType="centerCrop"
+                        android:visibility="gone"
+                        android:src="@drawable/right_img_svg"
+                        app:layout_constraintBottom_toBottomOf="@id/viewCircle"
+                        app:layout_constraintEnd_toEndOf="@id/viewCircle"
+                        app:layout_constraintStart_toStartOf="@id/viewCircle"
+                        app:layout_constraintTop_toTopOf="@id/viewCircle" />
 
                     <TextView
                         android:id="@+id/txtTransaction"

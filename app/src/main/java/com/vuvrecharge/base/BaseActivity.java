@@ -1052,11 +1052,12 @@ public void setConfigData() {
             // Access Tsnackbar text view safely
             TextView textView = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
             if (textView != null) {
+                Log.e("onError1", message);
                 textView.setTextColor(Color.WHITE);
                 textView.setMaxLines(5);
                 textView.setPadding(16, 16, 16, 16);
                 textView.setGravity(Gravity.CENTER_VERTICAL);
-                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
             }
 
             // Show the Tsnackbar
@@ -1064,7 +1065,7 @@ public void setConfigData() {
 
 
             new Handler(Objects.requireNonNull(Looper.myLooper()))
-                    .postDelayed(this::changeStatusBarColorLoginPage, 2150);
+                    .postDelayed(this::changeStatusBarColorLoginPage, 3150);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -116,7 +116,6 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
         recyclerView_latest_transitions.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         addPaymentHistoryAdapter = new AddPaymentHistoryAdapter(getLayoutInflater());
         recyclerView_latest_transitions.setAdapter(addPaymentHistoryAdapter);
-        mDefaultPresenter.recentSuccessDepositHistory(device_id + "");
         mDefaultPresenter.getPaymentSetting2(device_id + "", "timepass");
 
 
@@ -259,6 +258,7 @@ public class WalletActivity extends BaseActivity implements View.OnClickListener
             DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
             balance_TV.setText("\u20b9" + decimalFormat.format(earningsValue));
+            depositList.clear();
             if (array.length() > 0) {
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject object1 = array.getJSONObject(i);

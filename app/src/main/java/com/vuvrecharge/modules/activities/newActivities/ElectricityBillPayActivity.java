@@ -11,6 +11,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -68,8 +70,10 @@ import com.vuvrecharge.databinding.TransactionDialogBinding;
 import com.vuvrecharge.databinding.WalletTransactionBottonDialogBinding;
 import com.vuvrecharge.modules.activities.RechargeReportActivity;
 import com.vuvrecharge.modules.adapter.BillerAdapter;
+import com.vuvrecharge.modules.adapter.PaymentMethodSelectAdapter;
 import com.vuvrecharge.modules.model.BillFetch;
 import com.vuvrecharge.modules.model.PaymentModel;
+import com.vuvrecharge.modules.model.PaymentSettingModel;
 import com.vuvrecharge.modules.model.ReportsData;
 import com.vuvrecharge.modules.model.SpinnerData;
 import com.vuvrecharge.modules.model.UserData;
@@ -85,6 +89,8 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -225,6 +231,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
     String maxAmount;
     private boolean isGetingAPIResponse = false;
     private BottomSheetDialog bottomSheetDialog;
+    String requiredAmount;
 
     protected void attachBaseContext(Context newBase) {
         SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
@@ -626,9 +633,10 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
 
         if (titleStr.equals("Fastag")) {
             amt = txtAmountValue.getText().toString().trim();
-        } else {
+        }
+        else {
             if (billAmount.isEmpty() || billAmount == null) {
-                amt = txtAmountValue.getText().toString().trim();
+                amt = amount.getText().toString().trim();
             } else {
                 amt = txtAmountValue.getText().toString().trim();
             }
@@ -657,11 +665,11 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             int minInt = Integer.parseInt(minAmount);
             int maxInt = Integer.parseInt(maxAmount);
 
-            if (amtInt < minInt ) {
+            if (amtInt < minInt) {
                 showError("Enter amount min " + minInt + " and max " + maxInt);
                 return;
             }
-            if (maxInt>0 && amtInt > maxInt) {
+            if (maxInt > 0 && amtInt > maxInt) {
                 showError("Enter amount min " + minInt + " and max " + maxInt);
                 return;
             }
@@ -712,17 +720,21 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                     }
                 }
 
+                var infoSize = 0;
+                var infoLength = infos.size();
 
-                if (infos.size() < 3) {
-                    txtViewMore.setVisibility(VISIBLE);
-                    adapter = new BillerAdapter(infos, titleStr, type, 2);
-                } else if (infos.size() < 4) {
-                    txtViewMore.setVisibility(GONE);
-                    adapter = new BillerAdapter(infos, titleStr, type, 3);
-                } else {
-                    txtViewMore.setVisibility(VISIBLE);
+                if (infoLength == 0) {
+                    return;
                 }
 
+                if (infoLength > 3) {
+                    infoSize = 3;
+                    txtViewMore.setVisibility(VISIBLE);
+                } else {
+                    txtViewMore.setVisibility(GONE);
+                    infoSize = infoLength;
+                }
+                adapter = new BillerAdapter(infos, titleStr, type, infoSize);
 
 //                txtViewMore.setOnClickListener(v -> {
 //                    if (adapter.getItemCount() == 2) {
@@ -738,12 +750,11 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
 //                    recyclerViewBillerInfo.setAdapter(adapter);
 //                    adapter.notifyDataSetChanged();
 //                });
-                // Changes On 26/06/2025 By Nitan Singh
+                // Changes On 26/06/2025 By Nitam Singh
 
-
-                adapter = new BillerAdapter(infos, titleStr, type, 3);
                 recyclerViewBillerInfo.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
+                Log.e("BillerAdapter", "onSuccess: " + infos.size());
 
 // Show Due Date if available
                 for (BillFetch model : infos) {
@@ -755,19 +766,17 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 }
 
                 txtViewMore.setOnClickListener(v -> {
-                    if (adapter.getItemCount() == 3) {
-                        adapter = new BillerAdapter(infos, titleStr, type, infos.size());
+                    var adapterSize = 3;
+                    if (adapter.getItemCount() <= 3) {
                         txtViewMore.setText("Less More");
+                        adapterSize = infos.size();
                     } else {
-                        adapter = new BillerAdapter(infos, titleStr, type, 3);
                         txtViewMore.setText("View More");
                     }
-
+                    adapter = new BillerAdapter(infos, titleStr, type, adapterSize);
                     recyclerViewBillerInfo.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 });
-
-
             }
 
             billAmount = object.getString("billAmount");
@@ -831,10 +840,11 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 String orderid = jsonObject.getString("orderid");
                 this.order_id = orderid;
                 String uri = jsonObject.getString("upi_uri");
-                Intent upiIntent = new Intent(Intent.ACTION_VIEW);
-                upiIntent.setData(Uri.parse(uri.trim()));
-                Intent chooser = Intent.createChooser(upiIntent, "Pay with...");
-                startActivityForResult(chooser, 104, null);
+//                Intent upiIntent = new Intent(Intent.ACTION_VIEW);
+//                upiIntent.setData(Uri.parse(uri.trim()));
+//                Intent chooser = Intent.createChooser(upiIntent, "Pay with...");
+//                startActivityForResult(chooser, 104, null);
+                usingPaymentBottomSheet(uri, orderid);
             } else if (data_other.equals("orderDetails")) {
                 Gson gson = new Gson();
                 Type type_ = new TypeToken<ReportsData>() {
@@ -844,10 +854,10 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 mReportsData = gson.fromJson(data, type_);
                 mReportsData.setStatus(payment_status);
                 if (payment_status.toLowerCase().equals("pending")) {
-                    isGetingAPIResponse =false;
+                    isGetingAPIResponse = false;
                     openPendingDialog();
                 } else if (payment_status.toLowerCase().equals("success")) {
-                    isGetingAPIResponse =false;
+                    isGetingAPIResponse = false;
                     Log.d("doMobileRecharge", "success: " + data);
                     if (bottomSheetDialog != null && bottomSheetDialog.isShowing()) {
                         bottomSheetDialog.dismiss();
@@ -858,27 +868,105 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                             amount.getText().toString().trim(), sub_division_code.getText().toString().trim(),
                             "", "", device_id, mPin);
                 } else if (payment_status.toLowerCase().equals("failed")) {
-                    isGetingAPIResponse =false;
+                    isGetingAPIResponse = false;
                     Toast.makeText(getActivity(), "Transaction Failed", Toast.LENGTH_LONG).show();
                     if (bottomSheetDialog != null && bottomSheetDialog.isShowing()) {
                         bottomSheetDialog.dismiss();
                     }
                     cancelTimer();
                 } else {
-                    isGetingAPIResponse =false;
+                    isGetingAPIResponse = false;
                     openPendingDialog();
                 }
             } else if (data_other.equals("orderDetailsPending")) {
-                isGetingAPIResponse =false;
+                isGetingAPIResponse = false;
                 openPendingDialog();
             } else {
-                isGetingAPIResponse =false;
+                isGetingAPIResponse = false;
                 successDialog(data, data_other);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
+    }
+
+    private void usingPaymentBottomSheet(String upiUri, String orderId) {
+        try {
+            ArrayList<PaymentSettingModel> allUpiApps = new ArrayList<>();
+            this.order_id = orderId;
+
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
+            View layout = LayoutInflater.from(this).inflate(R.layout.using_payment_layout, null, false);
+            RecyclerView recyclerView = layout.findViewById(R.id.using_payment_recyclerView);
+            ImageView img2 = layout.findViewById(R.id.img2);
+
+
+            bottomSheetDialog.setContentView(layout);
+
+            FrameLayout bottomSheet = bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+            if (bottomSheet != null) {
+                BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                behavior.setPeekHeight(600);
+            }
+
+            img2.setOnClickListener(v -> bottomSheetDialog.cancel());
+
+            Intent upiIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("upi://pay"));
+            PackageManager pm = getPackageManager();
+            List<ResolveInfo> upiApps = pm.queryIntentActivities(upiIntent, 0);
+
+            for (ResolveInfo info : upiApps) {
+                String packageName = info.activityInfo.packageName;
+                String appName = info.loadLabel(pm).toString();
+                Log.d("appName", appName);
+                Drawable icon = info.loadIcon(pm);
+                Log.d("appName", String.valueOf(info));
+                allUpiApps.add(new PaymentSettingModel(icon, appName, "UPI App", packageName));
+            }
+            List<String> upiPriorityList = Arrays.asList("PhonePe", "GPay", "Paytm", "BHIM");
+
+            Collections.sort(allUpiApps, (a, b) -> {
+                int indexA = upiPriorityList.indexOf(a.getStr());
+                int indexB = upiPriorityList.indexOf(b.getStr());
+
+                if (indexA == -1) indexA = Integer.MAX_VALUE;
+                if (indexB == -1) indexB = Integer.MAX_VALUE;
+
+                return Integer.compare(indexA, indexB);
+            });
+
+
+            if (!allUpiApps.isEmpty()) {
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+                PaymentMethodSelectAdapter adapter = new PaymentMethodSelectAdapter(
+                        this,
+                        (amount, packageName) -> {
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setData(Uri.parse(upiUri));
+                            intent.setPackage(packageName);
+
+                            try {
+                                startActivityForResult(intent, 104);
+                                bottomSheetDialog.dismiss();
+                            } catch (Exception e) {
+                                Toast.makeText(this, "Unable to open UPI app", Toast.LENGTH_SHORT).show();
+                            }
+                        }, allUpiApps
+
+                );
+
+                adapter.addData(allUpiApps, requiredAmount.toString());
+                recyclerView.setAdapter(adapter);
+
+            }
+
+            bottomSheetDialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void pendingstatus() {
@@ -927,6 +1015,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             int a = Integer.parseInt(object.getString("total_fields"));
             String jsonNumberData = object.getString("number_data");
             String is_billFetch = object.getString("is_fetch");
+            Log.d("numberField", String.valueOf(data));
 
             if (is_billFetch.equals("1")) {
                 txtBillFetch.setVisibility(VISIBLE);
@@ -942,8 +1031,10 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             JSONObject numberField;
             if (!jsonNumberData.equals("null")) {
                 numberField = new JSONObject(jsonNumberData);
+                Log.d("numberField", String.valueOf(numberField));
             } else {
                 numberField = null;
+                Log.d("numberField", String.valueOf(numberField));
             }
 
             txtBillFetch.setOnClickListener(v -> {
@@ -1032,31 +1123,31 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 if (is_billFetch.equals("1")) {
                     consumerNumber.setVisibility(VISIBLE);
                     Consumer_Number.setVisibility(VISIBLE);
-                    consumerNumberText.setVisibility(VISIBLE);
+                    consumerNumberText.setVisibility(GONE);
                     star_img.setVisibility(VISIBLE);
                 } else {
-                    consumerNumber.setVisibility(GONE);
-                    Consumer_Number.setVisibility(GONE);
+                    consumerNumber.setVisibility(VISIBLE);
+                    Consumer_Number.setVisibility(VISIBLE);
                     consumerNumberText.setVisibility(GONE);
-                    star_img.setVisibility(GONE);
+                    star_img.setVisibility(VISIBLE);
                 }
 
                 if (type.contains("GiftCards")) {
                     provider_name.setVisibility(VISIBLE);
                     consumerNumber.setVisibility(VISIBLE);
                     Consumer_Number.setVisibility(VISIBLE);
-                    consumerNumberText.setVisibility(VISIBLE);
+                    consumerNumberText.setVisibility(GONE);
                     amount_layout.setVisibility(VISIBLE);
                     amount.setVisibility(VISIBLE);
-                    amountText.setVisibility(VISIBLE);
+                    amountText.setVisibility(GONE);
                 }
                 Log.d("TAG_ELECTRICITY", "onSuccessOther1: " + numberField);
                 Log.d("TAG_ELECTRICITY", "onSuccessOther: " + numberField.getString("field_name"));
 //                amount_layout.setText(numberField.getString("field_name"));
 //                amount.setHint(numberField.getString("eg"));
-                consumerNumber.setHint(numberField.getString("field_name"));
+                consumerNumber.setHint(numberField.getString("eg"));
                 Consumer_Number.setText(numberField.getString("field_name"));
-                consumerNumberText.setText(numberField.getString("eg"));
+//                consumerNumberText.setText(numberField.getString("field_name"));
 
 
                 int maxLength = Integer.parseInt(numberField.getString("max_length"));
@@ -1086,7 +1177,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                                 txtBillFetch.setVisibility(GONE);
                                 amount_layout.setVisibility(VISIBLE);
                                 amount.setVisibility(VISIBLE);
-                                amountText.setVisibility(VISIBLE);
+                                amountText.setVisibility(GONE);
                                 btnProcess.setVisibility(VISIBLE);
                                 proceedToPay.setVisibility(GONE);
                             }
@@ -1107,6 +1198,11 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                     consumerNumber.setInputType(InputType.TYPE_CLASS_NUMBER);
                 } else if (numberField.getString("type").equals("alphanumeric")) {
                     consumerNumber.setInputType(InputType.TYPE_CLASS_TEXT);
+//                    if (numberField.getString("field_name").equals("Building") && numberField.getString("type").equals("alphanumeric")){
+//                        consumerNumber.setVisibility(GONE);
+//
+//                    }
+
                 } else {
                     Log.d("TAG_ELECTRICITY", "onSuccessOther: " + numberField.getString("type"));
                 }
@@ -1152,8 +1248,8 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 } else {
                     sub_division_code_layout.setText(field1Data.getString("field_name"));
                     sub_division_code.setHint(field1Data.getString("eg"));
-                    sub_division_codeText.setText(field1Data.getString("eg"));
-                    sub_division_codeText.setVisibility(VISIBLE);
+//                    sub_division_codeText.setText(field1Data.getString("eg"));
+                    sub_division_codeText.setVisibility(GONE);
                     sub_division_code_layout.setVisibility(VISIBLE);
                     sub_division_code.setVisibility(VISIBLE);
 
@@ -1185,7 +1281,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                                     txtBillFetch.setVisibility(GONE);
                                     amount_layout.setVisibility(VISIBLE);
                                     amount.setVisibility(VISIBLE);
-                                    amountText.setVisibility(VISIBLE);
+                                    amountText.setVisibility(GONE);
                                     btnProcess.setVisibility(VISIBLE);
                                     proceedToPay.setVisibility(GONE);
                                 }
@@ -1227,11 +1323,10 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                     setSpinner(spinnerData, spinner3, spinnerText3, spinner_layout3);
                 } else {
                     amount_layout.setText(field2Data.getString("field_name"));
-                    amountText.setText(field2Data.getString("eg"));
                     amount_layout.setVisibility(VISIBLE);
-                    amountText.setVisibility(VISIBLE);
+
                     amount.setVisibility(VISIBLE);
-                    amountText.setVisibility(VISIBLE);
+                    amountText.setVisibility(GONE);
                     amount.setHint(field2Data.getString("eg"));
                     amountText.setHint(field2Data.getString("eg"));
 
@@ -1263,7 +1358,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                                     txtBillFetch.setVisibility(GONE);
                                     amount_layout.setVisibility(VISIBLE);
                                     amount.setVisibility(VISIBLE);
-                                    amountText.setVisibility(VISIBLE);
+                                    amountText.setVisibility(GONE);
                                     btnProcess.setVisibility(VISIBLE);
                                     proceedToPay.setVisibility(GONE);
                                 }
@@ -1372,6 +1467,12 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             binding.amount.setText("\u20b9" + amt);
             amtPay = amount;
             binding.mpinTxt.requestFocus();
+            binding.mpinTxt.postDelayed(() -> {
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.showSoftInput(binding.mpinTxt, InputMethodManager.SHOW_FORCED);
+                }
+            }, 200);
             if (warning_message.isEmpty()) {
                 binding.warningMessage.setVisibility(GONE);
             } else {
@@ -1451,7 +1552,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 _binding.btnComplete.setBackgroundResource(R.drawable.failed_button);
             } else if (status.toUpperCase().equals("PENDING")) {
                 _binding.btnComplete.setBackgroundResource(R.drawable.pending_button);
-                _binding.txtTitle.setText("Pending");
+                _binding.txtTitle.setText("Payment Processing...");
                 _binding.txtMessage.setText(message);
                 _binding.txtSlug.setText("CHILL!");
                 Glide.with(this).asGif().load(R.drawable.pending).into(_binding.imgGif);
@@ -1524,6 +1625,7 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             binding.btnPay.setText("Add on ₹" + json.getInt("required"));
             binding.btnPay.setOnClickListener(v -> {
                 try {
+                    requiredAmount = json.getString("required");
                     mDefaultPresenter.addInsufficientBalance(device_id, json.getString("required"));
                     dialog1.dismiss();
                 } catch (Exception e) {
@@ -1597,12 +1699,12 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
                 cancelTimer();
                 showPending("You can recharge after sometime.");
                 hideLoading(loading);
-                isGetingAPIResponse =false;
+                isGetingAPIResponse = false;
             });
 
-            bottomSheetDialog.setOnDismissListener(v ->{
+            bottomSheetDialog.setOnDismissListener(v -> {
                 cancelTimer();
-                isGetingAPIResponse =false;
+                isGetingAPIResponse = false;
             });
 
             bottomSheetDialog.show();
@@ -1611,12 +1713,14 @@ public class ElectricityBillPayActivity extends BaseActivity implements DefaultV
             e.printStackTrace();
         }
     }
+
     private void cancelTimer() {
         if (timer != null) {
             timer.cancel();
             timer = null;
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

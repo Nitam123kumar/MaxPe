@@ -1193,6 +1193,7 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         View layout = LayoutInflater.from(getActivity()).inflate(R.layout.follows_layout, null, false);
         RecyclerView recyclerView = layout.findViewById(R.id.followUsRecyclerView);
         ImageView cancel = layout.findViewById(R.id.img2);
+        ConstraintLayout updatedLayout = layout.findViewById(R.id.updatedLayout);
         dialog.setContentView(layout);
         dialog.setCancelable(true);
         changeStatusBarColor(dialog);
@@ -1207,6 +1208,15 @@ public class AccountActivity extends BaseActivity implements DefaultView, View.O
         BottomSheetDialog finalDialog = dialog;
         cancel.setOnClickListener(v -> {
             finalDialog.cancel();
+        });
+
+        updatedLayout.setOnClickListener(v -> {
+            UserData userData1 = mDatabase.getUserData();
+            String url1 = "https://api.whatsapp.com/send/?phone=91" + userData1.getWhatsapp_number() + "&text=" + "Hello MaxPe Support, My registered mobile number is " + userData1.getMobile();
+            Intent in = new Intent(Intent.ACTION_VIEW);
+            in.setData(Uri.parse(url1));
+            Intent chooser1 = Intent.createChooser(in, "Chat with...");
+            startActivity(chooser1);
         });
 
         try {

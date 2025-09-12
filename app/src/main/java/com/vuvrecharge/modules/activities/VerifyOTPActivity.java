@@ -234,7 +234,8 @@ public class VerifyOTPActivity extends BaseActivity implements DefaultView {
             showErrorLoginPage(bottomSheet, error);
             submit.setVisibility(View.VISIBLE);
         }
-        showErrorLoginPage(error);
+//        showErrorLoginPage(error);
+        Toasty.error(this, error, Toasty.LENGTH_LONG).show();
     }
 
     @Override

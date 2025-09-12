@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -62,6 +63,7 @@ import java.util.TimerTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+@SuppressLint({"SetJavaScriptEnabled", "NotifyDataSetChanged", "SetTextI18n", "NonConstantResourceId"})
 public class ShareEarnActivity extends BaseActivity implements DefaultView, View.OnClickListener {
 
     private DefaultPresenter mDefaultPresenter;
@@ -103,15 +105,15 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
 
     @BindView(R.id.SuccessfulReferralView)
     View viewMyReferral;
+    @BindView(R.id.referralView)
+    View referralView;
 
     @BindView(R.id.maxPoints_availableTxt)
     TextView maxPoints_availableTxt;
-    @BindView(R.id.top_Earner)
-    TextView top_EarnerTV;
-    @BindView(R.id.top_earner_ImageSlider)
-    ImageSlider top_earner_ImageSlider;
     @BindView(R.id.myBonusView)
     View viewReferralIncome;
+    @BindView(R.id.maxPointsView)
+    View maxPointsView;
     @BindView(R.id.available_earnTV)
     TextView available_earnTV;
     @BindView(R.id.viewPager)
@@ -152,9 +154,10 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
         mToolbar.setOnClickListener(this);
         btnInvite.setOnClickListener(this);
         btnReferCopy.setOnClickListener(this);
-        top_EarnerTV.setOnClickListener(this);
 //        setStatusBarGradiant(this);
         viewMyReferral.setOnClickListener(this);
+        referralView.setOnClickListener(this);
+        maxPointsView.setOnClickListener(this);
         viewReferralIncome.setOnClickListener(this);
         txtTermsCondition.setOnClickListener(this);
 
@@ -228,17 +231,6 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
 //        refresh_layout.setRefreshing(true);
 
 
-        ArrayList<SlideModel> top_earner_list = new ArrayList<>();
-
-        top_earner_list.add(new SlideModel(R.drawable.top_earner_ban, ScaleTypes.FIT));
-        top_earner_list.add(new SlideModel(R.drawable.top_earner_ban, ScaleTypes.FIT));
-        top_earner_list.add(new SlideModel(R.drawable.top_earner_ban, ScaleTypes.FIT));
-        top_earner_list.add(new SlideModel(R.drawable.top_earner_ban, ScaleTypes.FIT));
-
-        top_earner_ImageSlider.setImageList(top_earner_list, ScaleTypes.FIT);
-//        top_earner_ImageSlider.setIndicatorSelectedColor(Color.RED);
-
-
     }
 
 
@@ -259,16 +251,18 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
         setLayout(no_internet, retry, "shareEarn");
         sliderHandler.postDelayed(sliderRunnable, 3000);
     }
+
     void refreshData() {
         mDefaultPresenter.totalReferrals(device_id);
     }
+
     @Override
     protected void onPause() {
         hideAllDialog();
         super.onPause();
         sliderHandler.removeCallbacks(sliderRunnable);
     }
-    @SuppressLint({"SetJavaScriptEnabled", "NotifyDataSetChanged", "SetTextI18n"})
+
     @Override
     public void onSuccess(String userData) {
         try {
@@ -313,6 +307,7 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
 
 
     }
+
     class MyBrowser extends WebViewClient {
 
         @Override
@@ -408,35 +403,22 @@ public class ShareEarnActivity extends BaseActivity implements DefaultView, View
                     }
                 }
             }
-        } else if (v.getId() == R.id.SuccessfulReferralView) {
+        } else if (v.getId() == R.id.referralView) {
             Intent intent = new Intent(getActivity(), MyReferralsActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.myBonusView) {
             Intent intent = new Intent(getActivity(), ReferralsIncomeActivity.class);
             startActivity(intent);
+        } else if (v.getId() == R.id.maxPointsView) {
+            Intent intent = new Intent(getActivity(), ReferralsIncomeActivity.class);
+            intent.putExtra("points","MyPoints");
+            startActivity(intent);
         } else if (v.getId() == R.id.toolbar_layout) {
             onBackPressed();
             getActivity().finish();
-        } else if (v.getId() == R.id.top_Earner) {
-            Intent intent = new Intent(this, TopEarnerActivity.class);
-            startActivity(intent);
         } else if (v.getId() == R.id.txtTermsCondition) {
             Intent intent = new Intent(this, ReferandEarnTermsActivity.class);
             startActivity(intent);
-        }
-    }
-
-    @SuppressLint({"ObsoleteSdkInt,UseCompatLoadingForDrawables"})
-    @androidx.annotation.RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    static void setStatusBarGradiant(Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = activity.getWindow();
-            Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
-            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
-            window.setBackgroundDrawable(background);
         }
     }
 }

@@ -514,7 +514,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginBottom="@dimen/_13sdp"
-                            app:layout_constraintBottom_toTopOf="@id/contrant"/>
+                            app:layout_constraintBottom_toTopOf="@id/follow_us_List"/>
 
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -523,6 +523,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:gravity="center"
+                            android:visibility="gone"
                             android:layout_marginBottom="@dimen/_30sdp"
                             android:layout_marginTop="@dimen/_10sdp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -570,6 +571,17 @@
                                 app:layout_constraintTop_toTopOf="@id/youtube" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/follow_us_List"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_30sdp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            >
+
+                        </androidx.recyclerview.widget.RecyclerView>
 
                     <LinearLayout
                         android:id="@+id/no_internet"

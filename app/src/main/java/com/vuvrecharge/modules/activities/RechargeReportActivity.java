@@ -28,6 +28,7 @@ import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -86,6 +87,7 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
+
 @SuppressLint({"NonConstantResourceId, SetTextI18n"})
 public class RechargeReportActivity extends BaseActivity implements DefaultView, View.OnClickListener {
 
@@ -131,7 +133,7 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
     LinearLayout share_view;
     @BindView(R.id.second_layout)
     LinearLayout second_layout;
-//    @BindView(R.id.load)
+    //    @BindView(R.id.load)
 //    ImageView load;
     @BindView(R.id.operator_img)
     CircleImageView operator_img_;
@@ -145,6 +147,8 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
     TextView done;
     @BindView(R.id.imgResponse)
     ImageView imgResponse;
+    @BindView(R.id.imgResponse1)
+    ImageView imgResponse1;
     @BindView(R.id.rvCustomerInfo)
     RecyclerView rvCustomerInfo;
     @BindView(R.id.imgPDF)
@@ -171,11 +175,13 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
     String bps = "";
     String report = "0";
     int i = 0;
+
     protected void attachBaseContext(Context newBase) {
         SharedPreferences prefs = newBase.getSharedPreferences("settings", MODE_PRIVATE);
         String lang = prefs.getString("lang", "en");
         super.attachBaseContext(LocaleHelper.setLocale(newBase, lang));
     }
+
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
@@ -195,11 +201,12 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
         operator_dunmy_img = intent.getStringExtra("operator_dunmy_img");
         String mReportsData1 = intent.getStringExtra("mReportsData");
         bps = intent.getStringExtra("bps");
-        if (intent.hasExtra("report")){
+        if (intent.hasExtra("report")) {
             report = intent.getStringExtra("report");
         }
         Gson gson = new Gson();
-        Type type_ = new TypeToken<ReportsData>() {}.getType();
+        Type type_ = new TypeToken<ReportsData>() {
+        }.getType();
         mReportsData = gson.fromJson(mReportsData1, type_);
         mDefaultPresenter = new DefaultPresenter(this);
         mDefaultPresenter.rechargeDetails(device_id + "", mReportsData.getOrder_id() + "");
@@ -233,7 +240,7 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
             if (mReportsData.getStatus().equals("PENDING")) {
                 handler.postDelayed(runnable, 10000);
             }
-            if (mReportsData.getStatus() != null){
+            if (mReportsData.getStatus() != null) {
                 if (mReportsData.getStatus().equals("PENDING")) {
                     changeStatusBarColorProcess();
 //                    load.setVisibility(VISIBLE);
@@ -257,7 +264,7 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
                             .asGif()
                             .load(R.drawable.right)
                             .into(imgResponse);
-                    if (mReportsData.getRecharge_type() != null){
+                    if (mReportsData.getRecharge_type() != null) {
                         recharge_type = mReportsData.getRecharge_type();
                         if (!recharge_type.equals("null") && recharge_type.equals("GiftCards")) {
                             gift_number.setText(mReportsData.getOperator_ref());
@@ -292,26 +299,24 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
                 }
             }
 
-            if (i == 0){
+            if (i == 0) {
                 if (mReportsData.getStatus().toLowerCase().equals("pending")) {
                     i = 0;
-                }else if (mReportsData.getStatus().toLowerCase().equals("success")) {
-                    if (bps.equals("1")){
+                } else if (mReportsData.getStatus().toLowerCase().equals("success")) {
+                    if (bps.equals("1")) {
                         i = 1;
                         ringtone();
                     }
-                }else {
+                } else {
                     i = 1;
                 }
-            }
-            else {
-                Log.d("TAG_DATA", "setData: "+i);
+            } else {
+                Log.d("TAG_DATA", "setData: " + i);
             }
 
             if (mReportsData.getLogo() == null) {
                 setImageUser(operator_img + operator_dunmy_img, operator_img_);
-            }
-            else {
+            } else {
                 if (mReportsData.getLogo().equals("")) {
                     setImageUser(operator_img + operator_dunmy_img, operator_img_);
                 } else {
@@ -335,7 +340,7 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
                     android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", mReportsData.getOperator_ref());
                     clipboard.setPrimaryClip(clip);
                 }
-                  Toast.makeText(getActivity(), "Gift Card id copied", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Gift Card id copied", Toast.LENGTH_SHORT).show();
 
             });
             copy.setOnClickListener(v -> copyTextMain(mReportsData.getOrder_id()));
@@ -373,9 +378,8 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
                     remark.setText("Reason : " + mReportsData.getOperator_ref());
                 }
                 remark.setVisibility(VISIBLE);
-            }
-            else {
-                if (mReportsData.getStatus().toUpperCase().equals("PENDING")){
+            } else {
+                if (mReportsData.getStatus().toUpperCase().equals("PENDING")) {
                     remark.setVisibility(GONE);
                 } else {
                     remark.setVisibility(VISIBLE);
@@ -410,7 +414,7 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
 
     @Override
     public void onBackPressed() {
-        if (report.equals("0")){
+        if (report.equals("0")) {
             Intent intent = new Intent(this, MainActivity.class)
                     .addFlags(
                             Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -418,8 +422,7 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
                     );
             overridePendingTransition(R.anim.right_to_left, R.anim.left_to_right);
             startActivity(intent);
-        }
-        else {
+        } else {
             super.onBackPressed();
             if (runnable != null) {
                 handler.removeCallbacks(runnable);
@@ -432,11 +435,18 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
         switch (v.getId()) {
             case R.id.addMore:
                 screen = "No";
-                if (!selectFile()) {
-//                    setToolbarFalse(mToolbar);
-                    takeScreenshot(share_view);
-//                    new Handler().postDelayed(() -> setToolbar(mToolbar), 1000);
-                }
+                imgResponse1.setVisibility(VISIBLE);
+                imgResponse.setVisibility(GONE);
+                share_view.post(() -> {
+                    if (!selectFile()) {
+                        takeScreenshot(share_view);
+
+                        new Handler().postDelayed(() -> {
+                            imgResponse1.setVisibility(View.GONE);
+                            imgResponse.setVisibility(View.VISIBLE);
+                        }, 500);
+                    }
+                });
                 break;
             case R.id.toolbar_layout:
                 onBackPressed();
@@ -450,7 +460,7 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
                 finish();
                 break;
             case R.id.imgPDF:
-                if (!selectFile()){
+                if (!selectFile()) {
 //                    setToolbarFalse(mToolbar);
                     pdf(share_view);
 //                    new Handler().postDelayed(() -> setToolbar(mToolbar), 1000);
@@ -463,24 +473,22 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
         Bitmap b = null;
         b = ScreenshotUtils.takeScreenshotForView(view);
         try {
-            if(b!=null){
-                File file= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-                if(!file.isDirectory()){
+            if (b != null) {
+                File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+                if (!file.isDirectory()) {
                     file.mkdir();
                 }
-                File path =new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"IMG_"+System.currentTimeMillis()+".jpg");
+                File path = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "IMG_" + System.currentTimeMillis() + ".jpg");
 
-                    FileOutputStream fileOutputStream=new FileOutputStream(path);
-                    if(b.compress(Bitmap.CompressFormat.JPEG,100, fileOutputStream))
-                    {
-                        createPdf(path);
-                    }
-                    else{
-                        Log.d("TAG_PDF", "pdf: "+new Exception().getMessage());
-                    }
+                FileOutputStream fileOutputStream = new FileOutputStream(path);
+                if (b.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)) {
+                    createPdf(path);
+                } else {
+                    Log.d("TAG_PDF", "pdf: " + new Exception().getMessage());
+                }
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.e("TAG_PDF", e + " ");
         }
     }
@@ -488,10 +496,10 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
     private void createPdf(File path) {
         try {
 
-            File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),"PDF_"+System.currentTimeMillis()+".pdf");
-            Log.d("TAG_PDF", "pdf: working..."+dir);
+            File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "PDF_" + System.currentTimeMillis() + ".pdf");
+            Log.d("TAG_PDF", "pdf: working..." + dir);
             FileOutputStream fOut = new FileOutputStream(dir);
-            Rectangle size = new Rectangle(PageSize.A3.getWidth(),PageSize.A3.getHeight());
+            Rectangle size = new Rectangle(PageSize.A3.getWidth(), PageSize.A3.getHeight());
             Document document = new Document();
             PdfWriter.getInstance(document, fOut);
 
@@ -503,7 +511,7 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
 
             //Draw the bitmap onto the page
             Image img = Image.getInstance(path.toString());
-            img.scaleToFit(600,  850);
+            img.scaleToFit(600, 850);
             Font f = new Font(Font.FontFamily.TIMES_ROMAN, 45.0f, Font.BOLD, BaseColor.BLACK);
             Chunk c = new Chunk("MAXPE");
             Paragraph paragraph = new Paragraph(c);
@@ -520,8 +528,8 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
             share.putExtra(Intent.EXTRA_STREAM, uri);
             startActivity(share);
 
-        }catch (Exception e){
-            Log.d("TAG_PDF", "pdf: error..."+e.getMessage());
+        } catch (Exception e) {
+            Log.d("TAG_PDF", "pdf: error..." + e.getMessage());
         }
     }
 
@@ -592,7 +600,7 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
             JSONObject object1 = new JSONObject(object.getString("bill_data"));
             mReportsData.setOperator_ref(object.getString("operator_ref"));
 
-            if (object1 != null){
+            if (object1 != null) {
                 Iterator<String> keys = object1.keys();
                 while (keys.hasNext()) {
                     String key = keys.next();
@@ -610,7 +618,7 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
                 adapter.notifyDataSetChanged();
             }
 
-            if (mReportsData.getIs_bbps() != null){
+            if (mReportsData.getIs_bbps() != null) {
                 if (mReportsData.getIs_bbps().equals("true")) {
                     String text_ = "BConnect Txn id: ";
                     String text_new = text_ + mReportsData.getOperator_ref();
@@ -645,8 +653,8 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
 
             setData(mReportsData);
 
-        }catch (Exception e){
-            Log.d("TAG_DATA", "onSuccess: "+e.getMessage());
+        } catch (Exception e) {
+            Log.d("TAG_DATA", "onSuccess: " + e.getMessage());
         }
     }
 
@@ -739,7 +747,7 @@ public class RechargeReportActivity extends BaseActivity implements DefaultView,
             Uri sound = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getPackageName() + "/" + R.raw.bharat_connect_mogo);
             Ringtone ringtone = RingtoneManager.getRingtone(this, sound);
             ringtone.play();
-            new Handler(Objects.requireNonNull(Looper.myLooper())).postDelayed(ringtone::stop,3000);
+            new Handler(Objects.requireNonNull(Looper.myLooper())).postDelayed(ringtone::stop, 3000);
         } catch (Exception e) {
             e.printStackTrace();
         }

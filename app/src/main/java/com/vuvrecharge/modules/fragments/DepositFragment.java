@@ -58,7 +58,7 @@ public class DepositFragment extends BaseFragment implements DefaultView {
 //    @BindView(R.id.loading)
 //    LinearLayout loading;
     @BindView(R.id.txtNoData)
-    TextView txtNoData;
+    ImageView txtNoData;
 
     @BindView(R.id.layoutFrom)
     ConstraintLayout select_from_date_img;

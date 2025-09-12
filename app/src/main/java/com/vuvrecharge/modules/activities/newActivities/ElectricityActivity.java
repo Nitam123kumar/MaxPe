@@ -3,6 +3,7 @@ package com.vuvrecharge.modules.activities.newActivities;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -47,7 +48,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
+@SuppressLint("NonConstantResourceId")
 public class ElectricityActivity extends BaseActivity implements DefaultView, View.OnClickListener {
 
     private DefaultPresenter mDefaultPresenter;
@@ -107,7 +108,7 @@ public class ElectricityActivity extends BaseActivity implements DefaultView, Vi
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         if (title1 != null) {
-            search_electricity.setHint("Search Operater");
+            search_electricity.setHint("Search Operator");
             operatorPreferences = new OperatorPreferences(this, type);
             map = operatorPreferences.getData();
             if (map.get("type") != null) {
@@ -523,19 +524,6 @@ public class ElectricityActivity extends BaseActivity implements DefaultView, Vi
     protected void onResume() {
         super.onResume();
         setLayout(no_internet, retry, "Electricity");
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public static void setStatusBarGradiant(Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = activity.getWindow();
-            Drawable background = activity.getResources().getDrawable(R.drawable.main_wallet_shape);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-
-            window.setStatusBarColor(activity.getResources().getColor(android.R.color.transparent));
-            window.setNavigationBarColor(activity.getResources().getColor(android.R.color.transparent));
-            window.setBackgroundDrawable(background);
-        }
     }
 
     private void searchData(@NonNull String searchableData) {

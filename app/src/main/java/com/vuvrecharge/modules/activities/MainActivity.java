@@ -554,7 +554,7 @@ public class MainActivity extends BaseActivity implements DefaultView,
         }
         Log.d("DashBoardData1", "onSuccess: " + "operatorData");
         mDefaultPresenter.dashboardDataWithoutRefresh(fcmToken + "", device_id + "", null);
-        mDefaultPresenter.fetchBalance(fcmToken + "", device_id + "", rotation);
+//        mDefaultPresenter.fetchBalance(fcmToken + "", device_id + "", rotation);
     }
 
     @Override
